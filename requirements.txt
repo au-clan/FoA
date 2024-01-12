@@ -1,2 +1,4 @@
 openai==1.7.1
 backoff==2.2.1
+sympy==1.12 # NOTE: Not actually used so far!!
+pandas==2.1.4
