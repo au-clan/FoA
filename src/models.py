@@ -1,6 +1,7 @@
 import os
 from openai import OpenAI, APIConnectionError, APITimeoutError
 import backoff
+from random import randint
 
 class OpenAIBot:
     def __init__(self, model="gpt-3.5-turbo-1106", temperature=0.5, max_tokens=1000) -> None:
@@ -17,13 +18,13 @@ class OpenAIBot:
 
     @backoff.on_exception(backoff.expo, (APIConnectionError, APITimeoutError))
     def create_completion(self, **kwargs):
-        return self.client.chat.completions.create(**kwargs)
+        return self.client.chat.completions.create(**kwargs, seed=randint(0,100000))
     
 
-    def request(self, prompt) -> str:
+    def request(self, prompt, n=1) -> list:
         messages = [{"role": "user", "content": prompt}]
-        response = self.create_completion(model=self.model, messages=messages, temperature=self.temperature, max_tokens=self.max_tokens)
-        output = response.choices[0].message.content
+        response = self.create_completion(model=self.model, messages=messages, temperature=self.temperature, max_tokens=self.max_tokens, n=n)
+        output = [response.choices[i].message.content for i in range(n)]
         self.completion_tokens += response.usage.completion_tokens
         self.prompt_tokens += response.usage.prompt_tokens
         return output
