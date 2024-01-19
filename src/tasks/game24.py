@@ -17,9 +17,15 @@ class Game24(Task):
         self.values_log = {}
 
     def __len__(self) -> int:
+        """
+        Returns the number of examples (possible inputs) for the task.
+        """
         return len(self.data)
     
     def get_input(self, idx: int) -> str:
+        """
+        Sets the input for the task given its idx.
+        """
         if idx <0 or idx > self.__len__():
             raise IndexError(f'Index {idx} out of range for Game24 task with {len(self)} examples.')
         else:
@@ -59,9 +65,10 @@ class Game24(Task):
         value_map = {'impossible': 0.001, 'likely': 1, 'sure': 20}
         value_number = sum(value * value_names.count(name) for name, value in value_map.items())
         self.values_log[self.steps_count] = value_number
-        return value_names, value_number
+        return value_number
     
     def copy(self, task: Task):
-        self.steps = task.steps
+        self.steps = task.steps.copy()
         self.current_numbers = task.current_numbers
+        self.values_log = task.values_log.copy()
         
