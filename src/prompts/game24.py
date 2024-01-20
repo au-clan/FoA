@@ -1,10 +1,10 @@
 # 5-shot
 # TODO: 24 in input causes problems - Maybe solved
 
-foa_step_prompt = '''Use numbers and basic arithmetic operations (+ - * /) to obtain 24. At this step, you are only allowed to choose two of the input numbers to obtain a new number. 
+foa_step_prompt = '''Use numbers and basic arithmetic operations (+ - * /) to obtain 24. At this step, you are only allowed to choose two of the input numbers to obtain a new number and nothing else. Perform just one step. Remember that the goal is not to close 24 immediately, but produce a number that can be used to get to 24 in the next steps.
 Input: 2 8 8 14
 Possible next step and numbers left:
-2 + 8 = 10 (left: 8 10 14)
+8 + 14 = 22 (left: 2 8 22)
 Input: 2 2 6
 Possible next step and numbers left:
 2 * 6 = 12 (left: 12 2)

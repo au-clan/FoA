@@ -91,8 +91,9 @@ class Agents():
         Returns the best agent best on their state's last evaluation.
         """
         best_agent_idx = np.argmax(self.values)
-        print(f"Best agent: {best_agent_idx}")
         best_agent = self.agents[best_agent_idx]
+        best_answer = "n".join(best_agent.steps)
+        print(f"Best answer: {best_answer}")
 
         # Log best agent
         self.log["best_agent"] = {}

@@ -4,7 +4,7 @@ import backoff
 from random import randint
 
 class OpenAIBot:
-    def __init__(self, model="gpt-3.5-turbo-1106", temperature=0.5, max_tokens=1000) -> None:
+    def __init__(self, model="gpt-3.5-turbo-1106", temperature=0.9, max_tokens=1000) -> None:
         self.model = model
         self.temperature = temperature
         self.max_tokens = max_tokens
