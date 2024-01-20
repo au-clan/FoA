@@ -1,24 +1,24 @@
 # 5-shot
-# TODO: 24 in input causes problems
+# TODO: 24 in input causes problems - Maybe solved
 
-foa_step_prompt = '''Use numbers and basic arithmetic operations (+ - * /) to obtain 24. At this step, you are only allowed to choose two of the input numbers to obtain a new number.
+foa_step_prompt = '''Use numbers and basic arithmetic operations (+ - * /) to obtain 24. At this step, you are only allowed to choose two of the input numbers to obtain a new number. 
 Input: 2 8 8 14
-Possible next steps:
+Possible next step and numbers left:
 2 + 8 = 10 (left: 8 10 14)
-Input: 7 5 8 11
-Possible next steps:
-11 - 7 = 4 (left: 4 5 8)
-Input: 4 12 3 1
-Possible next steps:
-12 / 4 = 3 (left: 3 3 1)
-Input: 2 4 13 9
-Possible next steps:
-2 * 4 = 8 (left: 8 13 9)
-Input: 3 5 6 10
-Possible next steps:
-10 + 6 = 16 (left: 3 5 16)
+Input: 2 2 6
+Possible next step and numbers left:
+2 * 6 = 12 (left: 12 2)
+Input: 3 8
+Possible next step and numbers left:
+3 * 8 = 24 (left: 24)
+Input: 4 8 64
+Possible next step and numbers left:
+64 / 4 = 16 (left: 4 16)
+Input: 3 5 10 14
+Possible next step and numbers left:
+10 + 14 = 24 (left: 3 5 24)
 Input: {input}
-Possible next steps:
+Possible next step and numbers left:
 '''
 
 # Taken from Tree of Thoughts paper

@@ -1,5 +1,7 @@
-import os, copy
+import os
 import pandas as pd
+from copy import deepcopy
+
 from src.tasks.base import Task, DATA_PATH
 from src.prompts.game24 import foa_step_prompt, cot_prompt, value_prompt, value_last_step_prompt
 
@@ -67,8 +69,19 @@ class Game24(Task):
         self.values_log[self.steps_count] = value_number
         return value_number
     
-    def copy(self, task: Task):
-        self.steps = task.steps.copy()
-        self.current_numbers = task.current_numbers
-        self.values_log = task.values_log.copy()
+    def get_state(self)-> dict:
+        """
+        Collects the values that contribute towards the state of the task in a dictionary.
+        """
+        state = {"steps": self.steps, "current_numbers": self.current_numbers, "values_log": self.values_log}
+        return state
+    
+    def copy_state(self, state: dict):
+        """
+        Given a state (dictionary), copy the state values to the current task.
+        """
+        for key, value in state.items():
+            setattr(self, key, deepcopy(value))
+
+    
         

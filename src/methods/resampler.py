@@ -6,6 +6,9 @@ class Resampler():
 
     @staticmethod
     def resample_normalization(values: np.array) -> list:
+        """
+        
+        """
         sum = values.sum()
         p = (values / sum).tolist()
         indices = list(range(len(values)))
