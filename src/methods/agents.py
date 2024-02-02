@@ -85,6 +85,11 @@ class Agents():
         self.log[f"step_{self.step_count}"]['resampled'] = log_indices
         current_steps = ["\n".join(agent.steps) for agent in self.agents]
         self.log[f"step_{self.step_count}"]['resampled_steps'] = current_steps
+    
+    def test_output(self)-> list:
+        results = [agent.test_output() for agent in self.agents]
+        return results
+
 
     def choose(self)-> Task:
         """

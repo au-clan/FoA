@@ -36,7 +36,7 @@ def parse_args():
     args.add_argument("--idx_input", type=int, default=8)
     args.add_argument("--n_evaluations", type=int, default=3)
     args.add_argument("--n_agents", type=int, default=5)
-    args.add_argument("--model_name", type=str, choices=["gpt-4", "gpt-3.5-turbo-1106"] ,default="gpt-3.5-turbo-1106")
+    args.add_argument("--model_name", type=str, choices=["gpt-4", "gpt-3.5-turbo-1106", "gpt-3.5-turbo-0125"] ,default="gpt-3.5-turbo-0125")
     
     args = args.parse_args()
     return args

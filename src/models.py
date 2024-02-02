@@ -4,7 +4,7 @@ import backoff
 from random import randint
 
 class OpenAIBot:
-    def __init__(self, model="gpt-3.5-turbo-1106", temperature=0.9, max_tokens=1000) -> None:
+    def __init__(self, model="gpt-3.5-turbo-0125", temperature=0.9, max_tokens=1000) -> None:
         self.model = model
         self.temperature = temperature
         self.max_tokens = max_tokens
@@ -31,8 +31,8 @@ class OpenAIBot:
     
     
     def print_usage(self):
-        input_prices =  {"gpt-4":0.03, "gpt-4-32k":0.06, "gpt-3.5-turbo-1106":0.0010, "gpt-3.5-turbo-instruct":0.0015}
-        output_prices = {"gpt-4":0.06, "gpt-4-32k":0.12, "gpt-3.5-turbo-1106":0.0020, "gpt-3.5-turbo-instruct":0.0020}
+        input_prices =  {"gpt-4":0.03, "gpt-4-32k":0.06, "gpt-3.5-turbo-1106":0.0010, "gpt-3.5-turbo-instruct":0.0015, "gpt-3.5-turbo-0125":0.0005}
+        output_prices = {"gpt-4":0.06, "gpt-4-32k":0.12, "gpt-3.5-turbo-1106":0.0020, "gpt-3.5-turbo-instruct":0.0020, "gpt-3.5-turbo-0125":0.0015}
         if self.model not in input_prices:
             print("No pricing information available for this model")
         else:

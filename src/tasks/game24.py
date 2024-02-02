@@ -1,6 +1,7 @@
-import os
+import os, re
 import pandas as pd
 from copy import deepcopy
+from sympy import simplify
 
 from src.tasks.base import Task, DATA_PATH
 from src.prompts.game24 import foa_step_prompt, cot_prompt, value_prompt, value_last_step_prompt
@@ -14,6 +15,7 @@ class Game24(Task):
         self.model = model
         self.steps = []
         self.input = None
+        self.input_idx = None
         self.max_steps = 4
         self.steps_count = 0
         self.values_log = {}
@@ -32,8 +34,9 @@ class Game24(Task):
             raise IndexError(f'Index {idx} out of range for Game24 task with {len(self)} examples.')
         else:
             input = self.data[idx]
-            self.current_numbers = input
             self.input = input
+            self.input_idx = idx
+            self.current_numbers = input
             self.steps = []
 
     def step(self):
@@ -82,6 +85,24 @@ class Game24(Task):
         """
         for key, value in state.items():
             setattr(self, key, deepcopy(value))
+
+    # Taken from ToT
+    def test_output(self)-> dict:
+            """
+            Tests the output of a given task
+                1. Checks if the numbers used are the same as the ones provided.
+                2. Checks if the operations performed result to 24.
+            """
+            expression = self.steps[-1].lower().replace('answer: ', '').split('=')[0]
+            numbers = re.findall(r'\d+', expression)
+            problem_numbers = re.findall(r'\d+', self.data[self.input_idx])
+            if sorted(numbers) != sorted(problem_numbers):
+                return {'r': 0}
+            try:
+                return {'r': int(simplify(expression) == 24)}
+            except Exception as e:
+                # print(e)
+                return {'r': 0}
 
     
         
