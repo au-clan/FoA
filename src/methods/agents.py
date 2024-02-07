@@ -88,6 +88,10 @@ class Agents():
     
     def test_output(self)-> list:
         results = [agent.test_output() for agent in self.agents]
+
+        # Log results
+        self.log["results"] = results
+        self.log["cost"] = self.agents[0].get_cost(verbose=False)
         return results
 
 
