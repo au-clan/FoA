@@ -1,6 +1,6 @@
 import os, shutil
 
-def empty_folder(folder):
+def empty_folder(folder: str):
     """
     Deletes all the contents of a folder
     """
@@ -13,3 +13,11 @@ def empty_folder(folder):
                 shutil.rmtree(file_path)
         except Exception as e:
             print('Failed to delete %s. Reason: %s' % (file_path, e))
+
+def delete_file(file_path: str):
+    """
+    Deletes a file given its path, if it already exists
+    """
+    if os.path.exists(file_path):
+        os.remove(file_path)
+        print(f"Deleted : '{file_path}'")
