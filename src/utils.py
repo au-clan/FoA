@@ -1,4 +1,12 @@
 import os, shutil
+from pathlib import Path
+
+
+def create_folder(folder_path: str):
+    """
+    Creates a folder if it doesn't exist
+    """
+    Path(folder_path).mkdir(parents=True, exist_ok=True)
 
 def empty_folder(folder: str):
     """
@@ -13,6 +21,7 @@ def empty_folder(folder: str):
                 shutil.rmtree(file_path)
         except Exception as e:
             print('Failed to delete %s. Reason: %s' % (file_path, e))
+
 
 def delete_file(file_path: str):
     """
