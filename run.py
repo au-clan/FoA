@@ -1,4 +1,5 @@
 import os, argparse
+from tqdm import tqdm
 from src.methods.agents import Agents
 from src.tasks.game24 import Game24
 from src.models import OpenAIBot
@@ -25,7 +26,7 @@ def run(args):
     # Create agents
     ## TODO: Add model + task selection
     bot = OpenAIBot(model=model_name)
-    for idx_input in range(task_start_index, task_end_index):
+    for idx_input in tqdm(range(task_start_index, task_end_index)):
         agents = Agents(task=Game24, idx_input=idx_input, n_agents=n_agents, model=bot, init=init)
 
         # Run agents
@@ -40,7 +41,7 @@ def run(args):
         agents.create_log(repo_path=log_path, file_name=file_name)
     
     Game24.get_accuracy(file_path)
-
+    print(f"Logs saved in : \n\t'{file_path}'")
 def parse_args():
     args = argparse.ArgumentParser()
     args.add_argument("--init", type=bool, default=True)
