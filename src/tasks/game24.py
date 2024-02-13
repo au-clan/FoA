@@ -1,4 +1,4 @@
-import os, re, json
+import os, re, json, random
 import pandas as pd
 from copy import deepcopy
 from sympy import simplify
@@ -7,7 +7,7 @@ from src.tasks.base import Task, DATA_PATH
 from src.prompts.game24 import foa_step_prompt, cot_prompt, value_prompt, value_last_step_prompt, bfs_prompt
 
 class Game24(Task):
-    def __init__(self, model, file='24_tot.csv'):
+    def __init__(self, model, file='24_tot.csv', foa_prompt:bool = False):
         super().__init__()
         path = os.path.join(DATA_PATH, file)
         self.data = pd.read_csv(path).Puzzles.tolist()
@@ -19,6 +19,7 @@ class Game24(Task):
         self.max_steps = 4
         self.steps_count = 0
         self.values_log = {}
+        self.foa_prompt = foa_prompt
 
     def __len__(self) -> int:
         """
@@ -40,17 +41,32 @@ class Game24(Task):
             self.steps = []
 
     def step(self):
+        """
+        Performs a step in the game of 24 task
+        """
+        temp = self.current_state
         if self.current_state.strip() == "24":
             steps = '\n'.join(self.steps) + "\n"
             prompt = cot_prompt.format(input=self.input) + "\n" + steps
             suggestion = self.model.request(prompt)[0]
             self.steps.append(suggestion)
+            print(f"Prompt: CoT, State : {temp}\n\tSuggestion: {suggestion}")
         
-        else:
+        elif self.foa_prompt:
             prompt = foa_step_prompt.format(input=self.current_state)
             suggestion = self.model.request(prompt)[0]
             self.current_state = self.get_current_state(suggestion)
             self.steps.append(suggestion)
+            print(f"Prompt: FoA, State : {temp}\n\tSuggestion: {suggestion}")
+        
+        else:
+            prompt = bfs_prompt.format(input=self.current_state)
+            suggestions = self.model.request(prompt)[0]                         # bfs prompt produces multiple suggestions
+            selected_suggestion = random.choice(suggestions.split("\n"))        # We select random suggestion
+            self.current_state = self.get_current_state(selected_suggestion)
+            self.steps.append(selected_suggestion)
+            print(f"Prompt: BFS, State : {temp}\n\tSuggestion: {selected_suggestion}")
+
         
         self.steps_count += 1
 
@@ -117,11 +133,12 @@ class Game24(Task):
         
         accuracy = correct_experiments/len(log)
         if verbose:
-            print(f"Predicted correctly {correct_experiments}/{len(log)} ({accuracy*100}%)")
+            print(f"Predicted correctly {correct_experiments}/{len(log)} ({accuracy*100:.2f}%)")
         return accuracy
 
     @staticmethod
     def init_step(input:str, n:int, model)-> list:
+        print("Init stepping")
         prompt = bfs_prompt.format(input=input)
         steps = []
         while len(steps)<n:

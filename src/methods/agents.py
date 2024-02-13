@@ -28,6 +28,7 @@ class Agents():
 
         # Initialization
         if init:
+            print("Random initialization")
             self.step_count = 1
             steps = task.init_step(input=self.input, n=len(self.agents), model=self.agents[0].model)
             for step, agent in zip(steps, self.agents):

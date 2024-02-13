@@ -1,4 +1,7 @@
 import os, argparse
+from datetime import datetime
+
+# Custom
 from src.methods.agents import Agents
 from src.tasks.game24 import Game24
 from src.models import OpenAIBot
@@ -12,21 +15,24 @@ def run(args):
     n_agents = args.n_agents
     model_name = args.model_name
     init = args.init
+    foa_prompt = args.foa_prompt
 
     # Log file initialization (Choose name + delete if it already exists)
-    file_name=f"{model_name}__{n_agents}agents_{n_evaluations}evaluations_{task_start_index}start_{task_end_index}end.json"
+    file_name=f"{model_name}__{n_agents}agents_{str(foa_prompt)[0]}foa_{n_evaluations}evaluations_{task_start_index}start_{task_end_index}end.json"
     current_path = os.getcwd()
-    log_path = os.path.join(current_path, "logs")
+    log_path = os.path.join(current_path, f"logs/{datetime.now().date()}")
     create_folder(log_path)
     file_path = os.path.join(log_path, file_name)
     delete_file(file_path)
+
+    print(f"Init : {init}, int(init): {int(init)}")
 
 
     # Create agents
     ## TODO: Add model + task selection
     bot = OpenAIBot(model=model_name)
     for idx_input in range(task_start_index, task_end_index):
-        agents = Agents(task=Game24, idx_input=idx_input, n_agents=n_agents, model=bot, init=init)
+        agents = Agents(task=Game24, idx_input=idx_input, n_agents=n_agents, model=bot, init=init, foa_prompt=foa_prompt)
 
         # Run agents
         for i in range(agents.max_steps-int(init)):
@@ -43,11 +49,12 @@ def run(args):
 
 def parse_args():
     args = argparse.ArgumentParser()
-    args.add_argument("--init", type=bool, default=True)
+    args.add_argument("--init", action="store_true")
     args.add_argument("--difficulty", type=int, choices=list(range(10)), default=0)
     args.add_argument("--n_samples", type=int, default=50)
     args.add_argument("--n_evaluations", type=int, default=3)
     args.add_argument("--n_agents", type=int, default=5)
+    args.add_argument("--foa_prompt", action="store_true")
     args.add_argument("--model_name", type=str, choices=["gpt-4", "gpt-3.5-turbo-1106", "gpt-3.5-turbo-0125"] , default="gpt-3.5-turbo-1106")
     
     args = args.parse_args()
