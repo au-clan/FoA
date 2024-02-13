@@ -2,3 +2,4 @@ openai==1.7.1
 backoff==2.2.1
 sympy==1.12 
 pandas==2.1.4
+tqdm==4.66.1

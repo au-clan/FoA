@@ -46,7 +46,7 @@ def run(args):
         agents.create_log(repo_path=log_path, file_name=file_name)
     
     Game24.get_accuracy(file_path)
-
+    print(f"Logs saved in : \n\t'{file_path}'")
 def parse_args():
     args = argparse.ArgumentParser()
     args.add_argument("--init", action="store_true")
