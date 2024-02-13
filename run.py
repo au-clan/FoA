@@ -25,8 +25,6 @@ def run(args):
     file_path = os.path.join(log_path, file_name)
     delete_file(file_path)
 
-    print(f"Init : {init}, int(init): {int(init)}")
-
 
     # Create agents
     ## TODO: Add model + task selection

@@ -60,9 +60,12 @@ class Agents():
         """
         All agents take a step.
         """
+        cost_before = self.agents[0].model.get_cost(verbose=False)
         for agent in self.agents:
             agent.step()
         self.step_count += 1
+        cost_after = self.agents[0].model.get_cost(verbose=False)
+        print(f"Step cost : {cost_after-cost_before} ({len(self.agents)} agents)")
 
         # Log steps
         self.log[self.input_idx][f"step_{self.step_count}"] = {}
@@ -74,10 +77,12 @@ class Agents():
         """
         All agents evaluate their current state.
         """
+        cost_before = self.agents[0].model.get_cost(verbose=False)
         for i, agent in enumerate(self.agents):
             value = agent.evaluate(n=n)
             self.values[i] = value
-        
+        cost_after = self.agents[0].model.get_cost(verbose=False)
+        print(f"Evaluation cost : {cost_after-cost_before} ({len(self.agents)} agents)")
         # Log values
         self.log[self.input_idx][f"step_{self.step_count}"]['values'] = self.values.tolist()
 
