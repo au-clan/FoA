@@ -18,7 +18,6 @@ class Game24(Task):
         self.input_idx = None
         self.max_steps = 4
         self.steps_count = 0
-        self.values_log = {}
         self.foa_prompt = foa_prompt
 
     def __len__(self) -> int:
@@ -85,14 +84,13 @@ class Game24(Task):
         value_names = [value.split('\n')[-1] for value in response]
         value_map = {'impossible': 0.001, 'likely': 1, 'sure': 20}
         value_number = sum(value * value_names.count(name) for name, value in value_map.items())
-        self.values_log[self.steps_count] = value_number
         return value_number
     
     def get_state(self)-> dict:
         """
         Collects the values that contribute towards the state of the task in a dictionary.
         """
-        state = {"steps": self.steps, "current_state": self.current_state, "values_log": self.values_log}
+        state = {"steps": self.steps, "current_state": self.current_state}
         return state
     
     def copy_state(self, state: dict):

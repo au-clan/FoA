@@ -16,6 +16,7 @@ def run(args):
     model_name = args.model_name
     init = args.init
     foa_prompt = args.foa_prompt
+    max_steps = args.max_steps
 
     # Log file initialization (Choose name + delete if it already exists)
     file_name=f"{model_name}__{n_agents}agents_{str(foa_prompt)[0]}foa_{n_evaluations}evaluations_{task_start_index}start_{task_end_index}end.json"
@@ -33,12 +34,15 @@ def run(args):
         agents = Agents(task=Game24, idx_input=idx_input, n_agents=n_agents, model=bot, init=init, foa_prompt=foa_prompt)
 
         # Run agents
-        for i in range(agents.max_steps-int(init)):
+        for i in range(max_steps-int(init)):
             agents.step()
+            done, _ = agents.test_output()
+            if done:
+                break
             agents.evaluate(n=n_evaluations)
-            if i!=agents.max_steps-1:       # Resampling condition (when to resample)
+            if i!=max_steps-int(init)-1:    # Resampling condition (when to resample)
                 agents.resample()
-        agents.test_output()
+        
 
         # Log results
         agents.create_log(repo_path=log_path, file_name=file_name)
@@ -52,6 +56,7 @@ def parse_args():
     args.add_argument("--n_samples", type=int, default=50)
     args.add_argument("--n_evaluations", type=int, default=3)
     args.add_argument("--n_agents", type=int, default=5)
+    args.add_argument("--max_steps", type=int, default=10)
     args.add_argument("--foa_prompt", action="store_true")
     args.add_argument("--model_name", type=str, choices=["gpt-4", "gpt-3.5-turbo-1106", "gpt-3.5-turbo-0125"] , default="gpt-3.5-turbo-1106")
     

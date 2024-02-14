@@ -4,23 +4,30 @@ from src.tasks.base import Task
 from src.methods.resampler import Resampler
 
 class Agents():
-    def __init__(self, task: Task, idx_input: int, n_agents: int, init: bool, **kwargs):
+    def __init__(self, task: Task, idx_input: int, n_agents: int, init: bool, back_coef: float=0.8, n_evaluations: int=3, **kwargs):
         # Task and model names (for logging)
         self.task_name = task.__name__
         self.model_name = kwargs.get('model', 'none').__class__.__name__
 
-        # Create agents, get input, create values list and set Resampler
+        
+
+        # Create agents and get input 
         self.input_idx = idx_input
         self.agents = [task(**kwargs) for agent in range(n_agents)] 
         for agent in self.agents:
             agent.get_input(idx_input)
-        self.values = np.array([None] * n_agents)
-        self.resampler = Resampler()
-        
+
         # Set input, max steps and start step count
         self.input = self.agents[0].input
         self.max_steps = self.agents[0].max_steps
         self.step_count = 0
+
+        # Create values list and set Resampler
+        self.values = {"idx":["INIT"], "values":[n_evaluations*20], "states":[{"steps":[], "current_state":self.input}]}
+        self.n_evaluations =n_evaluations
+        self.resampler = Resampler()
+        self.back_coef = back_coef
+        self.n_evaluations = n_evaluations
         
         # Start logging
         self.log = {self.input_idx:{}}
@@ -60,12 +67,16 @@ class Agents():
         """
         All agents take a step.
         """
-        cost_before = self.agents[0].model.get_cost(verbose=False)
         for agent in self.agents:
             agent.step()
         self.step_count += 1
-        cost_after = self.agents[0].model.get_cost(verbose=False)
-        print(f"Step cost : {cost_after-cost_before} ({len(self.agents)} agents)")
+
+        # Decade value of previous states every time a step is performed
+        old_state_values = np.array(self.values["values"])
+        old_state_new_values = (self.back_coef * old_state_values).tolist()
+        old_state_new_values[0] = old_state_new_values[0] * self.back_coef
+        self.values["values"] = old_state_new_values
+        
 
         # Log steps
         self.log[self.input_idx][f"step_{self.step_count}"] = {}
@@ -77,14 +88,13 @@ class Agents():
         """
         All agents evaluate their current state.
         """
-        cost_before = self.agents[0].model.get_cost(verbose=False)
         for i, agent in enumerate(self.agents):
-            value = agent.evaluate(n=n)
-            self.values[i] = value
-        cost_after = self.agents[0].model.get_cost(verbose=False)
-        print(f"Evaluation cost : {cost_after-cost_before} ({len(self.agents)} agents)")
+            self.values["idx"].append(f"{self.step_count}.{i}")
+            self.values["values"].append(agent.evaluate(n=n))
+            self.values["states"].append(agent.get_state())
+
         # Log values
-        self.log[self.input_idx][f"step_{self.step_count}"]['values'] = self.values.tolist()
+        self.log[self.input_idx][f"step_{self.step_count}"]['values'] = self.values["values"][-len(self.agents):]
 
 
     def resample(self, resample_method: str = 'normalization'):
@@ -92,48 +102,41 @@ class Agents():
         Given a resampling method, resample the agents based on their values.
         """
         # Indices of resampled agents
-        indices = self.resampler.resample(self.values, resample_method)
-        pre_resampling_states = [agent.get_state() for agent in self.agents]
+        indices = self.resampler.resample(np.array(self.values["values"]), resample_method)
+        selected_states = [self.values["states"][i] for i in indices]
+        selected_states_idx = [self.values["idx"][i] for i in indices]
         log_indices = []
 
         # The agents copy the state of the resampled agents
-        for i, agent in enumerate(self.agents):
-            agent.copy_state(pre_resampling_states[indices[i]])
-            log_indices.append(f"{i} <- {indices[i]}")
+        for i, agent, in enumerate(self.agents):
+            agent.copy_state(selected_states[i])
+            print(f"{i} <- {selected_states_idx[i]}")
+            log_indices.append(f"{i} <- {selected_states_idx[i]}")
         
         # Log resampling
         self.log[self.input_idx][f"step_{self.step_count}"]['resampled'] = log_indices
         current_steps = ["\n".join(agent.steps) for agent in self.agents]
         self.log[self.input_idx][f"step_{self.step_count}"]['resampled_steps'] = current_steps
     
-    def test_output(self)-> list:
+    def test_output(self)-> tuple:
         results = [agent.test_output() for agent in self.agents]
+        done = {"r":1} in results
 
         # Log results
         self.log[self.input_idx]["results"] = results
         self.log[self.input_idx]["cost"] = self.agents[0].model.get_cost(verbose=False)
-        return results
-
-
-    def choose(self)-> Task:
-        """
-        Returns the best agent best on their state's last evaluation.
-        """
-        best_agent_idx = np.argmax(self.values)
-        best_agent = self.agents[best_agent_idx]
-        best_answer = "n".join(best_agent.steps)
-        print(f"Best answer: {best_answer}")
-
-        # Log best agent
-        self.log[self.input_idx]["best_agent"] = {}
-        self.log[self.input_idx]["best_agent"]['idx'] = int(best_agent_idx)
-        self.log[self.input_idx]["best_agent"]['steps'] = "\n".join(best_agent.steps)
-        return best_agent
+        return done, results
 
     def create_log(self, repo_path: str, file_name:str = None):
         """
         Given the repo path, create a log file (in the given repo).
         """
+        # Moving results and cost log at the end
+        results = self.log[self.input_idx].pop("results")
+        self.log[self.input_idx]["results"] = results
+        cost = self.log[self.input_idx].pop("cost")
+        self.log[self.input_idx]["cost"] = cost
+
         if not file_name:
             file_name = f"{self.task_name}_{self.input_idx}inputIdx_{len(self.agents)}agents_{self.model_name}.json"
         file_path = os.path.join(repo_path, file_name)
