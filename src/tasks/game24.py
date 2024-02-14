@@ -135,6 +135,18 @@ class Game24(Task):
         if verbose:
             print(f"Predicted correctly {correct_experiments}/{len(log)} ({accuracy*100:.2f}%)")
         return accuracy
+    
+    @staticmethod
+    def get_cost(log_path: str, verbose: bool=True)-> float:
+        with open(log_path, "r") as log_file:
+            log = json.load(log_file)
+            last_experiment_idx = max(log.keys())
+            cost = log[last_experiment_idx]["cost"]
+        
+        if verbose:
+            print(f"Experiment cost : {cost} USD")
+        return cost
+
 
     @staticmethod
     def init_step(input:str, n:int, model)-> list:
