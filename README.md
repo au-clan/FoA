@@ -25,16 +25,17 @@ To run an experiment you can simply use:
 python run.py
 ```
 Arguments
-- `--init` (flag): Whether to use initialization or not (default=False). Using initialization guarantees that the first step of each agent is unique but random.
 - `--difficulty`: Selects the difficulty of the samples going from 0 (easiest) to 9 (samples used for the ToT paper).
 - `--n_samples`: Number of samples/games to run during the experiment.
 - `--n_evaluations`: Number of times to evaluate each state in order to give it a final value (=sum of all evaluations).
 - `--n_agents`: Number of agents to use for the experiment.
+- `--back_coeff`: Backtracking coefficient (min:0 -> No backtracking allowed, max:1 -> Old states value does not depreciate).
 - `--max_steps`: Max steps agents are allowed to execute.
-- `--foa_prompt` (flag): Whether to use foa specific prompt or prompt from ToT paper (default=False -> ToT).
 - `--model_name`: Name of OpenAI model to use.
+- `--init` (flag): Whether to use initialization or not (default=False). Using initialization guarantees that the first step of each agent is unique but random.
+- `--foa_prompt` (flag): Whether to use foa specific prompt or prompt from ToT paper (default=False -> ToT).
 
 Default arguments
 ```bash
-python run.py  --difficulty 0 --n_samples 50 --n_evaluations 3 --n_agents 5 --max_steps 10 --model_name gpt-3.5-turbo-1106
+python run.py  --difficulty 0 --n_samples 50 --n_evaluations 3 --n_agents 5 --back_coeff 0.8 --max_steps 10 --model_name gpt-3.5-turbo-1106
 ```

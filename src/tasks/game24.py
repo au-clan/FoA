@@ -138,8 +138,9 @@ class Game24(Task):
     def get_cost(log_path: str, verbose: bool=True)-> float:
         with open(log_path, "r") as log_file:
             log = json.load(log_file)
-            last_experiment_idx = max(log.keys())
-            cost = log[last_experiment_idx]["cost"]
+            experiments_idx = [int(idx) for idx in log.keys()]
+            last_experiment_idx = max(experiments_idx)
+            cost = log[str(last_experiment_idx)]["cost"]
         
         if verbose:
             print(f"Experiment cost : {cost} USD")

@@ -8,7 +8,6 @@ class Agents():
         # Task and model names (for logging)
         self.task_name = task.__name__
         self.model_name = kwargs.get('model', 'none').__class__.__name__
-
         
 
         # Create agents and get input 

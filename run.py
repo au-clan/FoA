@@ -16,6 +16,7 @@ def run(args):
     model_name = args.model_name
     init = args.init
     foa_prompt = args.foa_prompt
+    back_coeff = args.back_coeff
     max_steps = args.max_steps
 
     # Log file initialization (Choose name + delete if it already exists)
@@ -31,7 +32,7 @@ def run(args):
     ## TODO: Add model + task selection
     bot = OpenAIBot(model=model_name)
     for idx_input in range(task_start_index, task_end_index):
-        agents = Agents(task=Game24, idx_input=idx_input, n_agents=n_agents, model=bot, init=init, foa_prompt=foa_prompt)
+        agents = Agents(task=Game24, idx_input=idx_input, n_agents=n_agents, init=init, back_coef=back_coeff, model=bot,  foa_prompt=foa_prompt)
 
         # Run agents
         for i in range(max_steps-int(init)):
@@ -51,14 +52,16 @@ def run(args):
     print(f"Logs saved in : \n\t'{file_path}'")
 def parse_args():
     args = argparse.ArgumentParser()
-    args.add_argument("--init", action="store_true")
+    
     args.add_argument("--difficulty", type=int, choices=list(range(10)), default=0)
     args.add_argument("--n_samples", type=int, default=50)
     args.add_argument("--n_evaluations", type=int, default=3)
     args.add_argument("--n_agents", type=int, default=5)
+    args.add_argument("--back_coef", type=float, default=0.8)
     args.add_argument("--max_steps", type=int, default=10)
-    args.add_argument("--foa_prompt", action="store_true")
     args.add_argument("--model_name", type=str, choices=["gpt-4", "gpt-3.5-turbo-1106", "gpt-3.5-turbo-0125"] , default="gpt-3.5-turbo-1106")
+    args.add_argument("--init", action="store_true")
+    args.add_argument("--foa_prompt", action="store_true")
     
     args = args.parse_args()
     return args
