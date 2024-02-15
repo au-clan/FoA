@@ -16,7 +16,7 @@ def run(args):
     model_name = args.model_name
     init = args.init
     foa_prompt = args.foa_prompt
-    back_coeff = args.back_coeff
+    back_coef = args.back_coef
     max_steps = args.max_steps
 
     # Log file initialization (Choose name + delete if it already exists)
@@ -32,7 +32,7 @@ def run(args):
     ## TODO: Add model + task selection
     bot = OpenAIBot(model=model_name)
     for idx_input in range(task_start_index, task_end_index):
-        agents = Agents(task=Game24, idx_input=idx_input, n_agents=n_agents, init=init, back_coef=back_coeff, model=bot,  foa_prompt=foa_prompt)
+        agents = Agents(task=Game24, idx_input=idx_input, n_agents=n_agents, init=init, back_coef=back_coef, model=bot,  foa_prompt=foa_prompt)
 
         # Run agents
         for i in range(max_steps-int(init)):
