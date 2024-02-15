@@ -1,19 +1,19 @@
-import numpy as np
 import asyncio
+# set up logging
+import logging
 import os
 import random
 
+import numpy as np
 import pandas as pd
 from diskcache import Cache
 
 from async_engine.cached_api import CachedOpenAIAPI
 from async_engine.round_robin_manager import AsyncRoundRobin
 from async_implementation.agents.gameof24 import GameOf24Agent
-from async_implementation.states.gameof24 import GameOf24State
 from async_implementation.resampling import value_weighted
+from async_implementation.states.gameof24 import GameOf24State
 
-# set up logging
-import logging
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
@@ -49,7 +49,7 @@ data = pd.read_csv(path).Puzzles.tolist()
 
 # ToDo: this should probably be moved to its own file
 # for now I'm keeping it here, for easier debugging
-async def foa_gameof24(puzzle_idx:int, num_agents=3, k=2):
+async def foa_gameof24(puzzle_idx: int, num_agents=3, k=2):
     randomness = 0
     random.seed(randomness)
 
@@ -71,7 +71,7 @@ async def foa_gameof24(puzzle_idx:int, num_agents=3, k=2):
         states = await asyncio.gather(*agent_coroutines)
 
         # every k steps, evaluate and resample
-        if step>0 and step%k==0:
+        if step > 0 and step % k == 0:
             # evaluate
             value_coroutines = []
             for state in states:
@@ -92,18 +92,14 @@ async def foa_gameof24(puzzle_idx:int, num_agents=3, k=2):
             states = [states[i] for i in resampled_indices]
 
 
-
-
-
 async def run():
     game_coroutines = []
     for idx in range(len(data)):
         # limit to a few games for debugging
-        if idx>2:
+        if idx > 2:
             break
 
         game_coroutines.append(foa_gameof24(idx))
-
 
     results = await asyncio.gather(*game_coroutines)
     return results

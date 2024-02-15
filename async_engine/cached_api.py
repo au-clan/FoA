@@ -1,13 +1,12 @@
 import asyncio
+import logging
 import time
 from copy import deepcopy
-from deepdiff import DeepHash
+
 import openai
+from deepdiff import DeepHash
 from openai import AsyncOpenAI
 
-import json
-
-import logging
 logger = logging.getLogger(__name__)
 
 
@@ -33,7 +32,7 @@ class CachedOpenAIAPI:
         config = deepcopy(config)
         self.config = config
 
-        self.aclient =  AsyncOpenAI()
+        self.aclient = AsyncOpenAI()
 
     async def request(self, messages, limiter, n=10, request_timeout=30):
 
@@ -115,7 +114,6 @@ class CachedOpenAIAPI:
 
             assert response is not None
 
-
         stop = time.time()
         # by communicating the tokens and time used to the resource manager, we can optimize the rate of requests
         # or maybe we're just using a very simple round robin strategy ;)
@@ -128,7 +126,6 @@ class CachedOpenAIAPI:
         resource.free(time_taken=time_taken, amount_used=tokens_used)
 
         logger.log(logging.DEBUG, f"Tokens used: {tokens_used}")
-
 
         raw_responses = []
         for choice in response.choices:

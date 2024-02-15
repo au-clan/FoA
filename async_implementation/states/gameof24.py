@@ -13,4 +13,3 @@ class GameOf24State:
     randomness: int
 
     steps: List[str]
-
