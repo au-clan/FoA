@@ -10,12 +10,11 @@ logger = logging.getLogger(__name__)
 
 
 class CachedOpenAIAPI:
-    def __init__(self, cache, model,
+    def __init__(self, cache, config,
                  sleep_time=5,
                  sleep_factor=3,
                  num_retries=3,
                  max_sleep=60,
-                 config=None,
                  **kwargs):
 
         self.cache = cache
@@ -23,7 +22,6 @@ class CachedOpenAIAPI:
         # we'll use a resource manager to cycle through keys
         # ideally, the resource manager should ensure that requests are made just below the rate limit
         # in case that doesn't work we also have a more crude sleep mechanism built into the API
-        self.model = model
         self.sleep_time = sleep_time
         self.sleep_factor = sleep_factor
         self.current_sleep_time = sleep_time
@@ -68,30 +66,30 @@ class CachedOpenAIAPI:
             while True:
                 self.current_sleep_time = min(self.current_sleep_time, self.max_sleep)
                 try:
-                    response = await asyncio.wait_for(openai.ChatCompletion.acreate(**cache_config, messages=messages, request_timeout=request_timeout,
+                    response = await asyncio.wait_for(openai.ChatCompletion.acreate(**cache_config, request_timeout=request_timeout,
                                                                                    n=num_needed), timeout=request_timeout)
 
                     self.current_sleep_time = self.sleep_time
                     break
-                except openai.error.RateLimitError as e:
+                except openai.RateLimitError as e:
                     print(f"Rate limit error, sleeping for {self.current_sleep_time} seconds")
                     print(e)
                     await asyncio.sleep(self.current_sleep_time)
                     self.current_sleep_time *= self.sleep_factor
 
-                except openai.error.ServiceUnavailableError as e:
-                    print(f"Service unavailable error, sleeping for {self.current_sleep_time} seconds")
+                except openai.APIStatusError as e:
+                    print(f"APIStatusError, sleeping for {self.current_sleep_time} seconds")
                     print(e)
                     await asyncio.sleep(self.current_sleep_time)
                     self.current_sleep_time *= self.sleep_factor
 
-                except openai.error.Timeout as e:
+                except openai.APITimeoutError as e:
                     print(f"Timeout error, sleeping for {self.current_sleep_time} seconds")
                     print(e)
                     await asyncio.sleep(self.current_sleep_time)
                     self.current_sleep_time *= self.sleep_factor
 
-                except openai.error.APIError as e:
+                except openai.APIError as e:
                     print(f"API error, sleeping for {self.current_sleep_time} seconds")
                     print(e)
                     await asyncio.sleep(self.current_sleep_time)
