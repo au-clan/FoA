@@ -64,6 +64,8 @@ class CachedOpenAIAPI:
         num_needed = n - len(cache_entry)
         assert num_needed > 0
 
+        print("needing more samples")
+
         start = time.time()
         async with limiter as resource:
             self.aclient.api_key = resource.data

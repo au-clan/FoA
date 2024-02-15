@@ -1,5 +1,7 @@
+import numpy as np
 import asyncio
 import os
+import random
 
 import pandas as pd
 from diskcache import Cache
@@ -8,6 +10,7 @@ from async_engine.cached_api import CachedOpenAIAPI
 from async_engine.round_robin_manager import AsyncRoundRobin
 from async_implementation.agents.gameof24 import GameOf24Agent
 from async_implementation.states.gameof24 import GameOf24State
+from async_implementation.resampling import value_weighted
 
 # set up logging
 import logging
@@ -44,18 +47,20 @@ path = 'data/24_tot.csv'
 data = pd.read_csv(path).Puzzles.tolist()
 
 
+# ToDo: this should probably be moved to its own file
+# for now I'm keeping it here, for easier debugging
+async def foa_gameof24(puzzle_idx:int, num_agents=3, k=2):
+    randomness = 0
+    random.seed(randomness)
 
-async def run():
+    puzzle = data[puzzle_idx]
     # set up states
-    chosen_puzzle = data[0]
-    num_agents = 10
     states = []
     for _ in range(num_agents):
-        states.append(GameOf24State(current_state=chosen_puzzle, steps=[]))
+        states.append(GameOf24State(puzzle=puzzle, current_state=puzzle, steps=[], randomness=random.randint(0, 1000)))
 
     num_steps = 10
     for step in range(num_steps):
-
         # ToDo: eh, log messages are not showing up
         logger.info(f"Step {step}")
         print(f"Step {step}")
@@ -65,8 +70,44 @@ async def run():
             agent_coroutines.append(GameOf24Agent.step(state, api, limiter))
         states = await asyncio.gather(*agent_coroutines)
 
-    # return the final states
-    return states
+        # every k steps, evaluate and resample
+        if step>0 and step%k==0:
+            # evaluate
+            value_coroutines = []
+            for state in states:
+                value_coroutines.append(GameOf24Agent.evaluate(state, api, limiter))
+            values = await asyncio.gather(*value_coroutines)
+
+            # resample, ToDo, move this to a function, probably on the agent
+            probabilities = value_weighted.linear(values)
+            random.seed(randomness)
+            randomness = random.randint(0, 1000)
+            resampled_indices = np.random.choice(range(len(states)), size=num_agents, p=probabilities, replace=True)
+
+            # this could be dangerous, I'm indexing into the list of states
+            # -> the new states will contain ducplicates of the old states
+            # but we're using a frozen dataclass to represent states, so duplicates should be fine
+            # we can't update the fields in-place in any case
+            # any code that wants to mutate state needs to return a new state
+            states = [states[i] for i in resampled_indices]
 
 
-output_states = asyncio.run(run())
+
+
+
+async def run():
+    game_coroutines = []
+    for idx in range(len(data)):
+        # limit to a few games for debugging
+        if idx>2:
+            break
+
+        game_coroutines.append(foa_gameof24(idx))
+
+
+    results = await asyncio.gather(*game_coroutines)
+    return results
+
+
+results = asyncio.run(run())
+print(results)
