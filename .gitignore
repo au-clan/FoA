@@ -2,3 +2,4 @@ logs
 *.DS_Store
 *.pyc
 screenlog.*
+.env
