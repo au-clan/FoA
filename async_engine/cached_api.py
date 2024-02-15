@@ -3,6 +3,8 @@ import time
 from copy import deepcopy
 from deepdiff import DeepHash
 import openai
+from openai import AsyncOpenAI
+
 import json
 
 import logging
@@ -30,6 +32,8 @@ class CachedOpenAIAPI:
 
         config = deepcopy(config)
         self.config = config
+
+        self.aclient =  AsyncOpenAI()
 
     async def request(self, messages, limiter, n=10, request_timeout=30):
 
@@ -60,14 +64,20 @@ class CachedOpenAIAPI:
         num_needed = n - len(cache_entry)
         assert num_needed > 0
 
+        start = time.time()
         async with limiter as resource:
-            openai.api_key = resource.data
-
+            self.aclient.api_key = resource.data
             while True:
                 self.current_sleep_time = min(self.current_sleep_time, self.max_sleep)
                 try:
-                    response = await asyncio.wait_for(openai.ChatCompletion.acreate(**cache_config, request_timeout=request_timeout,
-                                                                                   n=num_needed), timeout=request_timeout)
+                    response = await asyncio.wait_for(self.aclient.chat.completions.create(
+                        **cache_config,
+                        # messages=cache_config["messages"],
+                        # model=cache_config["model"],
+                        # temperature=cache_config["temperature"],
+                        # max_tokens=cache_config["max_tokens"],
+                        # timeout=request_timeout,
+                        n=num_needed), timeout=request_timeout)
 
                     self.current_sleep_time = self.sleep_time
                     break
@@ -104,13 +114,14 @@ class CachedOpenAIAPI:
             assert response is not None
 
 
+        stop = time.time()
         # by communicating the tokens and time used to the resource manager, we can optimize the rate of requests
         # or maybe we're just using a very simple round robin strategy ;)
         # ToDo: I have a super sophisticated and only slightly buggy implementation of a leaky bucket rate limiting algo
         # for GPT3.5 it works worse than round robin, I think because the rate limit for gpt3.5 are so high that it's
         # easier to just get out of the way and let the next request through
         # but for GPT4 I've found the leaky bucket to be very more efficient
-        time_taken = response.response_ms / 1000
+        time_taken = stop - start
         tokens_used = response.usage.total_tokens
         resource.free(time_taken=time_taken, amount_used=tokens_used)
 

@@ -17,7 +17,8 @@ class GameOf24Agent:
         prompt = prompts.bfs_prompt.format(input=current_state)
 
         # Get the next state
-        iid_suggestions = await api.request(prompt, limiter, n=1)
+        messages = [{"role":"user", "content":prompt}]
+        iid_suggestions = await api.request(messages, limiter, n=1)
         suggestions = iid_suggestions[0]
 
         # parse suggestions

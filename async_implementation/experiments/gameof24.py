@@ -9,6 +9,11 @@ from async_engine.round_robin_manager import AsyncRoundRobin
 from async_implementation.agents.gameof24 import GameOf24Agent
 from async_implementation.states.gameof24 import GameOf24State
 
+# set up logging
+import logging
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+
 # you should use the same cache for every instance of CachedOpenAIAPI
 # that way we never pay for the same request twice
 assert os.path.exists(
@@ -20,11 +25,11 @@ OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 assert OPENAI_API_KEY is not None, "Please set the OPENAI_API_KEY environment variable"
 
 api_config = {
-    "max_tokens": 2000,
+    "max_tokens": 100,
     "temperature": 0.7,
     "top_p": 1,
     "request_timeout": 45,
-    "model": "gpt-3.5-turbo-1106"
+    "model": "gpt-3.5-turbo"
 }
 
 api = CachedOpenAIAPI(cache, api_config)
@@ -51,6 +56,9 @@ async def run():
     num_steps = 10
     for step in range(num_steps):
 
+        # ToDo: eh, log messages are not showing up
+        logger.info(f"Step {step}")
+        print(f"Step {step}")
         # make one step for each state
         agent_coroutines = []
         for state in states:
