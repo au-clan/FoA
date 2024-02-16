@@ -3,3 +3,5 @@ backoff==2.2.1
 sympy==1.12 
 pandas==2.1.4
 tqdm==4.66.1
+deepdiff==6.7.1
+diskcache==5.6.3
