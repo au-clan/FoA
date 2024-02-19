@@ -1,4 +1,6 @@
 logs
+caches
 *.DS_Store
 *.pyc
 screenlog.*
+.env
