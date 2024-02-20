@@ -1,11 +1,13 @@
 import re
 import random
+import numpy as np
 from sympy import simplify
 
 random.seed(0)
 
 from async_implementation.prompts import gameof24 as prompts
 from async_implementation.states.gameof24 import GameOf24State
+from async_implementation.resampling import value_weighted
 
 
 class GameOf24Agent:
@@ -106,4 +108,22 @@ class GameOf24Agent:
             except Exception as e:
                 # print(e)
                 return {'r': 0}
+
+    class Resampling:
+
+        @staticmethod
+        def linear( values: list, n_picks: int, randomness: int)-> list:
+            """
+            Inputs:
+                values: Initial values.
+                n_picks: Number of picks to return.
+                randomness: Current state of randomness.
+            Outputs:
+                resampled_indices: Indices of picked values.
+            """
+            probabilities = value_weighted.linear(values)
+            random.seed(randomness)
+            randomness = random.randint(0, 1000)
+            resampled_indices = np.random.choice(range(len(values)), size=n_picks, p=probabilities, replace=True)
+            return resampled_indices
 

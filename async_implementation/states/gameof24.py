@@ -10,6 +10,12 @@ class GameOf24State:
     # initialized to the same value as puzzle, but is updated as the game progresses
     current_state: str
 
+    steps: List[str]
+
     randomness: int
 
-    steps: List[str]
+    def __hash__(self):
+        return hash((self.puzzle, self.current_state, " -> ".join(self.steps)))
+    
+    def items(self):
+        return self.puzzle, self.current_state, self.steps, self.randomness

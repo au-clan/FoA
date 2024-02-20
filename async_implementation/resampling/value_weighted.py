@@ -1,7 +1,7 @@
 from typing import List
 
 
-def linear(values: List[float]):
+def linear(values: List[float])-> List[float]:
     """
     Compute the probability of each value.
     """
