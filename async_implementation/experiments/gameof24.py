@@ -140,10 +140,10 @@ async def run(run_options:dict, foa_options:dict):
 
 # Select parameters
 difficulty = 0                  # Starting idx = 100 * difficulty
-sample_size = 10                # Ending idx   = 100 * difficulty + sample_size
-num_agents = 5                  # Number of agents
+sample_size = 50                # Ending idx   = 100 * difficulty + sample_size
+num_agents = 10                  # Number of agents
 k = 1                           # Resampling every <k> steps
-origin_value = 20 * num_agents  # The evaluation of the origin state
+origin_value = 20 * 3           # The evaluation of the origin state #TODO: Change to num evaluations
 num_steps = 10                  # Total number of steps FoA executes
 backtrack = 0.8                 # Backtrack decaying coefficient
 
