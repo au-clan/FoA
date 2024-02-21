@@ -1,4 +1,6 @@
 import os
+
+import numpy as np
 from pathlib import Path
 
 
@@ -15,3 +17,7 @@ def delete_file(file_path: str):
     if os.path.exists(file_path):
         os.remove(file_path)
         print(f"Deleted : '{file_path}'")
+
+def sigmoid(x):
+    "Sigmoid function"
+    return 1 / (1 + np.exp(-x))

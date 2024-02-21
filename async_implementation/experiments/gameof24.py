@@ -73,7 +73,7 @@ async def foa_gameof24(puzzle_idx: int, num_agents=3, k=2, backtrack=0.8):
 
     origin_state_hash = [key for key in record.keys()][0]
 
-    num_steps = 10
+    num_steps = 4
     for step in range(num_steps):
         print(f"Step {step}")
         for value in record.values():
@@ -168,4 +168,4 @@ for game in results:
     print(verifications)
     print("-----------"*5)
 
-[1,2,3].extend([3,4,5])
+api.cost(verbose=True)

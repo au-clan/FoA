@@ -34,6 +34,10 @@ class CachedOpenAIAPI:
 
         self.aclient = AsyncOpenAI()
 
+        # Counting tokens to compute cost
+        self.completion_tokens = 0
+        self.prompt_tokens = 0
+
     async def request(self, messages, limiter, n=10, request_timeout=30):
 
         if "request_timeout" in self.config:
@@ -49,6 +53,10 @@ class CachedOpenAIAPI:
         # now we also need to add the messages to the cache_config
         cache_config["messages"] = messages
 
+        # NOTE: Updated cache structure to save cost
+        # Cache structure {cache_key : cache_entry, ...}
+        # Cache entry structure : [(message, completion_tokens, prompt_tokens), ...]
+
         # use DeepHash to create a key for the cache
         cache_key = DeepHash(cache_config)[cache_config]
         cache_entry = self.cache.get(cache_key)
@@ -57,7 +65,12 @@ class CachedOpenAIAPI:
 
         # the cache_entry is a list of IID responses
         if len(cache_entry) >= n:
-            return cache_entry[:n]
+            
+            # Update tokens count
+            self.completion_tokens += sum([entry[1] for entry in cache_entry[:n]])
+            self.prompt_tokens += sum([entry[2] for entry in cache_entry[:n]])
+
+            return [entry[0] for entry in cache_entry[:n]]
 
         # if we don't have enough responses in the cache, we need to make a request
         num_needed = n - len(cache_entry)
@@ -122,6 +135,8 @@ class CachedOpenAIAPI:
         # easier to just get out of the way and let the next request through
         # but for GPT4 I've found the leaky bucket to be very more efficient
         time_taken = stop - start
+        completion_tokens = response.usage.completion_tokens
+        prompt_tokens = response.usage.prompt_tokens
         tokens_used = response.usage.total_tokens
         resource.free(time_taken=time_taken, amount_used=tokens_used)
 
@@ -129,14 +144,48 @@ class CachedOpenAIAPI:
 
         raw_responses = []
         for choice in response.choices:
-            raw_responses.append(choice.message.content)
+            raw_responses.append((choice.message.content, completion_tokens/num_needed, prompt_tokens))
 
         # add the new responses to the cache
         cache_entry.extend(raw_responses)
 
         self.cache.set(cache_key, cache_entry)
 
-        return cache_entry[:n]
+        # Update tokens count
+        self.completion_tokens += sum([entry[1] for entry in cache_entry[:n]])
+        self.prompt_tokens += sum([entry[2] for entry in cache_entry[:n]])
+
+        return [entry[0] for entry in cache_entry[:n]]
 
     def __str__(self):
         return self.config['model']
+
+    def cost(self, verbose=True):
+
+        # Price catalog
+        catalog = {
+            "gpt-4": {"prompt_tokens": 0.03, "completion_tokens":0.06},
+            "gpt-4-32k": {"prompt_tokens": 0.06, "completion_tokens":0.12},
+            "gpt-3.5-turbo-1106": {"prompt_tokens": 0.001, "completion_tokens":0.002},
+            "gpt-3.5-turbo-0125": {"prompt_tokens": 0.0005, "completion_tokens":0.0015},
+            "gpt-3.5-turbo-instruct": {"prompt_tokens": 0.0015, "completion_tokens":0.002},
+        }
+
+        # Name of the model we actually used
+        model_used = self.config["model"]
+
+        # "gpt-3.5-turbo" currently (!) refers to "gpt-3.5-turbo-0125"
+        if model_used == "gpt-3.5-turbo":
+            model_used ="gpt-3.5-turbo-0125"
+
+        if model_used not in catalog:
+            print("No pricing information available for this model")
+        else:
+            input_cost = self.prompt_tokens / 1000 * catalog[model_used]["prompt_tokens"]
+            output_cost = self.completion_tokens / 1000 * catalog[model_used]["completion_tokens"]
+            total_cost = input_cost + output_cost
+            if verbose:
+                print(f"Input tokens: {self.prompt_tokens:.0f} ({input_cost:.3f} USD)")
+                print(f"Output tokens: {self.completion_tokens:.0f} ({output_cost:.3f} USD)")
+                print(f"Total tokens: {self.prompt_tokens + self.completion_tokens:.0f} ({total_cost:.3f} USD)")
+            return total_cost
