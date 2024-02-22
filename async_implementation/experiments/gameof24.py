@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 from diskcache import Cache
 from datetime import datetime
+from collections import Counter
 
 
 # TODO: Not sure if this is correct, I didn't know how else to handle the package paths
@@ -17,7 +18,6 @@ sys.path.append(os.getcwd()) # Project root!!
 from async_engine.cached_api import CachedOpenAIAPI
 from async_engine.round_robin_manager import AsyncRoundRobin
 from async_implementation.agents.gameof24 import GameOf24Agent
-from async_implementation.resampling import value_weighted
 from async_implementation.states.gameof24 import GameOf24State
 from utils import create_folder
 
@@ -63,6 +63,9 @@ data = pd.read_csv(path).Puzzles.tolist()
 async def foa_gameof24(puzzle_idx, foa_options):
     randomness = 0
     random.seed(randomness)
+    
+    # New data structure keeping record of all unique states visited and their according values
+    # (Randomness of a state does not count towards uniqueness)
     record = {}
 
     puzzle = data[puzzle_idx]
@@ -83,9 +86,18 @@ async def foa_gameof24(puzzle_idx, foa_options):
 
         # make one step for each state
         agent_coroutines = []
-        for state in states:
-            agent_coroutines.append(GameOf24Agent.step(state, api, limiter))
+        for state, n in Counter(states).items():
+            agent_coroutines.append(GameOf24Agent.step(state, api, limiter, n=n))
         states = await asyncio.gather(*agent_coroutines)
+        states = [state for new_states in states for state in new_states]
+
+        # After each step we verify if the answer is found and if so we break
+        verifications = [GameOf24Agent.verify(state) for state in states]
+        if {"r":1} in verifications:
+            logger.info(f"STOPPED AT STEP {step}")
+            break
+
+        # Update the record with the new states and depreciate values of old states
         record.update({k:{"state":v["state"], "value":v["value"]*foa_options["backtrack"]} for k,v in record.items()})
         record[origin_state_hash]["value"] = record[origin_state_hash]["value"] * foa_options["backtrack"]
         record.update({hash(state): {"state": state, "value": 0} for state in states})
@@ -140,10 +152,10 @@ async def run(run_options:dict, foa_options:dict):
 
 # Select parameters
 difficulty = 0                  # Starting idx = 100 * difficulty
-sample_size = 50                # Ending idx   = 100 * difficulty + sample_size
+sample_size = 1                # Ending idx   = 100 * difficulty + sample_size
 num_agents = 10                  # Number of agents
 k = 1                           # Resampling every <k> steps
-origin_value = 20 * 3           # The evaluation of the origin state #TODO: Change to num evaluations
+origin_value = 20 * 3           # The evaluation of the origin state #TODO: Change 3 to num_evaluations
 num_steps = 10                  # Total number of steps FoA executes
 backtrack = 0.8                 # Backtrack decaying coefficient
 
@@ -167,11 +179,14 @@ handler = logging.FileHandler(log_folder+"test2.log", mode="w")
 logger.addHandler(handler)
 
 results = asyncio.run(run(run_options, foa_options))
+
+n_success = 0
 for game in results:
     verifications = [GameOf24Agent.verify(result) for result in game]
+    if {"r":1} in verifications:
+        n_success+=1
     logger.info(f"Puzzle : {game[0].puzzle}")
     for i, result in enumerate(game):
-        print(result)
         logger.info(f"\tAgent {i} current state : {result.current_state}")
         logger.info(f"\t\tSteps : {' -> '.join(result.steps)}")
         logger.info(f"\t\tResult : {bool(verifications[i]['r'])}")
@@ -180,7 +195,8 @@ for game in results:
         logger.info(f"\tGame : Successful\n")
     else:
         logger.info(f"\tGame : Unsuccessful\n")
-    print(verifications)
     print("-----------"*5)
 
+
 api.cost(verbose=True)
+print(f"Accuracy : {n_success*100/len(results):.2f}")

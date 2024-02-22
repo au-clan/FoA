@@ -4,7 +4,7 @@ from datetime import datetime
 # Custom
 from src.methods.agents import Agents
 from src.tasks.game24 import Game24
-from src.models import OpenAIBot
+from initial_implementation.models import OpenAIBot
 from src.utils import delete_file, create_folder
 
 

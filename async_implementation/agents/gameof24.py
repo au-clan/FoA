@@ -1,4 +1,5 @@
 import re
+import math
 import random
 import numpy as np
 from sympy import simplify
@@ -13,9 +14,9 @@ from async_implementation.resampling import value_weighted
 class GameOf24Agent:
 
     @staticmethod
-    async def step(state: GameOf24State, api, limiter):
+    async def step(state: GameOf24State, api, limiter, n: int=1):
         """
-        Given a state, return the next state.
+        Given a state, returns n next states.
         """
 
         # set up the prompt, based on the current state
@@ -28,49 +29,51 @@ class GameOf24Agent:
         # Step 2 : '4 * 6 = 24 (left: 24)'            BFS prompt
         # Step 3 : Answer : ((1 - 1) + 4) * 6 = 24    CoT prompt
 
-        current_state = state.current_state
+
+        suggestions  = []
 
         # Answer not found -> Need to compute next step
-        if current_state.strip() != "24":
-            prompt = prompts.bfs_prompt.format(input=current_state)
+        if state.current_state.strip() != "24":
+            prompt = prompts.bfs_prompt.format(input=state.current_state)
 
             # Get the next state
-            messages = [{"role": "user", "content": prompt}]
-            iid_suggestions = await api.request(messages, limiter, n=1)
-            suggestions = iid_suggestions[0]
+            while len(suggestions) < n:
+                messages = [{"role": "user", "content": prompt}]
+                iid_suggestions = await api.request(messages, limiter, n=math.ceil(n/8)) # Prompt suggests 8 new states
+                [suggestions.extend(suggestion.split("\n")) for suggestion in iid_suggestions]
 
             # parse suggestions
-            suggestions = suggestions.split("\n")
             random.seed(state.randomness)
-            selected_suggestion = random.choice(suggestions)
-            selected_state = GameOf24Agent.parse_next_state(selected_suggestion)
+            selected_suggestions = random.sample(suggestions, k=n)
+            selected_states = [GameOf24Agent.parse_next_state(x) for x in selected_suggestions]
 
         # Answer found -> Need to compute final expression
         else:
-            current_steps = '\n'.join(state.steps)
-            prompt = prompts.cot_prompt.format(input=current_state) + "\n" + current_steps
+            current_steps = '\n'.join(state.steps) + "\n"
+            prompt = prompts.cot_prompt.format(input=state.puzzle) + "\n" + current_steps
 
             #  Get the final expression
             messages = [{"role": "user", "content": prompt}]
-            iid_suggestions = await api.request(messages, limiter, n=1)
-            suggestions = iid_suggestions[0]
+            iid_suggestions = await api.request(messages, limiter, n=n) 
+            suggestions.extend(iid_suggestions)
 
-            # Only 1 suggestion (because of prompt)
-            selected_suggestion = suggestions
+            # We already computed exactly the number of suggestions needed
+            selected_suggestions = suggestions
 
             # We don't change states
-            selected_state = current_state
+            selected_states = [state.current_state]*n
 
-        
-
-        # set up new state object
-        next_state = GameOf24State(
-            puzzle=state.puzzle,
-            current_state=selected_state,
-            steps=state.steps + [selected_suggestion],
-            randomness=random.randint(0, 1000)
-        )
-        return next_state
+        # set up new state objects
+        next_states = []
+        for next_suggestion, next_state in zip(selected_suggestions, selected_states):
+            next_state = GameOf24State(
+                puzzle=state.puzzle,
+                current_state=next_state,
+                steps=state.steps + [next_suggestion],
+                randomness=random.randint(0, 1000)
+            )
+            next_states.append(next_state)
+        return next_states
 
     @staticmethod
     async def evaluate(state: GameOf24State, api, limiter, n=3):
