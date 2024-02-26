@@ -2,6 +2,7 @@ import asyncio
 # set up logging
 import logging
 import os
+import json
 import random
 
 import numpy as np
@@ -63,33 +64,32 @@ data = pd.read_csv(path).Puzzles.tolist()
 async def foa_gameof24(puzzle_idx, foa_options):
     randomness = 0
     random.seed(randomness)
-    
-    # New data structure keeping record of all unique states visited and their according values
-    # (Randomness of a state does not count towards uniqueness)
-    record = {}
 
     puzzle = data[puzzle_idx]
+    
+    log = {puzzle_idx:{"puzzle": puzzle}}
+
+    # New data structure keeping record of all unique states visited and their according values
+    r = {"idx": ["INIT"], "values":[foa_options["origin_value"]], "states": [{"steps":[], "current_state":puzzle}]}
+
     # set up states
     states = []
     for _ in range(foa_options["num_agents"]):
         states.append(GameOf24State(puzzle=puzzle, current_state=puzzle, steps=[], randomness=random.randint(0, 1000)))
-    record.update({hash(state): {"state": state, "value": origin_value} for state in states})
-
-    origin_state_hash = [key for key in record.keys()][0]
 
     num_steps = foa_options["num_steps"]
     for step in range(num_steps):
-        print(f"Step {step}")
+        log[puzzle_idx][f"Step {step}"]={}
 
         # DONE (?): eh, log messages are not showing up -> Saved them in logs file but not the api ones.
         #logger.info(f"Step: {step}", )
 
         # make one step for each state
         agent_coroutines = []
-        for state, n in Counter(states).items():
-            agent_coroutines.append(GameOf24Agent.step(state, api, limiter, n=n))
+        for state in states:
+            agent_coroutines.append(GameOf24Agent.step(state, api, limiter))
         states = await asyncio.gather(*agent_coroutines)
-        states = [state for new_states in states for state in new_states]
+        log[puzzle_idx][f"Step {step}"]["steps"] = [" || ".join(state.steps) for state in states]
 
         # After each step we verify if the answer is found and if so we break
         verifications = [GameOf24Agent.verify(state) for state in states]
@@ -97,38 +97,45 @@ async def foa_gameof24(puzzle_idx, foa_options):
             logger.info(f"STOPPED AT STEP {step}")
             break
 
-        # Update the record with the new states and depreciate values of old states
-        record.update({k:{"state":v["state"], "value":v["value"]*foa_options["backtrack"]} for k,v in record.items()})
-        record[origin_state_hash]["value"] = record[origin_state_hash]["value"] * foa_options["backtrack"]
-        record.update({hash(state): {"state": state, "value": 0} for state in states})
+        # Depreciate old values
+        r["values"] = [value * foa_options["backtrack"] if i != 0 else value * foa_options["backtrack"] ** 2 for i, value in enumerate(r["values"])]
 
         # every k steps, evaluate and resample
-        if 0 < step < num_steps -1 and step % foa_options["k"] == 0:
+        if step < num_steps -1 and step % foa_options["k"] == 0:
             # evaluate
             value_coroutines = []
             for state in states:
                 value_coroutines.append(GameOf24Agent.evaluate(state, api, limiter))
-            new_values = await asyncio.gather(*value_coroutines)
-            record.update({hash(state): {"state": state, "value": value} for state,value in zip(states, new_values)})
+            values = await asyncio.gather(*value_coroutines)
 
-            all_states, all_values = zip(*[(v["state"], v["value"]) for v in record.values()])
-
+            # Update states tracker
+            for i, (state, value) in enumerate(zip(states, values)):
+                r["idx"].append(f"{step}.{i}")
+                r["values"].append(value)
+                r["states"].append({"steps": state.steps, "current_state": state.current_state})
+            
+            
+            # Logging
+            log[puzzle_idx][f"Step {step}"]["Evaluation"] = r["values"][-foa_options["num_agents"]:]
             
 
             # DONE : resample, ToDo, move this to a function, probably on the agent
-            resampled_indices = GameOf24Agent.Resampling.linear(all_values, n_picks=foa_options["num_agents"], randomness=randomness)
+            resampled_indices = GameOf24Agent.Resampling.linear(r["values"], n_picks=foa_options["num_agents"], randomness=randomness)
 
             # this could be dangerous, I'm indexing into the list of states
             # -> the new states will contain ducplicates of the old states
             # but we're using a frozen dataclass to represent states, so duplicates should be fine
             # we can't update the fields in-place in any case
             # any code that wants to mutate state needs to return a new state
-            resampled_states = [all_states[i] for i in resampled_indices]
+            resampled_states = [r["states"][i] for i in resampled_indices]
             for i, state in enumerate(resampled_states):
-                puzzle, current_state, steps, _ = state.items()
-                states[i] = GameOf24State(puzzle=puzzle, current_state=current_state, steps=steps, randomness=random.randint(0, 1000))
+                states[i] = GameOf24State(puzzle=puzzle, current_state=state["current_state"], steps=state["steps"], randomness=random.randint(0, 1000))
+            
+            # Logging
+            log[puzzle_idx][f"Step {step}"]["Resampling"] = [f"{i} <- {r['idx'][j]}" for i, j in enumerate(resampled_indices)]
 
-    return states
+
+    return states, log
 
 
 async def run(run_options:dict, foa_options:dict):
@@ -138,12 +145,20 @@ async def run(run_options:dict, foa_options:dict):
         sample_size: Selects the number of experiments to run
     """
     game_coroutines = []
-
+    log = {}
     for idx in range(100*run_options["difficulty"], 100*run_options["difficulty"]+run_options["sample_size"]):
         game_coroutines.append(foa_gameof24(idx, foa_options))
 
     results = await asyncio.gather(*game_coroutines)
-    return results
+    logs = [log for (game, log) in results]
+    for l in logs:
+        log.update(l)
+    with open("logs/test.json", 'w+') as f:
+        json.dump(log, f, indent=4)
+    
+    game_states = [game for (game, log) in results]
+
+    return game_states
 
 
 #################
@@ -152,7 +167,7 @@ async def run(run_options:dict, foa_options:dict):
 
 # Select parameters
 difficulty = 0                  # Starting idx = 100 * difficulty
-sample_size = 1                # Ending idx   = 100 * difficulty + sample_size
+sample_size = 10                # Ending idx   = 100 * difficulty + sample_size
 num_agents = 10                  # Number of agents
 k = 1                           # Resampling every <k> steps
 origin_value = 20 * 3           # The evaluation of the origin state #TODO: Change 3 to num_evaluations
@@ -195,7 +210,6 @@ for game in results:
         logger.info(f"\tGame : Successful\n")
     else:
         logger.info(f"\tGame : Unsuccessful\n")
-    print("-----------"*5)
 
 
 api.cost(verbose=True)

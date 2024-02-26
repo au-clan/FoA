@@ -30,50 +30,44 @@ class GameOf24Agent:
         # Step 3 : Answer : ((1 - 1) + 4) * 6 = 24    CoT prompt
 
 
-        suggestions  = []
+        # set up the prompt, based on the current state
+        current_state = state.current_state
 
-        # Answer not found -> Need to compute next step
-        if state.current_state.strip() != "24":
-            prompt = prompts.bfs_prompt.format(input=state.current_state)
-
-            # Get the next state
-            while len(suggestions) < n:
-                messages = [{"role": "user", "content": prompt}]
-                iid_suggestions = await api.request(messages, limiter, n=math.ceil(n/8)) # Prompt suggests 8 new states
-                [suggestions.extend(suggestion.split("\n")) for suggestion in iid_suggestions]
-
-            # parse suggestions
-            random.seed(state.randomness)
-            selected_suggestions = random.sample(suggestions, k=n)
-            selected_states = [GameOf24Agent.parse_next_state(x) for x in selected_suggestions]
-
-        # Answer found -> Need to compute final expression
+        if current_state.strip() == "24":
+            # CoT prompt
+            steps = "\n".join(state.steps) + "\n"
+            prompt = prompts.cot_prompt.format(input=state.puzzle) + "\n" + steps
         else:
-            current_steps = '\n'.join(state.steps) + "\n"
-            prompt = prompts.cot_prompt.format(input=state.puzzle) + "\n" + current_steps
+            # BFS prompt
+            prompt = prompts.bfs_prompt.format(input=current_state)
 
-            #  Get the final expression
-            messages = [{"role": "user", "content": prompt}]
-            iid_suggestions = await api.request(messages, limiter, n=n) 
-            suggestions.extend(iid_suggestions)
+        # Get the next state
+        messages = [{"role": "user", "content": prompt}]
+        iid_suggestions = await api.request(messages, limiter, n=1)
+        suggestions = iid_suggestions[0]
 
-            # We already computed exactly the number of suggestions needed
-            selected_suggestions = suggestions
+        # parse suggestions, based on the current state
+        if current_state.strip() == "24":
+            # CoT prompt
+            random.seed(state.randomness)
+            selected_suggestion = suggestions
+            selected_state = state.current_state
+        else:
+            # BFS prompt
+            suggestions = suggestions.split("\n")
+            random.seed(state.randomness)
+            selected_suggestion = random.choice(suggestions)
+            selected_state = GameOf24Agent.parse_next_state(selected_suggestion)
 
-            # We don't change states
-            selected_states = [state.current_state]*n
+        # set up new state object
+        next_state = GameOf24State(
+            puzzle=state.puzzle,
+            current_state=selected_state,
+            steps=state.steps + [selected_suggestion],
+            randomness=random.randint(0, 1000)
+        )
+        return next_state
 
-        # set up new state objects
-        next_states = []
-        for next_suggestion, next_state in zip(selected_suggestions, selected_states):
-            next_state = GameOf24State(
-                puzzle=state.puzzle,
-                current_state=next_state,
-                steps=state.steps + [next_suggestion],
-                randomness=random.randint(0, 1000)
-            )
-            next_states.append(next_state)
-        return next_states
 
     @staticmethod
     async def evaluate(state: GameOf24State, api, limiter, n=3):
@@ -128,5 +122,5 @@ class GameOf24Agent:
             random.seed(randomness)
             randomness = random.randint(0, 1000)
             resampled_indices = np.random.choice(range(len(values)), size=n_picks, p=probabilities, replace=True)
-            return resampled_indices
+            return resampled_indices.tolist()
 
