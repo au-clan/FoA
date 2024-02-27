@@ -3,8 +3,8 @@ import pandas as pd
 from copy import deepcopy
 from sympy import simplify
 
-from src.tasks.base import Task, DATA_PATH
-from src.prompts.game24 import foa_step_prompt, cot_prompt, value_prompt, value_last_step_prompt, bfs_prompt
+from initial_implementation.tasks.base import Task, DATA_PATH
+from initial_implementation.prompts.game24 import foa_step_prompt, cot_prompt, value_prompt, value_last_step_prompt, bfs_prompt
 
 class Game24(Task):
     def __init__(self, model, file='24_tot.csv', foa_prompt:bool = False):

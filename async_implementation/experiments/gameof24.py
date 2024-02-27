@@ -39,11 +39,11 @@ OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 assert OPENAI_API_KEY is not None, "Please set the OPENAI_API_KEY environment variable"
 
 api_config = {
-    "max_tokens": 100,
+    "max_tokens": 1000,
     "temperature": 0.7,
     "top_p": 1,
     "request_timeout": 45,
-    "model": "gpt-3.5-turbo"
+    "model": "gpt-3.5-turbo-0125"
 }
 
 api = CachedOpenAIAPI(cache, api_config)
@@ -79,6 +79,7 @@ async def foa_gameof24(puzzle_idx, foa_options):
 
     num_steps = foa_options["num_steps"]
     for step in range(num_steps):
+        print(f"Step {step}")
         log[puzzle_idx][f"Step {step}"]={}
 
         # DONE (?): eh, log messages are not showing up -> Saved them in logs file but not the api ones.
@@ -94,11 +95,10 @@ async def foa_gameof24(puzzle_idx, foa_options):
         # After each step we verify if the answer is found and if so we break
         verifications = [GameOf24Agent.verify(state) for state in states]
         if {"r":1} in verifications:
-            logger.info(f"STOPPED AT STEP {step}")
             break
 
         # Depreciate old values
-        r["values"] = [value * foa_options["backtrack"] if i != 0 else value * foa_options["backtrack"] ** 2 for i, value in enumerate(r["values"])]
+        r["values"] = [value * foa_options["backtrack"] if i != 0 else value * (foa_options["backtrack"] ** 2) for i, value in enumerate(r["values"])]
 
         # every k steps, evaluate and resample
         if step < num_steps -1 and step % foa_options["k"] == 0:
@@ -134,7 +134,9 @@ async def foa_gameof24(puzzle_idx, foa_options):
             # Logging
             log[puzzle_idx][f"Step {step}"]["Resampling"] = [f"{i} <- {r['idx'][j]}" for i, j in enumerate(resampled_indices)]
 
-
+    verifications = [GameOf24Agent.verify(result) for result in states]
+    log[puzzle_idx]["Input"] = puzzle
+    log[puzzle_idx]["Verifications"] = verifications
     return states, log
 
 
@@ -153,7 +155,7 @@ async def run(run_options:dict, foa_options:dict):
     logs = [log for (game, log) in results]
     for l in logs:
         log.update(l)
-    with open("logs/test.json", 'w+') as f:
+    with open("logs/full_test.json", 'w+') as f:
         json.dump(log, f, indent=4)
     
     game_states = [game for (game, log) in results]
@@ -167,8 +169,8 @@ async def run(run_options:dict, foa_options:dict):
 
 # Select parameters
 difficulty = 0                  # Starting idx = 100 * difficulty
-sample_size = 10                # Ending idx   = 100 * difficulty + sample_size
-num_agents = 10                  # Number of agents
+sample_size = 50                # Ending idx   = 100 * difficulty + sample_size
+num_agents = 10                 # Number of agents
 k = 1                           # Resampling every <k> steps
 origin_value = 20 * 3           # The evaluation of the origin state #TODO: Change 3 to num_evaluations
 num_steps = 10                  # Total number of steps FoA executes
@@ -190,7 +192,7 @@ foa_options = {
 }
 
 # Set handler to log file
-handler = logging.FileHandler(log_folder+"test2.log", mode="w")
+handler = logging.FileHandler(log_folder+"full_test.log", mode="w")
 logger.addHandler(handler)
 
 results = asyncio.run(run(run_options, foa_options))

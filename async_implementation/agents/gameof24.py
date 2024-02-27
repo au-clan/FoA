@@ -37,23 +37,25 @@ class GameOf24Agent:
             # CoT prompt
             steps = "\n".join(state.steps) + "\n"
             prompt = prompts.cot_prompt.format(input=state.puzzle) + "\n" + steps
-        else:
-            # BFS prompt
-            prompt = prompts.bfs_prompt.format(input=current_state)
 
-        # Get the next state
-        messages = [{"role": "user", "content": prompt}]
-        iid_suggestions = await api.request(messages, limiter, n=1)
-        suggestions = iid_suggestions[0]
+            # Get the final expression
+            messages = [{"role": "user", "content": prompt}]
+            iid_suggestions = await api.request(messages, limiter, n=1)
+            suggestions = iid_suggestions[0]
 
-        # parse suggestions, based on the current state
-        if current_state.strip() == "24":
-            # CoT prompt
-            random.seed(state.randomness)
+            # State does not change, only the steps
             selected_suggestion = suggestions
             selected_state = state.current_state
         else:
             # BFS prompt
+            prompt = prompts.bfs_prompt.format(input=current_state)
+
+            # Get the next state
+            messages = [{"role": "user", "content": prompt}]
+            iid_suggestions = await api.request(messages, limiter, n=1)
+            suggestions = iid_suggestions[0]
+
+            # parse suggestions, based on the current state
             suggestions = suggestions.split("\n")
             random.seed(state.randomness)
             selected_suggestion = random.choice(suggestions)

@@ -1,7 +1,7 @@
 import json, os
 import numpy as np
-from src.tasks.base import Task
-from src.methods.resampler import Resampler
+from initial_implementation.tasks.base import Task
+from initial_implementation.methods.resampler import Resampler
 
 class Agents():
     def __init__(self, task: Task, idx_input: int, n_agents: int, init: bool, back_coef: float=0.8, n_evaluations: int=3, **kwargs):

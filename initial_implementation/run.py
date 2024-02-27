@@ -1,11 +1,15 @@
 import os, argparse
 from datetime import datetime
 
+
+import sys
+sys.path.append(os.getcwd()) # Project root!!
+
 # Custom
-from src.methods.agents import Agents
-from src.tasks.game24 import Game24
+from initial_implementation.methods.agents import Agents
+from initial_implementation.tasks.game24 import Game24
 from initial_implementation.models import OpenAIBot
-from src.utils import delete_file, create_folder
+from initial_implementation.utils import delete_file, create_folder
 
 
 def run(args):
