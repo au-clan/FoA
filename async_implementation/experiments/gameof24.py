@@ -20,7 +20,7 @@ from async_engine.cached_api import CachedOpenAIAPI
 from async_engine.round_robin_manager import AsyncRoundRobin
 from async_implementation.agents.gameof24 import GameOf24Agent
 from async_implementation.states.gameof24 import GameOf24State
-from utils import create_folder
+from utils import create_folder, email_notification
 
 logger = logging.getLogger("experiments")
 logger.setLevel(logging.DEBUG) # Order : debug < info < warning < error < critical
@@ -215,4 +215,6 @@ for game in results:
 
 
 api.cost(verbose=True)
-print(f"Accuracy : {n_success*100/len(results):.2f}")
+accuracy = n_success*100/len(results)
+print(f"Accuracy : {accuracy:.2f}")
+email_notification(subject="0-50, 10 agents, 10 steps", message=f"Accuracy : {accuracy:.2f}")
