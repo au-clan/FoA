@@ -41,6 +41,7 @@ def email_notification(subject, message):
     except:
         print("Environment variable <GOOGLE_APP_PASS> not found")
         return
+    
     google_app_pass = os.environ.get("GOOGLE_APP_PASS")
     server.login(sender_email, google_app_pass)
 

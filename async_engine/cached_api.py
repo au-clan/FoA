@@ -38,7 +38,7 @@ class CachedOpenAIAPI:
         self.completion_tokens = 0
         self.prompt_tokens = 0
 
-    async def cached_request(self, messages, limiter, n=10, request_timeout=30):
+    async def request(self, messages, limiter, n=10, request_timeout=30):
         """
         CACHED request to the OpenAI API
         """
@@ -160,12 +160,12 @@ class CachedOpenAIAPI:
 
         return [entry[0] for entry in cache_entry[:n]]
 
-    async def request(self, messages, limiter, n=10, request_timeout=30):
+    async def uncached_request(self, messages, limiter, n=10, request_timeout=30):
         """
         UNCACHED request to the OpenAI API
 
         Just for debugging purposes
-        Same as request, but without using cache.
+        Same as request(), but without using cache.
         """
 
         if "request_timeout" in self.config:

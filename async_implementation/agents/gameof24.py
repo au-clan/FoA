@@ -107,22 +107,23 @@ class GameOf24Agent:
             except Exception as e:
                 # print(e)
                 return {'r': 0}
+    
+    @staticmethod
+    def resample(values: list, n_picks: int, randomness: int, resampling_method: str="linear", percentile: float=0.75)-> list:
 
-    class Resampling:
+        methods = {
+            "linear": value_weighted.linear,
+            "logistic": value_weighted.logistic,
+            "max": value_weighted.max,
+            "percentile": value_weighted.percentile
+        }
 
-        @staticmethod
-        def linear( values: list, n_picks: int, randomness: int)-> list:
-            """
-            Inputs:
-                values: Initial values.
-                n_picks: Number of picks to return.
-                randomness: Current state of randomness.
-            Outputs:
-                resampled_indices: Indices of picked values.
-            """
-            probabilities = value_weighted.linear(values)
-            random.seed(randomness)
-            randomness = random.randint(0, 1000)
-            resampled_indices = np.random.choice(range(len(values)), size=n_picks, p=probabilities, replace=True)
-            return resampled_indices.tolist()
+        if resampling_method not in methods:
+            raise ValueError(f"Invalid resampling method: {resampling_method}\nValid methods: {methods.keys()}")
+        
+        probabilities = methods[resampling_method](values)
+        random.seed(randomness)
+        randomness = random.randint(0, 1000)
+        resampled_indices = np.random.choice(range(len(values)), size=n_picks, p=probabilities, replace=True)
+        return resampled_indices.tolist()
 
