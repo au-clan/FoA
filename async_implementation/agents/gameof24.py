@@ -40,8 +40,7 @@ class GameOf24Agent:
             prompt = prompts.cot_prompt.format(input=state.puzzle) + "\n" + steps
 
             # Get the final expression
-            iid_suggestions = await api.buffered_request(prompt)
-            suggestions = iid_suggestions[0]
+            suggestions = await api.buffered_request(prompt)
 
             # State does not change, only the steps
             selected_suggestion = suggestions
@@ -51,8 +50,7 @@ class GameOf24Agent:
             prompt = prompts.bfs_prompt.format(input=current_state)
 
             # Get the next state
-            iid_suggestions = await api.buffered_request(prompt)
-            suggestions = iid_suggestions[0]
+            suggestions = await api.buffered_request(prompt)
 
             # parse suggestions, based on the current state
             suggestions = suggestions.split("\n")

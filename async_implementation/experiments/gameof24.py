@@ -55,9 +55,6 @@ N = 4
 for _ in range(N):
     limiter.add_resource(data=OPENAI_API_KEY)
 
-# Batching API
-api = BatchingAPI(api, limiter, batch_size=4)
-
 # set up GameOf24 puzzles
 path = 'data/24_tot.csv'
 data = pd.read_csv(path).Puzzles.tolist()
@@ -183,7 +180,7 @@ def parse_args():
     
     args.add_argument("--difficulty", type=int, choices=list(range(10)), default=0)
     args.add_argument("--n_samples", type=int, default=2)
-    args.add_argument("--n_agents", type=int, default=5)
+    args.add_argument("--n_agents", type=int, default=2)
     args.add_argument("--back_coef", type=float, default=0.8)
     args.add_argument("--max_steps", type=int, default=10)
     args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile"], default="linear")
@@ -217,6 +214,10 @@ foa_options = {
     "backtrack":backtrack,
     "resampling_method":resampling_method
 }
+
+
+# Use batching API
+api = BatchingAPI(api, limiter, batch_size=foa_options["num_agents"], timeout=10)
 
 # Run
 results = asyncio.run(run(run_options, foa_options))

@@ -5,8 +5,7 @@ from dataclasses import dataclass
 
 
 class BatchingAPI:
-    def __init__(self, api, limiter, batch_size):
-
+    def __init__(self, api, limiter, batch_size, timeout=30):
         # Actual API
         self.api = api
         self.limiter = limiter
@@ -15,6 +14,9 @@ class BatchingAPI:
         self.batch_size = batch_size
         self.futures = []
         self.prompts = []
+
+        # Timeout
+        self.timeout = timeout
 
         # for debugging, counts the number of batches processed so far
         self.num_batches_processed = 0
@@ -36,10 +38,17 @@ class BatchingAPI:
         # or just await resolve directly
         # await self.resolve()
 
-        return await future
+        # Either the future is resolved or the timeout expires
+        done, _ = await asyncio.wait([future], timeout=self.timeout)
+        if future in done:
+            return await future
+        else:
+            # Create new task for timed-out futures
+           asyncio.create_task(self.resolve(force=True))
+           return await future
 
-    async def resolve(self):
-        if len(self.futures) < self.batch_size:
+    async def resolve(self, force=False):
+        if (len(self.futures) < self.batch_size) and (not force):
             return
 
         # create a new list for the batch to be processed
@@ -53,12 +62,12 @@ class BatchingAPI:
         await self.flush(futures_to_resolve, prompts_to_resolve)
 
     async def flush(self, futures_to_resolve, prompts_to_resolve):
-        # ToDo: we could add a timeout based resolve mechanism:
+        # DONE: we could add a timeout based resolve mechanism:
         # even if there's not enough samples for a full batch, we resolve after a timeout
         # this could be done with a separate task that sleeps for a while and then resolves the batch
         # if we want to do this, then these asserts probably need to go
-        assert len(futures_to_resolve) == len(prompts_to_resolve)
-        assert len(futures_to_resolve) == self.batch_size
+        #assert len(futures_to_resolve) == len(prompts_to_resolve)
+        #assert len(futures_to_resolve) == self.batch_size
 
         # find duplicate prompts
         prompt2futures = defaultdict(list)
@@ -91,3 +100,6 @@ class BatchingAPI:
             return await self.api.request(prompt, self.limiter, n)
         else:
             return await self.api.uncached_request(prompt, self.limiter, n)
+    
+    def cost(self, verbose=True):
+        return self.api.cost(verbose)
