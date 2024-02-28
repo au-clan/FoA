@@ -5,7 +5,13 @@ from dataclasses import dataclass
 
 
 class BatchingAPI:
-    def __init__(self, batch_size):
+    def __init__(self, api, limiter, batch_size):
+
+        # Actual API
+        self.api = api
+        self.limiter = limiter
+
+        # Batching
         self.batch_size = batch_size
         self.futures = []
         self.prompts = []
@@ -47,7 +53,6 @@ class BatchingAPI:
         await self.flush(futures_to_resolve, prompts_to_resolve)
 
     async def flush(self, futures_to_resolve, prompts_to_resolve):
-
         # ToDo: we could add a timeout based resolve mechanism:
         # even if there's not enough samples for a full batch, we resolve after a timeout
         # this could be done with a separate task that sleeps for a while and then resolves the batch
@@ -73,78 +78,16 @@ class BatchingAPI:
                 #print(f"Setting result for future {future}, current state: {future.done()}")
                 future.set_result(result)
 
-    async def immediate_request(self, prompt, n):
+    async def immediate_request(self, prompt, n=1, cached=True):
         """
         used to process a request without buffering.
         used internally by the resolve method, can also be used publicly for one-off prompts that don't fit into the
         lock-step mechanism of N prompts in a batch
         """
-
         # ToDo, this is a placeholder
         # in the actual implementation, we would send a request to openai here
 
-        results = []
-        for i in range(n):
-            # we're storing the number of batches so far, the index in this batch and the prompt
-            # this combination should be unique, so we can check for duplicates
-            # just doing this for debugging
-            results.append((self.num_batches_processed, i, prompt))
-
-        self.num_batches_processed += 1
-
-        # sleep for a random amount of time to simulate network latency
-        await asyncio.sleep(random.random() * 0.05)
-        return results
-
-
-@dataclass(frozen=True)
-class State:
-    prompt: str
-
-
-class Agent:
-
-    @staticmethod
-    async def step(state: State, api: BatchingAPI):
-        # make request
-        result = await api.buffered_request(state.prompt)
-
-        # do something with the result
-        # ...
-
-        return result
-
-
-if __name__ == "__main__":
-
-    # run code repeatedly, for stress testing
-    for _ in range(100):
-        api = BatchingAPI(batch_size=3)
-
-        # set up prompts
-        num_prompts = 30
-        assert num_prompts % api.batch_size == 0
-        prompts = []
-        for _ in range(num_prompts):
-            prompt = random.randint(0, 10)
-            prompts.append(f"prompt{prompt}")
-        states = [State(prompt=prompt) for prompt in prompts]
-
-
-        async def main():
-            coroutines = []
-            for state in states:
-                coroutines.append(Agent.step(state, api))
-            results = await asyncio.gather(*coroutines)
-            return results
-
-
-        results = asyncio.run(main())
-
-        # now we can check the results
-        assert len(results) == len(prompts)
-
-        # within each batch, the combination of prompt and batch_idx must be unique
-        # this means that each combination of batch_num, prompt and batch_idx must occur exactly once
-        # we can use a set to check this
-        assert len(set(results)) == len(results)
+        if cached:
+            return await self.api.request(prompt, self.limiter, n)
+        else:
+            return await self.api.uncached_request(prompt, self.limiter, n)

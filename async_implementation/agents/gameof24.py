@@ -1,3 +1,4 @@
+import asyncio
 import re
 import math
 import random
@@ -14,9 +15,9 @@ from async_implementation.resampling import value_weighted
 class GameOf24Agent:
 
     @staticmethod
-    async def step(state: GameOf24State, api, limiter, n: int=1):
+    async def step(state: GameOf24State, api):
         """
-        Given a state, returns n next states.
+        Given a state, returns the next state (1-to-1).
         """
 
         # set up the prompt, based on the current state
@@ -39,8 +40,7 @@ class GameOf24Agent:
             prompt = prompts.cot_prompt.format(input=state.puzzle) + "\n" + steps
 
             # Get the final expression
-            messages = [{"role": "user", "content": prompt}]
-            iid_suggestions = await api.request(messages, limiter, n=1)
+            iid_suggestions = await api.buffered_request(prompt)
             suggestions = iid_suggestions[0]
 
             # State does not change, only the steps
@@ -51,8 +51,7 @@ class GameOf24Agent:
             prompt = prompts.bfs_prompt.format(input=current_state)
 
             # Get the next state
-            messages = [{"role": "user", "content": prompt}]
-            iid_suggestions = await api.request(messages, limiter, n=1)
+            iid_suggestions = await api.buffered_request(prompt)
             suggestions = iid_suggestions[0]
 
             # parse suggestions, based on the current state
@@ -72,15 +71,18 @@ class GameOf24Agent:
 
 
     @staticmethod
-    async def evaluate(state: GameOf24State, api, limiter, n=3):
+    async def evaluate(state: GameOf24State, api, n=3):
         last_step = state.steps[-1]
         if "left" not in last_step:
             answer = last_step.lower().replace("answer: ", "")
             prompt = prompts.value_last_step_prompt.format(input=state.puzzle, answer=answer)
         else:
             prompt = prompts.value_prompt.format(input=state.current_state)
-        messages = [{"role": "user", "content": prompt}]
-        iid_replies = await api.request(messages, limiter, n=3)
+
+        coroutines = []
+        for _ in range(n):
+            coroutines.append(api.buffered_request(prompt))
+        iid_replies = await asyncio.gather(*coroutines)
         value_names = [value.split('\n')[-1] for value in iid_replies]
         value_map = {'impossible': 0.001, 'likely': 1, 'sure': 20}
         value_number = sum(value * value_names.count(name) for name, value in value_map.items())

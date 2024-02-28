@@ -43,6 +43,7 @@ class CachedOpenAIAPI:
         CACHED request to the OpenAI API
         """
 
+        messages = [{"role": "user", "content": messages}]
         if "request_timeout" in self.config:
             request_timeout = self.config["request_timeout"]
 

@@ -19,6 +19,7 @@ sys.path.append(os.getcwd()) # Project root!!
 
 from async_engine.cached_api import CachedOpenAIAPI
 from async_engine.round_robin_manager import AsyncRoundRobin
+from async_engine.mock_batched_async import BatchingAPI
 from async_implementation.agents.gameof24 import GameOf24Agent
 from async_implementation.states.gameof24 import GameOf24State
 from utils import create_folder, email_notification
@@ -53,6 +54,9 @@ limiter = AsyncRoundRobin()
 N = 4
 for _ in range(N):
     limiter.add_resource(data=OPENAI_API_KEY)
+
+# Batching API
+api = BatchingAPI(api, limiter, batch_size=4)
 
 # set up GameOf24 puzzles
 path = 'data/24_tot.csv'
@@ -89,7 +93,7 @@ async def foa_gameof24(puzzle_idx, foa_options):
         # Step : make one step for each state
         agent_coroutines = []
         for state in states:
-            agent_coroutines.append(GameOf24Agent.step(state, api, limiter))
+            agent_coroutines.append(GameOf24Agent.step(state, api))
         states = await asyncio.gather(*agent_coroutines)
         log[puzzle_idx][f"Step {step}"]["steps"] = [" || ".join(state.steps) for state in states]
 
@@ -107,7 +111,7 @@ async def foa_gameof24(puzzle_idx, foa_options):
             # Evaluation : each of the current states is given a value
             value_coroutines = []
             for state in states:
-                value_coroutines.append(GameOf24Agent.evaluate(state, api, limiter))
+                value_coroutines.append(GameOf24Agent.evaluate(state, api))
             values = await asyncio.gather(*value_coroutines)
 
             # Update states tracker
@@ -178,7 +182,7 @@ def parse_args():
     args = argparse.ArgumentParser()
     
     args.add_argument("--difficulty", type=int, choices=list(range(10)), default=0)
-    args.add_argument("--n_samples", type=int, default=50)
+    args.add_argument("--n_samples", type=int, default=2)
     args.add_argument("--n_agents", type=int, default=5)
     args.add_argument("--back_coef", type=float, default=0.8)
     args.add_argument("--max_steps", type=int, default=10)
