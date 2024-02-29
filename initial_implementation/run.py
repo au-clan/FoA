@@ -9,8 +9,7 @@ sys.path.append(os.getcwd()) # Project root!!
 from initial_implementation.methods.agents import Agents
 from initial_implementation.tasks.game24 import Game24
 from initial_implementation.models import OpenAIBot
-from initial_implementation.utils import delete_file, create_folder
-
+from initial_implementation.utils import delete_file, create_folder, email_notification
 
 def run(args):
     task_start_index = args.difficulty * 100
@@ -52,8 +51,16 @@ def run(args):
         # Log results
         agents.create_log(repo_path=log_path, file_name=file_name)
     
-    Game24.get_accuracy(file_path)
     print(f"Logs saved in : \n\t'{file_path}'")
+    accuracy = Game24.get_accuracy(file_path)
+
+    send_email = True
+    if send_email:
+        subject = file_path
+        message = f"Accuracy : {accuracy}"
+        email_notification(subject=subject, message=message)
+    return
+
 def parse_args():
     args = argparse.ArgumentParser()
     

@@ -56,7 +56,7 @@ for _ in range(N):
     limiter.add_resource(data=OPENAI_API_KEY)
 
 # set up GameOf24 puzzles
-path = 'data/24_tot.csv'
+path = 'data/datasets/24_tot.csv'
 data = pd.read_csv(path).Puzzles.tolist()
 
 
@@ -72,6 +72,7 @@ async def foa_gameof24(puzzle_idx, foa_options):
     log = {puzzle_idx:{"puzzle": puzzle}}
 
     # New data structure keeping record of all unique states visited and their according values
+    # "idx" shows the step and the agent where the state was visited eg. 0.1 means step 0, agent 1
     r = {"idx": ["INIT"], "values":[foa_options["origin_value"]], "states": [{"steps":[], "current_state":puzzle}]}
 
     # set up states
@@ -83,9 +84,6 @@ async def foa_gameof24(puzzle_idx, foa_options):
     for step in range(num_steps):
         print(f"Step {step}")
         log[puzzle_idx][f"Step {step}"]={}
-
-        # DONE (?): eh, log messages are not showing up -> Saved them in logs file but not the api ones.
-        #logger.info(f"Step: {step}", )
 
         # Step : make one step for each state
         agent_coroutines = []

@@ -26,10 +26,9 @@ def sigmoid(x):
     return 1 / (1 + np.exp(-x))
 
 
-def email_notification(subject, message):
+def email_notification(subject: str, message: str, reciever_email: str="nearchospot@gmail.com"):
 
     sender_email = "nearchospot@gmail.com"
-    reciever_email = "nearchospot@gmail.com"
 
     text = f"Subject: {subject}\n\n{message}"
 
@@ -39,8 +38,7 @@ def email_notification(subject, message):
     try:
         google_app_pass = os.environ.get("GOOGLE_APP_PASS")
     except:
-        print("Environment variable <GOOGLE_APP_PASS> not found")
-        return
+        raise EnvironmentError("Environment variable <GOOGLE_APP_PASS> not found")
     
     google_app_pass = os.environ.get("GOOGLE_APP_PASS")
     server.login(sender_email, google_app_pass)

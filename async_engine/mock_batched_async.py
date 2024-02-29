@@ -1,8 +1,5 @@
 import asyncio
-import random
 from collections import defaultdict
-from dataclasses import dataclass
-
 
 class BatchingAPI:
     def __init__(self, api, limiter, batch_size, timeout=30):
@@ -93,13 +90,14 @@ class BatchingAPI:
         used internally by the resolve method, can also be used publicly for one-off prompts that don't fit into the
         lock-step mechanism of N prompts in a batch
         """
-        # ToDo, this is a placeholder
-        # in the actual implementation, we would send a request to openai here
 
         if cached:
             return await self.api.request(prompt, self.limiter, n)
         else:
             return await self.api.uncached_request(prompt, self.limiter, n)
     
-    def cost(self, verbose=True):
+    def cost(self, verbose=True)-> float:
+        """
+        Returns the total cost of the API calls, so far.
+        """
         return self.api.cost(verbose)
