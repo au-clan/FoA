@@ -79,7 +79,7 @@ class BatchingAPI:
 
         # resolve futures
         for results, futures in zip(request_results, prompt2futures.values()):
-            assert len(results) == len(futures)
+            assert len(results) == len(futures), f"Results: {len(results)}, Futures: {len(futures)}"
             for result, future in zip(results, futures):
                 #print(f"Setting result for future {future}, current state: {future.done()}")
                 future.set_result(result)

@@ -38,6 +38,9 @@ class CachedOpenAIAPI:
         self.completion_tokens = 0
         self.prompt_tokens = 0
 
+        # Counter
+        self.used_count = {}
+
     async def request(self, messages, limiter, n=1, request_timeout=30):
         """
         CACHED request to the OpenAI API
@@ -67,17 +70,22 @@ class CachedOpenAIAPI:
         if cache_entry is None:
             cache_entry = []
 
+        # Get the number of times this cached entry has been used and update the count
+        count = self.used_count.get(cache_key, 0)
+
         # the cache_entry is a list of IID responses
-        if len(cache_entry) >= n:
+        if len(cache_entry[count:]) >= n:
             
             # Update tokens count
             self.completion_tokens += sum([entry[1] for entry in cache_entry[:n]])
             self.prompt_tokens += sum([entry[2] for entry in cache_entry[:n]])
 
-            return [entry[0] for entry in cache_entry[:n]]
+            # Update the count
+            self.used_count[cache_key] = count + n
+            return [entry[0] for entry in cache_entry[count:count+n]]
 
         # if we don't have enough responses in the cache, we need to make a request
-        num_needed = n - len(cache_entry)
+        num_needed = n - len(cache_entry[count:])
         assert num_needed > 0
 
         print("needing more samples")
@@ -152,14 +160,16 @@ class CachedOpenAIAPI:
 
         # add the new responses to the cache
         cache_entry.extend(raw_responses)
-
         self.cache.set(cache_key, cache_entry)
 
         # Update tokens count
         self.completion_tokens += sum([entry[1] for entry in cache_entry[:n]])
         self.prompt_tokens += sum([entry[2] for entry in cache_entry[:n]])
 
-        return [entry[0] for entry in cache_entry[:n]]
+        # Update the count
+        self.used_count[cache_key] = count + n
+
+        return [entry[0] for entry in cache_entry[count:count+n]]
 
     async def uncached_request(self, messages, limiter, n=10, request_timeout=30):
         """
