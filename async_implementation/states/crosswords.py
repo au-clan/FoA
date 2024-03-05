@@ -9,7 +9,9 @@ class CrosswordsState:
     data: List[str] 
     board_gt: List[str] 
     ans_gt: List[str]
+    randomness: int
 
+    # State with no steps taken
     board: List[str] = field(default_factory=lambda: ["_"]*25)
     ans : List[str] = field(default_factory=lambda: ["_____"]*10)
     status: List[int] = field(default_factory=lambda: [0]*10)
@@ -99,14 +101,23 @@ class CrosswordsState:
             return state.render_board() + '\nUnfilled:\n' + state.render_ans(status=0) + '\nFilled:\n' + state.render_ans(status=1) + '\nChanged:\n' + state.render_ans(status=2)
         else:
             return state.render_board() + '\n' + state.render_ans()
+    
+    @staticmethod
+    def render(state, status=True):
+        ans = CrosswordsState.get_ans(state.board)
+        s = ""
+        s += CrosswordsState.render_board(state.board)
+        if status:
+            # Returns answers discriminating them based on status
+            s += "\nUnfilled:\n"
+            s += CrosswordsState.render_ans(state.data, ans, status=0, state_status=state.status)
+            s += "\nFilled:\n"
+            s += CrosswordsState.render_ans(state.data, ans, status=1, state_status=state.status)
+            s += "\nChanged:\n"
+            s += CrosswordsState.render_ans(state.data, ans, status=2, state_status=state.status)
+        else:
+            # Returns answers without status discrimination
+            s+= "\n"
+            s+= CrosswordsState.render_ans(state.data, ans)
+        return s
 
-
-
-dataset_path="data/datasets/mini0505.json"
-with open(dataset_path, "r") as file:
-    dataset = json.load(file)
-
-idx = 0
-data, board_gt = dataset[idx]
-state = CrosswordsState(data=data, board_gt=board_gt, ans_gt=CrosswordsState.get_ans(board_gt))
-print(state.status)

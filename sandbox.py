@@ -18,7 +18,7 @@ from dataclasses import dataclass
 
 
 from async_engine.cached_api import CachedOpenAIAPI
-from async_engine.mock_batched_async import BatchingAPI
+from async_engine.batched_api import BatchingAPI
 from async_engine.round_robin_manager import AsyncRoundRobin
 
 from async_implementation.agents.gameof24 import GameOf24Agent

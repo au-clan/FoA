@@ -1,4 +1,6 @@
+import re
 import asyncio
+import random
 
 from async_implementation.prompts import crosswords as prompts
 from async_implementation.states.crosswords import CrosswordsState
@@ -26,7 +28,17 @@ class CrosswordsAgent:
         return candidates_to_scores
     
     @staticmethod
-    def step(state: CrosswordsState, action)-> CrosswordsState:
+    async def step(state: CrosswordsState, api)-> CrosswordsState:
+        # Get next step suggestions and pick one of the ones with the highest value
+        suggestions = await CrosswordsAgent.get_candidates(state, api)
+        print(suggestions)
+        assert len(suggestions) > 0, "No suggestions found" # -> TODO: Can deal with this by resampling the specific agent
+        suggestions_max_value = max(suggestions.values())
+        max_value_suggestions = [suggestion for suggestion, value in suggestions.items() if value == suggestions_max_value]
+        random.seed(state.randomness)
+        action = random.choice(max_value_suggestions)
+
+        
         action = action.split('\n')[-1]
         action = action.split('. ')
         new_board = state.board.copy()
@@ -55,6 +67,7 @@ class CrosswordsAgent:
         r_word = sum(a == b for a, b in zip(new_ans, state.ans_gt)) / 10
         #return self.render(), r_all, (r_all or self.steps >= 20), {'r_letter': r_letter, 'r_word': r_word, 'r_game': r_all}
 
+        random.seed(state.randomness)
         next_state = CrosswordsState(
             data=state.data,
             board_gt=state.board_gt,
@@ -62,7 +75,9 @@ class CrosswordsAgent:
             board=new_board, 
             ans=new_ans, 
             status=new_status,
+            randomness=random.randint(0, 1000)
              )
+        return next_state
         
     @staticmethod
     async def evaluate(state, api, n=1):
@@ -75,7 +90,9 @@ class CrosswordsAgent:
             res = await api.buffered_request(prompt)
             res = res.split('\n')[-1].strip()
             if res in count: count[res] += 1
-        return count
+        value_map = {'impossible': -20, 'maybe': 5, 'sure': 20}
+        value_number  =sum(value * value_map[name] for name, value in count.items())
+        return value_number
         
 
 def parse_line(input_str):
