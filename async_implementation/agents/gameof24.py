@@ -15,7 +15,7 @@ from async_implementation.resampling import value_weighted
 class GameOf24Agent:
 
     @staticmethod
-    async def step(state: GameOf24State, api):
+    async def step(state: GameOf24State, api)-> GameOf24State:
         """
         Given a state, returns the next state (1-to-1).
         """
