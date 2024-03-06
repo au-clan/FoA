@@ -97,6 +97,17 @@ async def foa_gameof24(puzzle_idx, foa_options):
         if {"r":1} in verifications:
             break
 
+        # Pruning : resampling agents that terminated incorrectly 
+        #TODO: This can be done more efficiently code-wise
+        n_terminated = verifications.count({"r":-1})
+        for i, verification in enumerate(verifications):
+            if verification["r"] == -1:
+                states.pop(i)
+        resampled_indices = GameOf24Agent.resample(r["values"], n_picks=n_terminated, randomness=randomness)
+        resampled_states = [r["states"][i] for i in resampled_indices]
+        for i, state in enumerate(resampled_states):
+            states.append(GameOf24State(puzzle=puzzle, current_state=state["current_state"], steps=state["steps"], randomness=random.randint(0, 1000)))
+
         # Depreciation : old state values are decayed by the backtrack coefficient
         r["values"] = [value * foa_options["backtrack"] if i != 0 else value * (foa_options["backtrack"] ** 2) for i, value in enumerate(r["values"])]
 

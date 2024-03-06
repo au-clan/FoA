@@ -96,17 +96,28 @@ class GameOf24Agent:
             Verifies the output of a given task
                 1. Checks if the numbers used are the same as the ones provided.
                 2. Checks if the operations performed result to 24.
+
+            States 
+                {"r": 0} : Not finished.
+                {"r": 1} : Finished and correct.
+                {"r": -1} : Finished and incorrect.
             """
-            expression = state.steps[-1].lower().replace('answer: ', '').split('=')[0]
-            numbers = re.findall(r'\d+', expression)
-            problem_numbers = re.findall(r'\d+', state.puzzle)
-            if sorted(numbers) != sorted(problem_numbers):
-                return {'r': 0}
-            try:
-                return {'r': int(simplify(expression) == 24)}
-            except Exception as e:
-                # print(e)
-                return {'r': 0}
+            current_states = state.current_state.split(" ")
+            if len(current_states) !=1:
+                return {'r':0}
+            elif current_states[0] != "24":
+                return {'r':-1}
+            else:
+                expression = state.steps[-1].lower().replace('answer: ', '').split('=')[0]
+                numbers = re.findall(r'\d+', expression)
+                problem_numbers = re.findall(r'\d+', state.puzzle)
+                if sorted(numbers) != sorted(problem_numbers):
+                    return {'r': 0}
+                try:
+                    return {'r': int(simplify(expression) == 24)}
+                except Exception as e:
+                    # print(e)
+                    return {'r': 0}
     
     @staticmethod
     def resample(values: list, n_picks: int, randomness: int, resampling_method: str="linear", percentile: float=0.75)-> list:

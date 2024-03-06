@@ -8,17 +8,22 @@ from async_implementation.states.crosswords import CrosswordsState
 class CrosswordsAgent:
 
     @staticmethod
-    async def get_candidates(state: CrosswordsState, api, n:int =8):
+    async def get_candidates(state: CrosswordsState, api, n:int =8)-> dict:
+        """
+        Given a state, return a dictionary of candidate actions along with its scores.
+        """
         
+        # Render the state
         obs = CrosswordsState.render(state)
 
+        # Get candidate actions and their scores
         prompt = prompts.propose_prompt.format(input=obs)
-
         coroutines = []
         for _ in range(n):
             coroutines.append(api.buffered_request(prompt))
         responses = await asyncio.gather(*coroutines)
 
+        # Parse the responses and add the scores for each action
         candidates_to_scores = {}
         for response in responses:
             parsed_response = parse_response(response)
@@ -29,25 +34,33 @@ class CrosswordsAgent:
     
     @staticmethod
     async def step(state: CrosswordsState, api)-> CrosswordsState:
-        # Get next step suggestions and pick one of the ones with the highest value
+        """
+        Given a state, return the next state.
+        """
+        
+        # Get next step suggestions/actions and pick one of the ones with the highest value
         suggestions = await CrosswordsAgent.get_candidates(state, api)
-        print(suggestions)
         assert len(suggestions) > 0, "No suggestions found" # -> TODO: Can deal with this by resampling the specific agent
         suggestions_max_value = max(suggestions.values())
         max_value_suggestions = [suggestion for suggestion, value in suggestions.items() if value == suggestions_max_value]
         random.seed(state.randomness)
         action = random.choice(max_value_suggestions)
 
-        
+        #Parse the action
         action = action.split('\n')[-1]
         action = action.split('. ')
-        new_board = state.board.copy()
+        
+        # Assert the action is valid TODO: Maybe change to actual assert (?)
         if len(action) != 2:
             return 'Invalid! Format should be like "h1. apple"', 0, False, {}
-        pos, word = action
-
         if len(word) != 5:
             return 'Invalid! Word should have 5 letters.', 0, False, {}
+        
+        # Get the current board and break action to position and word
+        new_board = state.board.copy()
+        pos, word = action
+
+        # Update new board based on the action
         if pos.startswith('h'):
             idx = int(pos[1:]) - 1
             new_board[idx*5:(idx+1)*5] = list(word.upper())
@@ -58,15 +71,18 @@ class CrosswordsAgent:
         else:
             return 'Invalid! Position should be h1-h5 or v1-v5', 0, False, {}
         
+        # Get new answer and status based on the current board
         new_ans = CrosswordsState.get_ans(new_board)
         new_status = [2 if any(letter != new_letter and letter != '_' for letter, new_letter in zip(ans, new_ans)) else status for status, ans, new_ans in zip(state.status, state.ans, new_ans)]
         new_status[idx] = 1
 
-        r_all = (new_board == state.board_gt)
-        r_letter = sum(a == b for a, b in zip(new_board, state.board_gt)) / 25
-        r_word = sum(a == b for a, b in zip(new_ans, state.ans_gt)) / 10
+        # Comparison with ground truth
+        #r_all = (new_board == state.board_gt)
+        #r_letter = sum(a == b for a, b in zip(new_board, state.board_gt)) / 25
+        #r_word = sum(a == b for a, b in zip(new_ans, state.ans_gt)) / 10
         #return self.render(), r_all, (r_all or self.steps >= 20), {'r_letter': r_letter, 'r_word': r_word, 'r_game': r_all}
 
+        # Return the next state
         random.seed(state.randomness)
         next_state = CrosswordsState(
             data=state.data,
@@ -80,17 +96,32 @@ class CrosswordsAgent:
         return next_state
         
     @staticmethod
-    async def evaluate(state, api, n=1):
+    async def evaluate(state, api):
+        """
+        Evaluates the current state and returns a value number.
+        The state is evaluated line by line.
+        """
+
+        # Count of the results for each line
         count = {'sure': 0, 'maybe': 0, 'impossible': 0}
+        
         for ans, data in zip(state.ans, state.data):
             if ans.count('_') >= 4:continue
+            
+            # Parse the answer along with the original question
             ans = ' '.join(ans.lower())
             line = f'{data}: {ans}'
+            
+            # Get a value for the line from the set {sure, maybe, impossible}
             prompt = prompts.value_prompt.format(input=line)
             res = await api.buffered_request(prompt)
+            
+            # Parse the response and update the count
             res = res.split('\n')[-1].strip()
             if res in count: count[res] += 1
-        value_map = {'impossible': -20, 'maybe': 5, 'sure': 20}
+
+        # Map the count to a value number    
+        value_map = {'impossible': -20, 'maybe': 5, 'sure': 20} #TODO: ad hoc
         value_number  =sum(value * value_map[name] for name, value in count.items())
         return value_number
         
