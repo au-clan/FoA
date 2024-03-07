@@ -9,13 +9,30 @@ class CrosswordsState:
     data: List[str] 
     board_gt: List[str] 
     ans_gt: List[str]
+    steps: List[str]
     randomness: int
 
     # State with no steps taken / initial state
     board: List[str] = field(default_factory=lambda: ["_"]*25)
     ans : List[str] = field(default_factory=lambda: ["_____"]*10)
     status: List[int] = field(default_factory=lambda: [0]*10)
+
+    def duplicate(self, randomness=None):
+        return CrosswordsState(
+            data=self.data,
+            board_gt=self.board_gt,
+            ans_gt=self.ans_gt,
+            board=self.board,
+            ans=self.ans,
+            status=self.status,
+            steps = self.steps,
+            randomness=randomness if randomness is not None else self.randomness)
     
+    def get_metrics(self):
+        r_all = (self.board == self.board_gt)
+        r_letter = sum(a == b for a, b in zip(self.board, self.board_gt)) / 25
+        r_word = sum(a == b for a, b in zip(self.ans, self.ans_gt)) / 10
+        return {"r_all":r_all, "r_letter":r_letter, "r_word":r_word}
     
     @staticmethod
     def render_board(board: List[str])-> List[str]:

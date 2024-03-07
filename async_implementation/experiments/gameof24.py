@@ -22,11 +22,12 @@ from async_engine.round_robin_manager import AsyncRoundRobin
 from async_engine.batched_api import BatchingAPI
 from async_implementation.agents.gameof24 import GameOf24Agent
 from async_implementation.states.gameof24 import GameOf24State
+from async_implementation.resampling.resampler import Resampler
 from utils import create_folder, email_notification
 
 logger = logging.getLogger("experiments")
 logger.setLevel(logging.DEBUG) # Order : debug < info < warning < error < critical
-log_folder = f"logs/{datetime.now().date()}/{datetime.now().strftime('%H')}:00/gameof24" # Folder in which logs will be saved (organized daily)
+log_folder = f"logs/{datetime.now().date()}/{datetime.now().strftime('%H')}:00/gameof24/" # Folder in which logs will be saved (organized daily)
 create_folder(log_folder)
 
 
@@ -64,16 +65,17 @@ data = pd.read_csv(path).Puzzles.tolist()
 # for now I'm keeping it here, for easier debugging
 #async def foa_gameof24(puzzle_idx: int, num_agents=3, k=2, backtrack=0.8):
 async def foa_gameof24(puzzle_idx, foa_options):
-    randomness = 0
+    randomness = puzzle_idx
     random.seed(randomness)
 
-    puzzle = data[puzzle_idx]
+    resampler = Resampler(randomness)
     
+    puzzle = data[puzzle_idx]
     log = {puzzle_idx:{"puzzle": puzzle}}
 
     # New data structure keeping record of all unique states visited and their according values
     # "idx" shows the step and the agent where the state was visited eg. 0.1 means step 0, agent 1
-    r = {"idx": ["INIT"], "values":[foa_options["origin_value"]], "states": [{"steps":[], "current_state":puzzle}]}
+    r = {"idx": ["INIT"], "values":[foa_options["origin_value"]], "states": [GameOf24State(puzzle=puzzle, current_state=puzzle, steps=[], randomness=random.randint(0, 1000))]}
 
     # set up states
     states = []
@@ -92,21 +94,16 @@ async def foa_gameof24(puzzle_idx, foa_options):
         states = await asyncio.gather(*agent_coroutines)
         log[puzzle_idx][f"Step {step}"]["steps"] = [" || ".join(state.steps) for state in states]
 
-        # Verification : After each step we verify if the answer is found and if so we break
-        verifications = [GameOf24Agent.verify(state) for state in states]
-        if {"r":1} in verifications:
-            break
+        # Verification : After each step we verify if the answer is found and if so we break    
+        verifications = [GameOf24Agent.verify(state) for state in states]   # {"r":1} Finished correctly
+        if {"r":1} in verifications:                                        # {"r":-1} Finished incorrectly
+            break                                                           # {"r":0} Not finished                   
 
-        # Pruning : resampling agents that terminated incorrectly 
-        #TODO: This can be done more efficiently code-wise
-        n_terminated = verifications.count({"r":-1})
-        for i, verification in enumerate(verifications):
-            if verification["r"] == -1:
-                states.pop(i)
-        resampled_indices = GameOf24Agent.resample(r["values"], n_picks=n_terminated, randomness=randomness)
-        resampled_states = [r["states"][i] for i in resampled_indices]
-        for i, state in enumerate(resampled_states):
-            states.append(GameOf24State(puzzle=puzzle, current_state=state["current_state"], steps=state["steps"], randomness=random.randint(0, 1000)))
+        # Pruning
+        states = [state for state, verification in zip(states, verifications) if verification == {"r":0}]
+        new_states, _ = resampler.resample(r, foa_options["num_agents"]-len(states), foa_options["resampling_method"], False)
+        states += new_states
+
 
         # Depreciation : old state values are decayed by the backtrack coefficient
         r["values"] = [value * foa_options["backtrack"] if i != 0 else value * (foa_options["backtrack"] ** 2) for i, value in enumerate(r["values"])]
@@ -124,24 +121,14 @@ async def foa_gameof24(puzzle_idx, foa_options):
             for i, (state, value) in enumerate(zip(states, values)):
                 r["idx"].append(f"{step}.{i}")
                 r["values"].append(value)
-                r["states"].append({"steps": state.steps, "current_state": state.current_state})
+                r["states"].append(state)
             
             
             # Logging
             log[puzzle_idx][f"Step {step}"]["Evaluation"] = r["values"][-foa_options["num_agents"]:]
             
-
-            # Resampling : the states are resampled according to their values
-            resampled_indices = GameOf24Agent.resample(r["values"], n_picks=foa_options["num_agents"], randomness=randomness)
-
-            # this could be dangerous, I'm indexing into the list of states
-            # -> the new states will contain ducplicates of the old states
-            # but we're using a frozen dataclass to represent states, so duplicates should be fine
-            # we can't update the fields in-place in any case
-            # any code that wants to mutate state needs to return a new state
-            resampled_states = [r["states"][i] for i in resampled_indices]
-            for i, state in enumerate(resampled_states):
-                states[i] = GameOf24State(puzzle=puzzle, current_state=state["current_state"], steps=state["steps"], randomness=random.randint(0, 1000))
+            # Resampling
+            states, resampled_indices = resampler.resample(r, foa_options["num_agents"], foa_options["resampling_method"])
             
             # Logging
             log[puzzle_idx][f"Step {step}"]["Resampling"] = [f"{i} <- {r['idx'][j]}" for i, j in enumerate(resampled_indices)]
@@ -188,9 +175,9 @@ def parse_args():
     args = argparse.ArgumentParser()
     
     args.add_argument("--difficulty", type=int, choices=list(range(10)), default=0)
-    args.add_argument("--n_samples", type=int, default=2)
-    args.add_argument("--n_agents", type=int, default=2)
-    args.add_argument("--back_coef", type=float, default=0.8)
+    args.add_argument("--n_samples", type=int, default=10)
+    args.add_argument("--n_agents", type=int, default=5)
+    args.add_argument("--back_coef", type=float, default=0.6)
     args.add_argument("--max_steps", type=int, default=10)
     args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile"], default="linear")
     args = args.parse_args()

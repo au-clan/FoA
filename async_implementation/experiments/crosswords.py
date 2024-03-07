@@ -22,8 +22,9 @@ sys.path.append(os.getcwd()) # Project root!!
 from async_engine.cached_api import CachedOpenAIAPI
 from async_engine.round_robin_manager import AsyncRoundRobin
 from async_engine.batched_api import BatchingAPI
-from async_implementation.agents.crosswords import CrosswordsAgent, GameOf24Agent
+from async_implementation.agents.crosswords import CrosswordsAgent
 from async_implementation.states.crosswords import CrosswordsState
+from async_implementation.resampling.resampler import Resampler
 from utils import create_folder, email_notification
 
 logger = logging.getLogger("experiments")
@@ -65,20 +66,29 @@ with open(path, "r") as file:
 # for now I'm keeping it here, for easier debugging
 #async def foa_gameof24(puzzle_idx: int, num_agents=3, k=2, backtrack=0.8):
 async def foa_crosswords(puzzle_idx, foa_options):
-    randomness = 0
+    randomness = puzzle_idx
     random.seed(randomness)
 
+    resampler = Resampler(randomness)
 
     data, board_gt = dataset[puzzle_idx] # Data is the list of clues, board_gt is the ground truth  board
     ans_gt = CrosswordsState.get_ans(board_gt) # Get the ground truth answers
 
+    # Set up logging
+    log = {puzzle_idx: {f"Agent {i}":{} for i in range(foa_options["num_agents"])}}
+    for a in range(foa_options["num_agents"]):
+        log[puzzle_idx][f"Agent {a}"]["action"] = []
+        log[puzzle_idx][f"Agent {a}"]["value"] = []
+        log[puzzle_idx][f"Agent {a}"]["resample"] = []
+        log[puzzle_idx][f"Agent {a}"]["metrics"] = []
+
     # Records
-    r = {"idx":["INIT"], "values":[foa_options["origin_value"]], "states":[CrosswordsState(data=data, board_gt=board_gt, ans_gt=ans_gt, randomness=random.randint(0, 1000))]}
+    r = {"idx":["INIT"], "values":[foa_options["origin_value"]], "states":[CrosswordsState(data=data, board_gt=board_gt, ans_gt=ans_gt, steps=[], randomness=random.randint(0, 1000))]}
 
     # Set up states
     states = []
     for _ in range(foa_options["num_agents"]):
-        states.append(CrosswordsState(data=data, board_gt=board_gt, ans_gt=ans_gt, randomness=random.randint(0, 1000)))
+        states.append(CrosswordsState(data=data, board_gt=board_gt, ans_gt=ans_gt, steps=[], randomness=random.randint(0, 1000)))
 
     num_steps = foa_options["num_steps"]
     for step in range(num_steps):
@@ -88,15 +98,26 @@ async def foa_crosswords(puzzle_idx, foa_options):
         agent_coroutines = []
         for state in states:
             agent_coroutines.append(CrosswordsAgent.step(state, api))
-        states = await asyncio.gather(*agent_coroutines)
+        states, actions = zip(* await asyncio.gather(*agent_coroutines))
+
+        for i, (state, action) in enumerate(zip(states, actions)):
+            log[puzzle_idx][f"Agent {i}"]["action"].append(". ".join(action))
+
 
         # TODO: Verification 
+        verifications = ...
+        
+        # NOTE: Pruning can be employed as soon as verification is implemented
+        #states = [state for state, verification in zip(states, verifications) if verification == {"r":0}]
+        #new_states, _ = resampler.resample(r, foa_options["num_agents"]-len(states), foa_options["resampling_method"])
+        #states += new_states
 
         # Depreciation
         r["values"] = [value * foa_options["backtrack"] if i != 0 else value * (foa_options["backtrack"] ** 2) for i, value in enumerate(r["values"])]
 
         # Resampling : every k steps, evaluate and resample
-        if step < num_steps - 1 and step % foa_options["k"] == 0:
+        #if step < num_steps - 1 and step % foa_options["k"] == 0: # <- Correct one : changing it just fo debugging
+        if step < num_steps and step % foa_options["k"] == 1:
 
             # Evaluation : each of the current states is given a value
             value_coroutines = []
@@ -110,33 +131,30 @@ async def foa_crosswords(puzzle_idx, foa_options):
                 r["values"].append(value)
                 r["states"].append(state)
             
-            # TODO: Logging
-                
-            # Resampling : the states are resampled according to their values
-            # TODO: Temp fix - Create Resampler class, otherwise resample function will have to be replicated for every task
-            resampled_indices = GameOf24Agent.resample(r["values"], n_picks=foa_options["num_agents"], randomness=randomness)
-
-            # this could be dangerous, I'm indexing into the list of states
-            # -> the new states will contain ducplicates of the old states
-            # but we're using a frozen dataclass to represent states, so duplicates should be fine
-            # we can't update the fields in-place in any case
-            # any code that wants to mutate state needs to return a new state
-            resampled_states = [r["states"][i] for i in resampled_indices]
-            random.seed(randomness)
-            for i, state in enumerate(resampled_states):
-                states[i] = CrosswordsState(
-                    data=state.data,
-                    board_gt=state.board_gt,
-                    ans_gt=state.ans_gt,
-                    board=state.board,
-                    ans=state.ans,
-                    status=state.status,
-                    randomness=random.randint(0, 1000)
-                )
+            # Logging : Add NAs for steps that were not evaluated
+            while len(log[puzzle_idx]["Agent 0"]["value"]) < step:
+                for a in range(foa_options["num_agents"]):
+                    log[puzzle_idx][f"Agent {a}"]["value"].append("NA")
+                    log[puzzle_idx][f"Agent {a}"]["resample"].append("NA")
             
-            #TODO: Logging
+            # Logging : Evaluation
+            for i, v in enumerate(values):
+                log[puzzle_idx][f"Agent {i}"]["value"].append(v)
+                
+            # Resampling
+            states, resampled_indices = resampler.resample(r, foa_options["num_agents"], foa_options["resampling_method"])
+            
+            # Logging : Resampling
+            for i, j in enumerate(resampled_indices):
+                log[puzzle_idx][f"Agent {i}"]["resample"].append(f"{r['idx'][j]}")
+            
+        # Logging : metrics
+        for i, state in enumerate(states):
+            log[puzzle_idx][f"Agent {i}"]["metrics"].append(state.get_metrics())
                 
     #TODO: Final logging
+            
+    return states, log
 
 
 async def run(run_options:dict, foa_options:dict):
@@ -178,10 +196,10 @@ def parse_args():
     args = argparse.ArgumentParser()
     
     args.add_argument("--difficulty", type=int, choices=list(range(10)), default=0)
-    args.add_argument("--n_samples", type=int, default=3)
-    args.add_argument("--n_agents", type=int, default=3)
+    args.add_argument("--n_samples", type=int, default=1)
+    args.add_argument("--n_agents", type=int, default=2)
     args.add_argument("--back_coef", type=float, default=0.8)
-    args.add_argument("--max_steps", type=int, default=10)
+    args.add_argument("--max_steps", type=int, default=2)
     args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile"], default="linear")
     args = args.parse_args()
     return args

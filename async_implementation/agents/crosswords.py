@@ -1,6 +1,7 @@
 import re
 import asyncio
 import random
+from typing import Tuple
 
 from async_implementation.prompts import crosswords as prompts
 from async_implementation.states.crosswords import CrosswordsState
@@ -33,7 +34,7 @@ class CrosswordsAgent:
         return candidates_to_scores
     
     @staticmethod
-    async def step(state: CrosswordsState, api)-> CrosswordsState:
+    async def step(state: CrosswordsState, api)-> Tuple[CrosswordsState, str]:
         """
         Given a state, return the next state.
         """
@@ -49,6 +50,9 @@ class CrosswordsAgent:
         #Parse the action
         action = action.split('\n')[-1]
         action = action.split('. ')
+
+        # Get the position and word from the action
+        pos, word = action
         
         # Assert the action is valid TODO: Maybe change to actual assert (?)
         if len(action) != 2:
@@ -56,9 +60,8 @@ class CrosswordsAgent:
         if len(word) != 5:
             return 'Invalid! Word should have 5 letters.', 0, False, {}
         
-        # Get the current board and break action to position and word
+        # New board = Current board, before the action is implemented
         new_board = state.board.copy()
-        pos, word = action
 
         # Update new board based on the action
         if pos.startswith('h'):
@@ -76,12 +79,6 @@ class CrosswordsAgent:
         new_status = [2 if any(letter != new_letter and letter != '_' for letter, new_letter in zip(ans, new_ans)) else status for status, ans, new_ans in zip(state.status, state.ans, new_ans)]
         new_status[idx] = 1
 
-        # Comparison with ground truth
-        #r_all = (new_board == state.board_gt)
-        #r_letter = sum(a == b for a, b in zip(new_board, state.board_gt)) / 25
-        #r_word = sum(a == b for a, b in zip(new_ans, state.ans_gt)) / 10
-        #return self.render(), r_all, (r_all or self.steps >= 20), {'r_letter': r_letter, 'r_word': r_word, 'r_game': r_all}
-
         # Return the next state
         random.seed(state.randomness)
         next_state = CrosswordsState(
@@ -91,9 +88,10 @@ class CrosswordsAgent:
             board=new_board, 
             ans=new_ans, 
             status=new_status,
+            steps = state.steps + [" .".join(action)],
             randomness=random.randint(0, 1000)
              )
-        return next_state
+        return next_state, action
         
     @staticmethod
     async def evaluate(state, api):

@@ -9,7 +9,6 @@ random.seed(0)
 
 from async_implementation.prompts import gameof24 as prompts
 from async_implementation.states.gameof24 import GameOf24State
-from async_implementation.resampling import value_weighted
 
 
 class GameOf24Agent:
@@ -103,7 +102,7 @@ class GameOf24Agent:
                 {"r": -1} : Finished and incorrect.
             """
             current_states = state.current_state.split(" ")
-            if len(current_states) !=1:
+            if len(current_states) !=1 or len(state.steps)<=3:
                 return {'r':0}
             elif current_states[0] != "24":
                 return {'r':-1}
@@ -112,29 +111,13 @@ class GameOf24Agent:
                 numbers = re.findall(r'\d+', expression)
                 problem_numbers = re.findall(r'\d+', state.puzzle)
                 if sorted(numbers) != sorted(problem_numbers):
-                    return {'r': 0}
+                    return {'r': -1}
                 try:
-                    return {'r': int(simplify(expression) == 24)}
+                    if simplify(expression) == 24:
+                        return {'r': 1}
+                    else:
+                        return {'r': -1}
                 except Exception as e:
                     # print(e)
-                    return {'r': 0}
-    
-    @staticmethod
-    def resample(values: list, n_picks: int, randomness: int, resampling_method: str="linear", percentile: float=0.75)-> list:
-
-        methods = {
-            "linear": value_weighted.linear,
-            "logistic": value_weighted.logistic,
-            "max": value_weighted.max,
-            "percentile": value_weighted.percentile
-        }
-
-        if resampling_method not in methods:
-            raise ValueError(f"Invalid resampling method: {resampling_method}\nValid methods: {methods.keys()}")
-        
-        probabilities = methods[resampling_method](values)
-        random.seed(randomness)
-        randomness = random.randint(0, 1000)
-        resampled_indices = np.random.choice(range(len(values)), size=n_picks, p=probabilities, replace=True)
-        return resampled_indices.tolist()
+                    return {'r': -1}
 
