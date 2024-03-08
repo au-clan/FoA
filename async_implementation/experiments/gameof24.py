@@ -91,6 +91,7 @@ async def foa_gameof24(puzzle_idx, puzzle, foa_options):
             agent_coroutines.append(GameOf24Agent.step(state, api))
         states = await asyncio.gather(*agent_coroutines)
         log[puzzle_idx][f"Step {step}"]["steps"] = [" || ".join(state.steps) for state in states]
+        #assert len(api.futures) == 0, f"API futures should be empty, but are {len(api.futures)}"
 
         # Verification : After each step we verify if the answer is found and if so we break    
         verifications = [GameOf24Agent.verify(state) for state in states]   # {"r":1} Finished correctly
@@ -114,6 +115,7 @@ async def foa_gameof24(puzzle_idx, puzzle, foa_options):
             for state in states:
                 value_coroutines.append(GameOf24Agent.evaluate(state, api))
             values = await asyncio.gather(*value_coroutines)
+            #assert len(api.futures) == 0, f"API futures should be empty, but are {len(api.futures)}"
 
             # Update records
             for i, (state, value) in enumerate(zip(states, values)):
@@ -149,6 +151,8 @@ async def run(run_options:dict, foa_options:dict):
 
     # Run FoA for each puzzle
     for puzzle_idx, puzzle in zip(*data.get_data(run_options["set"])):
+        if puzzle_idx == 950:
+            break
         game_coroutines.append(foa_gameof24(puzzle_idx, puzzle, foa_options))
     results = await asyncio.gather(*game_coroutines)
     
@@ -156,7 +160,8 @@ async def run(run_options:dict, foa_options:dict):
     logs = [log for (game, log) in results]
     for l in logs:
         log.update(l)
-    
+    log["Cost"] = api.cost(verbose=False)
+
     # Save merged logs
     with open(log_folder + log_file, 'w+') as f:
         json.dump(log, f, indent=4)
@@ -173,10 +178,10 @@ async def run(run_options:dict, foa_options:dict):
 def parse_args():
     args = argparse.ArgumentParser()
     
-    args.add_argument("--set", type=str, choices=["practice", "train", "validation", "test"], default="practice")
-    args.add_argument("--n_agents", type=int, default=2)
+    args.add_argument("--set", type=str, choices=["practice", "train", "validation", "test"], default="test")
+    args.add_argument("--n_agents", type=int, default=5)
     args.add_argument("--back_coef", type=float, default=0.6)
-    args.add_argument("--max_steps", type=int, default=4)
+    args.add_argument("--max_steps", type=int, default=10)
     args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile"], default="linear")
     args = args.parse_args()
     return args
@@ -230,7 +235,7 @@ print(f"Accuracy : {accuracy:.2f}")
 
 
 # Send email notification
-send_email = True
+send_email = False
 if send_email:
     subject = log_file
     message = f"Accuracy : {accuracy}"

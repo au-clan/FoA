@@ -203,4 +203,4 @@ class CachedOpenAIAPI:
                 print(f"Input tokens: {self.prompt_tokens:.0f} ({input_cost:.3f} USD)")
                 print(f"Output tokens: {self.completion_tokens:.0f} ({output_cost:.3f} USD)")
                 print(f"Total tokens: {self.prompt_tokens + self.completion_tokens:.0f} ({total_cost:.3f} USD)")
-            return total_cost
+            return {"input_tokens": self.prompt_tokens, "output_tokens": self.completion_tokens, "total_cost": total_cost}
