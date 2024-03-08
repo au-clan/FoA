@@ -7,14 +7,19 @@ class GameOf24Data:
     path = "data/datasets/24_tot.csv"
     data = pd.read_csv(path).Puzzles.tolist()
 
-    def get_train(self):
-        return self.data[0:200]
+    def get_data(self, set):
+        if set == "practice":
+            indices = list(range(0,50))
+        elif set == "train":
+            indices = list(range(850,875) + list(range(1025,1050)))
+        elif set == "validation":
+            incices = list(range(875,900) + list(range(1050,1075)))
+        elif set == "test":
+            indices = list(range(900,1000))
+        else:
+            raise ValueError("Invalid set name")
 
-    def get_validation(self):
-        return self.data[800:900]
-
-    def get_test(self):
-        return self.data[900:1000]
+        return indices, [self.data[i] for i in indices]
     
 @dataclass(frozen=True)
 class CrosswordsData:
@@ -23,11 +28,18 @@ class CrosswordsData:
     with open(file_path, "r") as file:
         data = json.load(file)
 
-    def get_train(self):
-        return self.data[40:80]
+    def get_data(self, set):
+        if set == "practice":
+            indices = [i + 1 for i in range(0,100,5)[:5]]
+        if set == "train":
+            indices = [i + 2 for i in range(0,100,5)[:10]]
+        if set == "validation":
+            indices = [i + 3 for i in range(0,100,5)[:10]]
+        if set == "test":
+            indices = [i for i in range(0,100,5)[:10]]
+        else:
+            raise ValueError("Invalid set name")
+        
+        return indices, [self.data[i] for i in indices]
 
-    def get_validation(self):
-        return self.data[20:40]
 
-    def get_test(self):
-        return self.data[0:20]

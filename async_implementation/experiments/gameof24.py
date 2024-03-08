@@ -23,6 +23,7 @@ from async_engine.batched_api import BatchingAPI
 from async_implementation.agents.gameof24 import GameOf24Agent
 from async_implementation.states.gameof24 import GameOf24State
 from async_implementation.resampling.resampler import Resampler
+from data.data import GameOf24Data
 from utils import create_folder, email_notification
 
 logger = logging.getLogger("experiments")
@@ -56,21 +57,18 @@ N = 4
 for _ in range(N):
     limiter.add_resource(data=OPENAI_API_KEY)
 
-# set up GameOf24 puzzles
-path = 'data/datasets/24_tot.csv'
-data = pd.read_csv(path).Puzzles.tolist()
-
+# Setting up the data
+data = GameOf24Data()
 
 # ToDo: this should probably be moved to its own file
 # for now I'm keeping it here, for easier debugging
 #async def foa_gameof24(puzzle_idx: int, num_agents=3, k=2, backtrack=0.8):
-async def foa_gameof24(puzzle_idx, foa_options):
+async def foa_gameof24(puzzle_idx, puzzle, foa_options):
     randomness = puzzle_idx
     random.seed(randomness)
 
     resampler = Resampler(randomness)
     
-    puzzle = data[puzzle_idx]
     log = {puzzle_idx:{"puzzle": puzzle}}
 
     # New data structure keeping record of all unique states visited and their according values
@@ -145,12 +143,13 @@ async def run(run_options:dict, foa_options:dict):
         difficulty: Selects the starting index
         sample_size: Selects the number of experiments to run
     """
+
     game_coroutines = []
     log = {}
 
     # Run FoA for each puzzle
-    for idx in range(100*run_options["difficulty"], 100*run_options["difficulty"]+run_options["sample_size"]):
-        game_coroutines.append(foa_gameof24(idx, foa_options))
+    for puzzle_idx, puzzle in zip(*data.get_data(run_options["set"])):
+        game_coroutines.append(foa_gameof24(puzzle_idx, puzzle, foa_options))
     results = await asyncio.gather(*game_coroutines)
     
     # Merge logs for each run
@@ -174,19 +173,17 @@ async def run(run_options:dict, foa_options:dict):
 def parse_args():
     args = argparse.ArgumentParser()
     
-    args.add_argument("--difficulty", type=int, choices=list(range(10)), default=0)
-    args.add_argument("--n_samples", type=int, default=10)
-    args.add_argument("--n_agents", type=int, default=5)
+    args.add_argument("--set", type=str, choices=["practice", "train", "validation", "test"], default="practice")
+    args.add_argument("--n_agents", type=int, default=2)
     args.add_argument("--back_coef", type=float, default=0.6)
-    args.add_argument("--max_steps", type=int, default=10)
+    args.add_argument("--max_steps", type=int, default=4)
     args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile"], default="linear")
     args = args.parse_args()
     return args
 args = parse_args()
 
 # Select parameters
-difficulty = args.difficulty               # Starting idx = 100 * difficulty
-sample_size = args.n_samples               # Ending idx   = 100 * difficulty + sample_size
+set = args.set                             # Set of data to be used
 num_agents = args.n_agents                 # Number of agents
 k = 1                                      # Resampling every <k> steps
 origin_value = 20 * 3                      # The evaluation of the origin state #TODO: Change 3 to num_evaluations
@@ -197,10 +194,10 @@ resampling_method = args.resampling        # Resampling method
 
 
 # Just for now so it's easier to change values and reduce noise
-log_file = f"{difficulty}diff_{num_agents}agents_{num_steps}steps_{sample_size}sample_{k}k_{origin_value}origin_{backtrack}backtrack_{resampling_method}-resampling.json"
+log_file = f"{set}-set_{num_agents}agents_{num_steps}steps_{k}k_{origin_value}origin_{backtrack}backtrack_{resampling_method}-resampling.json"
 run_options = {
-    "difficulty":difficulty,
-    "sample_size":sample_size}
+    "set":set
+}
 
 foa_options = {
     "num_agents":num_agents,
@@ -237,4 +234,8 @@ send_email = True
 if send_email:
     subject = log_file
     message = f"Accuracy : {accuracy}"
-    email_notification(subject=subject, message=message)
+    try:
+        email_notification(subject=subject, message=message)
+    except:
+        print("Email not sent")
+        pass
