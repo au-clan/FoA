@@ -29,7 +29,7 @@ from utils import create_folder, email_notification
 
 logger = logging.getLogger("experiments")
 logger.setLevel(logging.DEBUG) # Order : debug < info < warning < error < critical
-log_folder = f"logs/{datetime.now().date()}/{datetime.now().strftime('%H')}:00/crosswords/" # Folder in which logs will be saved (organized daily)
+log_folder = f"logs/{datetime.now().date()}/crosswords/{datetime.now().strftime('%H')}:00/" # Folder in which logs will be saved (organized daily)
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI

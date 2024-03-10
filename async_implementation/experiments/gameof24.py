@@ -28,7 +28,7 @@ from utils import create_folder, email_notification
 
 logger = logging.getLogger("experiments")
 logger.setLevel(logging.DEBUG) # Order : debug < info < warning < error < critical
-log_folder = f"logs/{datetime.now().date()}/{datetime.now().strftime('%H')}:00/gameof24/" # Folder in which logs will be saved (organized daily)
+log_folder = f"logs/{datetime.now().date()}/gameof24/{datetime.now().strftime('%H')}:00/" # Folder in which logs will be saved (organized daily)
 create_folder(log_folder)
 
 
