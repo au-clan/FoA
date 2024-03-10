@@ -11,7 +11,20 @@ class Resampler:
     def __init__(self, randomness: int):
         self.randomness = randomness 
 
-    def resample(self, r, n_picks, resampling_method, include_init=True):
+    def resample(self, state_records, n_picks, resampling_method, include_init=True):
+        """
+        Resample states based on their values.
+
+        Inputs:
+            - state_records: List of tuples (state_identifier, state_value, state)
+            - n_picks: Number of states to resample
+            - resampling_method: Method to use for resampling
+            - include_init: Whether to include the initial state in the resampling process
+        
+        Outputs:
+            - resampled_states: List of resampled states
+            - resampled_indices: List of indices of the resampled states in the original state_records
+        """
         methods = {
             "linear": Resampler.linear,
             "logistic": Resampler.logistic,
@@ -26,20 +39,26 @@ class Resampler:
             return [], []
         
         if not include_init:
-            r = r.copy()
-            r["values"] = r["values"][1:]
-            r["states"] = r["states"][1:]
-            r["idx"] = r["idx"][1:]
+            # Only consider states after the initial state
+            state_records = state_records.copy()
+            init_state = state_records[0]
+            state_records = state_records[1:]
+            
 
         # Get probabilities for each state based on values
-        probabilities = methods[resampling_method](r["values"])
-        resampled_indices = np.random.choice(range(len(r["values"])), size=n_picks, p=probabilities, replace=True).tolist()
+        probabilities = methods[resampling_method]([value for _, value, _ in state_records])
+        resampled_indices = np.random.choice(range(len(state_records)), size=n_picks, p=probabilities, replace=True).tolist()
+
+        if not include_init:
+            # Add 1 to indices to account for the initial state
+            resampled_indices = [i+1 for i in resampled_indices]
+            state_records = [init_state] + state_records
         
         # Resample states based on resampled_indices
         random.seed(self.randomness)
         new_randomness = [random.randint(1, 1000) for _ in range(n_picks)]
         self.randomness = new_randomness[-1]
-        resampled_states = [r["states"][i].duplicate(randomness) for i, randomness in zip(resampled_indices, new_randomness)]
+        resampled_states = [state_records[i][2].duplicate(randomness) for i, randomness in zip(resampled_indices, new_randomness)]
         return resampled_states, resampled_indices
     
     @staticmethod

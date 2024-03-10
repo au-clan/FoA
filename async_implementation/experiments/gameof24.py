@@ -71,9 +71,10 @@ async def foa_gameof24(puzzle_idx, puzzle, foa_options):
     
     log = {puzzle_idx:{"puzzle": puzzle}}
 
-    # New data structure keeping record of all unique states visited and their according values
-    # "idx" shows the step and the agent where the state was visited eg. 0.1 means step 0, agent 1
-    r = {"idx": ["INIT"], "values":[foa_options["origin_value"]], "states": [GameOf24State(puzzle=puzzle, current_state=puzzle, steps=[], randomness=random.randint(0, 1000))]}
+
+    # State identifier shows the step and the agent where the state was visited eg. 0.1 means step 0, agent 1
+    state_records = [] # List of states [(state_identifier, state_value, state)]
+    state_records.append(("INIT", foa_options["origin_value"], GameOf24State(puzzle=puzzle, current_state=puzzle, steps=[], randomness=random.randint(0, 1000))))
 
     # set up states
     states = []
@@ -93,19 +94,21 @@ async def foa_gameof24(puzzle_idx, puzzle, foa_options):
         log[puzzle_idx][f"Step {step}"]["steps"] = [" || ".join(state.steps) for state in states]
         #assert len(api.futures) == 0, f"API futures should be empty, but are {len(api.futures)}"
 
+        # Depreciation : old state values are decayed by the backtrack coefficient
+        state_records = [(idx, value*foa_options["backtrack"], state) for idx, value, state in state_records]
+
         # Verification : After each step we verify if the answer is found and if so we break    
         verifications = [GameOf24Agent.verify(state) for state in states]   # {"r":1} Finished correctly
-        if {"r":1} in verifications:                                        # {"r":-1} Finished incorrectly
-            break                                                           # {"r":0} Not finished                   
+        if {"r":1} in verifications:                                        # {"r":-1} Finished incorrectly / "Ivalid state"
+            break                                                           # {"r":0} Not finished                
 
-        # Pruning
-        states = [state for state, verification in zip(states, verifications) if verification == {"r":0}]
-        new_states, _ = resampler.resample(r, foa_options["num_agents"]-len(states), foa_options["resampling_method"], False)
-        states += new_states
+        # Pruning # TODO : Pruned states should NOT be re-evaluated. 
+        invalid_state_indices = [i for i, verification in enumerate(verifications) if verification["r"] == -1]
+        new_states, pruned_indices = resampler.resample(state_records, len(invalid_state_indices), foa_options["resampling_method"], include_init=False)
+        states = [new_states.pop(0) if i in invalid_state_indices else state for i, state in enumerate(states)]
 
-
-        # Depreciation : old state values are decayed by the backtrack coefficient
-        r["values"] = [value * foa_options["backtrack"] if i != 0 else value * (foa_options["backtrack"] ** 2) for i, value in enumerate(r["values"])]
+        # Log pruning
+        log[puzzle_idx][f"Step {step}"]["Pruning"] = [f"{i}<-{state_records[j][0]}" for i, j in zip(invalid_state_indices, pruned_indices)]
 
         # Resampling : every k steps, evaluate and resample
         if step < num_steps -1 and step % foa_options["k"] == 0:
@@ -119,19 +122,16 @@ async def foa_gameof24(puzzle_idx, puzzle, foa_options):
 
             # Update records
             for i, (state, value) in enumerate(zip(states, values)):
-                r["idx"].append(f"{step}.{i}")
-                r["values"].append(value)
-                r["states"].append(state)
-            
+                state_records.append((f"{step}.{i}", value, state))
             
             # Logging
-            log[puzzle_idx][f"Step {step}"]["Evaluation"] = r["values"][-foa_options["num_agents"]:]
+            log[puzzle_idx][f"Step {step}"]["Evaluation"] = [value for _, value, _ in state_records[-foa_options["num_agents"]:]]
             
             # Resampling
-            states, resampled_indices = resampler.resample(r, foa_options["num_agents"], foa_options["resampling_method"])
+            states, resampled_indices = resampler.resample(state_records, foa_options["num_agents"], foa_options["resampling_method"])
             
             # Logging
-            log[puzzle_idx][f"Step {step}"]["Resampling"] = [f"{i} <- {r['idx'][j]}" for i, j in enumerate(resampled_indices)]
+            log[puzzle_idx][f"Step {step}"]["Resampling"] = [f"{i} <- {state_records[j][0]}" for i, j in enumerate(resampled_indices)]
 
     verifications = [GameOf24Agent.verify(result) for result in states]
     log[puzzle_idx]["Input"] = puzzle
@@ -151,8 +151,6 @@ async def run(run_options:dict, foa_options:dict):
 
     # Run FoA for each puzzle
     for puzzle_idx, puzzle in zip(*data.get_data(run_options["set"])):
-        if puzzle_idx == 950:
-            break
         game_coroutines.append(foa_gameof24(puzzle_idx, puzzle, foa_options))
     results = await asyncio.gather(*game_coroutines)
     
@@ -178,7 +176,7 @@ async def run(run_options:dict, foa_options:dict):
 def parse_args():
     args = argparse.ArgumentParser()
     
-    args.add_argument("--set", type=str, choices=["practice", "train", "validation", "test"], default="test")
+    args.add_argument("--set", type=str, choices=["practice", "train", "validation", "test"], default="practice")
     args.add_argument("--n_agents", type=int, default=5)
     args.add_argument("--back_coef", type=float, default=0.6)
     args.add_argument("--max_steps", type=int, default=10)

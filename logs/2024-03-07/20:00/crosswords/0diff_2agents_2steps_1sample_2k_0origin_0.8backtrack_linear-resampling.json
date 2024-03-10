@@ -1,0 +1,18 @@
+{
+    "0": {
+        "Agent 0": {
+            "action": [
+                "h2. motor",
+                "v4. spout"
+            ],
+            "value": []
+        },
+        "Agent 1": {
+            "action": [
+                "v4. spout",
+                "h4. atria"
+            ],
+            "value": []
+        }
+    }
+}
