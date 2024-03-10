@@ -18,7 +18,7 @@ class BatchingAPI:
         # for debugging, counts the number of batches processed so far
         self.num_batches_processed = 0
 
-    async def buffered_request(self, prompt):
+    async def buffered_request(self, prompt, key):
         """
         public facing API, returns a future that will be resolved with the result of the request.
         the request is buffered and only sent when a full batch of prompts has been collected
@@ -27,7 +27,7 @@ class BatchingAPI:
         future = asyncio.Future()
 
         # add coroutine to batch
-        self.futures.append(future)
+        self.futures.append((future, key))
         self.prompts.append(prompt)
 
         # process batch if full
@@ -71,6 +71,7 @@ class BatchingAPI:
 
         # resolve futures
         for results, futures in zip(request_results, prompt2futures.values()):
+            futures = sorted(futures, key=lambda x: x[1])
             assert len(results) == len(futures), f"Results: {len(results)}, Futures: {len(futures)}"
             for result, future in zip(results, futures):
                 #print(f"Setting result for future {future}, current state: {future.done()}")
