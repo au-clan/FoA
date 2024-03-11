@@ -39,7 +39,7 @@ class GameOf24Agent:
             prompt = prompts.cot_prompt.format(input=state.puzzle) + "Steps:\n" + steps
 
             # Get the final expression
-            suggestions = await api.buffered_request(prompt)
+            suggestions = await api.buffered_request(prompt, key=hash(state))
 
             # State does not change, only the steps
             selected_suggestion = suggestions
@@ -49,7 +49,7 @@ class GameOf24Agent:
             prompt = prompts.bfs_prompt.format(input=current_state)
 
             # Get the next state
-            suggestions = await api.buffered_request(prompt)
+            suggestions = await api.buffered_request(prompt, key=hash(state))
 
             # parse suggestions, based on the current state
             suggestions = suggestions.split("\n")
@@ -78,7 +78,7 @@ class GameOf24Agent:
 
         coroutines = []
         for _ in range(n):
-            coroutines.append(api.buffered_request(prompt))
+            coroutines.append(api.buffered_request(prompt, key=hash(state)))
         iid_replies = await asyncio.gather(*coroutines)
         value_names = [value.split('\n')[-1] for value in iid_replies]
         value_map = {'impossible': 0.001, 'likely': 1, 'sure': 20}

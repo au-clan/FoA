@@ -18,7 +18,7 @@ class BatchingAPI:
         # for debugging, counts the number of batches processed so far
         self.num_batches_processed = 0
 
-    async def buffered_request(self, prompt):
+    async def buffered_request(self, prompt, key):
         """
         public facing API, returns a future that will be resolved with the result of the request.
         the request is buffered and only sent when a full batch of prompts has been collected
@@ -27,44 +27,36 @@ class BatchingAPI:
         future = asyncio.Future()
 
         # add coroutine to batch
-        self.futures.append(future)
+        self.futures.append((future, key))
         self.prompts.append(prompt)
 
-        # add a concurrent task to check resolve the batch
-        asyncio.create_task(self.resolve())
-        # or just await resolve directly
-        # await self.resolve()
+        # process batch if full
+        await self.process_batched()
 
-        # Either the future is resolved or the timeout expires
-        done, _ = await asyncio.wait([future], timeout=self.timeout)
-        if future in done:
-            return await future
-        else:
-            # Create new task for timed-out futures
-           asyncio.create_task(self.resolve(force=True))
-           return await future
+        return await future
 
-    async def resolve(self, force=False):
-        if (len(self.futures) < self.batch_size) and (not force):
-            return
+    async def process_batched(self):
+        while len(self.futures) >= self.batch_size:
 
-        # create a new list for the batch to be processed
-        futures_to_resolve = self.futures[:self.batch_size]
-        prompts_to_resolve = self.prompts[:self.batch_size]
+            # create a new list for the batch to be processed
+            futures_to_resolve = self.futures[:self.batch_size]
+            prompts_to_resolve = self.prompts[:self.batch_size]
 
-        # clear the lists
-        self.futures = self.futures[self.batch_size:]
-        self.prompts = self.prompts[self.batch_size:]
+            # clear the lists
+            self.futures = self.futures[self.batch_size:]
+            self.prompts = self.prompts[self.batch_size:]
+
+            await self.flush(futures_to_resolve, prompts_to_resolve)
+
+    async def process_all(self):
+        futures_to_resolve = self.futures
+        prompts_to_resolve = self.prompts
+        self.futures = []
+        self.prompts = []
 
         await self.flush(futures_to_resolve, prompts_to_resolve)
 
     async def flush(self, futures_to_resolve, prompts_to_resolve):
-        # DONE: we could add a timeout based resolve mechanism:
-        # even if there's not enough samples for a full batch, we resolve after a timeout
-        # this could be done with a separate task that sleeps for a while and then resolves the batch
-        # if we want to do this, then these asserts probably need to go
-        #assert len(futures_to_resolve) == len(prompts_to_resolve)
-        #assert len(futures_to_resolve) == self.batch_size
 
         # find duplicate prompts
         prompt2futures = defaultdict(list)
@@ -79,6 +71,7 @@ class BatchingAPI:
 
         # resolve futures
         for results, futures in zip(request_results, prompt2futures.values()):
+            futures = sorted(futures, key=lambda x: x[1])
             assert len(results) == len(futures), f"Results: {len(results)}, Futures: {len(futures)}"
             for result, future in zip(results, futures):
                 #print(f"Setting result for future {future}, current state: {future.done()}")
