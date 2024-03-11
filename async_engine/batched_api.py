@@ -77,17 +77,14 @@ class BatchingAPI:
                 #print(f"Setting result for future {future}, current state: {future.done()}")
                 future.set_result(result)
 
-    async def immediate_request(self, prompt, n=1, cached=True):
+    async def immediate_request(self, prompt, n=1):
         """
         used to process a request without buffering.
         used internally by the resolve method, can also be used publicly for one-off prompts that don't fit into the
         lock-step mechanism of N prompts in a batch
         """
 
-        if cached:
-            return await self.api.request(prompt, self.limiter, n)
-        else:
-            return await self.api.uncached_request(prompt, self.limiter, n)
+        return await self.api.request(prompt, self.limiter, n)
     
     def cost(self, verbose=True)-> float:
         """

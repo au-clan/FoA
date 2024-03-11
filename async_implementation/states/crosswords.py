@@ -9,12 +9,30 @@ class CrosswordsState:
     data: List[str] 
     board_gt: List[str] 
     ans_gt: List[str]
+    steps: List[str]
     randomness: int
 
-    # State with no steps taken
+    # State with no steps taken / initial state
     board: List[str] = field(default_factory=lambda: ["_"]*25)
     ans : List[str] = field(default_factory=lambda: ["_____"]*10)
     status: List[int] = field(default_factory=lambda: [0]*10)
+
+    def duplicate(self, randomness=None):
+        return CrosswordsState(
+            data=self.data,
+            board_gt=self.board_gt,
+            ans_gt=self.ans_gt,
+            board=self.board,
+            ans=self.ans,
+            status=self.status,
+            steps = self.steps,
+            randomness=randomness if randomness is not None else self.randomness)
+    
+    def get_metrics(self):
+        r_all = (self.board == self.board_gt)
+        r_letter = sum(a == b for a, b in zip(self.board, self.board_gt)) / 25
+        r_word = sum(a == b for a, b in zip(self.ans, self.ans_gt)) / 10
+        return {"r_all":r_all, "r_letter":r_letter, "r_word":r_word}
     
     @staticmethod
     def render_board(board: List[str])-> List[str]:
@@ -34,6 +52,7 @@ class CrosswordsState:
         for i in range(5):
             s += ' '.join(board[i*5:(i+1)*5]) + '\n'
         return s
+
 
     @staticmethod
     def render_clues(data, status=None, state_status=None):
@@ -56,6 +75,7 @@ class CrosswordsState:
                 s += 'v' + str(i-5+1) + '. ' + data[i] + '\n'
         return s
     
+
     @staticmethod
     def render_ans(data, ans, status=None, state_status=None):
             """
@@ -79,6 +99,7 @@ class CrosswordsState:
                     s += 'v' + str(i-5+1) + '. ' + data[i] + ': ' + ans[i] + '\n'
             return s 
     
+
     @staticmethod
     def get_ans(board: List[str])-> List[str]:
         """"
@@ -95,12 +116,6 @@ class CrosswordsState:
             ans[i+5] = ''.join(board[i::5])
         return ans
     
-    @staticmethod
-    def render(state, status=True):
-        if status:
-            return state.render_board() + '\nUnfilled:\n' + state.render_ans(status=0) + '\nFilled:\n' + state.render_ans(status=1) + '\nChanged:\n' + state.render_ans(status=2)
-        else:
-            return state.render_board() + '\n' + state.render_ans()
     
     @staticmethod
     def render(state, status=True):

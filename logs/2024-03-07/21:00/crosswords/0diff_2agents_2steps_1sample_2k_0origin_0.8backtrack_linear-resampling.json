@@ -1,0 +1,56 @@
+{
+    "0": {
+        "Agent 0": {
+            "action": [
+                "h2. motor",
+                "h3. fancy"
+            ],
+            "value": [
+                "NA",
+                80
+            ],
+            "resample": [
+                "NA",
+                "1.1"
+            ],
+            "metrics": [
+                {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                },
+                {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            ]
+        },
+        "Agent 1": {
+            "action": [
+                "v4. spout",
+                "v4. spout"
+            ],
+            "value": [
+                "NA",
+                20
+            ],
+            "resample": [
+                "NA",
+                "1.0"
+            ],
+            "metrics": [
+                {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                },
+                {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            ]
+        }
+    }
+}

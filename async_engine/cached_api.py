@@ -171,107 +171,6 @@ class CachedOpenAIAPI:
 
         return [entry[0] for entry in cache_entry[count:count+n]]
 
-    async def uncached_request(self, messages, limiter, n=10, request_timeout=30):
-        """
-        UNCACHED request to the OpenAI API
-
-        Just for debugging purposes
-        Same as request(), but without using cache.
-        """
-
-        messages = [{"role": "user", "content": messages}]
-        if "request_timeout" in self.config:
-            request_timeout = self.config["request_timeout"]
-
-        # Check if the request is cached
-        cache_config = deepcopy(self.config)
-
-        # we keep only those keys that are relevant for the answer generation
-        keep_keys = ["model", "temperature", "max_tokens", "top_p", "presence_penalty", "frequency_penalty", "stop"]
-        cache_config = {k: v for k, v in cache_config.items() if k in keep_keys}
-
-        # now we also need to add the messages to the cache_config
-        cache_config["messages"] = messages
-
-        # if we don't have enough responses in the cache, we need to make a request
-        num_needed = n
-        assert num_needed > 0
-
-        print("needing more samples")
-
-        start = time.time()
-        async with limiter as resource:
-            self.aclient.api_key = resource.data
-            while True:
-                self.current_sleep_time = min(self.current_sleep_time, self.max_sleep)
-                try:
-                    response = await asyncio.wait_for(self.aclient.chat.completions.create(
-                        **cache_config,
-                        # messages=cache_config["messages"],
-                        # model=cache_config["model"],
-                        # temperature=cache_config["temperature"],
-                        # max_tokens=cache_config["max_tokens"],
-                        # timeout=request_timeout,
-                        n=num_needed), timeout=request_timeout)
-
-                    self.current_sleep_time = self.sleep_time
-                    break
-                except openai.RateLimitError as e:
-                    print(f"Rate limit error, sleeping for {self.current_sleep_time} seconds")
-                    print(e)
-                    await asyncio.sleep(self.current_sleep_time)
-                    self.current_sleep_time *= self.sleep_factor
-
-                except openai.APIStatusError as e:
-                    print(f"APIStatusError, sleeping for {self.current_sleep_time} seconds")
-                    print(e)
-                    await asyncio.sleep(self.current_sleep_time)
-                    self.current_sleep_time *= self.sleep_factor
-
-                except openai.APITimeoutError as e:
-                    print(f"Timeout error, sleeping for {self.current_sleep_time} seconds")
-                    print(e)
-                    await asyncio.sleep(self.current_sleep_time)
-                    self.current_sleep_time *= self.sleep_factor
-
-                except openai.APIError as e:
-                    print(f"API error, sleeping for {self.current_sleep_time} seconds")
-                    print(e)
-                    await asyncio.sleep(self.current_sleep_time)
-                    self.current_sleep_time *= self.sleep_factor
-
-                except asyncio.TimeoutError as e:
-                    print(f"Asyncio timeout error, sleeping for {self.current_sleep_time} seconds")
-                    print(e)
-                    await asyncio.sleep(self.current_sleep_time)
-                    self.current_sleep_time *= self.sleep_factor
-
-            assert response is not None
-
-        stop = time.time()
-        # by communicating the tokens and time used to the resource manager, we can optimize the rate of requests
-        # or maybe we're just using a very simple round robin strategy ;)
-        # ToDo: I have a super sophisticated and only slightly buggy implementation of a leaky bucket rate limiting algo
-        # for GPT3.5 it works worse than round robin, I think because the rate limit for gpt3.5 are so high that it's
-        # easier to just get out of the way and let the next request through
-        # but for GPT4 I've found the leaky bucket to be very more efficient
-        time_taken = stop - start
-        completion_tokens = response.usage.completion_tokens
-        prompt_tokens = response.usage.prompt_tokens
-        tokens_used = response.usage.total_tokens
-        resource.free(time_taken=time_taken, amount_used=tokens_used)
-
-        logger.log(logging.DEBUG, f"Tokens used: {tokens_used}")
-
-        raw_responses = []
-        for choice in response.choices:
-            raw_responses.append((choice.message.content, completion_tokens/num_needed, prompt_tokens))
-
-        # Update tokens count
-        self.completion_tokens += sum([entry[1] for entry in raw_responses])
-        self.prompt_tokens += sum([entry[2] for entry in raw_responses])
-
-        return [entry[0] for entry in raw_responses[:n]]
 
     def __str__(self):
         return self.config['model']
@@ -304,4 +203,4 @@ class CachedOpenAIAPI:
                 print(f"Input tokens: {self.prompt_tokens:.0f} ({input_cost:.3f} USD)")
                 print(f"Output tokens: {self.completion_tokens:.0f} ({output_cost:.3f} USD)")
                 print(f"Total tokens: {self.prompt_tokens + self.completion_tokens:.0f} ({total_cost:.3f} USD)")
-            return total_cost
+            return {"input_tokens": self.prompt_tokens, "output_tokens": self.completion_tokens, "total_cost": total_cost}

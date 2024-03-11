@@ -1,0 +1,18 @@
+Puzzle : 1 1 4 6
+	Agent 0 current state : 9
+		Steps : 1 * 1 = 1 (left: 1 4 6) -> 4 + 6 = 10 (left: 1 10) -> 10 - 1 = 9 (left: 9)
+		Result : False
+	Agent 1 current state : 1.5
+		Steps : 1 * 1 = 1 (left: 1 4 6) -> 1 * 4 = 4 (left: 4 6) -> 6 / 4 = 1.5 (left: 1.5)
+		Result : False
+	Game : Unsuccessful
+
+Puzzle : 1 1 11 11
+	Agent 0 current state : 1 11 11
+		Steps : 1 * 1 = 1 (left: 1 11 11)
+		Result : False
+	Agent 1 current state : 1 10 11
+		Steps : 11 - 1 = 10 (left: 1 10 11)
+		Result : False
+	Game : Unsuccessful
+

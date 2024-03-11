@@ -19,3 +19,10 @@ class GameOf24State:
     
     def items(self):
         return self.puzzle, self.current_state, self.steps, self.randomness
+    
+    def duplicate(self, randomness=None):
+        return GameOf24State(
+            puzzle=self.puzzle,
+            current_state=self.current_state,
+            steps=self.steps,
+            randomness=randomness if randomness is not None else self.randomness)

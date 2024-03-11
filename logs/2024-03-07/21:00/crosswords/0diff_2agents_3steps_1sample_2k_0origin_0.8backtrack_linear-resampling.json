@@ -1,0 +1,26 @@
+{
+    "0": {
+        "Agent 0": {
+            "action": [
+                "h2. motor",
+                "h3. fancy",
+                "v4. spout"
+            ],
+            "value": [
+                "NA",
+                80
+            ]
+        },
+        "Agent 1": {
+            "action": [
+                "v4. spout",
+                "v4. spout",
+                "v4. spout"
+            ],
+            "value": [
+                "NA",
+                20
+            ]
+        }
+    }
+}

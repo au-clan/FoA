@@ -1,0 +1,330 @@
+Puzzle : 1 1 4 6
+	Agent 0 current state : 24
+		Steps : 1 * 1 = 1 (left: 1 4 6) -> 4 * 6 = 24 (left: 1 24) -> 24 * 1 = 24 (left: 24)
+		Result : False
+	Agent 1 current state : 2
+		Steps : 1 * 1 = 1 (left: 1 4 6) -> 4 * 6 = 24 (left: 1 24) -> 10 / 5 = 2 (left: 2)
+		Result : False
+	Agent 2 current state : 1 2
+		Steps : 1 * 1 = 1 (left: 1 4 6) -> 6 - 4 = 2 (left: 1 2)
+		Result : False
+	Agent 3 current state : Input: 5 10
+		Steps : 1 * 1 = 1 (left: 1 4 6) -> 4 * 6 = 24 (left: 1 24) -> Input: 5 10
+		Result : False
+	Agent 4 current state : 5 5
+		Steps : 6 - 1 = 5 (left: 1 4 5) -> 5 / 1 = 5 (left: 5 5)
+		Result : False
+	Agent 5 current state : 15
+		Steps : 1 * 1 = 1 (left: 1 4 6) -> 4 * 6 = 24 (left: 1 24) -> 5 + 10 = 15 (left: 15)
+		Result : False
+	Agent 6 current state : Input: 5 10
+		Steps : 1 * 1 = 1 (left: 1 4 6) -> 4 * 6 = 24 (left: 1 24) -> Input: 5 10
+		Result : False
+	Agent 7 current state : Input: 5 10
+		Steps : 1 * 1 = 1 (left: 1 4 6) -> 4 * 6 = 24 (left: 1 24) -> Input: 5 10
+		Result : False
+	Agent 8 current state : 1
+		Steps : 1 * 1 = 1 (left: 1 4 6) -> 6 - 1 = 5 (left: 4 5) -> 5 - 4 = 1 (left: 1)
+		Result : False
+	Agent 9 current state : 15
+		Steps : 1 * 1 = 1 (left: 1 4 6) -> 4 * 6 = 24 (left: 1 24) -> 5 + 10 = 15 (left: 15)
+		Result : False
+	Game : Unsuccessful
+
+Puzzle : 1 1 11 11
+	Agent 0 current state : 12 + 12 = 24
+		Steps : 11 + 1 = 12 (left: 1 11 12) -> 11 + 1 = 12 (left: 12 12) -> 12 + 12 = 24
+		Result : False
+	Agent 1 current state : 1 11 11
+		Steps : 11 * 1 = 11 (left: 1 11 11)
+		Result : False
+	Agent 2 current state : 12 + 12 = 24
+		Steps : 11 + 1 = 12 (left: 1 11 12) -> 11 + 1 = 12 (left: 12 12) -> 12 + 12 = 24
+		Result : False
+	Agent 3 current state : 12 + 12 = 24
+		Steps : 11 + 1 = 12 (left: 1 11 12) -> 11 + 1 = 12 (left: 12 12) -> 12 + 12 = 24
+		Result : False
+	Agent 4 current state : 12 + 12 = 24
+		Steps : 11 + 1 = 12 (left: 1 11 12) -> 11 + 1 = 12 (left: 12 12) -> 12 + 12 = 24
+		Result : False
+	Agent 5 current state : 12 + 12 = 24
+		Steps : 11 + 1 = 12 (left: 1 11 12) -> 11 + 1 = 12 (left: 12 12) -> 12 + 12 = 24
+		Result : False
+	Agent 6 current state : 12 + 12 = 24
+		Steps : 11 + 1 = 12 (left: 1 11 12) -> 11 + 1 = 12 (left: 12 12) -> 12 + 12 = 24
+		Result : False
+	Agent 7 current state : 12 + 12 = 24
+		Steps : 11 + 1 = 12 (left: 1 11 12) -> 11 + 1 = 12 (left: 12 12) -> 12 + 12 = 24
+		Result : False
+	Agent 8 current state : 12 + 12 = 24
+		Steps : 11 + 1 = 12 (left: 1 11 12) -> 11 + 1 = 12 (left: 12 12) -> 12 + 12 = 24
+		Result : False
+	Agent 9 current state : 12 12
+		Steps : 11 + 1 = 12 (left: 1 11 12) -> 11 + 1 = 12 (left: 12 12)
+		Result : False
+	Game : Unsuccessful
+
+Puzzle : 1 1 3 8
+	Agent 0 current state : 24
+		Steps : 3 * 1 = 3 (left: 1 3 8) -> 3 * 1 = 3 (left: 3 8) -> 3 * 8 = 24 (left: 24) -> Answer: (3 * 1) * (3 * 8) = 24
+		Result : False
+	Agent 1 current state : 24
+		Steps : 3 * 1 = 3 (left: 1 3 8) -> 3 * 1 = 3 (left: 3 8) -> 3 * 8 = 24 (left: 24) -> Answer: (3 * 1) * (3 * 8) = 24
+		Result : False
+	Agent 2 current state : 24
+		Steps : 3 * 1 = 3 (left: 1 3 8) -> 3 * 1 = 3 (left: 3 8) -> 3 * 8 = 24 (left: 24)
+		Result : False
+	Agent 3 current state : 3 5
+		Steps : 1 * 3 = 3 (left: 3 1 8) -> 8 - 3 = 5 (left: 3 5)
+		Result : False
+	Agent 4 current state : 24
+		Steps : 3 * 1 = 3 (left: 1 3 8) -> 3 * 1 = 3 (left: 3 8) -> 3 * 8 = 24 (left: 24) -> Answer: (3 * 1) * (3 * 8) = 24
+		Result : False
+	Agent 5 current state : Input: 5 6
+		Steps : 1 * 3 = 3 (left: 3 1 8) -> Input: 5 6
+		Result : False
+	Agent 6 current state : 5
+		Steps : 3 * 1 = 3 (left: 1 3 8) -> 3 * 1 = 3 (left: 3 8) -> 8 - 3 = 5 (left: 5)
+		Result : False
+	Agent 7 current state : 5
+		Steps : 3 * 1 = 3 (left: 1 3 8) -> 3 * 1 = 3 (left: 3 8) -> 8 - 3 = 5 (left: 5)
+		Result : False
+	Agent 8 current state : 24
+		Steps : 3 * 1 = 3 (left: 1 3 8) -> 3 * 1 = 3 (left: 3 8) -> 3 * 8 = 24 (left: 24) -> Answer: (3 * 1) * (3 * 8) = 24
+		Result : False
+	Agent 9 current state : 24
+		Steps : 3 * 1 = 3 (left: 1 3 8) -> 3 * 1 = 3 (left: 3 8) -> 3 * 8 = 24 (left: 24) -> Answer: (3 * 1) * (3 * 8) = 24
+		Result : False
+	Game : Unsuccessful
+
+Puzzle : 1 1 1 8
+	Agent 0 current state : 8
+		Steps : 8 - 1 = 7 (left: 1 1 7) -> 7 / 1 = 7 (left: 1 7) -> 1 + 7 = 8 (left: 8)
+		Result : False
+	Agent 1 current state : 1 7
+		Steps : 8 - 1 = 7 (left: 1 1 7) -> 7 / 1 = 7 (left: 1 7)
+		Result : False
+	Agent 2 current state : 7
+		Steps : 8 - 1 = 7 (left: 1 1 7) -> 7 / 1 = 7 (left: 1 7) -> 7 / 1 = 7 (left: 7)
+		Result : False
+	Agent 3 current state : 1 6
+		Steps : 8 - 1 = 7 (left: 1 1 7) -> 7 - 1 = 6 (left: 1 6)
+		Result : False
+	Agent 4 current state : 7
+		Steps : 8 - 1 = 7 (left: 1 1 7) -> 7 / 1 = 7 (left: 1 7) -> 7 / 1 = 7 (left: 7)
+		Result : False
+	Agent 5 current state : 6
+		Steps : 8 - 1 = 7 (left: 1 1 7) -> 7 - 1 = 6 (left: 1 6) -> 6 / 1 = 6 (left: 6)
+		Result : False
+	Agent 6 current state : 6
+		Steps : 8 - 1 = 7 (left: 1 1 7) -> 7 / 1 = 7 (left: 1 7) -> 7 - 1 = 6 (left: 6)
+		Result : False
+	Agent 7 current state : 6
+		Steps : 8 - 1 = 7 (left: 1 1 7) -> 7 / 1 = 7 (left: 1 7) -> 7 - 1 = 6 (left: 6)
+		Result : False
+	Agent 8 current state : 6
+		Steps : 8 - 1 = 7 (left: 1 1 7) -> 7 / 1 = 7 (left: 1 7) -> 7 - 1 = 6 (left: 6)
+		Result : False
+	Agent 9 current state : 7
+		Steps : 8 - 1 = 7 (left: 1 1 7) -> 7 / 1 = 7 (left: 1 7) -> 7 / 1 = 7 (left: 7)
+		Result : False
+	Game : Unsuccessful
+
+Puzzle : 6 6 6 6
+	Agent 0 current state : 6 6 7
+		Steps : 6 / 6 = 1 (left: 1 6 6) -> 1 + 6 = 7 (left: 6 6 7)
+		Result : False
+	Agent 1 current state : 6 9
+		Steps : 6 - 6 = 0 (left: 0 6 6) -> 3 * 3 = 9 (left: 6 9)
+		Result : False
+	Agent 2 current state : 36
+		Steps : 6 * 6 = 36 (left: 6 6 36) -> 6 / 6 = 1 (left: 1 36) -> 1 * 36 = 36 (left: 36)
+		Result : False
+	Agent 3 current state : 36 / 2 = 18
+		Steps : 6 * 6 = 36 (left: 6 6 36) -> 6 - 6 = 0 (left: 0 36) -> 0 * 36 = 0 (left: 36) -> 36 / 2 = 18
+		Result : False
+	Agent 4 current state : 36
+		Steps : 6 * 6 = 36 (left: 6 6 36) -> 6 / 6 = 1 (left: 1 36) -> 1 * 36 = 36 (left: 36)
+		Result : False
+	Agent 5 current state : 36 / 2 = 18
+		Steps : 6 * 6 = 36 (left: 6 6 36) -> 6 / 6 = 1 (left: 1 36) -> 1 * 36 = 36 (left: 36) -> 36 / 2 = 18
+		Result : False
+	Agent 6 current state : 36
+		Steps : 6 * 6 = 36 (left: 6 6 36) -> 6 - 6 = 0 (left: 0 36) -> 0 / 36 = 0 (left: 36)
+		Result : False
+	Agent 7 current state : 36 / 2 = 18
+		Steps : 6 * 6 = 36 (left: 6 6 36) -> 6 - 6 = 0 (left: 0 36) -> 0 * 36 = 0 (left: 36) -> 36 / 2 = 18
+		Result : False
+	Agent 8 current state : 36 / 2 = 18
+		Steps : 6 * 6 = 36 (left: 6 6 36) -> 6 / 6 = 1 (left: 1 36) -> 1 * 36 = 36 (left: 36) -> 36 / 2 = 18
+		Result : False
+	Agent 9 current state : 36
+		Steps : 6 * 6 = 36 (left: 6 6 36) -> 6 / 6 = 1 (left: 1 36) -> 1 * 36 = 36 (left: 36)
+		Result : False
+	Game : Unsuccessful
+
+Puzzle : 1 1 2 12
+	Agent 0 current state : 10
+		Steps : 12 / 2 = 6 (left: 1 2 6) -> 6 - 1 = 5 (left: 2 5) -> 2 * 5 = 10 (left: 10)
+		Result : False
+	Agent 1 current state : 4
+		Steps : 12 / 2 = 6 (left: 1 2 6) -> 6 - 2 = 4 (left: 1 4) -> 1 * 4 = 4 (left: 4)
+		Result : False
+	Agent 2 current state : 2.5
+		Steps : 12 / 2 = 6 (left: 1 2 6) -> 6 - 1 = 5 (left: 2 5) -> 5 / 2 = 2.5 (left: 2.5)
+		Result : False
+	Agent 3 current state : 3
+		Steps : 12 / 2 = 6 (left: 1 2 6) -> 6 - 1 = 5 (left: 2 5) -> 5 - 2 = 3 (left: 3)
+		Result : False
+	Agent 4 current state : 4
+		Steps : 12 / 2 = 6 (left: 1 2 6) -> 6 - 2 = 4 (left: 1 4) -> 1 * 4 = 4 (left: 4)
+		Result : False
+	Agent 5 current state : 4
+		Steps : 12 / 2 = 6 (left: 1 2 6) -> 6 - 2 = 4 (left: 1 4) -> 1 * 4 = 4 (left: 4)
+		Result : False
+	Agent 6 current state : 4
+		Steps : 12 / 2 = 6 (left: 1 2 6) -> 6 - 2 = 4 (left: 1 4) -> 4 / 1 = 4 (left: 4)
+		Result : False
+	Agent 7 current state : 4
+		Steps : 12 / 2 = 6 (left: 1 2 6) -> 6 - 2 = 4 (left: 1 4) -> 4 / 1 = 4 (left: 4)
+		Result : False
+	Agent 8 current state : 4
+		Steps : 12 / 2 = 6 (left: 1 2 6) -> 6 - 2 = 4 (left: 1 4) -> 4 / 1 = 4 (left: 4)
+		Result : False
+	Agent 9 current state : 2.5
+		Steps : 12 / 2 = 6 (left: 1 2 6) -> 6 - 1 = 5 (left: 2 5) -> 5 / 2 = 2.5 (left: 2.5)
+		Result : False
+	Game : Unsuccessful
+
+Puzzle : 1 2 2 6
+	Agent 0 current state : 2 4
+		Steps : 2 / 1 = 2 (left: 2 2 6) -> 6 - 2 = 4 (left: 2 4)
+		Result : False
+	Agent 1 current state : 8
+		Steps : 2 / 1 = 2 (left: 2 2 6) -> 6 + 6 = 12 (left: 8
+		Result : False
+	Agent 2 current state : 8
+		Steps : 2 / 1 = 2 (left: 2 2 6) -> 6 + 6 = 12 (left: 8
+		Result : False
+	Agent 3 current state : 2 3
+		Steps : 2 / 1 = 2 (left: 2 2 6) -> 6 / 2 = 3 (left: 2 3)
+		Result : False
+	Agent 4 current state : Possible next steps:
+		Steps : 2 / 1 = 2 (left: 2 2 6) -> Possible next steps:
+		Result : False
+	Agent 5 current state : Possible next steps:
+		Steps : 2 / 1 = 2 (left: 2 2 6) -> Possible next steps:
+		Result : False
+	Agent 6 current state : 2 3
+		Steps : 2 / 1 = 2 (left: 2 2 6) -> 6 / 2 = 3 (left: 2 3)
+		Result : False
+	Agent 7 current state : 2 2 6
+		Steps : 2 / 1 = 2 (left: 2 2 6)
+		Result : False
+	Agent 8 current state : 2 3
+		Steps : 2 / 1 = 2 (left: 2 2 6) -> 6 / 2 = 3 (left: 2 3)
+		Result : False
+	Agent 9 current state : Possible next steps:
+		Steps : 2 / 1 = 2 (left: 2 2 6) -> Possible next steps:
+		Result : False
+	Game : Unsuccessful
+
+Puzzle : 1 1 10 12
+	Agent 0 current state : 12 + 12 = 24
+		Steps : 10 + 1 = 11 (left: 1 11 12) -> 11 + 1 = 12 (left: 12 12) -> 12 + 12 = 24
+		Result : False
+	Agent 1 current state : 12 + 12 = 24
+		Steps : 10 + 1 = 11 (left: 1 11 12) -> 11 + 1 = 12 (left: 12 12) -> 12 + 12 = 24
+		Result : False
+	Agent 2 current state : 12 + 12 = 24
+		Steps : 10 + 1 = 11 (left: 1 11 12) -> 11 + 1 = 12 (left: 12 12) -> 12 + 12 = 24
+		Result : False
+	Agent 3 current state : 9.166666666666666
+		Steps : 1 + 10 = 11 (left: 11 10 12) -> 11 * 10 = 110 (left: 110 12) -> 110 / 12 = 9.166666666666666 (left: 9.166666666666666)
+		Result : False
+	Agent 4 current state : 1320
+		Steps : 1 + 10 = 11 (left: 11 10 12) -> 11 * 10 = 110 (left: 110 12) -> 110 * 12 = 1320 (left: 1320)
+		Result : False
+	Agent 5 current state : 12 + 12 = 24
+		Steps : 10 + 1 = 11 (left: 1 11 12) -> 11 + 1 = 12 (left: 12 12) -> 12 + 12 = 24
+		Result : False
+	Agent 6 current state : 12 + 12 = 24
+		Steps : 10 + 1 = 11 (left: 1 11 12) -> 11 + 1 = 12 (left: 12 12) -> 12 + 12 = 24
+		Result : False
+	Agent 7 current state : 12 + 12 = 24
+		Steps : 10 + 1 = 11 (left: 1 11 12) -> 11 + 1 = 12 (left: 12 12) -> 12 + 12 = 24
+		Result : False
+	Agent 8 current state : 12 + 12 = 24
+		Steps : 10 + 1 = 11 (left: 1 11 12) -> 11 + 1 = 12 (left: 12 12) -> 12 + 12 = 24
+		Result : False
+	Agent 9 current state : 12 12
+		Steps : 10 + 1 = 11 (left: 1 11 12) -> 11 + 1 = 12 (left: 12 12)
+		Result : False
+	Game : Unsuccessful
+
+Puzzle : 2 2 10 10
+	Agent 0 current state : 4 10
+		Steps : 2 * 2 = 4 (left: 4 10 10) -> 10 / 4 = 2.5 (left: 2.5 10 10) -> 10 / 2.5 = 4 (left: 4 10)
+		Result : False
+	Agent 1 current state : 10 25
+		Steps : 2 * 2 = 4 (left: 4 10 10) -> 10 / 4 = 2.5 (left: 2.5 10 10) -> 2.5 * 10 = 25 (left: 10 25)
+		Result : False
+	Agent 2 current state : 10
+		Steps : 2 * 2 = 4 (left: 4 10 10) -> 10 / 4 = 2.5 (left: 2.5 10 10) -> 10 / 2.5 = 4 (left: 4 10) -> 4 * 10 = 40 (left: 10)
+		Result : False
+	Agent 3 current state : 6 10 10
+		Steps : 2 * 2 = 4 (left: 4 10 10) -> 10 - 4 = 6 (left: 6 10 10)
+		Result : False
+	Agent 4 current state : 10
+		Steps : 2 * 2 = 4 (left: 4 10 10) -> 10 / 4 = 2.5 (left: 2.5 10 10) -> 10 / 2.5 = 4 (left: 4 10) -> 4 * 10 = 40 (left: 10)
+		Result : False
+	Agent 5 current state : 10
+		Steps : 2 * 2 = 4 (left: 4 10 10) -> 10 / 4 = 2.5 (left: 2.5 10 10) -> 10 / 2.5 = 4 (left: 4 10) -> 4 * 10 = 40 (left: 10)
+		Result : False
+	Agent 6 current state : 6 10
+		Steps : 2 * 2 = 4 (left: 4 10 10) -> 10 / 4 = 2.5 (left: 2.5 10 10) -> 10 / 2.5 = 4 (left: 4 10) -> 10 - 4 = 6 (left: 6 10)
+		Result : False
+	Agent 7 current state : 10 / 4 = 2
+		Steps : 2 * 2 = 4 (left: 4 10 10) -> 10 / 4 = 2
+		Result : False
+	Agent 8 current state : 1.6666666666666667 10 10
+		Steps : 2 * 2 = 4 (left: 4 10 10) -> 10 - 4 = 6 (left: 6 10 10) -> 10 / 6 = 1.6666666666666667 (left: 1.6666666666666667 10 10)
+		Result : False
+	Agent 9 current state : 10 25
+		Steps : 2 * 2 = 4 (left: 4 10 10) -> 10 / 4 = 2.5 (left: 2.5 10 10) -> 2.5 * 10 = 25 (left: 10 25)
+		Result : False
+	Game : Unsuccessful
+
+Puzzle : 1 1 1 12
+	Agent 0 current state : 10
+		Steps : 12 / 1 = 12 (left: 1 1 12) -> 12 - 1 = 11 (left: 1 11) -> 11 - 1 = 10 (left: 10)
+		Result : False
+	Agent 1 current state : 11
+		Steps : 12 / 1 = 12 (left: 1 1 12) -> 12 - 1 = 11 (left: 1 11) -> 1 * 11 = 11 (left: 11)
+		Result : False
+	Agent 2 current state : 1 12
+		Steps : 12 / 1 = 12 (left: 1 1 12) -> 12 / 1 = 12 (left: 1 12)
+		Result : False
+	Agent 3 current state : 1 11
+		Steps : 12 / 1 = 12 (left: 1 1 12) -> 12 - 1 = 11 (left: 1 11)
+		Result : False
+	Agent 4 current state : 11
+		Steps : 12 / 1 = 12 (left: 1 1 12) -> 12 - 1 = 11 (left: 1 11) -> 1 * 11 = 11 (left: 11)
+		Result : False
+	Agent 5 current state : 11
+		Steps : 12 / 1 = 12 (left: 1 1 12) -> 12 - 1 = 11 (left: 1 11) -> 1 * 11 = 11 (left: 11)
+		Result : False
+	Agent 6 current state : 11
+		Steps : 12 / 1 = 12 (left: 1 1 12) -> 12 - 1 = 11 (left: 1 11) -> 11 / 1 = 11 (left: 11)
+		Result : False
+	Agent 7 current state : Input: 0 12
+		Steps : 12 / 1 = 12 (left: 1 1 12) -> Input: 0 12
+		Result : False
+	Agent 8 current state : 11
+		Steps : 12 / 1 = 12 (left: 1 1 12) -> 12 - 1 = 11 (left: 1 11) -> 11 / 1 = 11 (left: 11)
+		Result : False
+	Agent 9 current state : 1 12
+		Steps : 12 / 1 = 12 (left: 1 1 12) -> 12 / 1 = 12 (left: 1 12)
+		Result : False
+	Game : Unsuccessful
+
