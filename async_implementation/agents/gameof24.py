@@ -36,7 +36,7 @@ class GameOf24Agent:
         if current_state.strip() == "24":
             # CoT prompt
             steps = "\n".join(state.steps) + "\n"
-            prompt = prompts.cot_prompt.format(input=state.puzzle) + "\n" + steps
+            prompt = prompts.cot_prompt.format(input=state.puzzle) + "Steps:\n" + steps
 
             # Get the final expression
             suggestions = await api.buffered_request(prompt)

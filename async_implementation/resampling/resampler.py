@@ -47,6 +47,7 @@ class Resampler:
 
         # Get probabilities for each state based on values
         probabilities = methods[resampling_method]([value for _, value, _ in state_records])
+        np.random.seed(self.randomness)
         resampled_indices = np.random.choice(range(len(state_records)), size=n_picks, p=probabilities, replace=True).tolist()
 
         if not include_init:

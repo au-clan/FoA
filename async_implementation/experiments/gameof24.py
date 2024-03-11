@@ -151,6 +151,9 @@ async def run(run_options:dict, foa_options:dict):
 
     # Run FoA for each puzzle
     for puzzle_idx, puzzle in zip(*data.get_data(run_options["set"])):
+        ## Debug
+        if puzzle_idx == 5:
+            break
         game_coroutines.append(foa_gameof24(puzzle_idx, puzzle, foa_options))
     results = await asyncio.gather(*game_coroutines)
     
