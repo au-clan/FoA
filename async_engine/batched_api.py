@@ -75,7 +75,7 @@ class BatchingAPI:
             assert len(results) == len(futures), f"Results: {len(results)}, Futures: {len(futures)}"
             for result, future in zip(results, futures):
                 #print(f"Setting result for future {future}, current state: {future.done()}")
-                future.set_result(result)
+                future[0].set_result(result)
 
     async def immediate_request(self, prompt, n=1):
         """

@@ -25,6 +25,7 @@ from async_engine.batched_api import BatchingAPI
 from async_implementation.agents.crosswords import CrosswordsAgent
 from async_implementation.states.crosswords import CrosswordsState
 from async_implementation.resampling.resampler import Resampler
+from data.data import CrosswordsData
 from utils import create_folder, email_notification
 
 logger = logging.getLogger("experiments")
@@ -58,20 +59,24 @@ for _ in range(N):
     limiter.add_resource(data=OPENAI_API_KEY)
 
 # Set up Crosswords puzzles
-path = "data/datasets/mini0505.json"
-with open(path, "r") as file:
-    dataset = json.load(file)
+data = CrosswordsData()
 
 # ToDo: this should probably be moved to its own file
 # for now I'm keeping it here, for easier debugging
 #async def foa_gameof24(puzzle_idx: int, num_agents=3, k=2, backtrack=0.8):
-async def foa_crosswords(puzzle_idx, foa_options):
+async def foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options):
+
+    # Use batching API
+    step_api = BatchingAPI(api, limiter, batch_size=foa_options["num_agents"], timeout=10)
+    # TODO: Figure appropriate eval batch size, rn worst case scenario is num_agents * 10
+    eval_api = BatchingAPI(api, limiter, batch_size=foa_options["num_agents"], timeout=10)
+
     randomness = puzzle_idx
     random.seed(randomness)
 
     resampler = Resampler(randomness)
 
-    data, board_gt = dataset[puzzle_idx] # Data is the list of clues, board_gt is the ground truth  board
+    data, board_gt = puzzle[0], puzzle[1] # Data is the list of clues, board_gt is the ground truth  board
     ans_gt = CrosswordsState.get_ans(board_gt) # Get the ground truth answers
 
     # Set up logging
@@ -82,8 +87,9 @@ async def foa_crosswords(puzzle_idx, foa_options):
         log[puzzle_idx][f"Agent {a}"]["resample"] = []
         log[puzzle_idx][f"Agent {a}"]["metrics"] = []
 
-    # Records
-    r = {"idx":["INIT"], "values":[foa_options["origin_value"]], "states":[CrosswordsState(data=data, board_gt=board_gt, ans_gt=ans_gt, steps=[], randomness=random.randint(0, 1000))]}
+    # State identifier shows the step and the agent where the state was visited eg. 0.1 means step 0, agent 1
+    state_records = [] # List of states [(state_identifier, state_value, state)]
+    state_records.append(("INIT", foa_options["origin_value"], CrosswordsState(data=data, board_gt=board_gt, ans_gt=ans_gt, steps=[], randomness=random.randint(0, 1000))))
 
     # Set up states
     states = []
@@ -97,12 +103,14 @@ async def foa_crosswords(puzzle_idx, foa_options):
         # Step : make one step for each state
         agent_coroutines = []
         for state in states:
-            agent_coroutines.append(CrosswordsAgent.step(state, api))
+            agent_coroutines.append(CrosswordsAgent.step(state, step_api))
         states, actions = zip(* await asyncio.gather(*agent_coroutines))
 
         for i, (state, action) in enumerate(zip(states, actions)):
             log[puzzle_idx][f"Agent {i}"]["action"].append(". ".join(action))
 
+        # Depreciation : old state values are decayed by the backtrack coefficient
+        state_records = [(idx, value*foa_options["backtrack"], state) for idx, value, state in state_records]
 
         # TODO: Verification 
         verifications = ...
@@ -112,8 +120,7 @@ async def foa_crosswords(puzzle_idx, foa_options):
         #new_states, _ = resampler.resample(r, foa_options["num_agents"]-len(states), foa_options["resampling_method"])
         #states += new_states
 
-        # Depreciation
-        r["values"] = [value * foa_options["backtrack"] if i != 0 else value * (foa_options["backtrack"] ** 2) for i, value in enumerate(r["values"])]
+        
 
         # Resampling : every k steps, evaluate and resample
         #if step < num_steps - 1 and step % foa_options["k"] == 0: # <- Correct one : changing it just fo debugging
@@ -122,14 +129,12 @@ async def foa_crosswords(puzzle_idx, foa_options):
             # Evaluation : each of the current states is given a value
             value_coroutines = []
             for state in states:
-                value_coroutines.append(CrosswordsAgent.evaluate(state, api))
+                value_coroutines.append(CrosswordsAgent.evaluate(state, eval_api))
             values = await asyncio.gather(*value_coroutines)
 
             # Update records
             for i, (state, value) in enumerate(zip(states, values)):
-                r["idx"].append(f"{step}.{i}")
-                r["values"].append(value)
-                r["states"].append(state)
+                state_records.append((f"{step}.{i}", value, state))
             
             # Logging : Add NAs for steps that were not evaluated
             while len(log[puzzle_idx]["Agent 0"]["value"]) < step:
@@ -142,11 +147,11 @@ async def foa_crosswords(puzzle_idx, foa_options):
                 log[puzzle_idx][f"Agent {i}"]["value"].append(v)
                 
             # Resampling
-            states, resampled_indices = resampler.resample(r, foa_options["num_agents"], foa_options["resampling_method"])
+            states, resampled_indices = resampler.resample(state_records, foa_options["num_agents"], foa_options["resampling_method"])
             
             # Logging : Resampling
             for i, j in enumerate(resampled_indices):
-                log[puzzle_idx][f"Agent {i}"]["resample"].append(f"{r['idx'][j]}")
+                log[puzzle_idx][f"Agent {i}"]["resample"].append(f"{state_records[j][0]}")
             
         # Logging : metrics
         for i, state in enumerate(states):
@@ -166,15 +171,22 @@ async def run(run_options:dict, foa_options:dict):
     game_coroutines = []
     log = {}
 
+    # Get the data for each puzzle
+    puzzle_idxs, puzzles = data.get_data(run_options["set"])
+
+    # Will add barrier or whatever comes up for synchronization once a good solution is found for GameOf24
+
     # Run FoA for each puzzle
-    for idx in range(run_options["difficulty"]*10, run_options["difficulty"]*10+run_options["sample_size"]):
-        game_coroutines.append(foa_crosswords(idx, foa_options))
+     # Run FoA for each puzzle
+    for puzzle_idx, puzzle in zip(puzzle_idxs, puzzles):
+        game_coroutines.append(foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options))
     results = await asyncio.gather(*game_coroutines)
     
     # Merge logs for each run
     logs = [log for (game, log) in results]
     for l in logs:
         log.update(l)
+    log["Cost"] = api.cost(verbose=False)
     
     # Save merged logs
     with open(log_folder + log_file, 'w+') as f:
@@ -195,8 +207,7 @@ async def run(run_options:dict, foa_options:dict):
 def parse_args():
     args = argparse.ArgumentParser()
     
-    args.add_argument("--difficulty", type=int, choices=list(range(10)), default=0)
-    args.add_argument("--n_samples", type=int, default=1)
+    args.add_argument("--set", type=str, choices=["mini", "train", "validation", "test"], default="mini")
     args.add_argument("--n_agents", type=int, default=2)
     args.add_argument("--back_coef", type=float, default=0.8)
     args.add_argument("--max_steps", type=int, default=2)
@@ -206,8 +217,7 @@ def parse_args():
 args = parse_args()
 
 # Select parameters
-difficulty = args.difficulty               # Starting idx = 10 * difficulty
-sample_size = args.n_samples               # Ending idx   = 10 * difficulty + sample_size
+set = args.set                             # Set of data to be used
 num_agents = args.n_agents                 # Number of agents
 k = 2                                      # Resampling every <k> steps
 origin_value = 0                           # The evaluation of the origin state #TODO: Change 3 to num_evaluations
@@ -218,11 +228,10 @@ resampling_method = args.resampling        # Resampling method
 
 
 # Just for now so it's easier to change values and reduce noise
-log_file = f"{difficulty}diff_{num_agents}agents_{num_steps}steps_{sample_size}sample_{k}k_{origin_value}origin_{backtrack}backtrack_{resampling_method}-resampling.json"
-
+log_file = f"{set}-set_{num_agents}agents_{num_steps}steps_{k}k_{origin_value}origin_{backtrack}backtrack_{resampling_method}-resampling.json"
 run_options = {
-    "difficulty":difficulty,
-    "sample_size":sample_size}
+    "set":set
+}
 
 foa_options = {
     "num_agents":num_agents,
@@ -232,10 +241,6 @@ foa_options = {
     "backtrack":backtrack,
     "resampling_method":resampling_method
 }
-
-
-# Use batching API
-api = BatchingAPI(api, limiter, batch_size=foa_options["num_agents"], timeout=10)
 
 # Run
 results = asyncio.run(run(run_options, foa_options))
@@ -248,5 +253,8 @@ send_email = False
 if send_email:
     subject = log_file
     message = f"Accuracy : {accuracy}"
-    email_notification(subject=subject, message=message)
-
+    try:
+        email_notification(subject=subject, message=message)
+    except:
+        print("Email not sent")
+        pass

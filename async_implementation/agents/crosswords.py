@@ -21,7 +21,7 @@ class CrosswordsAgent:
         prompt = prompts.propose_prompt.format(input=obs)
         coroutines = []
         for _ in range(n):
-            coroutines.append(api.buffered_request(prompt))
+            coroutines.append(api.buffered_request(prompt, key=hash(state)))
         responses = await asyncio.gather(*coroutines)
 
         # Parse the responses and add the scores for each action
@@ -112,7 +112,7 @@ class CrosswordsAgent:
             
             # Get a value for the line from the set {sure, maybe, impossible}
             prompt = prompts.value_prompt.format(input=line)
-            res = await api.buffered_request(prompt)
+            res = await api.buffered_request(prompt, key=hash(state))
             
             # Parse the response and update the count
             res = res.split('\n')[-1].strip()

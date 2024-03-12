@@ -8,12 +8,12 @@ class GameOf24Data:
     data = pd.read_csv(path).Puzzles.tolist()
 
     def get_data(self, set):
-        if set == "practice":
-            indices = list(range(0,50))
+        if set == "mini":
+            indices = list(range(0,10))
         elif set == "train":
-            indices = list(range(850,875) + list(range(1025,1050)))
+            indices = list(range(850,875)) + list(range(1025,1050))
         elif set == "validation":
-            incices = list(range(875,900) + list(range(1050,1075)))
+            incices = list(range(875,900)) + list(range(1050,1075))
         elif set == "test":
             indices = list(range(900,1000))
         else:
@@ -29,13 +29,13 @@ class CrosswordsData:
         data = json.load(file)
 
     def get_data(self, set):
-        if set == "practice":
-            indices = [i + 1 for i in range(0,100,5)[:5]]
-        if set == "train":
+        if set == "mini":
+            indices = [i + 1 for i in range(0,100,5)[:1]]
+        elif set == "train":
             indices = [i + 2 for i in range(0,100,5)[:10]]
-        if set == "validation":
+        elif set == "validation":
             indices = [i + 3 for i in range(0,100,5)[:10]]
-        if set == "test":
+        elif set == "test":
             indices = [i for i in range(0,100,5)[:10]]
         else:
             raise ValueError("Invalid set name")

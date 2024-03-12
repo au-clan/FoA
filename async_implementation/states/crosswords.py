@@ -17,6 +17,9 @@ class CrosswordsState:
     ans : List[str] = field(default_factory=lambda: ["_____"]*10)
     status: List[int] = field(default_factory=lambda: [0]*10)
 
+    def __hash__(self):
+        return hash(("".join(self.data), "".join(self.board_gt), "".join(self.steps), "".join(self.board)))
+
     def duplicate(self, randomness=None):
         return CrosswordsState(
             data=self.data,

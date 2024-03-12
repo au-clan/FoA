@@ -64,9 +64,10 @@ data = GameOf24Data()
 # ToDo: this should probably be moved to its own file
 # for now I'm keeping it here, for easier debugging
 # async def foa_gameof24(puzzle_idx: int, num_agents=3, k=2, backtrack=0.8):
-async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options):
+async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
     # Use batching API
-    api = BatchingAPI(api, limiter, batch_size=foa_options["num_agents"], timeout=10)
+    step_api = BatchingAPI(api, limiter, batch_size=foa_options["num_agents"], timeout=10)
+    eval_api = BatchingAPI(api, limiter, batch_size=foa_options["num_agents"]*3, timeout=10)
 
     randomness = puzzle_idx
     random.seed(randomness)
@@ -82,22 +83,31 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options):
 
     # set up states
     states = []
+
     for _ in range(foa_options["num_agents"]):
         states.append(GameOf24State(puzzle=puzzle, current_state=puzzle, steps=[], randomness=random.randint(0, 1000)))
 
+    solution_found = False ### DEBUG: Just for now until I figure out something better
     num_steps = foa_options["num_steps"]
     for step in range(num_steps):
+
+        ### DEBUG: Just for now until I figure out something better
+        if solution_found:
+            await barrier.wait()
+            continue
+        
         print(f"Step {step}")
         log[puzzle_idx][f"Step {step}"] = {}
 
         # Step : make one step for each state
         agent_coroutines = []
         for state in states:
-            agent_coroutines.append(GameOf24Agent.step(state, api))
+            agent_coroutines.append(GameOf24Agent.step(state, step_api))
         states = await asyncio.gather(*agent_coroutines)
-        log[puzzle_idx][f"Step {step}"]["steps"] = [" || ".join(state.steps) for state in states]
 
-        #assert len(api.futures) == 0, f"API futures should be empty, but are {len(api.futures)}"
+        # Log steps
+        log[puzzle_idx][f"Step {step}"]["steps"] = [" || ".join(state.steps) for state in states]
+        assert len(step_api.futures) == 0, f"API futures should be empty, but are {len(step_api.futures)}"
 
         # Depreciation : old state values are decayed by the backtrack coefficient
         state_records = [(idx, value*foa_options["backtrack"], state) for idx, value, state in state_records]
@@ -105,7 +115,10 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options):
         # Verification : After each step we verify if the answer is found and if so we break    
         verifications = [GameOf24Agent.verify(state) for state in states]   # {"r":1} Finished correctly
         if {"r":1} in verifications:                                        # {"r":-1} Finished incorrectly / "Ivalid state"
-            break                                                           # {"r":0} Not finished                
+            ### DEBUG: Just for now until I figure out something better - Normally you want to break here
+            solution_found = True
+            await barrier.wait()
+            continue                                                        # {"r":0} Not finished                
 
         # Pruning # TODO : Pruned states should NOT be re-evaluated. 
         invalid_state_indices = [i for i, verification in enumerate(verifications) if verification["r"] == -1]
@@ -115,16 +128,20 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options):
         # Log pruning
         log[puzzle_idx][f"Step {step}"]["Pruning"] = [f"{i}<-{state_records[j][0]}" for i, j in zip(invalid_state_indices, pruned_indices)]
 
+        # Synchronize experiments
+        ### DEBUG: Normally syncrhonisation is done before resampling not after every step
+        await barrier.wait()
+
         # Resampling : every k steps, evaluate and resample
         if step < num_steps - 1 and step % foa_options["k"] == 0:
 
             # Evaluation : each of the current states is given a value
             value_coroutines = []
             for state in states:
-                value_coroutines.append(GameOf24Agent.evaluate(state, api))
+                value_coroutines.append(GameOf24Agent.evaluate(state, eval_api))
             values = await asyncio.gather(*value_coroutines)
 
-            #assert len(api.futures) == 0, f"API futures should be empty, but are {len(api.futures)}"
+            assert len(eval_api.futures) == 0, f"API futures should be empty, but are {len(eval_api.futures)}"
 
             # Update records
             for i, (state, value) in enumerate(zip(states, values)):
@@ -156,13 +173,15 @@ async def run(run_options: dict, foa_options: dict):
     game_coroutines = []
     log = {}
 
-    # Run FoA for each puzzle
-    for puzzle_idx, puzzle in zip(*data.get_data(run_options["set"])):
+    # Get the data for each puzzle
+    puzzle_idxs, puzzles = data.get_data(run_options["set"])
 
-        ## Debug
-        if puzzle_idx == 5:
-            break
-        game_coroutines.append(foa_gameof24(puzzle_idx, puzzle, foa_options))
+    # Barriers for each puzzle experiment
+    barrier = asyncio.Barrier(len(puzzles))
+
+    # Run FoA for each puzzle
+    for puzzle_idx, puzzle in zip(puzzle_idxs, puzzles):
+        game_coroutines.append(foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier))
     results = await asyncio.gather(*game_coroutines)
 
     # Merge logs for each run
@@ -187,7 +206,7 @@ async def run(run_options: dict, foa_options: dict):
 def parse_args():
     args = argparse.ArgumentParser()
 
-    args.add_argument("--set", type=str, choices=["practice", "train", "validation", "test"], default="practice")
+    args.add_argument("--set", type=str, choices=["mini", "train", "validation", "test"], default="train")
     args.add_argument("--n_agents", type=int, default=5)
     args.add_argument("--back_coef", type=float, default=0.6)
     args.add_argument("--max_steps", type=int, default=10)
