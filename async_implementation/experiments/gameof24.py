@@ -17,14 +17,14 @@ import sys
 
 sys.path.append(os.getcwd())  # Project root!!
 
-from async_engine.cached_api import CachedOpenAIAPI
+from async_engine.cached_api_namespace import CachedOpenAIAPI
 from async_engine.round_robin_manager import AsyncRoundRobin
 from async_engine.batched_api import BatchingAPI
 from async_implementation.agents.gameof24 import GameOf24Agent
 from async_implementation.states.gameof24 import GameOf24State
 from async_implementation.resampling.resampler import Resampler
 from data.data import GameOf24Data
-from utils import create_folder, email_notification
+from utils import create_folder, email_notification, compare_json_files
 
 logger = logging.getLogger("experiments")
 
@@ -36,7 +36,7 @@ create_folder(log_folder)
 # that way we never pay for the same request twice
 assert os.path.exists(
     "./caches/"), "Please run the script from the root directory of the project. To make sure all caches are created correctly."
-cache = Cache("./caches/async_api_cache", size_limit=int(2e10))
+cache = Cache("./caches/test_cache", size_limit=int(2e10))
 
 # get OPENAI_API_KEY from env
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
@@ -96,13 +96,13 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
             await barrier.wait()
             continue
         
-        print(f"Step {step}")
+        #print(f"Step {step}")
         log[puzzle_idx][f"Step {step}"] = {}
 
         # Step : make one step for each state
         agent_coroutines = []
-        for state in states:
-            agent_coroutines.append(GameOf24Agent.step(state, step_api))
+        for agent_id, state in enumerate(states):
+            agent_coroutines.append(GameOf24Agent.step(state, step_api, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}")))
         states = await asyncio.gather(*agent_coroutines)
 
         # Log steps
@@ -137,8 +137,8 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
 
             # Evaluation : each of the current states is given a value
             value_coroutines = []
-            for state in states:
-                value_coroutines.append(GameOf24Agent.evaluate(state, eval_api))
+            for agent_id, state in enumerate(states):
+                value_coroutines.append(GameOf24Agent.evaluate(state, eval_api, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}")))
             values = await asyncio.gather(*value_coroutines)
 
             assert len(eval_api.futures) == 0, f"API futures should be empty, but are {len(eval_api.futures)}"
@@ -176,11 +176,14 @@ async def run(run_options: dict, foa_options: dict):
     # Get the data for each puzzle
     puzzle_idxs, puzzles = data.get_data(run_options["set"])
 
+    ### Debugging
+    #puzzle_idxs, puzzles = puzzle_idxs[:1], puzzles[:1]
+
     # Barriers for each puzzle experiment
     barrier = asyncio.Barrier(len(puzzles))
 
     # Run FoA for each puzzle
-    for puzzle_idx, puzzle in zip(puzzle_idxs, puzzles):
+    for puzzle_idx, puzzle in zip(puzzle_idxs, puzzles): 
         game_coroutines.append(foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier))
     results = await asyncio.gather(*game_coroutines)
 
@@ -243,7 +246,13 @@ foa_options = {
 }
 
 # Run
+
 results = asyncio.run(run(run_options, foa_options))
+print(f"File name : {log_file}")
+f1 = "logs/2024-03-12/gameof24/22:00/"+log_file
+f2 = "logs/same_experiment_logs/"+log_file
+same = compare_json_files(f1, f2)
+print("Files are the same:", same)
 
 # Accuracy computation
 n_success = 0
@@ -252,10 +261,10 @@ for game in results:
     if {"r": 1} in verifications:
         n_success += 1
 
-# Print accuracy
-api.cost(verbose=True)
+# #print accuracy
+api.cost(verbose=False)
 accuracy = n_success * 100 / len(results)
-print(f"Accuracy : {accuracy:.2f}")
+#print(f"Accuracy : {accuracy:.2f}")
 
 # Send email notification
 send_email = False
@@ -265,5 +274,5 @@ if send_email:
     try:
         email_notification(subject=subject, message=message)
     except:
-        print("Email not sent")
+        #print("Email not sent")
         pass

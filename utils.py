@@ -1,5 +1,6 @@
 import os
 import smtplib
+import json
 
 import numpy as np
 from pathlib import Path
@@ -46,3 +47,20 @@ def email_notification(subject: str, message: str, reciever_email: str="nearchos
     server.sendmail(sender_email, reciever_email, text)
     print("Email sent successfully")
     return
+
+def compare_json_files(file_path1, file_path2):
+    """
+    Just for debugging purposes. Compares two JSON files and returns True if they are the same, False otherwise.
+    """
+    try:
+        with open(file_path1, 'r') as file1, open(file_path2, 'r') as file2:
+            data1 = json.load(file1)
+            data2 = json.load(file2)
+            
+            return data1 == data2
+    except FileNotFoundError:
+        print("One or both files not found.")
+        return False
+    except json.JSONDecodeError:
+        print("One or both files is not valid JSON.")
+        return False

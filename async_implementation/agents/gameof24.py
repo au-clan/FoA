@@ -14,7 +14,7 @@ from async_implementation.states.gameof24 import GameOf24State
 class GameOf24Agent:
 
     @staticmethod
-    async def step(state: GameOf24State, api)-> GameOf24State:
+    async def step(state: GameOf24State, api, namespace)-> GameOf24State:
         """
         Given a state, returns the next state (1-to-1).
         """
@@ -39,7 +39,7 @@ class GameOf24Agent:
             prompt = prompts.cot_prompt.format(input=state.puzzle) + "Steps:\n" + steps
 
             # Get the final expression
-            suggestions = await api.buffered_request(prompt, key=hash(state))
+            suggestions = await api.buffered_request(prompt, key=hash(state), namespace=namespace)
 
             # State does not change, only the steps
             selected_suggestion = suggestions
@@ -49,7 +49,7 @@ class GameOf24Agent:
             prompt = prompts.bfs_prompt.format(input=current_state)
 
             # Get the next state
-            suggestions = await api.buffered_request(prompt, key=hash(state))
+            suggestions = await api.buffered_request(prompt, key=hash(state), namespace=namespace)
 
             # parse suggestions, based on the current state
             suggestions = suggestions.split("\n")
@@ -68,7 +68,7 @@ class GameOf24Agent:
 
 
     @staticmethod
-    async def evaluate(state: GameOf24State, api, n=3):
+    async def evaluate(state: GameOf24State, api, namespace, n=3):
         last_step = state.steps[-1]
         if "left" not in last_step:
             answer = last_step.lower().replace("answer: ", "")
@@ -78,7 +78,7 @@ class GameOf24Agent:
 
         coroutines = []
         for _ in range(n):
-            coroutines.append(api.buffered_request(prompt, key=hash(state)))
+            coroutines.append(api.buffered_request(prompt, key=hash(state), namespace=namespace))
         iid_replies = await asyncio.gather(*coroutines)
         value_names = [value.split('\n')[-1] for value in iid_replies]
         value_map = {'impossible': 0.001, 'likely': 1, 'sure': 20}
