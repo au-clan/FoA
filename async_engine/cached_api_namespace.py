@@ -44,8 +44,28 @@ class CachedOpenAIAPI:
 
     async def request(self, messages, namespaces, limiter, request_timeout=30):
         """
-        CACHED request to the OpenAI API
+        CACHED request to the OpenAI API.
+        Input:
+        - messages: The prompt
+        - namespaces: List of namespace. Each namespace is attributed its own cache entry.
+        - limiter: Resource manager
+        - request_timeout: Timeout for the request
+
+        Te function is executed in the following steps:
+        Step 1. Setup : 
+            - Sets up the cache config for each namesapce and gets the respective cache key, cahce entry and used count.
+        Step 2. Prepare number of requests:
+            - Seperates the number of total requests needed for each namespace to number of requests from cache and number of requests from API.
+        Step 3. Request from API:
+            - Requests the total number of requests (no matter the namespace) from the API into responses.
+        Step 4. Requests redistribution:
+            - For each namespace, according to the computed number of requests needed from the cache, load the number of requests needed from the cache and update the cache entry and used count.
+            - For each namespace, according to the computed number of requests needed from the API, pop the number of responses needed from the API responses and update the cache entry and used count.
+        Step 5. Rearrange responses:
+            - Rearranges the responses to match the order of the input namespace list.
         """
+        
+        ##-- Step 1. Setup --##
         responses = []
         messages = [{"role": "user", "content": messages}]
         if "request_timeout" in self.config:
@@ -62,6 +82,8 @@ class CachedOpenAIAPI:
         cache_config["messages"] = messages
 
         namespace_counter = Counter(namespaces)
+        responses_per_namespace = {}
+
         cache_configs = []
         for namespace in namespace_counter.keys():
             temp_cache_config = deepcopy(cache_config)
@@ -85,71 +107,77 @@ class CachedOpenAIAPI:
         used_counts = [self.used_count.get(cache_key, 0) for cache_key in cache_keys]
         
         # Unrelated stuff to be fixed if we want to use this  
-        # -- Breaks cost optimisation but is unrelated
         # -- Does not consider prompt cost
-        for n, used_count, cache_entry, cache_key in zip(namespace_counter.values(), used_counts, cache_entries, cache_keys):
-            if len(cache_entry[used_count:]) >= n:
+        
+        ##-- Step 2. Prepare number of requests --##
+        # Compute the number of samples needed from the cache and from the API
+        for n, namespace, used_count, cache_entry, cache_key in zip(namespace_counter.values(), namespace_counter.keys(), used_counts, cache_entries, cache_keys):
+            cached_available = len(cache_entry[used_count:])
+            n_from_cache = min(n, cached_available)
+            n_from_api = n - n_from_cache
+            assert n_from_api >= 0
 
-                self.completion_tokens += sum([entry[1] for entry in cache_entry[:n]])
-                self.used_count[cache_key] = used_count + n
-                
-                responses.extend([entry[0] for entry in cache_entry[used_count:used_count+n]])
-                print(f"Using {n} cached samples")
+            responses_per_namespace[namespace] = {"cached": n_from_cache, "api": n_from_api}
+        
+        n_from_api_total = sum(responses_per_namespace[namespace]["api"] for namespace in responses_per_namespace)
+        n_from_cache_total = sum(responses_per_namespace[namespace]["cached"] for namespace in responses_per_namespace)
 
-            else:
-                num_needed = n - len(cache_entry[used_count:])
-                assert num_needed > 0
+        if n_from_cache_total > 0:
+            print(f"Using {n_from_cache_total} cached samples")
 
-                print(f"Requesting {num_needed} samples")
+        ##-- Step 3. Request from API --##
+        # Request the samples from the API
+        if n_from_api_total > 0:
+            print(f"Requesting {n_from_api_total} samples")
 
-                start = time.time()
-                async with limiter as resource:
-                    self.aclient.api_key = resource.data
-                    while True:
-                        self.current_sleep_time = min(self.current_sleep_time, self.max_sleep)
-                        try:
-                            response = await asyncio.wait_for(self.aclient.chat.completions.create(
-                                **cache_config,
-                                # messages=cache_config["messages"],
-                                # model=cache_config["model"],
-                                # temperature=cache_config["temperature"],
-                                # max_tokens=cache_config["max_tokens"],
-                                # timeout=request_timeout,
-                                n=num_needed), timeout=request_timeout)
+            start = time.time()
+            async with limiter as resource:
+                self.aclient.api_key = resource.data
+                while True:
+                    self.current_sleep_time = min(self.current_sleep_time, self.max_sleep)
+                    try:
+                        response = await asyncio.wait_for(self.aclient.chat.completions.create(
+                            **cache_config,
+                            # messages=cache_config["messages"],
+                            # model=cache_config["model"],
+                            # temperature=cache_config["temperature"],
+                            # max_tokens=cache_config["max_tokens"],
+                            # timeout=request_timeout,
+                            n=n_from_api_total), timeout=request_timeout)
 
-                            self.current_sleep_time = self.sleep_time
-                            break
-                        except openai.RateLimitError as e:
-                            print(f"Rate limit error, sleeping for {self.current_sleep_time} seconds")
-                            print(e)
-                            await asyncio.sleep(self.current_sleep_time)
-                            self.current_sleep_time *= self.sleep_factor
+                        self.current_sleep_time = self.sleep_time
+                        break
+                    except openai.RateLimitError as e:
+                        print(f"Rate limit error, sleeping for {self.current_sleep_time} seconds")
+                        print(e)
+                        await asyncio.sleep(self.current_sleep_time)
+                        self.current_sleep_time *= self.sleep_factor
 
-                        except openai.APIStatusError as e:
-                            print(f"APIStatusError, sleeping for {self.current_sleep_time} seconds")
-                            print(e)
-                            await asyncio.sleep(self.current_sleep_time)
-                            self.current_sleep_time *= self.sleep_factor
+                    except openai.APIStatusError as e:
+                        print(f"APIStatusError, sleeping for {self.current_sleep_time} seconds")
+                        print(e)
+                        await asyncio.sleep(self.current_sleep_time)
+                        self.current_sleep_time *= self.sleep_factor
 
-                        except openai.APITimeoutError as e:
-                            print(f"Timeout error, sleeping for {self.current_sleep_time} seconds")
-                            print(e)
-                            await asyncio.sleep(self.current_sleep_time)
-                            self.current_sleep_time *= self.sleep_factor
+                    except openai.APITimeoutError as e:
+                        print(f"Timeout error, sleeping for {self.current_sleep_time} seconds")
+                        print(e)
+                        await asyncio.sleep(self.current_sleep_time)
+                        self.current_sleep_time *= self.sleep_factor
 
-                        except openai.APIError as e:
-                            print(f"API error, sleeping for {self.current_sleep_time} seconds")
-                            print(e)
-                            await asyncio.sleep(self.current_sleep_time)
-                            self.current_sleep_time *= self.sleep_factor
+                    except openai.APIError as e:
+                        print(f"API error, sleeping for {self.current_sleep_time} seconds")
+                        print(e)
+                        await asyncio.sleep(self.current_sleep_time)
+                        self.current_sleep_time *= self.sleep_factor
 
-                        except asyncio.TimeoutError as e:
-                            print(f"Asyncio timeout error, sleeping for {self.current_sleep_time} seconds")
-                            print(e)
-                            await asyncio.sleep(self.current_sleep_time)
-                            self.current_sleep_time *= self.sleep_factor
+                    except asyncio.TimeoutError as e:
+                        print(f"Asyncio timeout error, sleeping for {self.current_sleep_time} seconds")
+                        print(e)
+                        await asyncio.sleep(self.current_sleep_time)
+                        self.current_sleep_time *= self.sleep_factor
 
-                    assert response is not None
+                assert response is not None
 
                 stop = time.time()
                 # by communicating the tokens and time used to the resource manager, we can optimize the rate of requests
@@ -166,21 +194,36 @@ class CachedOpenAIAPI:
 
                 raw_responses = []
                 for choice in response.choices:
-                    raw_responses.append((choice.message.content, completion_tokens/num_needed, prompt_tokens))
-                
-                # add the new responses to the cache
-                cache_entry.extend(raw_responses)
-                self.cache.set(cache_key, cache_entry)
+                    raw_responses.append((choice.message.content, completion_tokens/n_from_api_total, prompt_tokens))
 
-                # Update tokens count
-                self.completion_tokens += sum([entry[1] for entry in cache_entry[:n]])
+        ##-- Step 4. Requests redistribution --##
+        for n, namespace, used_count, cache_entry, cache_key in zip(namespace_counter.values(), namespace_counter.keys(), used_counts, cache_entries, cache_keys):
+            
+            # Update responses from cache
+            n_cache = responses_per_namespace[namespace]["cached"]
+            cached_responses = [entry for entry in cache_entry[used_count:used_count+n_cache]]
+            self.completion_tokens += sum([entry[1] for entry in cached_responses])
+            self.used_count[cache_key] = self.used_count.get(cache_key, 0) + n_cache
+            responses.extend([entry[0] for entry in cached_responses])
 
-                # Update the count
-                self.used_count[cache_key] = used_count + n
+            # Update responses from API
+            n_api = responses_per_namespace[namespace]["api"]
+            api_responses = [raw_responses.pop(0) for _ in range(n_api)]
+            cache_entry.extend(api_responses)
+            self.cache.set(cache_key, cache_entry)
+            self.completion_tokens += sum([response[1] for response in api_responses])
+            self.used_count[cache_key] =  self.used_count.get(cache_key, 0) + n_api
+            responses.extend([response[0] for response in api_responses])   
 
-                responses.extend([entry[0] for entry in cache_entry[used_count:used_count+n]])
-
-        # Rearrange the responses to match the order of the input messages
+        # Pormpt cost
+        if n_cache != 0:
+            self.prompt_tokens += cached_responses[0][2]
+        elif n_api != 0:
+            self.prompt_tokens += api_responses[0][2]
+        else:
+            raise Exception("Both n_api and n_cache are zero. This should not happen.")
+        
+        ##-- Step 5. Rearrange responses --##
         mapping = {}
         for k,v in namespace_counter.items():
             mapping[k] = []

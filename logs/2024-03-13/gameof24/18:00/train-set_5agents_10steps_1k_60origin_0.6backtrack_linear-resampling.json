@@ -11964,8 +11964,8 @@
         ]
     },
     "Cost": {
-        "input_tokens": 877815,
+        "input_tokens": 2726274,
         "output_tokens": 303533.0,
-        "total_cost": 0.8942070000000001
+        "total_cost": 1.8184365
     }
 }

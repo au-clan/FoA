@@ -15,7 +15,7 @@ class GameOf24State:
     randomness: int
 
     def __hash__(self):
-        return hash((self.puzzle, self.current_state, " -> ".join(self.steps), self.randomness))
+        return hash((self.puzzle, self.current_state, " -> ".join(self.steps)))
     
     def items(self):
         return self.puzzle, self.current_state, self.steps, self.randomness

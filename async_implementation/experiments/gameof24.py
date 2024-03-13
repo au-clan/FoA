@@ -191,7 +191,7 @@ async def run(run_options: dict, foa_options: dict):
     logs = [log for (game, log) in results]
     for l in logs:
         log.update(l)
-    log["Cost"] = api.cost(verbose=False)
+    log["Cost"] = api.cost(verbose=True)
 
     # Save merged logs
     with open(log_folder + log_file, 'w+') as f:
@@ -249,7 +249,7 @@ foa_options = {
 
 results = asyncio.run(run(run_options, foa_options))
 print(f"File name : {log_file}")
-f1 = "logs/2024-03-12/gameof24/22:00/"+log_file
+f1 = "logs/2024-03-13/gameof24/18:00/"+log_file
 f2 = "logs/same_experiment_logs/"+log_file
 same = compare_json_files(f1, f2)
 print("Files are the same:", same)
@@ -261,10 +261,9 @@ for game in results:
     if {"r": 1} in verifications:
         n_success += 1
 
-# #print accuracy
-api.cost(verbose=False)
+# Accuracy
 accuracy = n_success * 100 / len(results)
-#print(f"Accuracy : {accuracy:.2f}")
+print(f"Accuracy : {accuracy:.2f}")
 
 # Send email notification
 send_email = False
@@ -274,5 +273,5 @@ if send_email:
     try:
         email_notification(subject=subject, message=message)
     except:
-        #print("Email not sent")
+        print("Email not sent")
         pass
