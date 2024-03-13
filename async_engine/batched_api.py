@@ -31,7 +31,15 @@ class BatchingAPI:
         self.prompts.append(prompt)
 
         # process batch if full
-        await self.process_batched()
+        asyncio.create_task(self.process_batched())
+        
+        # Either the future is resolved or the timeout expires
+        done, _ = await asyncio.wait([future], timeout=self.timeout)
+        if future in done:
+            return await future
+        else:
+            # Create new task for timed-out futures
+           asyncio.create_task(self.process_all())
 
         return await future
 
