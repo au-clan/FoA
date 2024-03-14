@@ -1,0 +1,1450 @@
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 * 1 = 1 (left: 1 4 6)",
+                "Pruning": null,
+                "Evaluation": 40.0,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "1 4 6"
+                }
+            },
+            "Step 1": {
+                "Step": "1 * 1 = 1 (left: 1 4 6) -> 6 - 4 = 2 (left: 1 2)",
+                "Pruning": null,
+                "Evaluation": 0.002,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "1 4 6"
+                }
+            },
+            "Step 2": {
+                "Step": "1 * 1 = 1 (left: 1 4 6) -> 6 - 4 = 2 (left: 1 2)",
+                "Pruning": null,
+                "Evaluation": 1.002,
+                "Resampling": {
+                    "Idx": "2.1",
+                    "Resampled state": "6 6"
+                }
+            },
+            "Step 3": {
+                "Step": "4 + 1 = 5 (left: 1 5 6) -> 5 + 1 = 6 (left: 6 6) -> 6 - 6 = 0 (left: 0)",
+                "Pruning": "NA",
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "1.3",
+                    "Resampled state": "36"
+                }
+            },
+            "Step 4": {
+                "Step": "4 + 1 = 5 (left: 1 5 6) -> 5 + 1 = 6 (left: 6 6) -> 6 * 6 = 36 (left: 36) -> There are no possible next steps with just the number 36.",
+                "Pruning": null
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "4 + 1 = 5 (left: 1 5 6)",
+                "Pruning": null,
+                "Evaluation": 60.0,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "1 5 6"
+                }
+            },
+            "Step 1": {
+                "Step": "4 + 1 = 5 (left: 1 5 6) -> 1 * 5 = 5 (left: 5 6)",
+                "Pruning": null,
+                "Evaluation": 0.002,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "1 5 6"
+                }
+            },
+            "Step 2": {
+                "Step": "4 + 1 = 5 (left: 1 5 6) -> 5 * 1 = 5 (left: 5 6)",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "2.1",
+                    "Resampled state": "6 6"
+                }
+            },
+            "Step 3": {
+                "Step": "4 + 1 = 5 (left: 1 5 6) -> 5 + 1 = 6 (left: 6 6) -> 6 * 6 = 36 (left: 36)",
+                "Pruning": "NA",
+                "Evaluation": 40.0,
+                "Resampling": {
+                    "Idx": "1.3",
+                    "Resampled state": "36"
+                }
+            },
+            "Step 4": {
+                "Step": "4 + 1 = 5 (left: 1 5 6) -> 5 + 1 = 6 (left: 6 6) -> 6 * 6 = 36 (left: 36) -> 36 * 2 = 72 (left: 72)",
+                "Pruning": "NA"
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "6 - 4 = 2 (left: 1 2 6)",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "1 5 6"
+                }
+            },
+            "Step 1": {
+                "Step": "4 + 1 = 5 (left: 1 5 6) -> 5 + 1 = 6 (left: 6 6)",
+                "Pruning": null,
+                "Evaluation": 20.002,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "1 4 6"
+                }
+            },
+            "Step 2": {
+                "Step": "1 * 1 = 1 (left: 1 4 6) -> Input: 3 5",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "2.1",
+                    "Resampled state": "6 6"
+                }
+            },
+            "Step 3": {
+                "Step": "4 + 1 = 5 (left: 1 5 6) -> 5 + 1 = 6 (left: 6 6) -> 6 * 6 = 36 (left: 36)",
+                "Pruning": "NA",
+                "Evaluation": 20.001,
+                "Resampling": {
+                    "Idx": "1.3",
+                    "Resampled state": "36"
+                }
+            },
+            "Step 4": {
+                "Step": "4 + 1 = 5 (left: 1 5 6) -> 5 + 1 = 6 (left: 6 6) -> 6 * 6 = 36 (left: 36) -> 36 / 2 = 18",
+                "Pruning": null
+            }
+        },
+        "Input": "1 1 4 6",
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": -1
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "1": {
+        "puzzle": "1 1 11 11",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 * 1 = 1 (left: 1 11 11)",
+                "Pruning": null,
+                "Evaluation": 0.002,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "1 1 11 11"
+                }
+            },
+            "Step 1": {
+                "Step": "1 * 1 = 1 (left: 1 11 11)",
+                "Pruning": null,
+                "Evaluation": 0.002,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "1 11 11"
+                }
+            },
+            "Step 2": {
+                "Step": "1 * 1 = 1 (left: 1 11 11) -> 11 - 1 = 10 (left: 10 11 11)",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "10 11"
+                }
+            },
+            "Step 3": {
+                "Step": "11 - 1 = 10 (left: 1 10 11) -> 11 / 1 = 11 (left: 10 11) -> 10 - 11 = -1 (left: -1)",
+                "Pruning": "NA",
+                "Evaluation": 0.0,
+                "Resampling": {
+                    "Idx": "1.3",
+                    "Resampled state": "21"
+                }
+            },
+            "Step 4": {
+                "Step": "11 - 1 = 10 (left: 1 10 11) -> 11 / 1 = 11 (left: 10 11) -> 10 + 11 = 21 (left: 21) -> 21 / 2 = 10.5",
+                "Pruning": null
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "1 * 1 = 1 (left: 1 11 11)",
+                "Pruning": null,
+                "Evaluation": 1.002,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "1 1 11 11"
+                }
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 11 11)",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "1 10 11"
+                }
+            },
+            "Step 2": {
+                "Step": "11 - 1 = 10 (left: 1 10 11) -> 11 / 1 = 11 (left: 10 11)",
+                "Pruning": null,
+                "Evaluation": 2.001,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "10 11"
+                }
+            },
+            "Step 3": {
+                "Step": "11 - 1 = 10 (left: 1 10 11) -> 11 / 1 = 11 (left: 10 11) -> 10 + 11 = 21 (left: 21)",
+                "Pruning": "NA",
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "1.3",
+                    "Resampled state": "21"
+                }
+            },
+            "Step 4": {
+                "Step": "11 - 1 = 10 (left: 1 10 11) -> 11 / 1 = 11 (left: 10 11) -> 10 + 11 = 21 (left: 21) -> 21 + 2 = 23",
+                "Pruning": null
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "11 - 1 = 10 (left: 1 10 11)",
+                "Pruning": null,
+                "Evaluation": 1.002,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "1 1 11 11"
+                }
+            },
+            "Step 1": {
+                "Step": "11 - 1 = 10 (left: 1 10 11)",
+                "Pruning": null,
+                "Evaluation": 1.002,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "1 11 11"
+                }
+            },
+            "Step 2": {
+                "Step": "1 * 1 = 1 (left: 1 11 11) -> 1 * 11 = 11 (left: 11 11)",
+                "Pruning": null,
+                "Evaluation": 0.002,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "10 11"
+                }
+            },
+            "Step 3": {
+                "Step": "11 - 1 = 10 (left: 1 10 11) -> 11 / 1 = 11 (left: 10 11) -> 10 - 11 = -1 (left: -1)",
+                "Pruning": "NA",
+                "Evaluation": 0.0,
+                "Resampling": {
+                    "Idx": "1.3",
+                    "Resampled state": "21"
+                }
+            },
+            "Step 4": {
+                "Step": "11 - 1 = 10 (left: 1 10 11) -> 11 / 1 = 11 (left: 10 11) -> 10 + 11 = 21 (left: 21) -> 21 * 3 = 63 (left: 63)",
+                "Pruning": "NA"
+            }
+        },
+        "Input": "1 1 11 11",
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            },
+            {
+                "r": -1
+            }
+        ]
+    },
+    "2": {
+        "puzzle": "1 1 3 8",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 + 1 = 2 (left: 2 3 8)",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "1 4 8"
+                }
+            },
+            "Step 1": {
+                "Step": "3 + 1 = 4 (left: 1 4 8) -> 8 / 4 = 2 (left: 1 2)",
+                "Pruning": null,
+                "Evaluation": 60.0,
+                "Resampling": {
+                    "Idx": "0.1",
+                    "Resampled state": "1 2"
+                }
+            },
+            "Step 2": {
+                "Step": "3 + 1 = 4 (left: 1 4 8) -> 8 / 4 = 2 (left: 1 2) -> 2 - 1 = 1 (left: 1)",
+                "Pruning": {
+                    "Idx": "0.1",
+                    "Pruned state": "1 2"
+                },
+                "Evaluation": 0.002,
+                "Resampling": {
+                    "Idx": "0.1",
+                    "Resampled state": "1 2"
+                }
+            },
+            "Step 3": {
+                "Step": "3 + 1 = 4 (left: 1 4 8) -> 8 / 4 = 2 (left: 1 2) -> 2 - 1 = 1 (left: 1)",
+                "Pruning": "NA",
+                "Evaluation": 0.002,
+                "Resampling": {
+                    "Idx": "0.3",
+                    "Resampled state": "1"
+                }
+            },
+            "Step 4": {
+                "Step": "3 + 1 = 4 (left: 1 4 8) -> 8 / 4 = 2 (left: 1 2) -> 2 - 1 = 1 (left: 1) -> There is only one number left, so there are no possible next steps. The final result is 1.",
+                "Pruning": null
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "3 + 1 = 4 (left: 1 4 8)",
+                "Pruning": null,
+                "Evaluation": 20.002,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "1 1 3 8"
+                }
+            },
+            "Step 1": {
+                "Step": "3 * 1 = 3 (left: 3 3 ",
+                "Pruning": null,
+                "Evaluation": 20.0,
+                "Resampling": {
+                    "Idx": "0.1",
+                    "Resampled state": "1 2"
+                }
+            },
+            "Step 2": {
+                "Step": "3 + 1 = 4 (left: 1 4 8) -> 8 / 4 = 2 (left: 1 2) -> 1 * 2 = 2 (left: 2)",
+                "Pruning": {
+                    "Idx": "0.1",
+                    "Pruned state": "1 2"
+                },
+                "Evaluation": 0.002,
+                "Resampling": {
+                    "Idx": "0.1",
+                    "Resampled state": "1 2"
+                }
+            },
+            "Step 3": {
+                "Step": "3 + 1 = 4 (left: 1 4 8) -> 8 / 4 = 2 (left: 1 2) -> 1 + 2 = 3",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "2.3",
+                    "Resampled state": "1"
+                }
+            },
+            "Step 4": {
+                "Step": "3 + 1 = 4 (left: 1 4 8) -> 8 / 4 = 2 (left: 1 2) -> 2 - 1 = 1 (left: 1) -> There are no possible next steps with only one number given.",
+                "Pruning": null
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "3 * 1 = 3 (left: 3 1 8)",
+                "Pruning": null,
+                "Evaluation": 60.0,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "3 1 8"
+                }
+            },
+            "Step 1": {
+                "Step": "3 * 1 = 3 (left: 3 1 8) -> 8 - 1 = 7 (left: 3 7)",
+                "Pruning": null,
+                "Evaluation": 0.0,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "3 1 8"
+                }
+            },
+            "Step 2": {
+                "Step": "3 * 1 = 3 (left: 3 1 8) -> 1 + 8 = 9 (left: 3 9)",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "0.1",
+                    "Resampled state": "1 2"
+                }
+            },
+            "Step 3": {
+                "Step": "3 + 1 = 4 (left: 1 4 8) -> 8 / 4 = 2 (left: 1 2) -> 2 - 1 = 1 (left: 1)",
+                "Pruning": "NA",
+                "Evaluation": 0.002,
+                "Resampling": {
+                    "Idx": "2.3",
+                    "Resampled state": "1"
+                }
+            },
+            "Step 4": {
+                "Step": "3 + 1 = 4 (left: 1 4 8) -> 8 / 4 = 2 (left: 1 2) -> 2 - 1 = 1 (left: 1) -> There are no possible next steps with just one number provided.",
+                "Pruning": null
+            }
+        },
+        "Input": "1 1 3 8",
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "3": {
+        "puzzle": "1 1 1 8",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 + 1 = 2 (left: 1 2 8)",
+                "Pruning": null,
+                "Evaluation": 60.0,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "1 2 8"
+                }
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 1 2 8) -> 2 + 8 = 10 (left:",
+                "Pruning": null,
+                "Evaluation": 1.0,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "1 2 8"
+                }
+            },
+            "Step 2": {
+                "Step": "1 + 1 = 2 (left: 1 2 8) -> 1 + 2 = 3 (left: 3 8)",
+                "Pruning": null,
+                "Evaluation": 60.0,
+                "Resampling": {
+                    "Idx": "1.1",
+                    "Resampled state": "3 8"
+                }
+            },
+            "Step 3": {
+                "Step": "1 + 1 = 2 (left: 2 1 8) -> 2 + 1 = 3 (left: 3 8) -> 8 - 3 = 5 (left: 5)",
+                "Pruning": "NA",
+                "Evaluation": 0.001,
+                "Resampling": {
+                    "Idx": "2.3",
+                    "Resampled state": "2.67"
+                }
+            },
+            "Step 4": {
+                "Step": "1 + 1 = 2 (left: 2 1 8) -> 2 + 1 = 3 (left: 3 8) -> 8 / 3 = 2.67 (left: 2.67) -> There is only one number given, so there are no possible next steps.",
+                "Pruning": null
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "1 + 1 = 2 (left: 1 2 8)",
+                "Pruning": null,
+                "Evaluation": 41.0,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "2 1 8"
+                }
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 1 8) -> 2 + 1 = 3 (left: 3 8)",
+                "Pruning": null,
+                "Evaluation": 60.0,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "2 1 8"
+                }
+            },
+            "Step 2": {
+                "Step": "1 + 1 = 2 (left: 2 1 8) -> 2 - 1 = 1 (left: 1 8)",
+                "Pruning": null,
+                "Evaluation": 60.0,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "1 8"
+                }
+            },
+            "Step 3": {
+                "Step": "1 + 1 = 2 (left: 2 1 8) -> 2 - 1 = 1 (left: 1 8) -> 1 + 8 = 9 (left: 9)",
+                "Pruning": "NA",
+                "Evaluation": 0.002,
+                "Resampling": {
+                    "Idx": "2.3",
+                    "Resampled state": "2.67"
+                }
+            },
+            "Step 4": {
+                "Step": "1 + 1 = 2 (left: 2 1 8) -> 2 + 1 = 3 (left: 3 8) -> 8 / 3 = 2.67 (left: 2.67) -> There is only one number provided, so there are no possible next steps.",
+                "Pruning": null
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "1 + 1 = 2 (left: 2 1 8)",
+                "Pruning": null,
+                "Evaluation": 60.0,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "1 2 8"
+                }
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 1 2 8) -> 1 * 2 = 2 (left: 2 8)",
+                "Pruning": null,
+                "Evaluation": 1.001,
+                "Resampling": {
+                    "Idx": "2.1",
+                    "Resampled state": "2 8"
+                }
+            },
+            "Step 2": {
+                "Step": "1 + 1 = 2 (left: 1 2 8) -> 1 * 2 = 2 (left: 2 8) -> 8 - 2 = 6 (left: 6)",
+                "Pruning": {
+                    "Idx": "1.1",
+                    "Pruned state": "3 8"
+                },
+                "Evaluation": 60.0,
+                "Resampling": {
+                    "Idx": "2.2",
+                    "Resampled state": "3 8"
+                }
+            },
+            "Step 3": {
+                "Step": "1 + 1 = 2 (left: 2 1 8) -> 2 + 1 = 3 (left: 3 8) -> 8 / 3 = 2.67 (left: 2.67)",
+                "Pruning": "NA",
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "1.3",
+                    "Resampled state": "9"
+                }
+            },
+            "Step 4": {
+                "Step": "1 + 1 = 2 (left: 2 1 8) -> 2 - 1 = 1 (left: 1 8) -> 1 + 8 = 9 (left: 9) -> 8 - 9 = -1 (left: -1)",
+                "Pruning": "NA"
+            }
+        },
+        "Input": "1 1 1 8",
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            },
+            {
+                "r": -1
+            }
+        ]
+    },
+    "4": {
+        "puzzle": "6 6 6 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "6 + 6 = 12 (left: 6 6 12)",
+                "Pruning": null,
+                "Evaluation": 41.0,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "6 6 36"
+                }
+            },
+            "Step 1": {
+                "Step": "6 * 6 = 36 (left: 6 6 36) -> 36 - 6 = 30 (left: 6 30)",
+                "Pruning": null,
+                "Evaluation": 20.0,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "6 6 12"
+                }
+            },
+            "Step 2": {
+                "Step": "6 + 6 = 12 (left: 6 6 12) -> 6 + 6 = 12 (left: 12 12)",
+                "Pruning": null,
+                "Evaluation": 20.002,
+                "Resampling": {
+                    "Idx": "0.2",
+                    "Resampled state": "12 12"
+                }
+            },
+            "Step 3": {
+                "Step": "6 + 6 = 12 (left: 6 6 12) -> 6 + 6 = 12 (left: 12 12) -> 12 - 12 = 0 (left: 0)",
+                "Pruning": {
+                    "Idx": "1.2",
+                    "Pruned state": "30 180"
+                },
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "30 180"
+                }
+            },
+            "Step 4": {
+                "Step": "6 * 6 = 36 (left: 6 6 36) -> 36 - 6 = 30 (left: 6 30) -> 6 * 30 = 180 (left: 30 180) -> 30 + 180 = 210 (left: 210)",
+                "Pruning": {
+                    "Idx": "1.3",
+                    "Pruned state": "Possible next steps:"
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "6 / 6 = 1 (left: 6 6 1 6)",
+                "Pruning": null,
+                "Evaluation": 2.001,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "6 6 12"
+                }
+            },
+            "Step 1": {
+                "Step": "6 + 6 = 12 (left: 6 6 12) -> 6 / 6 = 1 (left: 1 12)",
+                "Pruning": null,
+                "Evaluation": 0.002,
+                "Resampling": {
+                    "Idx": "0.1",
+                    "Resampled state": "6 30"
+                }
+            },
+            "Step 2": {
+                "Step": "6 * 6 = 36 (left: 6 6 36) -> 36 - 6 = 30 (left: 6 30) -> 6 * 30 = 180 (left: 30 180)",
+                "Pruning": null,
+                "Evaluation": 40.001,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "30 180"
+                }
+            },
+            "Step 3": {
+                "Step": "6 * 6 = 36 (left: 6 6 36) -> 36 - 6 = 30 (left: 6 30) -> 6 * 30 = 180 (left: 30 180) -> Possible next steps:",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "30 180"
+                }
+            },
+            "Step 4": {
+                "Step": "6 * 6 = 36 (left: 6 6 36) -> 36 - 6 = 30 (left: 6 30) -> 6 * 30 = 180 (left: 30 180) -> 30 * 180 = 5400 (left: 5400)",
+                "Pruning": {
+                    "Idx": "1.3",
+                    "Pruned state": "Possible next steps:"
+                }
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "6 * 6 = 36 (left: 6 6 36)",
+                "Pruning": null,
+                "Evaluation": 60.0,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "6 6 36"
+                }
+            },
+            "Step 1": {
+                "Step": "6 * 6 = 36 (left: 6 6 36) -> Possible next steps:",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "6 6 36"
+                }
+            },
+            "Step 2": {
+                "Step": "6 * 6 = 36 (left: 6 6 36) -> 6 * 6 = 36 (left: 6 36)",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "0.1",
+                    "Resampled state": "6 30"
+                }
+            },
+            "Step 3": {
+                "Step": "6 * 6 = 36 (left: 6 6 36) -> 36 - 6 = 30 (left: 6 30) -> 6 * 5 = 30 (left: 30)",
+                "Pruning": {
+                    "Idx": "1.2",
+                    "Pruned state": "30 180"
+                },
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "30 180"
+                }
+            },
+            "Step 4": {
+                "Step": "6 * 6 = 36 (left: 6 6 36) -> 36 - 6 = 30 (left: 6 30) -> 6 * 30 = 180 (left: 30 180) -> 180 - 30 = 150 (left: 150)",
+                "Pruning": {
+                    "Idx": "1.3",
+                    "Pruned state": "Possible next steps:"
+                }
+            }
+        },
+        "Input": "6 6 6 6",
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "5": {
+        "puzzle": "1 1 2 12",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "12 / 2 = 6 (left: 1 2 6)",
+                "Pruning": null,
+                "Evaluation": 3.0,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "1 1 2 12"
+                }
+            },
+            "Step 1": {
+                "Step": "12 - 2 = 10 (left: 1 2 ",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "2 2 12"
+                }
+            },
+            "Step 2": {
+                "Step": "1 + 1 = 2 (left: 2 2 12) -> 2 * 2 = 4 (left: 4 12)",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "1.1",
+                    "Resampled state": "1 2 12"
+                }
+            },
+            "Step 3": {
+                "Step": "1 + 1 = 2 (left: 2 2 12) -> 2 / 2 = 1 (left: 1 2 12) -> 1 + 2 = 3 (left: 3 12)",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "1.3",
+                    "Resampled state": "1 24"
+                }
+            },
+            "Step 4": {
+                "Step": "1 + 1 = 2 (left: 2 2 12) -> 2 / 2 = 1 (left: 1 2 12) -> 2 * 12 = 24 (left: 1 24) -> 24 - 24 = 0 (left: 0)",
+                "Pruning": "NA"
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "1 + 1 = 2 (left: 2 2 12)",
+                "Pruning": null,
+                "Evaluation": 40.001,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "2 2 12"
+                }
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 2 12) -> 2 / 2 = 1 (left: 1 2 12)",
+                "Pruning": null,
+                "Evaluation": 40.001,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "2 2 12"
+                }
+            },
+            "Step 2": {
+                "Step": "1 + 1 = 2 (left: 2 2 12) -> 2 * 2 = 4 (left: 4 12)",
+                "Pruning": null,
+                "Evaluation": 20.001,
+                "Resampling": {
+                    "Idx": "1.1",
+                    "Resampled state": "1 2 12"
+                }
+            },
+            "Step 3": {
+                "Step": "1 + 1 = 2 (left: 2 2 12) -> 2 / 2 = 1 (left: 1 2 12) -> 2 * 12 = 24 (left: 1 24)",
+                "Pruning": null,
+                "Evaluation": 60.0,
+                "Resampling": {
+                    "Idx": "1.3",
+                    "Resampled state": "1 24"
+                }
+            },
+            "Step 4": {
+                "Step": "1 + 1 = 2 (left: 2 2 12) -> 2 / 2 = 1 (left: 1 2 12) -> 2 * 12 = 24 (left: 1 24) -> 24 / 1 = 24 (left: 24)",
+                "Pruning": "NA"
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "1 + 1 = 2 (left: 2 2 12)",
+                "Pruning": null,
+                "Evaluation": 21.001,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "1 1 2 12"
+                }
+            },
+            "Step 1": {
+                "Step": "1 * 1 = 1 (left: 1 2 12)",
+                "Pruning": null,
+                "Evaluation": 60.0,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "2 2 12"
+                }
+            },
+            "Step 2": {
+                "Step": "1 + 1 = 2 (left: 2 2 12) -> 12 - 2 = 10 (left: 2 10)",
+                "Pruning": null,
+                "Evaluation": 3.0,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "4 12"
+                }
+            },
+            "Step 3": {
+                "Step": "1 + 1 = 2 (left: 2 2 12) -> 2 * 2 = 4 (left: 4 12) -> 4 * 12 = 48 (left: 48)",
+                "Pruning": "NA",
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "1.3",
+                    "Resampled state": "1 24"
+                }
+            },
+            "Step 4": {
+                "Step": "1 + 1 = 2 (left: 2 2 12) -> 2 / 2 = 1 (left: 1 2 12) -> 2 * 12 = 24 (left: 1 24) -> 1 + 24 = 25 (left: 25)",
+                "Pruning": "NA"
+            }
+        },
+        "Input": "1 1 2 12",
+        "Verifications": [
+            {
+                "r": -1
+            },
+            {
+                "r": -1
+            },
+            {
+                "r": -1
+            }
+        ]
+    },
+    "6": {
+        "puzzle": "1 2 2 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "2 * 2 = 4 (left: 1 4 ",
+                "Pruning": null,
+                "Evaluation": 0.001,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "1 4 6"
+                }
+            },
+            "Step 1": {
+                "Step": "2 * 2 = 4 (left: 1 4 6) -> 6 - 4 = 2 (left: 1 2)",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "1 4 6"
+                }
+            },
+            "Step 2": {
+                "Step": "2 * 2 = 4 (left: 1 4 6) -> 1 * 4 = 4 (left: 4)",
+                "Pruning": {
+                    "Idx": "2.1",
+                    "Pruned state": "5 6"
+                },
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "0.1",
+                    "Resampled state": "1 2"
+                }
+            },
+            "Step 3": {
+                "Step": "2 * 2 = 4 (left: 1 4 6) -> 6 - 4 = 2 (left: 1 2) -> 1 * 2 = 2 (left: 2)",
+                "Pruning": "NA",
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "2.3",
+                    "Resampled state": "3"
+                }
+            },
+            "Step 4": {
+                "Step": "2 * 2 = 4 (left: 1 4 6) -> 6 - 4 = 2 (left: 1 2) -> 1 + 2 = 3 (left: 3) -> 3 - 8 = -5 (left: -5)",
+                "Pruning": "NA"
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "6 / 2 = 3 (left: 1 2 3)",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "1 2 2 6"
+                }
+            },
+            "Step 1": {
+                "Step": "6 - 2 = 4 (left: 1 2 4)",
+                "Pruning": null,
+                "Evaluation": 1.002,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "1 4 6"
+                }
+            },
+            "Step 2": {
+                "Step": "2 * 2 = 4 (left: 1 4 6) -> 6 - 4 = 2 (left: 2)",
+                "Pruning": {
+                    "Idx": "0.1",
+                    "Pruned state": "1 2"
+                },
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "1 2"
+                }
+            },
+            "Step 3": {
+                "Step": "2 * 2 = 4 (left: 1 4 6) -> 6 - 4 = 2 (left: 1 2) -> 2 - 1 = 1 (left: 1)",
+                "Pruning": "NA",
+                "Evaluation": 0.002,
+                "Resampling": {
+                    "Idx": "0.3",
+                    "Resampled state": "2"
+                }
+            },
+            "Step 4": {
+                "Step": "2 * 2 = 4 (left: 1 4 6) -> 6 - 4 = 2 (left: 1 2) -> 1 * 2 = 2 (left: 2) -> No possible next steps as there is only one number given.",
+                "Pruning": null
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "2 * 2 = 4 (left: 1 4 6)",
+                "Pruning": null,
+                "Evaluation": 60.0,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "1 4 6"
+                }
+            },
+            "Step 1": {
+                "Step": "2 * 2 = 4 (left: 1 4 6) -> 1 + 4 = 5 (left: 5 6)",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "1 4 6"
+                }
+            },
+            "Step 2": {
+                "Step": "2 * 2 = 4 (left: 1 4 6) -> 4 / 1 = ",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "1 2"
+                }
+            },
+            "Step 3": {
+                "Step": "2 * 2 = 4 (left: 1 4 6) -> 6 - 4 = 2 (left: 1 2) -> 1 + 2 = 3 (left: 3)",
+                "Pruning": "NA",
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "2.3",
+                    "Resampled state": "3"
+                }
+            },
+            "Step 4": {
+                "Step": "2 * 2 = 4 (left: 1 4 6) -> 6 - 4 = 2 (left: 1 2) -> 1 + 2 = 3 (left: 3) -> 3 / 8 = 0.375 (left: 0.375 8)",
+                "Pruning": null
+            }
+        },
+        "Input": "1 2 2 6",
+        "Verifications": [
+            {
+                "r": -1
+            },
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "7": {
+        "puzzle": "1 1 10 12",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "10 + 1 = 11 (left: 1 11 12)",
+                "Pruning": null,
+                "Evaluation": 21.001,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "1 1 10 12"
+                }
+            },
+            "Step 1": {
+                "Step": "1 * 1 = 1 (left: 1 10 12)",
+                "Pruning": null,
+                "Evaluation": 1.0,
+                "Resampling": {
+                    "Idx": "2.1",
+                    "Resampled state": "1 2 12"
+                }
+            },
+            "Step 2": {
+                "Step": "12 - 10 = 2 (left: 1 2 12) -> 12 - 2 = 10 (left: 1 10)",
+                "Pruning": null,
+                "Evaluation": 41.0,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "1 24"
+                }
+            },
+            "Step 3": {
+                "Step": "12 - 10 = 2 (left: 1 2 12) -> 2 * 12 = 24 (left: 1 24) -> 24 - 1 = 23 (left: 23)",
+                "Pruning": "NA",
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "1.3",
+                    "Resampled state": "27 27"
+                }
+            },
+            "Step 4": {
+                "Step": "12 - 10 = 2 (left: 1 2 12) -> 12 - 2 = 10 (left: 1 10) -> 9 * 3 = 27 (left: 27 27) -> 27 / 27 = 1 (left: 1)",
+                "Pruning": "NA"
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "1 * 1 = 1 (left: 1 10 12)",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "2 10 12"
+                }
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 10 12) -> 10 / 2 = 5 (left: 5 10 12)",
+                "Pruning": null,
+                "Evaluation": 1.001,
+                "Resampling": {
+                    "Idx": "2.1",
+                    "Resampled state": "1 2 12"
+                }
+            },
+            "Step 2": {
+                "Step": "12 - 10 = 2 (left: 1 2 12) -> 2 * 12 = 24 (left: 1 24)",
+                "Pruning": null,
+                "Evaluation": 60.0,
+                "Resampling": {
+                    "Idx": "0.2",
+                    "Resampled state": "1 10"
+                }
+            },
+            "Step 3": {
+                "Step": "12 - 10 = 2 (left: 1 2 12) -> 12 - 2 = 10 (left: 1 10) -> 9 * 3 = 27 (left: 27 27)",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "1.3",
+                    "Resampled state": "27 27"
+                }
+            },
+            "Step 4": {
+                "Step": "12 - 10 = 2 (left: 1 2 12) -> 12 - 2 = 10 (left: 1 10) -> 9 * 3 = 27 (left: 27 27) -> 27 + 27 = 54 (left: 54)",
+                "Pruning": "NA"
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "1 + 1 = 2 (left: 2 10 12)",
+                "Pruning": null,
+                "Evaluation": 20.002,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "1 1 10 12"
+                }
+            },
+            "Step 1": {
+                "Step": "12 - 10 = 2 (left: 1 2 12)",
+                "Pruning": null,
+                "Evaluation": 60.0,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "2 10 12"
+                }
+            },
+            "Step 2": {
+                "Step": "1 + 1 = 2 (left: 2 10 12) -> 10 * 2 = 20 (left: 2 20 12)",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "1 24"
+                }
+            },
+            "Step 3": {
+                "Step": "12 - 10 = 2 (left: 1 2 12) -> 2 * 12 = 24 (left: 1 24) -> 1 + 24 = 25 (left: 25)",
+                "Pruning": "NA",
+                "Evaluation": 0.002,
+                "Resampling": {
+                    "Idx": "1.3",
+                    "Resampled state": "27 27"
+                }
+            },
+            "Step 4": {
+                "Step": "12 - 10 = 2 (left: 1 2 12) -> 12 - 2 = 10 (left: 1 10) -> 9 * 3 = 27 (left: 27 27) -> 27 + 27 = 54 (left: 54)",
+                "Pruning": "NA"
+            }
+        },
+        "Input": "1 1 10 12",
+        "Verifications": [
+            {
+                "r": -1
+            },
+            {
+                "r": -1
+            },
+            {
+                "r": -1
+            }
+        ]
+    },
+    "8": {
+        "puzzle": "2 2 10 10",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "2 + 2 = 4 (left: 4 10 10)",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "2 2 10 10"
+                }
+            },
+            "Step 1": {
+                "Step": "10 * 2 = 20 (left: 2 10 ",
+                "Pruning": null,
+                "Evaluation": 1.0,
+                "Resampling": {
+                    "Idx": "1.1",
+                    "Resampled state": "2 10 "
+                }
+            },
+            "Step 2": {
+                "Step": "10 - 2 = 8 (left: 2 10  -> 2 + 10 = 12 (left: 10)",
+                "Pruning": "NA",
+                "Evaluation": 0.001,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "6 10"
+                }
+            },
+            "Step 3": {
+                "Step": "2 + 2 = 4 (left: 4 10 10) -> 10 - 4 = 6 (left: 6 10) -> 10 - 6 = 4 (left: 4 10)",
+                "Pruning": null,
+                "Evaluation": 20.001,
+                "Resampling": {
+                    "Idx": "0.3",
+                    "Resampled state": "4 10"
+                }
+            },
+            "Step 4": {
+                "Step": "2 + 2 = 4 (left: 4 10 10) -> 10 - 4 = 6 (left: 6 10) -> 10 - 6 = 4 (left: 4 10) -> 4 / 10 = 0.4 (left: 0.4 10)",
+                "Pruning": null
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "10 - 2 = 8 (left: 2 8 10)",
+                "Pruning": null,
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "2 10 "
+                }
+            },
+            "Step 1": {
+                "Step": "10 - 2 = 8 (left: 2 10  -> 10 / 2 = 5 (left: 5)",
+                "Pruning": {
+                    "Idx": "2.0",
+                    "Pruned state": "2 10 "
+                },
+                "Evaluation": 2.0,
+                "Resampling": {
+                    "Idx": "2.1",
+                    "Resampled state": "4 10 10"
+                }
+            },
+            "Step 2": {
+                "Step": "2 + 2 = 4 (left: 4 10 10) -> 10 - 4 = 6 (left: 6 10)",
+                "Pruning": null,
+                "Evaluation": 2.001,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "6 10"
+                }
+            },
+            "Step 3": {
+                "Step": "2 + 2 = 4 (left: 4 10 10) -> 10 - 4 = 6 (left: 6 10) -> 6 + 10 = 16 (left: 16)",
+                "Pruning": "NA",
+                "Evaluation": 0.002,
+                "Resampling": {
+                    "Idx": "0.3",
+                    "Resampled state": "4 10"
+                }
+            },
+            "Step 4": {
+                "Step": "2 + 2 = 4 (left: 4 10 10) -> 10 - 4 = 6 (left: 6 10) -> 10 - 6 = 4 (left: 4 10) -> 10 / 4 = 2.5 (left: 2.5)  ",
+                "Pruning": "NA"
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "10 - 2 = 8 (left: 2 10 ",
+                "Pruning": null,
+                "Evaluation": 2.0,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "2 2 10 10"
+                }
+            },
+            "Step 1": {
+                "Step": "2 + 2 = 4 (left: 4 10 10)",
+                "Pruning": null,
+                "Evaluation": 21.001,
+                "Resampling": {
+                    "Idx": "2.1",
+                    "Resampled state": "4 10 10"
+                }
+            },
+            "Step 2": {
+                "Step": "2 + 2 = 4 (left: 4 10 10) -> 10 / 4 = 2.5 (left",
+                "Pruning": null,
+                "Evaluation": 0.002,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "6 10"
+                }
+            },
+            "Step 3": {
+                "Step": "2 + 2 = 4 (left: 4 10 10) -> 10 - 4 = 6 (left: 6 10) -> 10 - 6 = 4 (left: 4)",
+                "Pruning": "NA",
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "0.3",
+                    "Resampled state": "4 10"
+                }
+            },
+            "Step 4": {
+                "Step": "2 + 2 = 4 (left: 4 10 10) -> 10 - 4 = 6 (left: 6 10) -> 10 - 6 = 4 (left: 4 10) -> 10 / 4 = 2.5 (left: 2.5)",
+                "Pruning": "NA"
+            }
+        },
+        "Input": "2 2 10 10",
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": -1
+            },
+            {
+                "r": -1
+            }
+        ]
+    },
+    "9": {
+        "puzzle": "1 1 1 12",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "12 - 1 = 11 (left: 1 1 11)",
+                "Pruning": null,
+                "Evaluation": 1.002,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "1 1 1 12"
+                }
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 1 2 12)",
+                "Pruning": null,
+                "Evaluation": 60.0,
+                "Resampling": {
+                    "Idx": "0.1",
+                    "Resampled state": "1 2 12"
+                }
+            },
+            "Step 2": {
+                "Step": "1 + 1 = 2 (left: 1 2 12) -> 1 * 2 = 2 (left: 2 12)",
+                "Pruning": null,
+                "Evaluation": 60.0,
+                "Resampling": {
+                    "Idx": "0.2",
+                    "Resampled state": "2 12"
+                }
+            },
+            "Step 3": {
+                "Step": "1 + 1 = 2 (left: 1 2 12) -> 1 * 2 = 2 (left: 2 12) -> 12 / 2 = 6 (left: 6)",
+                "Pruning": "NA",
+                "Evaluation": 0.002,
+                "Resampling": {
+                    "Idx": "0.3",
+                    "Resampled state": "6"
+                }
+            },
+            "Step 4": {
+                "Step": "1 + 1 = 2 (left: 1 2 12) -> 1 * 2 = 2 (left: 2 12) -> 12 / 2 = 6 (left: 6) -> 8 - 6 = 2 (left: 2 8)",
+                "Pruning": null
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "1 + 1 = 2 (left: 1 2 12)",
+                "Pruning": null,
+                "Evaluation": 60.0,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "1 2 12"
+                }
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 1 2 12) -> 12 - 2 = 10 (left: 1 10)",
+                "Pruning": null,
+                "Evaluation": 60.0,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "1 1 12"
+                }
+            },
+            "Step 2": {
+                "Step": "1 * 1 = 1 (left: 1 1 12) -> 1 / 12 = 0.08333333333333333 (left: 0.08333333333333333 ",
+                "Pruning": null,
+                "Evaluation": 20.0,
+                "Resampling": {
+                    "Idx": "1.1",
+                    "Resampled state": "1 10"
+                }
+            },
+            "Step 3": {
+                "Step": "1 + 1 = 2 (left: 1 2 12) -> 12 - 2 = 10 (left: 1 10) -> 1 * 10 = 10 (left: 10)",
+                "Pruning": "NA",
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "2.3",
+                    "Resampled state": "14"
+                }
+            },
+            "Step 4": {
+                "Step": "1 + 1 = 2 (left: 1 2 12) -> 1 * 2 = 2 (left: 2 12) -> 2 + 12 = 14 (left: 14) -> No more possible next steps as there is only one number left.",
+                "Pruning": null
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "1 * 1 = 1 (left: 1 1 12)",
+                "Pruning": null,
+                "Evaluation": 20.002,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "1 2 12"
+                }
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 1 2 12) -> 2 + 1 = 3 (left: 3 12)",
+                "Pruning": null,
+                "Evaluation": 20.002,
+                "Resampling": {
+                    "Idx": "0.1",
+                    "Resampled state": "1 2 12"
+                }
+            },
+            "Step 2": {
+                "Step": "1 + 1 = 2 (left: 1 2 12) -> 2 + 12 = 14 (left: 1 14)",
+                "Pruning": null,
+                "Evaluation": 21.001,
+                "Resampling": {
+                    "Idx": "0.2",
+                    "Resampled state": "2 12"
+                }
+            },
+            "Step 3": {
+                "Step": "1 + 1 = 2 (left: 1 2 12) -> 1 * 2 = 2 (left: 2 12) -> 2 + 12 = 14 (left: 14)",
+                "Pruning": "NA",
+                "Evaluation": 0.003,
+                "Resampling": {
+                    "Idx": "2.3",
+                    "Resampled state": "14"
+                }
+            },
+            "Step 4": {
+                "Step": "1 + 1 = 2 (left: 1 2 12) -> 1 * 2 = 2 (left: 2 12) -> 2 + 12 = 14 (left: 14) -> There are no possible next steps as there is only one number left.",
+                "Pruning": null
+            }
+        },
+        "Input": "1 1 1 12",
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "Cost": {
+        "input_tokens": 52669,
+        "output_tokens": 17996.000000000004,
+        "total_cost": 0.0533285
+    }
+}

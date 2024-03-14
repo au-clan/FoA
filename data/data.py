@@ -13,7 +13,7 @@ class GameOf24Data:
         elif set == "train":
             indices = list(range(850,875)) + list(range(1025,1050))
         elif set == "validation":
-            incices = list(range(875,900)) + list(range(1050,1075))
+            indices = list(range(875,900)) + list(range(1050,1075))
         elif set == "test":
             indices = list(range(900,1000))
         else:

@@ -24,12 +24,12 @@ from async_implementation.agents.gameof24 import GameOf24Agent
 from async_implementation.states.gameof24 import GameOf24State
 from async_implementation.resampling.resampler import Resampler
 from data.data import GameOf24Data
-from utils import create_folder, email_notification, compare_json_files
+from utils import create_folder, email_notification, create_box
 
 logger = logging.getLogger("experiments")
 
 logger.setLevel(logging.DEBUG) # Order : debug < info < warning < error < critical
-log_folder = f"logs/{datetime.now().date()}/gameof24/{datetime.now().strftime('%H')}:00/" # Folder in which logs will be saved (organized daily)
+log_folder = f"logs/gridsearch/gameof24/" # Folder in which logs will be saved (organized daily)
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
@@ -142,8 +142,10 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
         if len(temp_state_records) > 0:
             new_states, pruned_indices = resampler.resample(temp_state_records, len(invalid_state_indices), foa_options["resampling_method"])
             states = [new_states.pop(0) if i in invalid_state_indices else state for i, state in enumerate(states)]
+            invalids_resolved = True
         else:
             pruned_indices = [None] * len(invalid_state_indices)
+            invalids_resolved = False
 
         # Log - Pruning
         for agent_id in range(num_agents):
@@ -152,7 +154,7 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
                 if pruned_indice is None:
                     log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": "NA"})
                 else:
-                    log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning" : {"Idx":temp_state_records[pruned_indice][0], "Current state": temp_state_records[pruned_indice][2].steps[-1]}})
+                    log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning" : {"Idx":temp_state_records[pruned_indice][0], "Pruned state": temp_state_records[pruned_indice][2].current_state}})
             else:
                 log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": None})
 
@@ -173,7 +175,8 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
 
             # Update records
             for i, (state, value) in enumerate(zip(states, values)):
-                state_records.append((f"{step}.{i}", value, state))
+                if i not in invalid_state_indices or invalids_resolved:
+                    state_records.append((f"{i}.{step}", value, state))
             
             # Log - Evaluation
             for agent_id, value in enumerate(values):
@@ -184,7 +187,7 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
             
             # Log - Resampling
             for agent_id, resampled_idx in enumerate(resampled_indices):
-                log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Resampling": {"Idx":state_records[resampled_idx][0], "Current state": state_records[resampled_idx][2].steps[-1]}})
+                log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Resampling": {"Idx":state_records[resampled_idx][0], "Resampled state": state_records[resampled_idx][2].current_state}})
 
     verifications = [GameOf24Agent.verify(result) for result in states]
     log[puzzle_idx]["Input"] = puzzle
@@ -207,7 +210,7 @@ async def run(run_options: dict, foa_options: dict):
     puzzle_idxs, puzzles = data.get_data(run_options["set"])
 
     ### Debugging
-    puzzle_idxs, puzzles = puzzle_idxs[:1], puzzles[:1]
+    #puzzle_idxs, puzzles = puzzle_idxs[:1], puzzles[:1]
 
     # Barriers for each puzzle experiment
     barrier = asyncio.Barrier(len(puzzles))
@@ -221,7 +224,10 @@ async def run(run_options: dict, foa_options: dict):
     logs = [log for (game, log) in results]
     for l in logs:
         log.update(l)
+    
+    print()
     log["Cost"] = api.cost(verbose=True)
+    print()
 
     # Save merged logs
     with open(log_folder + log_file, 'w+') as f:
@@ -241,9 +247,10 @@ def parse_args():
 
     args.add_argument("--set", type=str, choices=["mini", "train", "validation", "test"], default="mini")
     args.add_argument("--n_agents", type=int, default=5)
-    args.add_argument("--back_coef", type=float, default=0.6)
+    args.add_argument("--backtrack", type=float, default=0.6)
     args.add_argument("--max_steps", type=int, default=10)
     args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile"], default="linear")
+    args.add_argument("--k", type=int, default=1)
     args = args.parse_args()
     return args
 
@@ -253,10 +260,10 @@ args = parse_args()
 # Select parameters
 set = args.set                             # Set of data to be used
 num_agents = args.n_agents                 # Number of agents
-k = 1                                      # Resampling every <k> steps
+k = args.k                                 # Resampling every <k> steps
 origin_value = 20 * 3                      # The evaluation of the origin state #TODO: Change 3 to num_evaluations
 num_steps = args.max_steps                 # Total number of steps FoA executes
-backtrack = args.back_coef                 # Backtrack decaying coefficient
+backtrack = args.backtrack                 # Backtrack decaying coefficient
 resampling_method = args.resampling        # Resampling method
 
 
@@ -267,21 +274,29 @@ run_options = {
 }
 
 foa_options = {
-    "num_agents": num_agents,
+    "n_agents": num_agents,
     "k": k,
     "origin_value": origin_value,
-    "num_steps": num_steps,
+    "max_steps": num_steps,
     "backtrack": backtrack,
     "resampling_method": resampling_method
 }
 
+
+run_message = f"""Run options :
+    task : gameof24
+    set : {set}
+    num_agents : {num_agents}
+    k : {k}
+    num_steps : {num_steps}
+    backtrack : {backtrack}
+"""
+print("\n"+create_box(run_message)+"\n")
+
+
 # Run
 results = asyncio.run(run(run_options, foa_options))
-print(f"File name : {log_file}")
-f1 = "logs/2024-03-13/gameof24/18:00/"+log_file
-f2 = "logs/same_experiment_logs/"+log_file
-same = compare_json_files(f1, f2)
-print("Files are the same:", same)
+
 
 # Accuracy computation
 n_success = 0
@@ -292,10 +307,12 @@ for game in results:
 
 # Accuracy
 accuracy = n_success * 100 / len(results)
-print(f"Accuracy : {accuracy:.2f}")
+print(f"Accuracy : {accuracy:.2f}\n")
+
+print(f"File name : {log_file}\n\n\n\n\n")
 
 # Send email notification
-send_email = False
+send_email = True
 if send_email:
     subject = log_file
     message = f"Accuracy : {accuracy}"
@@ -304,3 +321,5 @@ if send_email:
     except:
         print("Email not sent")
         pass
+
+

@@ -64,3 +64,18 @@ def compare_json_files(file_path1, file_path2):
     except json.JSONDecodeError:
         print("One or both files is not valid JSON.")
         return False
+    
+def create_box(input_string):
+    """
+    Creates a box around the input string and returns it.
+    """
+    lines = input_string.split('\n')
+    max_length = max(len(line) for line in lines)
+    border = '+' + '-' * (max_length + 2) + '+'
+
+    boxed_string = border + '\n'
+    for line in lines:
+        boxed_string += '| ' + line.ljust(max_length) + ' |\n'
+    boxed_string += border
+
+    return boxed_string
