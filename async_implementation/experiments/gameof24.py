@@ -65,8 +65,8 @@ data = GameOf24Data()
 # for now I'm keeping it here, for easier debugging
 # async def foa_gameof24(puzzle_idx: int, num_agents=3, k=2, backtrack=0.8):
 async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
-    num_agents = foa_options["num_agents"]
-    num_steps = foa_options["num_steps"]
+    num_agents = foa_options["n_agents"]
+    num_steps = foa_options["max_steps"]
 
     # Use batching API
     step_api = BatchingAPI(api, limiter, batch_size=num_agents, timeout=10)
@@ -183,7 +183,7 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
                 log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Evaluation": value})
             
             # Resampling
-            states, resampled_indices = resampler.resample(state_records, foa_options["num_agents"], foa_options["resampling_method"])
+            states, resampled_indices = resampler.resample(state_records, foa_options["n_agents"], foa_options["resampling_method"])
             
             # Log - Resampling
             for agent_id, resampled_idx in enumerate(resampled_indices):
