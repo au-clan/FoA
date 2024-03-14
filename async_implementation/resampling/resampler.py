@@ -11,7 +11,7 @@ class Resampler:
     def __init__(self, randomness: int):
         self.randomness = randomness 
 
-    def resample(self, state_records, n_picks, resampling_method, include_init=True):
+    def resample(self, state_records, n_picks, resampling_method):
         """
         Resample states based on their values.
 
@@ -35,25 +35,13 @@ class Resampler:
         if resampling_method not in methods:
             raise ValueError(f"Invalid resampling method: {resampling_method}\nValid methods: {methods.keys()}")
         
-        if n_picks == 0:
+        if n_picks == 0 or len(state_records) == 0:
             return [], []
-        
-        if not include_init:
-            # Only consider states after the initial state
-            state_records = state_records.copy()
-            init_state = state_records[0]
-            state_records = state_records[1:]
-            
 
         # Get probabilities for each state based on values
         probabilities = methods[resampling_method]([value for _, value, _ in state_records])
         np.random.seed(self.randomness)
         resampled_indices = np.random.choice(range(len(state_records)), size=n_picks, p=probabilities, replace=True).tolist()
-
-        if not include_init:
-            # Add 1 to indices to account for the initial state
-            resampled_indices = [i+1 for i in resampled_indices]
-            state_records = [init_state] + state_records
         
         # Resample states based on resampled_indices
         random.seed(self.randomness)

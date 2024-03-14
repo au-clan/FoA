@@ -65,16 +65,22 @@ data = GameOf24Data()
 # for now I'm keeping it here, for easier debugging
 # async def foa_gameof24(puzzle_idx: int, num_agents=3, k=2, backtrack=0.8):
 async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
+    num_agents = foa_options["num_agents"]
+    num_steps = foa_options["num_steps"]
+
     # Use batching API
-    step_api = BatchingAPI(api, limiter, batch_size=foa_options["num_agents"], timeout=10)
-    eval_api = BatchingAPI(api, limiter, batch_size=foa_options["num_agents"]*3, timeout=10)
+    step_api = BatchingAPI(api, limiter, batch_size=num_agents, timeout=10)
+    eval_api = BatchingAPI(api, limiter, batch_size=num_agents*3, timeout=10)
 
     randomness = puzzle_idx
     random.seed(randomness)
 
     resampler = Resampler(randomness)
     
-    log = {puzzle_idx:{"puzzle": puzzle}}
+    # Set up log
+    log = {}
+    log[puzzle_idx] = {"puzzle": puzzle}
+    log[puzzle_idx].update({f"Agent {i}": {} for i in range(num_agents)})
 
 
     # State identifier shows the step and the agent where the state was visited eg. 0.1 means step 0, agent 1
@@ -84,20 +90,20 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
     # set up states
     states = []
 
-    for _ in range(foa_options["num_agents"]):
+    for _ in range(num_agents):
         states.append(GameOf24State(puzzle=puzzle, current_state=puzzle, steps=[], randomness=random.randint(0, 1000)))
 
     solution_found = False ### DEBUG: Just for now until I figure out something better
-    num_steps = foa_options["num_steps"]
     for step in range(num_steps):
 
         ### DEBUG: Just for now until I figure out something better
         if solution_found:
             await barrier.wait()
             continue
-        
-        #print(f"Step {step}")
-        log[puzzle_idx][f"Step {step}"] = {}
+
+        # Log - Set up log of each agent for current step
+        for agent_id in range(num_agents):
+            log[puzzle_idx][f"Agent {agent_id}"].update({f"Step {step}": {}})
 
         # Step : make one step for each state
         agent_coroutines = []
@@ -106,8 +112,17 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
         states = await asyncio.gather(*agent_coroutines)
 
         # Log steps
-        log[puzzle_idx][f"Step {step}"]["steps"] = [" || ".join(state.steps) for state in states]
+        for agent_id, state in enumerate(states):
+            log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Step": f"{' -> '.join(state.steps)}"})
+
+        # After each step, the api should be empty
         assert len(step_api.futures) == 0, f"API futures should be empty, but are {len(step_api.futures)}"
+
+        # Variable state_records are only used for resampling. 
+        # Therefore, we can delete the states that cannot find a solution because there are not enough steps remaining
+        foa_remaining_steps = num_steps - (step + 1)
+        task_required_steps = 4 # Minimum number of steps to solve the puzzle (min=max for gameof24) -> TODO: Put this somewhere better
+        state_records = [(idx, value, state) for idx, value, state in state_records if  foa_remaining_steps >= task_required_steps - len(state.steps) ]
 
         # Depreciation : old state values are decayed by the backtrack coefficient
         state_records = [(idx, value*foa_options["backtrack"], state) for idx, value, state in state_records]
@@ -120,13 +135,26 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
             await barrier.wait()
             continue                                                        # {"r":0} Not finished                
 
-        # Pruning # TODO : Pruned states should NOT be re-evaluated. 
+        # Pruning # TODO : Pruned states should NOT be re-evaluated ? -> Not sure about this
+        # No point in incluing init_state in pruning
+        temp_state_records = [(idx, value, state) for idx, value, state in state_records if state.steps!=[]]
         invalid_state_indices = [i for i, verification in enumerate(verifications) if verification["r"] == -1]
-        new_states, pruned_indices = resampler.resample(state_records, len(invalid_state_indices), foa_options["resampling_method"], include_init=False)
-        states = [new_states.pop(0) if i in invalid_state_indices else state for i, state in enumerate(states)]
+        if len(temp_state_records) > 0:
+            new_states, pruned_indices = resampler.resample(temp_state_records, len(invalid_state_indices), foa_options["resampling_method"])
+            states = [new_states.pop(0) if i in invalid_state_indices else state for i, state in enumerate(states)]
+        else:
+            pruned_indices = [None] * len(invalid_state_indices)
 
-        # Log pruning
-        log[puzzle_idx][f"Step {step}"]["Pruning"] = [f"{i}<-{state_records[j][0]}" for i, j in zip(invalid_state_indices, pruned_indices)]
+        # Log - Pruning
+        for agent_id in range(num_agents):
+            if agent_id in invalid_state_indices:
+                pruned_indice = pruned_indices.pop(0)
+                if pruned_indice is None:
+                    log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": "NA"})
+                else:
+                    log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning" : {"Idx":temp_state_records[pruned_indice][0], "Current state": temp_state_records[pruned_indice][2].steps[-1]}})
+            else:
+                log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": None})
 
         # Synchronize experiments
         ### DEBUG: Normally syncrhonisation is done before resampling not after every step
@@ -147,19 +175,21 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
             for i, (state, value) in enumerate(zip(states, values)):
                 state_records.append((f"{step}.{i}", value, state))
             
-            # Logging
-            log[puzzle_idx][f"Step {step}"]["Evaluation"] = [value for _, value, _ in state_records[-foa_options["num_agents"]:]]
+            # Log - Evaluation
+            for agent_id, value in enumerate(values):
+                log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Evaluation": value})
             
             # Resampling
             states, resampled_indices = resampler.resample(state_records, foa_options["num_agents"], foa_options["resampling_method"])
             
-            # Logging
-            log[puzzle_idx][f"Step {step}"]["Resampling"] = [f"{i} <- {state_records[j][0]}" for i, j in enumerate(resampled_indices)]
-
+            # Log - Resampling
+            for agent_id, resampled_idx in enumerate(resampled_indices):
+                log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Resampling": {"Idx":state_records[resampled_idx][0], "Current state": state_records[resampled_idx][2].steps[-1]}})
 
     verifications = [GameOf24Agent.verify(result) for result in states]
     log[puzzle_idx]["Input"] = puzzle
     log[puzzle_idx]["Verifications"] = verifications
+
     return states, log
 
 
@@ -177,7 +207,7 @@ async def run(run_options: dict, foa_options: dict):
     puzzle_idxs, puzzles = data.get_data(run_options["set"])
 
     ### Debugging
-    #puzzle_idxs, puzzles = puzzle_idxs[:1], puzzles[:1]
+    puzzle_idxs, puzzles = puzzle_idxs[:1], puzzles[:1]
 
     # Barriers for each puzzle experiment
     barrier = asyncio.Barrier(len(puzzles))
@@ -209,7 +239,7 @@ async def run(run_options: dict, foa_options: dict):
 def parse_args():
     args = argparse.ArgumentParser()
 
-    args.add_argument("--set", type=str, choices=["mini", "train", "validation", "test"], default="train")
+    args.add_argument("--set", type=str, choices=["mini", "train", "validation", "test"], default="mini")
     args.add_argument("--n_agents", type=int, default=5)
     args.add_argument("--back_coef", type=float, default=0.6)
     args.add_argument("--max_steps", type=int, default=10)
@@ -246,7 +276,6 @@ foa_options = {
 }
 
 # Run
-
 results = asyncio.run(run(run_options, foa_options))
 print(f"File name : {log_file}")
 f1 = "logs/2024-03-13/gameof24/18:00/"+log_file
