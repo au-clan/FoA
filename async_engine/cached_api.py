@@ -2,6 +2,7 @@ import asyncio
 import logging
 import time
 from copy import deepcopy
+from collections import Counter
 
 import openai
 from deepdiff import DeepHash
@@ -41,11 +42,31 @@ class CachedOpenAIAPI:
         # Counter
         self.used_count = {}
 
-    async def request(self, messages, limiter, n=1, request_timeout=30):
+    async def request(self, messages, namespaces, limiter, request_timeout=30):
         """
-        CACHED request to the OpenAI API
-        """
+        CACHED request to the OpenAI API.
+        Input:
+        - messages: The prompt
+        - namespaces: List of namespace. Each namespace is attributed its own cache entry.
+        - limiter: Resource manager
+        - request_timeout: Timeout for the request
 
+        Te function is executed in the following steps:
+        Step 1. Setup : 
+            - Sets up the cache config for each namesapce and gets the respective cache key, cahce entry and used count.
+        Step 2. Prepare number of requests:
+            - Seperates the number of total requests needed for each namespace to number of requests from cache and number of requests from API.
+        Step 3. Request from API:
+            - Requests the total number of requests (no matter the namespace) from the API into responses.
+        Step 4. Requests redistribution:
+            - For each namespace, according to the computed number of requests needed from the cache, load the number of requests needed from the cache and update the cache entry and used count.
+            - For each namespace, according to the computed number of requests needed from the API, pop the number of responses needed from the API responses and update the cache entry and used count.
+        Step 5. Rearrange responses:
+            - Rearranges the responses to match the order of the input namespace list.
+        """
+        
+        ##-- Step 1. Setup --##
+        responses = []
         messages = [{"role": "user", "content": messages}]
         if "request_timeout" in self.config:
             request_timeout = self.config["request_timeout"]
@@ -60,122 +81,166 @@ class CachedOpenAIAPI:
         # now we also need to add the messages to the cache_config
         cache_config["messages"] = messages
 
+        namespace_counter = Counter(namespaces)
+        responses_per_namespace = {}
+
+        cache_configs = []
+        for namespace in namespace_counter.keys():
+            temp_cache_config = deepcopy(cache_config)
+            temp_cache_config["namespace"] = namespace
+            cache_configs.append(temp_cache_config)
+
         # NOTE: Updated cache structure to save cost
         # Cache structure {cache_key : cache_entry, ...}
         # Cache entry structure : [(message, completion_tokens, prompt_tokens), ...]
 
         # use DeepHash to create a key for the cache
-        cache_key = DeepHash(cache_config)[cache_config]
-        cache_entry = self.cache.get(cache_key)
-        if cache_entry is None:
-            cache_entry = []
+        cache_keys = [DeepHash(cc)[cc] for cc in cache_configs]
+        cache_entries = []
+        for cache_key in cache_keys:
+            cache_entry = self.cache.get(cache_key)
+            if cache_entry is None:
+                cache_entry = []
+            cache_entries.append(cache_entry)
 
         # Get the number of times this cached entry has been used and update the count
-        count = self.used_count.get(cache_key, 0)
+        used_counts = [self.used_count.get(cache_key, 0) for cache_key in cache_keys]
+        
+        # Unrelated stuff to be fixed if we want to use this  
+        # -- Does not consider prompt cost
+        
+        ##-- Step 2. Prepare number of requests --##
+        # Compute the number of samples needed from the cache and from the API
+        for n, namespace, used_count, cache_entry, cache_key in zip(namespace_counter.values(), namespace_counter.keys(), used_counts, cache_entries, cache_keys):
+            cached_available = len(cache_entry[used_count:])
+            n_from_cache = min(n, cached_available)
+            n_from_api = n - n_from_cache
+            assert n_from_api >= 0
 
-        # the cache_entry is a list of IID responses
-        if len(cache_entry[count:]) >= n:
+            responses_per_namespace[namespace] = {"cached": n_from_cache, "api": n_from_api}
+        
+        n_from_api_total = sum(responses_per_namespace[namespace]["api"] for namespace in responses_per_namespace)
+        n_from_cache_total = sum(responses_per_namespace[namespace]["cached"] for namespace in responses_per_namespace)
+
+        if n_from_cache_total > 0:
+            print(f"Using {n_from_cache_total} cached samples")
+
+        ##-- Step 3. Request from API --##
+        # Request the samples from the API
+        if n_from_api_total > 0:
+            print(f"Requesting {n_from_api_total} samples")
+
+            start = time.time()
+            async with limiter as resource:
+                self.aclient.api_key = resource.data
+                while True:
+                    self.current_sleep_time = min(self.current_sleep_time, self.max_sleep)
+                    try:
+                        response = await asyncio.wait_for(self.aclient.chat.completions.create(
+                            **cache_config,
+                            # messages=cache_config["messages"],
+                            # model=cache_config["model"],
+                            # temperature=cache_config["temperature"],
+                            # max_tokens=cache_config["max_tokens"],
+                            # timeout=request_timeout,
+                            n=n_from_api_total), timeout=request_timeout)
+
+                        self.current_sleep_time = self.sleep_time
+                        break
+                    except openai.RateLimitError as e:
+                        print(f"Rate limit error, sleeping for {self.current_sleep_time} seconds")
+                        print(e)
+                        await asyncio.sleep(self.current_sleep_time)
+                        self.current_sleep_time *= self.sleep_factor
+
+                    except openai.APIStatusError as e:
+                        print(f"APIStatusError, sleeping for {self.current_sleep_time} seconds")
+                        print(e)
+                        await asyncio.sleep(self.current_sleep_time)
+                        self.current_sleep_time *= self.sleep_factor
+
+                    except openai.APITimeoutError as e:
+                        print(f"Timeout error, sleeping for {self.current_sleep_time} seconds")
+                        print(e)
+                        await asyncio.sleep(self.current_sleep_time)
+                        self.current_sleep_time *= self.sleep_factor
+
+                    except openai.APIError as e:
+                        print(f"API error, sleeping for {self.current_sleep_time} seconds")
+                        print(e)
+                        await asyncio.sleep(self.current_sleep_time)
+                        self.current_sleep_time *= self.sleep_factor
+
+                    except asyncio.TimeoutError as e:
+                        print(f"Asyncio timeout error, sleeping for {self.current_sleep_time} seconds")
+                        print(e)
+                        await asyncio.sleep(self.current_sleep_time)
+                        self.current_sleep_time *= self.sleep_factor
+
+                assert response is not None
+
+                stop = time.time()
+                # by communicating the tokens and time used to the resource manager, we can optimize the rate of requests
+                # or maybe we're just using a very simple round robin strategy ;)
+                # ToDo: I have a super sophisticated and only slightly buggy implementation of a leaky bucket rate limiting algo
+                # for GPT3.5 it works worse than round robin, I think because the rate limit for gpt3.5 are so high that it's
+                # easier to just get out of the way and let the next request through
+                # but for GPT4 I've found the leaky bucket to be very more efficient
+                time_taken = stop - start
+                completion_tokens = response.usage.completion_tokens
+                prompt_tokens = response.usage.prompt_tokens
+                tokens_used = response.usage.total_tokens
+                resource.free(time_taken=time_taken, amount_used=tokens_used)
+
+                raw_responses = []
+                for choice in response.choices:
+                    raw_responses.append((choice.message.content, completion_tokens/n_from_api_total, prompt_tokens))
+
+        ##-- Step 4. Requests redistribution --##
+        for n, namespace, used_count, cache_entry, cache_key in zip(namespace_counter.values(), namespace_counter.keys(), used_counts, cache_entries, cache_keys):
             
-            # Update tokens count
-            self.completion_tokens += sum([entry[1] for entry in cache_entry[:n]])
-            self.prompt_tokens += sum([entry[2] for entry in cache_entry[:n]])
+            # Update responses from cache
+            n_cache = responses_per_namespace[namespace]["cached"]
+            cached_responses = [entry for entry in cache_entry[used_count:used_count+n_cache]]
+            self.completion_tokens += sum([entry[1] for entry in cached_responses])
+            self.used_count[cache_key] = self.used_count.get(cache_key, 0) + n_cache
+            responses.extend([entry[0] for entry in cached_responses])
 
-            # Update the count
-            self.used_count[cache_key] = count + n
-            return [entry[0] for entry in cache_entry[count:count+n]]
+            # Update responses from API
+            n_api = responses_per_namespace[namespace]["api"]
+            api_responses = [raw_responses.pop(0) for _ in range(n_api)]
+            cache_entry.extend(api_responses)
+            self.cache.set(cache_key, cache_entry)
+            self.completion_tokens += sum([response[1] for response in api_responses])
+            self.used_count[cache_key] =  self.used_count.get(cache_key, 0) + n_api
+            responses.extend([response[0] for response in api_responses])   
 
-        # if we don't have enough responses in the cache, we need to make a request
-        num_needed = n - len(cache_entry[count:])
-        assert num_needed > 0
+        # Pormpt cost
+        if n_cache != 0:
+            self.prompt_tokens += cached_responses[0][2]
+        elif n_api != 0:
+            self.prompt_tokens += api_responses[0][2]
+        else:
+            raise Exception("Both n_api and n_cache are zero. This should not happen.")
+        
+        ##-- Step 5. Rearrange responses --##
+        mapping = {}
+        for k,v in namespace_counter.items():
+            mapping[k] = []
+            for i in range(v):
+                mapping[k].append(responses.pop(0))
+        assert responses == []
 
-        print("needing more samples")
+        for namespace in namespaces:
+            responses.append(mapping[namespace].pop(0))
 
-        start = time.time()
-        async with limiter as resource:
-            self.aclient.api_key = resource.data
-            while True:
-                self.current_sleep_time = min(self.current_sleep_time, self.max_sleep)
-                try:
-                    response = await asyncio.wait_for(self.aclient.chat.completions.create(
-                        **cache_config,
-                        # messages=cache_config["messages"],
-                        # model=cache_config["model"],
-                        # temperature=cache_config["temperature"],
-                        # max_tokens=cache_config["max_tokens"],
-                        # timeout=request_timeout,
-                        n=num_needed), timeout=request_timeout)
-
-                    self.current_sleep_time = self.sleep_time
-                    break
-                except openai.RateLimitError as e:
-                    print(f"Rate limit error, sleeping for {self.current_sleep_time} seconds")
-                    print(e)
-                    await asyncio.sleep(self.current_sleep_time)
-                    self.current_sleep_time *= self.sleep_factor
-
-                except openai.APIStatusError as e:
-                    print(f"APIStatusError, sleeping for {self.current_sleep_time} seconds")
-                    print(e)
-                    await asyncio.sleep(self.current_sleep_time)
-                    self.current_sleep_time *= self.sleep_factor
-
-                except openai.APITimeoutError as e:
-                    print(f"Timeout error, sleeping for {self.current_sleep_time} seconds")
-                    print(e)
-                    await asyncio.sleep(self.current_sleep_time)
-                    self.current_sleep_time *= self.sleep_factor
-
-                except openai.APIError as e:
-                    print(f"API error, sleeping for {self.current_sleep_time} seconds")
-                    print(e)
-                    await asyncio.sleep(self.current_sleep_time)
-                    self.current_sleep_time *= self.sleep_factor
-
-                except asyncio.TimeoutError as e:
-                    print(f"Asyncio timeout error, sleeping for {self.current_sleep_time} seconds")
-                    print(e)
-                    await asyncio.sleep(self.current_sleep_time)
-                    self.current_sleep_time *= self.sleep_factor
-
-            assert response is not None
-
-        stop = time.time()
-        # by communicating the tokens and time used to the resource manager, we can optimize the rate of requests
-        # or maybe we're just using a very simple round robin strategy ;)
-        # ToDo: I have a super sophisticated and only slightly buggy implementation of a leaky bucket rate limiting algo
-        # for GPT3.5 it works worse than round robin, I think because the rate limit for gpt3.5 are so high that it's
-        # easier to just get out of the way and let the next request through
-        # but for GPT4 I've found the leaky bucket to be very more efficient
-        time_taken = stop - start
-        completion_tokens = response.usage.completion_tokens
-        prompt_tokens = response.usage.prompt_tokens
-        tokens_used = response.usage.total_tokens
-        resource.free(time_taken=time_taken, amount_used=tokens_used)
-
-        logger.log(logging.DEBUG, f"Tokens used: {tokens_used}")
-
-        raw_responses = []
-        for choice in response.choices:
-            raw_responses.append((choice.message.content, completion_tokens/num_needed, prompt_tokens))
-
-        # add the new responses to the cache
-        cache_entry.extend(raw_responses)
-        self.cache.set(cache_key, cache_entry)
-
-        # Update tokens count
-        self.completion_tokens += sum([entry[1] for entry in cache_entry[:n]])
-        self.prompt_tokens += sum([entry[2] for entry in cache_entry[:n]])
-
-        # Update the count
-        self.used_count[cache_key] = count + n
-
-        return [entry[0] for entry in cache_entry[count:count+n]]
+        return responses
 
 
     def __str__(self):
         return self.config['model']
 
-    def cost(self, verbose=True):
+    def cost(self, verbose=False):
 
         # Price catalog
         catalog = {

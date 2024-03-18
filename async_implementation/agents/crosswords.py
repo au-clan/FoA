@@ -9,7 +9,7 @@ from async_implementation.states.crosswords import CrosswordsState
 class CrosswordsAgent:
 
     @staticmethod
-    async def get_candidates(state: CrosswordsState, api, n:int =8)-> dict:
+    async def get_candidates(state: CrosswordsState, api, namespace, n:int =8)-> dict:
         """
         Given a state, return a dictionary of candidate actions along with its scores.
         """
@@ -21,7 +21,7 @@ class CrosswordsAgent:
         prompt = prompts.propose_prompt.format(input=obs)
         coroutines = []
         for _ in range(n):
-            coroutines.append(api.buffered_request(prompt, key=hash(state)))
+            coroutines.append(api.buffered_request(prompt, key=hash(state), namespace=namespace))
         responses = await asyncio.gather(*coroutines)
 
         # Parse the responses and add the scores for each action
@@ -34,13 +34,13 @@ class CrosswordsAgent:
         return candidates_to_scores
     
     @staticmethod
-    async def step(state: CrosswordsState, api)-> Tuple[CrosswordsState, str]:
+    async def step(state: CrosswordsState, api, namespace)-> Tuple[CrosswordsState, str]:
         """
-        Given a state, return the next state.
+        Given a state, returns the next state one.
         """
         
         # Get next step suggestions/actions and pick one of the ones with the highest value
-        suggestions = await CrosswordsAgent.get_candidates(state, api)
+        suggestions = await CrosswordsAgent.get_candidates(state, api, namespace=namespace)
         assert len(suggestions) > 0, "No suggestions found" # -> TODO: Can deal with this by resampling the specific agent
         suggestions_max_value = max(suggestions.values())
         max_value_suggestions = [suggestion for suggestion, value in suggestions.items() if value == suggestions_max_value]
@@ -91,10 +91,10 @@ class CrosswordsAgent:
             steps = state.steps + [" .".join(action)],
             randomness=random.randint(0, 1000)
              )
-        return next_state, action
+        return next_state
         
     @staticmethod
-    async def evaluate(state, api):
+    async def evaluate(state, api, namespace):
         """
         Evaluates the current state and returns a value number.
         The state is evaluated line by line.
@@ -112,7 +112,7 @@ class CrosswordsAgent:
             
             # Get a value for the line from the set {sure, maybe, impossible}
             prompt = prompts.value_prompt.format(input=line)
-            res = await api.buffered_request(prompt, key=hash(state))
+            res = await api.buffered_request(prompt, key=hash(state), namespace=namespace)
             
             # Parse the response and update the count
             res = res.split('\n')[-1].strip()
@@ -122,6 +122,25 @@ class CrosswordsAgent:
         value_map = {'impossible': -20, 'maybe': 5, 'sure': 20} #TODO: ad hoc
         value_number  =sum(value * value_map[name] for name, value in count.items())
         return value_number
+    
+    @staticmethod
+    def verify(state: CrosswordsState)->dict:
+        """
+        Verifies the output of a given task
+            1. Checks if the numbers used are the same as the ones provided.
+            2. Checks if the operations performed result to 24.
+
+        States 
+            {"r": 0} : Not finished.
+            {"r": 1} : Finished and correct.
+            {"r": -1} : Finished and incorrect.
+        """
+        if "_____" in state.ans:
+            return {"r":0}
+        elif state.board == state.board_gt:
+            return {"r":1}
+        else:
+            return {"r":-1}
         
 
 def parse_line(input_str):
