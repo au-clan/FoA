@@ -69,7 +69,7 @@ async def foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options, barrier)
 
     # Use batching API
     step_api = BatchingAPI(api, limiter, batch_size=num_agents*8, timeout=10)
-    eval_api = BatchingAPI(api, limiter, batch_size=num_agents, timeout=10) # TODO: Figure appropriate eval batch size, rn worst case scenario is num_agents * 10
+    eval_api = BatchingAPI(api, limiter, batch_size=num_agents*10, timeout=1)
 
     randomness = puzzle_idx
     random.seed(randomness)
@@ -215,7 +215,7 @@ async def run(run_options: dict, foa_options: dict):
     puzzle_idxs, puzzles = data.get_data(run_options["set"])
 
     ### Debugging
-    puzzle_idxs, puzzles = puzzle_idxs[:1], puzzles[:1]
+    #puzzle_idxs, puzzles = puzzle_idxs[:1], puzzles[:1]
 
     # Barriers for each puzzle experiment
     barrier = asyncio.Barrier(len(puzzles))
@@ -293,7 +293,7 @@ foa_options = {
 
 
 run_message = f"""Run options :
-    task : gameof24
+    task : crosswords
     set : {set}
     num_agents : {n_agents}
     k : {k}
@@ -321,7 +321,7 @@ cost = api.cost(verbose=False)
 
 
 # Send email notification
-send_email = True
+send_email = False
 if send_email:
     subject = log_file
     message = f"Accuracy : {accuracy}\nCost : {cost}"

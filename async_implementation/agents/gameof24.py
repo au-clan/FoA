@@ -16,7 +16,7 @@ class GameOf24Agent:
     @staticmethod
     async def step(state: GameOf24State, api, namespace)-> GameOf24State:
         """
-        Given a state, returns the next state (1-to-1).
+        Given a state, returns the next state one.
         """
 
         # set up the prompt, based on the current state

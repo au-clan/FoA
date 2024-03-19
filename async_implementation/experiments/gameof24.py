@@ -15,9 +15,9 @@ from collections import Counter
 # TODO: Not sure if this is correct, I didn't know how else to handle the package paths
 import sys
 
-sys.path.append(os.getcwd())  # Project root!!
+sys.path.append(os.getcwd()) # Project root!!
 
-from async_engine.cached_api_namespace import CachedOpenAIAPI
+from async_engine.cached_api import CachedOpenAIAPI
 from async_engine.round_robin_manager import AsyncRoundRobin
 from async_engine.batched_api import BatchingAPI
 from async_implementation.agents.gameof24 import GameOf24Agent
@@ -29,14 +29,14 @@ from utils import create_folder, email_notification, create_box
 logger = logging.getLogger("experiments")
 
 logger.setLevel(logging.DEBUG) # Order : debug < info < warning < error < critical
-log_folder = f"logs/test/gameof24/" # Folder in which logs will be saved (organized daily)
+log_folder = f"logs/{datetime.now().date()}/gameof24/{datetime.now().strftime('%H')}:00/" # Folder in which logs will be saved (organized daily)
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
 # that way we never pay for the same request twice
 assert os.path.exists(
     "./caches/"), "Please run the script from the root directory of the project. To make sure all caches are created correctly."
-cache = Cache("./caches/test_cache", size_limit=int(2e10))
+cache = Cache("./caches/gameof24", size_limit=int(2e10))
 
 # get OPENAI_API_KEY from env
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
@@ -63,7 +63,6 @@ data = GameOf24Data()
 
 # ToDo: this should probably be moved to its own file
 # for now I'm keeping it here, for easier debugging
-# async def foa_gameof24(puzzle_idx: int, num_agents=3, k=2, backtrack=0.8):
 async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
     num_agents = foa_options["n_agents"]
     num_steps = foa_options["max_steps"]
@@ -76,7 +75,7 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
     random.seed(randomness)
 
     resampler = Resampler(randomness)
-    
+
     # Set up log
     log = {}
     log[puzzle_idx] = {"puzzle": puzzle}
@@ -87,7 +86,7 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
     state_records = [] # List of states [(state_identifier, state_value, state)]
     state_records.append(("INIT", foa_options["origin_value"], GameOf24State(puzzle=puzzle, current_state=puzzle, steps=[], randomness=random.randint(0, 1000))))
 
-    # set up states
+    # Set up states
     states = []
 
     for _ in range(num_agents):
@@ -111,9 +110,12 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
             agent_coroutines.append(GameOf24Agent.step(state, step_api, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}")))
         states = await asyncio.gather(*agent_coroutines)
 
-        # Log steps
+        # Log - Steps
         for agent_id, state in enumerate(states):
             log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Step": f"{' -> '.join(state.steps)}"})
+
+        # Depreciation : old state values are decayed by the backtrack coefficient
+        state_records = [(idx, value*foa_options["backtrack"], state) for idx, value, state in state_records]
 
         # After each step, the api should be empty
         assert len(step_api.futures) == 0, f"API futures should be empty, but are {len(step_api.futures)}"
@@ -122,10 +124,8 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
         # Therefore, we can delete the states that cannot find a solution because there are not enough steps remaining
         foa_remaining_steps = num_steps - (step + 1)
         task_required_steps = 4 # Minimum number of steps to solve the puzzle (min=max for gameof24) -> TODO: Put this somewhere better
-        state_records = [(idx, value, state) for idx, value, state in state_records if  foa_remaining_steps >= task_required_steps - len(state.steps) ]
+        state_records = [(idx, value, state) for idx, value, state in state_records if  foa_remaining_steps >= task_required_steps - len(state.steps)]
 
-        # Depreciation : old state values are decayed by the backtrack coefficient
-        state_records = [(idx, value*foa_options["backtrack"], state) for idx, value, state in state_records]
 
         # Verification : After each step we verify if the answer is found and if so we break    
         verifications = [GameOf24Agent.verify(state) for state in states]   # {"r":1} Finished correctly
@@ -133,10 +133,9 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
             ### DEBUG: Just for now until I figure out something better - Normally you want to break here
             solution_found = True
             await barrier.wait()
-            continue                                                        # {"r":0} Not finished                
+            continue                                                        # {"r":0} Not finished
 
-        # Pruning # TODO : Pruned states should NOT be re-evaluated ? -> Not sure about this
-        # No point in incluing init_state in pruning
+        # Pruning
         temp_state_records = [(idx, value, state) for idx, value, state in state_records if state.steps!=[]]
         invalid_state_indices = [i for i, verification in enumerate(verifications) if verification["r"] == -1]
         if len(temp_state_records) > 0:
@@ -159,7 +158,6 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
                 log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": None})
 
         # Synchronize experiments
-        ### DEBUG: Normally syncrhonisation is done before resampling not after every step
         await barrier.wait()
 
         # Resampling : every k steps, evaluate and resample
@@ -181,9 +179,9 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
             # Log - Evaluation
             for agent_id, value in enumerate(values):
                 log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Evaluation": value})
-            
+
             # Resampling
-            states, resampled_indices = resampler.resample(state_records, foa_options["n_agents"], foa_options["resampling_method"])
+            states, resampled_indices = resampler.resample(state_records, num_agents, foa_options["resampling_method"])
             
             # Log - Resampling
             for agent_id, resampled_idx in enumerate(resampled_indices):
@@ -216,7 +214,7 @@ async def run(run_options: dict, foa_options: dict):
     barrier = asyncio.Barrier(len(puzzles))
 
     # Run FoA for each puzzle
-    for puzzle_idx, puzzle in zip(puzzle_idxs, puzzles): 
+    for puzzle_idx, puzzle in zip(puzzle_idxs, puzzles):
         game_coroutines.append(foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier))
     results = await asyncio.gather(*game_coroutines)
 
@@ -224,7 +222,7 @@ async def run(run_options: dict, foa_options: dict):
     logs = [log for (game, log) in results]
     for l in logs:
         log.update(l)
-    
+
     print()
     log["Cost"] = api.cost(verbose=True)
     print()
@@ -236,6 +234,9 @@ async def run(run_options: dict, foa_options: dict):
     # Return game states for each run
     game_states = [game for (game, log) in results]
     return game_states
+
+
+
 
 
 #################
@@ -259,22 +260,23 @@ args = parse_args()
 
 # Select parameters
 set = args.set                             # Set of data to be used
-num_agents = args.n_agents                 # Number of agents
+n_agents = args.n_agents                   # Number of agents
 k = args.k                                 # Resampling every <k> steps
-origin_value = 20 * 3                      # The evaluation of the origin state #TODO: Change 3 to num_evaluations
-num_steps = args.max_steps                 # Total number of steps FoA executes
+origin_value = 20 * 3                      # The evaluation of the origin
+num_steps = args.max_steps                 # Max allowed steps
 backtrack = args.backtrack                 # Backtrack decaying coefficient
 resampling_method = args.resampling        # Resampling method
 
 
+
 # Just for now so it's easier to change values and reduce noise
-log_file = f"{set}-set_{num_agents}agents_{num_steps}steps_{k}k_{origin_value}origin_{backtrack}backtrack_{resampling_method}-resampling.json"
+log_file = f"{set}-set_{n_agents}agents_{num_steps}steps_{k}k_{origin_value}origin_{backtrack}backtrack_{resampling_method}-resampling.json"
 run_options = {
     "set":set
 }
 
 foa_options = {
-    "n_agents": num_agents,
+    "n_agents": n_agents,
     "k": k,
     "origin_value": origin_value,
     "max_steps": num_steps,
@@ -286,7 +288,7 @@ foa_options = {
 run_message = f"""Run options :
     task : gameof24
     set : {set}
-    num_agents : {num_agents}
+    num_agents : {n_agents}
     k : {k}
     num_steps : {num_steps}
     backtrack : {backtrack}
@@ -298,22 +300,21 @@ print("\n"+create_box(run_message)+"\n")
 results = asyncio.run(run(run_options, foa_options))
 
 
-# Accuracy computation
+# Total accuracy and cost computation
 n_success = 0
 for game in results:
     verifications = [GameOf24Agent.verify(result) for result in game]
     if {"r": 1} in verifications:
         n_success += 1
-
-# Accuracy
 accuracy = n_success * 100 / len(results)
 print(f"Accuracy : {accuracy:.2f}\n")
-
 print(f"File name : {log_file}\n\n\n\n\n")
 
 cost = api.cost(verbose=False)
+
+
 # Send email notification
-send_email = True
+send_email = False
 if send_email:
     subject = log_file
     message = f"Accuracy : {accuracy}\nCost : {cost}"
@@ -322,5 +323,3 @@ if send_email:
     except:
         print("Email not sent")
         pass
-
-

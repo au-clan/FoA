@@ -12,7 +12,7 @@ for k in "${k__values[@]}"; do
         for n_agents in "${n_agents__values[@]}"; do
             for backtrack in "${backtrack__values[@]}"; do
                 echo "Running with: k=$k, max_steps=$max_steps, N n_agents=$n_agents, backtrack=$backtrack"
-                 python async_implementation/experiments/gameof24.py --k $k --max_steps $max_steps --n_agents $n_agents --backtrack $backtrack --set validation
+                 python async_implementation/experiments/gameof24.py --k $k --max_steps $max_steps --n_agents $n_agents --backtrack $backtrack --set test
                 ((total++))
             done
         done
