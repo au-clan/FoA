@@ -41,7 +41,8 @@ class CrosswordsAgent:
         
         # Get next step suggestions/actions and pick one of the ones with the highest value
         suggestions = await CrosswordsAgent.get_candidates(state, api, namespace=namespace)
-        assert len(suggestions) > 0, "No suggestions found" # -> TODO: Can deal with this by resampling the specific agent
+        if len(suggestions) == 0:
+            return state.duplicate(randomness=random.randint(0, 1000))
         suggestions_max_value = max(suggestions.values())
         max_value_suggestions = [suggestion for suggestion, value in suggestions.items() if value == suggestions_max_value]
         random.seed(state.randomness)

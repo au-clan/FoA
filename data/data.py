@@ -30,13 +30,13 @@ class CrosswordsData:
 
     def get_data(self, set):
         if set == "mini":
-            indices = [i + 1 for i in range(0,100,5)[:1]]
+            indices = [i + 1 for i in range(0,100,5)[:3]]
         elif set == "train":
             indices = [i + 2 for i in range(0,100,5)[:10]]
         elif set == "validation":
             indices = [i + 3 for i in range(0,100,5)[:10]]
         elif set == "test":
-            indices = [i for i in range(0,100,5)[:10]]
+            indices = [i for i in range(0,100,5)]
         else:
             raise ValueError("Invalid set name")
         

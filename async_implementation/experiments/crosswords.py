@@ -29,7 +29,7 @@ from utils import create_folder, email_notification, create_box
 logger = logging.getLogger("experiments")
 
 logger.setLevel(logging.DEBUG) # Order : debug < info < warning < error < critical
-log_folder = f"logs/{datetime.now().date()}/crosswords/{datetime.now().strftime('%H')}:00/" # Folder in which logs will be saved (organized daily)
+log_folder = f"logs_recent/{datetime.now().date()}/crosswords/{datetime.now().strftime('%H')}:00/" # Folder in which logs will be saved (organized daily)
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
@@ -58,7 +58,7 @@ for _ in range(N):
     limiter.add_resource(data=OPENAI_API_KEY)
 
 # Setting up the data
-data = CrosswordsData()
+dataset = CrosswordsData()
 
 
 # ToDo: this should probably be moved to its own file
@@ -212,7 +212,7 @@ async def run(run_options: dict, foa_options: dict):
     log = {}
 
     # Get the data for each puzzle
-    puzzle_idxs, puzzles = data.get_data(run_options["set"])
+    puzzle_idxs, puzzles = dataset.get_data(run_options["set"])
 
     ### Debugging
     puzzle_idxs, puzzles = puzzle_idxs[:1], puzzles[:1]
@@ -255,8 +255,8 @@ def parse_args():
 
     args.add_argument("--set", type=str, choices=["mini", "train", "validation", "test"], default="mini")
     args.add_argument("--n_agents", type=int, default=3)
-    args.add_argument("--backtrack", type=float, default=0.6)
-    args.add_argument("--max_steps", type=int, default=35)
+    args.add_argument("--backtrack", type=float, default=0.25)
+    args.add_argument("--max_steps", type=int, default=20)
     args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile"], default="linear")
     args.add_argument("--k", type=int, default=1)
     args = args.parse_args()
