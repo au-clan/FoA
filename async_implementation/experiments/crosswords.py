@@ -131,7 +131,7 @@ async def foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options, barrier)
 
 
         # Verification : After each step we verify if the answer is found and if so we break    
-        verifications = [CrosswordsAgent.verify(state) for state in states]   # {"r":1} Finished correctly
+        verifications = [CrosswordsAgent.verify(state) for state in states] # {"r":1} Finished correctly
         if {"r":1} in verifications:                                        # {"r":-1} Finished incorrectly / "Ivalid state"
             ### DEBUG: Just for now until I figure out something better - Normally you want to break here
             solution_found = True
@@ -156,7 +156,7 @@ async def foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options, barrier)
                 if pruned_indice is None:
                     log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": "NA"})
                 else:
-                    log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning" : {"Idx":temp_state_records[pruned_indice][0], "Pruned state": temp_state_records[pruned_indice][2].current_state}})
+                    log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning" : {"Idx":temp_state_records[pruned_indice][0], "Resampled state": [ans for ans in state_records[resampled_idx][2].ans if ans!="_____"]}})
             else:
                 log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": None})
 
@@ -215,7 +215,7 @@ async def run(run_options: dict, foa_options: dict):
     puzzle_idxs, puzzles = data.get_data(run_options["set"])
 
     ### Debugging
-    #puzzle_idxs, puzzles = puzzle_idxs[:1], puzzles[:1]
+    puzzle_idxs, puzzles = puzzle_idxs[:1], puzzles[:1]
 
     # Barriers for each puzzle experiment
     barrier = asyncio.Barrier(len(puzzles))
@@ -256,7 +256,7 @@ def parse_args():
     args.add_argument("--set", type=str, choices=["mini", "train", "validation", "test"], default="mini")
     args.add_argument("--n_agents", type=int, default=3)
     args.add_argument("--backtrack", type=float, default=0.6)
-    args.add_argument("--max_steps", type=int, default=3)
+    args.add_argument("--max_steps", type=int, default=35)
     args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile"], default="linear")
     args.add_argument("--k", type=int, default=1)
     args = args.parse_args()
