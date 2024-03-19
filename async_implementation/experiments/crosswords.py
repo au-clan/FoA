@@ -156,7 +156,7 @@ async def foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options, barrier)
                 if pruned_indice is None:
                     log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": "NA"})
                 else:
-                    log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning" : {"Idx":temp_state_records[pruned_indice][0], "Resampled state": [ans for ans in state_records[resampled_idx][2].ans if ans!="_____"]}})
+                    log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning" : {"Idx":temp_state_records[pruned_indice][0], "Resampled state": [ans for ans in state_records[pruned_indice][2].ans if ans!="_____"]}})
             else:
                 log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": None})
 
