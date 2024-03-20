@@ -29,7 +29,7 @@ from utils import create_folder, email_notification, create_box
 logger = logging.getLogger("experiments")
 
 logger.setLevel(logging.DEBUG) # Order : debug < info < warning < error < critical
-log_folder = f"logs/{datetime.now().date()}/gameof24/{datetime.now().strftime('%H')}:00/" # Folder in which logs will be saved (organized daily)
+log_folder = f"logs/gridsearch2/gameof24/" # Folder in which logs will be saved (organized daily)
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
@@ -314,7 +314,7 @@ cost = api.cost(verbose=False)
 
 
 # Send email notification
-send_email = False
+send_email = True
 if send_email:
     subject = log_file
     message = f"Accuracy : {accuracy}\nCost : {cost}"
