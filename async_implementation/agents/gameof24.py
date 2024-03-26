@@ -9,6 +9,7 @@ random.seed(0)
 
 from async_implementation.prompts import gameof24 as prompts
 from async_implementation.states.gameof24 import GameOf24State
+from utils import parse_suggestions, create_box
 
 
 class GameOf24Agent:
@@ -52,7 +53,14 @@ class GameOf24Agent:
             suggestions = await api.buffered_request(prompt, key=hash(state), namespace=namespace)
 
             # parse suggestions, based on the current state
-            suggestions = suggestions.split("\n")
+            parsed_suggestions = parse_suggestions(suggestions)
+            if parsed_suggestions == []:
+                print(f"State: {state}")
+                print(f"\nPrompt: {prompt}\nSuggestions: {suggestions}\nParsed suggestions: {' | '.join(parsed_suggestions)}\n")
+                assert False, "No suggestions found."
+            
+            suggestions = parsed_suggestions
+            
             random.seed(state.randomness)
             selected_suggestion = random.choice(suggestions)
             selected_state = GameOf24Agent.parse_next_state(selected_suggestion)
@@ -73,6 +81,9 @@ class GameOf24Agent:
         if "left" not in last_step:
             answer = last_step.lower().replace("answer: ", "")
             prompt = prompts.value_last_step_prompt.format(input=state.puzzle, answer=answer)
+            error = f"""Current state '{state.current_state}'\nSteps: '{" -> ".join(state.steps)}'"""
+            #print(create_box(error))
+            return n*0.001
         else:
             prompt = prompts.value_prompt.format(input=state.current_state)
 

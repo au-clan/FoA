@@ -79,3 +79,22 @@ def create_box(input_string):
     boxed_string += border
 
     return boxed_string
+
+def remove_after_last_bracket(input_string):
+    """
+    Given a string it removes everything after its last closing bracket ')
+    """
+    last_bracket_index = input_string.rfind(')')
+    if last_bracket_index != -1:
+        return input_string[:last_bracket_index + 1]  # Include the last bracket
+    else:
+        return input_string
+    
+def parse_suggestions(suggestions):
+
+    # The prompt can potentially be cropped due to token constraints.
+    # Therefore we remove everything after the last closing bracket ')'.
+
+    new_suggestions = remove_after_last_bracket(suggestions)
+    #valid_suggestions = [suggestion for suggestion in new_suggestions.split("\n") if "(left:" in suggestion]
+    return new_suggestions.split("\n")

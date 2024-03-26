@@ -6,6 +6,7 @@ from typing import Tuple
 from async_implementation.prompts import crosswords as prompts
 from async_implementation.states.crosswords import CrosswordsState
 
+
 class CrosswordsAgent:
 
     @staticmethod
@@ -31,6 +32,7 @@ class CrosswordsAgent:
             if parsed_response:
                 for candidate, score in parsed_response:
                     candidates_to_scores[candidate] = candidates_to_scores.get(candidate, 0) + score
+        candidates_to_scores = {k: v for k, v in candidates_to_scores.items()  if provokes_change(state, k)}
         return candidates_to_scores
     
     @staticmethod
@@ -173,3 +175,26 @@ def parse_response(response):
     parsed_lines = [(line[0].lower() + '. ' + line[1].lower(), confidence_to_value.get(line[2], 0)) for line in parsed_lines if line is not None]
 
     return parsed_lines if len(parsed_lines) >= 1 else None
+
+def provokes_change(state, action):
+    """
+    Given  a state and an action return whether the action provokes a change to the state's board.
+    """
+    current_board = state.board
+    new_board = state.board
+    pos, word = action
+    # Update new board based on the action
+    if pos.startswith('h'):
+        idx = int(pos[1:]) - 1
+        new_board[idx*5:(idx+1)*5] = list(word.upper())
+    elif pos.startswith('v'):
+        idx = int(pos[1:]) - 1
+        new_board[idx::5] = list(word.upper())
+        idx += 5  # for later status update
+    else:
+        return False
+
+    if new_board == current_board:
+        return False
+    else:
+        return True

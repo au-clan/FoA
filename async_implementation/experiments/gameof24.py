@@ -12,7 +12,7 @@ from diskcache import Cache
 from datetime import datetime
 from collections import Counter
 
-# TODO: Not sure if this is correct, I didn't know how else to handle the package paths
+# TODO: Not sure if this is οπτιμαλ, I didn't know how else to handle the package paths
 import sys
 
 sys.path.append(os.getcwd()) # Project root!!
@@ -29,7 +29,7 @@ from utils import create_folder, email_notification, create_box
 logger = logging.getLogger("experiments")
 
 logger.setLevel(logging.DEBUG) # Order : debug < info < warning < error < critical
-log_folder = f"logs/gridsearch2/gameof24/" # Folder in which logs will be saved (organized daily)
+log_folder = f"logs_recent/stresstest/gameof24/" # Folder in which logs will be saved (organized daily)
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
@@ -50,7 +50,7 @@ api_config = {
     "model": "gpt-3.5-turbo"
 }
 
-api = CachedOpenAIAPI(cache, api_config)
+api = CachedOpenAIAPI(cache, api_config, verbose=False)
 limiter = AsyncRoundRobin()
 # ToDo, this is a bit hacky. OpenAI allows multiple parallel requests per key, so we add the same key multiple times
 N = 4
@@ -63,7 +63,7 @@ data = GameOf24Data()
 
 # ToDo: this should probably be moved to its own file
 # for now I'm keeping it here, for easier debugging
-async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
+async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier, seed):
     num_agents = foa_options["n_agents"]
     num_steps = foa_options["max_steps"]
 
@@ -71,7 +71,8 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
     step_api = BatchingAPI(api, limiter, batch_size=num_agents, timeout=10)
     eval_api = BatchingAPI(api, limiter, batch_size=num_agents*3, timeout=10)
 
-    randomness = puzzle_idx
+    # Set randomness
+    randomness = puzzle_idx + seed
     random.seed(randomness)
 
     resampler = Resampler(randomness)
@@ -94,6 +95,9 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
 
     solution_found = False ### DEBUG: Just for now until I figure out something better
     for step in range(num_steps):
+
+        if puzzle_idx == 900:
+            print(f"Step {step}")
 
         ### DEBUG: Just for now until I figure out something better
         if solution_found:
@@ -120,11 +124,11 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
         # After each step, the api should be empty
         assert len(step_api.futures) == 0, f"API futures should be empty, but are {len(step_api.futures)}"
 
-        # Variable state_records are only used for resampling. 
-        # Therefore, we can delete the states that cannot find a solution because there are not enough steps remaining
+        # Update state records
         foa_remaining_steps = num_steps - (step + 1)
-        task_required_steps = 4 # Minimum number of steps to solve the puzzle (min=max for gameof24) -> TODO: Put this somewhere better
-        state_records = [(idx, value, state) for idx, value, state in state_records if  foa_remaining_steps >= task_required_steps - len(state.steps)]
+        task_required_steps = 4
+        state_records = [(idx, value, state) for idx, value, state in state_records if  foa_remaining_steps >= task_required_steps - len(state.steps)] # Remove states that cannot finish in time
+        state_records = [(idx, value, state) for idx, value, state in state_records if value>0] # Remove states with no value
 
 
         # Verification : After each step we verify if the answer is found and if so we break    
@@ -153,7 +157,7 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
                 if pruned_indice is None:
                     log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": "NA"})
                 else:
-                    log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning" : {"Idx":temp_state_records[pruned_indice][0], "Pruned state": temp_state_records[pruned_indice][2].current_state}})
+                    log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning" : {"Idx":temp_state_records[pruned_indice][0], "Pruned state": temp_state_records[pruned_indice][2].current_state, "Value": temp_state_records[pruned_indice][1], "Values": sorted([record[1] for record in state_records], reverse=True)}})
             else:
                 log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": None})
 
@@ -185,7 +189,7 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
             
             # Log - Resampling
             for agent_id, resampled_idx in enumerate(resampled_indices):
-                log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Resampling": {"Idx":state_records[resampled_idx][0], "Resampled state": state_records[resampled_idx][2].current_state}})
+                log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Resampling": {"Idx":state_records[resampled_idx][0], "Resampled state": state_records[resampled_idx][2].current_state, "Value": state_records[resampled_idx][1], "Values": sorted([record[1] for record in state_records], reverse=True)}})
 
     verifications = [GameOf24Agent.verify(result) for result in states]
     log[puzzle_idx]["Input"] = puzzle
@@ -203,19 +207,20 @@ async def run(run_options: dict, foa_options: dict):
 
     game_coroutines = []
     log = {}
+    seed = run_options["seed"]
 
     # Get the data for each puzzle
     puzzle_idxs, puzzles = data.get_data(run_options["set"])
 
     ### Debugging
-    #puzzle_idxs, puzzles = puzzle_idxs[:1], puzzles[:1]
+    #puzzle_idxs, puzzles = puzzle_idxs[20:40], puzzles[20:40]
 
     # Barriers for each puzzle experiment
     barrier = asyncio.Barrier(len(puzzles))
 
     # Run FoA for each puzzle
     for puzzle_idx, puzzle in zip(puzzle_idxs, puzzles):
-        game_coroutines.append(foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier))
+        game_coroutines.append(foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier, seed))
     results = await asyncio.gather(*game_coroutines)
 
     # Merge logs for each run
@@ -252,6 +257,7 @@ def parse_args():
     args.add_argument("--max_steps", type=int, default=10)
     args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile"], default="linear")
     args.add_argument("--k", type=int, default=1)
+    args.add_argument("--seed", type=int, default=0)
     args = args.parse_args()
     return args
 
@@ -266,13 +272,18 @@ origin_value = 20 * 3                      # The evaluation of the origin
 num_steps = args.max_steps                 # Max allowed steps
 backtrack = args.backtrack                 # Backtrack decaying coefficient
 resampling_method = args.resampling        # Resampling method
-
+seed = args.seed                           # Seed for reproducibility
 
 
 # Just for now so it's easier to change values and reduce noise
 log_file = f"{set}-set_{n_agents}agents_{num_steps}steps_{k}k_{origin_value}origin_{backtrack}backtrack_{resampling_method}-resampling.json"
+
+if seed:
+    print(f"Seed : {seed}")
+    log_file += f"_{seed}seed"
 run_options = {
-    "set":set
+    "set":set,
+    "seed":seed
 }
 
 foa_options = {

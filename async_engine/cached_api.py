@@ -17,9 +17,11 @@ class CachedOpenAIAPI:
                  sleep_factor=3,
                  num_retries=3,
                  max_sleep=60,
+                 verbose=True,
                  **kwargs):
 
         self.cache = cache
+        self.verbose = verbose
 
         # we'll use a resource manager to cycle through keys
         # ideally, the resource manager should ensure that requests are made just below the rate limit
@@ -122,7 +124,7 @@ class CachedOpenAIAPI:
         n_from_api_total = sum(responses_per_namespace[namespace]["api"] for namespace in responses_per_namespace)
         n_from_cache_total = sum(responses_per_namespace[namespace]["cached"] for namespace in responses_per_namespace)
 
-        if n_from_cache_total > 0:
+        if n_from_cache_total > 0 and self.verbose:
             print(f"Using {n_from_cache_total} cached samples")
 
         ##-- Step 3. Request from API --##
