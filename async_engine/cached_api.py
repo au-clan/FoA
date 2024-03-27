@@ -38,13 +38,12 @@ class CachedOpenAIAPI:
         self.aclient = AsyncOpenAI()
 
         # Counting tokens to compute cost
-        self.completion_tokens = 0
-        self.prompt_tokens = 0
+        self.tabs = {}
 
         # Counter
         self.used_count = {}
 
-    async def request(self, messages, namespaces, limiter, request_timeout=30):
+    async def request(self, messages, namespaces, limiter, request_timeout: int=30, tab: str="default"):
         """
         CACHED request to the OpenAI API.
         Input:
@@ -52,8 +51,11 @@ class CachedOpenAIAPI:
         - namespaces: List of namespace. Each namespace is attributed its own cache entry.
         - limiter: Resource manager
         - request_timeout: Timeout for the request
+        - tab: The tab for which the request is made
 
-        Te function is executed in the following steps:
+        Tabs (self.tabs) : Whoever calls this function can specify a tab. The API tracks the cost for each tab independently.
+        
+        The function is executed in the following steps:
         Step 1. Setup : 
             - Sets up the cache config for each namesapce and gets the respective cache key, cahce entry and used count.
         Step 2. Prepare number of requests:
@@ -66,6 +68,9 @@ class CachedOpenAIAPI:
         Step 5. Rearrange responses:
             - Rearranges the responses to match the order of the input namespace list.
         """
+
+        if tab not in self.tabs:
+            self.tabs[tab] = {"completion_tokens": 0, "prompt_tokens": 0, "actual_completion_tokens": 0, "actual_prompt_tokens": 0}
         
         ##-- Step 1. Setup --##
         responses = []
@@ -204,7 +209,7 @@ class CachedOpenAIAPI:
             # Update responses from cache
             n_cache = responses_per_namespace[namespace]["cached"]
             cached_responses = [entry for entry in cache_entry[used_count:used_count+n_cache]]
-            self.completion_tokens += sum([entry[1] for entry in cached_responses])
+            self.tabs[tab]["completion_tokens"] += sum([entry[1] for entry in cached_responses])
             self.used_count[cache_key] = self.used_count.get(cache_key, 0) + n_cache
             responses.extend([entry[0] for entry in cached_responses])
 
@@ -213,15 +218,17 @@ class CachedOpenAIAPI:
             api_responses = [raw_responses.pop(0) for _ in range(n_api)]
             cache_entry.extend(api_responses)
             self.cache.set(cache_key, cache_entry)
-            self.completion_tokens += sum([response[1] for response in api_responses])
+            self.tabs[tab]["completion_tokens"] += sum([response[1] for response in api_responses])
+            self.tabs[tab]["actual_completion_tokens"] += sum([response[1] for response in api_responses]) 
             self.used_count[cache_key] =  self.used_count.get(cache_key, 0) + n_api
             responses.extend([response[0] for response in api_responses])   
 
         # Pormpt cost
-        if n_cache != 0:
-            self.prompt_tokens += cached_responses[0][2]
-        elif n_api != 0:
-            self.prompt_tokens += api_responses[0][2]
+        if n_api != 0:
+            self.tabs[tab]["prompt_tokens"] += api_responses[0][2]
+            self.tabs[tab]["actual_prompt_tokens"] += api_responses[0][2]
+        elif n_cache != 0:
+            self.tabs[tab]["prompt_tokens"] += cached_responses[0][2]
         else:
             raise Exception("Both n_api and n_cache are zero. This should not happen.")
         
@@ -242,7 +249,7 @@ class CachedOpenAIAPI:
     def __str__(self):
         return self.config['model']
 
-    def cost(self, verbose=False):
+    def cost(self, actual_cost=False, tab=None, verbose=False):
 
         # Price catalog
         catalog = {
@@ -263,11 +270,28 @@ class CachedOpenAIAPI:
         if model_used not in catalog:
             print("No pricing information available for this model")
         else:
-            input_cost = self.prompt_tokens / 1000 * catalog[model_used]["prompt_tokens"]
-            output_cost = self.completion_tokens / 1000 * catalog[model_used]["completion_tokens"]
+            if tab:
+                # If a tab is specified, return the cost for the specific tab.
+                if actual_cost:
+                    input_tokens = self.tabs[tab]["actual_prompt_tokens"]
+                    output_tokens = self.tabs[tab]["actual_completion_tokens"]
+                else:
+                    input_tokens = self.tabs[tab]["prompt_tokens"]
+                    output_tokens = self.tabs[tab]["completion_tokens"]
+            else:
+                # If no tab is specified, return the cost for all tabs.
+                if actual_cost:
+                    input_tokens = sum([tab["actual_prompt_tokens"] for tab in self.tabs.values()])
+                    output_tokens = sum([tab["actual_completion_tokens"] for tab in self.tabs.values()])
+                else:
+                    input_tokens = sum([tab["prompt_tokens"] for tab in self.tabs.values()])
+                    output_tokens = sum([tab["completion_tokens"] for tab in self.tabs.values()])
+
+            input_cost = input_tokens / 1000 * catalog[model_used]["prompt_tokens"]
+            output_cost = output_tokens / 1000 * catalog[model_used]["completion_tokens"]
             total_cost = input_cost + output_cost
             if verbose:
-                print(f"Input tokens: {self.prompt_tokens:.0f} ({input_cost:.3f} USD)")
-                print(f"Output tokens: {self.completion_tokens:.0f} ({output_cost:.3f} USD)")
-                print(f"Total tokens: {self.prompt_tokens + self.completion_tokens:.0f} ({total_cost:.3f} USD)")
-            return {"input_tokens": self.prompt_tokens, "output_tokens": self.completion_tokens, "total_cost": total_cost}
+                print(f"Input tokens: {input_tokens:.0f} ({input_cost:.3f} USD)")
+                print(f"Output tokens: {output_tokens:.0f} ({output_cost:.3f} USD)")
+                print(f"Total tokens: {input_tokens + output_tokens:.0f} ({total_cost:.3f} USD)")
+            return {"input_tokens": input_tokens, "output_tokens": output_tokens, "total_cost": total_cost}

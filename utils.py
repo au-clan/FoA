@@ -45,7 +45,6 @@ def email_notification(subject: str, message: str, reciever_email: str="nearchos
     server.login(sender_email, google_app_pass)
 
     server.sendmail(sender_email, reciever_email, text)
-    print("Email sent successfully")
     return
 
 def compare_json_files(file_path1, file_path2):

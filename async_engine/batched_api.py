@@ -2,7 +2,7 @@ import asyncio
 from collections import defaultdict
 
 class BatchingAPI:
-    def __init__(self, api, limiter, batch_size, timeout=30):
+    def __init__(self, api, limiter, batch_size, timeout=30, tab="default"):
         # Actual API
         self.api = api
         self.limiter = limiter
@@ -17,6 +17,9 @@ class BatchingAPI:
 
         # for debugging, counts the number of batches processed so far
         self.num_batches_processed = 0
+
+        # The name of the tab for the cached api
+        self.tab = tab
 
     async def buffered_request(self, prompt, key, namespace):
         """
@@ -92,10 +95,10 @@ class BatchingAPI:
         lock-step mechanism of N prompts in a batch
         """
 
-        return await self.api.request(prompt, namespaces, self.limiter)
+        return await self.api.request(prompt, namespaces, self.limiter, tab=self.tab)
     
-    def cost(self, verbose=False)-> float:
+    def cost(self, actual_cost: int=False, verbose: int=False)-> dict:
         """
         Returns the total cost of the API calls, so far.
         """
-        return self.api.cost(verbose)
+        return self.api.cost(actual_cost=actual_cost, tab=self.tab, verbose=verbose)

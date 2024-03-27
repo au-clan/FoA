@@ -27,9 +27,8 @@ from data.data import GameOf24Data
 from utils import create_folder, email_notification, create_box
 
 logger = logging.getLogger("experiments")
-
 logger.setLevel(logging.DEBUG) # Order : debug < info < warning < error < critical
-log_folder = f"logs_recent/stresstest/gameof24/" # Folder in which logs will be saved (organized daily)
+log_folder = f"logs_recent/{datetime.now().date()}/gameof24/{datetime.now().strftime('%H')}:00/" # Folder in which logs will be saved (organized daily)
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
@@ -68,8 +67,8 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier, s
     num_steps = foa_options["max_steps"]
 
     # Use batching API
-    step_api = BatchingAPI(api, limiter, batch_size=num_agents, timeout=10)
-    eval_api = BatchingAPI(api, limiter, batch_size=num_agents*3, timeout=10)
+    step_api = BatchingAPI(api, limiter, batch_size=num_agents, timeout=10, tab="step")
+    eval_api = BatchingAPI(api, limiter, batch_size=num_agents*3, timeout=10, tab="eval")
 
     # Set randomness
     randomness = puzzle_idx + seed
@@ -228,9 +227,10 @@ async def run(run_options: dict, foa_options: dict):
     for l in logs:
         log.update(l)
 
-    print()
-    log["Cost"] = api.cost(verbose=True)
-    print()
+    step_cost = api.cost(tab="step")
+    evaluation_cost = api.cost(tab="eval")
+    total_cost = api.cost()
+    log["Cost"] = {"Step": step_cost, "Evaluation": evaluation_cost, "Total": total_cost}
 
     # Save merged logs
     with open(log_folder + log_file, 'w+') as f:
@@ -258,6 +258,7 @@ def parse_args():
     args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile"], default="linear")
     args.add_argument("--k", type=int, default=1)
     args.add_argument("--seed", type=int, default=0)
+    args.add_argument('--send_email', action=argparse.BooleanOptionalAction)
     args = args.parse_args()
     return args
 
@@ -273,14 +274,14 @@ num_steps = args.max_steps                 # Max allowed steps
 backtrack = args.backtrack                 # Backtrack decaying coefficient
 resampling_method = args.resampling        # Resampling method
 seed = args.seed                           # Seed for reproducibility
+send_email = args.send_email               # Send email notification
 
 
 # Just for now so it's easier to change values and reduce noise
 log_file = f"{set}-set_{n_agents}agents_{num_steps}steps_{k}k_{origin_value}origin_{backtrack}backtrack_{resampling_method}-resampling.json"
 
 if seed:
-    print(f"Seed : {seed}")
-    log_file += f"_{seed}seed"
+    log_file = log_file.split(".json")[0] + f"_{seed}.json"
 run_options = {
     "set":set,
     "seed":seed
@@ -321,16 +322,16 @@ accuracy = n_success * 100 / len(results)
 print(f"Accuracy : {accuracy:.2f}\n")
 print(f"File name : {log_file}\n\n\n\n\n")
 
-cost = api.cost(verbose=False)
+cost = api.cost(verbose=True)
 
 
 # Send email notification
-send_email = True
 if send_email:
     subject = log_file
     message = f"Accuracy : {accuracy}\nCost : {cost}"
     try:
         email_notification(subject=subject, message=message)
+        print("Email sent successfully.")
     except:
-        print("Email not sent")
+        print("Email failed to send.")
         pass
