@@ -5,3 +5,4 @@ screenlog.*
 .env
 logs_old
 n_sandboks.ipynb
+actual_cost.txt

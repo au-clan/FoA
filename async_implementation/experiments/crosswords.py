@@ -12,7 +12,7 @@ from diskcache import Cache
 from datetime import datetime
 from collections import Counter
 
-# TODO: Not sure if this is correct, I didn't know how else to handle the package paths
+# TODO: Not sure if this is optimal, I didn't know how else to handle the package paths
 import sys
 
 sys.path.append(os.getcwd()) # Project root!!
@@ -24,10 +24,9 @@ from async_implementation.agents.crosswords import CrosswordsAgent
 from async_implementation.states.crosswords import CrosswordsState
 from async_implementation.resampling.resampler import Resampler
 from data.data import CrosswordsData
-from utils import create_folder, email_notification, create_box
+from utils import create_folder, email_notification, create_box, update_actual_cost
 
 logger = logging.getLogger("experiments")
-
 logger.setLevel(logging.DEBUG) # Order : debug < info < warning < error < critical
 log_folder = f"logs_recent/{datetime.now().date()}/crosswords/{datetime.now().strftime('%H')}:00/" # Folder in which logs will be saved (organized daily)
 create_folder(log_folder)
@@ -39,23 +38,23 @@ assert os.path.exists(
 cache = Cache("./caches/crosswords", size_limit=int(2e10))
 
 # get OPENAI_API_KEY from env
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-assert OPENAI_API_KEY is not None, "Please set the OPENAI_API_KEY environment variable"
+AZURE_OPENAI_API_KEY = os.environ.get("AZURE_OPENAI_API_KEY")
+assert AZURE_OPENAI_API_KEY is not None, "Please set the AZURE_OPENAI_API_KEY environment variable"
 
 api_config = {
     "max_tokens": 100,
     "temperature": 0.7,
     "top_p": 1,
     "request_timeout": 45,
-    "model": "gpt-3.5-turbo"
+    "model": "gpt-35-turbo-0125"
 }
 
-api = CachedOpenAIAPI(cache, api_config)
+api = CachedOpenAIAPI(cache, api_config, verbose=False)
 limiter = AsyncRoundRobin()
 # ToDo, this is a bit hacky. OpenAI allows multiple parallel requests per key, so we add the same key multiple times
-N = 4
+N = 2
 for _ in range(N):
-    limiter.add_resource(data=OPENAI_API_KEY)
+    limiter.add_resource(data=AZURE_OPENAI_API_KEY)
 
 # Setting up the data
 dataset = CrosswordsData()
@@ -63,13 +62,13 @@ dataset = CrosswordsData()
 
 # ToDo: this should probably be moved to its own file
 # for now I'm keeping it here, for easier debugging
-async def foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options, barrier):
+async def foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options, barrier, seed):
     num_agents = foa_options["n_agents"]
     num_steps = foa_options["max_steps"]
 
     # Use batching API
-    step_api = BatchingAPI(api, limiter, batch_size=num_agents*8, timeout=10)
-    eval_api = BatchingAPI(api, limiter, batch_size=num_agents*10, timeout=1)
+    step_api = BatchingAPI(api, limiter, batch_size=num_agents*8, timeout=10, tab="step")
+    eval_api = BatchingAPI(api, limiter, batch_size=num_agents*10, timeout=1, tab="eval")
 
     randomness = puzzle_idx
     random.seed(randomness)
@@ -98,6 +97,9 @@ async def foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options, barrier)
     solution_found = False ### DEBUG: Just for now until I figure out something better
     for step in range(num_steps):
 
+        if puzzle_idx ==0:
+            print(f"Step {step}")
+
         ### DEBUG: Just for now until I figure out something better
         if solution_found:
             await barrier.wait()
@@ -123,11 +125,11 @@ async def foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options, barrier)
         # After each step, the api should be empty
         assert len(step_api.futures) == 0, f"API futures should be empty, but are {len(step_api.futures)}"
 
-        # Variable state_records are only used for resampling. 
-        # Therefore, we can delete the states that cannot find a solution because there are not enough steps remaining
+        # Update state records
         foa_remaining_steps = num_steps - (step + 1)
-        task_required_steps = 10 # Minimum number of steps to solve the puzzle -> TODO: Put this somewhere better
-        state_records = [(idx, value, state) for idx, value, state in state_records if  foa_remaining_steps >= task_required_steps - len(state.steps)]
+        task_required_steps = 10
+        state_records = [(idx, value, state) for idx, value, state in state_records if  foa_remaining_steps >= task_required_steps - len(state.steps)] # Remove states that cannot finish in time
+        state_records = [(idx, value, state) for idx, value, state in state_records if value>0] # Remove states with no value
 
 
         # Verification : After each step we verify if the answer is found and if so we break    
@@ -210,6 +212,7 @@ async def run(run_options: dict, foa_options: dict):
 
     game_coroutines = []
     log = {}
+    seed = run_options["seed"]
 
     # Get the data for each puzzle
     puzzle_idxs, puzzles = dataset.get_data(run_options["set"])
@@ -222,7 +225,7 @@ async def run(run_options: dict, foa_options: dict):
 
     # Run FoA for each puzzle
     for puzzle_idx, puzzle in zip(puzzle_idxs, puzzles):
-        game_coroutines.append(foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options, barrier))
+        game_coroutines.append(foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options, barrier, seed))
     results = await asyncio.gather(*game_coroutines)
 
     # Merge logs for each run
@@ -230,9 +233,10 @@ async def run(run_options: dict, foa_options: dict):
     for l in logs:
         log.update(l)
 
-    print()
-    log["Cost"] = api.cost(verbose=True)
-    print()
+    step_cost = api.cost(tab="step")
+    evaluation_cost = api.cost(tab="eval")
+    total_cost = api.cost()
+    log["Cost"] = {"Step": step_cost, "Evaluation": evaluation_cost, "Total": total_cost}
 
     # Save merged logs
     with open(log_folder + log_file, 'w+') as f:
@@ -259,6 +263,8 @@ def parse_args():
     args.add_argument("--max_steps", type=int, default=20)
     args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile"], default="linear")
     args.add_argument("--k", type=int, default=1)
+    args.add_argument("--seed", type=int, default=0)
+    args.add_argument('--send_email', action=argparse.BooleanOptionalAction)
     args = args.parse_args()
     return args
 
@@ -273,13 +279,18 @@ origin_value = 0                           # The evaluation of the origin
 num_steps = args.max_steps                 # Max allowed steps
 backtrack = args.backtrack                 # Backtrack decaying coefficient
 resampling_method = args.resampling        # Resampling method
-
+seed = args.seed                           # Seed for reproducibility
+send_email = args.send_email               # Send email notification
 
 
 # Just for now so it's easier to change values and reduce noise
 log_file = f"{set}-set_{n_agents}agents_{num_steps}steps_{k}k_{origin_value}origin_{backtrack}backtrack_{resampling_method}-resampling.json"
+
+if seed:
+    log_file = log_file.split(".json")[0] + f"_{seed}.json"
 run_options = {
-    "set":set
+    "set":set,
+    "seed":seed
 }
 
 foa_options = {
@@ -317,16 +328,18 @@ accuracy = n_success * 100 / len(results)
 print(f"Accuracy : {accuracy:.2f}\n")
 print(f"File name : {log_file}\n\n\n\n\n")
 
-cost = api.cost(verbose=False)
+#Update actual cost.
+update_actual_cost(api)
 
+cost = api.cost(verbose=True)
 
 # Send email notification
-send_email = False
 if send_email:
     subject = log_file
     message = f"Accuracy : {accuracy}\nCost : {cost}"
     try:
         email_notification(subject=subject, message=message)
+        print("Email sent successfully.")
     except:
-        print("Email not sent")
+        print("Email failed to send.")
         pass

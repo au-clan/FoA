@@ -6,7 +6,7 @@ from collections import Counter
 
 import openai
 from deepdiff import DeepHash
-from openai import AsyncOpenAI
+from openai import AsyncAzureOpenAI
 
 logger = logging.getLogger(__name__)
 
@@ -35,8 +35,7 @@ class CachedOpenAIAPI:
         config = deepcopy(config)
         self.config = config
 
-        self.aclient = AsyncOpenAI()
-
+        self.aclient = AsyncAzureOpenAI(azure_endpoint="https://key-2-loc2.openai.azure.com/", api_version="2024-02-15-preview")
         # Counting tokens to compute cost
         self.tabs = {}
 
@@ -264,7 +263,7 @@ class CachedOpenAIAPI:
         model_used = self.config["model"]
 
         # "gpt-3.5-turbo" currently (!) refers to "gpt-3.5-turbo-0125"
-        if model_used == "gpt-3.5-turbo":
+        if model_used == "gpt-3.5-turbo" or "gpt-35-turbo-0125":
             model_used ="gpt-3.5-turbo-0125"
 
         if model_used not in catalog:

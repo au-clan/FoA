@@ -12,7 +12,7 @@ from diskcache import Cache
 from datetime import datetime
 from collections import Counter
 
-# TODO: Not sure if this is οπτιμαλ, I didn't know how else to handle the package paths
+# TODO: Not sure if this is optimal, I didn't know how else to handle the package paths
 import sys
 
 sys.path.append(os.getcwd()) # Project root!!
@@ -24,7 +24,7 @@ from async_implementation.agents.gameof24 import GameOf24Agent
 from async_implementation.states.gameof24 import GameOf24State
 from async_implementation.resampling.resampler import Resampler
 from data.data import GameOf24Data
-from utils import create_folder, email_notification, create_box
+from utils import create_folder, email_notification, create_box, update_actual_cost
 
 logger = logging.getLogger("experiments")
 logger.setLevel(logging.DEBUG) # Order : debug < info < warning < error < critical
@@ -38,26 +38,26 @@ assert os.path.exists(
 cache = Cache("./caches/gameof24", size_limit=int(2e10))
 
 # get OPENAI_API_KEY from env
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-assert OPENAI_API_KEY is not None, "Please set the OPENAI_API_KEY environment variable"
+AZURE_OPENAI_API_KEY = os.environ.get("AZURE_OPENAI_API_KEY")
+assert AZURE_OPENAI_API_KEY is not None, "Please set the AZURE_OPENAI_API_KEY environment variable"
 
 api_config = {
     "max_tokens": 100,
     "temperature": 0.7,
     "top_p": 1,
     "request_timeout": 45,
-    "model": "gpt-3.5-turbo"
+    "model": "gpt-35-turbo-0125"
 }
 
 api = CachedOpenAIAPI(cache, api_config, verbose=False)
 limiter = AsyncRoundRobin()
 # ToDo, this is a bit hacky. OpenAI allows multiple parallel requests per key, so we add the same key multiple times
-N = 4
+N = 2
 for _ in range(N):
-    limiter.add_resource(data=OPENAI_API_KEY)
+    limiter.add_resource(data=AZURE_OPENAI_API_KEY)
 
 # Setting up the data
-data = GameOf24Data()
+dataset = GameOf24Data()
 
 
 # ToDo: this should probably be moved to its own file
@@ -209,7 +209,7 @@ async def run(run_options: dict, foa_options: dict):
     seed = run_options["seed"]
 
     # Get the data for each puzzle
-    puzzle_idxs, puzzles = data.get_data(run_options["set"])
+    puzzle_idxs, puzzles = dataset.get_data(run_options["set"])
 
     ### Debugging
     #puzzle_idxs, puzzles = puzzle_idxs[20:40], puzzles[20:40]
@@ -322,8 +322,10 @@ accuracy = n_success * 100 / len(results)
 print(f"Accuracy : {accuracy:.2f}\n")
 print(f"File name : {log_file}\n\n\n\n\n")
 
-cost = api.cost(verbose=True)
+#Update actual cost.
+update_actual_cost(api)
 
+cost = api.cost(verbose=True)
 
 # Send email notification
 if send_email:

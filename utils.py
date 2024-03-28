@@ -94,6 +94,24 @@ def parse_suggestions(suggestions):
     # The prompt can potentially be cropped due to token constraints.
     # Therefore we remove everything after the last closing bracket ')'.
 
-    new_suggestions = remove_after_last_bracket(suggestions)
+    suggestions = remove_after_last_bracket(suggestions)
     #valid_suggestions = [suggestion for suggestion in new_suggestions.split("\n") if "(left:" in suggestion]
-    return new_suggestions.split("\n")
+    return suggestions.split("\n")
+    
+    
+def update_actual_cost(api):
+    """
+    Used to track the actual cost of the API usage.
+    """
+    try:
+        with open('actual_cost.txt', 'r') as file:
+            current_cost = float(file.read())
+    except FileNotFoundError:
+        current_cost = 0  # If the file doesn't exist yet
+    
+    api_cost = api.cost(actual_cost=True)["total_cost"]
+
+    new_cost = current_cost + api_cost
+
+    with open('actual_cost.txt', 'w') as file:
+        file.write(str(new_cost))
