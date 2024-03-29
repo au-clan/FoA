@@ -80,7 +80,7 @@ async def foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options, barrier,
     log[puzzle_idx] = {"puzzle": puzzle[0]}
     log[puzzle_idx].update({f"Agent {i}": {} for i in range(num_agents)})
 
-    data, board_gt = puzzle[0], puzzle[1] # Data is the list of clues, board_gt is the ground truth  board
+    data, board_gt = puzzle # Data is the list of clues, board_gt is the ground truth  board
     ans_gt = CrosswordsState.get_ans(board_gt) # Get the ground truth answers
 
     # State identifier shows the step and the agent where the state was visited eg. 0.1 means step 0, agent 1

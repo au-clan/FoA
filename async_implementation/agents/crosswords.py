@@ -32,8 +32,8 @@ class CrosswordsAgent:
             if parsed_response:
                 for candidate, score in parsed_response:
                     candidates_to_scores[candidate] = candidates_to_scores.get(candidate, 0) + score
-        candidates_to_scores = {k: v for k, v in candidates_to_scores.items()  if provokes_change(state, k)}
-        return candidates_to_scores
+        filtered_candidate_to_score = {k: v for k, v in candidates_to_scores.items()  if provokes_change(state, k)}
+        return filtered_candidate_to_score
     
     @staticmethod
     async def step(state: CrosswordsState, api, namespace)-> Tuple[CrosswordsState, str]:
@@ -51,8 +51,7 @@ class CrosswordsAgent:
         action = random.choice(max_value_suggestions)
 
         #Parse the action
-        action = action.split('\n')[-1]
-        action = action.split('. ')
+        action = parse_action(action)
 
         # Get the position and word from the action
         pos, word = action
@@ -180,9 +179,12 @@ def provokes_change(state, action):
     """
     Given  a state and an action return whether the action provokes a change to the state's board.
     """
-    current_board = state.board
-    new_board = state.board
+    current_board = state.board.copy()
+    new_board = state.board.copy()
+
+    action = parse_action(action)
     pos, word = action
+
     # Update new board based on the action
     if pos.startswith('h'):
         idx = int(pos[1:]) - 1
@@ -193,8 +195,12 @@ def provokes_change(state, action):
         idx += 5  # for later status update
     else:
         return False
-
     if new_board == current_board:
         return False
     else:
         return True
+    
+def parse_action(action: str)-> str:
+    action = action.split('\n')[-1]
+    action = action.split('. ')
+    return action
