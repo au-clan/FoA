@@ -43,21 +43,24 @@ class CrosswordsAgent:
         
         # Get next step suggestions/actions and pick one of the ones with the highest value
         suggestions = await CrosswordsAgent.get_candidates(state, api, namespace=namespace)
-        if len(suggestions) == 0:
-            return state.duplicate(randomness=random.randint(0, 1000))
+        
+        assert len(suggestions) > 0, "No suggestions found"
+        #if len(suggestions) == 0:
+        #    return state.duplicate(randomness=random.randint(0, 1000))
+
         suggestions_max_value = max(suggestions.values())
         max_value_suggestions = [suggestion for suggestion, value in suggestions.items() if value == suggestions_max_value]
         random.seed(state.randomness)
         action = random.choice(max_value_suggestions)
 
         #Parse the action
-        action = parse_action(action)
+        parsed_action = parse_action(action)
 
         # Get the position and word from the action
-        pos, word = action
+        pos, word = parsed_action
         
         # Assert the action is valid TODO: Maybe change to actual assert (?)
-        if len(action) != 2:
+        if len(parsed_action) != 2:
             return 'Invalid! Format should be like "h1. apple"', 0, False, {}
         if len(word) != 5:
             return 'Invalid! Word should have 5 letters.', 0, False, {}
@@ -90,7 +93,7 @@ class CrosswordsAgent:
             board=new_board, 
             ans=new_ans, 
             status=new_status,
-            steps = state.steps + [" .".join(action)],
+            steps = state.steps + [action],
             randomness=random.randint(0, 1000)
              )
         return next_state
@@ -106,7 +109,10 @@ class CrosswordsAgent:
         count = {'sure': 0, 'maybe': 0, 'impossible': 0}
         
         for ans, data in zip(state.ans, state.data):
-            if ans.count('_') >= 4:continue
+
+            # Skip answers with 4 or 5 missing letters
+            if ans.count('_') >= 4:
+                continue
             
             # Parse the answer along with the original question
             ans = ' '.join(ans.lower())
@@ -114,11 +120,12 @@ class CrosswordsAgent:
             
             # Get a value for the line from the set {sure, maybe, impossible}
             prompt = prompts.value_prompt.format(input=line)
-            res = await api.buffered_request(prompt, key=hash(state), namespace=namespace)
+            response = await api.buffered_request(prompt, key=hash(state), namespace=namespace)
             
             # Parse the response and update the count
-            res = res.split('\n')[-1].strip()
-            if res in count: count[res] += 1
+            parsed_response = response.split('\n')[-1].strip()
+            if parsed_response in count:
+                count[parsed_response] += 1
 
         # Map the count to a value number    
         value_map = {'impossible': -20, 'maybe': 5, 'sure': 20} #TODO: ad hoc
@@ -137,7 +144,7 @@ class CrosswordsAgent:
             {"r": 1} : Finished and correct.
             {"r": -1} : Finished and incorrect.
         """
-        if "_____" in state.ans:
+        if any(["_" in ans for ans in state.ans]):
             return {"r":0}
         elif state.board == state.board_gt:
             return {"r":1}
