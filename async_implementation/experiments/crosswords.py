@@ -42,14 +42,14 @@ AZURE_OPENAI_API_KEY = os.environ.get("AZURE_OPENAI_API_KEY")
 assert AZURE_OPENAI_API_KEY is not None, "Please set the AZURE_OPENAI_API_KEY environment variable"
 
 api_config = {
-    "max_tokens": 100,
+    "max_tokens": 1000,
     "temperature": 0.7,
     "top_p": 1,
     "request_timeout": 45,
     "model": "gpt-35-turbo-0125"
 }
 
-api = CachedOpenAIAPI(cache, api_config, verbose=False)
+api = CachedOpenAIAPI(cache, api_config, verbose=True)
 limiter = AsyncRoundRobin()
 # ToDo, this is a bit hacky. OpenAI allows multiple parallel requests per key, so we add the same key multiple times
 N = 2
@@ -68,7 +68,7 @@ async def foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options, barrier,
 
     # Use batching API
     step_api = BatchingAPI(api, limiter, batch_size=num_agents*8, timeout=10, tab="step")
-    eval_api = BatchingAPI(api, limiter, batch_size=num_agents*10, timeout=1, tab="eval")
+    eval_api = BatchingAPI(api, limiter, batch_size=num_agents*10, timeout=10, tab="eval")
 
     randomness = puzzle_idx
     random.seed(randomness)
@@ -97,8 +97,8 @@ async def foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options, barrier,
     solution_found = False ### DEBUG: Just for now until I figure out something better
     for step in range(num_steps):
 
-        if puzzle_idx ==0:
-            print(f"Step {step}")
+        #if puzzle_idx ==0:
+        print(f"Step {step}")
 
         ### DEBUG: Just for now until I figure out something better
         if solution_found:
@@ -151,6 +151,10 @@ async def foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options, barrier,
             pruned_indices = [None] * len(invalid_state_indices)
             invalids_resolved = False
 
+        # quick check regarding states with no suggestions
+        for state in states:
+            assert state.ans != ["PRUNE"]*5
+
         # Log - Pruning
         for agent_id in range(num_agents):
             if agent_id in invalid_state_indices:
@@ -158,7 +162,7 @@ async def foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options, barrier,
                 if pruned_indice is None:
                     log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": "NA"})
                 else:
-                    log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning" : {"Idx":temp_state_records[pruned_indice][0], "Resampled state": [ans for ans in state_records[pruned_indice][2].ans if ans!="_____"]}})
+                    log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning" : {"Idx":temp_state_records[pruned_indice][0], "Resampled state": CrosswordsState.render_board(state_records[pruned_indice][2].board)}})
             else:
                 log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": None})
 
@@ -190,7 +194,10 @@ async def foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options, barrier,
             
             # Log - Resampling
             for agent_id, resampled_idx in enumerate(resampled_indices):
-                log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Resampling": {"Idx":state_records[resampled_idx][0], "Resampled state": [ans for ans in state_records[resampled_idx][2].ans if ans!="_____"]}})
+                log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Resampling": {"Idx":state_records[resampled_idx][0], "Resampled state": CrosswordsState.render_board(state_records[resampled_idx][2].board)}})
+
+            # After each evaluation, the api should be empty
+            assert len(eval_api.futures) == 0, f"API futures should be empty, but are {len(eval_api.futures)}"
             
         # Logging : metrics
         for agent_id, state in enumerate(states):
@@ -218,7 +225,7 @@ async def run(run_options: dict, foa_options: dict):
     puzzle_idxs, puzzles = dataset.get_data(run_options["set"])
 
     ### Debugging
-    puzzle_idxs, puzzles = puzzle_idxs[:1], puzzles[:1]
+    #puzzle_idxs, puzzles = puzzle_idxs[-1:], puzzles[-1:]
 
     # Barriers for each puzzle experiment
     barrier = asyncio.Barrier(len(puzzles))

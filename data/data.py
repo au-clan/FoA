@@ -30,7 +30,7 @@ class CrosswordsData:
 
     def get_data(self, set):
         if set == "mini":
-            indices = [i + 1 for i in range(0,100,5)[:3]]
+            indices = [i + 1 for i in range(0,100,5)[:5]]
         elif set == "train":
             indices = [i + 2 for i in range(0,100,5)[:10]]
         elif set == "validation":

@@ -8,6 +8,8 @@ import openai
 from deepdiff import DeepHash
 from openai import AsyncAzureOpenAI
 
+from utils import create_box
+
 logger = logging.getLogger(__name__)
 
 
@@ -201,6 +203,11 @@ class CachedOpenAIAPI:
                 raw_responses = []
                 for choice in response.choices:
                     raw_responses.append((choice.message.content, completion_tokens/n_from_api_total, prompt_tokens))
+                    
+                if any(response[0]==None for response in raw_responses):
+                    for choice in response.choices:
+                        print(create_box(choice))
+                    assert False, "None response in raw_responses"
 
         ##-- Step 4. Requests redistribution --##
         for n, namespace, used_count, cache_entry, cache_key in zip(namespace_counter.values(), namespace_counter.keys(), used_counts, cache_entries, cache_keys):
@@ -232,6 +239,7 @@ class CachedOpenAIAPI:
             raise Exception("Both n_api and n_cache are zero. This should not happen.")
         
         ##-- Step 5. Rearrange responses --##
+        initial_responses = responses.copy()
         mapping = {}
         for k,v in namespace_counter.items():
             mapping[k] = []
@@ -242,6 +250,12 @@ class CachedOpenAIAPI:
         for namespace in namespaces:
             responses.append(mapping[namespace].pop(0))
 
+        if any([response== None for response in responses]):
+            for i, response in enumerate(responses):
+                error = f"Response:\n{response}\nInitial responses:\n{initial_responses[i]}\n"
+                print(create_box(error))
+
+            assert False, "None response in responses"
         return responses
 
 
@@ -272,11 +286,11 @@ class CachedOpenAIAPI:
             if tab:
                 # If a tab is specified, return the cost for the specific tab.
                 if actual_cost:
-                    input_tokens = self.tabs[tab]["actual_prompt_tokens"]
-                    output_tokens = self.tabs[tab]["actual_completion_tokens"]
+                    input_tokens = self.tabs.get(tab, {}).get("actual_prompt_tokens", 0)
+                    output_tokens = self.tabs.get(tab, {}).get("actual_completion_tokens", 0)
                 else:
-                    input_tokens = self.tabs[tab]["prompt_tokens"]
-                    output_tokens = self.tabs[tab]["completion_tokens"]
+                    input_tokens = self.tabs.get(tab, {}).get("prompt_tokens", 0)
+                    output_tokens = self.tabs.get(tab, {}).get("completion_tokens", 0)
             else:
                 # If no tab is specified, return the cost for all tabs.
                 if actual_cost:

@@ -27,12 +27,18 @@ class CrosswordsAgent:
 
         # Parse the responses and add the scores for each action
         candidates_to_scores = {}
+    
         for response in responses:
+            # BUG: No idea why no response => Look into this !!!
+            if response == None:
+                print("Response is None")
+                continue
             parsed_response = parse_response(response)
             if parsed_response:
                 for candidate, score in parsed_response:
                     candidates_to_scores[candidate] = candidates_to_scores.get(candidate, 0) + score
         filtered_candidate_to_score = {k: v for k, v in candidates_to_scores.items()  if provokes_change(state, k)}
+
         return filtered_candidate_to_score
     
     @staticmethod
@@ -44,9 +50,24 @@ class CrosswordsAgent:
         # Get next step suggestions/actions and pick one of the ones with the highest value
         suggestions = await CrosswordsAgent.get_candidates(state, api, namespace=namespace)
         
-        assert len(suggestions) > 0, "No suggestions found"
-        #if len(suggestions) == 0:
-        #    return state.duplicate(randomness=random.randint(0, 1000))
+        if len(suggestions) == 0:
+            """
+            TODO: Cleaner solution.
+            If this condition applies the ToT backtracks. In our case backtrack is replaced by resampling.
+            This is quite a hacky solution. Basically returns the same state with all answers filled incorrectly.
+            When this state is validated it returns {"r": -1} and resampling is forced in pruning.
+            """
+            next_state = CrosswordsState(
+            data=state.data,
+            board_gt=state.board_gt,
+            ans_gt=state.ans_gt,
+            board=state.board, 
+            ans=["PRUNE"]*10, 
+            status=state.status,
+            steps=state.steps,
+            randomness=state.randomness
+             )
+            return next_state
 
         suggestions_max_value = max(suggestions.values())
         max_value_suggestions = [suggestion for suggestion, value in suggestions.items() if value == suggestions_max_value]
