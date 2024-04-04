@@ -204,10 +204,6 @@ class CachedOpenAIAPI:
                 for choice in response.choices:
                     raw_responses.append((choice.message.content, completion_tokens/n_from_api_total, prompt_tokens))
                     
-                if any(response[0]==None for response in raw_responses):
-                    for choice in response.choices:
-                        print(create_box(choice))
-                    assert False, "None response in raw_responses"
 
         ##-- Step 4. Requests redistribution --##
         for n, namespace, used_count, cache_entry, cache_key in zip(namespace_counter.values(), namespace_counter.keys(), used_counts, cache_entries, cache_keys):
@@ -250,12 +246,6 @@ class CachedOpenAIAPI:
         for namespace in namespaces:
             responses.append(mapping[namespace].pop(0))
 
-        if any([response== None for response in responses]):
-            for i, response in enumerate(responses):
-                error = f"Response:\n{response}\nInitial responses:\n{initial_responses[i]}\n"
-                print(create_box(error))
-
-            assert False, "None response in responses"
         return responses
 
 

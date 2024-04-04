@@ -1,6 +1,6 @@
 python async_implementation/experiments/crosswords.py\
-    --k 1\
-    --max_steps 10\
-    --n_agents 2\
-    --backtrack 0.5\
+    --k 2\
+    --max_steps 6\
+    --n_agents 4\
+    --backtrack 0\
     --set mini\

@@ -10,7 +10,7 @@ from async_implementation.states.crosswords import CrosswordsState
 class CrosswordsAgent:
 
     @staticmethod
-    async def get_candidates(state: CrosswordsState, api, namespace, n:int =8)-> dict:
+    async def get_candidates(state: CrosswordsState, api, namespace, n:int =2)-> dict:
         """
         Given a state, return a dictionary of candidate actions along with its scores.
         """
@@ -29,9 +29,8 @@ class CrosswordsAgent:
         candidates_to_scores = {}
     
         for response in responses:
-            # BUG: No idea why no response => Look into this !!!
+            # Azure-Filtered reponse
             if response == None:
-                print("Response is None")
                 continue
             parsed_response = parse_response(response)
             if parsed_response:
@@ -57,6 +56,7 @@ class CrosswordsAgent:
             This is quite a hacky solution. Basically returns the same state with all answers filled incorrectly.
             When this state is validated it returns {"r": -1} and resampling is forced in pruning.
             """
+            print(f"No suggestions found for {namespace}")
             next_state = CrosswordsState(
             data=state.data,
             board_gt=state.board_gt,
@@ -66,7 +66,7 @@ class CrosswordsAgent:
             status=state.status,
             steps=state.steps,
             randomness=state.randomness
-             )
+            )
             return next_state
 
         suggestions_max_value = max(suggestions.values())
@@ -142,6 +142,10 @@ class CrosswordsAgent:
             # Get a value for the line from the set {sure, maybe, impossible}
             prompt = prompts.value_prompt.format(input=line)
             response = await api.buffered_request(prompt, key=hash(state), namespace=namespace)
+
+            # Azure-Filtered response
+            if response is None:
+                continue
             
             # Parse the response and update the count
             parsed_response = response.split('\n')[-1].strip()
@@ -150,8 +154,8 @@ class CrosswordsAgent:
 
         # Map the count to a value number    
         value_map = {'impossible': -20, 'maybe': 5, 'sure': 20} #TODO: ad hoc
-        value_number  =sum(value * value_map[name] for name, value in count.items())
-        return value_number
+        value_number  = sum(value * value_map[name] for name, value in count.items())
+        return max(value_number, 0)
     
     @staticmethod
     def verify(state: CrosswordsState)->dict:

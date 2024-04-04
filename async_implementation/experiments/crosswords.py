@@ -49,7 +49,8 @@ api_config = {
     "model": "gpt-35-turbo-0125"
 }
 
-api = CachedOpenAIAPI(cache, api_config, verbose=True)
+api_step = CachedOpenAIAPI(cache, api_config, verbose=True)
+api_eval = CachedOpenAIAPI(cache, api_config, verbose=True)
 limiter = AsyncRoundRobin()
 # ToDo, this is a bit hacky. OpenAI allows multiple parallel requests per key, so we add the same key multiple times
 N = 2
@@ -62,13 +63,13 @@ dataset = CrosswordsData()
 
 # ToDo: this should probably be moved to its own file
 # for now I'm keeping it here, for easier debugging
-async def foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options, barrier, seed):
+async def foa_crosswords(apis, limiter, puzzle_idx, puzzle, foa_options, barrier, seed):
     num_agents = foa_options["n_agents"]
     num_steps = foa_options["max_steps"]
 
     # Use batching API
-    step_api = BatchingAPI(api, limiter, batch_size=num_agents*8, timeout=10, tab="step")
-    eval_api = BatchingAPI(api, limiter, batch_size=num_agents*10, timeout=10, tab="eval")
+    step_api = BatchingAPI(apis[0], limiter, batch_size=num_agents*2, timeout=2, tab="step")
+    eval_api = BatchingAPI(apis[1], limiter, batch_size=num_agents*10, timeout=2, tab="eval")
 
     randomness = puzzle_idx
     random.seed(randomness)
@@ -143,12 +144,21 @@ async def foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options, barrier,
         # Pruning
         temp_state_records = [(idx, value, state) for idx, value, state in state_records if state.status!=[0]*10]
         invalid_state_indices = [i for i, verification in enumerate(verifications) if verification["r"] == -1]
-        if len(temp_state_records) > 0:
+        if len(temp_state_records) > 0: 
+            # If there are eligible + evaluated states.
             new_states, pruned_indices = resampler.resample(temp_state_records, len(invalid_state_indices), foa_options["resampling_method"])
             states = [new_states.pop(0) if i in invalid_state_indices else state for i, state in enumerate(states)]
             invalids_resolved = True
         else:
-            pruned_indices = [None] * len(invalid_state_indices)
+            # If there are no eligible + evaluated states.
+            temp_state_records = [(f"{step}.i", 1, state) for i, state in enumerate(states) if i not in invalid_state_indices] 
+            if temp_state_records == []:
+                for i in range(len(states)):
+                    # If there are no eligible states at all.
+                    temp_state_records.append(("INIT", 1, CrosswordsState(data=data, board_gt=board_gt, ans_gt=ans_gt, steps=[], randomness=random.randint(0, 1000))))
+                    state_records = temp_state_records
+            new_states, pruned_indices = resampler.resample(temp_state_records, len(invalid_state_indices), "linear")
+            states = [new_states.pop(0) if i in invalid_state_indices else state for i, state in enumerate(states)]
             invalids_resolved = False
 
         # quick check regarding states with no suggestions
@@ -156,13 +166,10 @@ async def foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options, barrier,
             assert state.ans != ["PRUNE"]*5
 
         # Log - Pruning
-        for agent_id in range(num_agents):
+        for agent_id, state in enumerate(states):
             if agent_id in invalid_state_indices:
                 pruned_indice = pruned_indices.pop(0)
-                if pruned_indice is None:
-                    log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": "NA"})
-                else:
-                    log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning" : {"Idx":temp_state_records[pruned_indice][0], "Resampled state": CrosswordsState.render_board(state_records[pruned_indice][2].board)}})
+                log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning" : {"Idx":temp_state_records[pruned_indice][0], "Resampled state": CrosswordsState.render_board(state.board)}})
             else:
                 log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": None})
 
@@ -232,7 +239,7 @@ async def run(run_options: dict, foa_options: dict):
 
     # Run FoA for each puzzle
     for puzzle_idx, puzzle in zip(puzzle_idxs, puzzles):
-        game_coroutines.append(foa_crosswords(api, limiter, puzzle_idx, puzzle, foa_options, barrier, seed))
+        game_coroutines.append(foa_crosswords([api_step, api_eval], limiter, puzzle_idx, puzzle, foa_options, barrier, seed))
     results = await asyncio.gather(*game_coroutines)
 
     # Merge logs for each run
@@ -240,10 +247,11 @@ async def run(run_options: dict, foa_options: dict):
     for l in logs:
         log.update(l)
 
-    step_cost = api.cost(tab="step")
-    evaluation_cost = api.cost(tab="eval")
-    total_cost = api.cost()
-    log["Cost"] = {"Step": step_cost, "Evaluation": evaluation_cost, "Total": total_cost}
+    step_cost = api_step.cost(tab="step")
+    evaluation_cost = api_eval.cost(tab="eval")
+    total_cost = {key : sum(cost[key] for cost in [step_cost, evaluation_cost]) for key in step_cost.keys()}
+    print(f"\nTotal cost :\n{total_cost}")
+    log["Cost"] = {"Step": step_cost, "Evaluation": evaluation_cost, "Total cost": total_cost}
 
     # Save merged logs
     with open(log_folder + log_file, 'w+') as f:
@@ -336,9 +344,9 @@ print(f"Accuracy : {accuracy:.2f}\n")
 print(f"File name : {log_file}\n\n\n\n\n")
 
 #Update actual cost.
-update_actual_cost(api)
+update_actual_cost(api_step)
 
-cost = api.cost(verbose=True)
+#cost = api.cost(verbose=True)
 
 # Send email notification
 if send_email:
