@@ -1,20 +1,23 @@
+import os
+import time
 import asyncio
 import logging
-import time
+
 from copy import deepcopy
 from collections import Counter
 
 import openai
 from deepdiff import DeepHash
-from openai import AsyncAzureOpenAI
+from openai import AsyncAzureOpenAI, AsyncOpenAI
 
-from utils import create_box
+from async_engine.round_robin_manager import AsyncRoundRobin
 
 logger = logging.getLogger(__name__)
 
 
 class CachedOpenAIAPI:
-    def __init__(self, cache, config,
+    def __init__(self, cache, config, models,
+                 resources=1,
                  sleep_time=5,
                  sleep_factor=3,
                  num_retries=3,
@@ -34,23 +37,62 @@ class CachedOpenAIAPI:
         self.max_sleep = max_sleep
         self.num_retries = num_retries
 
+        # Configure OpenAI Client
+        self.clients = {}
+        if config.pop("use_azure", False):
+            model2keys = {
+                "gpt-4-0613": {"access_token": "AZURE_OPENAI_KEY2LOC1", "endpoint": "key-2"},
+                "gpt-35-turbo-0125" : {"access_token":"AZURE_OPENAI_KEY2LOC2", "endpoint": "key-2-loc2"},
+                "gpt-4-0125-preview": {"access_token":"AZURE_OPENAI_KEY2LOC3", "endpoint": "key-2-loc3"},
+            }
+
+            for model in models:
+                access_token = model2keys.get(model, {}).get("access_token", False)
+                endpoint = model2keys.get(model, {}).get("endpoint", False)
+                assert bool(access_token and endpoint), f"Model {model} not supported!"
+
+                api_key = os.getenv(access_token)
+                assert api_key, f"Access token '{access_token}' not found in environment variables!"
+
+                self.clients[model]= AsyncAzureOpenAI(
+                    azure_endpoint="https://"+endpoint+".openai.azure.com/",
+                    api_key=api_key,
+                    api_version="2024-02-15-preview"
+                )
+        else:
+            access_token = "OPENAI_API_KEY"
+            api_key = os.getenv(access_token)
+            assert api_key, f"Access token '{access_token}' not found in environment variables!"
+
+            for model in models:
+                self.clients[model] = AsyncOpenAI(api_key=access_token)
+
+        # Save config
         config = deepcopy(config)
         self.config = config
 
-        self.aclient = AsyncAzureOpenAI(azure_endpoint="https://key-2-loc2.openai.azure.com/", api_version="2024-02-15-preview")
+        # Resource manager
+        """
+        This is a bit hacky. OpenAI allows multiple parallel requests per key, so we add the same key multiple times.
+        """
+        self.limiters = {}
+        for model in models:
+            self.limiters[model] = AsyncRoundRobin()
+            for _ in range(resources):
+                self.limiters[model].add_resource(data=api_key)
+
         # Counting tokens to compute cost
         self.tabs = {}
 
         # Counter
         self.used_count = {}
 
-    async def request(self, messages, namespaces, limiter, request_timeout: int=30, tab: str="default"):
+    async def request(self, messages, namespaces, model: str=None, request_timeout: int=30, tab: str="default"):
         """
         CACHED request to the OpenAI API.
         Input:
         - messages: The prompt
         - namespaces: List of namespace. Each namespace is attributed its own cache entry.
-        - limiter: Resource manager
         - request_timeout: Timeout for the request
         - tab: The tab for which the request is made
 
@@ -70,8 +112,8 @@ class CachedOpenAIAPI:
             - Rearranges the responses to match the order of the input namespace list.
         """
 
-        if tab not in self.tabs:
-            self.tabs[tab] = {"completion_tokens": 0, "prompt_tokens": 0, "actual_completion_tokens": 0, "actual_prompt_tokens": 0}
+        if tab not in self.tabs or model not in self.tabs[tab]:
+            self.tabs[tab] = {model:{"completion_tokens": 0, "prompt_tokens": 0, "actual_completion_tokens": 0, "actual_prompt_tokens": 0}}
         
         ##-- Step 1. Setup --##
         responses = []
@@ -81,6 +123,7 @@ class CachedOpenAIAPI:
 
         # Check if the request is cached
         cache_config = deepcopy(self.config)
+        cache_config["model"] = model
 
         # we keep only those keys that are relevant for the answer generation
         keep_keys = ["model", "temperature", "max_tokens", "top_p", "presence_penalty", "frequency_penalty", "stop"]
@@ -139,12 +182,12 @@ class CachedOpenAIAPI:
             print(f"Requesting {n_from_api_total} samples")
 
             start = time.time()
-            async with limiter as resource:
-                self.aclient.api_key = resource.data
+            async with self.limiters[model] as resource:
+                self.clients[model].api_key = resource.data
                 while True:
                     self.current_sleep_time = min(self.current_sleep_time, self.max_sleep)
                     try:
-                        response = await asyncio.wait_for(self.aclient.chat.completions.create(
+                        response = await asyncio.wait_for(self.clients[model].chat.completions.create(
                             **cache_config,
                             # messages=cache_config["messages"],
                             # model=cache_config["model"],
@@ -211,7 +254,7 @@ class CachedOpenAIAPI:
             # Update responses from cache
             n_cache = responses_per_namespace[namespace]["cached"]
             cached_responses = [entry for entry in cache_entry[used_count:used_count+n_cache]]
-            self.tabs[tab]["completion_tokens"] += sum([entry[1] for entry in cached_responses])
+            self.tabs[tab][model]["completion_tokens"] += sum([entry[1] for entry in cached_responses])
             self.used_count[cache_key] = self.used_count.get(cache_key, 0) + n_cache
             responses.extend([entry[0] for entry in cached_responses])
 
@@ -220,17 +263,17 @@ class CachedOpenAIAPI:
             api_responses = [raw_responses.pop(0) for _ in range(n_api)]
             cache_entry.extend(api_responses)
             self.cache.set(cache_key, cache_entry)
-            self.tabs[tab]["completion_tokens"] += sum([response[1] for response in api_responses])
-            self.tabs[tab]["actual_completion_tokens"] += sum([response[1] for response in api_responses]) 
+            self.tabs[tab][model]["completion_tokens"] += sum([response[1] for response in api_responses])
+            self.tabs[tab][model]["actual_completion_tokens"] += sum([response[1] for response in api_responses]) 
             self.used_count[cache_key] =  self.used_count.get(cache_key, 0) + n_api
             responses.extend([response[0] for response in api_responses])   
 
         # Pormpt cost
         if n_api != 0:
-            self.tabs[tab]["prompt_tokens"] += api_responses[0][2]
-            self.tabs[tab]["actual_prompt_tokens"] += api_responses[0][2]
+            self.tabs[tab][model]["prompt_tokens"] += api_responses[0][2]
+            self.tabs[tab][model]["actual_prompt_tokens"] += api_responses[0][2]
         elif n_cache != 0:
-            self.tabs[tab]["prompt_tokens"] += cached_responses[0][2]
+            self.tabs[tab][model]["prompt_tokens"] += cached_responses[0][2]
         else:
             raise Exception("Both n_api and n_cache are zero. This should not happen.")
         
@@ -252,49 +295,51 @@ class CachedOpenAIAPI:
     def __str__(self):
         return self.config['model']
 
-    def cost(self, actual_cost=False, tab=None, verbose=False):
+    def cost(self, tab_name=None, actual_cost=False, verbose=False):
 
         # Price catalog
         catalog = {
-            "gpt-4": {"prompt_tokens": 0.03, "completion_tokens":0.06},
-            "gpt-4-32k": {"prompt_tokens": 0.06, "completion_tokens":0.12},
-            "gpt-3.5-turbo-1106": {"prompt_tokens": 0.001, "completion_tokens":0.002},
-            "gpt-3.5-turbo-0125": {"prompt_tokens": 0.0005, "completion_tokens":0.0015},
-            "gpt-3.5-turbo-instruct": {"prompt_tokens": 0.0015, "completion_tokens":0.002},
+            "gpt-4-0613": {"prompt_tokens": 0.03, "completion_tokens":0.06},
+            "gpt-4-0125-preview": {"prompt_tokens": 0.01, "completion_tokens":0.03},
+            "gpt-3.5-turbo-0125": {"prompt_tokens": 0.0005, "completion_tokens":0.0015}
         }
 
-        # Name of the model we actually used
-        model_used = self.config["model"]
+        # Same model just different name
+        catalog["gpt-3.5-turbo"] = catalog["gpt-35-turbo-0125"] = catalog["gpt-3.5-turbo-0125"]
 
-        # "gpt-3.5-turbo" currently (!) refers to "gpt-3.5-turbo-0125"
-        if model_used == "gpt-3.5-turbo" or "gpt-35-turbo-0125":
-            model_used ="gpt-3.5-turbo-0125"
+        input_cost = 0
+        output_cost = 0
 
-        if model_used not in catalog:
-            print("No pricing information available for this model")
+        # TODO: Clean this up -> No need for initial if else, can be better.
+        if tab_name:
+            # If a tab is specified, return the cost for the specific tab.
+            for model, tokens in self.tabs.get(tab_name, {}).items():
+                if actual_cost:
+                    input_tokens = tokens["actual_prompt_tokens"]
+                    output_tokens = tokens["actual_completion_tokens"]
+                else:
+                    input_tokens = tokens["prompt_tokens"]
+                    output_tokens = tokens["completion_tokens"]
+                input_cost += input_tokens / 1000 * catalog[model]["prompt_tokens"]
+                output_cost += output_tokens / 1000 * catalog[model]["completion_tokens"]
         else:
-            if tab:
-                # If a tab is specified, return the cost for the specific tab.
-                if actual_cost:
-                    input_tokens = self.tabs.get(tab, {}).get("actual_prompt_tokens", 0)
-                    output_tokens = self.tabs.get(tab, {}).get("actual_completion_tokens", 0)
-                else:
-                    input_tokens = self.tabs.get(tab, {}).get("prompt_tokens", 0)
-                    output_tokens = self.tabs.get(tab, {}).get("completion_tokens", 0)
-            else:
-                # If no tab is specified, return the cost for all tabs.
-                if actual_cost:
-                    input_tokens = sum([tab["actual_prompt_tokens"] for tab in self.tabs.values()])
-                    output_tokens = sum([tab["actual_completion_tokens"] for tab in self.tabs.values()])
-                else:
-                    input_tokens = sum([tab["prompt_tokens"] for tab in self.tabs.values()])
-                    output_tokens = sum([tab["completion_tokens"] for tab in self.tabs.values()])
+            # If no model is specified, return the cost for all models.
+            for _, tab in self.tabs.items():
+                for model, tokens in tab.items():
+                    if actual_cost:
+                        input_tokens = tokens["actual_prompt_tokens"]
+                        output_tokens = tokens["actual_completion_tokens"]
+                    else:
+                        input_tokens = tokens["prompt_tokens"]
+                        output_tokens = tokens["completion_tokens"]
+                    input_cost += input_tokens / 1000 * catalog[model]["prompt_tokens"]
+                    output_cost += output_tokens / 1000 * catalog[model]["completion_tokens"]
+        
+        total_cost = input_cost + output_cost
 
-            input_cost = input_tokens / 1000 * catalog[model_used]["prompt_tokens"]
-            output_cost = output_tokens / 1000 * catalog[model_used]["completion_tokens"]
-            total_cost = input_cost + output_cost
-            if verbose:
-                print(f"Input tokens: {input_tokens:.0f} ({input_cost:.3f} USD)")
-                print(f"Output tokens: {output_tokens:.0f} ({output_cost:.3f} USD)")
-                print(f"Total tokens: {input_tokens + output_tokens:.0f} ({total_cost:.3f} USD)")
-            return {"input_tokens": input_tokens, "output_tokens": output_tokens, "total_cost": total_cost}
+        if verbose:
+            print(f"Input cost: {input_cost:.3f} USD")
+            print(f"Output cost: {output_cost:.3f} USD")
+            print(f"Total tokens: {total_cost:.3f} USD")
+
+        return {"input_cost": input_cost, "output_cost": output_cost, "total_cost": total_cost}

@@ -56,7 +56,7 @@ class CrosswordsAgent:
             This is quite a hacky solution. Basically returns the same state with all answers filled incorrectly.
             When this state is validated it returns {"r": -1} and resampling is forced in pruning.
             """
-            print(f"No suggestions found for {namespace}")
+            #print(f"No suggestions found for {namespace}")
             next_state = CrosswordsState(
             data=state.data,
             board_gt=state.board_gt,

@@ -28,7 +28,7 @@ from utils import create_folder, email_notification, create_box, update_actual_c
 
 logger = logging.getLogger("experiments")
 logger.setLevel(logging.DEBUG) # Order : debug < info < warning < error < critical
-log_folder = f"logs_recent/{datetime.now().date()}/crosswords/{datetime.now().strftime('%H')}:00/" # Folder in which logs will be saved (organized daily)
+log_folder = f"logs_recent/gridsearch/crosswords/" # Folder in which logs will be saved (organized daily)
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
@@ -37,25 +37,21 @@ assert os.path.exists(
     "./caches/"), "Please run the script from the root directory of the project. To make sure all caches are created correctly."
 cache = Cache("./caches/crosswords", size_limit=int(2e10))
 
-# get OPENAI_API_KEY from env
-AZURE_OPENAI_API_KEY = os.environ.get("AZURE_OPENAI_API_KEY")
-assert AZURE_OPENAI_API_KEY is not None, "Please set the AZURE_OPENAI_API_KEY environment variable"
-
-api_config = {
+step_api_config = eval_api_config = {
     "max_tokens": 1000,
     "temperature": 0.7,
     "top_p": 1,
     "request_timeout": 45,
-    "model": "gpt-35-turbo-0125"
+    "use_azure": False,
 }
 
-api_step = CachedOpenAIAPI(cache, api_config, verbose=True)
-api_eval = CachedOpenAIAPI(cache, api_config, verbose=True)
-limiter = AsyncRoundRobin()
-# ToDo, this is a bit hacky. OpenAI allows multiple parallel requests per key, so we add the same key multiple times
-N = 2
-for _ in range(N):
-    limiter.add_resource(data=AZURE_OPENAI_API_KEY)
+models = {
+    "step": "gpt-3.5-turbo-0125",
+    "eval": "gpt-3.5-turbo-0125",
+}
+
+api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=2, verbose=True)
+
 
 # Setting up the data
 dataset = CrosswordsData()
@@ -63,13 +59,13 @@ dataset = CrosswordsData()
 
 # ToDo: this should probably be moved to its own file
 # for now I'm keeping it here, for easier debugging
-async def foa_crosswords(apis, limiter, puzzle_idx, puzzle, foa_options, barrier, seed):
+async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed):
     num_agents = foa_options["n_agents"]
     num_steps = foa_options["max_steps"]
 
     # Use batching API
-    step_api = BatchingAPI(apis[0], limiter, batch_size=num_agents*2, timeout=2, tab="step")
-    eval_api = BatchingAPI(apis[1], limiter, batch_size=num_agents*10, timeout=2, tab="eval")
+    step_batcher = BatchingAPI(api, batch_size=num_agents*2, timeout=2, model=models["step"], tab="step")
+    eval_batcher = BatchingAPI(api, batch_size=num_agents*10, timeout=2, model=models["eval"], tab="eval")
 
     randomness = puzzle_idx
     random.seed(randomness)
@@ -113,7 +109,7 @@ async def foa_crosswords(apis, limiter, puzzle_idx, puzzle, foa_options, barrier
         # Step : make one step for each state
         agent_coroutines = []
         for agent_id, state in enumerate(states):
-            agent_coroutines.append(CrosswordsAgent.step(state, step_api, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}")))
+            agent_coroutines.append(CrosswordsAgent.step(state, step_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}")))
         states = await asyncio.gather(*agent_coroutines)
 
         # Log - Steps
@@ -124,7 +120,7 @@ async def foa_crosswords(apis, limiter, puzzle_idx, puzzle, foa_options, barrier
         state_records = [(idx, value*foa_options["backtrack"], state) for idx, value, state in state_records]
 
         # After each step, the api should be empty
-        assert len(step_api.futures) == 0, f"API futures should be empty, but are {len(step_api.futures)}"
+        assert len(step_batcher.futures) == 0, f"API futures should be empty, but are {len(step_batcher.futures)}"
 
         # Update state records
         foa_remaining_steps = num_steps - (step + 1)
@@ -182,10 +178,10 @@ async def foa_crosswords(apis, limiter, puzzle_idx, puzzle, foa_options, barrier
             # Evaluation : each of the current states is given a value
             value_coroutines = []
             for agent_id, state in enumerate(states):
-                value_coroutines.append(CrosswordsAgent.evaluate(state, eval_api, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}")))
+                value_coroutines.append(CrosswordsAgent.evaluate(state, eval_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}")))
             values = await asyncio.gather(*value_coroutines)
 
-            assert len(eval_api.futures) == 0, f"API futures should be empty, but are {len(eval_api.futures)}"
+            assert len(eval_batcher.futures) == 0, f"API futures should be empty, but are {len(eval_batcher.futures)}"
 
             # Update records
             for i, (state, value) in enumerate(zip(states, values)):
@@ -202,9 +198,6 @@ async def foa_crosswords(apis, limiter, puzzle_idx, puzzle, foa_options, barrier
             # Log - Resampling
             for agent_id, resampled_idx in enumerate(resampled_indices):
                 log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Resampling": {"Idx":state_records[resampled_idx][0], "Resampled state": CrosswordsState.render_board(state_records[resampled_idx][2].board)}})
-
-            # After each evaluation, the api should be empty
-            assert len(eval_api.futures) == 0, f"API futures should be empty, but are {len(eval_api.futures)}"
             
         # Logging : metrics
         for agent_id, state in enumerate(states):
@@ -239,7 +232,7 @@ async def run(run_options: dict, foa_options: dict):
 
     # Run FoA for each puzzle
     for puzzle_idx, puzzle in zip(puzzle_idxs, puzzles):
-        game_coroutines.append(foa_crosswords([api_step, api_eval], limiter, puzzle_idx, puzzle, foa_options, barrier, seed))
+        game_coroutines.append(foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed))
     results = await asyncio.gather(*game_coroutines)
 
     # Merge logs for each run
@@ -247,9 +240,9 @@ async def run(run_options: dict, foa_options: dict):
     for l in logs:
         log.update(l)
 
-    step_cost = api_step.cost(tab="step")
-    evaluation_cost = api_eval.cost(tab="eval")
-    total_cost = {key : sum(cost[key] for cost in [step_cost, evaluation_cost]) for key in step_cost.keys()}
+    step_cost = api.cost(tab_name="step")
+    evaluation_cost = api.cost(tab_name="eval")
+    total_cost = api.cost()
     print(f"\nTotal cost :\n{total_cost}")
     log["Cost"] = {"Step": step_cost, "Evaluation": evaluation_cost, "Total cost": total_cost}
 
@@ -333,25 +326,20 @@ print("\n"+create_box(run_message)+"\n")
 results = asyncio.run(run(run_options, foa_options))
 
 
-# Total accuracy and cost computation
-n_success = 0
-for game in results:
-    verifications = [CrosswordsAgent.verify(result) for result in game]
-    if {"r": 1} in verifications:
-        n_success += 1
-accuracy = n_success * 100 / len(results)
-print(f"Accuracy : {accuracy:.2f}\n")
+#TODO: Compute metrics to send the email
+#metrics = get_metrics(...)
+#print(f"Metrics : {accuracy:.2f}\n")
 print(f"File name : {log_file}\n\n\n\n\n")
 
 #Update actual cost.
-update_actual_cost(api_step)
+update_actual_cost(api)
 
-#cost = api.cost(verbose=True)
+cost = api.cost(verbose=True)
 
 # Send email notification
 if send_email:
     subject = log_file
-    message = f"Accuracy : {accuracy}\nCost : {cost}"
+    message = f"Cost : {cost}"
     try:
         email_notification(subject=subject, message=message)
         print("Email sent successfully.")
