@@ -28,7 +28,7 @@ from utils import create_folder, email_notification, create_box, update_actual_c
 
 logger = logging.getLogger("experiments")
 logger.setLevel(logging.DEBUG) # Order : debug < info < warning < error < critical
-log_folder = f"logs_recent/gridsearch/crosswords/" # Folder in which logs will be saved (organized daily)
+log_folder = f"logs_recent/stresstest/crosswords/" # Folder in which logs will be saved (organized daily)
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
@@ -50,7 +50,7 @@ models = {
     "eval": "gpt-3.5-turbo-0125",
 }
 
-api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=2, verbose=True)
+api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=2, verbose=False)
 
 
 # Setting up the data
@@ -67,7 +67,8 @@ async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed):
     step_batcher = BatchingAPI(api, batch_size=num_agents*2, timeout=2, model=models["step"], tab="step")
     eval_batcher = BatchingAPI(api, batch_size=num_agents*10, timeout=2, model=models["eval"], tab="eval")
 
-    randomness = puzzle_idx
+    # Set randomness
+    randomness = puzzle_idx + seed
     random.seed(randomness)
 
     resampler = Resampler(randomness)
@@ -90,11 +91,9 @@ async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed):
     for _ in range(num_agents):
         states.append(CrosswordsState(data=data, board_gt=board_gt, ans_gt=ans_gt, steps=[], randomness=random.randint(0, 1000)))
 
-
     solution_found = False ### DEBUG: Just for now until I figure out something better
     for step in range(num_steps):
 
-        #if puzzle_idx ==0:
         print(f"Step {step}")
 
         ### DEBUG: Just for now until I figure out something better
@@ -125,7 +124,7 @@ async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed):
         # Update state records
         foa_remaining_steps = num_steps - (step + 1)
         task_required_steps = 10
-        state_records = [(idx, value, state) for idx, value, state in state_records if  foa_remaining_steps >= task_required_steps - len(state.steps)] # Remove states that cannot finish in time
+        #state_records = [(idx, value, state) for idx, value, state in state_records if  foa_remaining_steps >= task_required_steps - len(state.steps)] # Remove states that cannot finish in time
         state_records = [(idx, value, state) for idx, value, state in state_records if value>0] # Remove states with no value
 
 
@@ -140,17 +139,17 @@ async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed):
         # Pruning
         temp_state_records = [(idx, value, state) for idx, value, state in state_records if state.status!=[0]*10]
         invalid_state_indices = [i for i, verification in enumerate(verifications) if verification["r"] == -1]
-        if len(temp_state_records) > 0: 
+        if len(temp_state_records) > 0:
             # If there are eligible + evaluated states.
             new_states, pruned_indices = resampler.resample(temp_state_records, len(invalid_state_indices), foa_options["resampling_method"])
             states = [new_states.pop(0) if i in invalid_state_indices else state for i, state in enumerate(states)]
             invalids_resolved = True
         else:
             # If there are no eligible + evaluated states.
-            temp_state_records = [(f"{step}.i", 1, state) for i, state in enumerate(states) if i not in invalid_state_indices] 
-            if temp_state_records == []:
+            temp_state_records = [(f"{step}.{i}", 1, state) for i, state in enumerate(states) if i not in invalid_state_indices] 
+            if len(temp_state_records) == 0:
+                # If there are no eligible states at all.
                 for i in range(len(states)):
-                    # If there are no eligible states at all.
                     temp_state_records.append(("INIT", 1, CrosswordsState(data=data, board_gt=board_gt, ans_gt=ans_gt, steps=[], randomness=random.randint(0, 1000))))
                     state_records = temp_state_records
             new_states, pruned_indices = resampler.resample(temp_state_records, len(invalid_state_indices), "linear")
@@ -243,7 +242,6 @@ async def run(run_options: dict, foa_options: dict):
     step_cost = api.cost(tab_name="step")
     evaluation_cost = api.cost(tab_name="eval")
     total_cost = api.cost()
-    print(f"\nTotal cost :\n{total_cost}")
     log["Cost"] = {"Step": step_cost, "Evaluation": evaluation_cost, "Total cost": total_cost}
 
     # Save merged logs

@@ -33,11 +33,15 @@ class CrosswordsAgent:
             if response == None:
                 continue
             parsed_response = parse_response(response)
+            # response = {'h1. apple': "certain", 'h2. banana': "high", 'h3. apple': "medium", 'h4. apple': "low", 'h5. apple': "low"}
+            # mapping = {'certain': 1, 'high': 0.5, 'medium': 0.2, 'low': 0.1}
+            # parsed_response = {"h1. apple": 1, "h2. banana": 0.5, "h3. apple": 0.2, "h4. apple": 0.1, "h5. apple": 0.1}
             if parsed_response:
                 for candidate, score in parsed_response:
                     candidates_to_scores[candidate] = candidates_to_scores.get(candidate, 0) + score
         filtered_candidate_to_score = {k: v for k, v in candidates_to_scores.items()  if provokes_change(state, k)}
 
+        # {"h1. apple": 2.5, "h2. banana": 1.0, "h3. apple": 0.5, "h4. apple": 0.4, "h5. apple": 0.3}
         return filtered_candidate_to_score
     
     @staticmethod
@@ -48,6 +52,8 @@ class CrosswordsAgent:
         
         # Get next step suggestions/actions and pick one of the ones with the highest value
         suggestions = await CrosswordsAgent.get_candidates(state, api, namespace=namespace)
+        # suggestions = {"h1. apple": 2.5, "h2. banana": 1.0, "h3. apple": 0.5, "h4. apple": 0.4, "h5. apple": 0.3}
+        
         
         if len(suggestions) == 0:
             """

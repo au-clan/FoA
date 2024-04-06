@@ -37,24 +37,21 @@ assert os.path.exists(
     "./caches/"), "Please run the script from the root directory of the project. To make sure all caches are created correctly."
 cache = Cache("./caches/gameof24", size_limit=int(2e10))
 
-# get OPENAI_API_KEY from env
-AZURE_OPENAI_API_KEY = os.environ.get("AZURE_OPENAI_API_KEY")
-assert AZURE_OPENAI_API_KEY is not None, "Please set the AZURE_OPENAI_API_KEY environment variable"
-
-api_config = {
+step_api_config = eval_api_config = {
     "max_tokens": 100,
     "temperature": 0.7,
     "top_p": 1,
     "request_timeout": 45,
-    "model": "gpt-35-turbo-0125"
+    "use_azure": False,
 }
 
-api = CachedOpenAIAPI(cache, api_config, verbose=False)
-limiter = AsyncRoundRobin()
-# ToDo, this is a bit hacky. OpenAI allows multiple parallel requests per key, so we add the same key multiple times
-N = 2
-for _ in range(N):
-    limiter.add_resource(data=AZURE_OPENAI_API_KEY)
+models = {
+    "step": "gpt-3.5-turbo-0125",
+    "eval": "gpt-3.5-turbo-0125",
+}
+
+api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=2, verbose=False)
+
 
 # Setting up the data
 dataset = GameOf24Data()
@@ -62,13 +59,13 @@ dataset = GameOf24Data()
 
 # ToDo: this should probably be moved to its own file
 # for now I'm keeping it here, for easier debugging
-async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier, seed):
+async def foa_gameof24(api, puzzle_idx, puzzle, foa_options, barrier, seed):
     num_agents = foa_options["n_agents"]
     num_steps = foa_options["max_steps"]
 
     # Use batching API
-    step_api = BatchingAPI(api, limiter, batch_size=num_agents, timeout=10, tab="step")
-    eval_api = BatchingAPI(api, limiter, batch_size=num_agents*3, timeout=10, tab="eval")
+    step_batcher = BatchingAPI(api, batch_size=num_agents, timeout=2, model=models["step"], tab="step")
+    eval_batcher = BatchingAPI(api, batch_size=num_agents*3, timeout=2, model=models["eval"], tab="eval")
 
     # Set randomness
     randomness = puzzle_idx + seed
@@ -95,8 +92,7 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier, s
     solution_found = False ### DEBUG: Just for now until I figure out something better
     for step in range(num_steps):
 
-        if puzzle_idx == 900:
-            print(f"Step {step}")
+        print(f"Step {step}")
 
         ### DEBUG: Just for now until I figure out something better
         if solution_found:
@@ -110,7 +106,7 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier, s
         # Step : make one step for each state
         agent_coroutines = []
         for agent_id, state in enumerate(states):
-            agent_coroutines.append(GameOf24Agent.step(state, step_api, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}")))
+            agent_coroutines.append(GameOf24Agent.step(state, step_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}")))
         states = await asyncio.gather(*agent_coroutines)
 
         # Log - Steps
@@ -121,7 +117,7 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier, s
         state_records = [(idx, value*foa_options["backtrack"], state) for idx, value, state in state_records]
 
         # After each step, the api should be empty
-        assert len(step_api.futures) == 0, f"API futures should be empty, but are {len(step_api.futures)}"
+        assert len(step_batcher.futures) == 0, f"API futures should be empty, but are {len(step_batcher.futures)}"
 
         # Update state records
         foa_remaining_steps = num_steps - (step + 1)
@@ -142,21 +138,27 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier, s
         temp_state_records = [(idx, value, state) for idx, value, state in state_records if state.steps!=[]]
         invalid_state_indices = [i for i, verification in enumerate(verifications) if verification["r"] == -1]
         if len(temp_state_records) > 0:
+            # If there are eligible + evaluated states.
             new_states, pruned_indices = resampler.resample(temp_state_records, len(invalid_state_indices), foa_options["resampling_method"])
             states = [new_states.pop(0) if i in invalid_state_indices else state for i, state in enumerate(states)]
             invalids_resolved = True
         else:
-            pruned_indices = [None] * len(invalid_state_indices)
+            # If there are no eligible + evaluated states.
+            temp_state_records = [(f"{step}.{i}", 1, state) for i, state in enumerate(states) if i not in invalid_state_indices]
+            if len(temp_state_records) == 0:
+                # If there are no eligible states at all.
+                for i in range(len(states)):
+                    temp_state_records.append(("INIT", foa_options["origin_value"], GameOf24State(puzzle=puzzle, current_state=puzzle, steps=[], randomness=random.randint(0, 1000))))
+                    state_records = temp_state_records
+            new_states, pruned_indices = resampler.resample(temp_state_records, len(invalid_state_indices), "linear")
+            states = [new_states.pop(0) if i in invalid_state_indices else state for i, state in enumerate(states)]
             invalids_resolved = False
 
         # Log - Pruning
-        for agent_id in range(num_agents):
+        for agent_id, state in enumerate(states):
             if agent_id in invalid_state_indices:
                 pruned_indice = pruned_indices.pop(0)
-                if pruned_indice is None:
-                    log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": "NA"})
-                else:
-                    log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning" : {"Idx":temp_state_records[pruned_indice][0], "Pruned state": temp_state_records[pruned_indice][2].current_state, "Value": temp_state_records[pruned_indice][1], "Values": sorted([record[1] for record in state_records], reverse=True)}})
+                log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning" : {"Idx":temp_state_records[pruned_indice][0], "Resampled state": state.current_state, }})
             else:
                 log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": None})
 
@@ -169,10 +171,10 @@ async def foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier, s
             # Evaluation : each of the current states is given a value
             value_coroutines = []
             for agent_id, state in enumerate(states):
-                value_coroutines.append(GameOf24Agent.evaluate(state, eval_api, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}")))
+                value_coroutines.append(GameOf24Agent.evaluate(state, eval_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}")))
             values = await asyncio.gather(*value_coroutines)
 
-            assert len(eval_api.futures) == 0, f"API futures should be empty, but are {len(eval_api.futures)}"
+            assert len(eval_batcher.futures) == 0, f"API futures should be empty, but are {len(eval_batcher.futures)}"
 
             # Update records
             for i, (state, value) in enumerate(zip(states, values)):
@@ -219,7 +221,7 @@ async def run(run_options: dict, foa_options: dict):
 
     # Run FoA for each puzzle
     for puzzle_idx, puzzle in zip(puzzle_idxs, puzzles):
-        game_coroutines.append(foa_gameof24(api, limiter, puzzle_idx, puzzle, foa_options, barrier, seed))
+        game_coroutines.append(foa_gameof24(api, puzzle_idx, puzzle, foa_options, barrier, seed))
     results = await asyncio.gather(*game_coroutines)
 
     # Merge logs for each run
@@ -227,10 +229,10 @@ async def run(run_options: dict, foa_options: dict):
     for l in logs:
         log.update(l)
 
-    step_cost = api.cost(tab="step")
-    evaluation_cost = api.cost(tab="eval")
+    step_cost = api.cost(tab_name="step")
+    evaluation_cost = api.cost(tab_name="eval")
     total_cost = api.cost()
-    log["Cost"] = {"Step": step_cost, "Evaluation": evaluation_cost, "Total": total_cost}
+    log["Cost"] = {"Step": step_cost, "Evaluation": evaluation_cost, "Total cost": total_cost}
 
     # Save merged logs
     with open(log_folder + log_file, 'w+') as f:
