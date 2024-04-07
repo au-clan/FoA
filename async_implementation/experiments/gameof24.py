@@ -28,7 +28,7 @@ from utils import create_folder, email_notification, create_box, update_actual_c
 
 logger = logging.getLogger("experiments")
 logger.setLevel(logging.DEBUG) # Order : debug < info < warning < error < critical
-log_folder = f"logs_recent/{datetime.now().date()}/gameof24/{datetime.now().strftime('%H')}:00/" # Folder in which logs will be saved (organized daily)
+log_folder = f"logs_recent/mixed/gameof24_crosswords/" # Folder in which logs will be saved (organized daily)
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
@@ -42,12 +42,12 @@ step_api_config = eval_api_config = {
     "temperature": 0.7,
     "top_p": 1,
     "request_timeout": 45,
-    "use_azure": False,
+    "use_azure": True,
 }
 
 models = {
-    "step": "gpt-3.5-turbo-0125",
-    "eval": "gpt-3.5-turbo-0125",
+    "step": "gpt-35-turbo-0125",
+    "eval": "gpt-4-0125-preview",
 }
 
 api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=2, verbose=False)

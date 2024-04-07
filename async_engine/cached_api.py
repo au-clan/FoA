@@ -39,6 +39,7 @@ class CachedOpenAIAPI:
 
         # Configure OpenAI Client
         self.clients = {}
+        self.limiters = {}
         if config.pop("use_azure", False):
             model2keys = {
                 "gpt-4-0613": {"access_token": "AZURE_OPENAI_KEY2LOC1", "endpoint": "key-2"},
@@ -53,33 +54,36 @@ class CachedOpenAIAPI:
 
                 api_key = os.getenv(access_token)
                 assert api_key, f"Access token '{access_token}' not found in environment variables!"
-
+                print(f"Added access token {access_token} for model {model}.")
+                
+                # Client Setup
                 self.clients[model]= AsyncAzureOpenAI(
                     azure_endpoint="https://"+endpoint+".openai.azure.com/",
                     api_key=api_key,
                     api_version="2024-02-15-preview"
                 )
+
+                # Limiter Setup
+                self.limiters[model] = AsyncRoundRobin()
+                for _ in range(resources):
+                    self.limiters[model].add_resource(data=api_key)
         else:
             access_token = "OPENAI_API_KEY"
             api_key = os.getenv(access_token)
             assert api_key, f"Access token '{access_token}' not found in environment variables!"
 
             for model in models:
+                # Client Setup
                 self.clients[model] = AsyncOpenAI(api_key=access_token)
+
+                # Limiter Setup
+                self.limiters[model] = AsyncRoundRobin()
+                for _ in range(resources):
+                    self.limiters[model].add_resource(data=api_key)
 
         # Save config
         config = deepcopy(config)
         self.config = config
-
-        # Resource manager
-        """
-        This is a bit hacky. OpenAI allows multiple parallel requests per key, so we add the same key multiple times.
-        """
-        self.limiters = {}
-        for model in models:
-            self.limiters[model] = AsyncRoundRobin()
-            for _ in range(resources):
-                self.limiters[model].add_resource(data=api_key)
 
         # Counting tokens to compute cost
         self.tabs = {}
