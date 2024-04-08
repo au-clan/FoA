@@ -26,9 +26,7 @@ from async_implementation.resampling.resampler import Resampler
 from data.data import GameOf24Data
 from utils import create_folder, email_notification, create_box, update_actual_cost
 
-logger = logging.getLogger("experiments")
-logger.setLevel(logging.DEBUG) # Order : debug < info < warning < error < critical
-log_folder = f"logs_recent/mixed/gameof24_crosswords/" # Folder in which logs will be saved (organized daily)
+log_folder = f"logs_recent/testing/" # Folder in which logs will be saved (organized daily)
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
@@ -50,7 +48,7 @@ models = {
     "eval": "gpt-4-0125-preview",
 }
 
-api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=2, verbose=False)
+api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=2, verbose=True)
 
 
 # Setting up the data
@@ -144,21 +142,17 @@ async def foa_gameof24(api, puzzle_idx, puzzle, foa_options, barrier, seed):
             invalids_resolved = True
         else:
             # If there are no eligible + evaluated states.
-            temp_state_records = [(f"{step}.{i}", 1, state) for i, state in enumerate(states) if i not in invalid_state_indices]
-            if len(temp_state_records) == 0:
-                # If there are no eligible states at all.
-                for i in range(len(states)):
-                    temp_state_records.append(("INIT", foa_options["origin_value"], GameOf24State(puzzle=puzzle, current_state=puzzle, steps=[], randomness=random.randint(0, 1000))))
-                    state_records = temp_state_records
-            new_states, pruned_indices = resampler.resample(temp_state_records, len(invalid_state_indices), "linear")
-            states = [new_states.pop(0) if i in invalid_state_indices else state for i, state in enumerate(states)]
+            pruned_indices = [None] * len(invalid_state_indices)
             invalids_resolved = False
 
         # Log - Pruning
-        for agent_id, state in enumerate(states):
+        for agent_id in range(num_agents):
             if agent_id in invalid_state_indices:
                 pruned_indice = pruned_indices.pop(0)
-                log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning" : {"Idx":temp_state_records[pruned_indice][0], "Resampled state": state.current_state, }})
+                if pruned_indice is None:
+                    log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": "NA"})
+                else:
+                    log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning" : {"Idx":temp_state_records[pruned_indice][0], "Pruned state": temp_state_records[pruned_indice][2].current_state, "Value": temp_state_records[pruned_indice][1], "Values": sorted([record[1] for record in state_records], reverse=True)}})
             else:
                 log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": None})
 

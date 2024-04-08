@@ -11,6 +11,7 @@ from deepdiff import DeepHash
 from openai import AsyncAzureOpenAI, AsyncOpenAI
 
 from async_engine.round_robin_manager import AsyncRoundRobin
+from utils import create_box
 
 logger = logging.getLogger(__name__)
 
@@ -249,6 +250,12 @@ class CachedOpenAIAPI:
 
                 raw_responses = []
                 for choice in response.choices:
+                    if choice.message.content is None:
+                        print(f"Cache config :\n{cache_config}\n")
+                        for a in response.choices:
+                            print(a)
+                        assert False, "No content in choice"
+                        exit()
                     raw_responses.append((choice.message.content, completion_tokens/n_from_api_total, prompt_tokens))
                     
 

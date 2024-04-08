@@ -42,15 +42,15 @@ step_api_config = eval_api_config = {
     "temperature": 0.7,
     "top_p": 1,
     "request_timeout": 45,
-    "use_azure": False,
+    "use_azure": True,
 }
 
 models = {
-    "step": "gpt-3.5-turbo-0125",
-    "eval": "gpt-4-0125-preview",
+    "step": "gpt-35-turbo-0125",
+    "eval": "gpt-35-turbo-0125",
 }
 
-api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=2, verbose=False)
+api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=2, verbose=True)
 
 
 # Setting up the data
@@ -64,8 +64,8 @@ async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed):
     num_steps = foa_options["max_steps"]
 
     # Use batching API
-    step_batcher = BatchingAPI(api, batch_size=num_agents*2, timeout=2, model=models["step"], tab="step")
-    eval_batcher = BatchingAPI(api, batch_size=num_agents*10, timeout=2, model=models["eval"], tab="eval")
+    step_batcher = BatchingAPI(api, batch_size=num_agents*2, timeout=1, model=models["step"], tab="step")
+    eval_batcher = BatchingAPI(api, batch_size=num_agents*10, timeout=1, model=models["eval"], tab="eval")
 
     # Set randomness
     randomness = puzzle_idx + seed
