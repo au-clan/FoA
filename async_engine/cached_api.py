@@ -254,7 +254,7 @@ class CachedOpenAIAPI:
                         print(f"Cache config :\n{cache_config}\n")
                         for a in response.choices:
                             print(a)
-                        assert False, "No content in choice"
+                        print("Error: Response choice is None")
                         exit()
                     raw_responses.append((choice.message.content, completion_tokens/n_from_api_total, prompt_tokens))
                     

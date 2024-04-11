@@ -90,7 +90,7 @@ async def foa_gameof24(api, puzzle_idx, puzzle, foa_options, barrier, seed):
     solution_found = False ### DEBUG: Just for now until I figure out something better
     for step in range(num_steps):
 
-        print(f"Step {step}")
+        print(f"Step {step} : Stepping")
 
         ### DEBUG: Just for now until I figure out something better
         if solution_found:
@@ -161,7 +161,8 @@ async def foa_gameof24(api, puzzle_idx, puzzle, foa_options, barrier, seed):
 
         # Resampling : every k steps, evaluate and resample
         if step < num_steps - 1 and step % foa_options["k"] == 0:
-
+            
+            print(f"Step {step} : Evaluating")
             # Evaluation : each of the current states is given a value
             value_coroutines = []
             for agent_id, state in enumerate(states):

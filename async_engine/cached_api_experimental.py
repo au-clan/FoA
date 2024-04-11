@@ -190,10 +190,16 @@ class CachedOpenAIAPI:
             async with self.limiters[model] as resource:
                 self.clients[model].api_key = resource.data
                 response = await self.openai_request(model, n_from_api_total, cache_config, request_timeout)
+                raw_responses = [(choice.message.content, response.usage.completion_tokens/n_from_api_total, response.usage.prompt_tokens) for choice in response.choices]
 
-                for _ in range(3):
-                    response = [choice for choice in response if choice.message.content is not None]
-                    response.extend(await self.openai_request(model, n_from_api_total-len(response), cache_config, request_timeout))
+                for retry_count in range(5):
+                    if any([r[0] is None for r in raw_responses]):
+                        if self.verbose:
+                            print(f"Some choices are None, retrying (retry : {retry_count+1})")
+                        raw_responses = [r for r in raw_responses if r[0] is not None]
+                        n_empty = n_from_api_total - len(raw_responses)
+                        response = await self.openai_request(model, n_empty, cache_config, request_timeout)
+                        raw_responses.extend([(choice.message.content, response.usage.completion_tokens/n_from_api_total, response.usage.prompt_tokens) for choice in response.choices])
 
                 stop = time.time()
                 # by communicating the tokens and time used to the resource manager, we can optimize the rate of requests
@@ -203,20 +209,16 @@ class CachedOpenAIAPI:
                 # easier to just get out of the way and let the next request through
                 # but for GPT4 I've found the leaky bucket to be very more efficient
                 time_taken = stop - start
-                completion_tokens = response.usage.completion_tokens
-                prompt_tokens = response.usage.prompt_tokens
                 tokens_used = response.usage.total_tokens
                 resource.free(time_taken=time_taken, amount_used=tokens_used)
 
-                raw_responses = []
-                for choice in response.choices:
-                    if choice.message.content is None:
-                        print(f"Cache config :\n{cache_config}\n")
+                for r in raw_responses:
+                    if r[0] is None:
+                        print(create_box("No content in raw response"))
                         for a in response.choices:
                             print(a)
-                        assert False, "No content in choice"
+                        
                         exit()
-                    raw_responses.append((choice.message.content, completion_tokens/n_from_api_total, prompt_tokens))
                     
 
         ##-- Step 4. Requests redistribution --##

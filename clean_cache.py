@@ -3,6 +3,7 @@ from tqdm import tqdm
 
 def clean_cache(cache_filepath):
     cache = Cache(cache_filepath, size_limit=int(2e10))
+    print(f"Cache entries : {len(cache)}")
     # Iterate over the cache keys
     for key in tqdm(cache.iterkeys()):
         # Get the list associated with the key
@@ -13,8 +14,6 @@ def clean_cache(cache_filepath):
         
         # Update the cache with the modified list
         cache.set(key, modified_list)
-        assert False, "This is a test"
-        exit()
 
     # Close the cache
     cache.close()

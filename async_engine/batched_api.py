@@ -95,7 +95,7 @@ class BatchingAPI:
         lock-step mechanism of N prompts in a batch
         """
 
-        return await self.api.request(prompt, namespaces, model=self.model,tab=self.tab)
+        return await self.api.request(prompt, namespaces, model=self.model, tab=self.tab)
     
     def cost(self, actual_cost: int=False, verbose: int=False)-> dict:
         """

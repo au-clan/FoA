@@ -180,7 +180,7 @@ class CrosswordsAgent:
         elif state.board == state.board_gt:
             return {"r":1}
         else:
-            return {"r":-1}
+            return {"r":0}
         
 
 def parse_line(input_str):

@@ -17,7 +17,7 @@ import sys
 
 sys.path.append(os.getcwd()) # Project root!!
 
-from async_engine.cached_api import CachedOpenAIAPI
+from async_engine.cached_api_experimental import CachedOpenAIAPI
 from async_engine.round_robin_manager import AsyncRoundRobin
 from async_engine.batched_api import BatchingAPI
 from async_implementation.agents.crosswords import CrosswordsAgent
@@ -28,7 +28,7 @@ from utils import create_folder, email_notification, create_box, update_actual_c
 
 logger = logging.getLogger("experiments")
 logger.setLevel(logging.DEBUG) # Order : debug < info < warning < error < critical
-log_folder = f"logs_recent/mixed/gameof24_crosswords/" # Folder in which logs will be saved (organized daily)
+log_folder = f"logs_recent/stresstest/crosswords/" # Folder in which logs will be saved (organized daily)
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
@@ -47,7 +47,7 @@ step_api_config = eval_api_config = {
 
 models = {
     "step": "gpt-35-turbo-0125",
-    "eval": "gpt-35-turbo-0125",
+    "eval": "gpt-4-0125-preview",
 }
 
 api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=2, verbose=True)
@@ -133,12 +133,20 @@ async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed):
         if {"r":1} in verifications:                                        # {"r":-1} Finished incorrectly / "Ivalid state"
             ### DEBUG: Just for now until I figure out something better - Normally you want to break here
             solution_found = True
+            # Logging : metrics
+            for agent_id, state in enumerate(states):
+                log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"metrics": state.get_metrics()})
             await barrier.wait()
             continue                                                        # {"r":0} Not finished
 
         # Pruning
         temp_state_records = [(idx, value, state) for idx, value, state in state_records if state.status!=[0]*10]
-        invalid_state_indices = [i for i, verification in enumerate(verifications) if verification["r"] == -1]
+        #invalid_state_indices = [i for i, verification in enumerate(verifications) if verification["r"] == -1]
+        invalid_state_indices = [i for i, state in enumerate(states) if state.ans==["PRUNE"]*10]
+        if len(invalid_state_indices)>0:
+            print(f"In puzzle {puzzle_idx} at step {step} we prune agents : {invalid_state_indices}")
+            for i in invalid_state_indices:
+                print(states[i])
         if len(temp_state_records) > 0:
             # If there are eligible + evaluated states.
             new_states, pruned_indices = resampler.resample(temp_state_records, len(invalid_state_indices), foa_options["resampling_method"])
@@ -158,7 +166,7 @@ async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed):
 
         # quick check regarding states with no suggestions
         for state in states:
-            assert state.ans != ["PRUNE"]*5
+            assert state.ans != ["PRUNE"]*10
 
         # Log - Pruning
         for agent_id, state in enumerate(states):
