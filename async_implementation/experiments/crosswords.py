@@ -1,16 +1,11 @@
 import asyncio
-# set up logging
-import logging
 import os
 import json
 import random
 import argparse
 
-import numpy as np
-import pandas as pd
 from diskcache import Cache
 from datetime import datetime
-from collections import Counter
 
 # TODO: Not sure if this is optimal, I didn't know how else to handle the package paths
 import sys
@@ -18,7 +13,6 @@ import sys
 sys.path.append(os.getcwd()) # Project root!!
 
 from async_engine.cached_api_experimental import CachedOpenAIAPI
-from async_engine.round_robin_manager import AsyncRoundRobin
 from async_engine.batched_api import BatchingAPI
 from async_implementation.agents.crosswords import CrosswordsAgent
 from async_implementation.states.crosswords import CrosswordsState
@@ -26,16 +20,14 @@ from async_implementation.resampling.resampler import Resampler
 from data.data import CrosswordsData
 from utils import create_folder, email_notification, create_box, update_actual_cost
 
-logger = logging.getLogger("experiments")
-logger.setLevel(logging.DEBUG) # Order : debug < info < warning < error < critical
-log_folder = f"logs_recent/stresstest/crosswords/" # Folder in which logs will be saved (organized daily)
+log_folder = f"logs_recent/mixed/crosswords/" # Folder in which logs will be saved (organized daily)
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
 # that way we never pay for the same request twice
 assert os.path.exists(
     "./caches/"), "Please run the script from the root directory of the project. To make sure all caches are created correctly."
-cache = Cache("./caches/crosswords", size_limit=int(2e10))
+cache = Cache("./caches/crosswords_", size_limit=int(2e10))
 
 step_api_config = eval_api_config = {
     "max_tokens": 1000,
@@ -44,6 +36,8 @@ step_api_config = eval_api_config = {
     "request_timeout": 45,
     "use_azure": True,
 }
+
+# available models : gpt-35-turbo-0125, gpt-4-0125-preview, gpt-4-0613
 
 models = {
     "step": "gpt-35-turbo-0125",
