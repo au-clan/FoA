@@ -20,7 +20,7 @@ from async_implementation.resampling.resampler import Resampler
 from data.data import GameOf24Data
 from utils import create_folder, email_notification, create_box, update_actual_cost
 
-log_folder = f"logs_recent/mixed/gameof24/" # Folder in which logs will be saved (organized daily)
+log_folder = f"arxiv/logs/gameof24/mixed/" # Folder in which logs will be saved (organized daily)
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
