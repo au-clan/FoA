@@ -1,0 +1,1642 @@
+[
+    {
+        "idx": 0,
+        "ys": [
+            "Thoughts:\nh1. An agendum; something to be done: TASKS\nh2. An engine: MOTOR\nh3. Pretentious; flowery: ARTSY\nh4. A salon; a hall: ROOMS\nh5. To mock; to sneer: DERIS\nv1. To heap: PILEY\nv2. An Indian antelope: NILGA\nv3. To intend; to plan; to devise; a nettle; to guess: MEANS\nv4. A nozzle: SPIGE\nv5. Desiccator; more dry: DRIER\n\nOutput:\nT A S K S\nM O T O R\nA R T S Y\nR O O M S\nD E R I S",
+            "Thoughts:\nh1. An agendum; something to be done: TASKS\nh2. An engine: MOTOR\nh3. Pretentious; flowery: ARTSY\nh4. A salon; a hall: ROOMY\nh5. To mock; to sneer: DERID\nv1. To heap: PILEE\nv2. An Indian antelope: NIALA\nv3. To intend; to plan; to devise; a nettle; to guess: MEANE\nv4. A nozzle: ENDED\nv5. Desiccator; more dry: DRIER\n\nOutput:\nT A S K S\nM O T O R\nA R T S Y\nR O O M Y\nD E R I D",
+            "Thoughts:\nh1. An agendum; something to be done: TASKS\nh2. An engine: MOTOR\nh3. Pretentious; flowery: ARTSY\nh4. A salon; a hall: ROOMS\nh5. To mock; to sneer: TAUNT\nv1. To heap: PILE\nv2. An Indian antelope: NILGA\nv3. To intend; to plan; to devise; a nettle; to guess: MEAN\nv4. A nozzle: SPOUT\nv5. Desiccator; more dry: DRIER\n\nOutput:\nT A S K S\nM O T O R\nA R T S Y\nR O O M S\nT A U N T",
+            "Thoughts:\nh1. An agendum; something to be done: TASKS\nh2. An engine: MOTOR\nh3. Pretentious; flowery: ARTSY\nh4. A salon; a hall: LOBBY\nh5. To mock; to sneer: TAUNT\nv1. To heap: PILE\nv2. An Indian antelope: NILGI\nv3. To intend; to plan; to devise; a nettle; to guess: MEAN\nv4. A nozzle: SPOUT\nv5. Desiccator; more dry: DRIER\n\nOutput:\nT A S K S\nM O T O R\nA R T S Y\nL O B B Y\nT A U N T",
+            "Thoughts:\nh1. An agendum; something to be done: TASKS\nh2. An engine: MOTOR\nh3. Pretentious; flowery: ARTSY\nh4. A salon; a hall: ROOMS\nh5. To mock; to sneer: TAUNT\nv1. To heap: PILE\nv2. An Indian antelope: NILGA\nv3. To intend; to plan; to devise; a nettle; to guess: MEAN\nv4. A nozzle: SPIRE\nv5. Desiccator; more dry: DRIER\n\nOutput:\nT A S K S\nM O T O R\nA R T S Y\nR O O M S\nT A U N T",
+            "Thoughts:\nh1. An agendum; something to be done: TASKS\nh2. An engine: MOTOR\nh3. Pretentious; flowery: ORNAT\nh4. A salon; a hall: ROOMS\nh5. To mock; to sneer: TAUNT\nv1. To heap: PILE\nv2. An Indian antelope: NILGI\nv3. To intend; to plan; to devise; a nettle; to guess: DESIGN\nv4. A nozzle: SPOUT\nv5. Desiccator; more dry: DRIER\n\nOutput:\nT A S K S\nM O T O R\nO R N A T\nR O O M S\nT A U N T",
+            "Thoughts:\nh1. An agendum; something to be done: TASKS\nh2. An engine: MOTOR\nh3. Pretentious; flowery: ARTSY\nh4. A salon; a hall: ROOMY\nh5. To mock; to sneer: TAUNT\nv1. To heap: PILE\nv2. An Indian antelope: NILOT\nv3. To intend; to plan; to devise; a nettle; to guess: MEANS\nv4. A nozzle: SPOUT\nv5. Desiccator; more dry: DRIER\n\nOutput:\nT A S K S\nM O T O R\nA R T S Y\nR O O M Y\nT A U N T",
+            "Thoughts:\nh1. An agendum; something to be done: TASKS\nh2. An engine: MOTOR\nh3. Pretentious; flowery: ARTSY\nh4. A salon; a hall: ROOMS\nh5. To mock; to sneer: TAUNT\nv1. To heap: PILE\nv2. An Indian antelope: NILOT\nv3. To intend; to plan; to devise; a nettle; to guess: MEANS\nv4. A nozzle: SPOUT\nv5. Desiccator; more dry: DRIER\n\nOutput:\nT A S K S\nM O T O R\nA R T S Y\nR O O M S\nT A U N T",
+            "Thoughts:\nh1. An agendum; something to be done: TASKS\nh2. An engine: MOTOR\nh3. Pretentious; flowery: ORNATE\nh4. A salon; a hall: ROOMS\nh5. To mock; to sneer: TAUNT\nv1. To heap: STACK\nv2. An Indian antelope: NILGA\nv3. To intend; to plan; to devise; a nettle; to guess: MEANT\nv4. A nozzle: SPOUT\nv5. Desiccator; more dry: DRIER\n\nOutput:\nT A S K S\nM O T O R\nO R N A T\nR O O M S\nT A U N T",
+            "Thoughts:\nh1. An agendum; something to be done: TASKS\nh2. An engine: MOTOR\nh3. Pretentious; flowery: ARTSY\nh4. A salon; a hall: ROOMS\nh5. To mock; to sneer: TAUNT\nv1. To heap: PILE\nv2. An Indian antelope: NILGA\nv3. To intend; to plan; to devise; a nettle; to guess: MEANT\nv4. A nozzle: SNOOT\nv5. Desiccator; more dry: DRIER\n\nOutput:\nT A S K S\nM O T O R\nA R T S Y\nR O O M S\nT A U N T"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 1601,
+            "prompt_tokens": 1447,
+            "cost": 0.003125
+        }
+    },
+    {
+        "idx": 1,
+        "ys": [
+            "Thoughts:\nh1. An agendum; something to be done: AGEND\nh2. One who wires: WIRER\nh3. To stir up; to remove from office: UPSET\nh4. Ascended; awakened: AWOKE\nh5. To put into action: EXECU\nv1. Mindful; conscious: AWARE\nv2. A gadget: TOOLY\nv3. Notched or uneven, as if gnawed away (cognate with \"erode\"): EROSE\nv4. Not ever: NEVER\nv5. Drenched; drowned: WETLY\n\nOutput:\nA G E N D\nW I R E R\nU P S E T\nA W O K E\nE X E C U",
+            "Thoughts:\nh1. An agendum; something to be done: TASKS\nh2. One who wires: WIRER\nh3. To stir up; to remove from office: OUSTS\nh4. Ascended; awakened: ROSE\nh5. To put into action: DOING\nv1. Mindful; conscious: AWARE\nv2. A gadget: DEVICE\nv3. Notched or uneven, as if gnawed away (cognate with \"erode\"): EROSE\nv4. Not ever: NEVER\nv5. Drenched; drowned: WET\n\nOutput:\nT A S K S\nW I R E R\nO U S T S\nR O S E\nD O I N G",
+            "Thoughts:\nh1. An agendum; something to be done: TASKS\nh2. One who wires: CABLER\nh3. To stir up; to remove from office: OUSTS\nh4. Ascended; awakened: RISEN\nh5. To put into action: START\nv1. Mindful; conscious: AWARE\nv2. A gadget: DEVICE\nv3. Notched or uneven, as if gnawed away (cognate with \"erode\"): EROSE\nv4. Not ever: NEVER\nv5. Drenched; drowned: SOAKED\n\nOutput:\nT A S K S\nC A B L E R\nO U S T S\nR I S E N\nS T A R T",
+            "Thoughts:\nh1. An agendum; something to be done: TASKS\nh2. One who wires: CABLER\nh3. To stir up; to remove from office: UNSEAT\nh4. Ascended; awakened: RISEN\nh5. To put into action: DOING\nv1. Mindful; conscious: AWARE\nv2. A gadget: DEVICE\nv3. Notched or uneven, as if gnawed away (cognate with \"erode\"): NOTCH\nv4. Not ever: NEVER\nv5. Drenched; drowned: WETED\n\nOutput:\nT A S K S\nC A B L E R\nU N S E A T\nR I S E N\nD O I N G",
+            "Thoughts:\nh1. An agendum; something to be done: TASKS\nh2. One who wires: WIRER\nh3. To stir up; to remove from office: OUSTS\nh4. Ascended; awakened: ROSEY\nh5. To put into action: START\nv1. Mindful; conscious: AWARE\nv2. A gadget: TOOLY\nv3. Notched or uneven, as if gnawed away (cognate with \"erode\"): EROSE\nv4. Not ever: NEVER\nv5. Drenched; drowned: WETTY\n\nOutput:\nT A S K S\nW I R E R\nO U S T S\nR O S E Y\nS T A R T",
+            "Thoughts:\nh1. An agendum; something to be done: TASKS\nh2. One who wires: CABLER\nh3. To stir up; to remove from office: OUSTS\nh4. Ascended; awakened: ROSE\nh5. To put into action: DOING\nv1. Mindful; conscious: AWARE\nv2. A gadget: DEVICE\nv3. Notched or uneven, as if gnawed away (cognate with \"erode\"): EROSE\nv4. Not ever: NEVER\nv5. Drenched; drowned: SOAKED\n\nOutput:\nT A S K S\nC A B L E R\nO U S T S\nR O S E\nD O I N G",
+            "Thoughts:\nh1. An agendum; something to be done: TASKS\nh2. One who wires: WIRER\nh3. To stir up; to remove from office: OUSTS\nh4. Ascended; awakened: ROSE\nh5. To put into action: START\nv1. Mindful; conscious: AWARE\nv2. A gadget: DEVICE\nv3. Notched or uneven, as if gnawed away (cognate with \"erode\"): EROSE\nv4. Not ever: NEVER\nv5. Drenched; drowned: SOAKY\n\nOutput:\nT A S K S\nW I R E R\nO U S T S\nR O S E\nS T A R T",
+            "Thoughts:\nh1. An agendum; something to be done: TASKS\nh2. One who wires: CABLER\nh3. To stir up; to remove from office: OUSTS\nh4. Ascended; awakened: ROSEY\nh5. To put into action: START\nv1. Mindful; conscious: AWARE\nv2. A gadget: DEVICE\nv3. Notched or uneven, as if gnawed away (cognate with \"erode\"): EROSE\nv4. Not ever: NEVER\nv5. Drenched; drowned: SOAKY\n\nOutput:\nT A S K S\nC A B L E R\nO U S T S\nR O S E Y\nS T A R T",
+            "Thoughts:\nh1. An agendum; something to be done: AGEND\nh2. One who wires: WIRER\nh3. To stir up; to remove from office: OUSTS\nh4. Ascended; awakened: RISEN\nh5. To put into action: DOING\nv1. Mindful; conscious: AWARE\nv2. A gadget: DEVICE\nv3. Notched or uneven, as if gnawed away (cognate with \"erode\"): EROSE\nv4. Not ever: NEVER\nv5. Drenched; drowned: SOAKY\n\nOutput:\nA G E N D\nW I R E R\nO U S T S\nR I S E N\nD O I N G",
+            "Thoughts:\nh1. An agendum; something to be done: AGEND\nh2. One who wires: WIRER\nh3. To stir up; to remove from office: OUSTS\nh4. Ascended; awakened: ROSEN\nh5. To put into action: ENACT\nv1. Mindful; conscious: AWARE\nv2. A gadget: DEVICE\nv3. Notched or uneven, as if gnawed away (cognate with \"erode\"): EROSE\nv4. Not ever: NEVER\nv5. Drenched; drowned: SOAKED\n\nOutput:\nA G E N D\nW I R E R\nO U S T S\nR O S E N\nE N A C T"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.52,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.32,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.28,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.2,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.12,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.2,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.6,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.64,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 3240,
+            "prompt_tokens": 2897,
+            "cost": 0.006308500000000001
+        }
+    },
+    {
+        "idx": 2,
+        "ys": [
+            "Thoughts:\nh1. A male friend: BRO\nh2. Something big and important: EPIC\nh3. Things that enter; data given to a computer program: INPUT\nh4. To besiege: BESIEGE\nh5. More healthy; a coin: FILER\nv1. A Mennonite sect, named for Jacob Ammann: AMISH\nv2. A craze: MANIA\nv3. To force; to drive: IMPEL\nv4. To dig out roughly: EXCAV\nv5. On the outside: OUTER\n\nOutput:\nB R O \nE P I C \nI N P U \nB E S I E \nF I L E",
+            "Thoughts:\nh1. A male friend: BRO\nh2. Something big and important: EPIC\nh3. Things that enter; data given to a computer program: INPUT\nh4. To besiege: BESIEGE\nh5. More healthy; a coin: SOUND\nv1. A Mennonite sect, named for Jacob Ammann: AMISH\nv2. A craze: MANIA\nv3. To force; to drive: IMPEL\nv4. To dig out roughly: EXCAV\nv5. On the outside: OUTER\n\nOutput:\nB R O\nE P I C\nI N P U\nB E S I E\nS O U N D",
+            "Thoughts:\nh1. A male friend: BROSE\nh2. Something big and important: MAJOR\nh3. Things that enter; data given to a computer program: INPUT\nh4. To besiege: SIEGE\nh5. More healthy; a coin: ROBUST\nv1. A Mennonite sect, named for Jacob Ammann: AMISH\nv2. A craze: MANIA\nv3. To force; to drive: IMPEL\nv4. To dig out roughly: SCOOP\nv5. On the outside: OUTER\n\nOutput:\nB R O S E\nM A J O R\nI N P U T\nS I E G E\nR O B U S",
+            "Thoughts:\nh1. A male friend: BRO\nh2. Something big and important: EPIC\nh3. Things that enter; data given to a computer program: INPUT\nh4. To besiege: BESIEGE\nh5. More healthy; a coin: SOUND\nv1. A Mennonite sect, named for Jacob Ammann: AMISH\nv2. A craze: MANIA\nv3. To force; to drive: IMPEL\nv4. To dig out roughly: SCOOP\nv5. On the outside: EXTER\n\nOutput:\nB R O\nE P I C\nI N P U\nB E S I E\nS O U N D",
+            "Thoughts:\nh1. A male friend: CHUM\nh2. Something big and important: WHOP\nh3. Things that enter; data given to a computer program: INPUT\nh4. To besiege: LAYIN\nh5. More healthy; a coin: SOUNA\nv1. A Mennonite sect, named for Jacob Ammann: AMISH\nv2. A craze: MANIA\nv3. To force; to drive: URGE\nv4. To dig out roughly: SCOOP\nv5. On the outside: OUTER\n\nOutput:\nC H U M\nW H O P\nI N P U\nL A Y I N\nS O U N A",
+            "Thoughts:\nh1. A male friend: BRO\nh2. Something big and important: EPIC\nh3. Things that enter; data given to a computer program: INPUT\nh4. To besiege: BESIEGE\nh5. More healthy; a coin: SOUND\nv1. A Mennonite sect, named for Jacob Ammann: AMISH\nv2. A craze: MANIA\nv3. To force; to drive: IMPEL\nv4. To dig out roughly: EXCAV\nv5. On the outside: OUTER\n\nOutput:\nB R O\nE P I C\nI N P U\nB E S I E\nS O U N D",
+            "Thoughts:\nh1. A male friend: AMIGO\nh2. Something big and important: MAJOR\nh3. Things that enter; data given to a computer program: INPUT\nh4. To besiege: SIEGE\nh5. More healthy; a coin: SOUND\nv1. A Mennonite sect, named for Jacob Ammann: AMISH\nv2. A craze: MANIA\nv3. To force; to drive: IMPEL\nv4. To dig out roughly: SCOOP\nv5. On the outside: OUTER\n\nOutput:\nA M I G O\nM A J O R\nI N P U T\nS I E G E\nS O U N D",
+            "Thoughts:\nh1. A male friend: BRO\nh2. Something big and important: EPIC\nh3. Things that enter; data given to a computer program: INPUT\nh4. To besiege: BESIEGE\nh5. More healthy; a coin: SOUND\nv1. A Mennonite sect, named for Jacob Ammann: AMISH\nv2. A craze: MANIA\nv3. To force; to drive: IMPEL\nv4. To dig out roughly: EXCAV\nv5. On the outside: OUTER\n\nOutput:\nB R O\nE P I C\nI N P U T\nB E S I E G E\nS O U N D",
+            "Thoughts:\nh1. A male friend: BROSE\nh2. Something big and important: MAJOR\nh3. Things that enter; data given to a computer program: INPUT\nh4. To besiege: BESIE\nh5. More healthy; a coin: FILER\nv1. A Mennonite sect, named for Jacob Ammann: AMISH\nv2. A craze: MANIA\nv3. To force; to drive: IMPEL\nv4. To dig out roughly: EXCAV\nv5. On the outside: OUTER\n\nOutput:\nB R O S E\nM A J O R\nI N P U T\nB E S I E\nF I L E R",
+            "Thoughts:\nh1. A male friend: BRO\nh2. Something big and important: EPIC\nh3. Things that enter; data given to a computer program: INPUT\nh4. To besiege: BESIEGE\nh5. More healthy; a coin: SOUND\nv1. A Mennonite sect, named for Jacob Ammann: AMISH\nv2. A craze: MANIA\nv3. To force; to drive: IMPEL\nv4. To dig out roughly: SCOOP\nv5. On the outside: OUTER\n\nOutput:\nB R O\nE P I C\nI N P U\nB E S I E\nS O U N D"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.28,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.2,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.52,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.2,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.16,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.2,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.72,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.48,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.2,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 4766,
+            "prompt_tokens": 4340,
+            "cost": 0.009319000000000001
+        }
+    },
+    {
+        "idx": 3,
+        "ys": [
+            "Thoughts:\nh1. A male friend: AMIGO\nh2. To baptize: CHRIST\nh3. A negative ion: ANION\nh4. A sugar: GLUCO\nh5. A solitary person: LONER\nv1. Benefit; result: AVAIL\nv2. A Zen question and answer method; extreme: KOAN\nv3. Ancient Troy: ILION\nv4. A water fowl; a pinch to the rear; tailor's iron: GROSE\nv5. A possesser: OWNER\n\nOutput:\nA M I G O\nC H R I S\nA N I O N\nG L U C O\nL O N E R",
+            "Thoughts:\nh1. A male friend: BRO\nh2. To baptize: CHRISTEN\nh3. A negative ion: ANION\nh4. A sugar: GLUCOSE\nh5. A solitary person: LONER\nv1. Benefit; result: AVAIL\nv2. A Zen question and answer method; extreme: KOAN\nv3. Ancient Troy: ILION\nv4. A water fowl; a pinch to the rear; tailor's iron: GEESE\nv5. A possesser: OWNER\n\nOutput:\nB R O\nC H R I\nA N I O\nG L U C\nL O N E",
+            "Thoughts:\nh1. A male friend: BRO\nh2. To baptize: DIP\nh3. A negative ion: ANION\nh4. A sugar: GLUCO\nh5. A solitary person: LONER\nv1. Benefit; result: AVAIL\nv2. A Zen question and answer method; extreme: KOAN\nv3. Ancient Troy: ILION\nv4. A water fowl; a pinch to the rear; tailor's iron: GEESE\nv5. A possesser: OWNER\n\nOutput:\nB R O\nD I P\nA N I O N\nG L U C O\nL O N E R",
+            "Thoughts:\nh1. A male friend: BRO\nh2. To baptize: CHRISTEN\nh3. A negative ion: ANION\nh4. A sugar: GLUCOSE\nh5. A solitary person: LONER\nv1. Benefit; result: AVAIL\nv2. A Zen question and answer method; extreme: KOAN\nv3. Ancient Troy: ILION\nv4. A water fowl; a pinch to the rear; tailor's iron: GEESE\nv5. A possesser: OWNER\n\nOutput:\nB R O\nC H R I S T E N\nA N I O N\nG L U C O S E\nL O N E R",
+            "Thoughts:\nh1. A male friend: BRO\nh2. To baptize: DIP\nh3. A negative ion: ANION\nh4. A sugar: GLUCO\nh5. A solitary person: LONER\nv1. Benefit; result: AVAIL\nv2. A Zen question and answer method; extreme: KOAN\nv3. Ancient Troy: ILION\nv4. A water fowl; a pinch to the rear; tailor's iron: GEESE\nv5. A possesser: OWNER\n\nOutput:\nB R O\nD I P\nA N I O N\nG L U C O\nL O N E R",
+            "Thoughts:\nh1. A male friend: AMIGO\nh2. To baptize: CLEAN\nh3. A negative ion: ANION\nh4. A sugar: GLUCO\nh5. A solitary person: LONER\nv1. Benefit; result: AVAIL\nv2. A Zen question and answer method; extreme: KOAN\nv3. Ancient Troy: ILION\nv4. A water fowl; a pinch to the rear; tailor's iron: GLEBE\nv5. A possesser: OWNER\n\nOutput:\nA M I G O\nC L E A N\nA N I O N\nG L U C O\nL O N E R",
+            "Thoughts:\nh1. A male friend: BRO\nh2. To baptize: CHRISTEN\nh3. A negative ion: ANION\nh4. A sugar: GLUCO\nh5. A solitary person: LONER\nv1. Benefit; result: AVAIL\nv2. A Zen question and answer method; extreme: KOAN\nv3. Ancient Troy: ILION\nv4. A water fowl; a pinch to the rear; tailor's iron: GOOSE\nv5. A possesser: OWNER\n\nOutput:\nB R O\nC H R I\nA N I O\nG L U C O\nL O N E",
+            "Thoughts:\nh1. A male friend: BRO\nh2. To baptize: BAPT\nh3. A negative ion: ANION\nh4. A sugar: GLUCO\nh5. A solitary person: LONER\nv1. Benefit; result: AVAIL\nv2. A Zen question and answer method; extreme: KOAN\nv3. Ancient Troy: ILION\nv4. A water fowl; a pinch to the rear; tailor's iron: DUCKY\nv5. A possesser: OWNER\n\nOutput:\nB R O\nB A P T\nA N I O N\nG L U C O\nL O N E R",
+            "Thoughts:\nh1. A male friend: BUDDY\nh2. To baptize: CHRIST\nh3. A negative ion: ANION\nh4. A sugar: GLUCO\nh5. A solitary person: LONER\nv1. Benefit; result: AVAIL\nv2. A Zen question and answer method; extreme: KOAN\nv3. Ancient Troy: ILIUM\nv4. A water fowl; a pinch to the rear; tailor's iron: GEESE\nv5. A possesser: OWNER\n\nOutput:\nB U D D Y\nC H R I S\nA N I O N\nG L U C O\nL O N E R",
+            "Thoughts:\nh1. A male friend: BRO\nh2. To baptize: CHRISTEN\nh3. A negative ion: ANION\nh4. A sugar: GLUCOSE\nh5. A solitary person: LONER\nv1. Benefit; result: AVAIL\nv2. A Zen question and answer method; extreme: KOAN\nv3. Ancient Troy: ILIUM\nv4. A water fowl; a pinch to the rear; tailor's iron: GEESE\nv5. A possesser: OWNER\n\nOutput:\nB R O\nC H R I S T E N\nA N I O N\nG L U C O S E\nL O N E R"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.6,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.32,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.6,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.32,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 6242,
+            "prompt_tokens": 5776,
+            "cost": 0.012251
+        }
+    },
+    {
+        "idx": 4,
+        "ys": [
+            "Thoughts:\nh1. To dry up: SECCO\nh2. To tie again: RETIE\nh3. The Istrian peninsula: ISTRI\nh4. One who strains; one who runs heavily: STAMM\nh5. Eternal, everlasting: AGING\nv1. To ascend; to get up; to come up: RISEN\nv2. To sit again: RESIT\nv3. To intend; to plan; to devise; a nettle; to guess: STING\nv4. An igniter; a shooter: FIRER\nv5. To crave: YEARN\n\nOutput:\nS E C C O\nR E T I E\nI S T R I\nS T A M M\nA G I N G",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. To tie again: RETIE\nh3. The Istrian peninsula: ISTER\nh4. One who strains; one who runs heavily: STAMM\nh5. Eternal, everlasting: AGONE\nv1. To ascend; to get up; to come up: RISEN\nv2. To sit again: RESET\nv3. To intend; to plan; to devise; a nettle; to guess: STEER\nv4. An igniter; a shooter: ARSON\nv5. To crave: YEARN\n\nOutput:\nP A R C H\nR E T I E\nI S T E R\nS T A M M\nA G O N E",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. To tie again: RETIE\nh3. The Istrian peninsula: ISTER\nh4. One who strains; one who runs heavily: LOPER\nh5. Eternal, everlasting: AGING\nv1. To ascend; to get up; to come up: RISEN\nv2. To sit again: RESET\nv3. To intend; to plan; to devise; a nettle; to guess: MEANT\nv4. An igniter; a shooter: FIRER\nv5. To crave: YEARN\n\nOutput:\nP A R C H\nR E T I E\nI S T E R\nL O P E R\nA G I N G",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. To tie again: RETIE\nh3. The Istrian peninsula: ISTRA\nh4. One who strains; one who runs heavily: LOPER\nh5. Eternal, everlasting: AGEST\nv1. To ascend; to get up; to come up: RISEN\nv2. To sit again: RESET\nv3. To intend; to plan; to devise; a nettle; to guess: MEANT\nv4. An igniter; a shooter: FIRER\nv5. To crave: YEARN\n\nOutput:\nP A R C H\nR E T I E\nI S T R A\nL O P E R\nA G E S T",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. To tie again: RETIE\nh3. The Istrian peninsula: ISTER\nh4. One who strains; one who runs heavily: LOPER\nh5. Eternal, everlasting: AGAPE\nv1. To ascend; to get up; to come up: RISEN\nv2. To sit again: RESIT\nv3. To intend; to plan; to devise; a nettle; to guess: MEANT\nv4. An igniter; a shooter: LIGHT\nv5. To crave: YEARN\n\nOutput:\nP A R C H\nR E T I E\nI S T E R\nL O P E R\nA G A P E",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. To tie again: RETIE\nh3. The Istrian peninsula: ISTRA\nh4. One who strains; one who runs heavily: STRER\nh5. Eternal, everlasting: AGAPE\nv1. To ascend; to get up; to come up: RISEN\nv2. To sit again: RESIT\nv3. To intend; to plan; to devise; a nettle; to guess: MEANT\nv4. An igniter; a shooter: FIRER\nv5. To crave: YENED\n\nOutput:\nP A R C H\nR E T I E\nI S T R A\nS T R E R\nA G A P E",
+            "Thoughts:\nh1. To dry up: SECCO\nh2. To tie again: RETIE\nh3. The Istrian peninsula: ISTRA\nh4. One who strains; one who runs heavily: STRESS\nh5. Eternal, everlasting: AGELY\nv1. To ascend; to get up; to come up: RISEN\nv2. To sit again: RESET\nv3. To intend; to plan; to devise; a nettle; to guess: MEANT\nv4. An igniter; a shooter: TILAR\nv5. To crave: YEARN\n\nOutput:\nS E C C O\nR E T I E\nI S T R A\nS T R E S\nA G E L Y",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. To tie again: RETIE\nh3. The Istrian peninsula: ISTER\nh4. One who strains; one who runs heavily: STRES\nh5. Eternal, everlasting: AGELA\nv1. To ascend; to get up; to come up: RISEN\nv2. To sit again: RESET\nv3. To intend; to plan; to devise; a nettle; to guess: STINE\nv4. An igniter; a shooter: TIGER\nv5. To crave: YEARN\n\nOutput:\nP A R C H\nR E T I E\nI S T E R\nS T R E S\nA G E L A",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. To tie again: RETIE\nh3. The Istrian peninsula: ISTRA\nh4. One who strains; one who runs heavily: LOPER\nh5. Eternal, everlasting: AGAPE\nv1. To ascend; to get up; to come up: RISEN\nv2. To sit again: RESIT\nv3. To intend; to plan; to devise; a nettle; to guess: MEANT\nv4. An igniter; a shooter: ROCKET\nv5. To crave: YEARN\n\nOutput:\nP A R C H\nR E T I E\nI S T R A\nL O P E R\nA G A P E",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. To tie again: RETIE\nh3. The Istrian peninsula: ISTER\nh4. One who strains; one who runs heavily: LOPER\nh5. Eternal, everlasting: AGING\nv1. To ascend; to get up; to come up: RISEN\nv2. To sit again: RESET\nv3. To intend; to plan; to devise; a nettle; to guess: MEANS\nv4. An igniter; a shooter: FIRER\nv5. To crave: YEARN\n\nOutput:\nP A R C H\nR E T I E\nI S T E R\nL O P E R\nA G I N G"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.4,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.36,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.52,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.52,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.52,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.44,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.48,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 7863,
+            "prompt_tokens": 7225,
+            "cost": 0.015407
+        }
+    },
+    {
+        "idx": 5,
+        "ys": [
+            "Thoughts:\nh1. To dry up: PARCH\nh2. To outdo; to bandy words: SPARR\nh3. A Yoruba-speaking people: NIGER\nh4. A Passover meal: SEDER\nh5. Eternal, everlasting: AGELA\nv1. To ascend; to get up; to come up: RISEN\nv2. To regain: REWIN\nv3. To elude: EVADE\nv4. One who files: FILER\nv5. To crave: YEARN\n\nOutput:\nP A R C H\nS P A R R\nN I G E R\nS E D E R\nA G E L A",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. To outdo; to bandy words: SPARR\nh3. A Yoruba-speaking people: EGBAS\nh4. A Passover meal: SEDER\nh5. Eternal, everlasting: AGELA\nv1. To ascend; to get up; to come up: RISEN\nv2. To regain: REWIN\nv3. To elude: EVADE\nv4. One who files: RASER\nv5. To crave: YENED\n\nOutput:\nP A R C H\nS P A R R\nE G B A S\nS E D E R\nA G E L A",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. To outdo; to bandy words: VIE\nh3. A Yoruba-speaking people: EGBA\nh4. A Passover meal: SEDER\nh5. Eternal, everlasting: AGING\nv1. To ascend; to get up; to come up: RISEN\nv2. To regain: REWIN\nv3. To elude: EVADE\nv4. One who files: LIER\nv5. To crave: DESIRE\n\nOutput:\nP A R C H\nV I E\nE G B A\nS E D E R\nA G I N G",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. To outdo; to bandy words: SPARR\nh3. A Yoruba-speaking people: NIGER\nh4. A Passover meal: SEDER\nh5. Eternal, everlasting: AGING\nv1. To ascend; to get up; to come up: RISEN\nv2. To regain: REWIN\nv3. To elude: EVADE\nv4. One who files: RASPY\nv5. To crave: YENED\n\nOutput:\nP A R C H\nS P A R R\nN I G E R\nS E D E R\nA G I N G",
+            "Thoughts:\nh1. To dry up: SECCO\nh2. To outdo; to bandy words: OUTGO\nh3. A Yoruba-speaking people: EGBAS\nh4. A Passover meal: SEDER\nh5. Eternal, everlasting: AGAPE\nv1. To ascend; to get up; to come up: RISEN\nv2. To regain: REWIN\nv3. To elude: EVADE\nv4. One who files: RASER\nv5. To crave: YEARN\n\nOutput:\nS E C C O\nO U T G O\nE G B A S\nS E D E R\nA G A P E",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. To outdo; to bandy words: BESTS\nh3. A Yoruba-speaking people: EGBAS\nh4. A Passover meal: SEDER\nh5. Eternal, everlasting: AGELA\nv1. To ascend; to get up; to come up: RISEN\nv2. To regain: REWIN\nv3. To elude: AVERT\nv4. One who files: RASER\nv5. To crave: YEARN\n\nOutput:\nP A R C H\nB E S T S\nE G B A S\nS E D E R\nA G E L A",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. To outdo; to bandy words: VIE\nh3. A Yoruba-speaking people: EGBA\nh4. A Passover meal: SEDER\nh5. Eternal, everlasting: AGELA\nv1. To ascend; to get up; to come up: RISEN\nv2. To regain: RETAK\nv3. To elude: AVERT\nv4. One who files: RASER\nv5. To crave: YEARN\n\nOutput:\nP A R C H\nV I E\nE G B A\nS E D E R\nA G E L A",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. To outdo; to bandy words: BESTR\nh3. A Yoruba-speaking people: EGBAS\nh4. A Passover meal: SEDER\nh5. Eternal, everlasting: AGELA\nv1. To ascend; to get up; to come up: RISEN\nv2. To regain: REWIN\nv3. To elude: AVOID\nv4. One who files: RASER\nv5. To crave: YEARN\n\nOutput:\nP A R C H\nB E S T R\nE G B A S\nS E D E R\nA G E L A",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. To outdo; to bandy words: SPARR\nh3. A Yoruba-speaking people: EGBO\nh4. A Passover meal: SEDER\nh5. Eternal, everlasting: AGAPE\nv1. To ascend; to get up; to come up: RISEN\nv2. To regain: REWIN\nv3. To elude: ESCHE\nv4. One who files: RASER\nv5. To crave: YEARN\n\nOutput:\nP A R C H\nS P A R R\nE G B O\nS E D E R\nA G A P E",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. To outdo; to bandy words: OUTVIE\nh3. A Yoruba-speaking people: EGBAS\nh4. A Passover meal: SEDER\nh5. Eternal, everlasting: AGELA\nv1. To ascend; to get up; to come up: RISEN\nv2. To regain: REWIN\nv3. To elude: EVADE\nv4. One who files: RASER\nv5. To crave: YEARN\n\nOutput:\nP A R C H\nO U T V I E\nE G B A S\nS E D E R\nA G E L A"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.28,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.2,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.32,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.28,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.32,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.28,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 9390,
+            "prompt_tokens": 8661,
+            "cost": 0.0184155
+        }
+    },
+    {
+        "idx": 6,
+        "ys": [
+            "Thoughts:\nh1. To dry up: PARCH\nh2. Worth; usefulness; desirability: VALUE\nh3. A South American boa constrictor: ANACONDA\nh4. One who lopes: TROTTER\nh5. Eternal, everlasting: AGELAST\nv1. To let fall: DROP\nv2. A block for polishing marble or other rocks: PUCKA\nv3. To run away together to get married: ELOPE\nv4. One who fumes: STEAMER\nv5. To crave: YEARN\n\nOutput:\nP A R C H\nV A L U E\nA N A C O\nT R O T T\nA G E L A",
+            "Thoughts:\nh1. To dry up: SECCO\nh2. Worth; usefulness; desirability: VALUE\nh3. A South American boa constrictor: ANACONDA\nh4. One who lopes: TROTER\nh5. Eternal, everlasting: AGING\nv1. To let fall: DROP\nv2. A block for polishing marble or other rocks: RUBER\nv3. To run away together to get married: ELOPE\nv4. One who fumes: STEAM\nv5. To crave: HUNGER\n\nOutput:\nS E C C O\nV A L U E\nA N A C O\nT R O T E\nA G I N G",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. Worth; usefulness; desirability: VALUE\nh3. A South American boa constrictor: ANACONDA\nh4. One who lopes: TROTTER\nh5. Eternal, everlasting: ENDLE\nv1. To let fall: DROP\nv2. A block for polishing marble or other rocks: STONE\nv3. To run away together to get married: ELOPE\nv4. One who fumes: RAGER\nv5. To crave: YEARN\n\nOutput:\nP A R C H\nV A L U E\nA N A C O N D A\nT R O T T E R\nE N D L E",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. Worth; usefulness; desirability: VALUE\nh3. A South American boa constrictor: ANACONDA\nh4. One who lopes: TROTTER\nh5. Eternal, everlasting: NEVER\nv1. To let fall: DROP\nv2. A block for polishing marble or other rocks: STONE\nv3. To run away together to get married: ELOPE\nv4. One who fumes: ANGER\nv5. To crave: YEARN\n\nOutput:\nP A R C H\nV A L U E\nA N A C O\nT R O T T\nN E V E R",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. Worth; usefulness; desirability: VALUE\nh3. A South American boa constrictor: ANACONDA\nh4. One who lopes: TROTTER\nh5. Eternal, everlasting: AGESP\nv1. To let fall: DROP\nv2. A block for polishing marble or other rocks: LAPID\nv3. To run away together to get married: ELOPE\nv4. One who fumes: RAGER\nv5. To crave: LONG\n\nOutput:\nP A R C H\nV A L U E\nA N A C O N D A\nT R O T T E R\nA G E S P",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. Worth; usefulness; desirability: VALUE\nh3. A South American boa constrictor: ANACONDA\nh4. One who lopes: TROTTER\nh5. Eternal, everlasting: NEVER\nv1. To let fall: DROP\nv2. A block for polishing marble or other rocks: RUBER\nv3. To run away together to get married: ELOPE\nv4. One who fumes: RAGER\nv5. To crave: LONG\n\nOutput:\nP A R C H\nV A L U E\nA N A C O N D A\nT R O T T E R\nN E V E R",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. Worth; usefulness; desirability: VALUE\nh3. A South American boa constrictor: ANACONDA\nh4. One who lopes: TROTTER\nh5. Eternal, everlasting: AGING\nv1. To let fall: DROP\nv2. A block for polishing marble or other rocks: LAPID\nv3. To run away together to get married: ELOPE\nv4. One who fumes: RAGER\nv5. To crave: YEARN\n\nOutput:\nP A R C H\nV A L U E\nA N A C O N D A\nT R O T T E R\nA G I N G",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. Worth; usefulness; desirability: VALUE\nh3. A South American boa constrictor: ANACONDA\nh4. One who lopes: TROTTER\nh5. Eternal, everlasting: NEVER\nv1. To let fall: DROOP\nv2. A block for polishing marble or other rocks: LAPID\nv3. To run away together to get married: ELOPE\nv4. One who fumes: IRATE\nv5. To crave: YEARN\n\nOutput:\nP A R C H\nV A L U E\nA N A C O\nT R O T T\nN E V E R",
+            "Thoughts:\nh1. To dry up: SECCO\nh2. Worth; usefulness; desirability: VALUE\nh3. A South American boa constrictor: ANACONDA\nh4. One who lopes: TROTER\nh5. Eternal, everlasting: AGELY\nv1. To let fall: DROP\nv2. A block for polishing marble or other rocks: RUBER\nv3. To run away together to get married: ELOPE\nv4. One who fumes: RAGER\nv5. To crave: YEARN\n\nOutput:\nS E C C O\nV A L U E\nA N A C O\nT R O T E\nA G E L Y",
+            "Thoughts:\nh1. To dry up: PARCH\nh2. Worth; usefulness; desirability: VALUE\nh3. A South American boa constrictor: ANACONDA\nh4. One who lopes: TROTTER\nh5. Eternal, everlasting: NEVER\nv1. To let fall: DROOP\nv2. A block for polishing marble or other rocks: STONE\nv3. To run away together to get married: ELOPE\nv4. One who fumes: ANGER\nv5. To crave: YEARN\n\nOutput:\nP A R C H\nV A L U E\nA N A C O N D A\nT R O T T E R\nN E V E R"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.28,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.28,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.28,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.28,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 10962,
+            "prompt_tokens": 10101,
+            "cost": 0.0214935
+        }
+    },
+    {
+        "idx": 7,
+        "ys": [
+            "Thoughts:\nh1. To avoid; to turn away: SHUNN\nh2. A machine to separate peas from their pods and the pea vine: WINNO\nh3. An herb, the elecampane plant: INULA\nh4. A nerve gas: SARIN\nh5. To choose; a person chosen or destined to go to Heaven: ELECT\nv1. To advise: COUNS\nv2. A synthetic textile fiber: NYLON\nv3. To inure; to harden: INURE\nv4. A memento; a souvenir: KEEPS\nv5. To hawk; to peddle; odd jobs: TOUTS\n\nOutput:\nS H U N N\nW I N N O\nI N U L A\nS A R I N\nE L E C T",
+            "Thoughts:\nh1. To avoid; to turn away: SHUN\nh2. A machine to separate peas from their pods and the pea vine: WINNO\nh3. An herb, the elecampane plant: INULA\nh4. A nerve gas: SARIN\nh5. To choose; a person chosen or destined to go to Heaven: ELECT\nv1. To advise: COUNS\nv2. A synthetic textile fiber: NYLON\nv3. To inure; to harden: STEEL\nv4. A memento; a souvenir: KEEPS\nv5. To hawk; to peddle; odd jobs: TOUTS\n\nOutput:\nS H U N\nW I N N O\nI N U L A\nS A R I N\nE L E C T",
+            "Thoughts:\nh1. To avoid; to turn away: SHUNT\nh2. A machine to separate peas from their pods and the pea vine: WINNO\nh3. An herb, the elecampane plant: INULA\nh4. A nerve gas: TABUN\nh5. To choose; a person chosen or destined to go to Heaven: ELECT\nv1. To advise: COUNS\nv2. A synthetic textile fiber: NYLON\nv3. To inure; to harden: STEEL\nv4. A memento; a souvenir: KEEPS\nv5. To hawk; to peddle; odd jobs: TOUTS\n\nOutput:\nS H U N T\nW I N N O\nI N U L A\nT A B U N\nE L E C T",
+            "Thoughts:\nh1. To avoid; to turn away: SHUNT\nh2. A machine to separate peas from their pods and the pea vine: WINNO\nh3. An herb, the elecampane plant: INULA\nh4. A nerve gas: TABUN\nh5. To choose; a person chosen or destined to go to Heaven: ELECT\nv1. To advise: COUNS\nv2. A synthetic textile fiber: NYLON\nv3. To inure; to harden: STEEL\nv4. A memento; a souvenir: KEEPS\nv5. To hawk; to peddle; odd jobs: VENDS\n\nOutput:\nS H U N T\nW I N N O\nI N U L A\nT A B U N\nE L E C T",
+            "Thoughts:\nh1. To avoid; to turn away: SHUNT\nh2. A machine to separate peas from their pods and the pea vine: WINNO\nh3. An herb, the elecampane plant: INULA\nh4. A nerve gas: TABUN\nh5. To choose; a person chosen or destined to go to Heaven: ELECT\nv1. To advise: COUNS\nv2. A synthetic textile fiber: NYLON\nv3. To inure; to harden: STEEL\nv4. A memento; a souvenir: TOKEN\nv5. To hawk; to peddle; odd jobs: TOUTS\n\nOutput:\nS H U N T\nW I N N O\nI N U L A\nT A B U N\nE L E C T",
+            "Thoughts:\nh1. To avoid; to turn away: SHUNT\nh2. A machine to separate peas from their pods and the pea vine: WINNO\nh3. An herb, the elecampane plant: INULA\nh4. A nerve gas: SARIN\nh5. To choose; a person chosen or destined to go to Heaven: ELECT\nv1. To advise: COUNS\nv2. A synthetic textile fiber: NYLON\nv3. To inure; to harden: INURE\nv4. A memento; a souvenir: TOKEN\nv5. To hawk; to peddle; odd jobs: TOUTS\n\nOutput:\nS H U N T\nW I N N O\nI N U L A\nS A R I N\nE L E C T",
+            "Thoughts:\nh1. To avoid; to turn away: SHUNT\nh2. A machine to separate peas from their pods and the pea vine: WINNO\nh3. An herb, the elecampane plant: INULA\nh4. A nerve gas: SARIN\nh5. To choose; a person chosen or destined to go to Heaven: ELECT\nv1. To advise: COUNS\nv2. A synthetic textile fiber: NYLON\nv3. To inure; to harden: ANURE\nv4. A memento; a souvenir: KEEPS\nv5. To hawk; to peddle; odd jobs: TOUTS\n\nOutput:\nS H U N T\nW I N N O\nI N U L A\nS A R I N\nE L E C T",
+            "Thoughts:\nh1. To avoid; to turn away: SHUNT\nh2. A machine to separate peas from their pods and the pea vine: WINNO\nh3. An herb, the elecampane plant: INULA\nh4. A nerve gas: SARIN\nh5. To choose; a person chosen or destined to go to Heaven: ELECT\nv1. To advise: COUNS\nv2. A synthetic textile fiber: NYLON\nv3. To inure; to harden: STEEL\nv4. A memento; a souvenir: TOKEN\nv5. To hawk; to peddle; odd jobs: TOUTS\n\nOutput:\nS H U N T\nW I N N O\nI N U L A\nS A R I N\nE L E C T",
+            "Thoughts:\nh1. To avoid; to turn away: SHUNT\nh2. A machine to separate peas from their pods and the pea vine: WINNO\nh3. An herb, the elecampane plant: INULA\nh4. A nerve gas: TABUN\nh5. To choose; a person chosen or destined to go to Heaven: ELECT\nv1. To advise: COUNS\nv2. A synthetic textile fiber: NYLON\nv3. To inure; to harden: STEEL\nv4. A memento; a souvenir: KEEPS\nv5. To hawk; to peddle; odd jobs: TOUTS\n\nOutput:\nS H U N T\nW I N N O\nI N U L A\nT A B U N\nE L E C T",
+            "Thoughts:\nh1. To avoid; to turn away: SHUNT\nh2. A machine to separate peas from their pods and the pea vine: WINNO\nh3. An herb, the elecampane plant: INULA\nh4. A nerve gas: SARIN\nh5. To choose; a person chosen or destined to go to Heaven: ELECT\nv1. To advise: COUNS\nv2. A synthetic textile fiber: ORLON\nv3. To inure; to harden: STEEL\nv4. A memento; a souvenir: KEEPS\nv5. To hawk; to peddle; odd jobs: VENDS\n\nOutput:\nS H U N T\nW I N N O\nI N U L A\nS A R I N\nE L E C T"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.68,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.68,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.6,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.6,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.6,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.72,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.72,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.72,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.6,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.72,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 12716,
+            "prompt_tokens": 11562,
+            "cost": 0.024855000000000002
+        }
+    },
+    {
+        "idx": 8,
+        "ys": [
+            "Thoughts:\nh1. To avoid; to turn away: SHUNT\nh2. One who waxes: CANDY\nh3. To float; to swim: WADE\nh4. Grape jam: UVATE\nh5. To become late; to cause to become late: DELAY\nv1. Terrible; very: DREAD\nv2. An anatomical valve: AORTA\nv3. A bishop's permission for a priest to leave a diocese: EXEAT\nv4. A cigarette: RETTE\nv5. Wooden; wooden dishes and utensils: TREEN\n\nOutput:\nS H U N T\nC A N D Y\nW A D E\nU V A T E\nD E L A Y",
+            "Thoughts:\nh1. To avoid; to turn away: SHYED\nh2. One who waxes: WAXER\nh3. To float; to swim: WADE\nh4. Grape jam: UVATE\nh5. To become late; to cause to become late: DELAY\nv1. Terrible; very: DREAD\nv2. An anatomical valve: AORTA\nv3. A bishop's permission for a priest to leave a diocese: EXEAT\nv4. A cigarette: RETTE\nv5. Wooden; wooden dishes and utensils: WOODS\n\nOutput:\nS H Y E D\nW A X E R\nW A D E\nU V A T E\nD E L A Y",
+            "Thoughts:\nh1. To avoid; to turn away: SHUN\nh2. One who waxes: BLEB\nh3. To float; to swim: WAFT\nh4. Grape jam: UVATE\nh5. To become late; to cause to become late: TARDY\nv1. Terrible; very: AWFUL\nv2. An anatomical valve: AORTA\nv3. A bishop's permission for a priest to leave a diocese: EXEAT\nv4. A cigarette: RETTE\nv5. Wooden; wooden dishes and utensils: WOODS\n\nOutput:\nS H U N\nB L E B\nW A F T\nU V A T E\nT A R D Y",
+            "Thoughts:\nh1. To avoid; to turn away: SHUNT\nh2. One who waxes: POLER\nh3. To float; to swim: WAFTS\nh4. Grape jam: UVATE\nh5. To become late; to cause to become late: TARDY\nv1. Terrible; very: AWFUL\nv2. An anatomical valve: ATRIA\nv3. A bishop's permission for a priest to leave a diocese: EXEAT\nv4. A cigarette: RETTE\nv5. Wooden; wooden dishes and utensils: TREEN\n\nOutput:\nS H U N T\nP O L E R\nW A F T S\nU V A T E\nT A R D Y",
+            "Thoughts:\nh1. To avoid; to turn away: SHUN\nh2. One who waxes: BEEFY\nh3. To float; to swim: WADE\nh4. Grape jam: UVAE\nh5. To become late; to cause to become late: DELAY\nv1. Terrible; very: DREAD\nv2. An anatomical valve: ATRIO\nv3. A bishop's permission for a priest to leave a diocese: EXEAT\nv4. A cigarette: RETTE\nv5. Wooden; wooden dishes and utensils: WOODS\n\nOutput:\nS H U N\nB E E F Y\nW A D E\nU V A E\nD E L A Y",
+            "Thoughts:\nh1. To avoid; to turn away: SHUN\nh2. One who waxes: POLER\nh3. To float; to swim: WADE\nh4. Grape jam: UVATE\nh5. To become late; to cause to become late: TARDY\nv1. Terrible; very: DREAD\nv2. An anatomical valve: EDEMA\nv3. A bishop's permission for a priest to leave a diocese: EXEAT\nv4. A cigarette: RETTE\nv5. Wooden; wooden dishes and utensils: TREEN\n\nOutput:\nS H U N\nP O L E R\nW A D E\nU V A T E\nT A R D Y",
+            "Thoughts:\nh1. To avoid; to turn away: SHUNT\nh2. One who waxes: POLER\nh3. To float; to swim: WADE\nh4. Grape jam: UVATE\nh5. To become late; to cause to become late: LATEM\nv1. Terrible; very: DREAD\nv2. An anatomical valve: AORTA\nv3. A bishop's permission for a priest to leave a diocese: EXEAT\nv4. A cigarette: RETTE\nv5. Wooden; wooden dishes and utensils: TREEN\n\nOutput:\nS H U N T\nP O L E R\nW A D E\nU V A T E\nL A T E M",
+            "Thoughts:\nh1. To avoid; to turn away: DODGE\nh2. One who waxes: POLER\nh3. To float; to swim: WADE\nh4. Grape jam: UVATE\nh5. To become late; to cause to become late: TARDY\nv1. Terrible; very: DREAD\nv2. An anatomical valve: AORTA\nv3. A bishop's permission for a priest to leave a diocese: EXEAT\nv4. A cigarette: RETTE\nv5. Wooden; wooden dishes and utensils: WOODS\n\nOutput:\nD O D G E\nP O L E R\nW A D E\nU V A T E\nT A R D Y",
+            "Thoughts:\nh1. To avoid; to turn away: SHUNT\nh2. One who waxes: POLER\nh3. To float; to swim: WADE\nh4. Grape jam: UVATE\nh5. To become late; to cause to become late: BELAT\nv1. Terrible; very: AWFUL\nv2. An anatomical valve: AORTA\nv3. A bishop's permission for a priest to leave a diocese: EXEAT\nv4. A cigarette: RETTE\nv5. Wooden; wooden dishes and utensils: TREEN\n\nOutput:\nS H U N T\nP O L E R\nW A D E\nU V A T E\nB E L A T",
+            "Thoughts:\nh1. To avoid; to turn away: SHUN\nh2. One who waxes: POLER\nh3. To float; to swim: WAFT\nh4. Grape jam: UVATE\nh5. To become late; to cause to become late: TARDY\nv1. Terrible; very: AWFUL\nv2. An anatomical valve: AORTA\nv3. A bishop's permission for a priest to leave a diocese: EXEAT\nv4. A cigarette: RETTE\nv5. Wooden; wooden dishes and utensils: WOODS\n\nOutput:\nS H U N\nP O L E R\nW A F T\nU V A T E\nT A R D Y"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.28,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.28,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.12,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.32,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.48,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.32,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.32,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.36,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 14333,
+            "prompt_tokens": 13009,
+            "cost": 0.028004
+        }
+    },
+    {
+        "idx": 9,
+        "ys": [
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. To emulate: APISH\nh3. A worthless person: SCAMP\nh4. Culturally or stylistically new: NOUVE\nh5. A talkative, gossipy person: PRATE\nv1. To fasten; to hold: CLASP\nv2. To move: SHIFT\nv3. A violent Central Asian blizzard: BURAN\nv4. Odorous; fragrant: AROMA\nv5. A light Greek shield; an apothecium: PELTA\n\nOutput:\nA V A N T\nA P I S H\nS C A M P\nN O U V E\nP R A T E",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. To emulate: APISH\nh3. A worthless person: DREGS\nh4. Culturally or stylistically new: NEOTX\nh5. A talkative, gossipy person: PRATE\nv1. To fasten; to hold: GRASP\nv2. To move: TRAVY\nv3. A violent Central Asian blizzard: BORAN\nv4. Odorous; fragrant: AROMA\nv5. A light Greek shield; an apothecium: SCUTU\n\nOutput:\nA V A N T\nA P I S H\nD R E G S\nN E O T X\nP R A T E",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. To emulate: APISH\nh3. A worthless person: CADGE\nh4. Culturally or stylistically new: NOUVE\nh5. A talkative, gossipy person: YENTA\nv1. To fasten; to hold: ATTLE\nv2. To move: AMOVA\nv3. A violent Central Asian blizzard: BURAN\nv4. Odorous; fragrant: AROMA\nv5. A light Greek shield; an apothecium: ASCUS\n\nOutput:\nA V A N T\nA P I S H\nC A D G E\nN O U V E\nY E N T A",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. To emulate: APE\nh3. A worthless person: LOUT\nh4. Culturally or stylistically new: NOUVE\nh5. A talkative, gossipy person: PRATE\nv1. To fasten; to hold: LATCH\nv2. To move: STIR\nv3. A violent Central Asian blizzard: BURAN\nv4. Odorous; fragrant: AROMA\nv5. A light Greek shield; an apothecium: PELTA\n\nOutput:\nA V A N T\nP E L T A\nR O M A\nA R O M A\nT A L C H",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. To emulate: APISH\nh3. A worthless person: NERTS\nh4. Culturally or stylistically new: NOUVE\nh5. A talkative, gossipy person: PRATE\nv1. To fasten; to hold: CLASP\nv2. To move: HIE\nv3. A violent Central Asian blizzard: BURAN\nv4. Odorous; fragrant: AROMA\nv5. A light Greek shield; an apothecium: PELTA\n\nOutput:\nA V A N T\nA P I S H\nN E R T S\nN O U V E\nP R A T E",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. To emulate: APISH\nh3. A worthless person: DREGS\nh4. Culturally or stylistically new: NOUVE\nh5. A talkative, gossipy person: PRATE\nv1. To fasten; to hold: CLASP\nv2. To move: GYRATE\nv3. A violent Central Asian blizzard: BURAN\nv4. Odorous; fragrant: REDOL\nv5. A light Greek shield; an apothecium: ASCUS\n\nOutput:\nA V A N T\nA P I S H\nD R E G S\nN O U V E\nP R A T E",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. To emulate: APISH\nh3. A worthless person: CADGE\nh4. Culturally or stylistically new: AVANT\nh5. A talkative, gossipy person: GADFL\nv1. To fasten; to hold: PINCH\nv2. To move: SHIFT\nv3. A violent Central Asian blizzard: BURAN\nv4. Odorous; fragrant: REDOL\nv5. A light Greek shield; an apothecium: SCUTU\n\nOutput:\nA V A N T\nP I N C H\nI F T S\nS C U T U\nG O L D R",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. To emulate: APISH\nh3. A worthless person: NOBODY\nh4. Culturally or stylistically new: NOVEL\nh5. A talkative, gossipy person: GOSSIP\nv1. To fasten; to hold: GRASP\nv2. To move: GOING\nv3. A violent Central Asian blizzard: BURAN\nv4. Odorous; fragrant: AROMA\nv5. A light Greek shield; an apothecium: ASCUS\n\nOutput:\nA V A N T\nA P I S H\nN O B O D\nN O V E L\nG O S S I",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. To emulate: COPYC\nh3. A worthless person: CADGE\nh4. Culturally or stylistically new: NOUVE\nh5. A talkative, gossipy person: YENTA\nv1. To fasten; to hold: CLAMP\nv2. To move: SHIFT\nv3. A violent Central Asian blizzard: BURAN\nv4. Odorous; fragrant: AROMA\nv5. A light Greek shield; an apothecium: SCUTU\n\nOutput:\nA V A N T\nC O P Y C\nC A D G E\nN O U V E\nY E N T A",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. To emulate: APISH\nh3. A worthless person: CADGE\nh4. Culturally or stylistically new: NOUVE\nh5. A talkative, gossipy person: YENTA\nv1. To fasten; to hold: CLASP\nv2. To move: OPERA\nv3. A violent Central Asian blizzard: BURAN\nv4. Odorous; fragrant: REDOL\nv5. A light Greek shield; an apothecium: PELTA\n\nOutput:\nA V A N T\nA P I S H\nC A D G E\nN O U V E\nY E N T A"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.04,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.04,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.2,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.08,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.08,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.04,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.0,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.04,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.2,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.2,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 16047,
+            "prompt_tokens": 14465,
+            "cost": 0.031303000000000004
+        }
+    },
+    {
+        "idx": 10,
+        "ys": [
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. An Indian mallow: ABELI\nh3. A religious brother: FRIAR\nh4. To take; to receive: ACHEW\nh5. Argal; crude tartar: ARGOL\nv1. A comic actor or operatic clown: HISTR\nv2. A mistake: ERROR\nv3. Existence; a creature: BEING\nv4. The ruby snapper fish: TAIPI\nv5. Apparel; an egg preparation used to clarify wine: FINER\n\nOutput:\nA V A N T\nA B E L I\nF R I A R\nA C H E W\nA R G O L",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: BOPPY\nh2. An Indian mallow: ATISO\nh3. A religious brother: FRIAR\nh4. To take; to receive: ACATE\nh5. Argal; crude tartar: ALGAR\nv1. A comic actor or operatic clown: PANTO\nv2. A mistake: LAPSE\nv3. Existence; a creature: BEING\nv4. The ruby snapper fish: JOBEE\nv5. Apparel; an egg preparation used to clarify wine: LINEN\n\nOutput:\nB O P P Y\nA T I S O\nF R I A R\nA C A T E\nA L G A R",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. An Indian mallow: ATHEL\nh3. A religious brother: FRIAR\nh4. To take; to receive: ACHEW\nh5. Argal; crude tartar: SCAUR\nv1. A comic actor or operatic clown: ARTOO\nv2. A mistake: ERROR\nv3. Existence; a creature: BEING\nv4. The ruby snapper fish: EMPER\nv5. Apparel; an egg preparation used to clarify wine: ALBUM\n\nOutput:\nA V A N T\nA T H E L\nF R I A R\nA C H E W\nS C A U R",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. An Indian mallow: ABELI\nh3. A religious brother: FRIAR\nh4. To take; to receive: ACHEW\nh5. Argal; crude tartar: ALGAR\nv1. A comic actor or operatic clown: HARLE\nv2. A mistake: ERROR\nv3. Existence; a creature: BEING\nv4. The ruby snapper fish: OLEOS\nv5. Apparel; an egg preparation used to clarify wine: LIEVE\n\nOutput:\nA V A N T\nA B E L I\nF R I A R\nA C H E W\nA L G A R",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. An Indian mallow: ATASI\nh3. A religious brother: FRIAR\nh4. To take; to receive: ACHEW\nh5. Argal; crude tartar: ALGAR\nv1. A comic actor or operatic clown: ARTOO\nv2. A mistake: ERROR\nv3. Existence; a creature: BEING\nv4. The ruby snapper fish: JOBIE\nv5. Apparel; an egg preparation used to clarify wine: LIEVE\n\nOutput:\nA V A N T\nA T A S I\nF R I A R\nA C H E W\nA L G A R",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. An Indian mallow: ATASI\nh3. A religious brother: FRAIR\nh4. To take; to receive: ACATE\nh5. Argal; crude tartar: ARGOL\nv1. A comic actor or operatic clown: ARLE\nv2. A mistake: LAPSE\nv3. Existence; a creature: BEING\nv4. The ruby snapper fish: TARAK\nv5. Apparel; an egg preparation used to clarify wine: ALBUM\n\nOutput:\nA V A N T\nA T A S I\nF R A I R\nA C A T E\nA R G O L",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: BOPPY\nh2. An Indian mallow: KETMI\nh3. A religious brother: FRIAR\nh4. To take; to receive: ACCEPT\nh5. Argal; crude tartar: LEVIN\nv1. A comic actor or operatic clown: HARLE\nv2. A mistake: ERROR\nv3. Existence; a creature: BEING\nv4. The ruby snapper fish: LUTJAN\nv5. Apparel; an egg preparation used to clarify wine: CLARET\n\nOutput:\nB O P P Y\nK E T M I\nF R I A R\nA C C E P T\nL E V I N",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. An Indian mallow: ATISH\nh3. A religious brother: FRIAR\nh4. To take; to receive: ACHEW\nh5. Argal; crude tartar: TARRE\nv1. A comic actor or operatic clown: ARLE\nv2. A mistake: ERROR\nv3. Existence; a creature: BEING\nv4. The ruby snapper fish: TARAK\nv5. Apparel; an egg preparation used to clarify wine: ALBUM\n\nOutput:\nA V A N T\nA T I S H\nF R I A R\nA C H E W\nT A R R E",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. An Indian mallow: ATIBA\nh3. A religious brother: FRAIR\nh4. To take; to receive: GRASP\nh5. Argal; crude tartar: TARRE\nv1. A comic actor or operatic clown: ARLE\nv2. A mistake: LAPSE\nv3. Existence; a creature: BEING\nv4. The ruby snapper fish: TAMBA\nv5. Apparel; an egg preparation used to clarify wine: LIMON\n\nOutput:\nA V A N T\nA T I B A\nF R A I R\nG R A S P\nT A R R E",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. An Indian mallow: ATIBA\nh3. A religious brother: FRAIR\nh4. To take; to receive: OBTOT\nh5. Argal; crude tartar: TARTA\nv1. A comic actor or operatic clown: HARLE\nv2. A mistake: ERROR\nv3. Existence; a creature: BEING\nv4. The ruby snapper fish: CABRA\nv5. Apparel; an egg preparation used to clarify wine: ALBUM\n\nOutput:\nA V A N T\nA T I B A\nF R A I R\nO B T O T\nT A R T A"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.36,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.36,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.2,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.32,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.28,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.28,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.2,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.16,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.16,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 17739,
+            "prompt_tokens": 15919,
+            "cost": 0.034568
+        }
+    },
+    {
+        "idx": 11,
+        "ys": [
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. An Indian mallow: ATASI\nh3. Relating to the iris: IRIDAL\nh4. Miner's thumb; a small fish: TOMMY\nh5. Prolonged and deep fear: HOROR\nv1. To construct; to erect: RAISE\nv2. A mistake: ERROR\nv3. A fabric; a yellowish gray color: PEARL\nv4. The ruby snapper fish: ONAGA\nv5. Variegated; glazed: MARBY\n\nOutput:\nA V A N T\nA T A S I\nI R I D A\nT O M M Y\nH O R O R",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. An Indian mallow: ATIRA\nh3. Relating to the iris: UVEAL\nh4. Miner's thumb; a small fish: TOMMY\nh5. Prolonged and deep fear: DREAD\nv1. To construct; to erect: RAISE\nv2. A mistake: ERROR\nv3. A fabric; a yellowish gray color: FRISE\nv4. The ruby snapper fish: TAMBO\nv5. Variegated; glazed: MOTTI\n\nOutput:\nA V A N T\nA T I R A\nU V E A L\nT O M M Y\nD R E A D",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. An Indian mallow: AMBIE\nh3. Relating to the iris: IRINE\nh4. Miner's thumb; a small fish: TOMMY\nh5. Prolonged and deep fear: HORSE\nv1. To construct; to erect: RAISE\nv2. A mistake: ERROR\nv3. A fabric; a yellowish gray color: ECRU\nv4. The ruby snapper fish: EYEYE\nv5. Variegated; glazed: AGATE\n\nOutput:\nA V A N T\nA M B I E\nI R I N E\nT O M M Y\nH O R S E",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. An Indian mallow: ATASI\nh3. Relating to the iris: IRATE\nh4. Miner's thumb; a small fish: TOMMY\nh5. Prolonged and deep fear: HOROR\nv1. To construct; to erect: RAISE\nv2. A mistake: ERROR\nv3. A fabric; a yellowish gray color: DRABE\nv4. The ruby snapper fish: OPANE\nv5. Variegated; glazed: GLAZY\n\nOutput:\nA V A N T\nA T A S I\nI R A T E\nT O M M Y\nH O R O R",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. An Indian mallow: KHASM\nh3. Relating to the iris: IRINE\nh4. Miner's thumb; a small fish: TOMMY\nh5. Prolonged and deep fear: TERROR\nv1. To construct; to erect: RAISE\nv2. A mistake: ERROR\nv3. A fabric; a yellowish gray color: NACRE\nv4. The ruby snapper fish: MULLO\nv5. Variegated; glazed: MARLY\n\nOutput:\nA V A N T\nK H A S M\nI R I N E\nT O M M Y\nT E R R O",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. An Indian mallow: ABELI\nh3. Relating to the iris: IRATE\nh4. Miner's thumb; a small fish: TOMMY\nh5. Prolonged and deep fear: HORSE\nv1. To construct; to erect: RAISE\nv2. A mistake: ERROR\nv3. A fabric; a yellowish gray color: DRABE\nv4. The ruby snapper fish: SCARO\nv5. Variegated; glazed: SMEAR\n\nOutput:\nA V A N T\nA B E L I\nI R A T E\nT O M M Y\nH O R S E",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. An Indian mallow: ATASI\nh3. Relating to the iris: IRIDE\nh4. Miner's thumb; a small fish: TOMMY\nh5. Prolonged and deep fear: HORROR\nv1. To construct; to erect: RAISE\nv2. A mistake: ERROR\nv3. A fabric; a yellowish gray color: DRABE\nv4. The ruby snapper fish: TAMBO\nv5. Variegated; glazed: MOTTY\n\nOutput:\nA V A N T\nA T A S I\nI R I D E\nT O M M Y\nH O R R O",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. An Indian mallow: ATASI\nh3. Relating to the iris: IRIDAL\nh4. Miner's thumb; a small fish: TOMMY\nh5. Prolonged and deep fear: PANIC\nv1. To construct; to erect: RAISE\nv2. A mistake: ERROR\nv3. A fabric; a yellowish gray color: DRABE\nv4. The ruby snapper fish: JOBIE\nv5. Variegated; glazed: MARLY\n\nOutput:\nA V A N T\nA T A S I\nI R I D A\nT O M M Y\nP A N I C",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. An Indian mallow: KALMI\nh3. Relating to the iris: IRIDE\nh4. Miner's thumb; a small fish: SMOLT\nh5. Prolonged and deep fear: HOROR\nv1. To construct; to erect: RAISE\nv2. A mistake: ERROR\nv3. A fabric; a yellowish gray color: TAUPE\nv4. The ruby snapper fish: ONAGA\nv5. Variegated; glazed: MARBY\n\nOutput:\nA V A N T\nK A L M I\nI R I D E\nS M O L T\nH O R O R",
+            "Thoughts:\nh1. (yet more) dissonant jazz, with solo improvisations and complex rhythms: AVANT\nh2. An Indian mallow: ATASI\nh3. Relating to the iris: IRINE\nh4. Miner's thumb; a small fish: TOMMY\nh5. Prolonged and deep fear: HORROR\nv1. To construct; to erect: RAISE\nv2. A mistake: ERROR\nv3. A fabric; a yellowish gray color: TAUPE\nv4. The ruby snapper fish: TAMBA\nv5. Variegated; glazed: AGATE\n\nOutput:\nA V A N T\nA T A S I\nI R I N E\nT O M M Y\nH O R R O R"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.16,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.32,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.16,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.12,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.16,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.16,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.16,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.16,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.12,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.16,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 19435,
+            "prompt_tokens": 17375,
+            "cost": 0.03784
+        }
+    },
+    {
+        "idx": 12,
+        "ys": [
+            "Thoughts:\nh1. A two-legged creature: BIPED\nh2. A pointed arch: OGIVE\nh3. A caliph: KHALI\nh4. A plant related to the burdock: BURSA\nh5. One who eats: DINER\nv1. An Italian lawn game played with wooden balls: BOCCE\nv2. A Yoruba-speaking people: EGBAS\nv3. A guide; a captain: PILOT\nv4. To avoid: SHUN\nv5. To delay; to put off: DEFER\n\nOutput:\nB I P E D\nO G I V E\nK H A L I\nB U R S A\nD I N E R",
+            "Thoughts:\nh1. A two-legged creature: HUMAN\nh2. A pointed arch: OGIVE\nh3. A caliph: IMAM\nh4. A plant related to the burdock: DOCKS\nh5. One who eats: DINER\nv1. An Italian lawn game played with wooden balls: BOCCI\nv2. A Yoruba-speaking people: NAGO\nv3. A guide; a captain: PILOT\nv4. To avoid: SHUN\nv5. To delay; to put off: DEFER\n\nOutput:\nH U M A N\nO G I V E\nI M A M\nD O C K S\nD I N E R",
+            "Thoughts:\nh1. A two-legged creature: BIPED\nh2. A pointed arch: OGIVE\nh3. A caliph: IMAM\nh4. A plant related to the burdock: DOCKS\nh5. One who eats: DINER\nv1. An Italian lawn game played with wooden balls: BOCCI\nv2. A Yoruba-speaking people: NAGO\nv3. A guide; a captain: PILOT\nv4. To avoid: DODGE\nv5. To delay; to put off: DEFER\n\nOutput:\nB I P E D\nO G I V E\nI M A M\nD O C K S\nD I N E R",
+            "Thoughts:\nh1. A two-legged creature: HUMAN\nh2. A pointed arch: OGIVE\nh3. A caliph: EMIR\nh4. A plant related to the burdock: CARDO\nh5. One who eats: DINER\nv1. An Italian lawn game played with wooden balls: BOCCI\nv2. A Yoruba-speaking people: EGBAS\nv3. A guide; a captain: PILOT\nv4. To avoid: ELUDE\nv5. To delay; to put off: DEFER\n\nOutput:\nH U M A N\nO G I V E\nE M I R\nC A R D O\nD I N E R",
+            "Thoughts:\nh1. A two-legged creature: BIPED\nh2. A pointed arch: OGIVE\nh3. A caliph: KHALI\nh4. A plant related to the burdock: ARCTI\nh5. One who eats: DINER\nv1. An Italian lawn game played with wooden balls: BOCCE\nv2. A Yoruba-speaking people: YORUB\nv3. A guide; a captain: PILOT\nv4. To avoid: SHUNN\nv5. To delay; to put off: DEFER\n\nOutput:\nB I P E D\nO G I V E\nK H A L I\nA R C T I\nD I N E R",
+            "Thoughts:\nh1. A two-legged creature: BIPED\nh2. A pointed arch: OGIVE\nh3. A caliph: EMIR\nh4. A plant related to the burdock: ARCTI\nh5. One who eats: DINER\nv1. An Italian lawn game played with wooden balls: BOCCE\nv2. A Yoruba-speaking people: EGBAS\nv3. A guide; a captain: PILOT\nv4. To avoid: SHUN\nv5. To delay; to put off: DEFER\n\nOutput:\nB I P E D\nO G I V E\nE M I R\nA R C T I\nD I N E R",
+            "Thoughts:\nh1. A two-legged creature: BIPED\nh2. A pointed arch: OGIVE\nh3. A caliph: KHALI\nh4. A plant related to the burdock: ARCTI\nh5. One who eats: DINER\nv1. An Italian lawn game played with wooden balls: BOCCE\nv2. A Yoruba-speaking people: EGBAS\nv3. A guide; a captain: PILOT\nv4. To avoid: DODGE\nv5. To delay; to put off: DEFER\n\nOutput:\nB I P E D\nO G I V E\nK H A L I\nA R C T I\nD I N E R",
+            "Thoughts:\nh1. A two-legged creature: HUMAN\nh2. A pointed arch: OGIVE\nh3. A caliph: EMIR\nh4. A plant related to the burdock: ARCTI\nh5. One who eats: DINER\nv1. An Italian lawn game played with wooden balls: BOCCE\nv2. A Yoruba-speaking people: EGBAS\nv3. A guide; a captain: LEADE\nv4. To avoid: DODGE\nv5. To delay; to put off: DEFER\n\nOutput:\nH U M A N\nO G I V E\nE M I R\nA R C T I\nD I N E R",
+            "Thoughts:\nh1. A two-legged creature: HOMIN\nh2. A pointed arch: OGIVE\nh3. A caliph: IMAM\nh4. A plant related to the burdock: COCKLE\nh5. One who eats: DINER\nv1. An Italian lawn game played with wooden balls: BOCCE\nv2. A Yoruba-speaking people: EGBA\nv3. A guide; a captain: PILOT\nv4. To avoid: EVADE\nv5. To delay; to put off: DEFER\n\nOutput:\nH O M I N\nO G I V E\nI M A M\nC O C K L E\nD I N E R",
+            "Thoughts:\nh1. A two-legged creature: HUMAN\nh2. A pointed arch: OGIVE\nh3. A caliph: IMAM\nh4. A plant related to the burdock: DOCKS\nh5. One who eats: DINER\nv1. An Italian lawn game played with wooden balls: BOCCI\nv2. A Yoruba-speaking people: EGBAS\nv3. A guide; a captain: PILOT\nv4. To avoid: SHUN\nv5. To delay; to put off: DEFER\n\nOutput:\nH U M A N\nO G I V E\nI M A M\nD O C K S\nD I N E R"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.48,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.28,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.48,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.32,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.52,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.52,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.52,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.32,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.32,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.28,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 20977,
+            "prompt_tokens": 18814,
+            "cost": 0.0408725
+        }
+    },
+    {
+        "idx": 13,
+        "ys": [
+            "Thoughts:\nh1. A two-legged creature: BIPED\nh2. Oorali, a poison used on arrows: CURAR\nh3. A northern bird; a jager, a light infantryman: SKUA\nh4. Something that is drawn forth: EXTOL\nh5. Indolent; restive: IDLE\nv1. A purchaser: BUYER\nv2. A Turkish written decree: AHVAL\nv3. A county division: SHIRE\nv4. To choose; a person chosen or destined to go to Heaven: ELECT\nv5. Soiled; improper: UNCLE\n\nOutput:\nB I P E D\nC U R A R\nS K U A\nE X T O L\nI D L E",
+            "Thoughts:\nh1. A two-legged creature: BIPED\nh2. Oorali, a poison used on arrows: CURAR\nh3. A northern bird; a jager, a light infantryman: SKUA\nh4. Something that is drawn forth: TRACT\nh5. Indolent; restive: IDLE\nv1. A purchaser: BUYER\nv2. A Turkish written decree: AHVAL\nv3. A county division: SHIRE\nv4. To choose; a person chosen or destined to go to Heaven: ELECT\nv5. Soiled; improper: UNCLE\n\nOutput:\nB I P E D\nC U R A R\nS K U A\nT R A C T\nI D L E",
+            "Thoughts:\nh1. A two-legged creature: HUMAN\nh2. Oorali, a poison used on arrows: CURAR\nh3. A northern bird; a jager, a light infantryman: SKUA\nh4. Something that is drawn forth: EXTRU\nh5. Indolent; restive: IDLE\nv1. A purchaser: BUYER\nv2. A Turkish written decree: ARZU\nv3. A county division: SHIRE\nv4. To choose; a person chosen or destined to go to Heaven: ELECT\nv5. Soiled; improper: UNFIT\n\nOutput:\nH U M A N\nC U R A R\nS K U A  \nE X T R U\nI D L E  ",
+            "Thoughts:\nh1. A two-legged creature: BIPED\nh2. Oorali, a poison used on arrows: CURAR\nh3. A northern bird; a jager, a light infantryman: SKUA\nh4. Something that is drawn forth: EVOKE\nh5. Indolent; restive: IDLE\nv1. A purchaser: BUYER\nv2. A Turkish written decree: FERMAN\nv3. A county division: SHIRE\nv4. To choose; a person chosen or destined to go to Heaven: ELECT\nv5. Soiled; improper: DIRTY\n\nOutput:\nB I P E D\nC U R A R\nS K U A \nE V O K E\nI D L E",
+            "Thoughts:\nh1. A two-legged creature: HUMAN\nh2. Oorali, a poison used on arrows: CURAR\nh3. A northern bird; a jager, a light infantryman: SKUA\nh4. Something that is drawn forth: DERIV\nh5. Indolent; restive: IDLE\nv1. A purchaser: BUYER\nv2. A Turkish written decree: FERMA\nv3. A county division: SHIRE\nv4. To choose; a person chosen or destined to go to Heaven: ELECT\nv5. Soiled; improper: DIRTY\n\nOutput:\nH U M A N\nC U R A R\nS K U A\nD E R I V\nI D L E",
+            "Thoughts:\nh1. A two-legged creature: BIPED\nh2. Oorali, a poison used on arrows: CURAR\nh3. A northern bird; a jager, a light infantryman: SKUA\nh4. Something that is drawn forth: EVOKE\nh5. Indolent; restive: IDLE\nv1. A purchaser: BUYER\nv2. A Turkish written decree: FIRMA\nv3. A county division: SHIRE\nv4. To choose; a person chosen or destined to go to Heaven: ELECT\nv5. Soiled; improper: SEAMY\n\nOutput:\nB I P E D\nC U R A R\nS K U A  \nE V O K E\nI D L E  ",
+            "Thoughts:\nh1. A two-legged creature: BIPED\nh2. Oorali, a poison used on arrows: CURAR\nh3. A northern bird; a jager, a light infantryman: SKUA\nh4. Something that is drawn forth: EVOKE\nh5. Indolent; restive: IDLE\nv1. A purchaser: BUYER\nv2. A Turkish written decree: FIRMA\nv3. A county division: SHIRE\nv4. To choose; a person chosen or destined to go to Heaven: ELECT\nv5. Soiled; improper: SEEDY\n\nOutput:\nB I P E D\nC U R A R\nS K U A\nE V O K E\nI D L E",
+            "Thoughts:\nh1. A two-legged creature: BIPED\nh2. Oorali, a poison used on arrows: CURAR\nh3. A northern bird; a jager, a light infantryman: SKUA\nh4. Something that is drawn forth: EXCER\nh5. Indolent; restive: IDLE\nv1. A purchaser: BUYER\nv2. A Turkish written decree: FERMA\nv3. A county division: SHIRE\nv4. To choose; a person chosen or destined to go to Heaven: ELECT\nv5. Soiled; improper: DIRTY\n\nOutput:\nB I P E D\nC U R A R\nS K U A\nE X C E R\nI D L E",
+            "Thoughts:\nh1. A two-legged creature: BIPED\nh2. Oorali, a poison used on arrows: CURAR\nh3. A northern bird; a jager, a light infantryman: SKUA\nh4. Something that is drawn forth: EVOKE\nh5. Indolent; restive: IDLE\nv1. A purchaser: BUYER\nv2. A Turkish written decree: FERMA\nv3. A county division: SHIRE\nv4. To choose; a person chosen or destined to go to Heaven: ELECT\nv5. Soiled; improper: UNCLE\n\nOutput:\nB I P E D\nC U R A R\nS K U A\nE V O K E\nI D L E",
+            "Thoughts:\nh1. A two-legged creature: BIPED\nh2. Oorali, a poison used on arrows: CURAR\nh3. A northern bird; a jager, a light infantryman: SKUA\nh4. Something that is drawn forth: EVOKE\nh5. Indolent; restive: INERT\nv1. A purchaser: BUYER\nv2. A Turkish written decree: FIRMA\nv3. A county division: SHIRE\nv4. To choose; a person chosen or destined to go to Heaven: ELECT\nv5. Soiled; improper: SEAMY\n\nOutput:\nB I P E D\nC U R A R\nS K U A\nE V O K E\nI N E R T"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.28,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.04,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.0,
+                "r_word": 0.0,
+                "r_game": false,
+                "r": 0.0
+            },
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 22616,
+            "prompt_tokens": 20267,
+            "cost": 0.0440575
+        }
+    },
+    {
+        "idx": 14,
+        "ys": [
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An ammonia compound: AMINE\nh3. A pagoda; an Indian idol: DEVA\nh4. A piano piece: ETUDE\nh5. A shim; a vessel; a lining: LINER\nv1. A horse: EQUUS\nv2. A violin: FIDDL\nv3. A traditional folk or synagogue melody: NIGUN\nv4. A UNIX file system structure: INODE\nv5. A Passover meal: SEDER\n\nOutput:\nC A N I S\nA M I N E\nD E V A \nE T U D E\nL I N E R",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An ammonia compound: AMINE\nh3. A pagoda; an Indian idol: TEMPLE\nh4. A piano piece: SONAT\nh5. A shim; a vessel; a lining: LINER\nv1. A horse: EQUUS\nv2. A violin: STRAD\nv3. A traditional folk or synagogue melody: NIGUN\nv4. A UNIX file system structure: INODE\nv5. A Passover meal: SEDER\n\nOutput:\nC A N I S\nA M I N E\nT E M P L E\nS O N A T\nL I N E R",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An ammonia compound: AMIDE\nh3. A pagoda; an Indian idol: TEMPLE\nh4. A piano piece: SONAT\nh5. A shim; a vessel; a lining: LINER\nv1. A horse: EQUUS\nv2. A violin: FIDDL\nv3. A traditional folk or synagogue melody: NIGUN\nv4. A UNIX file system structure: INODE\nv5. A Passover meal: SEDER\n\nOutput:\nC A N I S\nA M I D E\nT E M P L\nS O N A T\nL I N E R",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An ammonia compound: AMINE\nh3. A pagoda; an Indian idol: DEVA\nh4. A piano piece: ETUDE\nh5. A shim; a vessel; a lining: LINER\nv1. A horse: EQUUS\nv2. A violin: FIDDL\nv3. A traditional folk or synagogue melody: NIGUN\nv4. A UNIX file system structure: INODE\nv5. A Passover meal: SEDER\n\nOutput:\nC A N I S\nA M I N E\nD E V A\nE T U D E\nL I N E R",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An ammonia compound: AMINE\nh3. A pagoda; an Indian idol: TEMPL\nh4. A piano piece: SONAT\nh5. A shim; a vessel; a lining: LINER\nv1. A horse: EQUUS\nv2. A violin: FIDDL\nv3. A traditional folk or synagogue melody: NIGUN\nv4. A UNIX file system structure: INODE\nv5. A Passover meal: SEDER\n\nOutput:\nC A N I S\nA M I N E\nT E M P L\nS O N A T\nL I N E R",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An ammonia compound: AMINE\nh3. A pagoda; an Indian idol: DEITY\nh4. A piano piece: SONAT\nh5. A shim; a vessel; a lining: LINER\nv1. A horse: EQUUS\nv2. A violin: FIDDLE\nv3. A traditional folk or synagogue melody: NIGUN\nv4. A UNIX file system structure: INODE\nv5. A Passover meal: SEDER\n\nOutput:\nC A N I S\nA M I N E\nD E I T Y\nS O N A T\nL I N E R",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An ammonia compound: AMINE\nh3. A pagoda; an Indian idol: TEMPLE\nh4. A piano piece: SONAT\nh5. A shim; a vessel; a lining: LINER\nv1. A horse: EQUUS\nv2. A violin: FIDDL\nv3. A traditional folk or synagogue melody: NIGUN\nv4. A UNIX file system structure: INODE\nv5. A Passover meal: SEDER\n\nOutput:\nC A N I S\nA M I N E\nT E M P L\nS O N A T\nL I N E R",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An ammonia compound: AMINE\nh3. A pagoda; an Indian idol: DEVA\nh4. A piano piece: SONAT\nh5. A shim; a vessel; a lining: LINER\nv1. A horse: EQUUS\nv2. A violin: FIDDLE\nv3. A traditional folk or synagogue melody: NIGUN\nv4. A UNIX file system structure: INODE\nv5. A Passover meal: SEDER\n\nOutput:\nC A N I S\nA M I N E\nD E V A\nS O N A T\nL I N E R",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An ammonia compound: AMINE\nh3. A pagoda; an Indian idol: DEVA\nh4. A piano piece: SONAT\nh5. A shim; a vessel; a lining: LINER\nv1. A horse: EQUUS\nv2. A violin: STRAD\nv3. A traditional folk or synagogue melody: NIGUN\nv4. A UNIX file system structure: INODE\nv5. A Passover meal: SEDER\n\nOutput:\nC A N I S\nA M I N E\nD E V A\nS O N A T\nL I N E R",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An ammonia compound: AMINE\nh3. A pagoda; an Indian idol: TEMPLE\nh4. A piano piece: SONAT\nh5. A shim; a vessel; a lining: LINER\nv1. A horse: EQUUS\nv2. A violin: FIDDLE\nv3. A traditional folk or synagogue melody: NIGUN\nv4. A UNIX file system structure: INODE\nv5. A Passover meal: SEDER\n\nOutput:\nC A N I S\nA M I N E\nT E M P L\nS O N A T\nL I N E R"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.8,
+                "r_word": 0.4,
+                "r_game": false,
+                "r": 0.4
+            },
+            {
+                "r_letter": 0.6,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.56,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.8,
+                "r_word": 0.4,
+                "r_game": false,
+                "r": 0.4
+            },
+            {
+                "r_letter": 0.6,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.6,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.6,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.6,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.6,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.6,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 24180,
+            "prompt_tokens": 21708,
+            "cost": 0.047124
+        }
+    },
+    {
+        "idx": 15,
+        "ys": [
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An Altaic language: TURKI\nh3. Ramie, an Asiatic plant yielding a rope fiber: CHINA\nh4. Face down; susceptible: PRONE\nh5. An Indian antelope: NILGA\nv1. A contingent: DETAC\nv2. The Brazilian macaw; an Australian bird: ARARA\nv3. A Greek province; a law; a coin: DRACH\nv4. An ancient British ethnic group: CELTI\nv5. Gloss; luster: SHEEN\n\nOutput:\nC A N I S\nT U R K I\nC H I N A\nP R O N E\nN I L G A",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An Altaic language: TURKI\nh3. Ramie, an Asiatic plant yielding a rope fiber: CHINA\nh4. Face down; susceptible: PRONE\nh5. An Indian antelope: NILGI\nv1. A contingent: UNIT\nv2. The Brazilian macaw; an Australian bird: ARARA\nv3. A Greek province; a law; a coin: DRACH\nv4. An ancient British ethnic group: CELTS\nv5. Gloss; luster: SHEEN\n\nOutput:\nC A N I S\nT U R K I\nC H I N A\nP R O N E\nN I L GI",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An Altaic language: TATAR\nh3. Ramie, an Asiatic plant yielding a rope fiber: CHINA\nh4. Face down; susceptible: PRONE\nh5. An Indian antelope: NILGA\nv1. A contingent: UNIT\nv2. The Brazilian macaw; an Australian bird: ARARA\nv3. A Greek province; a law; a coin: DRACH\nv4. An ancient British ethnic group: CELTS\nv5. Gloss; luster: SHEEN\n\nOutput:\nC A N I S\nT A T A R\nC H I N A\nP R O N E\nN I L G A",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An Altaic language: TURKI\nh3. Ramie, an Asiatic plant yielding a rope fiber: CHINA\nh4. Face down; susceptible: PRONE\nh5. An Indian antelope: NILGA\nv1. A contingent: UNIT\nv2. The Brazilian macaw; an Australian bird: ARARA\nv3. A Greek province; a law; a coin: DRACH\nv4. An ancient British ethnic group: CELTS\nv5. Gloss; luster: SHEEN\n\nOutput:\nC A N I S\nT U R K I\nC H I N A\nP R O N E\nN I L G A",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An Altaic language: ALTAI\nh3. Ramie, an Asiatic plant yielding a rope fiber: BOEHM\nh4. Face down; susceptible: PRONE\nh5. An Indian antelope: NILGA\nv1. A contingent: UNIT\nv2. The Brazilian macaw; an Australian bird: ARARA\nv3. A Greek province; a law; a coin: DRACH\nv4. An ancient British ethnic group: CELTS\nv5. Gloss; luster: SHEEN\n\nOutput:\nC A N I S\nA L T A I\nB O E H M\nP R O N E\nN I L G A",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An Altaic language: TURKI\nh3. Ramie, an Asiatic plant yielding a rope fiber: CHINA\nh4. Face down; susceptible: PRONE\nh5. An Indian antelope: NILGA\nv1. A contingent: UNIT\nv2. The Brazilian macaw; an Australian bird: ARARA\nv3. A Greek province; a law; a coin: DRACH\nv4. An ancient British ethnic group: CELTS\nv5. Gloss; luster: SHEEN\n\nOutput:\nC A N I S\nT U R K I\nC H I N A\nP R O N E\nN I L G A",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An Altaic language: TURKI\nh3. Ramie, an Asiatic plant yielding a rope fiber: CHINA\nh4. Face down; susceptible: PRONE\nh5. An Indian antelope: NILGA\nv1. A contingent: UNIT\nv2. The Brazilian macaw; an Australian bird: ARAVI\nv3. A Greek province; a law; a coin: DRACH\nv4. An ancient British ethnic group: ICENI\nv5. Gloss; luster: SHEEN\n\nOutput:\nC A N I S\nT U R K I\nC H I N A\nP R O N E\nN I L G A",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An Altaic language: TURKI\nh3. Ramie, an Asiatic plant yielding a rope fiber: CHINA\nh4. Face down; susceptible: PRONE\nh5. An Indian antelope: NILGA\nv1. A contingent: UNIT\nv2. The Brazilian macaw; an Australian bird: ARARA\nv3. A Greek province; a law; a coin: DRACH\nv4. An ancient British ethnic group: CELTS\nv5. Gloss; luster: SHEEN\n\nOutput:\nC A N I S\nT U R K I\nC H I N A\nP R O N E\nN I L G A",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An Altaic language: TURKI\nh3. Ramie, an Asiatic plant yielding a rope fiber: CHINA\nh4. Face down; susceptible: PRONE\nh5. An Indian antelope: NILGA\nv1. A contingent: UNIT\nv2. The Brazilian macaw; an Australian bird: ARAUC\nv3. A Greek province; a law; a coin: DRACH\nv4. An ancient British ethnic group: ICENI\nv5. Gloss; luster: SHEEN\n\nOutput:\nC A N I S\nT U R K I\nC H I N A\nP R O N E\nN I L G A",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An Altaic language: TURKI\nh3. Ramie, an Asiatic plant yielding a rope fiber: CHINA\nh4. Face down; susceptible: PRONE\nh5. An Indian antelope: NILGA\nv1. A contingent: UNIT\nv2. The Brazilian macaw; an Australian bird: ARARA\nv3. A Greek province; a law; a coin: DRACH\nv4. An ancient British ethnic group: CELTS\nv5. Gloss; luster: SHEEN\n\nOutput:\nC A N I S\nT U R K I\nC H I N A\nP R O N E\nN I L G A"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 25825,
+            "prompt_tokens": 23160,
+            "cost": 0.0503175
+        }
+    },
+    {
+        "idx": 16,
+        "ys": [
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. Liquid body waste: URINE\nh3. An Asian cape: RASUE\nh4. Defecates; a dice game: SHITS\nh5. High; high-class; pretentious: SWANK\nv1. A kerchief: BANDA\nv2. The Brazilian macaw; an Australian bird: ARARA\nv3. A New Zealand palm: NIKAU\nv4. Unfit; clumsy: INAPT\nv5. To perceive; wisdom; reason; feeling: SENSE\n\nOutput:\nC A N I S\nU R I N E\nR A S U E\nS H I T S\nS W A N K",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. Liquid body waste: URINE\nh3. An Asian cape: RASSE\nh4. Defecates; a dice game: SHITS\nh5. High; high-class; pretentious: POSH\nv1. A kerchief: BANDA\nv2. The Brazilian macaw; an Australian bird: ARARA\nv3. A New Zealand palm: NIKAU\nv4. Unfit; clumsy: INEPT\nv5. To perceive; wisdom; reason; feeling: SENSE\n\nOutput:\nC A N I S\nU R I N E\nR A S S E\nS H I T S\nP O S H",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. Liquid body waste: URINE\nh3. An Asian cape: RASUL\nh4. Defecates; a dice game: SHITS\nh5. High; high-class; pretentious: SWANK\nv1. A kerchief: NECKT\nv2. The Brazilian macaw; an Australian bird: ARARA\nv3. A New Zealand palm: NIKAU\nv4. Unfit; clumsy: INAPT\nv5. To perceive; wisdom; reason; feeling: SENSE\n\nOutput:\nC A N I S\nU R I N E\nR A S U L\nS H I T S\nS W A N K",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. Liquid body waste: URINE\nh3. An Asian cape: RASAM\nh4. Defecates; a dice game: CRAPS\nh5. High; high-class; pretentious: LUXE\nv1. A kerchief: FICHE\nv2. The Brazilian macaw; an Australian bird: ARARA\nv3. A New Zealand palm: NIKAU\nv4. Unfit; clumsy: INAPT\nv5. To perceive; wisdom; reason; feeling: SENSE\n\nOutput:\nC A N I S\nU R I N E\nR A S A M\nC R A P S\nL U X E",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. Liquid body waste: URINE\nh3. An Asian cape: RASSE\nh4. Defecates; a dice game: SHITS\nh5. High; high-class; pretentious: POSHY\nv1. A kerchief: BANDA\nv2. The Brazilian macaw; an Australian bird: ARARA\nv3. A New Zealand palm: NIKAU\nv4. Unfit; clumsy: INEPT\nv5. To perceive; wisdom; reason; feeling: SENSE\n\nOutput:\nC A N I S\nU R I N E\nR A S S E\nS H I T S\nP O S H Y",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. Liquid body waste: URINE\nh3. An Asian cape: RASSE\nh4. Defecates; a dice game: CRAPS\nh5. High; high-class; pretentious: SOPPY\nv1. A kerchief: CRAPE\nv2. The Brazilian macaw; an Australian bird: ARARA\nv3. A New Zealand palm: NIKAU\nv4. Unfit; clumsy: INEPT\nv5. To perceive; wisdom; reason; feeling: SENSE\n\nOutput:\nC A N I S\nU R I N E\nR A S S E\nC R A P S\nS O P P Y",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. Liquid body waste: URINE\nh3. An Asian cape: RACHA\nh4. Defecates; a dice game: SHITS\nh5. High; high-class; pretentious: HOITY\nv1. A kerchief: FICHE\nv2. The Brazilian macaw; an Australian bird: ARARA\nv3. A New Zealand palm: NIKAU\nv4. Unfit; clumsy: INEPT\nv5. To perceive; wisdom; reason; feeling: SENSE\n\nOutput:\nC A N I S\nU R I N E\nR A C H A\nS H I T S\nH O I T Y",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. Liquid body waste: URINE\nh3. An Asian cape: RASIN\nh4. Defecates; a dice game: CRAPS\nh5. High; high-class; pretentious: POSHY\nv1. A kerchief: BANDA\nv2. The Brazilian macaw; an Australian bird: ARARA\nv3. A New Zealand palm: NIKAU\nv4. Unfit; clumsy: INAPT\nv5. To perceive; wisdom; reason; feeling: SENSE\n\nOutput:\nC A N I S\nU R I N E\nR A S I N\nC R A P S\nP O S H Y",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. Liquid body waste: URINE\nh3. An Asian cape: RASAH\nh4. Defecates; a dice game: SHITS\nh5. High; high-class; pretentious: POSH\nv1. A kerchief: SCARF\nv2. The Brazilian macaw; an Australian bird: ARARA\nv3. A New Zealand palm: NIKAU\nv4. Unfit; clumsy: INEPT\nv5. To perceive; wisdom; reason; feeling: SENSE\n\nOutput:\nC A N I S\nU R I N E\nR A S A H\nS H I T S\nP O S H",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. Liquid body waste: URINE\nh3. An Asian cape: RASUL\nh4. Defecates; a dice game: SHITS\nh5. High; high-class; pretentious: SWANK\nv1. A kerchief: BANDA\nv2. The Brazilian macaw; an Australian bird: ARARA\nv3. A New Zealand palm: NIKAU\nv4. Unfit; clumsy: INAPT\nv5. To perceive; wisdom; reason; feeling: SENSE\n\nOutput:\nC A N I S\nU R I N E\nR A S U L\nS H I T S\nS W A N K"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.52,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.52,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.52,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.72,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.52,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.68,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.6,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.72,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.56,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.52,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 27457,
+            "prompt_tokens": 24608,
+            "cost": 0.0534895
+        }
+    },
+    {
+        "idx": 17,
+        "ys": [
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. Oorali, a poison used on arrows: CURAR\nh3. A phonetic notation: IPAIC\nh4. A small wheel or spindle; to transfer to a peripheral device: DISK\nh5. Belonging to you: YOURS\nv1. Poetic \"cursed\"; peevish: CURST\nv2. An old fashioned term for various medical remedies: CURES\nv3. An Australian river: DARLI\nv4. Ancient Troy: ILION\nv5. A shekel: COINS\n\nOutput:\nC A N I S\nC U R A R\nI P A I C\nD I S K S\nY O U R S",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. Oorali, a poison used on arrows: CURAR\nh3. A phonetic notation: IPAIC\nh4. A small wheel or spindle; to transfer to a peripheral device: REELT\nh5. Belonging to you: YOURS\nv1. Poetic \"cursed\"; peevish: CURST\nv2. An old fashioned term for various medical remedies: TINCT\nv3. An Australian river: DARLI\nv4. Ancient Troy: ILION\nv5. A shekel: SHKEL\n\nOutput:\nC A N I S\nC U R A R\nI P A I C\nR E E L T\nY O U R S",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. Oorali, a poison used on arrows: CURAR\nh3. A phonetic notation: IPAIC\nh4. A small wheel or spindle; to transfer to a peripheral device: SCROL\nh5. Belonging to you: THINE\nv1. Poetic \"cursed\"; peevish: WROTH\nv2. An old fashioned term for various medical remedies: CURES\nv3. An Australian river: DARLI\nv4. Ancient Troy: ILION\nv5. A shekel: DRACH\n\nOutput:\nC A N I S\nC U R A R\nI P A I C\nS C R O L\nT H I N E",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. Oorali, a poison used on arrows: CURAR\nh3. A phonetic notation: DIACR\nh4. A small wheel or spindle; to transfer to a peripheral device: DISK\nh5. Belonging to you: THINE\nv1. Poetic \"cursed\"; peevish: CURST\nv2. An old fashioned term for various medical remedies: CURES\nv3. An Australian river: DARLI\nv4. Ancient Troy: ILION\nv5. A shekel: COINS\n\nOutput:\nC A N I S\nC U R A R\nD I A C R\nD I S K\nT H I N E",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. Oorali, a poison used on arrows: CURAR\nh3. A phonetic notation: RINKT\nh4. A small wheel or spindle; to transfer to a peripheral device: REELT\nh5. Belonging to you: YOURS\nv1. Poetic \"cursed\"; peevish: CURST\nv2. An old fashioned term for various medical remedies: TINCT\nv3. An Australian river: DARLI\nv4. Ancient Troy: ILION\nv5. A shekel: ASHRA\n\nOutput:\nC A N I S\nC U R A R\nR I N K T\nR E E L T\nY O U R S",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. Oorali, a poison used on arrows: CURAR\nh3. A phonetic notation: DIACR\nh4. A small wheel or spindle; to transfer to a peripheral device: DISK\nh5. Belonging to you: YOURS\nv1. Poetic \"cursed\"; peevish: CURST\nv2. An old fashioned term for various medical remedies: BOLUS\nv3. An Australian river: DARLI\nv4. Ancient Troy: ILION\nv5. A shekel: DRACH\n\nOutput:\nC A N I S\nC U R A R\nD I A C R\nD I S K\nY O U R S",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. Oorali, a poison used on arrows: CURAR\nh3. A phonetic notation: DIACR\nh4. A small wheel or spindle; to transfer to a peripheral device: DISK\nh5. Belonging to you: THINE\nv1. Poetic \"cursed\"; peevish: CURST\nv2. An old fashioned term for various medical remedies: EMMET\nv3. An Australian river: DARLI\nv4. Ancient Troy: ILION\nv5. A shekel: GERAH\n\nOutput:\nC A N I S\nC U R A R\nD I A C R\nD I S K\nT H I N E",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. Oorali, a poison used on arrows: CURAR\nh3. A phonetic notation: DIACR\nh4. A small wheel or spindle; to transfer to a peripheral device: DISK\nh5. Belonging to you: THINE\nv1. Poetic \"cursed\"; peevish: CURST\nv2. An old fashioned term for various medical remedies: CURES\nv3. An Australian river: DARLI\nv4. Ancient Troy: ILION\nv5. A shekel: TYRUS\n\nOutput:\nC A N I S\nC U R A R\nD I A C R\nD I S K\nT H I N E",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. Oorali, a poison used on arrows: CURAR\nh3. A phonetic notation: DIACR\nh4. A small wheel or spindle; to transfer to a peripheral device: DISK\nh5. Belonging to you: YOURS\nv1. Poetic \"cursed\"; peevish: CURST\nv2. An old fashioned term for various medical remedies: CURES\nv3. An Australian river: DARLI\nv4. Ancient Troy: ILION\nv5. A shekel: DRACH\n\nOutput:\nC A N I S\nC U R A R\nD I A C R\nD I S K\nY O U R S",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. Oorali, a poison used on arrows: CURAR\nh3. A phonetic notation: IPAIC\nh4. A small wheel or spindle; to transfer to a peripheral device: SPOKE\nh5. Belonging to you: THINE\nv1. Poetic \"cursed\"; peevish: WROTH\nv2. An old fashioned term for various medical remedies: SALVE\nv3. An Australian river: DARLI\nv4. Ancient Troy: ILION\nv5. A shekel: DRACH\n\nOutput:\nC A N I S\nC U R A R\nI P A I C\nS P O K E\nT H I N E"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.28,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.28,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.6,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.24,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.2,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.2,
+                "r_word": 0.1,
+                "r_game": false,
+                "r": 0.1
+            },
+            {
+                "r_letter": 0.6,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 29148,
+            "prompt_tokens": 26064,
+            "cost": 0.056754
+        }
+    },
+    {
+        "idx": 18,
+        "ys": [
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An Indian mallow: ATAPA\nh3. To feast; to carouse; another name for Reval: CAROL\nh4. A pound sterling: QUIDS\nh5. Tart or sour; like a prostitute: TARTY\nv1. Poetic \"cursed\"; peevish: CURST\nv2. A performance ring: STAGE\nv3. Not ever: NEVER\nv4. Unmoving; inactive: STATIC\nv5. Briny; profane: SALTY\n\nOutput:\nC A N I S\nA T A P A\nC A R O L\nQ U I D S\nT A R T Y",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An Indian mallow: AMLA\nh3. To feast; to carouse; another name for Reval: CAROL\nh4. A pound sterling: QUID\nh5. Tart or sour; like a prostitute: TARTY\nv1. Poetic \"cursed\"; peevish: CURST\nv2. A performance ring: ARENA\nv3. Not ever: NEVER\nv4. Unmoving; inactive: INERT\nv5. Briny; profane: SALTY\n\nOutput:\nC A N I S\nA M L A\nC A R O L\nQ U I D\nT A R T Y",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An Indian mallow: ABELI\nh3. To feast; to carouse; another name for Reval: REVEL\nh4. A pound sterling: QUIDS\nh5. Tart or sour; like a prostitute: TARTY\nv1. Poetic \"cursed\"; peevish: CURST\nv2. A performance ring: ARENA\nv3. Not ever: NEVER\nv4. Unmoving; inactive: STATIC\nv5. Briny; profane: SALTY\n\nOutput:\nC A N I S\nA B E L I\nR E V E L\nQ U I D S\nT A R T Y",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An Indian mallow: ATASI\nh3. To feast; to carouse; another name for Reval: REVEL\nh4. A pound sterling: QUIDS\nh5. Tart or sour; like a prostitute: TARTY\nv1. Poetic \"cursed\"; peevish: WROTH\nv2. A performance ring: STAGE\nv3. Not ever: NEVER\nv4. Unmoving; inactive: IDLED\nv5. Briny; profane: SALTY\n\nOutput:\nC A N I S\nA T A S I\nR E V E L\nQ U I D S\nT A R T Y",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An Indian mallow: ATASI\nh3. To feast; to carouse; another name for Reval: CAROL\nh4. A pound sterling: QUIDS\nh5. Tart or sour; like a prostitute: TARTY\nv1. Poetic \"cursed\"; peevish: CURST\nv2. A performance ring: ARENA\nv3. Not ever: NEVER\nv4. Unmoving; inactive: STILL\nv5. Briny; profane: SALTY\n\nOutput:\nC A N I S\nA T A S I\nC A R O L\nQ U I D S\nT A R T Y",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An Indian mallow: ATASI\nh3. To feast; to carouse; another name for Reval: REVEL\nh4. A pound sterling: QUIDS\nh5. Tart or sour; like a prostitute: TARTY\nv1. Poetic \"cursed\"; peevish: CURST\nv2. A performance ring: STAGE\nv3. Not ever: NEVER\nv4. Unmoving; inactive: STATIC\nv5. Briny; profane: SALTY\n\nOutput:\nC A N I S\nA T A S I\nR E V E L\nQ U I D S\nT A R T Y",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An Indian mallow: ATASI\nh3. To feast; to carouse; another name for Reval: REVEL\nh4. A pound sterling: QUIDS\nh5. Tart or sour; like a prostitute: TARTY\nv1. Poetic \"cursed\"; peevish: CURST\nv2. A performance ring: ARENA\nv3. Not ever: NEVER\nv4. Unmoving; inactive: STONY\nv5. Briny; profane: SALTY\n\nOutput:\nC A N I S\nA T A S I\nR E V E L\nQ U I D S\nT A R T Y",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An Indian mallow: ATASI\nh3. To feast; to carouse; another name for Reval: REVEL\nh4. A pound sterling: QUIDS\nh5. Tart or sour; like a prostitute: TARTY\nv1. Poetic \"cursed\"; peevish: CURST\nv2. A performance ring: STAGE\nv3. Not ever: NEVER\nv4. Unmoving; inactive: STATIC\nv5. Briny; profane: SALTY\n\nOutput:\nC A N I S\nA T A S I\nR E V E L\nQ U I D S\nT A R T Y",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An Indian mallow: ATASI\nh3. To feast; to carouse; another name for Reval: CAROL\nh4. A pound sterling: QUIDS\nh5. Tart or sour; like a prostitute: TARTY\nv1. Poetic \"cursed\"; peevish: CURST\nv2. A performance ring: ARENA\nv3. Not ever: NEVER\nv4. Unmoving; inactive: INERT\nv5. Briny; profane: SALTY\n\nOutput:\nC A N I S\nA T A S I\nC A R O L\nQ U I D S\nT A R T Y",
+            "Thoughts:\nh1. The genus to which the dog and wolf belong: CANIS\nh2. An Indian mallow: ATASI\nh3. To feast; to carouse; another name for Reval: REVEL\nh4. A pound sterling: POUND\nh5. Tart or sour; like a prostitute: TARTY\nv1. Poetic \"cursed\"; peevish: CURST\nv2. A performance ring: STAGE\nv3. Not ever: NEVER\nv4. Unmoving; inactive: STILL\nv5. Briny; profane: SALTY\n\nOutput:\nC A N I S\nA T A S I\nR E V E L\nP O U N D\nT A R T Y"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.48,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.44,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.64,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.6,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.44,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.6,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.6,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.6,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            },
+            {
+                "r_letter": 0.44,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.6,
+                "r_word": 0.3,
+                "r_game": false,
+                "r": 0.3
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 30772,
+            "prompt_tokens": 27514,
+            "cost": 0.059914999999999996
+        }
+    },
+    {
+        "idx": 19,
+        "ys": [
+            "Thoughts:\nh1. To choose: ELECT\nh2. A spiral, usually three dimensional: HELIX\nh3. To emulate: APISH\nh4. A Passover meal: SEDER\nh5. A pound sterling: POUND\nv1. A board game; a British river: CHESS\nv2. British dialect for \"them\": EMMET\nv3. To avoid capture or detection: EVADE\nv4. One who strains; one who runs heavily: LOPER\nv5. To put into action: ENACT\n\nOutput:\nE L E C T\nH E L I X\nA P I S H\nS E D E R\nP O U N D",
+            "Thoughts:\nh1. To choose: ELECT\nh2. A spiral, usually three dimensional: HELIX\nh3. To emulate: APISH\nh4. A Passover meal: SEDER\nh5. A pound sterling: POUND\nv1. A board game; a British river: CHESS\nv2. British dialect for \"them\": EM\nv3. To avoid capture or detection: ELUDE\nv4. One who strains; one who runs heavily: LOPER\nv5. To put into action: ENACT\n\nOutput:\nE L E C T\nH E L I X\nA P I S H\nS E D E R\nP O U N D",
+            "Thoughts:\nh1. To choose: ELECT\nh2. A spiral, usually three dimensional: HELIX\nh3. To emulate: APISH\nh4. A Passover meal: SEDER\nh5. A pound sterling: POUND\nv1. A board game; a British river: CHESS\nv2. British dialect for \"them\": EM\nv3. To avoid capture or detection: EVADE\nv4. One who strains; one who runs heavily: LOPER\nv5. To put into action: EVOKE\n\nOutput:\nE L E C T\nH E L I X\nA P I S H\nS E D E R\nP O U N D",
+            "Thoughts:\nh1. To choose: OPTED\nh2. A spiral, usually three dimensional: HELIX\nh3. To emulate: MIMIC\nh4. A Passover meal: SEDER\nh5. A pound sterling: POUND\nv1. A board game; a British river: CHESS\nv2. British dialect for \"them\": EM\nv3. To avoid capture or detection: EVADE\nv4. One who strains; one who runs heavily: RACER\nv5. To put into action: DOING\n\nOutput:\nO P T E D\nH E L I X\nM I M I C\nS E D E R\nP O U N D",
+            "Thoughts:\nh1. To choose: ELECT\nh2. A spiral, usually three dimensional: HELIX\nh3. To emulate: IMITATE\nh4. A Passover meal: SEDER\nh5. A pound sterling: POUND\nv1. A board game; a British river: CHESS\nv2. British dialect for \"them\": EMSEL\nv3. To avoid capture or detection: EVADE\nv4. One who strains; one who runs heavily: STRESS\nv5. To put into action: IMPLEMENT\n\nOutput:\nE L E C T\nH E L I X\nI M I T A\nS E D E R\nP O U N D",
+            "Thoughts:\nh1. To choose: ELECT\nh2. A spiral, usually three dimensional: HELIX\nh3. To emulate: APISH\nh4. A Passover meal: SEDER\nh5. A pound sterling: POUND\nv1. A board game; a British river: CHESS\nv2. British dialect for \"them\": EMSEL\nv3. To avoid capture or detection: EVADE\nv4. One who strains; one who runs heavily: LOPER\nv5. To put into action: IMPLEMENT\n\nOutput:\nE L E C T\nH E L I X\nA P I S H\nS E D E R\nP O U N D",
+            "Thoughts:\nh1. To choose: ELECT\nh2. A spiral, usually three dimensional: HELIX\nh3. To emulate: APISH\nh4. A Passover meal: SEDER\nh5. A pound sterling: POUND\nv1. A board game; a British river: CHESS\nv2. British dialect for \"them\": EM\nv3. To avoid capture or detection: ELUDE\nv4. One who strains; one who runs heavily: HEAVY\nv5. To put into action: ENACT\n\nOutput:\nE L E C T\nH E L I X\nA P I S H\nS E D E R\nP O U N D",
+            "Thoughts:\nh1. To choose: OPTED\nh2. A spiral, usually three dimensional: HELIX\nh3. To emulate: APING\nh4. A Passover meal: SEDER\nh5. A pound sterling: POUND\nv1. A board game; a British river: CHESS\nv2. British dialect for \"them\": EMMET\nv3. To avoid capture or detection: EVADE\nv4. One who strains; one who runs heavily: LOPER\nv5. To put into action: EXECUTE\n\nOutput:\nO P T E D\nH E L I X\nA P I N G\nS E D E R\nP O U N D",
+            "Thoughts:\nh1. To choose: ELECT\nh2. A spiral, usually three dimensional: HELIX\nh3. To emulate: APISH\nh4. A Passover meal: SEDER\nh5. A pound sterling: POUND\nv1. A board game; a British river: CHESS\nv2. British dialect for \"them\": EM\nv3. To avoid capture or detection: EVADE\nv4. One who strains; one who runs heavily: RACER\nv5. To put into action: ENACT\n\nOutput:\nE L E C T\nH E L I X\nA P I S H\nS E D E R\nP O U N D",
+            "Thoughts:\nh1. To choose: ELECT\nh2. A spiral, usually three dimensional: HELIX\nh3. To emulate: COPYC\nh4. A Passover meal: SEDER\nh5. A pound sterling: POUND\nv1. A board game; a British river: CHESS\nv2. British dialect for \"them\": EMSEL\nv3. To avoid capture or detection: EVADE\nv4. One who strains; one who runs heavily: LOPER\nv5. To put into action: ENACT\n\nOutput:\nE L E C T\nH E L I X\nC O P Y C\nS E D E R\nP O U N D"
+        ],
+        "infos": [
+            {
+                "r_letter": 0.44,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.44,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.44,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.48,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.44,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.44,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.4,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.44,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            },
+            {
+                "r_letter": 0.44,
+                "r_word": 0.2,
+                "r_game": false,
+                "r": 0.2
+            }
+        ],
+        "usage_so_far": {
+            "completion_tokens": 32284,
+            "prompt_tokens": 28952,
+            "cost": 0.062902
+        }
+    }
+]
