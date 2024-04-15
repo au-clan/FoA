@@ -20,14 +20,14 @@ from async_implementation.resampling.resampler import Resampler
 from data.data import GameOf24Data
 from utils import create_folder, email_notification, create_box, update_actual_cost
 
-log_folder = f"arxiv/logs/gameof24/mixed/" # Folder in which logs will be saved (organized daily)
+log_folder = f"logs/{datetime.now().date()}/gameof24/{datetime.now().strftime('%H')}:00/" # Folder in which logs will be saved 
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
 # that way we never pay for the same request twice
 assert os.path.exists(
     "./caches/"), "Please run the script from the root directory of the project. To make sure all caches are created correctly."
-cache = Cache("./caches/gameof24_", size_limit=int(2e10))
+cache = Cache("./caches/gameof24", size_limit=int(2e10))
 
 step_api_config = eval_api_config = {
     "max_tokens": 100,
@@ -40,8 +40,8 @@ step_api_config = eval_api_config = {
 # available models : gpt-35-turbo-0125, gpt-4-0125-preview, gpt-4-0613
 
 models = {
-    "step": "gpt-35-turbo-0125",
-    "eval": "gpt-4-0125-preview",
+    "step": "gpt-4-0613",
+    "eval": "gpt-4-0613",
 }
 
 api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=2, verbose=True)
@@ -205,7 +205,7 @@ async def run(run_options: dict, foa_options: dict):
     puzzle_idxs, puzzles = dataset.get_data(run_options["set"])
 
     ### Debugging
-    #puzzle_idxs, puzzles = puzzle_idxs[20:40], puzzles[20:40]
+    puzzle_idxs, puzzles = puzzle_idxs[:10], puzzles[:10]
 
     # Barriers for each puzzle experiment
     barrier = asyncio.Barrier(len(puzzles))
@@ -224,6 +224,7 @@ async def run(run_options: dict, foa_options: dict):
     evaluation_cost = api.cost(tab_name="eval")
     total_cost = api.cost()
     log["Cost"] = {"Step": step_cost, "Evaluation": evaluation_cost, "Total cost": total_cost}
+    log["Models"] = {"Step": models["step"], "Evaluation": models["eval"]}
 
     # Save merged logs
     with open(log_folder + log_file, 'w+') as f:

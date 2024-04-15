@@ -20,14 +20,14 @@ from async_implementation.resampling.resampler import Resampler
 from data.data import CrosswordsData
 from utils import create_folder, email_notification, create_box, update_actual_cost
 
-log_folder = f"arxiv/logs/crosswords/mixed/" # Folder in which logs will be saved (organized daily)
+log_folder = f"logs/{datetime.now().date()}/gameof24/{datetime.now().strftime('%H')}:00/" # Folder in which logs will be saved 
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
 # that way we never pay for the same request twice
 assert os.path.exists(
     "./caches/"), "Please run the script from the root directory of the project. To make sure all caches are created correctly."
-cache = Cache("./caches/crosswords_", size_limit=int(2e10))
+cache = Cache("./caches/crosswords", size_limit=int(2e10))
 
 step_api_config = eval_api_config = {
     "max_tokens": 1000,
@@ -40,8 +40,8 @@ step_api_config = eval_api_config = {
 # available models : gpt-35-turbo-0125, gpt-4-0125-preview, gpt-4-0613
 
 models = {
-    "step": "gpt-35-turbo-0125",
-    "eval": "gpt-4-0125-preview",
+    "step": "gpt-4-0613",
+    "eval": "gpt-4-0613",
 }
 
 api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=2, verbose=True)
@@ -245,6 +245,7 @@ async def run(run_options: dict, foa_options: dict):
     evaluation_cost = api.cost(tab_name="eval")
     total_cost = api.cost()
     log["Cost"] = {"Step": step_cost, "Evaluation": evaluation_cost, "Total cost": total_cost}
+    log["Models"] = {"Step": models["step"], "Evaluation": models["eval"]}
 
     # Save merged logs
     with open(log_folder + log_file, 'w+') as f:
