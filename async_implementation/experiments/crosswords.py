@@ -12,7 +12,7 @@ import sys
 
 sys.path.append(os.getcwd()) # Project root!!
 
-from async_engine.cached_api_experimental import CachedOpenAIAPI
+from async_engine.cached_api import CachedOpenAIAPI
 from async_engine.batched_api import BatchingAPI
 from async_implementation.agents.crosswords import CrosswordsAgent
 from async_implementation.states.crosswords import CrosswordsState

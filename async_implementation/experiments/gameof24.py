@@ -12,7 +12,7 @@ import sys
 
 sys.path.append(os.getcwd()) # Project root!!
 
-from async_engine.cached_api_experimental import CachedOpenAIAPI
+from async_engine.cached_api import CachedOpenAIAPI
 from async_engine.batched_api import BatchingAPI
 from async_implementation.agents.gameof24 import GameOf24Agent
 from async_implementation.states.gameof24 import GameOf24State
@@ -33,7 +33,7 @@ step_api_config = eval_api_config = {
     "max_tokens": 100,
     "temperature": 0.7,
     "top_p": 1,
-    "request_timeout": 45,
+    "request_timeout": 60,
     "use_azure": True,
 }
 
@@ -205,7 +205,7 @@ async def run(run_options: dict, foa_options: dict):
     puzzle_idxs, puzzles = dataset.get_data(run_options["set"])
 
     ### Debugging
-    puzzle_idxs, puzzles = puzzle_idxs[:10], puzzles[:10]
+    #puzzle_idxs, puzzles = puzzle_idxs[:10], puzzles[:10]
 
     # Barriers for each puzzle experiment
     barrier = asyncio.Barrier(len(puzzles))

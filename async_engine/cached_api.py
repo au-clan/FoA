@@ -189,51 +189,17 @@ class CachedOpenAIAPI:
             start = time.time()
             async with self.limiters[model] as resource:
                 self.clients[model].api_key = resource.data
-                while True:
-                    self.current_sleep_time = min(self.current_sleep_time, self.max_sleep)
-                    try:
-                        response = await asyncio.wait_for(self.clients[model].chat.completions.create(
-                            **cache_config,
-                            # messages=cache_config["messages"],
-                            # model=cache_config["model"],
-                            # temperature=cache_config["temperature"],
-                            # max_tokens=cache_config["max_tokens"],
-                            # timeout=request_timeout,
-                            n=n_from_api_total), timeout=request_timeout)
+                response = await self.openai_request(model, n_from_api_total, cache_config, request_timeout)
+                raw_responses = [(choice.message.content, response.usage.completion_tokens/n_from_api_total, response.usage.prompt_tokens) for choice in response.choices]
 
-                        self.current_sleep_time = self.sleep_time
-                        break
-                    except openai.RateLimitError as e:
-                        print(f"Rate limit error, sleeping for {self.current_sleep_time} seconds")
-                        print(e)
-                        await asyncio.sleep(self.current_sleep_time)
-                        self.current_sleep_time *= self.sleep_factor
-
-                    except openai.APIStatusError as e:
-                        print(f"APIStatusError, sleeping for {self.current_sleep_time} seconds")
-                        print(e)
-                        await asyncio.sleep(self.current_sleep_time)
-                        self.current_sleep_time *= self.sleep_factor
-
-                    except openai.APITimeoutError as e:
-                        print(f"Timeout error, sleeping for {self.current_sleep_time} seconds")
-                        print(e)
-                        await asyncio.sleep(self.current_sleep_time)
-                        self.current_sleep_time *= self.sleep_factor
-
-                    except openai.APIError as e:
-                        print(f"API error, sleeping for {self.current_sleep_time} seconds")
-                        print(e)
-                        await asyncio.sleep(self.current_sleep_time)
-                        self.current_sleep_time *= self.sleep_factor
-
-                    except asyncio.TimeoutError as e:
-                        print(f"Asyncio timeout error, sleeping for {self.current_sleep_time} seconds")
-                        print(e)
-                        await asyncio.sleep(self.current_sleep_time)
-                        self.current_sleep_time *= self.sleep_factor
-
-                assert response is not None
+                for retry_count in range(5):
+                    if any([r[0] is None for r in raw_responses]):
+                        if self.verbose:
+                            print(f"Some choices are None, retrying (retry : {retry_count+1})")
+                        raw_responses = [r for r in raw_responses if r[0] is not None]
+                        n_empty = n_from_api_total - len(raw_responses)
+                        response = await self.openai_request(model, n_empty, cache_config, request_timeout)
+                        raw_responses.extend([(choice.message.content, response.usage.completion_tokens/n_from_api_total, response.usage.prompt_tokens) for choice in response.choices])
 
                 stop = time.time()
                 # by communicating the tokens and time used to the resource manager, we can optimize the rate of requests
@@ -243,20 +209,16 @@ class CachedOpenAIAPI:
                 # easier to just get out of the way and let the next request through
                 # but for GPT4 I've found the leaky bucket to be very more efficient
                 time_taken = stop - start
-                completion_tokens = response.usage.completion_tokens
-                prompt_tokens = response.usage.prompt_tokens
                 tokens_used = response.usage.total_tokens
                 resource.free(time_taken=time_taken, amount_used=tokens_used)
 
-                raw_responses = []
-                for choice in response.choices:
-                    if choice.message.content is None:
-                        print(f"Cache config :\n{cache_config}\n")
+                for r in raw_responses:
+                    if r[0] is None:
+                        print(create_box("No content in raw response"))
                         for a in response.choices:
                             print(a)
-                        print("Error: Response choice is None")
+                        
                         exit()
-                    raw_responses.append((choice.message.content, completion_tokens/n_from_api_total, prompt_tokens))
                     
 
         ##-- Step 4. Requests redistribution --##
@@ -302,9 +264,54 @@ class CachedOpenAIAPI:
 
         return responses
 
+    async def openai_request(self, model, n, cache_config, request_timeout=30):
+        while True:
+            self.current_sleep_time = min(self.current_sleep_time, self.max_sleep)
+            try:
+                response = await asyncio.wait_for(self.clients[model].chat.completions.create(
+                    **cache_config,
+                    # messages=cache_config["messages"],
+                    # model=cache_config["model"],
+                    # temperature=cache_config["temperature"],
+                    # max_tokens=cache_config["max_tokens"],
+                    # timeout=request_timeout,
+                    n=n), timeout=request_timeout)
 
-    def __str__(self):
-        return self.config['model']
+                self.current_sleep_time = self.sleep_time
+                break
+            except openai.RateLimitError as e:
+                print(f"Rate limit error, sleeping for {self.current_sleep_time} seconds")
+                print(e)
+                await asyncio.sleep(self.current_sleep_time)
+                self.current_sleep_time *= self.sleep_factor
+
+            except openai.APIStatusError as e:
+                print(f"APIStatusError, sleeping for {self.current_sleep_time} seconds")
+                print(e)
+                await asyncio.sleep(self.current_sleep_time)
+                self.current_sleep_time *= self.sleep_factor
+
+            except openai.APITimeoutError as e:
+                print(f"Timeout error, sleeping for {self.current_sleep_time} seconds")
+                print(e)
+                await asyncio.sleep(self.current_sleep_time)
+                self.current_sleep_time *= self.sleep_factor
+
+            except openai.APIError as e:
+                print(f"API error, sleeping for {self.current_sleep_time} seconds")
+                print(e)
+                await asyncio.sleep(self.current_sleep_time)
+                self.current_sleep_time *= self.sleep_factor
+
+            except asyncio.TimeoutError as e:
+                print(f"Asyncio timeout error, sleeping for {self.current_sleep_time} seconds")
+                print(e)
+                await asyncio.sleep(self.current_sleep_time)
+                self.current_sleep_time *= self.sleep_factor
+
+        assert response is not None
+
+        return response
 
     def cost(self, tab_name=None, actual_cost=False, verbose=False):
 
