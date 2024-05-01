@@ -1,0 +1,2559 @@
+{
+    "0": {
+        "puzzle": [
+            "An agendum; something to be done",
+            "An engine",
+            "Pretentious; flowery",
+            "A salon; a hall",
+            "To mock; to sneer",
+            "To heap",
+            "An Indian antelope",
+            "To intend; to plan; to devise; a nettle; to guess",
+            "A nozzle",
+            "Desiccator; more dry"
+        ],
+        "Agent 0": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "0.1",
+                    "Resampled state": "_ _ _ _ _\nM O T O R\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\nM O T O R\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h2. motor -> h5. taunt",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h2. motor -> h5. taunt -> v1. emote",
+                "Pruning": null,
+                "Evaluation": 50,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "_ _ _ _ D\nM O T O R\n_ _ _ _ I\nA T R I E\n_ _ _ _ R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "h2. motor -> h4. atria -> v5. drier -> v1. amass",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.48,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "h2. motor",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\nM O T O R\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h2. motor -> h4. atria",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h2. motor -> h4. atria -> v5. drier",
+                "Pruning": null,
+                "Evaluation": 110,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "_ _ _ _ D\nM O T O R\n_ _ _ _ I\nA T R I E\n_ _ _ _ R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "h2. motor -> h4. atria -> v5. drier -> v1. amass",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.48,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "5": {
+        "puzzle": [
+            "To dry up",
+            "To outdo; to bandy words",
+            "A Yoruba-speaking people",
+            "A Passover meal",
+            "Eternal, everlasting",
+            "To ascend; to get up; to come up",
+            "To regain",
+            "To elude",
+            "One who files",
+            "To crave"
+        ],
+        "Agent 0": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "0.1",
+                    "Resampled state": "_ _ E _ _\n_ _ L _ _\n_ _ U _ _\n_ _ D _ _\n_ _ E _ _\n"
+                },
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ E _ _\n_ _ L _ _\n_ _ U _ _\n_ _ D _ _\n_ _ E _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v3. elude -> h4. seder",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "v3. elude -> h4. seder -> v4. filer",
+                "Pruning": null,
+                "Evaluation": 95,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "_ _ E _ C\n_ _ L _ R\n_ _ U _ A\nS E D E V\n_ _ E _ E\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v3. elude -> h4. seder -> v5. crave -> h2. solar",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "v3. elude",
+                "Pruning": null,
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ E _ _\n_ _ L _ _\n_ _ U _ _\n_ _ D _ _\n_ _ E _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v3. elude -> h4. seder",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "v3. elude -> h4. seder -> v5. crave",
+                "Pruning": null,
+                "Evaluation": 80,
+                "Resampling": {
+                    "Idx": "0.2",
+                    "Resampled state": "_ _ E F _\n_ _ L I _\n_ _ U L _\nS E D E R\n_ _ E R _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.44,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "v3. elude -> h4. seder -> v4. filer",
+                "Pruning": {
+                    "Idx": "3.0",
+                    "Resampled state": "_ _ E _ C\nS O L A R\n_ _ U _ A\nS E D E V\n_ _ E _ E\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "10": {
+        "puzzle": [
+            "(yet more) dissonant jazz, with solo improvisations and complex rhythms",
+            "An Indian mallow",
+            "A religious brother",
+            "To take; to receive",
+            "Argal; crude tartar",
+            "A comic actor or operatic clown",
+            "A mistake",
+            "Existence; a creature",
+            "The ruby snapper fish",
+            "Apparel; an egg preparation used to clarify wine"
+        ],
+        "Agent 0": {
+            "Step 0": {
+                "Step": "v1. clown",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "C _ _ _ _\nL _ _ _ _\nO _ _ _ _\nW _ _ _ _\nN _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v1. clown",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v2. error",
+                "Pruning": null,
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "_ _ B _ _\n_ _ E _ _\n_ _ I _ _\n_ _ N _ _\n_ _ G _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "v3. being -> h1. bebop",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "v5. blanc",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "C _ _ _ _\nL _ _ _ _\nO _ _ _ _\nW _ _ _ _\nN _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v1. clown",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v3. being",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "_ _ B _ _\n_ _ E _ _\n_ _ I _ _\n_ _ N _ _\n_ _ G _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "v3. being -> h3. friar",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "15": {
+        "puzzle": [
+            "The genus to which the dog and wolf belong",
+            "An Altaic language",
+            "Ramie, an Asiatic plant yielding a rope fiber",
+            "Face down; susceptible",
+            "An Indian antelope",
+            "A contingent",
+            "The Brazilian macaw; an Australian bird",
+            "A Greek province; a law; a coin",
+            "An ancient British ethnic group",
+            "Gloss; luster"
+        ],
+        "Agent 0": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "0.1",
+                    "Resampled state": "C A N I S\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "C A N I S\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h1. canis",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h4. prone",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "_ _ _ _ S\n_ _ _ _ H\n_ _ _ _ E\n_ _ _ _ E\n_ _ _ _ N\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "v5. sheen -> h4. prone",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "h1. canis",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "C A N I S\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h1. canis",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v5. sheen",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.2",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nP R O N E\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "h4. prone -> h3. china",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "20": {
+        "puzzle": [
+            "To choose",
+            "A spiral, usually three dimensional",
+            "Notched or uneven, as if gnawed away (cognate with \"erode\")",
+            "A drinker; a sedative",
+            "A pound sterling",
+            "A board game; a British river",
+            "A wading bird",
+            "To run away together to get married",
+            "Cider; sicer",
+            "To put into action"
+        ],
+        "Agent 0": {
+            "Step 0": {
+                "Step": "v1. chess",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "C _ _ _ _\nH _ _ _ _\nE _ _ _ _\nS _ _ _ _\nS _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v1. chess -> h3. erode",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "v1. chess -> h3. erode -> v4. cider",
+                "Pruning": null,
+                "Evaluation": 125,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "C H _ _ _\nH E _ _ _\nE R O D E\nS O _ _ _\nS N _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.48,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "v1. chess -> v2. heron -> h3. erode -> v3. elope",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.64,
+                    "r_word": 0.3
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "0.0",
+                    "Resampled state": "C _ _ _ _\nH _ _ _ _\nE _ _ _ _\nS _ _ _ _\nS _ _ _ _\n"
+                },
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "C _ _ _ _\nH _ _ _ _\nE _ _ _ _\nS _ _ _ _\nS _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v1. chess -> v2. heron",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "v1. chess -> v2. heron -> h3. erode",
+                "Pruning": null,
+                "Evaluation": 110,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "C H _ _ _\nH E _ _ _\nE R O D E\nS O _ _ _\nS N _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.48,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "v1. chess -> v2. heron -> h3. erode -> v3. elope",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.64,
+                    "r_word": 0.3
+                }
+            }
+        },
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "25": {
+        "puzzle": [
+            "To choose",
+            "A coin",
+            "A European owl",
+            "To slide; to skulk",
+            "One who uses a hose; a good guy",
+            "To subdue; to crumple; a hidden romantic attraction",
+            "A greeting",
+            "The Islamic name for Satan",
+            "To sift",
+            "One who eats"
+        ],
+        "Agent 0": {
+            "Step 0": {
+                "Step": "v1. crush",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "C _ _ _ _\nR _ _ _ _\nU _ _ _ _\nS _ _ _ _\nH _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v1. crush -> h2. penny",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v1. crush -> h2. penny -> h4. sneak",
+                "Pruning": null,
+                "Evaluation": 95,
+                "Resampling": {
+                    "Idx": "0.2",
+                    "Resampled state": "C _ _ _ _\nP E N N Y\nU _ _ _ _\nS N E A K\nH _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v1. crush -> h2. penny -> h4. sneak -> v1. crush",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "0.0",
+                    "Resampled state": "C _ _ _ _\nR _ _ _ _\nU _ _ _ _\nS _ _ _ _\nH _ _ _ _\n"
+                },
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "C _ _ _ _\nR _ _ _ _\nU _ _ _ _\nS _ _ _ _\nH _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v1. crush -> h4. skulk",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "v1. crush -> h4. skulk -> h4. crush",
+                "Pruning": null,
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "0.2",
+                    "Resampled state": "C _ _ _ _\nP E N N Y\nU _ _ _ _\nS N E A K\nH _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v1. crush -> h2. penny -> h4. sneak -> v1. crush",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "30": {
+        "puzzle": [
+            "To hold onto",
+            "An enlarged tool",
+            "Shaded or dyed; a 3 person card game using 40 cards",
+            "To subdue; to terrify; a Central American timber tree",
+            "A limestone region marked by sinks, abrupt ridges, protuberant rocks",
+            "A frog sound; to die",
+            "A semitone",
+            "To exclude",
+            "An interjection expressing exasperation; nonsense",
+            "To salute"
+        ],
+        "Agent 0": {
+            "Step 0": {
+                "Step": "h5. karst",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nK A R S T\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h5. karst -> h3. tinge",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h5. karst -> h3. tinge -> v5. greet",
+                "Pruning": null,
+                "Evaluation": 95,
+                "Resampling": {
+                    "Idx": "0.2",
+                    "Resampled state": "_ _ _ _ G\n_ _ _ _ R\nT I N G E\n_ _ _ _ E\nK A R S T\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "h5. karst -> h3. tinge -> v5. greet -> h4. quell",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "h5. karst",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nK A R S T\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h5. karst -> v1. croak",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "h5. karst -> v1. croak -> v5. greet",
+                "Pruning": null,
+                "Evaluation": 110,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "C _ _ _ G\nR _ _ _ R\nO _ _ _ E\nA _ _ _ E\nK A R S T\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            },
+            "Step 3": {
+                "Step": "h5. karst -> v1. croak -> v5. greet -> h4. quell",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.44,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "35": {
+        "puzzle": [
+            "Is able",
+            "A bard",
+            "A theme; an attempt",
+            "To sift",
+            "A leather dresser; someone who shoots a marble",
+            "A top; a heraldic device",
+            "True being",
+            "To undo the sewing of",
+            "To depart; permission",
+            "Desiccator; more dry"
+        ],
+        "Agent 0": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "0.1",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nT A W E R\n"
+                },
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nT A W E R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h5. tawer -> v4. leave",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "h5. tawer -> v4. leave -> v3. unsew",
+                "Pruning": null,
+                "Evaluation": 45,
+                "Resampling": {
+                    "Idx": "0.2",
+                    "Resampled state": "_ _ U L _\n_ _ N E _\n_ _ S A _\n_ _ E V _\nT A W E R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            },
+            "Step 3": {
+                "Step": "h5. tawer -> v4. leave -> v3. unsew -> h5. tower",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.48,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "h5. tawer",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nT A W E R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h5. tawer -> h1. adept",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h5. tawer -> h1. adept",
+                "Pruning": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ U L _\n_ _ N E _\n_ _ S A _\n_ _ E V _\nT A W E R\n"
+                },
+                "Evaluation": 70,
+                "Resampling": {
+                    "Idx": "0.2",
+                    "Resampled state": "_ _ U L _\n_ _ N E _\n_ _ S A _\n_ _ E V _\nT A W E R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            },
+            "Step 3": {
+                "Step": "h5. tawer -> v4. leave -> v3. unsew -> h4. sieve",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.64,
+                    "r_word": 0.4
+                }
+            }
+        },
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "40": {
+        "puzzle": [
+            "A music style; a dance hall",
+            "To remove the hat",
+            "Unhidden; explicit",
+            "The minister's house",
+            "To demand; to arrange;",
+            "An Italian domed cathedral",
+            "A nickel steel alloy",
+            "To disgrace; to blame; to injure",
+            "Low-lying fertile land",
+            "A sea mammal; a fishing device"
+        ],
+        "Agent 0": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "0.1",
+                    "Resampled state": "D _ _ _ _\nU _ _ _ _\nO _ _ _ _\nM _ _ _ _\nO _ _ _ _\n"
+                },
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "D _ _ _ _\nU _ _ _ _\nO _ _ _ _\nM _ _ _ _\nO _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v1. duomo -> h5. order",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "v1. duomo -> h5. order -> v5. otter",
+                "Pruning": null,
+                "Evaluation": 140,
+                "Resampling": {
+                    "Idx": "0.2",
+                    "Resampled state": "D _ _ _ O\nU _ _ _ T\nO _ _ _ T\nM _ _ _ E\nO R D E R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            },
+            "Step 3": {
+                "Step": "v1. duomo -> h5. order -> v5. otter -> h3. overt",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.64,
+                    "r_word": 0.4
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "v1. duomo",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "D _ _ _ _\nU _ _ _ _\nO _ _ _ _\nM _ _ _ _\nO _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v1. duomo -> h1. disco",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "v1. duomo -> h1. disco",
+                "Pruning": {
+                    "Idx": "2.0",
+                    "Resampled state": "D _ _ _ O\nU _ _ _ T\nO _ _ _ T\nM _ _ _ E\nO R D E R\n"
+                },
+                "Evaluation": 140,
+                "Resampling": {
+                    "Idx": "0.2",
+                    "Resampled state": "D _ _ _ O\nU _ _ _ T\nO _ _ _ T\nM _ _ _ E\nO R D E R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            },
+            "Step 3": {
+                "Step": "v1. duomo -> h5. order -> v5. otter -> h1. disco",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.64,
+                    "r_word": 0.4
+                }
+            }
+        },
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "45": {
+        "puzzle": [
+            "To belch, to burp",
+            "A location",
+            "To warn",
+            "A dipsomaniac",
+            "To come in",
+            "To elude",
+            "To win again",
+            "Inept; irrelevant",
+            "To execrate",
+            "Purport; a trend; a singing voice"
+        ],
+        "Agent 0": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "50": {
+        "puzzle": [
+            "A custard",
+            "A lithograph",
+            "Anatomically on the inside",
+            "An agendum; something to be done",
+            "To combine",
+            "A sharp surgical lancet used for opening veins to cause bloodletting; a bevel angle",
+            "To strike or flog",
+            "Corrupt matter from a sore; a tongue coating",
+            "A bang; a leather thong; to shoot; a shive; the penis",
+            "Would not"
+        ],
+        "Agent 0": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "55": {
+        "puzzle": [
+            "A crowd; a mob",
+            "To get a fresh crew",
+            "An American Indian tribe",
+            "A tribal emblem",
+            "A room for storing ewers",
+            "To chafe or rub",
+            "To sow again",
+            "To subdue; to terrify; a Central American timber tree",
+            "An electronic message device",
+            "A foe"
+        ],
+        "Agent 0": {
+            "Step 0": {
+                "Step": "v5. enemy",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ R _ _ _\n_ E _ _ _\n_ S _ _ _\n_ E _ _ _\n_ W _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v2. resew -> h3. sioux",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v2. resew -> h3. sioux -> v2. resew",
+                "Pruning": null,
+                "Evaluation": 40,
+                "Resampling": {
+                    "Idx": "0.2",
+                    "Resampled state": "_ R _ _ _\n_ E _ _ _\nS S O U X\n_ E _ _ _\n_ W _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v2. resew -> h3. sioux -> v2. resew -> h3. sioux",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "v2. resew",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ _ _ E\n_ _ _ _ N\n_ _ _ _ E\n_ _ _ _ M\n_ _ _ _ Y\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v5. enemy -> h4. totem",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "v5. enemy -> h4. totem -> h2. renew",
+                "Pruning": null,
+                "Evaluation": 95,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "_ _ _ _ E\nR E N E W\n_ _ _ _ E\nT O T E M\n_ _ _ _ Y\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "v5. enemy -> h4. totem -> h2. renew -> v5. enemy",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.44,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "60": {
+        "puzzle": [
+            "A woodland",
+            "An alarm",
+            "A tropical lizard",
+            "To increase; to lift up; to rear",
+            "A duck, or its down; a quilt or comforter",
+            "To stare at angrily; a harsh light",
+            "A veranda",
+            "A plant allied to the arum",
+            "An edible seaweed (if you say so)",
+            "An Arab prince"
+        ],
+        "Agent 0": {
+            "Step 0": {
+                "Step": "h4. raise",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\nS I R E N\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h2. siren -> h5. eider",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h2. siren -> h5. eider -> v2. patio",
+                "Pruning": null,
+                "Evaluation": 65,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "G _ _ _ _\nL _ _ _ _\nA _ _ _ _\nR A I S E\nE I D E R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            },
+            "Step 3": {
+                "Step": "h4. raise -> v1. glare -> h5. eider",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "h2. siren",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nR A I S E\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h4. raise -> v1. glare",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "h4. raise -> v1. glare -> h5. eider",
+                "Pruning": null,
+                "Evaluation": 95,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "G _ _ _ _\nL _ _ _ _\nA _ _ _ _\nR A I S E\nE I D E R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            },
+            "Step 3": {
+                "Step": "h4. raise -> v1. glare -> h5. eider",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "65": {
+        "puzzle": [
+            "A woodland",
+            "A flight feather",
+            "The soft palate",
+            "Mesial; median",
+            "A river boat",
+            "A complainer",
+            "Flat; a stage; to be honest with",
+            "To entertain",
+            "To dally; to put off",
+            "To praise; to raise higher"
+        ],
+        "Agent 0": {
+            "Step 0": {
+                "Step": "h5. ferry",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nF E R R Y\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h5. ferry -> v3. amuse",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h5. ferry -> v3. amuse -> h2. quill",
+                "Pruning": null,
+                "Evaluation": 80,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "_ _ _ _ E\n_ _ _ _ X\n_ _ _ _ A\n_ _ _ _ L\nF E R R Y\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h5. ferry -> v5. exalt -> h5. ferry -> h2. quill",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "v3. amuse",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nF E R R Y\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h5. ferry -> v5. exalt",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h5. ferry -> v5. exalt -> h5. ferry",
+                "Pruning": null,
+                "Evaluation": 40,
+                "Resampling": {
+                    "Idx": "0.2",
+                    "Resampled state": "_ _ A _ _\nQ U I L L\n_ _ U _ _\n_ _ S _ _\nF E E R Y\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h5. ferry -> v3. amuse -> h2. quill -> h5. ferry",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "70": {
+        "puzzle": [
+            "A language",
+            "To impose a fine upon",
+            "To lower; to reduce",
+            "To clean; to wash quickly with water",
+            "Atap, the nipa palm",
+            "A tropical American tree",
+            "Not bitten",
+            "A heraldic mastiff",
+            "A dog whelk or its shell",
+            "A computer user"
+        ],
+        "Agent 0": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "75": {
+        "puzzle": [
+            "The Kaiser",
+            "An introduction",
+            "Public disgrace",
+            "The belly button, which Adam and Eve might not have had",
+            "A buzzard; a kite; a red hot coal used to light a fire",
+            "A Tibetan wild horse",
+            "Anatomically on the inside",
+            "To stew; to stuff up; floating dust",
+            "Equipped; having arms",
+            "To rile; to salt fish"
+        ],
+        "Agent 0": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "0.1",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\nS H A M E\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\nS H A M E\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h3. shame -> h5. ember",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h3. shame -> h5. ember",
+                "Pruning": {
+                    "Idx": "2.1",
+                    "Resampled state": "_ _ _ A _\n_ _ _ R _\nS H A M E\nN A V E L\n_ _ _ D _\n"
+                },
+                "Evaluation": 80,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "_ _ _ A _\n_ _ _ R _\nS H A M E\nN A V E L\n_ _ _ D _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "h3. shame -> v4. armed -> h4. navel",
+                "Pruning": {
+                    "Idx": "3.1",
+                    "Resampled state": "_ _ _ A _\n_ _ _ R _\nS H A M E\nN A V E L\nE M B E R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "h3. shame",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\nS H A M E\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h3. shame -> v4. armed",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h3. shame -> v4. armed -> h4. navel",
+                "Pruning": null,
+                "Evaluation": 95,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "_ _ _ A _\n_ _ _ R _\nS H A M E\nN A V E L\n_ _ _ D _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "h3. shame -> v4. armed -> h4. navel -> h5. ember",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "80": {
+        "puzzle": [
+            "A biblical place",
+            "Relating to sheep",
+            "A woodland",
+            "Anatomically on the inside",
+            "A realm",
+            "A person or instrument that cuts down",
+            "To happen",
+            "A lariat; a lasso",
+            "An Irish doctor",
+            "To meddle; to mix"
+        ],
+        "Agent 0": {
+            "Step 0": {
+                "Step": "h5. realm",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nR E A L M\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h5. realm -> h4. inner",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h5. realm -> h4. inner -> v3. lasso",
+                "Pruning": null,
+                "Evaluation": 55,
+                "Resampling": {
+                    "Idx": "0.2",
+                    "Resampled state": "_ _ L _ _\n_ _ A _ _\n_ _ S _ _\nI N S E R\nR E O L M\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h5. realm -> h4. inner -> v3. lasso -> h5. realm",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "h5. realm",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nR E A L M\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h5. realm -> h4. inner",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h5. realm -> h4. inner -> v5. inter",
+                "Pruning": null,
+                "Evaluation": 40,
+                "Resampling": {
+                    "Idx": "0.2",
+                    "Resampled state": "_ _ L _ _\n_ _ A _ _\n_ _ S _ _\nI N S E R\nR E O L M\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h5. realm -> h4. inner -> v3. lasso -> h5. realm",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "85": {
+        "puzzle": [
+            "A deity associated with a natural object",
+            "A habit or custom",
+            "To munch",
+            "Inquires into; forces open using leverage",
+            "Extra; to withhold punishment; thin",
+            "A fool; a stupid person",
+            "To displace illegally or unfairly",
+            "A craze",
+            "An inciter; various moths whose larva feed on tree leaves; a lobster bearing an egg mass; one who collects eggs",
+            "To sneeze"
+        ],
+        "Agent 0": {
+            "Step 0": {
+                "Step": "v3. craze",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ C _ _\n_ _ R _ _\n_ _ A _ _\n_ _ Z _ _\n_ _ E _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v3. craze",
+                "Pruning": {
+                    "Idx": "1.1",
+                    "Resampled state": "C A C A O\n_ _ R _ _\n_ _ A _ _\n_ _ Z _ _\n_ _ E _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v3. craze -> h1. cacao -> v1. clown",
+                "Pruning": null,
+                "Evaluation": 40,
+                "Resampling": {
+                    "Idx": "1.2",
+                    "Resampled state": "C A C A O\n_ _ R _ _\n_ _ A _ _\n_ _ Z _ _\nW A I V E\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v3. craze -> h1. cacao -> h5. waive -> v2. abuse",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ C _ _\n_ _ R _ _\n_ _ A _ _\n_ _ Z _ _\n_ _ E _ _\n"
+                },
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ C _ _\n_ _ R _ _\n_ _ A _ _\n_ _ Z _ _\n_ _ E _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v3. craze -> h1. cacao",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v3. craze -> h1. cacao -> h5. waive",
+                "Pruning": null,
+                "Evaluation": 40,
+                "Resampling": {
+                    "Idx": "0.2",
+                    "Resampled state": "C A C A O\nL _ R _ _\nO _ A _ _\nW _ Z _ _\nN _ E _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v3. craze -> h1. cacao -> v1. clown -> h3. munch",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "90": {
+        "puzzle": [
+            "A tit-lark",
+            "A Turkish written decree",
+            "An ancient name for Korea",
+            "More healthy; a coin",
+            "Operating on a single object",
+            "The Canada lynx",
+            "Relating to the iris",
+            "An ancient Roman full outer robe or wrap worn outdoors by women",
+            "One who does nothing",
+            "Weepy; tear-filled"
+        ],
+        "Agent 0": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "95": {
+        "puzzle": [
+            "To stamp; to brand; to impress; to put into type",
+            "A scarf; a cymar; a loose dress",
+            "To cut",
+            "To perceive; wisdom; reason; feeling",
+            "The ridges on a tire; to walk heavily",
+            "A signaling sound",
+            "A rice processor; an implement for ricing potatoes",
+            "A chemical compound",
+            "A dog whelk or its shell",
+            "Chased up a tree"
+        ],
+        "Agent 0": {
+            "Step 0": {
+                "Step": "h5. tread",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nT R E A D\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h5. tread -> v3. oxide",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h5. tread -> v3. oxide",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nT R E A D\n"
+                },
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nT R E A D\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h5. tread -> v2. ricer",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "h5. tread -> v2. ricer",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "INIT",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Verifications": [
+            {
+                "r": 0
+            },
+            {
+                "r": 0
+            }
+        ]
+    },
+    "Info": {
+        "Cost": {
+            "Step": {
+                "input_cost": 0.01091,
+                "output_cost": 0.03202625,
+                "total_cost": 0.042936249999999995
+            },
+            "Evaluation": {
+                "input_cost": 0.0585675,
+                "output_cost": 0.023189150000000002,
+                "total_cost": 0.08175665
+            },
+            "Total cost": {
+                "input_cost": 0.0694775,
+                "output_cost": 0.0552154,
+                "total_cost": 0.1246929
+            }
+        },
+        "Models": {
+            "Step": "gpt-35-turbo-0125",
+            "Evaluation": "gpt-35-turbo-0125"
+        }
+    }
+}
