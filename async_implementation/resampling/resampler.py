@@ -27,6 +27,7 @@ class Resampler:
         """
         methods = {
             "linear": Resampler.linear,
+            "linear_filtered": Resampler.linear_filtered,
             "logistic": Resampler.logistic,
             "max": Resampler.max,
             "percentile": Resampler.percentile
@@ -59,6 +60,15 @@ class Resampler:
         values = [value + eps for value in values]
         total = sum(values)
         return [value / total for value in values]
+    
+    @staticmethod
+    def linear_filtered(values: List[float], threshold: float=0.5)-> List[float]:
+        """
+        Computes the linear probability of each value, but filters out values below a certain threshold.
+        """
+        max_value = np.max(values)
+        values = [value if value>= max_value * threshold else 0 for value in values]
+        return Resampler.linear(values)
     
     @staticmethod
     def logistic(values: List[float])-> List[float]:
