@@ -192,7 +192,7 @@ class CachedOpenAIAPI:
                 response = await self.openai_request(model, n_from_api_total, cache_config, request_timeout)
                 raw_responses = [(choice.message.content, response.usage.completion_tokens/n_from_api_total, response.usage.prompt_tokens) for choice in response.choices]
 
-                for retry_count in range(5):
+                for retry_count in range(10):
                     if any([r[0] is None for r in raw_responses]):
                         if self.verbose:
                             print(f"Some choices are None, retrying (retry : {retry_count+1})")
@@ -312,6 +312,9 @@ class CachedOpenAIAPI:
         assert response is not None
 
         return response
+
+    def empty_tabs(self):
+        self.tabs = {}
 
     def cost(self, tab_name=None, actual_cost=False, verbose=False):
 
