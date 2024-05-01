@@ -1,0 +1,5302 @@
+{
+    "0": {
+        "Agent 0": {
+            "Step 0": {
+                "Step": "h2. motor",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "3.0",
+                    "Resampled state": "_ _ _ S _\n_ _ _ P _\n_ _ _ O _\n_ _ _ U _\n_ _ _ T _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v4. spout -> h1. tasks",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v4. spout -> h1. tasks -> v4. spout",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v4. spout -> h1. tasks -> v4. spout -> h5. taunt",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "v4. spout",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "4.0",
+                    "Resampled state": "_ _ _ S _\n_ _ _ P _\n_ _ _ O _\n_ _ _ U _\n_ _ _ T _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v4. spout -> h3. apple",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v4. spout -> h3. apple -> h5. taunt",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v4. spout -> h3. apple -> h5. taunt -> h2. equip",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "v4. spout",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "3.0",
+                    "Resampled state": "_ _ _ S _\n_ _ _ P _\n_ _ _ O _\n_ _ _ U _\n_ _ _ T _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v4. spout -> h2. spark",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v4. spout -> h2. spark -> h4. house",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v4. spout -> h2. spark -> h4. house",
+                "Pruning": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ S _\n_ _ _ P _\n_ _ _ O _\n_ _ _ U _\n_ _ _ T _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 3": {
+            "Step 0": {
+                "Step": "v4. spout",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "3.0",
+                    "Resampled state": "_ _ _ S _\n_ _ _ P _\n_ _ _ O _\n_ _ _ U _\n_ _ _ T _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v4. spout -> v4. snout",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v4. spout -> v4. snout -> v3. guess",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v4. spout -> v4. snout -> v3. guess -> v5. drier",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 4": {
+            "Step 0": {
+                "Step": "v4. spout",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ _ S _\n_ _ _ P _\n_ _ _ O _\n_ _ _ U _\n_ _ _ T _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v4. spout -> h5. taunt",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v4. spout -> h5. taunt",
+                "Pruning": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ _ S _\n_ _ _ P _\n_ _ _ O _\n_ _ _ U _\n_ _ _ T _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v4. spout -> h1. apple",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 5": {
+            "Step 0": {
+                "Step": "v4. spout",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "3.0",
+                    "Resampled state": "_ _ _ S _\n_ _ _ P _\n_ _ _ O _\n_ _ _ U _\n_ _ _ T _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v4. spout -> h2. apple",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v4. spout -> h2. apple -> h5. taunt",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v4. spout -> h2. apple -> h5. taunt -> h4. court",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            }
+        }
+    },
+    "5": {
+        "Agent 0": {
+            "Step 0": {
+                "Step": "v3. evade",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nS E D E R\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h4. seder -> v5. yearn",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "h4. seder -> v5. yearn -> v3. evade",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            },
+            "Step 3": {
+                "Step": "h4. seder -> v5. yearn -> v3. evade -> v3. yearn",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "h4. seder",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nS E D E R\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h4. seder -> v5. longs",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h4. seder -> v5. longs -> h4. seder",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "h4. seder -> v5. longs -> h4. seder -> v5. longs",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "h4. seder",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nS E D E R\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h4. seder -> v3. dodge",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h4. seder -> v3. dodge -> v1. rises",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h4. seder -> v3. dodge -> v1. rises -> h2. ratio",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 3": {
+            "Step 0": {
+                "Step": "h4. seder",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nS E D E R\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h4. seder -> v5. yearn",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "h4. seder -> v5. yearn -> v3. evade",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            },
+            "Step 3": {
+                "Step": "h4. seder -> v5. yearn -> v3. evade -> v1. rises",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.48,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 4": {
+            "Step 0": {
+                "Step": "h4. seder",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nS E D E R\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h4. seder -> v1. rises",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h4. seder -> v1. rises -> h4. seder",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "h4. seder -> v1. rises -> h4. seder -> v5. yearn",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 5": {
+            "Step 0": {
+                "Step": "h4. seder",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "3.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nS E D E R\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h4. seder -> v3. dodge",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h4. seder -> v3. dodge -> v1. rises",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h4. seder -> v3. dodge -> v1. rises -> v5. yearn",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.1
+                }
+            }
+        }
+    },
+    "10": {
+        "Agent 0": {
+            "Step 0": {
+                "Step": "v3. being",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "4.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nC R E A M\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h5. cream -> v3. being",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h5. cream -> v3. being -> v2. error",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.44,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "h5. cream -> v3. being -> v2. error -> h5. argal",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.48,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "v2. error",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ B _ _\n_ _ E _ _\n_ _ I _ _\n_ _ N _ _\n_ _ G _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v3. being -> h4. glean",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v3. being -> h4. glean -> v5. linen",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v3. being -> h4. glean -> v5. linen -> h5. argon",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "v3. being",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "3.0",
+                    "Resampled state": "_ _ _ _ B\n_ _ _ _ L\n_ _ _ _ A\n_ _ _ _ N\n_ _ _ _ C\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v5. blanc -> h1. bebop",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "v5. blanc -> h1. bebop",
+                "Pruning": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ E _ _ _\n_ R _ _ _\n_ R _ _ _\n_ O _ _ _\n_ R _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "v2. error -> v1. clown",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 3": {
+            "Step 0": {
+                "Step": "v5. blanc",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "4.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nC R E A M\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h5. cream -> v1. actor",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h5. cream -> v1. actor -> h5. cream",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h5. cream -> v1. actor -> h5. cream -> v2. error",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 4": {
+            "Step 0": {
+                "Step": "h5. cream",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ B _ _\n_ _ E _ _\n_ _ I _ _\n_ _ N _ _\n_ _ G _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v3. being -> h1. bebop",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "v3. being -> h1. bebop -> h3. friar",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            },
+            "Step 3": {
+                "Step": "v3. being -> h1. bebop -> h3. friar -> v1. buffo",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.64,
+                    "r_word": 0.4
+                }
+            }
+        },
+        "Agent 5": {
+            "Step 0": {
+                "Step": "v2. error",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ E _ _ _\n_ R _ _ _\n_ R _ _ _\n_ O _ _ _\n_ R _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v2. error -> v1. clown",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "v2. error -> v1. clown -> h3. order",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "v2. error -> v1. clown -> h3. order -> h1. apple",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.0
+                }
+            }
+        }
+    },
+    "15": {
+        "Agent 0": {
+            "Step 0": {
+                "Step": "h2. tatar",
+                "Pruning": null,
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nN I L G H\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h5. nilgh -> h1. canis",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h5. nilgh -> h1. canis -> h4. prone",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "h5. nilgh -> h1. canis -> h4. prone -> v5. sheen",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "v1. group",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "G _ _ _ _\nR _ _ _ _\nO _ _ _ _\nU _ _ _ _\nP _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v1. group -> h2. runic",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v1. group -> h2. runic -> v4. iliac",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v1. group -> h2. runic -> v4. iliac -> h2. runic",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "v5. sheen",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "G _ _ _ _\nR _ _ _ _\nO _ _ _ _\nU _ _ _ _\nP _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v1. group -> v3. nomos",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "v1. group -> v3. nomos -> h5. pasha",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "v1. group -> v3. nomos -> h5. pasha -> v5. sheen",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.44,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 3": {
+            "Step 0": {
+                "Step": "v1. group",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ _ _ S\n_ _ _ _ H\n_ _ _ _ E\n_ _ _ _ E\n_ _ _ _ N\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v5. sheen -> h3. china",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v5. sheen -> h3. china -> v5. sheen",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "v5. sheen -> h3. china -> v5. sheen -> h1. canis",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 4": {
+            "Step 0": {
+                "Step": "h1. canis",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ _ _ S\n_ _ _ _ H\n_ _ _ _ E\n_ _ _ _ E\n_ _ _ _ N\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v5. sheen -> h3. ramie",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "v5. sheen -> h3. ramie -> h4. prone",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.48,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "v5. sheen -> h3. ramie -> h4. prone -> v3. nomos",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.6,
+                    "r_word": 0.3
+                }
+            }
+        },
+        "Agent 5": {
+            "Step 0": {
+                "Step": "h5. nilgh",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "3.0",
+                    "Resampled state": "G _ _ _ _\nR _ _ _ _\nO _ _ _ _\nU _ _ _ _\nP _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v1. group -> h4. undue",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v1. group -> h4. undue -> v5. shine",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v1. group -> h4. undue -> v5. shine -> v4. iceni",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.1
+                }
+            }
+        }
+    },
+    "20": {
+        "Agent 0": {
+            "Step 0": {
+                "Step": "v1. chess",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "3.0",
+                    "Resampled state": "_ _ E _ _\n_ _ L _ _\n_ _ O _ _\n_ _ P _ _\n_ _ E _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v3. elope -> v2. heron",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "v3. elope -> v2. heron",
+                "Pruning": {
+                    "Idx": "0.0",
+                    "Resampled state": "C _ _ _ _\nH _ _ _ _\nE _ _ _ _\nS _ _ _ _\nS _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "v1. chess -> h3. erode",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "v1. chess",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ H _ _ _\n_ E _ _ _\n_ R _ _ _\n_ O _ _ _\n_ N _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v2. heron -> h5. pound",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v2. heron -> h5. pound",
+                "Pruning": {
+                    "Idx": "1.0",
+                    "Resampled state": "C _ _ _ _\nH _ _ _ _\nE _ _ _ _\nS _ _ _ _\nS _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "v1. chess -> h3. erode",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "v5. enact",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ H _ _ _\n_ E _ _ _\n_ R _ _ _\n_ O _ _ _\n_ N _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v2. heron -> h5. pound",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v2. heron -> h5. pound -> v3. elope",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "v2. heron -> h5. pound -> v3. elope",
+                "Pruning": {
+                    "Idx": "3.0",
+                    "Resampled state": "_ _ E _ _\n_ _ L _ _\n_ _ O _ _\n_ _ P _ _\n_ _ E _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 3": {
+            "Step 0": {
+                "Step": "v3. elope",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "4.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\nE R O D E\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h3. erode -> v3. elope",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h3. erode -> v3. elope -> v5. enact",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "h3. erode -> v3. elope -> v5. enact -> h3. erode",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 4": {
+            "Step 0": {
+                "Step": "h3. erode",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "C _ _ _ _\nH _ _ _ _\nE _ _ _ _\nS _ _ _ _\nS _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v1. chess -> h3. erode",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "v1. chess -> h3. erode -> v3. elope",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.48,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "v1. chess -> h3. erode -> v3. elope -> h2. helix",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.6,
+                    "r_word": 0.3
+                }
+            }
+        },
+        "Agent 5": {
+            "Step 0": {
+                "Step": "v2. heron",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "4.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\nE R O D E\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h3. erode -> v2. heron",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h3. erode -> v2. heron -> v5. enact",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "h3. erode -> v2. heron -> v5. enact -> h5. pound",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.0
+                }
+            }
+        }
+    },
+    "25": {
+        "Agent 0": {
+            "Step 0": {
+                "Step": "v2. hello",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ _ _ S _\n_ _ _ I _\n_ _ _ F _\n_ _ _ T _\n_ _ _ S _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v4. sifts -> h4. slink",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v4. sifts -> h4. slink -> h5. hoses",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v4. sifts -> h4. slink -> h5. hoses -> v2. hello",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.48,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "v2. hello",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "3.0",
+                    "Resampled state": "_ H _ _ _\n_ E _ _ _\n_ L _ _ _\n_ L _ _ _\n_ O _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v2. hello -> v5. eater",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "v2. hello -> v5. eater -> h2. eagle",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v2. hello -> v5. eater -> h2. eagle -> v2. hello",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "v2. hello",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ H _ _ _\n_ E _ _ _\n_ L _ _ _\n_ L _ _ _\n_ O _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v2. hello -> v5. eater",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "v2. hello -> v5. eater -> h2. eagle",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v2. hello -> v5. eater -> h2. eagle -> v5. eater",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 3": {
+            "Step 0": {
+                "Step": "v2. hello",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ H _ _ _\n_ E _ _ _\n_ L _ _ _\n_ L _ _ _\n_ O _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v2. hello -> v3. iblis",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "v2. hello -> v3. iblis -> v1. crush",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.56,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "v2. hello -> v3. iblis -> v1. crush -> h2. rebus",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.56,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 4": {
+            "Step 0": {
+                "Step": "v2. hello",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ H _ _ _\n_ E _ _ _\n_ L _ _ _\n_ L _ _ _\n_ O _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v2. hello -> v3. iblis",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "v2. hello -> v3. iblis -> v5. eater",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.56,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "v2. hello -> v3. iblis -> v5. eater -> v1. crush",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.76,
+                    "r_word": 0.3
+                }
+            }
+        },
+        "Agent 5": {
+            "Step 0": {
+                "Step": "v4. sifts",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ H _ _ _\n_ E _ _ _\n_ L _ _ _\n_ L _ _ _\n_ O _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v2. hello -> v3. iblis",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "v2. hello -> v3. iblis -> v1. crush",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.56,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "v2. hello -> v3. iblis -> v1. crush -> h2. rebel",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.56,
+                    "r_word": 0.2
+                }
+            }
+        }
+    },
+    "30": {
+        "Agent 0": {
+            "Step 0": {
+                "Step": "v5. greet",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "3.0",
+                    "Resampled state": "_ _ _ _ G\n_ _ _ _ R\n_ _ _ _ E\n_ _ _ _ E\n_ _ _ _ T\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v5. greet -> v1. croak",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "v5. greet -> v1. croak -> h5. karst",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            },
+            "Step 3": {
+                "Step": "v5. greet -> v1. croak -> h5. karst -> v1. greet",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "h1. grasp",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nD A U N T\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h4. daunt -> h2. auger",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h4. daunt -> h2. auger -> h5. karst",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "h4. daunt -> h2. auger -> h5. karst -> v1. croak",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.44,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "h4. daunt",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "3.0",
+                    "Resampled state": "_ _ _ _ G\n_ _ _ _ R\n_ _ _ _ E\n_ _ _ _ E\n_ _ _ _ T\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v5. greet -> v1. croak",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "v5. greet -> v1. croak -> h4. abase",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.44,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "v5. greet -> v1. croak -> h4. abase -> h1. cling",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.56,
+                    "r_word": 0.3
+                }
+            }
+        },
+        "Agent 3": {
+            "Step 0": {
+                "Step": "v5. greet",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ _ _ G\n_ _ _ _ R\n_ _ _ _ E\n_ _ _ _ E\n_ _ _ _ T\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v5. greet -> h4. daunt",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v5. greet -> h4. daunt -> h5. karst",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "v5. greet -> h4. daunt -> h5. karst -> v5. greet",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 4": {
+            "Step 0": {
+                "Step": "h5. karst",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nK A R S T\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h5. karst -> h2. auger",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h5. karst -> h2. auger -> v1. croak",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.44,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "h5. karst -> h2. auger -> v1. croak -> h3. ombre",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.6,
+                    "r_word": 0.3
+                }
+            }
+        },
+        "Agent 5": {
+            "Step 0": {
+                "Step": "h5. karst",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nD A U N T\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h4. daunt -> h5. karst",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h4. daunt -> h5. karst -> v1. croak",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "h4. daunt -> h5. karst -> v1. croak -> v5. greet",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            }
+        }
+    },
+    "35": {
+        "Agent 0": {
+            "Step 0": {
+                "Step": "v1. crest",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ _ _ D\n_ _ _ _ R\n_ _ _ _ I\n_ _ _ _ E\n_ _ _ _ R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v5. drier -> v1. crest",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "v5. drier -> v1. crest -> v4. leave",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.56,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "v5. drier -> v1. crest -> v4. leave -> h4. sieve",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.64,
+                    "r_word": 0.3
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "h3. essay",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\nE S S A Y\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h3. essay -> v4. leave",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "h3. essay -> v4. leave -> h4. sieve",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            },
+            "Step 3": {
+                "Step": "h3. essay -> v4. leave -> h4. sieve -> h4. leave",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "v5. drier",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\nE S S A Y\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h3. essay -> v3. unsew",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "h3. essay -> v3. unsew -> v4. leave",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            },
+            "Step 3": {
+                "Step": "h3. essay -> v3. unsew -> v4. leave -> h2. crane",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.44,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 3": {
+            "Step 0": {
+                "Step": "h3. essay",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\nE S S A Y\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h3. essay -> v2. exist",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h3. essay -> v2. exist -> h3. essay",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "h3. essay -> v2. exist -> h3. essay -> h5. tawer",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 4": {
+            "Step 0": {
+                "Step": "v3. unrip",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "4.0",
+                    "Resampled state": "_ _ U _ _\n_ _ N _ _\n_ _ R _ _\n_ _ I _ _\n_ _ P _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v3. unrip -> h1. could",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "v3. unrip -> h1. could -> v4. leave",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "v3. unrip -> h1. could -> v4. leave",
+                "Pruning": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\nE S S A Y\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 5": {
+            "Step 0": {
+                "Step": "v3. unrip",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "C _ _ _ _\nR _ _ _ _\nE _ _ _ _\nS _ _ _ _\nT _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v1. crest",
+                "Pruning": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\nE S S A Y\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h3. essay -> h1. adept",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "h3. essay -> h1. adept",
+                "Pruning": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ _ _ D\n_ _ _ _ R\n_ _ _ _ I\n_ _ _ _ E\n_ _ _ _ R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            }
+        }
+    },
+    "40": {
+        "Agent 0": {
+            "Step 0": {
+                "Step": "v3. taint",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nO R D E R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h5. order -> h3. clear",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h5. order -> h3. clear -> h1. salsa",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "h5. order -> h3. clear -> h1. salsa -> v5. otter",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "v5. otter",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ T _ _\n_ _ A _ _\n_ _ I _ _\n_ _ N _ _\n_ _ T _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v3. taint -> h3. clear",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v3. taint -> h3. clear -> h1. twist",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v3. taint -> h3. clear -> h1. twist -> v3. taint",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "h5. order",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "4.0",
+                    "Resampled state": "_ _ _ S _\n_ _ _ W _\n_ _ _ A _\n_ _ _ L _\n_ _ _ E _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v4. swale -> h1. salsa",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v4. swale -> h1. salsa",
+                "Pruning": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ T _ _\n_ _ A _ _\n_ _ I _ _\n_ _ N _ _\n_ _ T _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v3. taint -> h4. manse",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 3": {
+            "Step 0": {
+                "Step": "h3. clear",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ O\n_ _ _ _ T\n_ _ _ _ T\n_ _ _ _ E\n_ _ _ _ R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v5. otter -> v1. duomo",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "v5. otter -> v1. duomo -> h5. order",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            },
+            "Step 3": {
+                "Step": "v5. otter -> v1. duomo -> h5. order -> h1. disco",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.64,
+                    "r_word": 0.4
+                }
+            }
+        },
+        "Agent 4": {
+            "Step 0": {
+                "Step": "v4. swale",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nO R D E R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h5. order -> v1. duomo",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "h5. order -> v1. duomo -> v5. otter",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            },
+            "Step 3": {
+                "Step": "h5. order -> v1. duomo -> v5. otter -> v2. invar",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.68,
+                    "r_word": 0.4
+                }
+            }
+        },
+        "Agent 5": {
+            "Step 0": {
+                "Step": "v3. taint",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ O\n_ _ _ _ T\n_ _ _ _ T\n_ _ _ _ E\n_ _ _ _ R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v5. otter -> v1. duomo",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "v5. otter -> v1. duomo -> h3. overt",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            },
+            "Step 3": {
+                "Step": "v5. otter -> v1. duomo -> h3. overt -> h2. untie",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.2
+                }
+            }
+        }
+    },
+    "45": {
+        "Agent 0": {
+            "Step 0": {
+                "Step": "h3. alarm",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "5.0",
+                    "Resampled state": "E _ _ _ _\nV _ _ _ _\nA _ _ _ _\nD _ _ _ _\nE _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v1. evade -> h5. enter",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "v1. evade -> h5. enter -> h2. venue",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            },
+            "Step 3": {
+                "Step": "v1. evade -> h5. enter -> h2. venue -> h4. drunk",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "h2. place",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "3.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nE N T E R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h5. enter -> v3. trite",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h5. enter -> v3. trite -> v1. evade",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "h5. enter -> v3. trite -> v1. evade -> h4. drunk",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "v4. curse",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\nP L A C E\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h2. place -> v4. curse",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h2. place -> v4. curse -> h5. enter",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "h2. place -> v4. curse -> h5. enter -> h2. place",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 3": {
+            "Step 0": {
+                "Step": "h5. enter",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\nA L A R M\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h3. alarm -> v1. evade",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h3. alarm -> v1. evade -> h4. drunk",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "h3. alarm -> v1. evade -> h4. drunk -> h5. enter",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.44,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 4": {
+            "Step 0": {
+                "Step": "v1. evade",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ _ C _\n_ _ _ U _\n_ _ _ R _\n_ _ _ S _\n_ _ _ E _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v4. curse -> h5. enter",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "v4. curse -> h5. enter -> v3. trite",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "v4. curse -> h5. enter -> v3. trite -> h4. toast",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 5": {
+            "Step 0": {
+                "Step": "v1. evade",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ _ C _\n_ _ _ U _\n_ _ _ R _\n_ _ _ S _\n_ _ _ E _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v4. curse -> v1. evade",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "v4. curse -> v1. evade -> h5. enter",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            },
+            "Step 3": {
+                "Step": "v4. curse -> v1. evade -> h5. enter -> v5. tenor",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.68,
+                    "r_word": 0.4
+                }
+            }
+        }
+    },
+    "50": {
+        "Agent 0": {
+            "Step 0": {
+                "Step": "v5. would",
+                "Pruning": null,
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ W\n_ _ _ _ O\n_ _ _ _ U\n_ _ _ _ L\n_ _ _ _ D\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v5. would -> v2. whack",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v5. would -> v2. whack -> v1. bevel",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v5. would -> v2. whack -> v1. bevel -> h5. merge",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "v5. would",
+                "Pruning": null,
+                "Evaluation": 5,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ W\n_ _ _ _ O\n_ _ _ _ U\n_ _ _ _ L\n_ _ _ _ D\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v5. would -> h3. inner",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v5. would -> h3. inner -> v5. would",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v5. would -> h3. inner -> v5. would -> h3. inner",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "v5. would",
+                "Pruning": null,
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ W\n_ _ _ _ O\n_ _ _ _ U\n_ _ _ _ L\n_ _ _ _ D\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v5. would -> h3. inner",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v5. would -> h3. inner -> v5. would",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v5. would -> h3. inner -> v5. would -> h3. inner",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 3": {
+            "Step 0": {
+                "Step": "v5. would",
+                "Pruning": null,
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ W\n_ _ _ _ O\n_ _ _ _ U\n_ _ _ _ L\n_ _ _ _ D\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v5. would -> h5. blend",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v5. would -> h5. blend -> v1. bevel",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v5. would -> h5. blend -> v1. bevel -> v2. flail",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 4": {
+            "Step 0": {
+                "Step": "v5. would",
+                "Pruning": null,
+                "Evaluation": 5,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ W\n_ _ _ _ O\n_ _ _ _ U\n_ _ _ _ L\n_ _ _ _ D\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v5. would -> h5. merge",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "v5. would -> h5. merge -> v5. would",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v5. would -> h5. merge -> v5. would -> h5. merge",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 5": {
+            "Step 0": {
+                "Step": "v5. would",
+                "Pruning": null,
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "4.0",
+                    "Resampled state": "_ _ _ _ W\n_ _ _ _ O\n_ _ _ _ U\n_ _ _ _ L\n_ _ _ _ D\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v5. would -> h1. cream",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v5. would -> h1. cream -> h5. blend",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v5. would -> h1. cream -> h5. blend -> v3. edema",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            }
+        }
+    },
+    "55": {
+        "Agent 0": {
+            "Step 0": {
+                "Step": "h4. totem",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nT O T E M\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h4. totem -> v2. resow",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "h4. totem -> v2. resow -> v5. enemy",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            },
+            "Step 3": {
+                "Step": "h4. totem -> v2. resow -> v5. enemy -> v1. greet",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "h2. renew",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ _ _ E _\n_ _ _ M _\n_ _ _ A _\n_ _ _ I _\n_ _ _ L _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v4. email -> v5. enemy",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "v4. email -> v5. enemy -> v3. daunt",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "v4. email -> v5. enemy -> v3. daunt -> h4. totem",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "v5. enemy",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ _ _ E\n_ _ _ _ N\n_ _ _ _ E\n_ _ _ _ M\n_ _ _ _ Y\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v5. enemy -> v4. email",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "v5. enemy -> v4. email -> v3. email",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "v5. enemy -> v4. email -> v3. email -> h4. totem",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.44,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 3": {
+            "Step 0": {
+                "Step": "v5. enemy",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\nR E N E W\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h2. renew -> v2. reuse",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h2. renew -> v2. reuse -> v5. enemy",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "h2. renew -> v2. reuse -> v5. enemy -> h2. renew",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 4": {
+            "Step 0": {
+                "Step": "v1. chafe",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "3.0",
+                    "Resampled state": "_ _ _ _ E\n_ _ _ _ N\n_ _ _ _ E\n_ _ _ _ M\n_ _ _ _ Y\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v5. enemy -> h4. totem",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "v5. enemy -> h4. totem -> h2. renew",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "v5. enemy -> h4. totem -> h2. renew -> v5. enemy",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.44,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 5": {
+            "Step 0": {
+                "Step": "v4. email",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\nR E N E W\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h2. renew -> v2. reuse",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h2. renew -> v2. reuse",
+                "Pruning": {
+                    "Idx": "4.0",
+                    "Resampled state": "C _ _ _ _\nH _ _ _ _\nA _ _ _ _\nF _ _ _ _\nE _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v1. chafe -> v4. email",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            }
+        }
+    },
+    "60": {
+        "Agent 0": {
+            "Step 0": {
+                "Step": "h5. eider",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nE I D E R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h5. eider -> h2. siren",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h5. eider -> h2. siren -> v3. arums",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h5. eider -> h2. siren -> v3. arums -> h5. eider",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "h5. eider",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nE I D E R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h5. eider -> v2. patio",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h5. eider -> v2. patio -> h5. eider",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "h5. eider -> v2. patio -> h5. eider -> h2. alarm",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "h5. eider",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nE I D E R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h5. eider -> h2. siren",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h5. eider -> h2. siren -> v2. patio",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h5. eider -> h2. siren -> v2. patio -> h1. aspen",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 3": {
+            "Step 0": {
+                "Step": "v5. sheik",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "3.0",
+                    "Resampled state": "_ _ _ _ S\n_ _ _ _ H\n_ _ _ _ E\n_ _ _ _ I\n_ _ _ _ K\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v5. sheik -> h4. raise",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "v5. sheik -> h4. raise -> v5. sheik",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v5. sheik -> h4. raise -> v5. sheik -> v3. aroid",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 4": {
+            "Step 0": {
+                "Step": "h4. raise",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "3.0",
+                    "Resampled state": "_ _ _ _ S\n_ _ _ _ H\n_ _ _ _ E\n_ _ _ _ I\n_ _ _ _ K\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v5. sheik -> v2. porch",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v5. sheik -> v2. porch -> v1. glare",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "v5. sheik -> v2. porch -> v1. glare -> h1. grass",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 5": {
+            "Step 0": {
+                "Step": "h5. eider",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nE I D E R\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h5. eider -> v2. patio",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h5. eider -> v2. patio -> h5. eider",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "h5. eider -> v2. patio -> h5. eider -> v2. patio",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.0
+                }
+            }
+        }
+    },
+    "65": {
+        "Agent 0": {
+            "Step 0": {
+                "Step": "v2. level",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nB A R G E\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h5. barge -> v5. exalt",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h5. barge -> v5. exalt -> h5. barge",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h5. barge -> v5. exalt -> h5. barge -> h2. quill",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "h5. barge",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ L _ _ _\n_ E _ _ _\n_ V _ _ _\n_ E _ _ _\n_ L _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v2. level -> h3. velum",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v2. level -> h3. velum -> h5. skiff",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v2. level -> h3. velum -> h5. skiff -> h2. quill",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "h5. barge",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nB A R G E\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h5. barge -> h2. quill",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h5. barge -> h2. quill -> h1. grove",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h5. barge -> h2. quill -> h1. grove",
+                "Pruning": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nB A R G E\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 3": {
+            "Step 0": {
+                "Step": "v2. level",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nB A R G E\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h5. barge -> v5. exalt",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h5. barge -> v5. exalt -> h5. barge",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h5. barge -> v5. exalt -> h5. barge -> v5. exalt",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 4": {
+            "Step 0": {
+                "Step": "h2. quill",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nB A R G E\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h5. barge -> v2. level",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h5. barge -> v2. level -> h2. quill",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h5. barge -> v2. level -> h2. quill -> h5. barge",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 5": {
+            "Step 0": {
+                "Step": "h5. barge",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ L _ _ _\n_ E _ _ _\n_ V _ _ _\n_ E _ _ _\n_ L _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v2. level -> h1. plant",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "v2. level -> h1. plant -> h2. quill",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v2. level -> h1. plant -> h2. quill",
+                "Pruning": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nB A R G E\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            }
+        }
+    },
+    "70": {
+        "Agent 0": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "0.5",
+                    "Resampled state": "_ _ _ _ _\nP E N A L\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ _ _ _ _\nP E N A L\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h2. penal -> h4. rinse",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h2. penal -> h4. rinse -> v3. hound",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "h2. penal -> h4. rinse -> v3. hound -> h2. penal",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "0.5",
+                    "Resampled state": "_ _ _ _ _\nP E N A L\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ _ _ _ _\nP E N A L\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h2. penal -> h3. lower",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h2. penal -> h3. lower -> v4. pearl",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h2. penal -> h3. lower -> v4. pearl -> h4. rinse",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "0.5",
+                    "Resampled state": "_ _ _ _ _\nP E N A L\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ _ _ _ _\nP E N A L\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h2. penal -> h3. lower",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h2. penal -> h3. lower -> v4. pearl",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h2. penal -> h3. lower -> v4. pearl -> h4. rinse",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 3": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "0.5",
+                    "Resampled state": "_ _ _ _ _\nP E N A L\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ _ _ _ _\nP E N A L\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h2. penal -> h3. lower",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h2. penal -> h3. lower -> v1. apple",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h2. penal -> h3. lower -> v1. apple -> h3. lower",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 4": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "0.5",
+                    "Resampled state": "_ _ _ _ _\nP E N A L\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ _ _ _ _\nP E N A L\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h2. penal -> h3. lower",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h2. penal -> h3. lower -> v1. apple",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h2. penal -> h3. lower -> v1. apple -> h3. lower",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 5": {
+            "Step 0": {
+                "Step": "h2. penal",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ _ _ _ _\nP E N A L\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h2. penal -> h3. lower",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h2. penal -> h3. lower -> v4. pearl",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h2. penal -> h3. lower -> v4. pearl -> h4. rinse",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            }
+        }
+    },
+    "75": {
+        "Agent 0": {
+            "Step 0": {
+                "Step": "",
+                "Pruning": {
+                    "Idx": "0.3",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\nS H A M E\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "3.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\nS H A M E\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h3. shame -> h4. navel",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h3. shame -> h4. navel -> h5. ember",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "h3. shame -> h4. navel -> h5. ember -> v4. armed",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "v3. steam",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ I _ _ _\n_ N _ _ _\n_ N _ _ _\n_ E _ _ _\n_ R _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v2. inner -> h4. navel",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "v2. inner -> h4. navel -> h5. ember",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "v2. inner -> h4. navel -> h5. ember",
+                "Pruning": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ S _ _\n_ _ T _ _\n_ _ E _ _\n_ _ A _ _\n_ _ M _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "h5. eagle",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "4.0",
+                    "Resampled state": "_ _ S _ _\n_ _ T _ _\n_ _ E _ _\n_ _ A _ _\n_ _ M _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v3. steam -> h4. navel",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "v3. steam -> h4. navel -> h5. ember",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "v3. steam -> h4. navel -> h5. ember -> v4. armed",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.44,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 3": {
+            "Step 0": {
+                "Step": "h3. shame",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "4.0",
+                    "Resampled state": "_ _ S _ _\n_ _ T _ _\n_ _ E _ _\n_ _ A _ _\n_ _ M _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v3. steam -> h1. grass",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v3. steam -> h1. grass -> h4. navel",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "v3. steam -> h1. grass -> h4. navel",
+                "Pruning": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nE A G L E\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 4": {
+            "Step 0": {
+                "Step": "v3. steam",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nE A G L E\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h5. eagle -> v2. inner",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h5. eagle -> v2. inner -> h5. eagle",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h5. eagle -> v2. inner -> h5. eagle -> h4. navel",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 5": {
+            "Step 0": {
+                "Step": "v2. inner",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ S _ _\n_ _ T _ _\n_ _ E _ _\n_ _ A _ _\n_ _ M _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v3. steam -> h3. shame",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v3. steam -> h3. shame -> v3. steam",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v3. steam -> h3. shame -> v3. steam -> h3. shame",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            }
+        }
+    },
+    "80": {
+        "Agent 0": {
+            "Step 0": {
+                "Step": "h5. realm",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "3.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nR E A L M\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h5. realm -> h4. inner",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h5. realm -> h4. inner -> v3. lasso",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h5. realm -> h4. inner -> v3. lasso -> h5. realm",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "h5. realm",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "4.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nR E A L M\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h5. realm -> h4. inner",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h5. realm -> h4. inner -> v2. occur",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h5. realm -> h4. inner -> v2. occur -> h5. realm",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "h5. realm",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nR E A L M\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h5. realm -> h4. inner",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h5. realm -> h4. inner -> v5. inter",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h5. realm -> h4. inner -> v5. inter -> h5. realm",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 3": {
+            "Step 0": {
+                "Step": "h5. realm",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "4.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nR E A L M\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h5. realm -> h4. inner",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h5. realm -> h4. inner -> v5. inter",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h5. realm -> h4. inner -> v5. inter -> h5. realm",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 4": {
+            "Step 0": {
+                "Step": "h5. realm",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nR E A L M\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h5. realm -> v5. tweak",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h5. realm -> v5. tweak -> h5. realm",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h5. realm -> v5. tweak -> h5. realm -> h4. inner",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 5": {
+            "Step 0": {
+                "Step": "h5. realm",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "4.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nR E A L M\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.12,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h5. realm -> h2. ovine",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h5. realm -> h2. ovine -> v2. occur",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h5. realm -> h2. ovine -> v2. occur -> h5. realm",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.0
+                }
+            }
+        }
+    },
+    "85": {
+        "Agent 0": {
+            "Step 0": {
+                "Step": "v1. idiot",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "3.0",
+                    "Resampled state": "_ _ C _ _\n_ _ R _ _\n_ _ A _ _\n_ _ Z _ _\n_ _ E _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v3. craze -> h5. extra",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v3. craze -> h5. extra -> v3. craze",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v3. craze -> h5. extra -> v3. craze -> h5. extra",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "h2. habit",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ C _ _\n_ _ R _ _\n_ _ A _ _\n_ _ Z _ _\n_ _ E _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v3. craze -> h1. cacao",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v3. craze -> h1. cacao -> h2. error",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v3. craze -> h1. cacao -> h2. error",
+                "Pruning": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ C _ _\n_ _ R _ _\n_ _ A _ _\n_ _ Z _ _\n_ _ E _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "v3. craze",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\nH A B I T\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h2. habit -> v3. craze",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h2. habit -> v3. craze -> h5. spare",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "h2. habit -> v3. craze -> h5. spare -> h3. munch",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.32,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 3": {
+            "Step 0": {
+                "Step": "v3. craze",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "3.0",
+                    "Resampled state": "_ _ C _ _\n_ _ R _ _\n_ _ A _ _\n_ _ Z _ _\n_ _ E _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v3. craze -> h2. habit",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v3. craze -> h2. habit -> h3. eaten",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v3. craze -> h2. habit -> h3. eaten -> v3. craze",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 4": {
+            "Step 0": {
+                "Step": "v3. craze",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\nH A B I T\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h2. habit -> v2. cheat",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "h2. habit -> v2. cheat -> h5. light",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h2. habit -> v2. cheat -> h5. light -> v2. cheat",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 5": {
+            "Step 0": {
+                "Step": "v3. craze",
+                "Pruning": null,
+                "Evaluation": 0,
+                "Resampling": {
+                    "Idx": "2.0",
+                    "Resampled state": "_ _ C _ _\n_ _ R _ _\n_ _ A _ _\n_ _ Z _ _\n_ _ E _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.0,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v3. craze -> h5. extra",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v3. craze -> h5. extra -> v3. craze",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v3. craze -> h5. extra -> v3. craze -> h5. extra",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            }
+        }
+    },
+    "90": {
+        "Agent 0": {
+            "Step 0": {
+                "Step": "v3. stola",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ S _ _\n_ _ T _ _\n_ _ O _ _\n_ _ L _ _\n_ _ A _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v3. stola -> h5. alone",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v3. stola -> h5. alone -> h3. korea",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v3. stola -> h5. alone -> h3. korea -> v4. idler",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "v5. teary",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ S _ _\n_ _ T _ _\n_ _ O _ _\n_ _ L _ _\n_ _ A _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "v3. stola -> h5. alone",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.04,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v3. stola -> h5. alone -> v5. teary",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "v3. stola -> h5. alone -> v5. teary -> v3. stole",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "h3. korea",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ _ _ I _\n_ _ _ D _\n_ _ _ L _\n_ _ _ E _\n_ _ _ R _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v4. idler -> h5. unary",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "v4. idler -> h5. unary -> h1. ciris",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "v4. idler -> h5. unary -> h1. ciris -> h3. silla",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.56,
+                    "r_word": 0.3
+                }
+            }
+        },
+        "Agent 3": {
+            "Step 0": {
+                "Step": "h4. sound",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ _ _ I _\n_ _ _ D _\n_ _ _ L _\n_ _ _ E _\n_ _ _ R _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v4. idler -> h3. goryo",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.16,
+                    "r_word": 0.0
+                }
+            },
+            "Step 2": {
+                "Step": "v4. idler -> h3. goryo -> v3. stola",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "v4. idler -> h3. goryo -> v3. stola",
+                "Pruning": {
+                    "Idx": "0.0",
+                    "Resampled state": "_ _ S _ _\n_ _ T _ _\n_ _ O _ _\n_ _ L _ _\n_ _ A _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 4": {
+            "Step 0": {
+                "Step": "v5. teary",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ T\n_ _ _ _ E\n_ _ _ _ A\n_ _ _ _ R\n_ _ _ _ Y\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v5. teary -> v4. idler",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "v5. teary -> v4. idler -> v3. stola",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.48,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "v5. teary -> v4. idler -> v3. stola -> h3. korea",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.44,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 5": {
+            "Step 0": {
+                "Step": "v4. idler",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ T\n_ _ _ _ E\n_ _ _ _ A\n_ _ _ _ R\n_ _ _ _ Y\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "v5. teary -> v4. idler",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "v5. teary -> v4. idler -> v3. palla",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.6,
+                    "r_word": 0.3
+                }
+            },
+            "Step 3": {
+                "Step": "v5. teary -> v4. idler -> v3. palla -> v2. iride",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.72,
+                    "r_word": 0.3
+                }
+            }
+        }
+    },
+    "95": {
+        "Agent 0": {
+            "Step 0": {
+                "Step": "h4. sense",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\nS L A S H\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h3. slash -> h4. sense",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h3. slash -> h4. sense -> v5. chase",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.0
+                }
+            },
+            "Step 3": {
+                "Step": "h3. slash -> h4. sense -> v5. chase -> h5. ridge",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.0
+                }
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "h3. slash",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "1.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\nS L A S H\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h3. slash -> h4. sense",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h3. slash -> h4. sense -> v4. gloss",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.24,
+                    "r_word": 0.1
+                }
+            },
+            "Step 3": {
+                "Step": "h3. slash -> h4. sense -> v4. gloss -> v2. ricer",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.2
+                }
+            }
+        },
+        "Agent 2": {
+            "Step 0": {
+                "Step": "h1. mould",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nT R E A D\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h5. tread -> v5. treed",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "h5. tread -> v5. treed -> h3. carve",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "h5. tread -> v5. treed -> h3. carve -> h1. print",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            }
+        },
+        "Agent 3": {
+            "Step 0": {
+                "Step": "h3. slash",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "4.0",
+                    "Resampled state": "P R E S S\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h1. press -> h5. tread",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h1. press -> h5. tread -> h4. sense",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.48,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "h1. press -> h5. tread -> h4. sense -> v2. ricer",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.56,
+                    "r_word": 0.3
+                }
+            }
+        },
+        "Agent 4": {
+            "Step 0": {
+                "Step": "h1. press",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "3.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\nS L A S H\n_ _ _ _ _\n_ _ _ _ _\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.08,
+                    "r_word": 0.0
+                }
+            },
+            "Step 1": {
+                "Step": "h3. slash -> h4. sense",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.28,
+                    "r_word": 0.1
+                }
+            },
+            "Step 2": {
+                "Step": "h3. slash -> h4. sense -> v2. ricer",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.44,
+                    "r_word": 0.2
+                }
+            },
+            "Step 3": {
+                "Step": "h3. slash -> h4. sense -> v2. ricer -> h2. india",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.4,
+                    "r_word": 0.1
+                }
+            }
+        },
+        "Agent 5": {
+            "Step 0": {
+                "Step": "h5. tread",
+                "Pruning": null,
+                "Evaluation": 20,
+                "Resampling": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nT R E A D\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            },
+            "Step 1": {
+                "Step": "h5. tread -> v2. ricer",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.36,
+                    "r_word": 0.2
+                }
+            },
+            "Step 2": {
+                "Step": "h5. tread -> v2. ricer -> h4. sense",
+                "Pruning": null,
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.52,
+                    "r_word": 0.3
+                }
+            },
+            "Step 3": {
+                "Step": "h5. tread -> v2. ricer -> h4. sense",
+                "Pruning": {
+                    "Idx": "5.0",
+                    "Resampled state": "_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\n_ _ _ _ _\nT R E A D\n"
+                },
+                "metrics": {
+                    "r_all": false,
+                    "r_letter": 0.2,
+                    "r_word": 0.1
+                }
+            }
+        }
+    },
+    "Info": {
+        "Cost": {
+            "Step": {
+                "input_cost": 0.04575,
+                "output_cost": 0.15501019999999996,
+                "total_cost": 0.20076019999999994
+            },
+            "Evaluation": {
+                "input_cost": 0.025106000000000003,
+                "output_cost": 0.013211700000000003,
+                "total_cost": 0.03831770000000001
+            },
+            "Total cost": {
+                "input_cost": 0.070856,
+                "output_cost": 0.16822189999999995,
+                "total_cost": 0.23907789999999995
+            }
+        },
+        "Models": {
+            "Step": "gpt-35-turbo-0125",
+            "Evaluation": "gpt-35-turbo-0125"
+        },
+        "Metrics": {
+            "r_letter": 0.332,
+            "r_word": 0.12500000000000003,
+            "r_all": 0.0
+        }
+    }
+}
