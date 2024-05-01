@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define arrays for each parameter
-max_steps__values=(7)
+max_steps__values=(4)
 n_agents__values=(7)
 backtrack__values=(0)
 total=0

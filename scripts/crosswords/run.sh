@@ -1,7 +1,7 @@
-python async_implementation/experiments/crosswords.py\
-    --k 3\
-    --max_steps 12\
-    --n_agents 2\
-    --backtrack 0.5\
+python async_implementation/experiments/crosswords_cached.py\
     --set test\
-    --seed 0\
+    --n_agents 2\
+    --max_steps 4\
+    --k 3\
+    --backtrack 0.5\
+    --send_email
