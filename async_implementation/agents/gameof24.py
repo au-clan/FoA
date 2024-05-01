@@ -76,7 +76,7 @@ class GameOf24Agent:
 
 
     @staticmethod
-    async def evaluate(state: GameOf24State, api, namespace, n=3):
+    async def evaluate(state: GameOf24State, api, value_cache, namespace, n=3):
         last_step = state.steps[-1]
         if "left" not in last_step:
             answer = last_step.lower().replace("answer: ", "")
@@ -87,20 +87,25 @@ class GameOf24Agent:
         else:
             prompt = prompts.value_prompt.format(input=state.current_state)
 
-        coroutines = []
-        for _ in range(n):
-            coroutines.append(api.buffered_request(prompt, key=hash(state), namespace=namespace))
-        iid_replies = await asyncio.gather(*coroutines)
-
-        # Unwrap the iid_replies
-
-        if len(state.steps.strip().split('\n')) == 4 and 'answer' not in state.step.lower():
-            value_number = 0
+        if prompt in value_cache:
+            value_number = value_cache[prompt]
         
         else:
-            value_names = [value.split('\n')[-1] for value in iid_replies]
-            value_map = {'impossible': 0.001, 'likely': 1, 'sure': 20}
-            value_number = sum(value * value_names.count(name) for name, value in value_map.items())
+            coroutines = []
+            for _ in range(n):
+                coroutines.append(api.buffered_request(prompt, key=hash(state), namespace=namespace))
+            iid_replies = await asyncio.gather(*coroutines)
+
+            # Unwrap the iid_replies
+
+            if len(state.steps) == 4 and 'answer' not in "\n".join(state.steps).lower():
+                value_number = 0
+            
+            else:
+                value_names = [value.split('\n')[-1] for value in iid_replies]
+                value_map = {'impossible': 0.001, 'likely': 1, 'sure': 20}
+                value_number = sum(value * value_names.count(name) for name, value in value_map.items())
+            value_cache[prompt] = value_number
         
         return value_number
 

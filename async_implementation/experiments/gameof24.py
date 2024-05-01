@@ -20,7 +20,7 @@ from async_implementation.resampling.resampler import Resampler
 from data.data import GameOf24Data
 from utils import create_folder, email_notification, create_box, update_actual_cost
 
-log_folder = f"full_logs_gpt4/gameof24/" # Folder in which logs will be saved 
+log_folder = f"full_logs_gpt4/gameof24/cached/" # Folder in which logs will be saved 
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
@@ -49,6 +49,9 @@ api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=
 
 # Setting up the data
 dataset = GameOf24Data()
+
+# Value cache
+value_cache = {}
 
 
 # ToDo: this should probably be moved to its own file
@@ -157,12 +160,23 @@ async def foa_gameof24(api, puzzle_idx, puzzle, foa_options, barrier, seed):
 
         # Resampling : every k steps, evaluate and resample
         if step < num_steps - 1 and step % foa_options["k"] == 0:
-            
+            #temp_states = states.copy()
+            #temp_state_steps = []
+            #states = []
+            #for state in temp_states:
+            #    if "->".join(state.steps) not in temp_state_steps:
+            #        states.append(state)
+            #        temp_state_steps.append("->".join(state.steps))
+            #if len(states) < len(temp_states):
+            #    print(f"Removed {len(temp_states) - len(states)} duplicate states.")
+            #else:
+            #    print("No duplicate states removed.")
+                
             print(f"Step {step} : Evaluating")
             # Evaluation : each of the current states is given a value
             value_coroutines = []
             for agent_id, state in enumerate(states):
-                value_coroutines.append(GameOf24Agent.evaluate(state, eval_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}")))
+                value_coroutines.append(GameOf24Agent.evaluate(state=state, api=eval_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}"), value_cache=value_cache))
             values = await asyncio.gather(*value_coroutines)
 
             assert len(eval_batcher.futures) == 0, f"API futures should be empty, but are {len(eval_batcher.futures)}"
@@ -205,7 +219,7 @@ async def run(run_options: dict, foa_options: dict):
     puzzle_idxs, puzzles = dataset.get_data(run_options["set"])
 
     ### Debugging
-    puzzle_idxs, puzzles = puzzle_idxs[:50], puzzles[:50]
+    #puzzle_idxs, puzzles = puzzle_idxs[:10], puzzles[:10]
 
     # Barriers for each puzzle experiment
     barrier = asyncio.Barrier(len(puzzles))
@@ -223,6 +237,7 @@ async def run(run_options: dict, foa_options: dict):
     step_cost = api.cost(tab_name="step")
     evaluation_cost = api.cost(tab_name="eval")
     total_cost = api.cost()
+    log["Info"] = {}
     log["Cost"] = {"Step": step_cost, "Evaluation": evaluation_cost, "Total cost": total_cost}
     log["Models"] = {"Step": models["step"], "Evaluation": models["eval"]}
 

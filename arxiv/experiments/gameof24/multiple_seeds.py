@@ -20,7 +20,7 @@ from async_implementation.resampling.resampler import Resampler
 from data.data import GameOf24Data
 from utils import create_folder, email_notification, create_box, update_actual_cost
 
-log_folder = f"arxiv/logs/multiple_seeds/gameof24/" # Folder in which logs will be saved 
+log_folder = f"arxiv/logs/multiple_seeds_cached/gameof24/" # Folder in which logs will be saved 
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
@@ -52,7 +52,7 @@ dataset = GameOf24Data()
 
 # ToDo: this should probably be moved to its own file
 # for now I'm keeping it here, for easier debugging
-async def foa_gameof24(api, puzzle_idx, puzzle, foa_options, barrier, seed):
+async def foa_gameof24(api, puzzle_idx, puzzle, foa_options, barrier, seed, value_cache):
     num_agents = foa_options["n_agents"]
     num_steps = foa_options["max_steps"]
 
@@ -156,12 +156,23 @@ async def foa_gameof24(api, puzzle_idx, puzzle, foa_options, barrier, seed):
 
         # Resampling : every k steps, evaluate and resample
         if step < num_steps - 1 and step % foa_options["k"] == 0:
-            
+            #temp_states = states.copy()
+            #temp_state_steps = []
+            #states = []
+            #for state in temp_states:
+            #    if "->".join(state.steps) not in temp_state_steps:
+            #        states.append(state)
+            #        temp_state_steps.append("->".join(state.steps))
+            #if len(states) < len(temp_states):
+            #    print(f"Removed {len(temp_states) - len(states)} duplicate states.")
+            #else:
+            #    print("No duplicate states removed.")
+                
             print(f"Step {step} : Evaluating")
             # Evaluation : each of the current states is given a value
             value_coroutines = []
             for agent_id, state in enumerate(states):
-                value_coroutines.append(GameOf24Agent.evaluate(state=state, api=eval_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}")))
+                value_coroutines.append(GameOf24Agent.evaluate(state=state, api=eval_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}"), value_cache=value_cache))
             values = await asyncio.gather(*value_coroutines)
 
             assert len(eval_batcher.futures) == 0, f"API futures should be empty, but are {len(eval_batcher.futures)}"
@@ -200,18 +211,21 @@ async def run(run_options: dict, foa_options: dict, log_file: str):
     log = {}
     seed = run_options["seed"]
 
+    # Value cache
+    value_cache = {}
+
     # Get the data for each puzzle
     puzzle_idxs, puzzles = dataset.get_data(run_options["set"])
 
     ### Debugging
-    #puzzle_idxs, puzzles = puzzle_idxs[:1], puzzles[:1]
+    #puzzle_idxs, puzzles = puzzle_idxs[:50], puzzles[:50]
 
     # Barriers for each puzzle experiment
     barrier = asyncio.Barrier(len(puzzles))
 
     # Run FoA for each puzzle
     for puzzle_idx, puzzle in zip(puzzle_idxs, puzzles):
-        game_coroutines.append(foa_gameof24(api, puzzle_idx, puzzle, foa_options, barrier, seed))
+        game_coroutines.append(foa_gameof24(api, puzzle_idx, puzzle, foa_options, barrier, seed, value_cache))
     results = await asyncio.gather(*game_coroutines)
 
     # Merge logs for each run
@@ -222,8 +236,9 @@ async def run(run_options: dict, foa_options: dict, log_file: str):
     step_cost = api.cost(tab_name="step")
     evaluation_cost = api.cost(tab_name="eval")
     total_cost = api.cost()
-    log["Cost"] = {"Step": step_cost, "Evaluation": evaluation_cost, "Total cost": total_cost}
-    log["Models"] = {"Step": models["step"], "Evaluation": models["eval"]}
+    log["Info"] = {}
+    log["Info"]["Cost"] = {"Step": step_cost, "Evaluation": evaluation_cost, "Total cost": total_cost}
+    log["Info"]["Models"] = {"Step": models["step"], "Evaluation": models["eval"]}
 
     # Save merged logs
     with open(log_folder + log_file, 'w+') as f:
@@ -262,7 +277,7 @@ async def main():
     n_agents = args.n_agents                                        # Number of agents
     k = args.k                                                      # Resampling every <k> steps
     backtrack = args.backtrack                                      # Backtrack decaying coefficient
-    origin_value = 20 * 3                                           # The evaluation of the origin
+    origin_value = 20 * 3 / backtrack if backtrack!=0 else 20 * 3   # The evaluation of the origin
     num_steps = args.max_steps                                      # Max allowed steps
     resampling_method = args.resampling                             # Resampling method
     send_email = args.send_email                                    # Send email notification
@@ -315,11 +330,15 @@ async def main():
         update_actual_cost(api)
 
         cost = api.cost(verbose=True)
+        cost = cost["total_cost"]
+
+        # Empty api tabs
+        api.empty_tabs()
 
         # Send email notification
         if send_email:
-            subject = log_file
-            message = f"Accuracy : {accuracy}\nCost : {cost}"
+            subject = f"{seed+1}/5 :" + log_file
+            message = f"Accuracy : {accuracy}\nCost : {cost:.2f}"
             try:
                 email_notification(subject=subject, message=message)
                 print("Email sent successfully.")

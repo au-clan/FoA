@@ -20,7 +20,7 @@ from async_implementation.resampling.resampler import Resampler
 from data.data import CrosswordsData
 from utils import create_folder, email_notification, create_box, update_actual_cost
 
-log_folder = f"logs/{datetime.now().date()}/gameof24/{datetime.now().strftime('%H')}:00/" # Folder in which logs will be saved 
+log_folder = f"logs_recent/debug/crosswords/gridsearch2/" # Folder in which logs will be saved 
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
@@ -40,8 +40,8 @@ step_api_config = eval_api_config = {
 # available models : gpt-35-turbo-0125, gpt-4-0125-preview, gpt-4-0613
 
 models = {
-    "step": "gpt-4-0613",
-    "eval": "gpt-4-0613",
+    "step": "gpt-35-turbo-0125",
+    "eval": "gpt-35-turbo-0125",
 }
 
 api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=2, verbose=True)
@@ -49,6 +49,9 @@ api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=
 
 # Setting up the data
 dataset = CrosswordsData()
+
+# Value cache
+value_cache = {}
 
 
 # ToDo: this should probably be moved to its own file
@@ -102,7 +105,7 @@ async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed):
         # Step : make one step for each state
         agent_coroutines = []
         for agent_id, state in enumerate(states):
-            agent_coroutines.append(CrosswordsAgent.step(state, step_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}")))
+            agent_coroutines.append(CrosswordsAgent.step(state=state, api=step_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}"), value_cache=value_cache))
         states = await asyncio.gather(*agent_coroutines)
 
         # Log - Steps
@@ -137,10 +140,6 @@ async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed):
         temp_state_records = [(idx, value, state) for idx, value, state in state_records if state.status!=[0]*10]
         #invalid_state_indices = [i for i, verification in enumerate(verifications) if verification["r"] == -1]
         invalid_state_indices = [i for i, state in enumerate(states) if state.ans==["PRUNE"]*10]
-        if len(invalid_state_indices)>0:
-            print(f"In puzzle {puzzle_idx} at step {step} we prune agents : {invalid_state_indices}")
-            for i in invalid_state_indices:
-                print(states[i])
         if len(temp_state_records) > 0:
             # If there are eligible + evaluated states.
             new_states, pruned_indices = resampler.resample(temp_state_records, len(invalid_state_indices), foa_options["resampling_method"])
@@ -179,7 +178,7 @@ async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed):
             # Evaluation : each of the current states is given a value
             value_coroutines = []
             for agent_id, state in enumerate(states):
-                value_coroutines.append(CrosswordsAgent.evaluate(state, eval_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}")))
+                value_coroutines.append(CrosswordsAgent.evaluate(state=state, api=eval_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}")))
             values = await asyncio.gather(*value_coroutines)
 
             assert len(eval_batcher.futures) == 0, f"API futures should be empty, but are {len(eval_batcher.futures)}"
@@ -241,11 +240,18 @@ async def run(run_options: dict, foa_options: dict):
     for l in logs:
         log.update(l)
 
+    # Get cost number
     step_cost = api.cost(tab_name="step")
     evaluation_cost = api.cost(tab_name="eval")
     total_cost = api.cost()
-    log["Cost"] = {"Step": step_cost, "Evaluation": evaluation_cost, "Total cost": total_cost}
-    log["Models"] = {"Step": models["step"], "Evaluation": models["eval"]}
+    log["Info"] = {}
+    log["Info"]["Cost"] = {"Step": step_cost, "Evaluation": evaluation_cost, "Total cost": total_cost}
+    log["Info"]["Models"] = {"Step": models["step"], "Evaluation": models["eval"]}
+
+    # Get metrics numbers
+    metrics = CrosswordsAgent.get_metrics(log.copy())
+    print(f"Metrics : {metrics}")
+    log["Info"]["Metrics"] = metrics
 
     # Save merged logs
     with open(log_folder + log_file, 'w+') as f:
@@ -328,8 +334,10 @@ results = asyncio.run(run(run_options, foa_options))
 
 
 #TODO: Compute metrics to send the email
-#metrics = get_metrics(...)
-#print(f"Metrics : {accuracy:.2f}\n")
+with open(log_folder + log_file, 'r') as f:
+    data = json.load(f)
+metrics = data["Info"]["Metrics"]
+r_letter = float(metrics["r_letter"])
 print(f"File name : {log_file}\n\n\n\n\n")
 
 #Update actual cost.
@@ -340,7 +348,7 @@ cost = api.cost(verbose=True)
 # Send email notification
 if send_email:
     subject = log_file
-    message = f"Cost : {cost}"
+    message = f"R_Letter : {r_letter:.3f}, Cost : {cost:.2f}"
     try:
         email_notification(subject=subject, message=message)
         print("Email sent successfully.")

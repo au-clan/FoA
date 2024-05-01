@@ -1,8 +1,10 @@
 import re
+import json
 import asyncio
 import random
 from typing import Tuple
 
+from numpy import mean
 from async_implementation.prompts import crosswords as prompts
 from async_implementation.states.crosswords import CrosswordsState
 
@@ -10,13 +12,17 @@ from async_implementation.states.crosswords import CrosswordsState
 class CrosswordsAgent:
 
     @staticmethod
-    async def get_candidates(state: CrosswordsState, api, namespace, n:int =2)-> dict:
+    async def get_candidates(state: CrosswordsState, api, namespace, value_cache, n:int =2)-> dict:
         """
         Given a state, return a dictionary of candidate actions along with its scores.
         """
         
         # Render the state
         obs = CrosswordsState.render(state)
+
+        # Return cached candidates if they exist
+        if obs in value_cache:
+            return value_cache[obs]
 
         # Get candidate actions and their scores
         prompt = prompts.propose_prompt.format(input=obs)
@@ -41,18 +47,25 @@ class CrosswordsAgent:
                     candidates_to_scores[candidate] = candidates_to_scores.get(candidate, 0) + score
         filtered_candidate_to_score = {k: v for k, v in candidates_to_scores.items()  if provokes_change(state, k)}
 
+        #Update cache
+        if len(filtered_candidate_to_score) > 0:
+            value_cache[obs] = filtered_candidate_to_score
+
         # {"h1. apple": 2.5, "h2. banana": 1.0, "h3. apple": 0.5, "h4. apple": 0.4, "h5. apple": 0.3}
         return filtered_candidate_to_score
     
     @staticmethod
-    async def step(state: CrosswordsState, api, namespace)-> Tuple[CrosswordsState, str]:
+    async def step(state: CrosswordsState, api, namespace, value_cache: dict)-> Tuple[CrosswordsState, str]:
         """
         Given a state, returns the next state one.
         """
-        
         # Get next step suggestions/actions and pick one of the ones with the highest value
-        suggestions = await CrosswordsAgent.get_candidates(state, api, namespace=namespace)
-        # suggestions = {"h1. apple": 2.5, "h2. banana": 1.0, "h3. apple": 0.5, "h4. apple": 0.4, "h5. apple": 0.3}
+        tries=3 # Number of tries till valid suggestion found. Increasing it improves performance but maybe unfair to ToT.
+        for i in range(tries):
+            suggestions = await CrosswordsAgent.get_candidates(state, api, value_cache=value_cache, namespace=namespace)
+            # suggestions = {"h1. apple": 2.5, "h2. banana": 1.0, "h3. apple": 0.5, "h4. apple": 0.4, "h5. apple": 0.3}
+            if len(suggestions) > 0: # Suggestions found
+                break
         
         
         if len(suggestions) == 0:
@@ -181,6 +194,39 @@ class CrosswordsAgent:
             return {"r":1}
         else:
             return {"r":0}
+    
+    @staticmethod
+    def get_metrics(experiment_logs):
+        """
+        Given a file path, return the metrics of the experiment based on the logs.
+        """
+        #with open(file_path, "r") as f:
+        #    data = json.load(f)
+
+        experiment_logs = experiment_logs.copy() # Making sure initial logs are not modified
+        info = experiment_logs.pop("Info")
+
+        metrics = {}
+        for puzzle_id, puzzle_results in experiment_logs.items():
+            initial_puzzle = puzzle_results.pop("puzzle")       # Not needed just want to pop
+            verifications = puzzle_results.pop("Verifications") # Not needed just want to pop
+
+            max_actions = 0
+            metrics[puzzle_id] = {"r_letter": None, "r_word": None, "r_all": None}
+            for agent_id, agent_results in puzzle_results.items():
+                for step_id, step_results in agent_results.items():
+                    step_actions = len(step_results["Step"].split(" -> "))
+                    if step_actions > max_actions:
+                        max_actions = step_actions
+                        metrics[puzzle_id] = step_results["metrics"]
+            assert max_actions > 0, f"No actions found for {puzzle_id}"
+        
+        r_letter = mean([metric["r_letter"] for metric in metrics.values()])
+        r_word = mean([metric["r_word"] for metric in metrics.values()])
+        r_all = mean([metric["r_all"] for metric in metrics.values()])
+
+        return {"r_letter": r_letter, "r_word": r_word, "r_all": r_all}
+        
         
 
 def parse_line(input_str):

@@ -20,7 +20,7 @@ from async_implementation.resampling.resampler import Resampler
 from data.data import CrosswordsData
 from utils import create_folder, email_notification, create_box, update_actual_cost
 
-log_folder = f"arxiv/logs/multiple_seeds/crosswords/" # Folder in which logs will be saved 
+log_folder = f"arxiv/logs/multiple_seeds_cached/crosswords/" # Folder in which logs will be saved 
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
@@ -53,7 +53,7 @@ dataset = CrosswordsData()
 
 # ToDo: this should probably be moved to its own file
 # for now I'm keeping it here, for easier debugging
-async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed):
+async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed, value_cache):
     num_agents = foa_options["n_agents"]
     num_steps = foa_options["max_steps"]
 
@@ -102,7 +102,7 @@ async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed):
         # Step : make one step for each state
         agent_coroutines = []
         for agent_id, state in enumerate(states):
-            agent_coroutines.append(CrosswordsAgent.step(state, step_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}")))
+            agent_coroutines.append(CrosswordsAgent.step(state=state, api=step_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}"), value_cache=value_cache))
         states = await asyncio.gather(*agent_coroutines)
 
         # Log - Steps
@@ -137,10 +137,6 @@ async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed):
         temp_state_records = [(idx, value, state) for idx, value, state in state_records if state.status!=[0]*10]
         #invalid_state_indices = [i for i, verification in enumerate(verifications) if verification["r"] == -1]
         invalid_state_indices = [i for i, state in enumerate(states) if state.ans==["PRUNE"]*10]
-        #if len(invalid_state_indices)>0:
-            #print(f"In puzzle {puzzle_idx} at step {step} we prune agents : {invalid_state_indices}")
-            #for i in invalid_state_indices:
-                #print(states[i])
         if len(temp_state_records) > 0:
             # If there are eligible + evaluated states.
             new_states, pruned_indices = resampler.resample(temp_state_records, len(invalid_state_indices), foa_options["resampling_method"])
@@ -180,7 +176,7 @@ async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed):
             # Evaluation : each of the current states is given a value
             value_coroutines = []
             for agent_id, state in enumerate(states):
-                value_coroutines.append(CrosswordsAgent.evaluate(state, eval_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}")))
+                value_coroutines.append(CrosswordsAgent.evaluate(state=state, api=eval_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}")))
             values = await asyncio.gather(*value_coroutines)
 
             assert len(eval_batcher.futures) == 0, f"API futures should be empty, but are {len(eval_batcher.futures)}"
@@ -223,6 +219,9 @@ async def run(run_options: dict, foa_options: dict, log_file: str):
     log = {}
     seed = run_options["seed"]
 
+    # Value cache
+    value_cache = {}
+
     # Get the data for each puzzle
     puzzle_idxs, puzzles = dataset.get_data(run_options["set"])
 
@@ -234,7 +233,7 @@ async def run(run_options: dict, foa_options: dict, log_file: str):
 
     # Run FoA for each puzzle
     for puzzle_idx, puzzle in zip(puzzle_idxs, puzzles):
-        game_coroutines.append(foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed))
+        game_coroutines.append(foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed, value_cache))
     results = await asyncio.gather(*game_coroutines)
 
     # Merge logs for each run
@@ -242,11 +241,18 @@ async def run(run_options: dict, foa_options: dict, log_file: str):
     for l in logs:
         log.update(l)
 
+    # Get cost number
     step_cost = api.cost(tab_name="step")
     evaluation_cost = api.cost(tab_name="eval")
     total_cost = api.cost()
-    log["Cost"] = {"Step": step_cost, "Evaluation": evaluation_cost, "Total cost": total_cost}
-    log["Models"] = {"Step": models["step"], "Evaluation": models["eval"]}
+    log["Info"] = {}
+    log["Info"]["Cost"] = {"Step": step_cost, "Evaluation": evaluation_cost, "Total cost": total_cost}
+    log["Info"]["Models"] = {"Step": models["step"], "Evaluation": models["eval"]}
+
+    # Get metrics numbers
+    metrics = CrosswordsAgent.get_metrics(log.copy())
+    print(f"Metrics : {metrics}")
+    log["Info"]["Metrics"] = metrics
 
     # Save merged logs
     with open(log_folder + log_file, 'w+') as f:
@@ -271,7 +277,7 @@ def parse_args():
     args.add_argument("--n_agents", type=int, default=3)
     args.add_argument("--backtrack", type=float, default=0.25)
     args.add_argument("--max_steps", type=int, default=20)
-    args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile"], default="linear")
+    args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile", "linear_filtered"], default="linear")
     args.add_argument("--k", type=int, default=1)
     args.add_argument('--send_email', action=argparse.BooleanOptionalAction)
     args = args.parse_args()
@@ -334,11 +340,15 @@ async def main():
         update_actual_cost(api)
 
         cost = api.cost(verbose=True)
+        cost = cost["total_cost"]
+
+        # Empty api tabs
+        api.empty_tabs()
 
         # Send email notification
         if send_email:
-            subject = log_file
-            message = f"Cost : {cost}"
+            subject = f"{seed+1}/5 :" + log_file
+            message = f"Cost : {cost:.2f}"
             try:
                 email_notification(subject=subject, message=message)
                 print("Email sent successfully.")
@@ -347,5 +357,4 @@ async def main():
                 pass
 
 if __name__ == "__main__":
-    print("Hi")
     asyncio.run(main())
