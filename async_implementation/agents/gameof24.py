@@ -91,9 +91,17 @@ class GameOf24Agent:
         for _ in range(n):
             coroutines.append(api.buffered_request(prompt, key=hash(state), namespace=namespace))
         iid_replies = await asyncio.gather(*coroutines)
-        value_names = [value.split('\n')[-1] for value in iid_replies]
-        value_map = {'impossible': 0.001, 'likely': 1, 'sure': 20}
-        value_number = sum(value * value_names.count(name) for name, value in value_map.items())
+
+        # Unwrap the iid_replies
+
+        if len(state.steps.strip().split('\n')) == 4 and 'answer' not in state.step.lower():
+            value_number = 0
+        
+        else:
+            value_names = [value.split('\n')[-1] for value in iid_replies]
+            value_map = {'impossible': 0.001, 'likely': 1, 'sure': 20}
+            value_number = sum(value * value_names.count(name) for name, value in value_map.items())
+        
         return value_number
 
     @staticmethod
