@@ -2,6 +2,8 @@ import json
 import pandas as pd
 from dataclasses import dataclass
 
+from utils import get_file_names
+
 @dataclass(frozen=True)
 class GameOf24Data:
     path = "data/datasets/24_tot.csv"
@@ -41,5 +43,25 @@ class CrosswordsData:
             raise ValueError("Invalid set name")
         
         return indices, [self.data[i] for i in indices]
+
+@dataclass(frozen=True)
+class TextWorldData:
+        
+    data = sorted([f for f in get_file_names("data/datasets/tw_games") if f.endswith(".ulx")])
+
+
+    def get_data(self, set, challenge="cooking"):
+        
+        wrong_challenge_message = "Avaialble challenges are: simple, cooking, collector, hunter"
+        assert challenge in ["simple", "cooking", "coin", "treasure"], wrong_challenge_message
+        data = [d for d in self.data if d.startswith(f"tw-{challenge}_")]
+        
+        if set == "mini":
+            indices = list(range(2))
+        elif set == "train":
+            indices = list(range(2, len(data)))
+        else:
+            raise ValueError("Invalid set name")
+        return indices, [data[i] for i in indices]
 
 
