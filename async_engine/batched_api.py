@@ -72,16 +72,23 @@ class BatchingAPI:
         # find duplicate prompts
         prompt2futures = defaultdict(list)
         for prompt, future in zip(prompts_to_resolve, futures_to_resolve):
-            prompt2futures[prompt].append(future)
+            if isinstance(prompt, str):
+                prompt2futures[prompt].append((prompt, future))
+            else:
+                modified_prompt = "".join([f"{d['role']} : {d['content']}" for d in prompt])
+                prompt2futures[modified_prompt].append((prompt, future))
 
         # make requests
         request_coroutines = []
-        for prompt, futures in prompt2futures.items():
+        for _, prompts_futures in prompt2futures.items():
+            prompts, futures = zip(*prompts_futures)
+            prompt = prompts[0]
             request_coroutines.append(self.immediate_request(prompt, namespaces=[future[2] for future in futures]))
         request_results = await asyncio.gather(*request_coroutines)
 
         # resolve futures
-        for results, futures in zip(request_results, prompt2futures.values()):
+        for results, prompts_futures in zip(request_results, prompt2futures.values()):
+            prompts, futures = zip(*prompts_futures)
             futures = sorted(futures, key=lambda x: x[2])
             assert len(results) == len(futures), f"Results: {len(results)}, Futures: {len(futures)}"
             for result, future in zip(results, futures):

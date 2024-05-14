@@ -122,7 +122,11 @@ class CachedOpenAIAPI:
         
         ##-- Step 1. Setup --##
         responses = []
-        messages = [{"role": "user", "content": messages}]
+
+        # In case user provides the prompt as just a string
+        if isinstance(messages, str):
+            messages = [{"role": "user", "content": messages}]
+        
         if "request_timeout" in self.config:
             request_timeout = self.config["request_timeout"]
 
