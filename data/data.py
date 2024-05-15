@@ -63,5 +63,9 @@ class TextWorldData:
         else:
             raise ValueError("Invalid set name")
         return indices, [data[i] for i in indices]
+    
+@dataclass(frozen=True)
+class WebShopData:
+    ...
 
 
