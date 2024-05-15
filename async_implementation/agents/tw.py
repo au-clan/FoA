@@ -2,7 +2,7 @@ import textworld
 import random
 from uuid import uuid4
 
-class SimpleAgent:
+class TextWorldAgent:
 
     def __init__(self, env_id, random_seed, replay_actions=[]):
 
@@ -161,7 +161,7 @@ The following verbs are available: {verbs}. You may combine them into actions li
         self.action_history.append(chosen_action)
 
     async def clone(self, random_seed):
-        cloned_agent = SimpleAgent(self.env_id, random_seed, self.action_history)
+        cloned_agent = TextWorldAgent(self.env_id, random_seed, self.action_history)
         assert cloned_agent.observations == self.observations, "cloned agent should have the same observations as the original agent"
         assert cloned_agent.infos == self.infos, "cloned agent should have the same infos as the original agent"
         assert cloned_agent.action_history == self.action_history, "cloned agent should have the same action history as the original agent"

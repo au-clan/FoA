@@ -3,10 +3,7 @@ import json
 import asyncio
 import os
 import random
-import tempfile
 import numpy as np
-
-from dataclasses import dataclass
 
 from datetime import datetime
 
@@ -16,8 +13,8 @@ import textworld.gym
 from diskcache import Cache
 
 import sys
-sys.path.append(os.getcwd()) # Project root!!
-from async_implementation.agents.tw import SimpleAgent
+sys.path.append(os.getcwd())
+from async_implementation.agents.tw import TextWorldAgent
 from async_engine.cached_api import CachedOpenAIAPI
 from async_engine.batched_api import BatchingAPI
 from data.data import TextWorldData
@@ -100,29 +97,29 @@ async def foa_tw(api, puzzle_idx, puzzle, foa_options, seed):
     env_id = textworld.gym.register_game(game_file, request_infos)
 
 
-    num_agents = 10
-
-    step_batcher = BatchingAPI(api, batch_size=num_agents, timeout=2, model=models["step"], tab="step")
-
+    num_agents = foa_options["num_agents"]
     agents = []
     for i in range(num_agents):
-        agents.append(SimpleAgent(env_id, i))
+        agents.append(TextWorldAgent(env_id, i))
     agents_record = agents[:1].copy()
+
+    # Batcher
+    step_batcher = BatchingAPI(api, batch_size=num_agents, timeout=2, model=models["step"], tab="step")
     
     # Log - Setup
     log = {}
     log[puzzle_idx] = {"environment": {"File":puzzle, "Initial observation":agents[0].strip_obs(agents[0].observations[0])}}
     log[puzzle_idx].update({f"Agent {i}": {} for i in range(num_agents)})
 
-    num_steps = 10
-    k = 1
+    num_steps = foa_options["num_steps"]
+    k = foa_options["k"]
     for step in range(num_steps):
 
         # mutation phase
-        agent_coroutines = []
+        step_coroutines = []
         for agent_id, agent in enumerate(agents):
-            agent_coroutines.append(agent.step(step_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step: {step}")))
-        await asyncio.gather(*agent_coroutines)
+            step_coroutines.append(agent.step(step_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step: {step}")))
+        await asyncio.gather(*step_coroutines)
 
         # Log - Steps
         for agent_id, agent in enumerate(agents):
@@ -157,10 +154,10 @@ async def foa_tw(api, puzzle_idx, puzzle, foa_options, seed):
 
 async def run(run_options: dict, foa_options: dict, log_file:str):
 
-    # Value cache : Not needed for textworld
+    # Value cache : Not needed for TextWorld (no evaluation)
     # value_cache = {}
 
-    # Get the dat for each puzzle
+    # Get the data for each puzzle
     puzzle_idxs, puzzles = dataset.get_data(run_options["set"], run_options["challenge"])
 
     ### Debugging
@@ -172,7 +169,7 @@ async def run(run_options: dict, foa_options: dict, log_file:str):
         puzzle_coroutines.append(foa_tw(api, puzzle_idx, puzzle, foa_options, seed=run_options["seed"]))
     results = await asyncio.gather(*puzzle_coroutines)
 
-    # Merge logs for each run
+    # Merge logs of all puzzles
     merged_log = {}
     logs = [log for (puzzle, log) in results]
     for log in logs:
@@ -192,7 +189,7 @@ async def run(run_options: dict, foa_options: dict, log_file:str):
     with open(log_folder + log_file, 'w+') as f:
         json.dump(merged_log, f, indent=4)
 
-    # Return puzzle states for each puzzle
+    # Return puzzle states/agents for each puzzle
     puzzle_states = [puzzle for (puzzle, log) in results]
     return puzzle_states
 
@@ -208,9 +205,9 @@ def parse_args():
     args = argparse.ArgumentParser()
     args.add_argument("--set", type=str, choices=["mini", "train", "validation", "test"], default="mini")
     args.add_argument("--challenge", type=str, choices=["simple", "cooking", "coin", "treasure"], default="cooking")
-    args.add_argument("--n_agents", type=int, default=1)
+    args.add_argument("--num_agents", type=int, default=1)
     args.add_argument("--backtrack", type=float, default=0.6)
-    args.add_argument("--max_steps", type=int, default=10)
+    args.add_argument("--num_steps", type=int, default=10)
     args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile", "linear_filtered"], default="linear")
     args.add_argument("--k", type=int, default=1)
     args.add_argument('--repeats', type=int, default=1)
@@ -224,24 +221,25 @@ async def main():
     # Select parameters
     set = args.set                        # Set of data to be used
     challenge = args.challenge            # Textworld challenge
-    n_agents = args.n_agents              # Number of agents
+    num_agents = args.num_agents          # Number of agents
     k = args.k                            # Resampling every <k> steps
     backtrack = args.backtrack            # Backtrack decaying coefficient
     origin_value = 0                      # The evaluation of the origin #TODO: Origin value?
-    num_steps = args.max_steps            # Max allowed steps
+    num_steps = args.num_steps            # Max allowed steps
     resampling_method = args.resampling   # Resampling method
     repeats = args.repeats                # Number of times to repeat the whole experiment
     send_email = args.send_email          # Send email notification
     
 
-    log_file_ = f"{set}-set_{n_agents}agents_{num_steps}steps_{k}k_{origin_value}origin_{backtrack}backtrack_{resampling_method}-resampling.json"
+    # Initial name of the final log file (just name, no path)
+    log_file_ = f"{set}-set_{num_agents}agents_{num_steps}steps_{k}k_{origin_value}origin_{backtrack}backtrack_{resampling_method}-resampling.json"
 
-    # Organizing the arguments
+    # Organizing FoA arguments
     foa_options = {
-        "n_agents": n_agents,
+        "num_agents": num_agents,
         "k": k,
         "origin_value": origin_value,
-        "max_steps": num_steps,
+        "num_steps": num_steps,
         "backtrack": backtrack,
         "resampling_method": resampling_method
     }
@@ -250,7 +248,7 @@ async def main():
     run_message = f"""Run options :
         task : gameof24
         set : {set}
-        num_agents : {n_agents}
+        num_agents : {num_agents}
         k : {k}
         num_steps : {num_steps}
         backtrack : {backtrack}
@@ -260,19 +258,19 @@ async def main():
     for seed in range(repeats):
         log_file = log_file_.split(".json")[0] + f"_{seed}.json"
         
+        # Organizing Run arguments
         run_options = {
             "task": "TextWorld",
             "set":set,
             "challenge":challenge,
             "seed":seed,
-
         }
 
         # Run the experiment
         results = await run(run_options, foa_options, log_file)
 
 
-        # Compute accuracy TODO
+        # Compute accuracy
         n_success = 0
         for puzzle in results:
             verifications = [agent.has_won() for agent in puzzle]
@@ -287,7 +285,7 @@ async def main():
         cost = cost["total_cost"]
         update_actual_cost(api)
 
-        # Empty api cost so repeats are not added
+        # Empty api cost so multiple repeats are not cumulative
         api.empty_tabs()
 
         # Send email notification
