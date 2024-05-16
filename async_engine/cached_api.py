@@ -44,6 +44,7 @@ class CachedOpenAIAPI:
         if config.pop("use_azure", False):
             model2keys = {
                 "gpt-4-0613": {"access_token": "AZURE_OPENAI_KEY2LOC1", "endpoint": "key-2"},
+                "gpt-35-turbo-0613": {"access_token": "AZURE_OPENAI_KEY2LOC1", "endpoint": "key-2"},
                 "gpt-35-turbo-0125" : {"access_token":"AZURE_OPENAI_KEY2LOC2", "endpoint": "key-2-loc2"},
                 "gpt-4-0125-preview": {"access_token":"AZURE_OPENAI_KEY2LOC3", "endpoint": "key-2-loc3"},
             }
