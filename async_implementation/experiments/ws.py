@@ -97,7 +97,7 @@ async def foa_ws(api, puzzle_idx, puzzle, foa_options, seed):
     num_agents = foa_options["num_agents"]
     agents = []
     for i in range(num_agents):
-        agents.append(WebShopAgent(env_id, seed, server, replay_actions=[]))
+        agents.append(WebShopAgent(env_id, random_seed=i, server=server, replay_actions=[]))
     agents_record = agents[:1].copy()
 
     # Batcher
