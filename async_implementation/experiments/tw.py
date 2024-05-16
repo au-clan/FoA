@@ -100,7 +100,7 @@ async def foa_tw(api, puzzle_idx, puzzle, foa_options, seed):
     num_agents = foa_options["num_agents"]
     agents = []
     for i in range(num_agents):
-        agents.append(TextWorldAgent(env_id, i))
+        agents.append(TextWorldAgent(env_id, random_seed=i))
     agents_record = agents[:1].copy()
 
     # Batcher
