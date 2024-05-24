@@ -50,22 +50,45 @@ class TextWorldData:
     data = sorted([f for f in get_file_names("data/datasets/tw_games") if f.endswith(".ulx")])
 
 
-    def get_data(self, set, challenge="cooking"):
+    def get_data(self, set, challenge="cooking", level=None):
         
         wrong_challenge_message = "Avaialble challenges are: simple, cooking, collector, hunter"
         assert challenge in ["simple", "cooking", "coin", "treasure"], wrong_challenge_message
         data = [d for d in self.data if d.startswith(f"tw-{challenge}_")]
+
+        if level is not None:
+            data = [d for d in data if f"level_{level}" in d]
+
+        if challenge=="simple":
+            data = [d for d in data if f"rewards_balanced" in d]
         
         if set == "mini":
-            indices = list(range(2))
+            indices = list(range(5))
         elif set == "train":
-            indices = list(range(2, len(data)))
+            indices = list(range(100))
         else:
             raise ValueError("Invalid set name")
         return indices, [data[i] for i in indices]
     
 @dataclass(frozen=True)
 class WebShopData:
-    ...
+    """
+    Data is actually handled by the server so we only need to select the indices
+    """
+    
+    def get_data(self, set):
+
+        if set == "mini":
+            indices = list(range(5))
+        elif set == "train":
+            indices = list(range(20, 70))
+        elif set == "validation":
+            indices = list(range(15, 65))
+        elif set == "test":
+            indices = list(range(65, 115))
+        else:
+            raise ValueError("Invalid set name")
+        
+        return indices, indices
 
 
