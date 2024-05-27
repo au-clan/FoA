@@ -45,8 +45,9 @@ class CachedOpenAIAPI:
             model2keys = {
                 "gpt-4-0613": {"access_token": "AZURE_OPENAI_KEY2LOC1", "endpoint": "key-2"},
                 "gpt-35-turbo-0613": {"access_token": "AZURE_OPENAI_KEY2LOC1", "endpoint": "key-2"},
-                "gpt-35-turbo-0125" : {"access_token":"AZURE_OPENAI_KEY2LOC2", "endpoint": "key-2-loc2"},
+                "gpt-35-turbo-0125" : {"access_token":"AZURE_OPENAI_KEY1LOC4", "endpoint": "key-1-18k-loc4"},
                 "gpt-4-0125-preview": {"access_token":"AZURE_OPENAI_KEY2LOC3", "endpoint": "key-2-loc3"},
+                "gpt-4-turbo-2024-04-09": {"access_token": "AZURE_OPENAI_KEY2LOC1", "endpoint": "key-2"},
             }
 
             for model in models:
@@ -332,6 +333,7 @@ class CachedOpenAIAPI:
 
         # Same model just different name
         catalog["gpt-3.5-turbo"] = catalog["gpt-35-turbo-0125"] = catalog["gpt-3.5-turbo-0125"]
+        catalog["gpt-4-turbo-2024-04-09"] = catalog["gpt-4-0125-preview"]
 
         input_cost = 0
         output_cost = 0
