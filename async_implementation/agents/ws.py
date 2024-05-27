@@ -1,93 +1,150 @@
-import gym
-import random
 from uuid import uuid4
 
-from bs4 import BeautifulSoup
 from bs4.element import Comment
 
-import async_implementation.prompts.ws_react as prompts
+import async_implementation.prompts.ws as prompts
+from utils import webshopEnv
 
 class WebShopAgent:
-    def __init__(self, env_id, random_seed, server, replay_actions=[], prompt="react"):
+    def __init__(self, env_id, random_seed, id=None, replay_actions=[], values=[], prompting="react"):
         self.unique_id = uuid4()
         self.random_seed = random_seed
         self.observations = []
         self.rewards = []
-        self.infos = []
-        self.action_history = []
+        self.values = values
+        self.prompt=None
+        self.id = id
 
         self.env_id = env_id
-        self.env = gym.make('WebAgentTextEnv-v0', observation_mode='html', server=server)
-        obs, infos = self.env.reset(session=env_id)
-        self.action_history.append("reset")
-        self.rewards.append(0)
-        self.observations.append(self.parse_obs(obs))
-        self.infos.append(infos)
+        self.env = webshopEnv()
 
-        self.terminal = False
-
-        if prompt == "act":
+        if prompting == "act":
             self.init_prompt = prompts.actonly_prompt
-        elif prompt == "react":
+        elif prompting == "react":
             self.init_prompt = prompts.react_prompt
         else:
-            raise ValueError(f"Unknown prompt type: {prompt} (should be 'act' or 'react')")
-        self.prompt = f"{self.parse_obs(obs)}\n\nAction:"
+            raise ValueError(f"Unknown prompt type: {prompting} (should be 'act' or 'react')")
+        self.prompting = prompting
 
         # If the first action was to reset skip.
-        for action in replay_actions:
-            obs, reward, terminal, infos = self.env.step(action)
-            self.terminal = terminal
-            self.observations.append(obs)
-            self.rewards.append(reward)
-            self.infos.append(infos)
-            self.action_history.append(action)
+        if replay_actions:
+            self.action_history = replay_actions
+        else:
+            self.action_history = ["reset"]
+        self.step()
+    
+    def reset(self):
+        obs, reward, done = self.env.step(session=self.env_id, action="reset")
 
-    async def step(self, api, namespace):
-        assert len(self.observations) == len(self.infos)
+        assert obs is not None, "Observation is None after reset"
+        assert reward == 0, "Reward is not 0 after reset"
+        assert not done, "Done is True after reset"
+
+        self.observations = [obs]
+        self.rewards = [0]
+        self.terminal = False
+
+        return obs, reward, done
+
+    async def get_next_action(self, api, namespace):
         assert len(self.observations) == len(self.action_history)
         assert len(self.observations) > 0, "resetting the environment must generate one observation at the beginning"
 
-        
-        
-        
-
-        # Get next action from the system
-        prompt = self.init_prompt + self.prompt[-(6400-len(self.init_prompt)):]
+        # Get the prompt
+        prompt = self.get_complete_prompt(type="step")
         response = await api.buffered_request(prompt, key=self.hash(), namespace=namespace)
         action = response.lstrip(' ')
+        self.action_history.append(action)
+    
+    def step(self):
+        """
+        This function assumes that the first action is a reset action. This is needed in our implementation.
+        """
+        initial_obs = len(self.observations)
+        initial_rewards = len(self.rewards)
+        self.observations = []
+        self.rewards = []
+        prompt=""
+        for i, action in enumerate(self.action_history):
+            
+            obs, reward, terminal = self.take_action(action)
+            self.update(obs, reward, terminal)
+            
+            if i == 0:
+                prompt += f"{obs}\n\nAction:"
+            else:
+                prompt += f' {action}\nObservation: {obs}\n\nAction:'
 
-        # Apply the action to the environment
+        # Update prompt
+        self.prompt = prompt
+
+
+    def update(self, obs, reward, terminal):
+        self.observations.append(obs)
+        self.rewards.append(reward)
+        self.terminal=terminal
+
+
+    def take_action(self, action):
+            
+        # Try to impelement given action
         try:
-            obs, reward, terminal, infos = self.env.step(action)
-            self.terminal = terminal
-            self.rewards.append(reward)
-            self.infos.append(infos)
+            obs, reward, terminal = self.env.step(session=f"fixed_{self.env_id}", action=action)
         except AssertionError:
             obs = "Invalid action!"
-            self.rewards.append(self.rewards[-1])
-            self.infos.append(self.infos[-1])
+            reward = 0
+            terminal = False
+        
+        # Debugging
+        except KeyError:
+            print(f"KeyError in action: {action}")
+            print(f"Prompt: {self.prompt}")
+            print(f"Observations: {self.observations}")
+            print(f"Action history: {self.action_history}")
+            exit()
+        assert obs is not None, f"Observation is None after action {action}"
 
+        # If the action is a think action, adjust the observation
         if action.startswith("think"):
-            obs = "OK."
+            obs = "OK."     
         
-        
-        self.action_history.append(action)
-
-        if obs not in ["OK.", "Invalid action!"]:
-            obs = self.parse_obs(obs)
-        self.observations.append(obs)
-        self.prompt += f"{action}\nObservation: {obs}\n\nAction:"
-
-
-
-
-
+        return obs, reward, terminal
     
-    async def clone(self, random_seed):
-        cloned_agent = WebShopAgent(self.env_id, random_seed, self.server, replay_actions=self.action_history[1:])
+    
+    async def evaluate(self, api, value_cache, namespace, verbose=False):
+        prompt = self.get_complete_prompt(type="eval")
+        
+        if prompt in value_cache:
+            value = value_cache[prompt]
+        else:
+            response = await api.buffered_request(prompt, key=self.hash(), namespace=namespace)
+            if verbose:
+                print(response)
+            value = value_outputs_unwrap(response)
+            value_cache[prompt] = value
+        
+        self.values.append(value)
+        
+    def clone(self, random_seed=None):
+        # If a random seed is not provided, clone an exact replica of the agent
+        if random_seed is None:
+            random_seed = self.random_seed
+        
+        # Clone the agent
+        cloned_agent = WebShopAgent(self.env_id, random_seed, id=self.id, replay_actions=self.action_history.copy(), values=self.values.copy(), prompting=self.prompting)
+
+        # Debugging
+        if cloned_agent.observations != self.observations or cloned_agent.action_history != self.action_history:
+            print(f"Env id: {self.env_id}")
+            print(f"Original agent observations ({len(self.observations)}):")
+            print(self.observations)
+            print(f"Cloned agent observations ({len(cloned_agent.observations)}):")
+            print(cloned_agent.observations)
+            print(f"Original agent action history ({len(self.action_history)}):")
+            print(self.action_history)
+            print(f"Cloned agent action history ({len(cloned_agent.action_history)}):")
+            print(cloned_agent.action_history)
         assert cloned_agent.observations == self.observations, "cloned agent should have the same observations as the original agent"
-        assert cloned_agent.infos == self.infos, "cloned agent should have the same infos as the original agent"
         assert cloned_agent.action_history == self.action_history, "cloned agent should have the same action history as the original agent"
         assert not cloned_agent.terminal, "it doesn't make sense to clone a terminal agent, this points to a logic error in the outer algorithm"
         return cloned_agent
@@ -95,68 +152,19 @@ class WebShopAgent:
     def hash(self):
         return hash((self.env_id, " ".join(self.observations), " -> ".join(self.action_history), self.random_seed))
 
-    def parse_obs(self, obs):
-        print(f"ACTION HISTORY : {self.action_history}")
-        if self.action_history[-1] in ["reset", "click[Back to Search]"]:
-            page_type = "init"
+    
+    def get_complete_prompt(self, type=None):
+        step_prompt = self.init_prompt + self.prompt[-(6400-len(self.init_prompt)):]
+        eval_prompt = prompts.score_prompt.format(s="", input=step_prompt)
+
+        if type is None:
+            return {"step": step_prompt, "evaluate": eval_prompt}
+        elif type == "step":
+            return step_prompt
+        elif type == "eval":
+            return eval_prompt
         else:
-            page_type = "not_init"
-        
-        print(f"PAGE: {page_type}")
-        html = obs
-        html_obj = BeautifulSoup(html, 'html.parser')
-        texts = html_obj.findAll(text=True)
-        visible_texts = list(filter(tag_visible, texts))
-        if False:
-            # For `simple` mode, return just [SEP] separators
-            return ' [SEP] '.join(t.strip() for t in visible_texts if t != '\n')
-        else:
-            # Otherwise, return an observation with tags mapped to specific, unique separators
-            observation = ''
-            option_type = ''
-            options = {}
-            asins = []
-            cnt = 0
-            prod_cnt = 0
-            just_prod = 0
-            for t in visible_texts:
-                if t == '\n': continue
-                if t.replace('\n', '').replace('\\n', '').replace(' ', '') == '': continue
-                if t.parent.name == 'button':  # button
-                    processed_t = f'\n[{t}] '
-                elif t.parent.name == 'label':  # options
-                    if False: #f"'{t}'" in url: (No such cases in ReAcz)
-                        processed_t = f'[[{t}]]'
-                        # observation = f'You have clicked {t}.\n' + observation
-                    else:
-                        processed_t = f'[{t}]'
-                    options[str(t)] = option_type
-                    # options[option_type] = options.get(option_type, []) + [str(t)]
-                elif t.parent.get('class') == ["product-link"]: # product asins
-                    processed_t = f'\n[{t}] '
-                    if prod_cnt >= 3:
-                        processed_t = ''
-                    prod_cnt += 1
-                    asins.append(str(t))
-                    just_prod = 0
-                else: # regular, unclickable text
-                    processed_t =  '\n' + str(t) + ' '
-                    if cnt < 2 and page_type != 'init': processed_t = ''
-                    if just_prod <= 2 and prod_cnt >= 4: processed_t = ''
-                    option_type = str(t)
-                    cnt += 1
-                just_prod += 1
-                observation += processed_t
-            info = {}
-            if options:
-                info['option_types'] = options
-            if asins:
-                info['asins'] = asins
-            if 'Your score (min 0.0, max 1.0)' in visible_texts:
-                idx = visible_texts.index('Your score (min 0.0, max 1.0)')
-                info['reward'] = float(visible_texts[idx + 1])
-                observation = 'Your score (min 0.0, max 1.0): ' + (visible_texts[idx + 1])
-            return clean_str(observation)
+            raise ValueError(f"Unknown prompt type: {type}")
 
 def clean_str(p):
   return p.encode().decode("unicode-escape").encode("latin1").decode("utf-8")
@@ -167,3 +175,28 @@ def tag_visible(element):
     return (
         element.parent.name not in ignore and not isinstance(element, Comment)
     )
+
+# LATS: https://arxiv.org/abs/2310.04406
+def value_outputs_unwrap(evaluate_prompt: str):
+        if '10' in evaluate_prompt:
+            return 1.0
+        elif '9' in evaluate_prompt:
+            return 0.9
+        elif '8' in evaluate_prompt:
+            return 0.8
+        elif '7' in evaluate_prompt:
+            return 0.7
+        elif '6' in evaluate_prompt:
+            return 0.6
+        elif '5' in evaluate_prompt:
+            return 0.5
+        elif '4' in evaluate_prompt:
+            return 0.4
+        elif '3' in evaluate_prompt:
+            return 0.3
+        elif '2' in evaluate_prompt:
+            return 0.2
+        elif '1' in evaluate_prompt:
+            return 0.1
+        else:
+            return 0.0

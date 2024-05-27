@@ -121,6 +121,14 @@ def update_actual_cost(api):
         file.write(str(new_cost))
 
 
+WEBSHOP_URL = "http://128.179.136.29:3000"
+ACTION_TO_TEMPLATE = {
+    'Description': 'description_page.html',
+    'Features': 'features_page.html',
+    'Reviews': 'review_page.html',
+    'Attributes': 'attributes_page.html',
+}
+
 def clean_str(p):
   return p.encode().decode("unicode-escape").encode("latin1").decode("utf-8")
 
@@ -131,29 +139,30 @@ def tag_visible(element):
         element.parent.name not in ignore and not isinstance(element, Comment)
     )
 
-def webshop_text(webshop_url, session, page_type, query_string='', page_num=1, asin='', options={}, subpage='', **kwargs):
+
+def webshop_text(session, page_type, query_string='', page_num=1, asin='', options={}, subpage='', **kwargs):
     if page_type == 'init':
       url = (
-          f'{webshop_url}/{session}'
+          f'{WEBSHOP_URL}/{session}'
       )
     if page_type == 'search':
       url = (
-          f'{webshop_url}/search_results/{session}/'
+          f'{WEBSHOP_URL}/search_results/{session}/'
           f'{query_string}/{page_num}'
       )
     elif page_type == 'item':
       url = (
-          f'{webshop_url}/item_page/{session}/'
+          f'{WEBSHOP_URL}/item_page/{session}/'
           f'{asin}/{query_string}/{page_num}/{options}'
       )
     elif page_type == 'item_sub':
       url = (
-          f'{webshop_url}/item_sub_page/{session}/'
+          f'{WEBSHOP_URL}/item_sub_page/{session}/'
           f'{asin}/{query_string}/{page_num}/{subpage}/{options}'
       )
     elif page_type == 'end':
       url = (
-          f'{webshop_url}/done/{session}/'
+          f'{WEBSHOP_URL}/done/{session}/'
           f'{asin}/{options}'
       )
     # print(url)
@@ -215,7 +224,72 @@ def webshop_text(webshop_url, session, page_type, query_string='', page_num=1, a
           info['reward'] = float(visible_texts[idx + 1])
           observation = 'Your score (min 0.0, max 1.0): ' + (visible_texts[idx + 1])
         return clean_str(observation), info
-    
+
+class webshopEnv:
+  def __init__(self):
+    self.sessions = {}
+  
+  def step(self, session, action):
+    done = False
+    observation_ = None
+    if action == 'reset':
+      self.sessions[session] = {'session': session, 'page_type': 'init'}
+    elif action.startswith('think['):
+      observation = 'OK.'
+    elif action.startswith('search['):
+      assert self.sessions[session]['page_type'] == 'init'
+      query = action[7:-1]
+      self.sessions[session] = {'session': session, 'page_type': 'search',
+                                'query_string': query, 'page_num': 1}
+    elif action.startswith('click['):
+      button = action[6:-1]
+      if button == 'Buy Now':
+        assert self.sessions[session]['page_type'] == 'item'
+        self.sessions[session]['page_type'] = 'end'
+        done = True
+      elif button == 'Back to Search':
+        assert self.sessions[session]['page_type'] in ['search', 'item_sub', 'item']
+        self.sessions[session] = {'session': session, 'page_type': 'init'}
+      elif button == 'Next >':
+        assert False # ad hoc page limitation
+        assert self.sessions[session]['page_type'] == 'search'
+        self.sessions[session]['page_num'] += 1
+      elif button == '< Prev':
+        assert self.sessions[session]['page_type'] in ['search', 'item_sub', 'item']
+        if self.sessions[session]['page_type'] == 'search':
+          assert False
+          self.sessions[session]['page_num'] -= 1
+        elif self.sessions[session]['page_type'] == 'item_sub':
+          self.sessions[session]['page_type'] = 'item'
+        elif self.sessions[session]['page_type'] == 'item':
+          self.sessions[session]['page_type'] = 'search'
+          self.sessions[session]['options'] = {}
+      elif button in ACTION_TO_TEMPLATE:
+        assert self.sessions[session]['page_type'] == 'item'
+        self.sessions[session]['page_type'] = 'item_sub'
+        self.sessions[session]['subpage'] = button
+      else:
+        if self.sessions[session]['page_type'] == 'search':
+          assert button in self.sessions[session].get('asins', [])  # must be asins
+          self.sessions[session]['page_type'] = 'item'
+          self.sessions[session]['asin'] = button
+        elif self.sessions[session]['page_type'] == 'item':
+          assert 'option_types' in self.sessions[session]
+          assert button in self.sessions[session]['option_types'], (button, self.sessions[session]['option_types'])  # must be options
+          option_type = self.sessions[session]['option_types'][button]
+          if not 'options' in self.sessions[session]:
+            self.sessions[session]['options'] = {}
+          self.sessions[session]['options'][option_type] = button
+          observation_ = f'You have clicked {button}.'
+    else:
+      assert False
+    observation, info = webshop_text(**self.sessions[session])
+    if observation_:
+      observation = observation_
+    self.sessions[session].update(info)
+    reward = info.get('reward', 0.0)
+    return observation, reward, done
+  
 def get_file_names(folder_path):
     """
     Gets all file names in a folder.
