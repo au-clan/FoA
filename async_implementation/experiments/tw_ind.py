@@ -27,7 +27,7 @@ os.system('cls' if os.name == 'nt' else 'clear')
 time = datetime.now()
 day = time.strftime("%d-%m")
 hour = time.strftime("%H")
-log_folder = f"logs_recent/textworld/{day}/{hour}/"
+log_folder = f"logs_recent/textworld{day}/{hour}/treasure/"
 create_folder(log_folder)
 
 assert os.path.exists("./caches/"), "Please run the script from the root directory of the project."
@@ -47,10 +47,10 @@ step_api_config = eval_api_config = {
 
 models = {
     "step": "gpt-3.5-turbo-0125",
-    "eval": "gpt-35-turbo-0125",
+    "eval": "gpt-3.5-turbo-0125",
 }
 
-api = CachedOpenAIAPI(cache, step_api_config, models=models.values(), resources=4, verbose=True)
+api = CachedOpenAIAPI(cache, step_api_config, models=models.values(), resources=2, verbose=True)
 
 
 # Setting up the data
@@ -103,7 +103,8 @@ async def foa_tw(api, puzzle_idx, puzzle, foa_options, seed):
     agents = []
     for i in range(num_agents):
         agents.append(TextWorldAgent(env_id, random_seed=i))
-    agents_record = [agents[0]]
+    
+    dead_agents = [0] * num_agents
 
     # Batcher
     step_batcher = BatchingAPI(api, batch_size=num_agents, timeout=2, model=models["step"], tab="step")
@@ -114,14 +115,15 @@ async def foa_tw(api, puzzle_idx, puzzle, foa_options, seed):
     log[puzzle_idx].update({f"Agent {i}": {} for i in range(num_agents)})
 
     num_steps = foa_options["num_steps"]
-    k = foa_options["k"]
     for step in range(num_steps):
 
         print(f"Step {step}")
 
         # mutation phase
         step_coroutines = []
-        for agent_id, agent in enumerate(agents):
+        for (agent_id, agent), is_dead in zip(enumerate(agents), dead_agents):
+            if is_dead:
+                continue
             step_coroutines.append(agent.step(step_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step: {step}")))
         await asyncio.gather(*step_coroutines)
 
@@ -136,24 +138,8 @@ async def foa_tw(api, puzzle_idx, puzzle, foa_options, seed):
             # At least an agent, has finished successfully
             break
         elif len(lost_agents) > 0:
-            # At least an agent, has finished unsuccessfully
-            # TODO: Resample from current agents only or record too ? -> So far, only current.
-            if len(lost_agents)!=len(agents):
-                agents = [agent for agent in agents if agent not in lost_agents]
-                resampled_agents = await resample(agents, len(lost_agents))
-                agents.extend(resampled_agents.copy())
-            else:
-                agents = [agent for agent in agents if agent not in lost_agents]
-                resampled_agents = await resample(agents_record, len(lost_agents))
-                agents.extend(resampled_agents.copy())
+            dead_agents = [(agent.terminal and not agent.has_won()) for agent in agents]
         
-        #selection phase
-        if step < num_steps - 1 and step % k == 0 :
-            agents = await resample(agents, num_agents)
-
-            # Log - Resampling
-            for agent_id, agent in enumerate(agents):
-                log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Resampling":{"Latest Observation": agent.observations[-1], "Action history": agent.action_history.copy(), "Rewards": agent.rewards.copy(), "Terminal": agent.terminal, "Won": agent.has_won()}})
 
     
     return agents, log
@@ -226,7 +212,6 @@ def parse_args():
     args.add_argument("--num_agents", type=int, default=5)
     args.add_argument("--level", type=int, default=None)
     args.add_argument("--num_steps", type=int, default=10)
-    args.add_argument("--k", type=int, default=1)
     args.add_argument('--repeats', type=int, default=1)
     args.add_argument('--send_email', action=argparse.BooleanOptionalAction)
     args = args.parse_args()
@@ -241,27 +226,25 @@ async def main():
     level = args.level                    # Level of the challenge
     num_agents = args.num_agents          # Number of agents
     num_steps = args.num_steps            # Max allowed steps
-    k = args.k                            # Resample every <k> steps
     repeats = args.repeats                # Number of times to repeat the whole experiment
     send_email = args.send_email          # Send email notification
     
 
     # Initial name of the final log file (just name, no path)
     if level is None:
-        log_file_ = f"{challenge}/{set}-set_{num_agents}agents_{num_steps}steps_{k}k.json"
+        log_file_ = f"{set}-set_{num_agents}agents_{num_steps}steps_{challenge}_independent.json"
     else:
-        log_file_ = f"{challenge}/{set}-set_{num_agents}agents_{num_steps}steps_{k}k_{level}level.json"
+        log_file_ = f"{set}-set_{num_agents}agents_{num_steps}steps_{level}level_{challenge}_independent.json"
 
     # Organizing FoA arguments
     foa_options = {
         "num_agents": num_agents,
         "num_steps": num_steps,
-        "k":k
     }
 
     # Setting a run message
     run_message = f"""Run options :
-        task : TextWorld 
+        task : TextWorld (independent agents)
         set : {set}
         num_agents : {num_agents}
         num_steps : {num_steps}
@@ -299,7 +282,7 @@ async def main():
         # Send email notification
         if send_email:
             subject = f"{seed+1}/{repeats} :" + log_file
-            message = '\n'.join(f'{key.capitalize()}: {value}' for key, value in metrics.items()) + f"\nCost : {cost:.2f}"
+            message = '\n'.join(f'{key.upper()}: {value}' for key, value in metrics.items()) + f"\nCost : {cost:.2f}"
             try:
                 email_notification(subject=subject, message=message)
                 print("Email sent successfully.")

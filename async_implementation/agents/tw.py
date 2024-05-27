@@ -32,6 +32,21 @@ class TextWorldAgent:
             self.rewards.append(reward)
             self.infos.append(infos)
             self.action_history.append(action)
+            if terminal:
+                print(f"Agent terminated while cloning!")
+
+    def reset(self):
+        self.observations = []
+        self.rewards = []
+        self.infos = []
+        self.action_history = []
+
+        obs, infos = self.env.reset()
+        obs = self.strip_obs(obs)
+        self.observations.append(obs)
+        self.infos.append(infos)
+
+        self.terminal = False
 
     def strip_obs(self, obs):
         return obs.replace(r"""
@@ -160,11 +175,18 @@ The following verbs are available: {verbs}. You may combine them into actions li
         self.infos.append(infos)
         self.action_history.append(chosen_action)
 
-    async def clone(self, random_seed):
+    async def clone(self, random_seed=None):
+        if random_seed is None:
+            random_seed = self.random_seed
         cloned_agent = TextWorldAgent(self.env_id, random_seed, self.action_history)
         assert cloned_agent.observations == self.observations, "cloned agent should have the same observations as the original agent"
         assert cloned_agent.infos == self.infos, "cloned agent should have the same infos as the original agent"
         assert cloned_agent.action_history == self.action_history, "cloned agent should have the same action history as the original agent"
+        if cloned_agent.terminal:
+            print(f"Original Agent terminated : {self.terminal}")
+            print(f"Cloned Agent terminated : {cloned_agent.terminal}")
+            print(f"Original Agent actions : {self.action_history}")
+            print(f"Cloned Agent actions : {cloned_agent.action_history}")
         assert not cloned_agent.terminal, "it doesn't make sense to clone a terminal agent, this points to a logic error in the outer algorithm"
         return cloned_agent
     
