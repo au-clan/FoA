@@ -23,38 +23,46 @@ os.system('cls' if os.name == 'nt' else 'clear')
 time = datetime.now()
 day = time.strftime("%d-%m")
 hour = time.strftime("%H")
-log_folder = f"logs_recent/webshop/{day}/{hour}/"
+log_folder = f"logs_recent/webshop/gridsearch_react/"
+# log_folder = f"logs_recent/webshop/{day}/{hour}/"
 create_folder(log_folder)
 
 assert os.path.exists("./caches/"), "Please run the script from the root directory of the project."
-cache = Cache("./caches/ws_spare", size_limit=int(2e10))
+cache = Cache("./caches/ws2", size_limit=int(2e10))
 
 # According to ReAct
-step_api_config = eval_api_config = {
+step_api_config = {
     "max_tokens": 100,
     "temperature": 1,
     "top_p": 1,
     "frequency_penalty": 0.0,
     "presence_penalty": 0.0,
-    "request_timeout": 60,
+    "request_timeout": 90,
     "stop": ["\n"],
-    "use_azure": False,
+    "use_azure": True,
+}
+
+eval_api_config = {
+    "max_tokens": 100,
+    "temperature": 1,
+    "request_timeout": 90,
+    "stop": None,
+    "use_azure": True,
 }
 
 # available models : gpt-35-turbo-0125, gpt-4-0125-preview, gpt-4-0613
 
 models = {
-    "step": "gpt-3.5-turbo-0125",
-    "eval": "gpt-3.5-turbo-0125",
+    "step": "gpt-35-turbo-0125",
+    "eval": "gpt-35-turbo-0125",
 }
 
-api = CachedOpenAIAPI(cache, step_api_config, models=models.values(), resources=2, verbose=True)
-
+api = CachedOpenAIAPI(cache, step_api_config, models=models.values(), resources=1, verbose=True)
 
 # Setting up the data
 dataset = WebShopData()
 
-async def resample(agents, n, gamma=0.5):
+def resample(agents, n, agent_ids, current_step, gamma=0.5):
     """
     Linear resampling of agents based on their rewards
     Input:
@@ -63,13 +71,14 @@ async def resample(agents, n, gamma=0.5):
     Output:
         - resampled_agents: list of resampled agents
     """
+
+    assert n == len(agent_ids), f"Number of agents ({n}) and number of agent ids ({len(agent_ids)}) do not match."
     # Computing discount factors
-    max_steps = max([len(agent.rewards) for agent in agents])
-    gammas = np.array([gamma ** (max_steps - len(agent.rewards)) for agent in agents])
+    gammas = np.array([gamma ** (current_step + 2 - len(agent.action_history)) for agent in agents])
 
     # Compute probabilities
     eps = 1e-6
-    values = np.array([agent.values[-1] + eps for agent in agents]) #* gammas
+    values = np.array([agent.values[-1] + eps for agent in agents]) * gammas
     probs = values / np.sum(values)
     
 
@@ -86,7 +95,11 @@ async def resample(agents, n, gamma=0.5):
     # Get resampled agents
     random.seed(random_seed)
     new_random_seeds = [random.randint(1, 1000) for _ in range(len(agents))]
-    resampled_agents = [agents[i].clone(new_random_seeds[i]) for i in resampled_indices]
+    resampled_agents = []
+    for indice, id in zip(resampled_indices, agent_ids):
+        resampled_agents.append(agents[indice].clone(random_seed=new_random_seeds[indice], id=id))
+
+    assert len(resampled_agents) == n, f"Returned {len(resampled_agents)}/{n} requested agents "
     return resampled_agents
 
 async def foa_ws(api, puzzle_idx, puzzle, foa_options, value_cache,seed):
@@ -96,12 +109,13 @@ async def foa_ws(api, puzzle_idx, puzzle, foa_options, value_cache,seed):
     num_agents = foa_options["num_agents"]
     agents = []
     for i in range(num_agents):
-        agents.append(WebShopAgent(env_id, random_seed=i, id=i, replay_actions=[], prompting="react"))
+        agents.append(WebShopAgent(env_id, random_seed=i, id=i, replay_actions=[], prompting=foa_options["prompting"]))
     agents_record = []
+    terminal_agents = []
 
     # Batcher
-    step_batcher = BatchingAPI(api, batch_size=num_agents, timeout=2, model=models["step"], tab="step")
-    eval_batcher = BatchingAPI(api, batch_size=num_agents, timeout=2, model=models["eval"], tab="eval")
+    step_batcher = BatchingAPI(api, batch_size=num_agents, timeout=10, model=models["step"], tab="step")
+    eval_batcher = BatchingAPI(api, batch_size=num_agents, timeout=10, model=models["eval"], tab="eval")
 
     # Log - Setup
     log = {}
@@ -118,7 +132,7 @@ async def foa_ws(api, puzzle_idx, puzzle, foa_options, value_cache,seed):
         step_coroutines = []
         for agent in agents:
             if not agent.terminal:
-                step_coroutines.append(agent.get_next_action(step_batcher, namespace=(puzzle_idx, f"Agent: {agent}", f"Step: {step}")))
+                step_coroutines.append(agent.get_next_action(step_batcher, namespace=(puzzle_idx, f"Agent: {agent.id}", f"Step: {step}")))
         await asyncio.gather(*step_coroutines)
 
         for agent in agents:
@@ -126,43 +140,49 @@ async def foa_ws(api, puzzle_idx, puzzle, foa_options, value_cache,seed):
 
         # Log - Steps
         for agent in agents:
-            if agent.terminal and len(agent.action_history) < step + 2:
-                continue
-            else:
-                log[puzzle_idx][f"Agent {agent.id}"][f"Step {step}"] = {"Latest Observation": agent.observations[-1], "Action history": agent.action_history.copy(), "Latest reward": agent.rewards[-1], "Terminal": agent.terminal}
+            log[puzzle_idx][f"Agent {agent.id}"][f"Step {step}"] = {"Latest Observation": agent.observations[-1], "Action history": agent.action_history.copy(), "Latest reward": agent.rewards[-1], "Terminal": agent.terminal}
         
+        
+        
+        terminal_agents.extend([agent.clone(allow_terminal=True) for agent in agents if agent.terminal])
         agents = [agent.clone() for agent in agents if not agent.terminal]
-        terminal_agents = [agent for agent in agents if agent.terminal]
+        assert len(step_batcher.futures) == 0, f"Step batcher futures not empty: {len(step_batcher.futures)}"
+        assert len(eval_batcher.futures) == 0, f"Eval batcher futures not empty: {len(eval_batcher.futures)}"
+        step_batcher.batch_size=len(agents)
+        eval_batcher.batch_size=len(agents)
+
+        if len(agents) == 0:
+            assert len(terminal_agents) == num_agents, f"Irregular break (env_id {env_id}, step {step}): {len(terminal_agents)}/{num_agents} terminal."
+            break
         
         # Selection phase
-        if step < num_steps -1 and step % k == 0:
+        if 0 < step < num_steps -1 and k>0 and step % k == 0:
             # Evaluation
             value_coroutines = []
             for agent in agents:
-                if not agent.terminal:
-                    value_coroutines.append(agent.evaluate(eval_batcher, value_cache, namespace=(puzzle_idx, f"Agent: {agent.id}", f"Step: {step}")))
+                value_coroutines.append(agent.evaluate(eval_batcher, value_cache, namespace=(puzzle_idx, f"Agent: {agent.id}", f"Step: {step}")))
             await asyncio.gather(*value_coroutines)
 
             agents_record=[agent.clone() for agent in agents if (not agent.terminal and agent.values[-1] > 0)]
             
             # Resampling
             if len(agents_record) > 0:
-                agents = await resample(agents_record, len(agents))
+                agent_ids = [agent.id for agent in agents]
+                agents = resample(agents_record, len(agents), gamma=foa_options["backtrack"], agent_ids=agent_ids, current_step=step)
 
         # Log - Resampling
             for agent in agents:
-                if agent.terminal:
-                    continue
-                else:
-                    log[puzzle_idx][f"Agent {agent.id}"][f"Step {step}"].update({"Resampling":{"Latest Observation": agent.observations[-1], "Action history": agent.action_history.copy(), "Latest reward": agent.rewards[-1], "Latest value": agent.values[-1],"Terminal": agent.terminal}})
+                log[puzzle_idx][f"Agent {agent.id}"][f"Step {step}"].update({"Resampling":{"Latest Observation": agent.observations[-1], "Action history": agent.action_history.copy(), "Latest reward": agent.rewards[-1], "Latest value": agent.values[-1],"Terminal": agent.terminal}})
     
     all_agents = agents + terminal_agents
+    
+    assert len(all_agents) == num_agents, f"{len(all_agents)}/{num_agents} returned"
     return all_agents, log
 
 async def run(run_options: dict, foa_options: dict, log_file:str):
 
-    # Value cache
     value_cache = {}
+
 
     # Get the data for each puzzle
     puzzle_idxs, puzzles = dataset.get_data(run_options["set"])
@@ -176,6 +196,15 @@ async def run(run_options: dict, foa_options: dict, log_file:str):
         puzzle_coroutines.append(foa_ws(api, puzzle_idx, puzzle, foa_options, value_cache=value_cache, seed=run_options["seed"]))
     results = await asyncio.gather(*puzzle_coroutines)
     puzzle_agents, logs = zip(*results)
+
+    ### Sync version just for debugging
+    # puzzle_agents=[]
+    # logs=[]
+    # for puzzle_idx, puzzle in zip(puzzle_idxs, puzzles):
+    #     pa, l = await foa_ws(api, puzzle_idx, puzzle, foa_options, value_cache=value_cache, seed=run_options["seed"])
+    #     puzzle_agents.append(pa)
+    #     logs.append(l)
+
 
     # Merge logs of all puzzles
     merged_log = {}
@@ -224,14 +253,15 @@ async def run(run_options: dict, foa_options: dict, log_file:str):
 
 def parse_args():
     args = argparse.ArgumentParser()
-    args.add_argument("--set", type=str, choices=["mini", "train", "validation", "test"], default="mini")
+    args.add_argument("--set", type=str, choices=["mini", "train", "validation", "test", "test1", "test2", "test3"], default="mini")
     args.add_argument("--num_agents", type=int, default=10)
-    args.add_argument("--backtrack", type=float, default=0.3)
+    args.add_argument("--backtrack", type=float, default=0.5)
     args.add_argument("--num_steps", type=int, default=5)
     args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile", "linear_filtered"], default="linear")
     args.add_argument("--k", type=int, default=1)
     args.add_argument('--repeats', type=int, default=1)
     args.add_argument('--send_email', action=argparse.BooleanOptionalAction)
+    args.add_argument('--prompting', type=str, choices=["act", "react"], default="react")
     args = args.parse_args()
     return args
 
@@ -248,9 +278,10 @@ async def main():
     resampling_method = args.resampling   # Resampling method
     repeats = args.repeats                # Number of times to repeat the whole experiment
     send_email = args.send_email          # Send email notification
+    prompting = args.prompting            # Prompting method
 
     # Initial name of the final log file (just name, no path)
-    log_file_ = f"{set}-set_{num_agents}agents_{num_steps}steps_{k}k_{origin_value}origin_{backtrack}backtrack_{resampling_method}-resampling.json"
+    log_file_ = f"{set}_{num_agents}agents_{num_steps}steps_{k}k_{backtrack}backtrack_{prompting}.json"
 
     # Organizing FoA arguments
     foa_options = {
@@ -259,7 +290,8 @@ async def main():
         "origin_value": origin_value,
         "num_steps": num_steps,
         "backtrack": backtrack,
-        "resampling_method": resampling_method
+        "resampling_method": resampling_method,
+        "prompting": prompting,
     }
 
     # Setting a run message
@@ -303,7 +335,7 @@ async def main():
         # Send email notification
         if send_email:
             subject = f"{seed+1}/{repeats} :" + log_file
-            message = '\n'.join(f'{key.upper()}: {value}' for key, value in metrics.items()) + f"\nCost : {cost:.2f}"
+            message = '\n'.join(f'{key.capitalize()}: {value}' for key, value in metrics.items()) + f"\nCost : {cost:.2f}"
             try:
                 email_notification(subject=subject, message=message)
                 print("Email sent successfully.")

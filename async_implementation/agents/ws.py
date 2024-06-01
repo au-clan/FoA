@@ -34,7 +34,7 @@ class WebShopAgent:
         self.step()
     
     def reset(self):
-        obs, reward, done = self.env.step(session=self.env_id, action="reset")
+        obs, reward, done = self.env.step(session=f"fixed_{self.env_id}", action="reset")
 
         assert obs is not None, "Observation is None after reset"
         assert reward == 0, "Reward is not 0 after reset"
@@ -53,15 +53,13 @@ class WebShopAgent:
         # Get the prompt
         prompt = self.get_complete_prompt(type="step")
         response = await api.buffered_request(prompt, key=self.hash(), namespace=namespace)
-        action = response.lstrip(' ')
+        action = response.strip(' ')
         self.action_history.append(action)
     
     def step(self):
         """
         This function assumes that the first action is a reset action. This is needed in our implementation.
         """
-        initial_obs = len(self.observations)
-        initial_rewards = len(self.rewards)
         self.observations = []
         self.rewards = []
         prompt=""
@@ -116,6 +114,9 @@ class WebShopAgent:
         
         if prompt in value_cache:
             value = value_cache[prompt]
+        elif self.observations[-1] == "Invalid action!":
+            value = 0
+            value_cache[prompt] = value
         else:
             response = await api.buffered_request(prompt, key=self.hash(), namespace=namespace)
             if verbose:
@@ -125,37 +126,31 @@ class WebShopAgent:
         
         self.values.append(value)
         
-    def clone(self, random_seed=None):
+    def clone(self, random_seed=None, id=None, allow_terminal=False):
         # If a random seed is not provided, clone an exact replica of the agent
         if random_seed is None:
             random_seed = self.random_seed
         
+        # If an id is not provided, clone the agent with the same id
+        if id is None:
+            id = self.id
+        
         # Clone the agent
-        cloned_agent = WebShopAgent(self.env_id, random_seed, id=self.id, replay_actions=self.action_history.copy(), values=self.values.copy(), prompting=self.prompting)
+        cloned_agent = WebShopAgent(self.env_id, random_seed, id=id, replay_actions=self.action_history.copy(), values=self.values.copy(), prompting=self.prompting)
 
-        # Debugging
-        if cloned_agent.observations != self.observations or cloned_agent.action_history != self.action_history:
-            print(f"Env id: {self.env_id}")
-            print(f"Original agent observations ({len(self.observations)}):")
-            print(self.observations)
-            print(f"Cloned agent observations ({len(cloned_agent.observations)}):")
-            print(cloned_agent.observations)
-            print(f"Original agent action history ({len(self.action_history)}):")
-            print(self.action_history)
-            print(f"Cloned agent action history ({len(cloned_agent.action_history)}):")
-            print(cloned_agent.action_history)
         assert cloned_agent.observations == self.observations, "cloned agent should have the same observations as the original agent"
         assert cloned_agent.action_history == self.action_history, "cloned agent should have the same action history as the original agent"
-        assert not cloned_agent.terminal, "it doesn't make sense to clone a terminal agent, this points to a logic error in the outer algorithm"
+        if not allow_terminal:
+            assert not cloned_agent.terminal, "it doesn't make sense to clone a terminal agent, this points to a logic error in the outer algorithm"
         return cloned_agent
     
     def hash(self):
-        return hash((self.env_id, " ".join(self.observations), " -> ".join(self.action_history), self.random_seed))
+        return hash((self.env_id, " ".join(self.observations), " -> ".join(self.action_history)))
 
     
     def get_complete_prompt(self, type=None):
         step_prompt = self.init_prompt + self.prompt[-(6400-len(self.init_prompt)):]
-        eval_prompt = prompts.score_prompt.format(s="", input=step_prompt)
+        eval_prompt = prompts.score_prompt.format(s="", input=step_prompt + "\n\nReflection: ")
 
         if type is None:
             return {"step": step_prompt, "evaluate": eval_prompt}
@@ -165,16 +160,6 @@ class WebShopAgent:
             return eval_prompt
         else:
             raise ValueError(f"Unknown prompt type: {type}")
-
-def clean_str(p):
-  return p.encode().decode("unicode-escape").encode("latin1").decode("utf-8")
-
-
-def tag_visible(element):
-    ignore = {'style', 'script', 'head', 'title', 'meta', '[document]'}
-    return (
-        element.parent.name not in ignore and not isinstance(element, Comment)
-    )
 
 # LATS: https://arxiv.org/abs/2310.04406
 def value_outputs_unwrap(evaluate_prompt: str):
