@@ -81,11 +81,17 @@ class WebShopData:
         if set == "mini":
             indices = list(range(5))
         elif set == "train":
-            indices = list(range(20, 70))
+            indices = list(range(105, 125))
         elif set == "validation":
-            indices = list(range(15, 65))
+            indices = list(range(55, 105))
         elif set == "test":
-            indices = list(range(65, 115))
+            indices = list(range(5, 55))
+        elif set == "test1":
+            indices = list(range(5, 25))
+        elif set == "test2":
+            indices = list(range(25, 45))
+        elif set == "test3":
+            indices = list(range(45, 55))
         else:
             raise ValueError("Invalid set name")
         
