@@ -169,7 +169,7 @@ $15.95
 
 Action: think[B078GWRC1J and B078GTKVXY are bright citrus deodorant less then 50 dollars. I can check B078GWRC1J first.]
 Observation: OK.
+
 Reflection: Although the task is not yet complete, the first search is correct and returns relevant results. The thought is also logical and has potential to lead to the correct selection.
 Thus the correctness score is 9
-{input}
-'''
+{input}'''

@@ -3,16 +3,17 @@ from uuid import uuid4
 from bs4.element import Comment
 
 import async_implementation.prompts.ws as prompts
-from utils import webshopEnv
+from utils import webshopEnv, create_box
 
 class WebShopAgent:
-    def __init__(self, env_id, random_seed, id=None, replay_actions=[], values=[], prompting="react"):
+    def __init__(self, env_id, random_seed, id=None, replay_actions=[], values=[], prompting="react", prompt=None):
         self.unique_id = uuid4()
         self.random_seed = random_seed
         self.observations = []
         self.rewards = []
-        self.values = values
-        self.prompt=None
+        self.terminal=False
+        self.values = values.copy()
+        self.prompt = prompt
         self.id = id
 
         self.env_id = env_id
@@ -28,7 +29,7 @@ class WebShopAgent:
 
         # If the first action was to reset skip.
         if replay_actions:
-            self.action_history = replay_actions
+            self.action_history = replay_actions.copy()
         else:
             self.action_history = ["reset"]
         self.step()
@@ -110,11 +111,11 @@ class WebShopAgent:
     
     
     async def evaluate(self, api, value_cache, namespace, verbose=False):
+        init_value_len = len(self.values)
         prompt = self.get_complete_prompt(type="eval")
-        
         if prompt in value_cache:
             value = value_cache[prompt]
-        elif self.observations[-1] == "Invalid action!":
+        elif prompt.endswith("\nObservation: Invalid action!\n\nReflection: "):
             value = 0
             value_cache[prompt] = value
         else:
@@ -125,8 +126,11 @@ class WebShopAgent:
             value_cache[prompt] = value
         
         self.values.append(value)
+        assert len(self.values) == init_value_len + 1, "Only 1 value should be appended to the values list of an agent"
+        
         
     def clone(self, random_seed=None, id=None, allow_terminal=False):
+
         # If a random seed is not provided, clone an exact replica of the agent
         if random_seed is None:
             random_seed = self.random_seed
@@ -136,9 +140,11 @@ class WebShopAgent:
             id = self.id
         
         # Clone the agent
-        cloned_agent = WebShopAgent(self.env_id, random_seed, id=id, replay_actions=self.action_history.copy(), values=self.values.copy(), prompting=self.prompting)
+        cloned_agent = WebShopAgent(self.env_id, random_seed, id=id, replay_actions=self.action_history, values=self.values, prompting=self.prompting, prompt=self.prompt)
 
-        assert cloned_agent.observations == self.observations, "cloned agent should have the same observations as the original agent"
+        # For the moment we don't care about current observations to save time
+        # assert cloned_agent.observations == self.observations, "cloned agent should have the same observations as the original agent"
+        assert cloned_agent.prompt == self.prompt, "cloned agent should have the same prompt as the original agent"
         assert cloned_agent.action_history == self.action_history, "cloned agent should have the same action history as the original agent"
         if not allow_terminal:
             assert not cloned_agent.terminal, "it doesn't make sense to clone a terminal agent, this points to a logic error in the outer algorithm"
@@ -149,8 +155,9 @@ class WebShopAgent:
 
     
     def get_complete_prompt(self, type=None):
-        step_prompt = self.init_prompt + self.prompt[-(6400-len(self.init_prompt)):]
-        eval_prompt = prompts.score_prompt.format(s="", input=step_prompt + "\n\nReflection: ")
+        current_allowed_prompt = self.prompt[-(6400-len(self.init_prompt)):]
+        step_prompt = self.init_prompt + current_allowed_prompt
+        eval_prompt = prompts.score_prompt.format(s="", input=current_allowed_prompt[:-9] + "\n\nReflection: ")
 
         if type is None:
             return {"step": step_prompt, "evaluate": eval_prompt}

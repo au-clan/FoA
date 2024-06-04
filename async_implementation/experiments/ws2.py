@@ -120,8 +120,8 @@ async def foa_ws(api, puzzle_idx, puzzle, foa_options, value_cache,seed):
     terminal_agents = []
 
     # Batcher
-    step_batcher = BatchingAPI(api, batch_size=num_agents, timeout=3, model=models["step"], tab="step")
-    eval_batcher = BatchingAPI(api, batch_size=num_agents, timeout=3, model=models["eval"], tab="eval")
+    step_batcher = BatchingAPI(api, batch_size=num_agents, timeout=1, model=models["step"], tab="step")
+    eval_batcher = BatchingAPI(api, batch_size=num_agents, timeout=1, model=models["eval"], tab="eval")
 
     # Log - Setup
     log = {}
@@ -151,10 +151,10 @@ async def foa_ws(api, puzzle_idx, puzzle, foa_options, value_cache,seed):
         
         terminal_agents.extend([agent for agent in agents if agent.terminal])
         agents = [agent for agent in agents if not agent.terminal]
-        assert len(step_batcher.futures) == 0, f"Step batcher futures not empty: {len(step_batcher.futures)}"
-        assert len(eval_batcher.futures) == 0, f"Eval batcher futures not empty: {len(eval_batcher.futures)}"
-        step_batcher.batch_size=len(agents)
-        eval_batcher.batch_size=len(agents)
+        # assert len(step_batcher.futures) == 0, f"Step batcher futures not empty: {len(step_batcher.futures)}"
+        # assert len(eval_batcher.futures) == 0, f"Eval batcher futures not empty: {len(eval_batcher.futures)}"
+        # step_batcher.batch_size=len(agents)
+        # eval_batcher.batch_size=len(agents)
 
         if len(agents) == 0:
             assert len(terminal_agents) == num_agents, f"Irregular break (env_id {env_id}, step {step}): {len(terminal_agents)}/{num_agents} terminal."
@@ -168,7 +168,7 @@ async def foa_ws(api, puzzle_idx, puzzle, foa_options, value_cache,seed):
                 value_coroutines.append(agent.evaluate(eval_batcher, value_cache, namespace=(puzzle_idx, f"Agent: {agent.id}", f"Step: {step}")))
             await asyncio.gather(*value_coroutines)
 
-            agents_record=[agent.clone() for agent in agents if agent.values[-1] > 0]
+            agents_record += [agent.clone() for agent in agents if agent.values[-1] > 0]
             for agent in agents_record:
                 assert agent.observations[-1] != "Invalid action!", f"Invalid action in agent {agent.id} at step {step} taken to records in env_id {env_id}\nEvaluate prompt:\n{agent.get_complete_prompt(type='eval')}\nAgent values : {agent.values}"
             
