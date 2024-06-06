@@ -1,4 +1,6 @@
+import asyncio
 from uuid import uuid4
+from copy import deepcopy
 
 from bs4.element import Comment
 
@@ -6,14 +8,14 @@ import async_implementation.prompts.ws as prompts
 from utils import webshopEnv, create_box
 
 class WebShopAgent:
-    def __init__(self, env_id, random_seed, id=None, replay_actions=[], values=[], prompting="react", prompt=None):
+    def __init__(self, env_id, random_seed, id=None, sessions=None, values=[], prompting="react"):
         self.unique_id = uuid4()
         self.random_seed = random_seed
         self.observations = []
         self.rewards = []
         self.terminal=False
-        self.values = values.copy()
-        self.prompt = prompt
+        self.values = deepcopy(values)
+        self.prompt = ""
         self.id = id
 
         self.env_id = env_id
@@ -27,12 +29,12 @@ class WebShopAgent:
             raise ValueError(f"Unknown prompt type: {prompting} (should be 'act' or 'react')")
         self.prompting = prompting
 
-        # If the first action was to reset skip.
-        if replay_actions:
-            self.action_history = replay_actions.copy()
+        if sessions is not None:
+            self.env.sessions = deepcopy(sessions)
+            self.action_history = []
         else:
+            self.take_action_sync("reset")
             self.action_history = ["reset"]
-        self.step()
     
     def reset(self):
         obs, reward, done = self.env.step(session=f"fixed_{self.env_id}", action="reset")
@@ -47,7 +49,7 @@ class WebShopAgent:
 
         return obs, reward, done
 
-    async def get_next_action(self, api, namespace):
+    async def step(self, api, namespace):
         assert len(self.observations) == len(self.action_history)
         assert len(self.observations) > 0, "resetting the environment must generate one observation at the beginning"
 
@@ -55,40 +57,16 @@ class WebShopAgent:
         prompt = self.get_complete_prompt(type="step")
         response = await api.buffered_request(prompt, key=self.hash(), namespace=namespace)
         action = response.strip(' ')
+        #await self.take_action(action)
+        self.take_action_sync(action)
         self.action_history.append(action)
-    
-    def step(self):
-        """
-        This function assumes that the first action is a reset action. This is needed in our implementation.
-        """
-        self.observations = []
-        self.rewards = []
-        prompt=""
-        for i, action in enumerate(self.action_history):
-            
-            obs, reward, terminal = self.take_action(action)
-            self.update(obs, reward, terminal)
-            
-            if i == 0:
-                prompt += f"{obs}\n\nAction:"
-            else:
-                prompt += f' {action}\nObservation: {obs}\n\nAction:'
+              
 
-        # Update prompt
-        self.prompt = prompt
-
-
-    def update(self, obs, reward, terminal):
-        self.observations.append(obs)
-        self.rewards.append(reward)
-        self.terminal=terminal
-
-
-    def take_action(self, action):
+    async def take_action(self, action):
             
         # Try to impelement given action
         try:
-            obs, reward, terminal = self.env.step(session=f"fixed_{self.env_id}", action=action)
+            obs, reward, terminal = await self.env.step(session=f"fixed_{self.env_id}", action=action)
         except AssertionError:
             obs = "Invalid action!"
             reward = 0
@@ -105,12 +83,48 @@ class WebShopAgent:
 
         # If the action is a think action, adjust the observation
         if action.startswith("think"):
-            obs = "OK."     
+            obs = "OK."
+        
+        self.observations.append(obs)
+        self.rewards.append(reward)
+        self.terminal=terminal
+
+        if self.prompt == "":
+            self.prompt += f"{obs}\n\nAction:"
+        else:
+            self.prompt += f' {action}\nObservation: {obs}\n\nAction:'
+        
+        return obs, reward, terminal
+    
+    def take_action_sync(self, action):
+            
+        # Try to impelement given action
+        try:
+            obs, reward, terminal = self.env.step_sync(session=f"fixed_{self.env_id}", action=action)
+        except AssertionError:
+            obs = "Invalid action!"
+            reward = 0
+            terminal = False
+
+        assert obs is not None, f"Observation is None after action {action}"
+
+        # If the action is a think action, adjust the observation
+        if action.startswith("think"):
+            obs = "OK."
+        
+        self.observations.append(obs)
+        self.rewards.append(reward)
+        self.terminal=terminal
+
+        if self.prompt == "":
+            self.prompt += f"{obs}\n\nAction:"
+        else:
+            self.prompt += f' {action}\nObservation: {obs}\n\nAction:'
         
         return obs, reward, terminal
     
     
-    async def evaluate(self, api, value_cache, namespace, verbose=False):
+    async def evaluate(self, api, value_cache, namespace, n=1,verbose=False):
         init_value_len = len(self.values)
         prompt = self.get_complete_prompt(type="eval")
         if prompt in value_cache:
@@ -119,10 +133,13 @@ class WebShopAgent:
             value = 0
             value_cache[prompt] = value
         else:
-            response = await api.buffered_request(prompt, key=self.hash(), namespace=namespace)
-            if verbose:
-                print(response)
-            value = value_outputs_unwrap(response)
+            coroutines = []
+            for _ in range(n):
+                coroutines.append(api.buffered_request(prompt, key=self.hash(), namespace=namespace))
+            iid_replies = await asyncio.gather(*coroutines)
+            #response = await api.buffered_request(prompt, key=self.hash(), namespace=namespace)
+            values = [value_outputs_unwrap(reply) for reply in iid_replies]
+            value = sum(values) / len(values)
             value_cache[prompt] = value
         
         self.values.append(value)
@@ -130,6 +147,7 @@ class WebShopAgent:
         
         
     def clone(self, random_seed=None, id=None, allow_terminal=False):
+        print("Cloning agent")
 
         # If a random seed is not provided, clone an exact replica of the agent
         if random_seed is None:
@@ -140,7 +158,14 @@ class WebShopAgent:
             id = self.id
         
         # Clone the agent
-        cloned_agent = WebShopAgent(self.env_id, random_seed, id=id, replay_actions=self.action_history, values=self.values, prompting=self.prompting, prompt=self.prompt)
+        cloned_agent = WebShopAgent(self.env_id, random_seed, id=id, sessions=self.env.sessions, values=self.values, prompting=self.prompting)
+        cloned_agent.observations = deepcopy(self.observations)
+        cloned_agent.rewards = deepcopy(self.rewards)
+        cloned_agent.terminal = self.terminal
+        cloned_agent.prompt = self.prompt
+        cloned_agent.action_history = deepcopy(self.action_history)
+        assert cloned_agent.env.sessions == self.env.sessions, "Cloned agent has different session"
+
 
         # For the moment we don't care about current observations to save time
         # assert cloned_agent.observations == self.observations, "cloned agent should have the same observations as the original agent"

@@ -1,6 +1,8 @@
 import os
 import smtplib
 import json
+import asyncio
+import aiohttp
 
 import numpy as np
 from pathlib import Path
@@ -121,7 +123,7 @@ def update_actual_cost(api):
         file.write(str(new_cost))
 
 
-WEBSHOP_URL = "http://128.179.136.29:3000"
+WEBSHOP_URL = "http://10.90.39.11:3000"
 ACTION_TO_TEMPLATE = {
     'Description': 'description_page.html',
     'Features': 'features_page.html',
@@ -129,7 +131,11 @@ ACTION_TO_TEMPLATE = {
     'Attributes': 'attributes_page.html',
 }
 
-def clean_str(p):
+
+async def clean_str(p):
+  return p.encode().decode("unicode-escape").encode("latin1").decode("utf-8")
+
+def clean_str_sync(p):
   return p.encode().decode("unicode-escape").encode("latin1").decode("utf-8")
 
 
@@ -139,8 +145,79 @@ def tag_visible(element):
         element.parent.name not in ignore and not isinstance(element, Comment)
     )
 
+async def webshop_text(session, page_type, query_string='', page_num=1, asin='', options={}, subpage='', **kwargs):
+    if page_type == 'init':
+      url = (f'{WEBSHOP_URL}/{session}')
+    if page_type == 'search':
+        url = (f'{WEBSHOP_URL}/search_results/{session}/{query_string}/{page_num}')
+    elif page_type == 'item':
+        url = (f'{WEBSHOP_URL}/item_page/{session}/{asin}/{query_string}/{page_num}/{options}')
+    elif page_type == 'item_sub':
+        url = f'{WEBSHOP_URL}/item_sub_page/{session}/{asin}/{query_string}/{page_num}/{subpage}/{options}'
+    elif page_type == 'end':
+        url = f'{WEBSHOP_URL}/done/{session}/{asin}/{options}'
 
-def webshop_text(session, page_type, query_string='', page_num=1, asin='', options={}, subpage='', **kwargs):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            html = await response.text()
+    
+    html_obj = BeautifulSoup(html, 'html.parser')
+    texts = html_obj.findAll(text=True)
+    visible_texts = list(filter(tag_visible, texts))
+
+    if False:
+        # For `simple` mode, return just [SEP] separators
+        return ' [SEP] '.join(t.strip() for t in visible_texts if t != '\n')
+    else:
+        # Otherwise, return an observation with tags mapped to specific, unique separators
+        observation = ''
+        option_type = ''
+        options = {}
+        asins = []
+        cnt = 0
+        prod_cnt = 0
+        just_prod = 0
+        for t in visible_texts:
+            if t == '\n': continue
+            if t.replace('\n', '').replace('\\n', '').replace(' ', '') == '': continue
+            if t.parent.name == 'button':  # button
+                processed_t = f'\n[{t}] '
+            elif t.parent.name == 'label':  # options
+                if f"'{t}'" in url:
+                    processed_t = f'[[{t}]]'
+                else:
+                    processed_t = f'[{t}]'
+                options[str(t)] = option_type
+            elif t.parent.get('class') == ["product-link"]: # product asins
+                processed_t = f'\n[{t}] '
+                if prod_cnt >= 3:
+                    processed_t = ''
+                prod_cnt += 1
+                asins.append(str(t))
+                just_prod = 0
+            else: # regular, unclickable text
+                processed_t =  '\n' + str(t) + ' '
+                if cnt < 2 and page_type != 'init': processed_t = ''
+                if just_prod <= 2 and prod_cnt >= 4: processed_t = ''
+                option_type = str(t)
+                cnt += 1
+            just_prod += 1
+            observation += processed_t
+
+        info = {}
+        if options:
+            info['option_types'] = options
+        if asins:
+            info['asins'] = asins
+        if 'Your score (min 0.0, max 1.0)' in visible_texts:
+            idx = visible_texts.index('Your score (min 0.0, max 1.0)')
+            info['reward'] = float(visible_texts[idx + 1])
+            observation = 'Your score (min 0.0, max 1.0): ' + (visible_texts[idx + 1])
+
+        return clean_str_sync(observation), info
+
+
+def webshop_text_sync(session, page_type, query_string='', page_num=1, asin='', options={}, subpage='', **kwargs):
     if page_type == 'init':
       url = (
           f'{WEBSHOP_URL}/{session}'
@@ -223,13 +300,14 @@ def webshop_text(session, page_type, query_string='', page_num=1, asin='', optio
           idx = visible_texts.index('Your score (min 0.0, max 1.0)')
           info['reward'] = float(visible_texts[idx + 1])
           observation = 'Your score (min 0.0, max 1.0): ' + (visible_texts[idx + 1])
-        return clean_str(observation), info
+        return clean_str_sync(observation), info
+
 
 class webshopEnv:
   def __init__(self):
     self.sessions = {}
   
-  def step(self, session, action):
+  async def step(self, session, action):
     done = False
     observation_ = None
     if action == 'reset':
@@ -283,7 +361,68 @@ class webshopEnv:
           observation_ = f'You have clicked {button}.'
     else:
       assert False
-    observation, info = webshop_text(**self.sessions[session])
+    observation, info = await webshop_text(**self.sessions[session])
+    if observation_:
+      observation = observation_
+    self.sessions[session].update(info)
+    reward = info.get('reward', 0.0)
+    return observation, reward, done
+  
+  def step_sync(self, session, action):
+    done = False
+    observation_ = None
+    if action == 'reset':
+      self.sessions[session] = {'session': session, 'page_type': 'init'}
+    elif action.startswith('think['):
+      observation = 'OK.'
+    elif action.startswith('search['):
+      assert self.sessions[session]['page_type'] == 'init'
+      query = action[7:-1]
+      self.sessions[session] = {'session': session, 'page_type': 'search',
+                                'query_string': query, 'page_num': 1}
+    elif action.startswith('click['):
+      button = action[6:-1]
+      if button == 'Buy Now':
+        assert self.sessions[session]['page_type'] == 'item'
+        self.sessions[session]['page_type'] = 'end'
+        done = True
+      elif button == 'Back to Search':
+        assert self.sessions[session]['page_type'] in ['search', 'item_sub', 'item']
+        self.sessions[session] = {'session': session, 'page_type': 'init'}
+      elif button == 'Next >':
+        assert False # ad hoc page limitation
+        assert self.sessions[session]['page_type'] == 'search'
+        self.sessions[session]['page_num'] += 1
+      elif button == '< Prev':
+        assert self.sessions[session]['page_type'] in ['search', 'item_sub', 'item']
+        if self.sessions[session]['page_type'] == 'search':
+          assert False
+          self.sessions[session]['page_num'] -= 1
+        elif self.sessions[session]['page_type'] == 'item_sub':
+          self.sessions[session]['page_type'] = 'item'
+        elif self.sessions[session]['page_type'] == 'item':
+          self.sessions[session]['page_type'] = 'search'
+          self.sessions[session]['options'] = {}
+      elif button in ACTION_TO_TEMPLATE:
+        assert self.sessions[session]['page_type'] == 'item'
+        self.sessions[session]['page_type'] = 'item_sub'
+        self.sessions[session]['subpage'] = button
+      else:
+        if self.sessions[session]['page_type'] == 'search':
+          assert button in self.sessions[session].get('asins', [])  # must be asins
+          self.sessions[session]['page_type'] = 'item'
+          self.sessions[session]['asin'] = button
+        elif self.sessions[session]['page_type'] == 'item':
+          assert 'option_types' in self.sessions[session]
+          assert button in self.sessions[session]['option_types'], (button, self.sessions[session]['option_types'])  # must be options
+          option_type = self.sessions[session]['option_types'][button]
+          if not 'options' in self.sessions[session]:
+            self.sessions[session]['options'] = {}
+          self.sessions[session]['options'][option_type] = button
+          observation_ = f'You have clicked {button}.'
+    else:
+      assert False
+    observation, info = webshop_text_sync(**self.sessions[session])
     if observation_:
       observation = observation_
     self.sessions[session].update(info)
