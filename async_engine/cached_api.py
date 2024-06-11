@@ -47,7 +47,8 @@ class CachedOpenAIAPI:
                 "gpt-35-turbo-0613": {"access_token": "AZURE_OPENAI_KEY2LOC1", "endpoint": "key-2"},
                 "gpt-35-turbo-0125" : {"access_token":"AZURE_OPENAI_KEY1LOC4", "endpoint": "key-1-18k-loc4"},
                 "gpt-4-0125-preview": {"access_token":"AZURE_OPENAI_KEY2LOC3", "endpoint": "key-2-loc3"},
-                "gpt-4-turbo-2024-04-09": {"access_token": "AZURE_OPENAI_KEY2LOC1", "endpoint": "key-2"},
+                "gpt-4-turbo-2024-04-09": {"access_token": "AZURE_OPENAI_KEY1LOC1", "endpoint": "key-1-18k"},
+                "gpt-4o-2024-05-13": {"access_token": "AZURE_OPENAI_KEY1LOC1", "endpoint": "key-1-18k"},
             }
 
             for model in models:
@@ -328,7 +329,8 @@ class CachedOpenAIAPI:
         catalog = {
             "gpt-4-0613": {"prompt_tokens": 0.03, "completion_tokens":0.06},
             "gpt-4-0125-preview": {"prompt_tokens": 0.01, "completion_tokens":0.03},
-            "gpt-3.5-turbo-0125": {"prompt_tokens": 0.0005, "completion_tokens":0.0015}
+            "gpt-3.5-turbo-0125": {"prompt_tokens": 0.0005, "completion_tokens":0.0015},
+            "gpt-4o-2024-05-13": {"prompt_tokens": 0.005, "completion_tokens":0.015}
         }
 
         # Same model just different name
