@@ -25,8 +25,8 @@ os.system('cls' if os.name == 'nt' else 'clear')
 time = datetime.now()
 day = time.strftime("%d-%m")
 hour = time.strftime("%H")
-#log_folder = f"logs_recent/webshop/gridsearch_react/"
-log_folder = f"logs_recent/webshop/{day}/{hour}/"
+log_folder = f"logs_recent/ablation/selection/webshop/"
+#log_folder = f"logs_recent/webshop/{day}/{hour}/"
 create_folder(log_folder)
 
 assert os.path.exists("./caches/"), "Please run the script from the root directory of the project."
@@ -52,7 +52,7 @@ eval_api_config = {
     "use_azure": True,
 }
 
-# available models : gpt-35-turbo-0125, gpt-4-0125-preview, gpt-4-0613
+# available models : gpt-35-turbo-0125, gpt-4-0125-preview, gpt-4-0613, gpt-4-turbo-2024-04-09
 
 models = {
     "step": "gpt-35-turbo-0125",
@@ -169,7 +169,7 @@ async def foa_ws(api, puzzle_idx, puzzle, foa_options, value_cache,seed):
                 value_coroutines.append(agent.evaluate(eval_batcher, value_cache, n=n_evaluations, namespace=(puzzle_idx, f"Agent: {agent.id}", f"Step: {step}")))
             await asyncio.gather(*value_coroutines)
 
-            agents_record=[agent.clone() for agent in agents if agent.values[-1] > 0]
+            agents_record+=[agent.clone() for agent in agents if agent.values[-1] > 0]
         
             for agent in agents_record:
                 assert agent.observations[-1] != "Invalid action!", f"Invalid action in agent {agent.id} at step {step} taken to records in env_id {env_id}\nEvaluate prompt:\n{agent.get_complete_prompt(type='eval')}\nAgent values : {agent.values}"
@@ -201,8 +201,8 @@ async def run(run_options: dict, foa_options: dict, log_file:str):
     puzzle_idxs, puzzles = dataset.get_data(run_options["set"])
 
     ### Debugging
-    end = 5
-    puzzle_idxs, puzzles = puzzle_idxs[:end], puzzles[:end]
+    # end = 5
+    # puzzle_idxs, puzzles = puzzle_idxs[:end], puzzles[:end]
 
     print(f"Puzzles to solve : {len(puzzle_idxs)}")
     # Run FoA for each puzzle experiment
@@ -298,7 +298,7 @@ async def main():
     n_evaluations = args.n_evaluations    # Number of evaluations 
 
     # Initial name of the final log file (just name, no path)
-    log_file_ = f"{set}_{num_agents}agents_{num_steps}steps_{k}k_{backtrack}backtrack_{prompting}.json"
+    log_file_ = f"{set}_{num_agents}a_{num_steps}s_{k}k_{backtrack}b_{n_evaluations}n_{prompting}.json"
 
     # Organizing FoA arguments
     foa_options = {
