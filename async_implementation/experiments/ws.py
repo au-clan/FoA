@@ -25,7 +25,7 @@ os.system('cls' if os.name == 'nt' else 'clear')
 time = datetime.now()
 day = time.strftime("%d-%m")
 hour = time.strftime("%H")
-log_folder = f"logs_recent/ablation/selection/webshop/"
+log_folder = f"logs_recent/ablations/backtracking/webshop/"
 #log_folder = f"logs_recent/webshop/{day}/{hour}/"
 create_folder(log_folder)
 
@@ -64,7 +64,7 @@ api = CachedOpenAIAPI(cache, step_api_config, models=models.values(), resources=
 # Setting up the data
 dataset = WebShopData()
 
-def resample(agents, n, agent_ids, current_step, gamma=0.5):
+def resample(agent_records, n, agent_ids, current_step, gamma=0.5, method="linear"):
     """
     Linear resampling of agents based on their rewards
     Input:
@@ -76,34 +76,32 @@ def resample(agents, n, agent_ids, current_step, gamma=0.5):
 
     assert n == len(agent_ids), f"Number of agents ({n}) and number of agent ids ({len(agent_ids)}) do not match."
     # Computing discount factors
-    ## +2 cause step starts from zero and action history always has an extra action being reset at the very start
-    gammas = np.array([gamma ** (current_step + 2 - len(agent.action_history)) for agent in agents])
+    gammas = np.array([gamma ** (current_step-step) for _, step in agent_records])
 
     # Compute probabilities
-    values = np.array([agent.values[-1] for agent in agents]) * gammas
-    probs = values / np.sum(values)
+    eps = 1e-6
+    values = np.array([agent.values[-1] for agent, _ in agent_records])
+    if method == "linear_filtered":
+        values[values < values.max() * 0.5] = 0
+    decayed_values = values * gammas + eps
+    probs = decayed_values / np.sum(decayed_values)
 
-    # Debugging
-    for agent, value in zip(agents, values):
-        agent.values[-1] * gamma ** (current_step + 2 - len(agent.action_history)) == value, f"Backtrack is wrong. Init value: {agent.values[-1]}, computed value: {value}"
-    
-
-    # Resanoke indices with consistency
-    random_seed = agents[0].random_seed
+    print("Resampling")
+    print("\tGammas", gammas)
+    print("\tValues", values)
+    print("\tProbs", probs)
+    # Resample indices with consistency
+    random_seed = agent_records[0][0].random_seed
     np.random.seed(random_seed)
-    try:
-        resampled_indices = np.random.choice(range(len(agents)), size=n, replace=True, p=probs).tolist()
-    except ValueError:
-        print("Error in resampling")
-        print(f"gammas: {gammas}")
-        print(f"values: {np.array([agent.values[-1] for agent in agents])}")
+    
+    resampled_indices = np.random.choice(range(len(agent_records)), size=n, replace=True, p=probs).tolist()
 
     # Get resampled agents
     random.seed(random_seed)
-    new_random_seeds = [random.randint(1, 1000) for _ in range(len(agents))]
+    new_random_seeds = [random.randint(1, 1000) for _ in range(len(agent_records))]
     resampled_agents = []
     for indice, id in zip(resampled_indices, agent_ids):
-        resampled_agents.append(agents[indice].clone(random_seed=new_random_seeds[indice], id=id))
+        resampled_agents.append(agent_records[indice][0].clone(random_seed=new_random_seeds[indice], id=id))
     
     for agent in resampled_agents:
         assert agent.env.sessions != {}, "Empty session in resampled agent "
@@ -111,7 +109,7 @@ def resample(agents, n, agent_ids, current_step, gamma=0.5):
     assert len(resampled_agents) == n, f"Returned {len(resampled_agents)}/{n} requested agents "
     return resampled_agents
 
-async def foa_ws(api, puzzle_idx, puzzle, foa_options, value_cache,seed):
+async def foa_ws(api, puzzle_idx, puzzle, foa_options, value_cache,seed, barrier):
 
     env_id = puzzle_idx
     n_evaluations = foa_options["n_evaluations"]
@@ -134,7 +132,12 @@ async def foa_ws(api, puzzle_idx, puzzle, foa_options, value_cache,seed):
 
     num_steps = foa_options["num_steps"]
     k = foa_options["k"]
+    solution_found = False
     for step in range(num_steps):
+
+        if solution_found:
+            await barrier.wait()
+            continue
 
         print(f"Step {step} (env_id {env_id})")
         
@@ -159,7 +162,12 @@ async def foa_ws(api, puzzle_idx, puzzle, foa_options, value_cache,seed):
 
         if len(agents) == 0:
             assert len(terminal_agents) == num_agents, f"Irregular break (env_id {env_id}, step {step}): {len(terminal_agents)}/{num_agents} terminal."
-            break
+            solution_found = True
+            await barrier.wait()
+            continue
+        
+        # Synchronize experiments
+        await barrier.wait()
         
         # Selection phase
         if 0 < step < num_steps -1 and k>0 and step % k == 0:
@@ -169,9 +177,9 @@ async def foa_ws(api, puzzle_idx, puzzle, foa_options, value_cache,seed):
                 value_coroutines.append(agent.evaluate(eval_batcher, value_cache, n=n_evaluations, namespace=(puzzle_idx, f"Agent: {agent.id}", f"Step: {step}")))
             await asyncio.gather(*value_coroutines)
 
-            agents_record+=[agent.clone() for agent in agents if agent.values[-1] > 0]
+            agents_record+=[(agent.clone(), step) for agent in agents if agent.values[-1] > 0]
         
-            for agent in agents_record:
+            for agent, _ in agents_record:
                 assert agent.observations[-1] != "Invalid action!", f"Invalid action in agent {agent.id} at step {step} taken to records in env_id {env_id}\nEvaluate prompt:\n{agent.get_complete_prompt(type='eval')}\nAgent values : {agent.values}"
                 assert agent.env.sessions != {}, "Empty session in records agent "
 
@@ -179,14 +187,13 @@ async def foa_ws(api, puzzle_idx, puzzle, foa_options, value_cache,seed):
             # Resampling
             if len(agents_record) > 0:
                 agent_ids = [agent.id for agent in agents]
-                agents = resample(agents_record, len(agents), gamma=foa_options["backtrack"], agent_ids=agent_ids, current_step=step)
-
+                agents = resample(agents_record, len(agents), gamma=foa_options["backtrack"], agent_ids=agent_ids, current_step=step, method=foa_options["resampling_method"])
 
                 # Log - Resampling
                 for agent in agents:
                     assert agent.observations[-1] != "Invalid action!", f"Invalid action in agent {agent.id} at step {step} resampled in env_id {env_id}"
                     log[puzzle_idx][f"Agent {agent.id}"][f"Step {step}"].update({"Resampling":{"Latest Observation": agent.observations[-1], "Action history": agent.action_history.copy(), "Latest reward": agent.rewards[-1], "Latest value": agent.values[-1],"Terminal": agent.terminal}})
-    
+        
     all_agents = agents + terminal_agents
     
     assert len(all_agents) == num_agents, f"{len(all_agents)}/{num_agents} returned"
@@ -204,11 +211,14 @@ async def run(run_options: dict, foa_options: dict, log_file:str):
     # end = 5
     # puzzle_idxs, puzzles = puzzle_idxs[:end], puzzles[:end]
 
+    # Barriers for each puzzle experiment
+    barrier = asyncio.Barrier(len(puzzles))
+
     print(f"Puzzles to solve : {len(puzzle_idxs)}")
     # Run FoA for each puzzle experiment
     puzzle_coroutines = []
     for puzzle_idx, puzzle in zip(puzzle_idxs, puzzles):
-        puzzle_coroutines.append(foa_ws(api, puzzle_idx, puzzle, foa_options, value_cache=value_cache, seed=run_options["seed"]))
+        puzzle_coroutines.append(foa_ws(api, puzzle_idx, puzzle, foa_options, value_cache=value_cache, seed=run_options["seed"], barrier=barrier))
     results = await asyncio.gather(*puzzle_coroutines)
     puzzle_agents, logs = zip(*results)
 
@@ -314,7 +324,7 @@ async def main():
 
     # Setting a run message
     run_message = f"""Run options :
-        task : gameof24
+        task : webshop
         set : {set}
         num_agents : {num_agents}
         k : {k}
