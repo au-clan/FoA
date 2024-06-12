@@ -438,3 +438,181 @@ def get_file_names(folder_path):
         if os.path.isfile(os.path.join(folder_path, file_name)):
             file_names.append(file_name)
     return file_names
+
+class LogParser():
+  def __init__(self):
+    self.actions = []
+  
+  def get_data(self, file, task, method):
+    if task =="gameof24":
+      if method == "tot":
+        return self.get_tot_results_gameof24(file)
+      elif method == "foa":
+        data = self.get_foa_data_gameof24(file)
+        data.update({"Batching": not "1batch" in file})
+        return data
+      else:
+        raise ValueError("Invalid method for gameof24")
+
+    elif task == "crosswords":
+      if method == "tot":
+        return self.get_tot_results_crosswords(file)
+      elif method == "foa":
+        data = self.get_foa_data_crosswords(file)
+        data.update({"Batching": not "1batch" in file})
+        return data
+    
+    elif task == "webshop":
+      if method == "foa":
+        data = self.get_foa_data_webshop(file)
+        data.update({"Batching": not "1batch" in file})
+        return data
+      else:
+        raise NotImplementedError("Webshop method not implemented yet")
+    
+    else:
+      raise ValueError("Invalid task")
+    
+  def get_tot_results_gameof24(self, file_name):
+    with open(file_name, 'r') as file:
+      run = json.load(file)
+
+    # Compute cost
+    cost = run[-1]["usage_so_far"]["cost"]
+
+    # Compute accuracy
+    rewards = []
+    for puzzle in run:
+      rewards.append({"r":1} in puzzle["infos"])
+    
+    return rewards, cost
+  
+  def get_foa_data_gameof24(self, file):
+    with open(file, 'r') as f:
+      run = json.load(f)
+    
+    data = {}
+    params = file.split("/")[-1].split("_")
+    data["num_agents"] = int(params[1].split("agents")[0])
+    data["num_steps"] = int(params[2].split("steps")[0])
+    data["k"] = int(params[3].split("k")[0])
+    data["backtrack"] = float(params[5].split("backtrack")[0])
+
+    if "Info" in run.keys():
+      data["Cost"] = run.pop("Info")["Cost"]["Total cost"]["total_cost"]
+    elif "Cost" in run.keys():
+      data["Cost"] = run.pop("Cost")["total_cost"]
+    else:
+      raise ValueError("No cost found in the log file")
+
+    rewards = []
+    for puzzle in run.values():
+      rewards.append(int({"r":1} in puzzle["Verifications"]))
+    data["rewards"] = rewards
+    data["Accuracy"] = np.mean(rewards)
+    return data
+
+  def get_tot_results_crosswords(self, file_path):
+
+    with open(file_path) as f:
+      results = json.load(f)
+
+    cost = results.pop(-1)["cost"]
+    best_steps = []
+    for game in results:
+      step_len = [len(step["actions"]) for step in game]
+      if step_len == []:
+        # Empty game -> No suggestions at root node
+        best_steps.append({"total_step":0, "env_step":0, "actions":[], 'info': {'r_letter': 0, 'r_word': 0},})
+        continue
+      best_step_index = step_len.index(max(step_len))
+      best_step = game[best_step_index]
+      best_steps.append(best_step)
+  
+    r_letters = [game["info"]["r_letter"] for game in best_steps]
+    r_words = [game["info"]["r_word"] for game in best_steps]
+    r_game = [1 if game["info"]["r_word"]==1 else 0 for game in best_steps]
+
+    rewards = {"r_letter": r_letters, "r_word": r_words, "r_game": r_game}
+    return rewards, cost
+  
+  def get_foa_data_crosswords(self, file, metric="r_letter"):
+    with open(file, "r") as experiment_file:
+      run = json.load(experiment_file)
+    
+    data = {}
+    params = file.split("/")[-1].split("_")
+    data["num_agents"] = int(params[1].split("agents")[0])
+    data["num_steps"] = int(params[2].split("steps")[0])
+    data["k"] = int(params[3].split("k")[0])
+    data["backtrack"] = float(params[5].split("backtrack")[0])
+
+    if "Info" in run.keys():
+      data["Cost"] = run.pop("Info")["Cost"]["Total cost"]["total_cost"]
+    elif "Cost" in run.keys():
+      data["Cost"] = run.pop("Cost")['Total cost']["total_cost"]
+    else:
+      raise ValueError("No cost found in the log file")
+
+    metrics = {}
+    for puzzle_id, puzzle_results in run.items():
+      initial_puzzle = puzzle_results.pop("puzzle", None)       # Not needed just want to pop
+      verifications = puzzle_results.pop("Verifications", None) # Not needed just want to pop
+
+      max_actions = 0
+      metrics[puzzle_id] = {"r_letter": None, "r_word": None, "r_all": None}
+      for agent_id, agent_results in puzzle_results.items():
+        for step_id, step_results in agent_results.items():
+          step_actions = len(step_results["Step"].split(" -> "))
+          if step_actions > max_actions:
+            max_actions = step_actions
+            metrics[puzzle_id] = step_results["metrics"]
+      assert max_actions > 0, f"No actions found for {puzzle_id}"
+
+    r_letters = [metric["r_letter"] for metric in metrics.values()]
+    r_words = [metric["r_word"] for metric in metrics.values()]
+    r_alls = [metric["r_all"] for metric in metrics.values()]
+    metrics = {"r_letter": r_letters, "r_word": r_words, "r_all": r_alls}
+    data[metric] = metrics[metric]
+    data["Accuracy"] = np.mean(metrics[metric])
+
+    data.update(metrics)
+    
+    return data
+  
+  def get_foa_data_webshop(self, file):
+    with open(file) as f:
+      run = json.load(f)
+    info = run.pop("Info")
+
+    data = {}
+    data["num_agents"] = info["FoA options"]["num_agents"]
+    data["num_steps"] = info["FoA options"]["num_steps"]
+    data["k"] = info["FoA options"]["k"]
+    data["backtrack"] = info["FoA options"]["backtrack"]
+    data["prompting"] = info["FoA options"]["prompting"]
+    data["Cost"] = info["Cost"]["Total cost"]["total_cost"]
+    
+    rewards = []
+    for puzzle in run.values():
+      environment = puzzle.pop("environment")
+      agent_rewards = []
+      for agent in puzzle.values():
+        last_step = list(agent.keys())[-1]
+        reward = agent[last_step]["Latest reward"]
+        agent_rewards.append(reward)
+      rewards.append(agent_rewards)
+
+    rewards = np.array(rewards)
+    rewards = rewards.max(axis=1)
+
+    assert np.mean(rewards) == info["Metrics"]["mean_reward"], "Mean reward does not match: Expected {}, Got {}".format(info["Metrics"]["mean_reward"], np.mean(rewards))
+    assert np.mean(rewards>0) == info["Metrics"]["percentage_finished"], "Finished agents (%) does not match"
+
+    
+    data["rewards"] = rewards.tolist()
+    data["Accuracy"] = np.mean(rewards)
+    data["success_rate"] = np.mean(rewards==1)
+
+    
+    return data
