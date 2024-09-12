@@ -25,7 +25,7 @@ os.system('cls' if os.name == 'nt' else 'clear')
 time = datetime.now()
 day = time.strftime("%d-%m")
 hour = time.strftime("%H")
-log_folder = f"logs_recent/ablations/backtracking/webshop/"
+log_folder = f"logs_recent/"
 #log_folder = f"logs_recent/webshop/{day}/{hour}/"
 create_folder(log_folder)
 
@@ -52,7 +52,7 @@ eval_api_config = {
     "use_azure": True,
 }
 
-# available models : gpt-35-turbo-0125, gpt-4-0125-preview, gpt-4-0613, gpt-4-turbo-2024-04-09
+# available models : gpt-35-turbo-0125, gpt-4-0125-preview, gpt-4-0613, gpt-4-turbo-2024-04-09, gpt-4-0613-no-filter
 
 models = {
     "step": "gpt-35-turbo-0125",

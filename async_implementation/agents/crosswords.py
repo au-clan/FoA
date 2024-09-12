@@ -16,7 +16,6 @@ class CrosswordsAgent:
         """
         Given a state, return a dictionary of candidate actions along with its scores.
         """
-        
         # Render the state
         obs = CrosswordsState.render(state)
 
