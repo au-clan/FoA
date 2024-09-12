@@ -5,11 +5,15 @@ import asyncio
 import aiohttp
 
 import numpy as np
+from scipy.stats import bootstrap
+
 from pathlib import Path
 
 import requests
 from bs4 import BeautifulSoup
 from bs4.element import Comment
+
+
 
 
 def create_folder(folder_path: str):
@@ -443,13 +447,14 @@ class LogParser():
   def __init__(self):
     self.actions = []
   
-  def get_data(self, file, task, method):
+  def get_data(self, file, task, method, **kwargs):
     if task =="gameof24":
       if method == "tot":
         return self.get_tot_results_gameof24(file)
       elif method == "foa":
         data = self.get_foa_data_gameof24(file)
         data.update({"Batching": not "1batch" in file})
+        data.update({"Caching": not "nocache" in file})
         return data
       else:
         raise ValueError("Invalid method for gameof24")
@@ -460,12 +465,26 @@ class LogParser():
       elif method == "foa":
         data = self.get_foa_data_crosswords(file)
         data.update({"Batching": not "1batch" in file})
+        data.update({"Caching": not "nocache" in file})
         return data
-    
+      elif method == "bok":
+        assert "num_agents" in kwargs, "'num_agents' must also be provided"
+        data = self.get_bok_data_crosswords(file, num_agents=kwargs.get("num_agents"))
+        data.update({"Batching": False})
+        data.update({"Caching": not "nocache" in file})
+        return data
+
     elif task == "webshop":
       if method == "foa":
         data = self.get_foa_data_webshop(file)
         data.update({"Batching": not "1batch" in file})
+        data.update({"Caching": not "nocache" in file})
+        return data
+      elif method == "react":
+        assert "num_agents" in kwargs, "'num_agents' must also be provided"
+        data = self.get_react_data_webshop(file, num_agents=kwargs.get("num_agents"))
+        data.update({"Batching": False})
+        data.update({"Caching": not "nocache" in file})
         return data
       else:
         raise NotImplementedError("Webshop method not implemented yet")
@@ -498,6 +517,13 @@ class LogParser():
     data["k"] = int(params[3].split("k")[0])
     data["backtrack"] = float(params[5].split("backtrack")[0])
 
+    if "linear_filtered-resampling" in file:
+      data["resampling"] = "linear_filtered"
+    elif "linear-resampling" in file:
+      data["resampling"] = "linear"
+    else:
+      raise ValueError("No resampling method found in the log file's name")
+
     if "Info" in run.keys():
       data["Cost"] = run.pop("Info")["Cost"]["Total cost"]["total_cost"]
     elif "Cost" in run.keys():
@@ -509,7 +535,8 @@ class LogParser():
     for puzzle in run.values():
       rewards.append(int({"r":1} in puzzle["Verifications"]))
     data["rewards"] = rewards
-    data["Accuracy"] = np.mean(rewards)
+    stats = get_stats(np.array(rewards), "Accuracy")
+    data.update(stats)
     return data
 
   def get_tot_results_crosswords(self, file_path):
@@ -547,6 +574,13 @@ class LogParser():
     data["k"] = int(params[3].split("k")[0])
     data["backtrack"] = float(params[5].split("backtrack")[0])
 
+    if "linear_filtered-resampling" in file:
+      data["resampling"] = "linear_filtered"
+    elif "linear-resampling" in file:
+      data["resampling"] = "linear"
+    else:
+      raise ValueError("No resampling method found in the log file's name")
+
     if "Info" in run.keys():
       data["Cost"] = run.pop("Info")["Cost"]["Total cost"]["total_cost"]
     elif "Cost" in run.keys():
@@ -573,13 +607,93 @@ class LogParser():
     r_words = [metric["r_word"] for metric in metrics.values()]
     r_alls = [metric["r_all"] for metric in metrics.values()]
     metrics = {"r_letter": r_letters, "r_word": r_words, "r_all": r_alls}
-    data[metric] = metrics[metric]
-    data["Accuracy"] = np.mean(metrics[metric])
 
-    data.update(metrics)
+    rewards = np.array(metrics[metric])
+    data["rewards"] = rewards.tolist()
+    #data.update(metrics)
+    stats = get_stats(rewards, "Accuracy")
+    data.update(stats)
     
     return data
   
+  def get_bok_data_crosswords(self, folder, num_agents=1):
+    data = {}
+
+    files = [folder + f for f in get_file_names(folder)]
+    assert num_agents <= len(files), f"Number of max iid agents : {len(files)}"
+    files = files[:num_agents]
+
+    total_cost = 0
+    rewards = []
+
+    num_steps = None
+
+    for file in files:
+      agent_data = self.get_foa_data_crosswords(file)
+      rewards.append(agent_data["rewards"])
+      total_cost += agent_data["Cost"]
+      
+      if num_steps:
+        assert num_steps == agent_data["num_steps"], "Number of steps do not match"
+      num_steps = agent_data["num_steps"]
+
+    data["num_agents"] = num_agents
+    data["num_steps"] = num_steps
+    data["k"] = 0
+    data["backtrack"] = 0
+    data["resampling"] = None
+    data["Cost"] = total_cost
+
+    rewards = np.array(rewards).max(axis=0)
+    data["rewards"] = rewards.tolist()
+    data["success_rate"] = np.mean(rewards == 1)    
+    stats = get_stats(rewards, "Accuracy")
+    data.update(stats)
+
+    return data 
+
+     
+  def get_react_data_webshop(self, folder, num_agents=1):
+    data = {}
+    
+    files = [folder + f for f in get_file_names(folder)]
+    assert num_agents <= len(files), f"Number of max iid agents : {len(files)}"
+    files = files[:num_agents]
+
+    total_cost = 0
+    rewards = []
+
+    num_steps = None
+    prompting = None
+    
+    for file in files:
+      agent_data = self.get_foa_data_webshop(file)
+      rewards.append(agent_data["rewards"])
+      total_cost += agent_data["Cost"]
+      
+      if num_steps:
+        assert num_steps == agent_data["num_steps"], "Number of steps do not match"
+      num_steps = agent_data["num_steps"]
+
+      if prompting:
+        assert prompting == agent_data["prompting"], "Prompting do not match"
+      prompting = agent_data["prompting"]
+    
+    data["num_agents"] = num_agents
+    data["num_steps"] = num_steps
+    data["k"] = 0
+    data["backtrack"] = 0
+    data["prompting"] = prompting
+    data["resampling"] = None
+    data["Cost"] = total_cost
+
+    rewards = np.array(rewards).max(axis=0)
+    data["rewards"] = rewards.tolist()
+    data["success_rate"] = np.mean(rewards == 1)    
+    stats = get_stats(rewards, "Accuracy")
+    data.update(stats)
+
+    return data
   def get_foa_data_webshop(self, file):
     with open(file) as f:
       run = json.load(f)
@@ -592,6 +706,7 @@ class LogParser():
     data["backtrack"] = info["FoA options"]["backtrack"]
     data["prompting"] = info["FoA options"]["prompting"]
     data["Cost"] = info["Cost"]["Total cost"]["total_cost"]
+    data["resampling"] = info["FoA options"]["resampling_method"]
     
     rewards = []
     for puzzle in run.values():
@@ -611,8 +726,18 @@ class LogParser():
 
     
     data["rewards"] = rewards.tolist()
-    data["Accuracy"] = np.mean(rewards)
     data["success_rate"] = np.mean(rewards==1)
+    stats = get_stats(rewards, "Accuracy")
+    data.update(stats)
 
-    
     return data
+  
+
+  
+
+def get_stats(array, name):
+   bootstrapped = bootstrap(array.reshape((1,-1)), np.mean)
+   mean = bootstrapped.bootstrap_distribution.mean()
+   ci = bootstrapped.confidence_interval
+   stats = {name: mean, "ci_low": ci[0], "ci_high": ci[1], "error_low": mean - ci[0], "error_high": ci[1] - mean}
+   return stats
