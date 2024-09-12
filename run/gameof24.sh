@@ -1,0 +1,1 @@
+python gameof24.py --set test --n_agents 9 --max_steps 9 --k 1 --backtrack 0.5 --resampling linear_filtered --send_email
