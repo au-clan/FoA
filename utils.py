@@ -118,13 +118,26 @@ def update_actual_cost(api):
             current_cost = float(file.read())
     except FileNotFoundError:
         current_cost = 0  # If the file doesn't exist yet
+
+    try:
+        with open('groq_requests.txt', 'r') as file:
+            current_requests = float(file.read())
+    except FileNotFoundError:
+        current_requests = 0  # If the file doesn't exist yet
     
     api_cost = api.cost(actual_cost=True)["total_cost"]
-
     new_cost = current_cost + api_cost
+
+    api_requests = api.groq_requests
+    new_requests = current_requests + api_requests
 
     with open('actual_cost.txt', 'w') as file:
         file.write(str(new_cost))
+    
+    with open('groq_requests.txt', 'w') as file:
+        file.write(str(new_requests))
+
+    return
 
 
 WEBSHOP_URL = "http://10.90.39.11:3000"
@@ -741,3 +754,41 @@ def get_stats(array, name):
    ci = bootstrapped.confidence_interval
    stats = {name: mean, "ci_low": ci[0], "ci_high": ci[1], "error_low": mean - ci[0], "error_high": ci[1] - mean}
    return stats
+
+
+def merge_responses(responses):
+   # Given a list of OpenAI/Groq styled responses, merge them into a single response
+   # The responses are assumed to be in the same format and of the same input prompt
+
+    # Merge the responses
+    merged_response = responses[0]
+    prompt_usage = merged_response.usage.prompt_tokens
+
+    for i, response in enumerate(responses[1:], start=1):
+        
+        merged_response.choices.extend(response.choices)        
+        
+        assert prompt_usage == response.usage.prompt_tokens, f"Prompt tokens do not match for response {i}"
+        
+        
+        # Update the usage
+        merged_response.usage.completion_tokens += response.usage.completion_tokens
+        merged_response.usage.prompt_tokens     += 0                                  # Count prompt tokeny only once
+        merged_response.usage.total_tokens      += response.usage.completion_tokens   # Count prompt tokeny only once
+        
+        # Only for Groq (not for TogetherAI)
+        try:
+            merged_response.usage.completion_time   += response.usage.completion_time
+            merged_response.usage.prompt_time       += 0                                  # Count prompt tokeny only once
+            merged_response.usage.total_time        += response.usage.completion_time     # Count prompt tokeny only once
+            merged_response.usage.queue_time        += response.usage.queue_time
+        except AttributeError as e:
+           pass
+
+
+    # Set the correct index for each choice
+    for i, choice in enumerate(merged_response.choices):
+        choice.index = i
+
+    return merged_response        
+       
