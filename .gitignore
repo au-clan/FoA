@@ -1,4 +1,5 @@
 caches
+screens
 *.DS_Store
 *.pyc
 screenlog.*
@@ -6,6 +7,7 @@ screenlog.*
 logs_old
 n_sandboks.ipynb
 actual_cost.txt
+groq_requests.txt
 WebShop
 data/datasets/tw_games
 data/datasets/alfworld
