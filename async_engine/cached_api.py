@@ -66,6 +66,7 @@ class CachedOpenAIAPI:
                     "gpt-4-turbo-2024-04-09": {"access_token": "AZURE_OPENAI_KEY1LOC1", "endpoint": "key-1-18k"},
                     "gpt-4o-2024-05-13": {"access_token": "AZURE_OPENAI_KEY1LOC1", "endpoint": "key-1-18k"},
                     "gpt-4-0613-no-filter": {"access_token": "AZURE_OPENAI_KEY1LOC1", "endpoint": "key-1-18k"},
+                    "gpt-4o-2024-05-13-global": {"access_token": "AZURE_OPENAI_KEY1LOC1", "endpoint": "key-1-18k"},
                 }
 
                 # Configure access token and endpoint for the model
@@ -533,6 +534,7 @@ class CachedOpenAIAPI:
             "gpt-4-0125-preview": {"prompt_tokens": 0.01, "completion_tokens":0.03},
             "gpt-3.5-turbo-0125": {"prompt_tokens": 0.0005, "completion_tokens":0.0015},
             "gpt-4o-2024-05-13": {"prompt_tokens": 0.005, "completion_tokens":0.015},
+            "gpt-4o-2024-05-13-global": {"prompt_tokens": 0.005, "completion_tokens":0.015},
             
             # Llama 3.1 - TogetherAI
             "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo": {"prompt_tokens": 0.88/1000, "completion_tokens":0.88/1000},
