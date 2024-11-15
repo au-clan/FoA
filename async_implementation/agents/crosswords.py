@@ -5,14 +5,15 @@ import random
 from typing import Tuple
 
 from numpy import mean
-from async_implementation.prompts import crosswords as prompts
+from async_implementation.prompts.adapt import crosswords as adapt_prompts
+from async_implementation.prompts.totor import crosswords as totor_prompts
 from async_implementation.states.crosswords import CrosswordsState
 
 
 class CrosswordsAgent:
 
     @staticmethod
-    async def get_candidates(state: CrosswordsState, api, namespace, value_cache, n:int =2)-> dict:
+    async def get_candidates(state: CrosswordsState, api, namespace, candidate_cache, n:int =2)-> dict:
         """
         Given a state, return a dictionary of candidate actions along with its scores.
         """
@@ -20,11 +21,16 @@ class CrosswordsAgent:
         obs = CrosswordsState.render(state)
 
         # Return cached candidates if they exist
-        if obs in value_cache:
-            return value_cache[obs]
+        if obs in candidate_cache:
+            return candidate_cache[obs]
+
+        # Prepare the prompt
+        if any(author in api.model for author in ["meta", "google", "mistral", "gpt-4o"]):
+            prompt = adapt_prompts.propose_prompt.format(input=obs)
+        else:
+            prompt = totor_prompts.propose_prompt.format(input=obs)
 
         # Get candidate actions and their scores
-        prompt = prompts.propose_prompt.format(input=obs)
         coroutines = []
         for _ in range(n):
             coroutines.append(api.buffered_request(prompt, key=hash(state), namespace=namespace))
@@ -48,33 +54,82 @@ class CrosswordsAgent:
 
         #Update cache
         if len(filtered_candidate_to_score) > 0:
-            value_cache[obs] = filtered_candidate_to_score
+            candidate_cache[obs] = filtered_candidate_to_score
 
         # {"h1. apple": 2.5, "h2. banana": 1.0, "h3. apple": 0.5, "h4. apple": 0.4, "h5. apple": 0.3}
         return filtered_candidate_to_score
     
     @staticmethod
-    async def step(state: CrosswordsState, api, namespace, value_cache: dict)-> Tuple[CrosswordsState, str]:
+    async def step(state: CrosswordsState, api, namespace, candidate_cache: dict)-> Tuple[CrosswordsState, str]:
         """
         Given a state, returns the next state one.
         """
         # Get next step suggestions/actions and pick one of the ones with the highest value
-        tries=3 # Number of tries till valid suggestion found. Increasing it improves performance but maybe unfair to ToT.
-        for i in range(tries):
-            suggestions = await CrosswordsAgent.get_candidates(state, api, value_cache=value_cache, namespace=namespace)
-            # suggestions = {"h1. apple": 2.5, "h2. banana": 1.0, "h3. apple": 0.5, "h4. apple": 0.4, "h5. apple": 0.3}
-            if len(suggestions) > 0: # Suggestions found
+        
+        # suggestions = {"h1. apple": 2.5, "h2. banana": 1.0, "h3. apple": 0.5, "h4. apple": 0.4, "h5. apple": 0.3}
+        suggestions = await CrosswordsAgent.get_candidates(state, api, candidate_cache=candidate_cache, namespace=namespace)
+        suggestions = dict(sorted(suggestions.items(), key=lambda item: item[1], reverse=True))
+
+
+        # Pick the best allowed (by ToT) mutation
+        mutation_found = False
+        for action, _ in suggestions.items():
+            
+            # Get the position and word from the action
+            parsed_action = parse_action(action)
+            pos, word = parsed_action
+
+            # Assert the action is valid TODO: Maybe change to actual assert (?)
+            if len(parsed_action) != 2:
+                return 'Invalid! Format should be like "h1. apple"', 0, False, {}
+            if len(word) != 5:
+                return 'Invalid! Word should have 5 letters.', 0, False, {}
+            
+            # Compute new board by applying the action
+            new_board = state.board.copy()
+            if pos.startswith('h'):
+                idx = int(pos[1:]) - 1
+                new_board[idx*5:(idx+1)*5] = list(word.upper())
+            elif pos.startswith('v'):
+                idx = int(pos[1:]) - 1
+                new_board[idx::5] = list(word.upper())
+                idx += 5  # for later status update
+            else:
+                return 'Invalid! Position should be h1-h5 or v1-v5', 0, False, {}
+            
+            new_ans = CrosswordsState.get_ans(new_board)
+            new_status = [2 if any(letter != new_letter and letter != '_' for letter, new_letter in zip(ans, new_ans)) else status for status, ans, new_ans in zip(state.status, state.ans, new_ans)]
+            new_status[idx] = 1
+
+            if any(status == 2 for status in new_status):
+                # As per ToT: If the action changes a different word, discard it.
+                continue
+            else:
+                mutation_found = True
                 break
         
-        
-        if len(suggestions) == 0:
+        if mutation_found:
+            # Return the next mutation
+            random.seed(state.randomness)
+            next_state = CrosswordsState(
+                data=state.data,
+                board_gt=state.board_gt,
+                ans_gt=state.ans_gt,
+                board=new_board, 
+                ans=new_ans, 
+                status=new_status,
+                steps = state.steps + [action],
+                randomness=random.randint(0, 1000)
+                )
+            return next_state
+    
+        else:
             """
             TODO: Cleaner solution.
-            If this condition applies the ToT backtracks. In our case backtrack is replaced by resampling.
-            This is quite a hacky solution. Basically returns the same state with all answers filled incorrectly.
-            When this state is validated it returns {"r": -1} and resampling is forced in pruning.
+            If this no "mutation" is found the ToT backtracks. In our case backtrack is replaced by resampling.
+            This is quite a hacky solution. Basically returns the same state with all answers filled with "PRUNE".
+            This is a signal for our algorithm to prune the state.
             """
-            #print(f"No suggestions found for {namespace}")
             next_state = CrosswordsState(
             data=state.data,
             board_gt=state.board_gt,
@@ -86,59 +141,9 @@ class CrosswordsAgent:
             randomness=state.randomness
             )
             return next_state
-
-        suggestions_max_value = max(suggestions.values())
-        max_value_suggestions = [suggestion for suggestion, value in suggestions.items() if value == suggestions_max_value]
-        random.seed(state.randomness)
-        action = random.choice(max_value_suggestions)
-
-        #Parse the action
-        parsed_action = parse_action(action)
-
-        # Get the position and word from the action
-        pos, word = parsed_action
-        
-        # Assert the action is valid TODO: Maybe change to actual assert (?)
-        if len(parsed_action) != 2:
-            return 'Invalid! Format should be like "h1. apple"', 0, False, {}
-        if len(word) != 5:
-            return 'Invalid! Word should have 5 letters.', 0, False, {}
-        
-        # New board = Current board, before the action is implemented
-        new_board = state.board.copy()
-
-        # Update new board based on the action
-        if pos.startswith('h'):
-            idx = int(pos[1:]) - 1
-            new_board[idx*5:(idx+1)*5] = list(word.upper())
-        elif pos.startswith('v'):
-            idx = int(pos[1:]) - 1
-            new_board[idx::5] = list(word.upper())
-            idx += 5  # for later status update
-        else:
-            return 'Invalid! Position should be h1-h5 or v1-v5', 0, False, {}
-        
-        # Get new answer and status based on the current board
-        new_ans = CrosswordsState.get_ans(new_board)
-        new_status = [2 if any(letter != new_letter and letter != '_' for letter, new_letter in zip(ans, new_ans)) else status for status, ans, new_ans in zip(state.status, state.ans, new_ans)]
-        new_status[idx] = 1
-
-        # Return the next state
-        random.seed(state.randomness)
-        next_state = CrosswordsState(
-            data=state.data,
-            board_gt=state.board_gt,
-            ans_gt=state.ans_gt,
-            board=new_board, 
-            ans=new_ans, 
-            status=new_status,
-            steps = state.steps + [action],
-            randomness=random.randint(0, 1000)
-             )
-        return next_state
         
     @staticmethod
-    async def evaluate(state, api, namespace):
+    async def evaluate(state, api, namespace, value_cache):
         """
         Evaluates the current state and returns a value number.
         The state is evaluated line by line.
@@ -157,9 +162,18 @@ class CrosswordsAgent:
             ans = ' '.join(ans.lower())
             line = f'{data}: {ans}'
             
-            # Get a value for the line from the set {sure, maybe, impossible}
-            prompt = prompts.value_prompt.format(input=line)
-            response = await api.buffered_request(prompt, key=hash(state), namespace=namespace)
+            # Prepare the prompt
+            if any(author in api.model for author in ["meta", "google", "mistral", "gpt-4o"]):
+                prompt = adapt_prompts.value_prompt.format(input=line)
+            else:
+                prompt = totor_prompts.value_prompt.format(input=line)
+            
+            # Get a value for the line from the set {sure, maybe, impossible} 
+            if prompt in value_cache:
+                response = value_cache[prompt]
+            else:
+                response = await api.buffered_request(prompt, key=hash(state), namespace=namespace)
+                value_cache[prompt] = response
 
             # Azure-Filtered response
             if response is None:
@@ -170,7 +184,7 @@ class CrosswordsAgent:
             if parsed_response in count:
                 count[parsed_response] += 1
 
-        # Map the count to a value number    
+        # Map the count to a value number 
         value_map = {'impossible': -20, 'maybe': 5, 'sure': 20} #TODO: ad hoc
         value_number  = sum(value * value_map[name] for name, value in count.items())
         return max(value_number, 0)
@@ -206,25 +220,41 @@ class CrosswordsAgent:
         info = experiment_logs.pop("Info")
 
         metrics = {}
+        averages = []
         for puzzle_id, puzzle_results in experiment_logs.items():
             initial_puzzle = puzzle_results.pop("puzzle")       # Not needed just want to pop
             verifications = puzzle_results.pop("Verifications") # Not needed just want to pop
 
             max_actions = 0
-            metrics[puzzle_id] = {"r_letter": None, "r_word": None, "r_all": None}
+            actions2metrics = {}
             for agent_id, agent_results in puzzle_results.items():
                 for step_id, step_results in agent_results.items():
                     step_actions = len(step_results["Step"].split(" -> "))
+                    actions2metrics.setdefault(step_actions, []).append(step_results["metrics"])
                     if step_actions > max_actions:
                         max_actions = step_actions
                         metrics[puzzle_id] = step_results["metrics"]
             assert max_actions > 0, f"No actions found for {puzzle_id}"
+
+            # Averaging the metrics across agents
+            max_num_actions = max(actions2metrics.keys())
+            data = actions2metrics[max_actions]
+            averages_puzzle = {key: sum(d[key] for d in data) / len(data) for key in data[0]}
+            averages.append(averages_puzzle)
+
         
         r_letter = mean([metric["r_letter"] for metric in metrics.values()])
         r_word = mean([metric["r_word"] for metric in metrics.values()])
         r_all = mean([metric["r_all"] for metric in metrics.values()])
 
-        return {"r_letter": r_letter, "r_word": r_word, "r_all": r_all}
+        results = {"r_letter": r_letter, "r_word": r_word, "r_all": r_all}
+
+        overall = {key + "_av": sum(d[key] for d in averages) / len(averages) for key in averages[0]}
+
+        results.update(overall)
+        
+
+        return results
         
         
 
