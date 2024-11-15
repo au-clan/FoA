@@ -1,3 +1,19 @@
+bfs_prompt = '''Input: 2 8 8 14
+Possible next steps:
+2 + 8 = 10 (left: 8 10 14)
+8 / 2 = 4 (left: 4 8 14)
+14 + 2 = 16 (left: 8 8 16)
+2 * 8 = 16 (left: 8 14 16)
+8 - 2 = 6 (left: 6 8 14)
+14 - 8 = 6 (left: 2 6 8)
+14 /  2 = 7 (left: 7 8 8)
+14 - 2 = 12 (left: 8 8 12)
+Input: {input}
+Possible next steps:
+'''
+
+
+
 # 5-shot
 # TODO: 24 in input causes problems - Maybe solved
 
@@ -13,19 +29,7 @@ Possible next step and numbers left:
 '''
 
 # Taken from Tree of Thoughts paper
-bfs_prompt = '''Input: 2 8 8 14
-Possible next steps:
-2 + 8 = 10 (left: 8 10 14)
-8 / 2 = 4 (left: 4 8 14)
-14 + 2 = 16 (left: 8 8 16)
-2 * 8 = 16 (left: 8 14 16)
-8 - 2 = 6 (left: 6 8 14)
-14 - 8 = 6 (left: 2 6 8)
-14 /  2 = 7 (left: 7 8 8)
-14 - 2 = 12 (left: 8 8 12)
-Input: {input}
-Possible next steps:
-'''
+
 
 # Taken from Tree of Thoughts paper
 cot_prompt = '''Use numbers and basic arithmetic operations (+ - * /) to obtain 24. Each step, you are only allowed to choose two of the remaining numbers to obtain a new number.
