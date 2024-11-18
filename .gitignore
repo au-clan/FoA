@@ -1,14 +1,10 @@
 caches
+logs
 screens
 *.DS_Store
 *.pyc
 screenlog.*
 .env
-logs_old
-n_sandboks.ipynb
 actual_cost.txt
 groq_requests.txt
-WebShop
-data/datasets/tw_games
-data/datasets/alfworld
-all_trajs
+sandbox.ipynb

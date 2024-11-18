@@ -1,1 +1,0 @@
-python async_implementation/experiments/ws.py --set test --num_agents 15 --num_steps 10 --k 4 --backtrack 0.5 --resampling linear --n_evaluations 10 --send_email

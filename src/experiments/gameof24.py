@@ -20,29 +20,28 @@ from src.resampling.resampler import Resampler
 from data.data import GameOf24Data
 from utils import create_folder, email_notification, create_box, update_actual_cost
 
-log_folder = f"logs_recent/gameof24/{datetime.now().strftime("%m-%d/%H")}/" # Folder in which logs will be saved 
-#log_folder = f"logs_recent/gridsearch/gameof24/"
+log_folder = f"full_logs_gpt4/gameof24/cached/" # Folder in which logs will be saved 
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
 # that way we never pay for the same request twice
-cache_path = "../archive/FoA/caches/game24_septemberss"
-assert os.path.exists(cache_path), "Cache path does not eist"
-cache = Cache(cache_path, size_limit=int(2e10))
+assert os.path.exists(
+    "./caches/"), "Please run the script from the root directory of the project. To make sure all caches are created correctly."
+cache = Cache("./caches/gameof24", size_limit=int(2e10))
 
 step_api_config = eval_api_config = {
     "max_tokens": 100,
     "temperature": 0.7,
     "top_p": 1,
-    "request_timeout": 120,
-    "top_k": 50
+    "request_timeout": 60,
+    "use_azure": True,
 }
 
 # available models : gpt-35-turbo-0125, gpt-4-0125-preview, gpt-4-0613
 
 models = {
-    "step": {"model_name":"meta-llama/Llama-3.2-11B-Vision-Instruct-Turbo", "provider":"TogetherAI"},
-    "eval": {"model_name":"meta-llama/Llama-3.2-11B-Vision-Instruct-Turbo", "provider":"TogetherAI"},
+    "step": "gpt-4-0613",
+    "eval": "gpt-4-0613",
 }
 
 api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=2, verbose=True)
@@ -51,15 +50,19 @@ api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=
 # Setting up the data
 dataset = GameOf24Data()
 
+# Value cache
+value_cache = {}
+
+
 # ToDo: this should probably be moved to its own file
 # for now I'm keeping it here, for easier debugging
-async def foa_gameof24(api, puzzle_idx, puzzle, foa_options, barrier, seed, value_cache):
+async def foa_gameof24(api, puzzle_idx, puzzle, foa_options, barrier, seed):
     num_agents = foa_options["n_agents"]
     num_steps = foa_options["max_steps"]
 
     # Use batching API
-    step_batcher = BatchingAPI(api, batch_size=num_agents, timeout=2, model=models["step"]["model_name"], tab="step")
-    eval_batcher = BatchingAPI(api, batch_size=num_agents*3, timeout=2, model=models["eval"]["model_name"], tab="eval")
+    step_batcher = BatchingAPI(api, batch_size=num_agents, timeout=2, model=models["step"], tab="step")
+    eval_batcher = BatchingAPI(api, batch_size=num_agents*3, timeout=2, model=models["eval"], tab="eval")
 
     # Set randomness
     randomness = puzzle_idx + seed
@@ -115,7 +118,7 @@ async def foa_gameof24(api, puzzle_idx, puzzle, foa_options, barrier, seed, valu
 
         # Update state records
         foa_remaining_steps = num_steps - (step + 1)
-        task_required_steps = 0
+        task_required_steps = 4
         state_records = [(idx, value, state) for idx, value, state in state_records if  foa_remaining_steps >= task_required_steps - len(state.steps)] # Remove states that cannot finish in time
         state_records = [(idx, value, state) for idx, value, state in state_records if value>0] # Remove states with no value
 
@@ -156,7 +159,7 @@ async def foa_gameof24(api, puzzle_idx, puzzle, foa_options, barrier, seed, valu
         await barrier.wait()
 
         # Resampling : every k steps, evaluate and resample
-        if step < num_steps - 1 and foa_options["k"]>0 and step % foa_options["k"] == 0:
+        if step < num_steps - 1 and step % foa_options["k"] == 0:
             #temp_states = states.copy()
             #temp_state_steps = []
             #states = []
@@ -201,7 +204,7 @@ async def foa_gameof24(api, puzzle_idx, puzzle, foa_options, barrier, seed, valu
     return states, log
 
 
-async def run(run_options: dict, foa_options: dict, log_file: str):
+async def run(run_options: dict, foa_options: dict):
     """
     Inputs
         difficulty: Selects the starting index
@@ -212,21 +215,18 @@ async def run(run_options: dict, foa_options: dict, log_file: str):
     log = {}
     seed = run_options["seed"]
 
-    # Value cache
-    value_cache = {}
-
     # Get the data for each puzzle
     puzzle_idxs, puzzles = dataset.get_data(run_options["set"])
 
     ### Debugging
-    #puzzle_idxs, puzzles = puzzle_idxs[:20], puzzles[:20]
+    #puzzle_idxs, puzzles = puzzle_idxs[:10], puzzles[:10]
 
     # Barriers for each puzzle experiment
     barrier = asyncio.Barrier(len(puzzles))
 
     # Run FoA for each puzzle
     for puzzle_idx, puzzle in zip(puzzle_idxs, puzzles):
-        game_coroutines.append(foa_gameof24(api, puzzle_idx, puzzle, foa_options, barrier, seed, value_cache))
+        game_coroutines.append(foa_gameof24(api, puzzle_idx, puzzle, foa_options, barrier, seed))
     results = await asyncio.gather(*game_coroutines)
 
     # Merge logs for each run
@@ -234,20 +234,12 @@ async def run(run_options: dict, foa_options: dict, log_file: str):
     for l in logs:
         log.update(l)
 
+    step_cost = api.cost(tab_name="step")
+    evaluation_cost = api.cost(tab_name="eval")
+    total_cost = api.cost()
     log["Info"] = {}
-    log["Info"]["Cost"] = {
-        "Step": api.cost(tab_name="step"),
-        "Evaluation": api.cost(tab_name="eval"),
-        "Total cost": api.cost()
-    }
-    log["Info"]["Tokens"] = {
-        "Step": api.cost(tab_name="step", report_tokens=True),
-        "Evaluation": api.cost(tab_name="eval", report_tokens=True),
-        "Total cost": api.cost(report_tokens=True)
-    }
-    log["Info"]["Models"] = {"Step": models["step"], "Evaluation": models["eval"]}
-    log["Info"]["FoA options"] = foa_options
-    log["Info"]["Run options"] = run_options
+    log["Cost"] = {"Step": step_cost, "Evaluation": evaluation_cost, "Total cost": total_cost}
+    log["Models"] = {"Step": models["step"], "Evaluation": models["eval"]}
 
     # Save merged logs
     with open(log_folder + log_file, 'w+') as f:
@@ -274,86 +266,83 @@ def parse_args():
     args.add_argument("--max_steps", type=int, default=10)
     args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile", "linear_filtered"], default="linear")
     args.add_argument("--k", type=int, default=1)
+    args.add_argument("--seed", type=int, default=0)
     args.add_argument('--send_email', action=argparse.BooleanOptionalAction)
     args = args.parse_args()
     return args
 
-async def main():
-    args = parse_args()
 
-    # Select parameters
-    set = args.set                                                  # Set of data to be used
-    n_agents = args.n_agents                                        # Number of agents
-    k = args.k                                                      # Resampling every <k> steps
-    backtrack = args.backtrack                                      # Backtrack decaying coefficient
-    origin_value = 20 * 3 / backtrack if backtrack !=0 else 20 * 3  # The evaluation of the origin
-    num_steps = args.max_steps                                      # Max allowed steps
-    resampling_method = args.resampling                             # Resampling method
-    send_email = args.send_email                                    # Send email notification
+args = parse_args()
 
-    log_file_ = f"{set}_{n_agents}ag_{num_steps}st_{k}k_{origin_value}or_{backtrack}b_{resampling_method}.json"
-
-    foa_options = {
-        "n_agents": n_agents,
-        "k": k,
-        "origin_value": origin_value,
-        "max_steps": num_steps,
-        "backtrack": backtrack,
-        "resampling_method": resampling_method
-    }
+# Select parameters
+set = args.set                                                  # Set of data to be used
+n_agents = args.n_agents                                        # Number of agents
+k = args.k                                                      # Resampling every <k> steps
+backtrack = args.backtrack                                      # Backtrack decaying coefficient
+origin_value = 20 * 3 / backtrack if backtrack!=0 else 20 * 3   # The evaluation of the origin
+num_steps = args.max_steps                                      # Max allowed steps
+resampling_method = args.resampling                             # Resampling method
+seed = args.seed                                                # Seed for reproducibility
+send_email = args.send_email                                    # Send email notification
 
 
-    run_message = f"""Run options :
-        task : gameof24
-        set : {set}
-        num_agents : {n_agents}
-        k : {k}
-        num_steps : {num_steps}
-        backtrack : {backtrack}
-    """
-    print("\n"+create_box(run_message)+"\n")
+# Just for now so it's easier to change values and reduce noise
+log_file = f"{set}-set_{n_agents}agents_{num_steps}steps_{k}k_{origin_value}origin_{backtrack}backtrack_{resampling_method}-resampling.json"
 
-    repeats = 4
-    for seed in range(repeats):
-        log_file = log_file_.split(".json")[0] + f"_{seed}.json"
+if seed:
+    log_file = log_file.split(".json")[0] + f"_{seed}.json"
+run_options = {
+    "set":set,
+    "seed":seed
+}
 
-        run_options = {
-            "set":set,
-            "seed":seed
-        }
+foa_options = {
+    "n_agents": n_agents,
+    "k": k,
+    "origin_value": origin_value,
+    "max_steps": num_steps,
+    "backtrack": backtrack,
+    "resampling_method": resampling_method
+}
 
-        # Run
-        results = await run(run_options, foa_options, log_file=log_file)
 
-        # Total accuracy and cost computation
-        n_success = 0
-        for game in results:
-            verifications = [GameOf24Agent.verify(result) for result in game]
-            if {"r": 1} in verifications:
-                n_success += 1
-        accuracy = n_success * 100 / len(results)
-        print(f"Accuracy : {accuracy:.2f}\n")
-        print(f"File name : {log_file}\n\n\n\n\n")
+run_message = f"""Run options :
+    task : gameof24
+    set : {set}
+    num_agents : {n_agents}
+    k : {k}
+    num_steps : {num_steps}
+    backtrack : {backtrack}
+"""
+print("\n"+create_box(run_message)+"\n")
 
-        #Update actual cost.
-        update_actual_cost(api)
 
-        cost = api.cost(verbose=True)
-        cost = cost["total_cost"]
+# Run
+results = asyncio.run(run(run_options, foa_options))
 
-        # Empty api tabs
-        api.empty_tabs()
 
-        # Send email notification
-        if send_email:
-            subject = f"{seed+1}/5 :" + log_file
-            message = f"Accuracy : {accuracy}\nCost : {cost:.2f}"
-            try:
-                email_notification(subject=subject, message=message)
-                print("Email sent successfully.")
-            except:
-                print("Email failed to send.")
-                pass
+# Total accuracy and cost computation
+n_success = 0
+for game in results:
+    verifications = [GameOf24Agent.verify(result) for result in game]
+    if {"r": 1} in verifications:
+        n_success += 1
+accuracy = n_success * 100 / len(results)
+print(f"Accuracy : {accuracy:.2f}\n")
+print(f"File name : {log_file}\n\n\n\n\n")
 
-if __name__ == "__main__":
-    asyncio.run(main())
+#Update actual cost.
+update_actual_cost(api)
+
+cost = api.cost(verbose=True)
+
+# Send email notification
+if send_email:
+    subject = log_file
+    message = f"Accuracy : {accuracy}\nCost : {cost}"
+    try:
+        email_notification(subject=subject, message=message)
+        print("Email sent successfully.")
+    except:
+        print("Email failed to send.")
+        pass

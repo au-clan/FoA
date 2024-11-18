@@ -140,7 +140,7 @@ def update_actual_cost(api):
     return
 
 
-WEBSHOP_URL = "http://10.90.39.11:3000"
+WEBSHOP_URL = "http://10.90.38.15:3000"
 ACTION_TO_TEMPLATE = {
     'Description': 'description_page.html',
     'Features': 'features_page.html',

@@ -82,9 +82,9 @@ class WebShopData:
         if set == "mini":
             indices = list(range(5))
         elif set == "train":
-            indices = list(range(70, 85))
+            indices = list(range(70, 80))
         elif set == "validation":
-            indices = list(range(55, 70))
+            indices = list(range(55, 65))
         elif set == "test":
             indices = list(range(5, 55))
         elif set == "test1":

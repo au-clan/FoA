@@ -20,29 +20,28 @@ from src.resampling.resampler import Resampler
 from data.data import CrosswordsData
 from utils import create_folder, email_notification, create_box, update_actual_cost
 
-log_folder = f"logs_recent/crosswords/{datetime.now().strftime("%m-%d/%H")}/" # Folder in which logs will be saved 
-#log_folder = f"logs_recent/gridsearch/crosswords/" # Folder in which logs will be saved 
+log_folder = f"logs_recent/debug/crosswords/gridsearch2/" # Folder in which logs will be saved 
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
 # that way we never pay for the same request twice
 assert os.path.exists(
     "./caches/"), "Please run the script from the root directory of the project. To make sure all caches are created correctly."
-cache = Cache("./caches/crosswords_october", size_limit=int(2e10))
+cache = Cache("./caches/crosswords", size_limit=int(2e10))
 
 step_api_config = eval_api_config = {
     "max_tokens": 1000,
     "temperature": 0.7,
     "top_p": 1,
-    "request_timeout": 120,
-    "top_k": 50
+    "request_timeout": 45,
+    "use_azure": True,
 }
 
 # available models : gpt-35-turbo-0125, gpt-4-0125-preview, gpt-4-0613
 
 models = {
-    "step": {"model_name":"meta-llama/Llama-3.2-11B-Vision-Instruct-Turbo", "provider":"TogetherAI"},
-    "eval": {"model_name":"meta-llama/Llama-3.2-11B-Vision-Instruct-Turbo", "provider":"TogetherAI"},
+    "step": "gpt-35-turbo-0125",
+    "eval": "gpt-35-turbo-0125",
 }
 
 api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=2, verbose=True)
@@ -51,17 +50,19 @@ api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=
 # Setting up the data
 dataset = CrosswordsData()
 
+# Value cache
+value_cache = {}
 
 
 # ToDo: this should probably be moved to its own file
 # for now I'm keeping it here, for easier debugging
-async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed, candidate_cache, value_cache):
+async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed):
     num_agents = foa_options["n_agents"]
     num_steps = foa_options["max_steps"]
 
     # Use batching API
-    step_batcher = BatchingAPI(api, batch_size=num_agents*2, timeout=1, model=models["step"]["model_name"], tab="step")
-    eval_batcher = BatchingAPI(api, batch_size=num_agents*10, timeout=1, model=models["eval"]["model_name"], tab="eval")
+    step_batcher = BatchingAPI(api, batch_size=num_agents*2, timeout=1, model=models["step"], tab="step")
+    eval_batcher = BatchingAPI(api, batch_size=num_agents*10, timeout=1, model=models["eval"], tab="eval")
 
     # Set randomness
     randomness = puzzle_idx + seed
@@ -90,7 +91,7 @@ async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed, ca
     solution_found = False ### DEBUG: Just for now until I figure out something better
     for step in range(num_steps):
 
-        print(f"Step {step} : Stepping")
+        print(f"Step {step}")
 
         ### DEBUG: Just for now until I figure out something better
         if solution_found:
@@ -104,7 +105,7 @@ async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed, ca
         # Step : make one step for each state
         agent_coroutines = []
         for agent_id, state in enumerate(states):
-            agent_coroutines.append(CrosswordsAgent.step(state=state, api=step_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}"), candidate_cache=candidate_cache))
+            agent_coroutines.append(CrosswordsAgent.step(state=state, api=step_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}"), value_cache=value_cache))
         states = await asyncio.gather(*agent_coroutines)
 
         # Log - Steps
@@ -172,13 +173,12 @@ async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed, ca
         await barrier.wait()
 
         # Resampling : every k steps, evaluate and resample
-        if step < num_steps - 1 and foa_options["k"]>0 and step % foa_options["k"] == 0:
-            
-            print(f"Step {step} : Evaluating")
+        if step < num_steps - 1 and step % foa_options["k"] == 0:
+
             # Evaluation : each of the current states is given a value
             value_coroutines = []
             for agent_id, state in enumerate(states):
-                value_coroutines.append(CrosswordsAgent.evaluate(state=state, api=eval_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}"), value_cache=value_cache))
+                value_coroutines.append(CrosswordsAgent.evaluate(state=state, api=eval_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}")))
             values = await asyncio.gather(*value_coroutines)
 
             assert len(eval_batcher.futures) == 0, f"API futures should be empty, but are {len(eval_batcher.futures)}"
@@ -210,7 +210,7 @@ async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed, ca
     return states, log
 
 
-async def run(run_options: dict, foa_options: dict, log_file: str):
+async def run(run_options: dict, foa_options: dict):
     """
     Inputs
         difficulty: Selects the starting index
@@ -221,22 +221,18 @@ async def run(run_options: dict, foa_options: dict, log_file: str):
     log = {}
     seed = run_options["seed"]
 
-    # Value cache
-    candidate_cache = {} # ToT: MiniCrosswordsEnv.cache
-    value_cache = {} # ToT: MiniCrosswordsEnv.prompt_status_cache
-
     # Get the data for each puzzle
     puzzle_idxs, puzzles = dataset.get_data(run_options["set"])
 
     ### Debugging
-    #puzzle_idxs, puzzles = puzzle_idxs[:1], puzzles[:1]
+    #puzzle_idxs, puzzles = puzzle_idxs[-1:], puzzles[-1:]
 
     # Barriers for each puzzle experiment
     barrier = asyncio.Barrier(len(puzzles))
 
     # Run FoA for each puzzle
     for puzzle_idx, puzzle in zip(puzzle_idxs, puzzles):
-        game_coroutines.append(foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed, candidate_cache, value_cache))
+        game_coroutines.append(foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed))
     results = await asyncio.gather(*game_coroutines)
 
     # Merge logs for each run
@@ -244,25 +240,16 @@ async def run(run_options: dict, foa_options: dict, log_file: str):
     for l in logs:
         log.update(l)
 
+    # Get cost number
+    step_cost = api.cost(tab_name="step")
+    evaluation_cost = api.cost(tab_name="eval")
+    total_cost = api.cost()
     log["Info"] = {}
-    log["Info"]["Cost"] = {
-        "Step": api.cost(tab_name="step"),
-        "Evaluation": api.cost(tab_name="eval"),
-        "Total cost": api.cost()
-    }
-    log["Info"]["Tokens"] = {
-        "Step": api.cost(tab_name="step", report_tokens=True),
-        "Evaluation": api.cost(tab_name="eval", report_tokens=True),
-        "Total cost": api.cost(report_tokens=True)
-    }
+    log["Info"]["Cost"] = {"Step": step_cost, "Evaluation": evaluation_cost, "Total cost": total_cost}
     log["Info"]["Models"] = {"Step": models["step"], "Evaluation": models["eval"]}
-    log["Info"]["FoA options"] = foa_options
-    log["Info"]["Run options"] = run_options
 
     # Get metrics numbers
-    global metrics
     metrics = CrosswordsAgent.get_metrics(log.copy())
-    
     print(f"Metrics : {metrics}")
     log["Info"]["Metrics"] = metrics
 
@@ -289,84 +276,82 @@ def parse_args():
     args.add_argument("--n_agents", type=int, default=3)
     args.add_argument("--backtrack", type=float, default=0.25)
     args.add_argument("--max_steps", type=int, default=20)
-    args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile", "linear_filtered"], default="linear")
+    args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile"], default="linear")
     args.add_argument("--k", type=int, default=1)
+    args.add_argument("--seed", type=int, default=0)
     args.add_argument('--send_email', action=argparse.BooleanOptionalAction)
     args = args.parse_args()
     return args
 
-async def main():
-    args = parse_args()
 
-    # Select parameters
-    set = args.set                             # Set of data to be used
-    n_agents = args.n_agents                   # Number of agents
-    k = args.k                                 # Resampling every <k> steps
-    origin_value = 0                           # The evaluation of the origin
-    num_steps = args.max_steps                 # Max allowed steps
-    backtrack = args.backtrack                 # Backtrack decaying coefficient
-    resampling_method = args.resampling        # Resampling method
-    send_email = args.send_email               # Send email notification
+args = parse_args()
 
-    log_file_ = f"{set}_{n_agents}ag_{num_steps}st_{k}k_{backtrack}b_{resampling_method}.json"
-
-    foa_options = {
-        "n_agents": n_agents,
-        "k": k,
-        "origin_value": origin_value,
-        "max_steps": num_steps,
-        "backtrack": backtrack,
-        "resampling_method": resampling_method
-    }
+# Select parameters
+set = args.set                             # Set of data to be used
+n_agents = args.n_agents                   # Number of agents
+k = args.k                                 # Resampling every <k> steps
+origin_value = 0                           # The evaluation of the origin
+num_steps = args.max_steps                 # Max allowed steps
+backtrack = args.backtrack                 # Backtrack decaying coefficient
+resampling_method = args.resampling        # Resampling method
+seed = args.seed                           # Seed for reproducibility
+send_email = args.send_email               # Send email notification
 
 
-    run_message = f"""Run options :
-        task : crosswords
-        set : {set}
-        num_agents : {n_agents}
-        k : {k}
-        num_steps : {num_steps}
-        backtrack : {backtrack}
-    """
-    print("\n"+create_box(run_message)+"\n")
+# Just for now so it's easier to change values and reduce noise
+log_file = f"{set}-set_{n_agents}agents_{num_steps}steps_{k}k_{origin_value}origin_{backtrack}backtrack_{resampling_method}-resampling.json"
 
-    repeats = 5
-    for seed in range(repeats):
-        log_file = log_file_.split(".json")[0] + f"_{seed}.json"
+if seed:
+    log_file = log_file.split(".json")[0] + f"_{seed}.json"
+run_options = {
+    "set":set,
+    "seed":seed
+}
 
-        run_options = {
-            "set":set,
-            "seed":seed
-        }
-
-        # Run
-        results = await run(run_options, foa_options, log_file=log_file)
+foa_options = {
+    "n_agents": n_agents,
+    "k": k,
+    "origin_value": origin_value,
+    "max_steps": num_steps,
+    "backtrack": backtrack,
+    "resampling_method": resampling_method
+}
 
 
-        #TODO: Compute metrics to send the email
-        #metrics = get_metrics(...)
-        #print(f"Metrics : {accuracy:.2f}\n")
-        print(f"File name : {log_file}\n\n\n\n\n")
+run_message = f"""Run options :
+    task : crosswords
+    set : {set}
+    num_agents : {n_agents}
+    k : {k}
+    num_steps : {num_steps}
+    backtrack : {backtrack}
+"""
+print("\n"+create_box(run_message)+"\n")
 
-        #Update actual cost.
-        update_actual_cost(api)
 
-        cost = api.cost(verbose=True)
-        cost = cost["total_cost"]
+# Run
+results = asyncio.run(run(run_options, foa_options))
 
-        # Empty api tabs
-        api.empty_tabs()
 
-        # Send email notification
-        if send_email:
-            subject = f"{seed+1}/5 :" + log_file
-            message = f"Cost : {cost:.2f}\n\nMetrics : {metrics}"
-            try:
-                email_notification(subject=subject, message=message)
-                print("Email sent successfully.")
-            except:
-                print("Email failed to send.")
-                pass
+#TODO: Compute metrics to send the email
+with open(log_folder + log_file, 'r') as f:
+    data = json.load(f)
+metrics = data["Info"]["Metrics"]
+r_letter = float(metrics["r_letter"])
+print(f"File name : {log_file}\n\n\n\n\n")
 
-if __name__ == "__main__":
-    asyncio.run(main())
+#Update actual cost.
+update_actual_cost(api)
+
+cost = api.cost(verbose=True)
+
+# Send email notification
+if send_email:
+    subject = log_file
+    message = f"R_Letter : {r_letter:.3f}, Cost : {cost:.2f}"
+    try:
+        email_notification(subject=subject, message=message)
+        print("Email sent successfully.")
+    except:
+        print("Email failed to send.")
+        pass
