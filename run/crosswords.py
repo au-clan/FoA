@@ -20,7 +20,7 @@ from src.resampling.resampler import Resampler
 from data.data import CrosswordsData
 from utils import create_folder, email_notification, create_box, update_actual_cost
 
-log_folder = f"logs_recent/crosswords/{datetime.now().strftime("%m-%d/%H")}/" # Folder in which logs will be saved 
+log_folder = f"logs_recent/crosswords/{datetime.now().strftime("%m-%d/%H/%M")}/" # Folder in which logs will be saved 
 #log_folder = f"logs_recent/gridsearch/crosswords/" # Folder in which logs will be saved 
 create_folder(log_folder)
 
@@ -38,14 +38,20 @@ step_api_config = eval_api_config = {
     "top_k": 50
 }
 
-# available models : gpt-35-turbo-0125, gpt-4-0125-preview, gpt-4-0613
+# Models
+## "gpt-3.5-turbo-0125"
+## "gpt-4-0613"
+## "meta-llama/Llama-3.2-11B-Vision-Instruct-Turbo"
+## "meta-llama/Llama-3.2-90B-Vision-Instruct-Turbo"
+model = "gpt-4-0613"
+provider = "TogetherAI" if "meta" in model else "OpenAI"
 
 models = {
-    "step": {"model_name":"meta-llama/Llama-3.2-11B-Vision-Instruct-Turbo", "provider":"TogetherAI"},
-    "eval": {"model_name":"meta-llama/Llama-3.2-11B-Vision-Instruct-Turbo", "provider":"TogetherAI"},
+    "step": {"model_name":model, "provider":provider},
+    "eval": {"model_name":model, "provider":provider},
 }
 
-api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=2, verbose=True)
+api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=2, verbose=False)
 
 
 # Setting up the data
@@ -56,12 +62,15 @@ dataset = CrosswordsData()
 # ToDo: this should probably be moved to its own file
 # for now I'm keeping it here, for easier debugging
 async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed, candidate_cache, value_cache):
-    num_agents = foa_options["n_agents"]
-    num_steps = foa_options["max_steps"]
+    num_agents = foa_options["num_agents"]
+    num_steps = foa_options["num_steps"]
+    caching = bool(foa_options["caching"])
+    batching = bool(foa_options["batching"])
+    pruning = bool(foa_options["pruning"])
 
     # Use batching API
-    step_batcher = BatchingAPI(api, batch_size=num_agents*2, timeout=1, model=models["step"]["model_name"], tab="step")
-    eval_batcher = BatchingAPI(api, batch_size=num_agents*10, timeout=1, model=models["eval"]["model_name"], tab="eval")
+    step_batcher = BatchingAPI(api, batch_size=num_agents*2 if batching else 1, timeout=1, model=models["step"]["model_name"], tab="step")
+    eval_batcher = BatchingAPI(api, batch_size=num_agents*10 if batching else 1, timeout=1, model=models["eval"]["model_name"], tab="eval")
 
     # Set randomness
     randomness = puzzle_idx + seed
@@ -104,7 +113,7 @@ async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed, ca
         # Step : make one step for each state
         agent_coroutines = []
         for agent_id, state in enumerate(states):
-            agent_coroutines.append(CrosswordsAgent.step(state=state, api=step_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}"), candidate_cache=candidate_cache))
+            agent_coroutines.append(CrosswordsAgent.step(state=state, api=step_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}"), candidate_cache=candidate_cache, caching=caching))
         states = await asyncio.gather(*agent_coroutines)
 
         # Log - Steps
@@ -173,12 +182,11 @@ async def foa_crosswords(api, puzzle_idx, puzzle, foa_options, barrier, seed, ca
 
         # Resampling : every k steps, evaluate and resample
         if step < num_steps - 1 and foa_options["k"]>0 and step % foa_options["k"] == 0:
-            
-            print(f"Step {step} : Evaluating")
+
             # Evaluation : each of the current states is given a value
             value_coroutines = []
             for agent_id, state in enumerate(states):
-                value_coroutines.append(CrosswordsAgent.evaluate(state=state, api=eval_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}"), value_cache=value_cache))
+                value_coroutines.append(CrosswordsAgent.evaluate(state=state, api=eval_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}"), value_cache=value_cache, caching=caching))
             values = await asyncio.gather(*value_coroutines)
 
             assert len(eval_batcher.futures) == 0, f"API futures should be empty, but are {len(eval_batcher.futures)}"
@@ -229,7 +237,9 @@ async def run(run_options: dict, foa_options: dict, log_file: str):
     puzzle_idxs, puzzles = dataset.get_data(run_options["set"])
 
     ### Debugging
-    #puzzle_idxs, puzzles = puzzle_idxs[:1], puzzles[:1]
+    if run_options["debugging"] > 0:
+        n_puzzles = run_options["debugging"]
+        puzzle_idxs, puzzles = puzzle_idxs[:n_puzzles], puzzles[:n_puzzles]
 
     # Barriers for each puzzle experiment
     barrier = asyncio.Barrier(len(puzzles))
@@ -286,12 +296,17 @@ def parse_args():
     args = argparse.ArgumentParser()
 
     args.add_argument("--set", type=str, choices=["mini", "train", "validation", "test"], default="mini")
-    args.add_argument("--n_agents", type=int, default=3)
+    args.add_argument("--num_agents", type=int, default=3)
     args.add_argument("--backtrack", type=float, default=0.25)
-    args.add_argument("--max_steps", type=int, default=20)
-    args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile", "linear_filtered"], default="linear")
+    args.add_argument("--num_steps", type=int, default=20)
+    args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile", "linear_filtered", "max_unique"], default="linear")
     args.add_argument("--k", type=int, default=1)
     args.add_argument('--send_email', action=argparse.BooleanOptionalAction)
+    args.add_argument('--debugging', type=int, default=0)
+    args.add_argument('--pruning', type=int, default=1)
+    args.add_argument('--repeats', type=int, default=1)
+    args.add_argument('--caching', type=int, default=1)
+    args.add_argument('--batching', type=int, default=1)
     args = args.parse_args()
     return args
 
@@ -299,44 +314,52 @@ async def main():
     args = parse_args()
 
     # Select parameters
-    set = args.set                             # Set of data to be used
-    n_agents = args.n_agents                   # Number of agents
-    k = args.k                                 # Resampling every <k> steps
-    origin_value = 0                           # The evaluation of the origin
-    num_steps = args.max_steps                 # Max allowed steps
-    backtrack = args.backtrack                 # Backtrack decaying coefficient
-    resampling_method = args.resampling        # Resampling method
-    send_email = args.send_email               # Send email notification
+    set = args.set                                                  # Set of data to be used
+    num_agents = args.num_agents                                        # Number of agents
+    k = args.k                                                      # Resampling every <k> steps
+    backtrack = args.backtrack                                      # Backtrack decaying coefficient
+    origin_value = 0                                                # The evaluation of the origin
+    num_steps = args.num_steps                                      # Max allowed steps
+    resampling_method = args.resampling                             # Resampling method
+    send_email = args.send_email                                    # Send email notification
+    debugging = args.debugging                                      # Number of puzzles to run
+    pruning = args.pruning                                          # Whether to prune or not
+    repeats = args.repeats                                          # Number of times to repeat the experiment
+    caching = args.caching                                          # Whether to cache the evaluations or not
+    batching  = args.batching                                       # Whether to use batching or not
 
-    log_file_ = f"{set}_{n_agents}ag_{num_steps}st_{k}k_{backtrack}b_{resampling_method}.json"
+    log_file_ = f"{set}_{num_agents}ag_{num_steps}st_{k}k_{backtrack}b_{resampling_method}.json"
 
     foa_options = {
-        "n_agents": n_agents,
+        "num_agents": num_agents,
         "k": k,
         "origin_value": origin_value,
-        "max_steps": num_steps,
+        "num_steps": num_steps,
         "backtrack": backtrack,
-        "resampling_method": resampling_method
+        "resampling_method": resampling_method,
+        "pruning": pruning,
+        "caching": caching,
+        "batching": batching
     }
 
 
     run_message = f"""Run options :
         task : crosswords
         set : {set}
-        num_agents : {n_agents}
+        num_agents : {num_agents}
         k : {k}
         num_steps : {num_steps}
         backtrack : {backtrack}
     """
     print("\n"+create_box(run_message)+"\n")
 
-    repeats = 5
     for seed in range(repeats):
         log_file = log_file_.split(".json")[0] + f"_{seed}.json"
 
         run_options = {
             "set":set,
-            "seed":seed
+            "seed":seed,
+            "debugging":debugging
         }
 
         # Run

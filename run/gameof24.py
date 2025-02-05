@@ -20,14 +20,14 @@ from src.resampling.resampler import Resampler
 from data.data import GameOf24Data
 from utils import create_folder, email_notification, create_box, update_actual_cost
 
-log_folder = f"logs_recent/gameof24/{datetime.now().strftime("%m-%d/%H")}/" # Folder in which logs will be saved 
+log_folder = f"logs_recent/gameof24/{datetime.now().strftime("%m-%d/%H/%M")}/" # Folder in which logs will be saved 
 #log_folder = f"logs_recent/gridsearch/gameof24/"
 create_folder(log_folder)
 
 # you should use the same cache for every instance of CachedOpenAIAPI
 # that way we never pay for the same request twice
-cache_path = "../archive/FoA/caches/game24_septemberss"
-assert os.path.exists(cache_path), "Cache path does not eist"
+cache_path = "caches/gameof24__"
+#assert os.path.exists(cache_path), f"Cache path does not exist : {cache_path}"
 cache = Cache(cache_path, size_limit=int(2e10))
 
 step_api_config = eval_api_config = {
@@ -38,28 +38,34 @@ step_api_config = eval_api_config = {
     "top_k": 50
 }
 
-# available models : gpt-35-turbo-0125, gpt-4-0125-preview, gpt-4-0613
+model = "gpt-4-0613"
+provider = "TogetherAI" if "meta" in model else "OpenAI"
 
 models = {
-    "step": {"model_name":"meta-llama/Llama-3.2-11B-Vision-Instruct-Turbo", "provider":"TogetherAI"},
-    "eval": {"model_name":"meta-llama/Llama-3.2-11B-Vision-Instruct-Turbo", "provider":"TogetherAI"},
+    "step": {"model_name":model, "provider":provider},
+    "eval": {"model_name":model, "provider":provider},
 }
 
-api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=2, verbose=True)
+api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=2, verbose=False)
 
 
 # Setting up the data
 dataset = GameOf24Data()
 
+
+
 # ToDo: this should probably be moved to its own file
 # for now I'm keeping it here, for easier debugging
 async def foa_gameof24(api, puzzle_idx, puzzle, foa_options, barrier, seed, value_cache):
-    num_agents = foa_options["n_agents"]
-    num_steps = foa_options["max_steps"]
+    num_agents = foa_options["num_agents"]
+    num_steps = foa_options["num_steps"]
+    caching = bool(foa_options["caching"])
+    batching = bool(foa_options["batching"])
+    pruning = bool(foa_options["pruning"])
 
     # Use batching API
-    step_batcher = BatchingAPI(api, batch_size=num_agents, timeout=2, model=models["step"]["model_name"], tab="step")
-    eval_batcher = BatchingAPI(api, batch_size=num_agents*3, timeout=2, model=models["eval"]["model_name"], tab="eval")
+    step_batcher = BatchingAPI(api, batch_size=num_agents if batching else 1, timeout=2, model=models["step"]["model_name"], tab="step")
+    eval_batcher = BatchingAPI(api, batch_size=num_agents*3 if batching else 1, timeout=2, model=models["eval"]["model_name"], tab="eval")
 
     # Set randomness
     randomness = puzzle_idx + seed
@@ -131,49 +137,39 @@ async def foa_gameof24(api, puzzle_idx, puzzle, foa_options, barrier, seed, valu
         # Pruning
         temp_state_records = [(idx, value, state) for idx, value, state in state_records if state.steps!=[]]
         invalid_state_indices = [i for i, verification in enumerate(verifications) if verification["r"] == -1]
-        if len(temp_state_records) > 0:
-            # If there are eligible + evaluated states.
-            new_states, pruned_indices = resampler.resample(temp_state_records, len(invalid_state_indices), foa_options["resampling_method"])
-            states = [new_states.pop(0) if i in invalid_state_indices else state for i, state in enumerate(states)]
-            invalids_resolved = True
-        else:
-            # If there are no eligible + evaluated states.
-            pruned_indices = [None] * len(invalid_state_indices)
-            invalids_resolved = False
-
-        # Log - Pruning
-        for agent_id in range(num_agents):
-            if agent_id in invalid_state_indices:
-                pruned_indice = pruned_indices.pop(0)
-                if pruned_indice is None:
-                    log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": "NA"})
-                else:
-                    log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning" : {"Idx":temp_state_records[pruned_indice][0], "Pruned state": temp_state_records[pruned_indice][2].current_state, "Value": temp_state_records[pruned_indice][1], "Values": sorted([record[1] for record in state_records], reverse=True)}})
+        invalids_resolved = False
+        
+        if pruning:
+            if len(temp_state_records) > 0:
+                # If there are eligible + evaluated states.
+                new_states, pruned_indices = resampler.resample(temp_state_records, len(invalid_state_indices), foa_options["resampling_method"])
+                states = [new_states.pop(0) if i in invalid_state_indices else state for i, state in enumerate(states)]
+                invalids_resolved = True
             else:
-                log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": None})
+                # If there are no eligible + evaluated states.
+                pruned_indices = [None] * len(invalid_state_indices)
+
+            # Log - Pruning
+            for agent_id in range(num_agents):
+                if agent_id in invalid_state_indices:
+                    pruned_indice = pruned_indices.pop(0)
+                    if pruned_indice is None:
+                        log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": "NA"})
+                    else:
+                        log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning" : {"Idx":temp_state_records[pruned_indice][0], "Pruned state": temp_state_records[pruned_indice][2].current_state, "Value": temp_state_records[pruned_indice][1],}})
+                else:
+                    log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Pruning": None})
 
         # Synchronize experiments
         await barrier.wait()
 
         # Resampling : every k steps, evaluate and resample
         if step < num_steps - 1 and foa_options["k"]>0 and step % foa_options["k"] == 0:
-            #temp_states = states.copy()
-            #temp_state_steps = []
-            #states = []
-            #for state in temp_states:
-            #    if "->".join(state.steps) not in temp_state_steps:
-            #        states.append(state)
-            #        temp_state_steps.append("->".join(state.steps))
-            #if len(states) < len(temp_states):
-            #    print(f"Removed {len(temp_states) - len(states)} duplicate states.")
-            #else:
-            #    print("No duplicate states removed.")
-                
-            print(f"Step {step} : Evaluating")
+
             # Evaluation : each of the current states is given a value
             value_coroutines = []
             for agent_id, state in enumerate(states):
-                value_coroutines.append(GameOf24Agent.evaluate(state=state, api=eval_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}"), value_cache=value_cache))
+                value_coroutines.append(GameOf24Agent.evaluate(state=state, api=eval_batcher, namespace=(puzzle_idx, f"Agent: {agent_id}", f"Step : {step}"), value_cache=value_cache, caching=caching))
             values = await asyncio.gather(*value_coroutines)
 
             assert len(eval_batcher.futures) == 0, f"API futures should be empty, but are {len(eval_batcher.futures)}"
@@ -192,7 +188,7 @@ async def foa_gameof24(api, puzzle_idx, puzzle, foa_options, barrier, seed, valu
             
             # Log - Resampling
             for agent_id, resampled_idx in enumerate(resampled_indices):
-                log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Resampling": {"Idx":state_records[resampled_idx][0], "Resampled state": state_records[resampled_idx][2].current_state, "Value": state_records[resampled_idx][1], "Values": sorted([record[1] for record in state_records], reverse=True)}})
+                log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Resampling": {"Idx":state_records[resampled_idx][0], "Resampled state": state_records[resampled_idx][2].current_state, "Value": state_records[resampled_idx][1],}})
 
     verifications = [GameOf24Agent.verify(result) for result in states]
     log[puzzle_idx]["Input"] = puzzle
@@ -219,7 +215,9 @@ async def run(run_options: dict, foa_options: dict, log_file: str):
     puzzle_idxs, puzzles = dataset.get_data(run_options["set"])
 
     ### Debugging
-    #puzzle_idxs, puzzles = puzzle_idxs[:20], puzzles[:20]
+    if run_options["debugging"] > 0:
+        n_puzzles = run_options["debugging"]
+        puzzle_idxs, puzzles = puzzle_idxs[:n_puzzles], puzzles[:n_puzzles]
 
     # Barriers for each puzzle experiment
     barrier = asyncio.Barrier(len(puzzles))
@@ -269,12 +267,17 @@ def parse_args():
     args = argparse.ArgumentParser()
 
     args.add_argument("--set", type=str, choices=["mini", "train", "validation", "test"], default="mini")
-    args.add_argument("--n_agents", type=int, default=5)
+    args.add_argument("--num_agents", type=int, default=5)
     args.add_argument("--backtrack", type=float, default=0.6)
-    args.add_argument("--max_steps", type=int, default=10)
-    args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile", "linear_filtered"], default="linear")
+    args.add_argument("--num_steps", type=int, default=10)
+    args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile", "linear_filtered", "max_unique"], default="linear")
     args.add_argument("--k", type=int, default=1)
     args.add_argument('--send_email', action=argparse.BooleanOptionalAction)
+    args.add_argument('--debugging', type=int, default=0)
+    args.add_argument('--pruning', type=int, default=1)
+    args.add_argument('--repeats', type=int, default=1)
+    args.add_argument('--caching', type=int, default=1)
+    args.add_argument('--batching', type=int, default=1)
     args = args.parse_args()
     return args
 
@@ -283,43 +286,52 @@ async def main():
 
     # Select parameters
     set = args.set                                                  # Set of data to be used
-    n_agents = args.n_agents                                        # Number of agents
+    num_agents = args.num_agents                                    # Number of agents
     k = args.k                                                      # Resampling every <k> steps
     backtrack = args.backtrack                                      # Backtrack decaying coefficient
     origin_value = 20 * 3 / backtrack if backtrack !=0 else 20 * 3  # The evaluation of the origin
-    num_steps = args.max_steps                                      # Max allowed steps
+    num_steps = args.num_steps                                      # Max allowed steps
     resampling_method = args.resampling                             # Resampling method
     send_email = args.send_email                                    # Send email notification
+    debugging = args.debugging                                      # Number of puzzles to run
+    pruning = args.pruning                                          # Whether to prune or not
+    repeats = args.repeats                                          # Number of times to repeat the experiment
+    caching = args.caching                                          # Whether to cache the evaluations or not
+    batching  = args.batching                                       # Whether to use batching or not
 
-    log_file_ = f"{set}_{n_agents}ag_{num_steps}st_{k}k_{origin_value}or_{backtrack}b_{resampling_method}.json"
+    log_file_ = f"{set}_{num_agents}ag_{num_steps}st_{k}k_{origin_value}or_{backtrack}b_{resampling_method}.json"
 
     foa_options = {
-        "n_agents": n_agents,
+        "num_agents": num_agents,
         "k": k,
         "origin_value": origin_value,
-        "max_steps": num_steps,
+        "num_steps": num_steps,
         "backtrack": backtrack,
-        "resampling_method": resampling_method
+        "resampling_method": resampling_method,
+        "pruning": pruning,
+        "caching": caching,
+        "batching": batching
     }
 
 
     run_message = f"""Run options :
         task : gameof24
         set : {set}
-        num_agents : {n_agents}
+        num_agents : {num_agents}
         k : {k}
         num_steps : {num_steps}
         backtrack : {backtrack}
     """
     print("\n"+create_box(run_message)+"\n")
 
-    repeats = 4
     for seed in range(repeats):
         log_file = log_file_.split(".json")[0] + f"_{seed}.json"
 
         run_options = {
+            "task": "GameOf24",
             "set":set,
-            "seed":seed
+            "seed":seed,
+            "debugging":debugging
         }
 
         # Run
@@ -338,10 +350,11 @@ async def main():
         #Update actual cost.
         update_actual_cost(api)
 
+        # Get current cost for email
         cost = api.cost(verbose=True)
         cost = cost["total_cost"]
 
-        # Empty api tabs
+        # Empty api cost so multiple repeats are not cumulative
         api.empty_tabs()
 
         # Send email notification
@@ -354,6 +367,9 @@ async def main():
             except:
                 print("Email failed to send.")
                 pass
+
+
+
 
 if __name__ == "__main__":
     asyncio.run(main())
