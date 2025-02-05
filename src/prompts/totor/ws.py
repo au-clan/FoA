@@ -46,9 +46,6 @@ Action: click[3 ounce (pack of 1)]
 Observation: You have clicked 3 ounce (pack of 1). 
 
 Action: click[Buy Now]
-
-Follow the previous examples and their exact format to solve the next task. Remember your available actions are: [think, click, search]. Simply state the next action and nothing else.
-
 """
 
 # ReAct: https://arxiv.org/abs/2210.03629
