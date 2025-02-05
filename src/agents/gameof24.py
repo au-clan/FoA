@@ -49,7 +49,7 @@ class GameOf24Agent:
             suggestions = await api.buffered_request(prompt, key=hash(state), namespace=namespace)
 
             # State does not change, only the steps
-            selected_suggestion = "Answer: " + suggestions
+            selected_suggestion = suggestions
             selected_state = state.current_state
         else:
             # Set up BFS prompt
@@ -64,7 +64,7 @@ class GameOf24Agent:
             # parse suggestions, based on the current state
             parsed_suggestions = parse_suggestions(suggestions)
             if parsed_suggestions == []:
-                print(f"State: {state}")
+                print(f"No suggestions were paresed from state: {state}")
                 print(f"\nPrompt: {prompt}\nSuggestions: {suggestions}\nParsed suggestions: {' | '.join(parsed_suggestions)}\n")
                 assert False, "No suggestions found."
             
@@ -85,7 +85,7 @@ class GameOf24Agent:
 
 
     @staticmethod
-    async def evaluate(state: GameOf24State, api, value_cache, namespace, n=3):
+    async def evaluate(state: GameOf24State, api, value_cache, namespace, n=3, caching=True):
         last_step = state.steps[-1]
         
         # Should not happen
@@ -96,9 +96,7 @@ class GameOf24Agent:
                 prompt = llama_prompts.value_last_step_prompt.format(input=state.puzzle, answer=answer)
             else:
                 prompt = totor_prompts.value_last_step_prompt.format(input=state.puzzle, answer=answer)
-
-            error = f"""Current state '{state.current_state}'\nSteps: '{" -> ".join(state.steps)}'"""
-            print(f"Evaluating terminal state that is not correct : {state}")
+            #print(f"Evaluating terminal state that is not correct : {state}")
             return 0
         else:
             if any(author in api.model for author in ["meta", "google", "mistral", "gpt-4o"]):
@@ -106,7 +104,7 @@ class GameOf24Agent:
             else:
                 prompt = totor_prompts.value_prompt.format(input=state.current_state)
 
-        if prompt in value_cache:
+        if prompt in value_cache and caching:
             value_number = value_cache[prompt]
         
         else:

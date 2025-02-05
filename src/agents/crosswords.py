@@ -13,7 +13,7 @@ from src.states.crosswords import CrosswordsState
 class CrosswordsAgent:
 
     @staticmethod
-    async def get_candidates(state: CrosswordsState, api, namespace, candidate_cache, n:int =2)-> dict:
+    async def get_candidates(state: CrosswordsState, api, namespace, candidate_cache, n:int =2, caching=True)-> dict:
         """
         Given a state, return a dictionary of candidate actions along with its scores.
         """
@@ -21,7 +21,7 @@ class CrosswordsAgent:
         obs = CrosswordsState.render(state)
 
         # Return cached candidates if they exist
-        if obs in candidate_cache:
+        if obs in candidate_cache and caching:
             return candidate_cache[obs]
 
         # Prepare the prompt
@@ -60,14 +60,14 @@ class CrosswordsAgent:
         return filtered_candidate_to_score
     
     @staticmethod
-    async def step(state: CrosswordsState, api, namespace, candidate_cache: dict)-> Tuple[CrosswordsState, str]:
+    async def step(state: CrosswordsState, api, namespace, candidate_cache: dict, caching:bool = True)-> Tuple[CrosswordsState, str]:
         """
         Given a state, returns the next state one.
         """
         # Get next step suggestions/actions and pick one of the ones with the highest value
         
         # suggestions = {"h1. apple": 2.5, "h2. banana": 1.0, "h3. apple": 0.5, "h4. apple": 0.4, "h5. apple": 0.3}
-        suggestions = await CrosswordsAgent.get_candidates(state, api, candidate_cache=candidate_cache, namespace=namespace)
+        suggestions = await CrosswordsAgent.get_candidates(state, api, candidate_cache=candidate_cache, namespace=namespace, caching=caching)
         suggestions = dict(sorted(suggestions.items(), key=lambda item: item[1], reverse=True))
 
 
@@ -143,7 +143,7 @@ class CrosswordsAgent:
             return next_state
         
     @staticmethod
-    async def evaluate(state, api, namespace, value_cache):
+    async def evaluate(state, api, namespace, value_cache, caching: bool=True):
         """
         Evaluates the current state and returns a value number.
         The state is evaluated line by line.
@@ -169,7 +169,7 @@ class CrosswordsAgent:
                 prompt = totor_prompts.value_prompt.format(input=line)
             
             # Get a value for the line from the set {sure, maybe, impossible} 
-            if prompt in value_cache:
+            if prompt in value_cache and caching:
                 response = value_cache[prompt]
             else:
                 response = await api.buffered_request(prompt, key=hash(state), namespace=namespace)

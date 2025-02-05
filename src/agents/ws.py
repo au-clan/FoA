@@ -124,10 +124,10 @@ class WebShopAgent:
         return obs, reward, terminal
     
     
-    async def evaluate(self, api, value_cache, namespace, n=1,verbose=False):
+    async def evaluate(self, api, value_cache, namespace, n=1,verbose=False, caching=True):
         init_value_len = len(self.values)
         prompt = self.get_complete_prompt(type="eval")
-        if prompt in value_cache:
+        if prompt in value_cache and caching:
             value = value_cache[prompt]
         elif prompt.endswith("\nObservation: Invalid action!\n\nReflection: "):
             value = 0
