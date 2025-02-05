@@ -18,7 +18,7 @@ from src.agents.crosswords import CrosswordsAgent
 from src.states.crosswords import CrosswordsState
 from src.resampling.resampler import Resampler
 from data.data import CrosswordsData
-from utils import create_folder, email_notification, create_box, update_actual_cost
+from utils import create_folder, create_box, update_actual_cost
 
 log_folder = f"logs_recent/crosswords/{datetime.now().strftime("%m-%d/%H/%M")}/" # Folder in which logs will be saved 
 #log_folder = f"logs_recent/gridsearch/crosswords/" # Folder in which logs will be saved 
@@ -301,7 +301,6 @@ def parse_args():
     args.add_argument("--num_steps", type=int, default=20)
     args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile", "linear_filtered", "max_unique"], default="linear")
     args.add_argument("--k", type=int, default=1)
-    args.add_argument('--send_email', action=argparse.BooleanOptionalAction)
     args.add_argument('--debugging', type=int, default=0)
     args.add_argument('--pruning', type=int, default=1)
     args.add_argument('--repeats', type=int, default=1)
@@ -321,7 +320,6 @@ async def main():
     origin_value = 0                                                # The evaluation of the origin
     num_steps = args.num_steps                                      # Max allowed steps
     resampling_method = args.resampling                             # Resampling method
-    send_email = args.send_email                                    # Send email notification
     debugging = args.debugging                                      # Number of puzzles to run
     pruning = args.pruning                                          # Whether to prune or not
     repeats = args.repeats                                          # Number of times to repeat the experiment
@@ -365,10 +363,6 @@ async def main():
         # Run
         results = await run(run_options, foa_options, log_file=log_file)
 
-
-        #TODO: Compute metrics to send the email
-        #metrics = get_metrics(...)
-        #print(f"Metrics : {accuracy:.2f}\n")
         print(f"File name : {log_file}\n\n\n\n\n")
 
         #Update actual cost.
@@ -379,17 +373,6 @@ async def main():
 
         # Empty api tabs
         api.empty_tabs()
-
-        # Send email notification
-        if send_email:
-            subject = f"{seed+1}/5 :" + log_file
-            message = f"Cost : {cost:.2f}\n\nMetrics : {metrics}"
-            try:
-                email_notification(subject=subject, message=message)
-                print("Email sent successfully.")
-            except:
-                print("Email failed to send.")
-                pass
 
 if __name__ == "__main__":
     asyncio.run(main())

@@ -18,7 +18,7 @@ from src.agents.gameof24 import GameOf24Agent
 from src.states.gameof24 import GameOf24State
 from src.resampling.resampler import Resampler
 from data.data import GameOf24Data
-from utils import create_folder, email_notification, create_box, update_actual_cost
+from utils import create_folder, create_box, update_actual_cost
 
 log_folder = f"logs_recent/gameof24/{datetime.now().strftime("%m-%d/%H/%M")}/" # Folder in which logs will be saved 
 #log_folder = f"logs_recent/gridsearch/gameof24/"
@@ -272,7 +272,6 @@ def parse_args():
     args.add_argument("--num_steps", type=int, default=10)
     args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile", "linear_filtered", "max_unique"], default="linear")
     args.add_argument("--k", type=int, default=1)
-    args.add_argument('--send_email', action=argparse.BooleanOptionalAction)
     args.add_argument('--debugging', type=int, default=0)
     args.add_argument('--pruning', type=int, default=1)
     args.add_argument('--repeats', type=int, default=1)
@@ -292,7 +291,6 @@ async def main():
     origin_value = 20 * 3 / backtrack if backtrack !=0 else 20 * 3  # The evaluation of the origin
     num_steps = args.num_steps                                      # Max allowed steps
     resampling_method = args.resampling                             # Resampling method
-    send_email = args.send_email                                    # Send email notification
     debugging = args.debugging                                      # Number of puzzles to run
     pruning = args.pruning                                          # Whether to prune or not
     repeats = args.repeats                                          # Number of times to repeat the experiment
@@ -350,23 +348,8 @@ async def main():
         #Update actual cost.
         update_actual_cost(api)
 
-        # Get current cost for email
-        cost = api.cost(verbose=True)
-        cost = cost["total_cost"]
-
         # Empty api cost so multiple repeats are not cumulative
         api.empty_tabs()
-
-        # Send email notification
-        if send_email:
-            subject = f"{seed+1}/5 :" + log_file
-            message = f"Accuracy : {accuracy}\nCost : {cost:.2f}"
-            try:
-                email_notification(subject=subject, message=message)
-                print("Email sent successfully.")
-            except:
-                print("Email failed to send.")
-                pass
 
 
 

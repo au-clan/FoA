@@ -36,27 +36,6 @@ def sigmoid(x):
     "Sigmoid function"
     return 1 / (1 + np.exp(-x))
 
-
-def email_notification(subject: str, message: str, reciever_email: str="nearchospot@gmail.com"):
-
-    sender_email = "nearchospot@gmail.com"
-
-    text = f"Subject: {subject}\n\n{message}"
-
-    server = smtplib.SMTP("smtp.gmail.com", 587)
-    server.starttls()
-
-    try:
-        google_app_pass = os.environ.get("GOOGLE_APP_PASS")
-    except:
-        raise EnvironmentError("Environment variable <GOOGLE_APP_PASS> not found")
-    
-    google_app_pass = os.environ.get("GOOGLE_APP_PASS")
-    server.login(sender_email, google_app_pass)
-
-    server.sendmail(sender_email, reciever_email, text)
-    return
-
 def compare_json_files(file_path1, file_path2):
     """
     Just for debugging purposes. Compares two JSON files and returns True if they are the same, False otherwise.

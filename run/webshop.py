@@ -16,7 +16,7 @@ from src.agents.ws import WebShopAgent
 from async_engine.cached_api import CachedOpenAIAPI
 from async_engine.batched_api import BatchingAPI
 from data.data import WebShopData
-from utils import create_folder, email_notification, create_box, update_actual_cost
+from utils import create_folder, create_box, update_actual_cost
 
 # Clear terminal
 os.system('cls' if os.name == 'nt' else 'clear')
@@ -296,7 +296,6 @@ def parse_args():
     args.add_argument("--num_steps", type=int, default=5)
     args.add_argument("--resampling", type=str, choices=["linear", "logistic", "max", "percentile", "linear_filtered", "max_unique"], default="linear")
     args.add_argument("--k", type=int, default=1)
-    args.add_argument('--send_email', action=argparse.BooleanOptionalAction)
     args.add_argument('--debugging', type=int, default=0)
     args.add_argument('--pruning', type=int, default=1)
     args.add_argument('--repeats', type=int, default=1)
@@ -319,7 +318,6 @@ async def main():
     origin_value = args.origin_value                                # The evaluation of the origin 
     num_steps = args.num_steps                                      # Max allowed steps
     resampling_method = args.resampling                             # Resampling method
-    send_email = args.send_email                                    # Send email notification
     debugging = args.debugging                                      # Number of puzzles to run
     pruning = args.pruning                                          # Whether to prune or not
     repeats = args.repeats                                          # Number of times to repeat the experiment
@@ -378,23 +376,8 @@ async def main():
         #Update actual cost.
         update_actual_cost(api)
 
-        # Get current cost for email
-        cost = api.cost(verbose=True)
-        cost = cost["total_cost"]
-
         # Empty api cost so multiple repeats are not cumulative
         api.empty_tabs()
-
-        # Send email notification
-        if send_email:
-            subject = f"{seed+1}/{repeats} :" + log_file
-            message = '\n'.join(f'{key.capitalize()}: {value}' for key, value in metrics.items()) + f"\nCost : {cost:.2f}"
-            try:
-                email_notification(subject=subject, message=message)
-                print("Email sent successfully.")
-            except:
-                print("Email failed to send.")
-                pass
 
 
 
