@@ -4,7 +4,6 @@ import json
 import random
 import argparse
 
-from diskcache import Cache
 from datetime import datetime
 
 # TODO: Not sure if this is optimal, I didn't know how else to handle the package paths
@@ -12,7 +11,7 @@ import sys
 
 sys.path.append(os.getcwd()) # Project root!!
 
-from async_engine.cached_api import CachedOpenAIAPI
+from async_engine.api import API
 from async_engine.batched_api import BatchingAPI
 from src.agents.crosswords import CrosswordsAgent
 from src.states.crosswords import CrosswordsState
@@ -23,12 +22,6 @@ from utils import create_folder, create_box, update_actual_cost
 log_folder = f"logs_recent/crosswords/{datetime.now().strftime("%m-%d/%H/%M")}/" # Folder in which logs will be saved 
 #log_folder = f"logs_recent/gridsearch/crosswords/" # Folder in which logs will be saved 
 create_folder(log_folder)
-
-# you should use the same cache for every instance of CachedOpenAIAPI
-# that way we never pay for the same request twice
-assert os.path.exists(
-    "./caches/"), "Please run the script from the root directory of the project. To make sure all caches are created correctly."
-cache = Cache("./caches/crosswords_october", size_limit=int(2e10))
 
 step_api_config = eval_api_config = {
     "max_tokens": 1000,
@@ -51,7 +44,7 @@ models = {
     "eval": {"model_name":model, "provider":provider},
 }
 
-api = CachedOpenAIAPI(cache, eval_api_config, models=models.values(), resources=2, verbose=False)
+api = API(eval_api_config, models=models.values(), resources=2, verbose=False)
 
 
 # Setting up the data

@@ -1,26 +1,21 @@
 import os
 import time
 import asyncio
-import logging
 
 from copy import deepcopy
 from collections import Counter
 
 import openai
 import together
-from deepdiff import DeepHash
-from openai import AsyncAzureOpenAI, AsyncOpenAI
+from openai import AsyncOpenAI
 from together import AsyncTogether
 from groq import AsyncGroq
 
 from async_engine.round_robin_manager import AsyncRoundRobin
-from utils import create_box, merge_responses
+from utils import merge_responses
 
-logger = logging.getLogger(__name__)
-
-
-class CachedOpenAIAPI:
-    def __init__(self, cache, config, models,
+class API:
+    def __init__(self, config, models,
                  resources=1,
                  sleep_time=5,
                  sleep_factor=3,
@@ -29,7 +24,6 @@ class CachedOpenAIAPI:
                  verbose=True,
                  **kwargs):
 
-        self.cache = cache
         self.verbose = verbose
 
         # we'll use a resource manager to cycle through keys
@@ -56,42 +50,8 @@ class CachedOpenAIAPI:
 
             # Save provider for specific model
             self.providers[model_name] = provider
-
-            if provider == "Azure":
-                model2keys = {
-                    "gpt-4-0613": {"access_token": "AZURE_OPENAI_KEY2LOC1", "endpoint": "key-2"},
-                    "gpt-35-turbo-0613": {"access_token": "AZURE_OPENAI_KEY2LOC1", "endpoint": "key-2"},
-                    "gpt-35-turbo-0125" : {"access_token":"AZURE_OPENAI_KEY1LOC4", "endpoint": "key-1-18k-loc4"},
-                    "gpt-4-0125-preview": {"access_token":"AZURE_OPENAI_KEY2LOC3", "endpoint": "key-2-loc3"},
-                    "gpt-4-turbo-2024-04-09": {"access_token": "AZURE_OPENAI_KEY1LOC1", "endpoint": "key-1-18k"},
-                    "gpt-4o-2024-05-13": {"access_token": "AZURE_OPENAI_KEY1LOC1", "endpoint": "key-1-18k"},
-                    "gpt-4-0613-no-filter": {"access_token": "AZURE_OPENAI_KEY1LOC1", "endpoint": "key-1-18k"},
-                    "gpt-4o-2024-05-13-global": {"access_token": "AZURE_OPENAI_KEY1LOC1", "endpoint": "key-1-18k"},
-                }
-
-                # Configure access token and endpoint for the model
-                access_token = model2keys.get(model_name, {}).get("access_token", False)
-                endpoint = model2keys.get(model_name, {}).get("endpoint", False)
-                assert bool(access_token and endpoint), f"Model {model_name} not supported!"
-
-                # Get the api key of the model
-                api_key = os.getenv(access_token)
-                assert api_key, f"Access token '{access_token}' not found in environment variables!"
-                print(f"Added access token {access_token} for model {model}.")
-
-                # Client Setup
-                self.clients[model_name]= AsyncAzureOpenAI(
-                    azure_endpoint="https://"+endpoint+".openai.azure.com/",
-                    api_key=api_key,
-                    api_version="2024-02-15-preview"
-                )
-
-                # Limiter Setup
-                self.limiters[model_name] = AsyncRoundRobin()
-                for _ in range(resources):
-                    self.limiters[model_name].add_resource(data=api_key)
             
-            elif provider == "Groq":
+            if provider == "Groq":
 
                 # Get the api key for Groq
                 access_token = "GROQ_API_KEY"
@@ -109,7 +69,7 @@ class CachedOpenAIAPI:
             elif provider == "TogetherAI":
 
                 # Get the api key for TogetherAI
-                access_token = "TOGETHER_API_KEY_DLAB"
+                access_token = "TOGETHER_API_KEY"
                 api_key = os.getenv(access_token)
                 assert api_key, f"Access token '{access_token}' not found in environment variables!"
 
@@ -136,9 +96,8 @@ class CachedOpenAIAPI:
                 for _ in range(resources):
                     self.limiters[model_name].add_resource(data=api_key)
                 
-
             else:
-                raise NotImplementedError(f"Provider '{provider}' not supported.\nSupported providers are : Azure, Groq, OpenAI")
+                raise NotImplementedError(f"Provider '{provider}' not supported.\nSupported providers are : Groq, TogetherAI and OpenAI")
 
         # Save config
         config = deepcopy(config)
@@ -152,7 +111,6 @@ class CachedOpenAIAPI:
 
     async def request(self, messages, namespaces, model: str=None, request_timeout: int=30, tab: str="default"):
         """
-        CACHED request to the OpenAI API.
         Input:
         - messages: The prompt
         - namespaces: List of namespace. Each namespace is attributed its own cache entry.
@@ -160,19 +118,6 @@ class CachedOpenAIAPI:
         - tab: The tab for which the request is made
 
         Tabs (self.tabs) : Whoever calls this function can specify a tab. The API tracks the cost for each tab independently.
-        
-        The function is executed in the following steps:
-        Step 1. Setup : 
-            - Sets up the cache config for each namesapce and gets the respective cache key, cahce entry and used count.
-        Step 2. Prepare number of requests:
-            - Seperates the number of total requests needed for each namespace to number of requests from cache and number of requests from API.
-        Step 3. Request from API:
-            - Requests the total number of requests (no matter the namespace) from the API into responses.
-        Step 4. Requests redistribution:
-            - For each namespace, according to the computed number of requests needed from the cache, load the number of requests needed from the cache and update the cache entry and used count.
-            - For each namespace, according to the computed number of requests needed from the API, pop the number of responses needed from the API responses and update the cache entry and used count.
-        Step 5. Rearrange responses:
-            - Rearranges the responses to match the order of the input namespace list.
         """
 
         if tab not in self.tabs or model not in self.tabs[tab]:
@@ -189,146 +134,50 @@ class CachedOpenAIAPI:
             request_timeout = self.config["request_timeout"]
 
         # Check if the request is cached
-        cache_config = deepcopy(self.config)
-        cache_config["model"] = model
+        request_config = deepcopy(self.config)
+        request_config["model"] = model
 
         # we keep only those keys that are relevant for the answer generation
         keep_keys = ["model", "temperature", "max_tokens", "top_p", "presence_penalty", "frequency_penalty", "stop"]
-        cache_config = {k: v for k, v in cache_config.items() if k in keep_keys}
+        request_config = {k: v for k, v in request_config.items() if k in keep_keys}
 
-        # now we also need to add the messages to the cache_config
-        cache_config["messages"] = messages
+        # now we also need to add the messages to the CACHE_CONFIG
+        request_config["messages"] = messages
 
-        namespace_counter = Counter(namespaces)
-        responses_per_namespace = {}
 
-        cache_configs = []
-        for namespace in namespace_counter.keys():
-            temp_cache_config = deepcopy(cache_config)
-            temp_cache_config["namespace"] = namespace
-            cache_configs.append(temp_cache_config)
-
-        # NOTE: Updated cache structure to save cost
-        # Cache structure {cache_key : cache_entry, ...}
-        # Cache entry structure : [(message, completion_tokens, prompt_tokens), ...]
-
-        # use DeepHash to create a key for the cache
-        cache_keys = [DeepHash(cc)[cc] for cc in cache_configs]
-        cache_entries = []
-        for cache_key in cache_keys:
-            cache_entry = self.cache.get(cache_key)
-            if cache_entry is None:
-                cache_entry = []
-            cache_entries.append(cache_entry)
-
-        # Get the number of times this cached entry has been used and update the count
-        used_counts = [self.used_count.get(cache_key, 0) for cache_key in cache_keys]
-        
-        # Unrelated stuff to be fixed if we want to use this  
-        # -- Does not consider prompt cost
-        
-        ##-- Step 2. Prepare number of requests --##
-        # Compute the number of samples needed from the cache and from the API
-        for n, namespace, used_count, cache_entry, cache_key in zip(namespace_counter.values(), namespace_counter.keys(), used_counts, cache_entries, cache_keys):
-            cached_available = len(cache_entry[used_count:])
-            n_from_cache = min(n, cached_available)
-            n_from_api = n - n_from_cache
-            assert n_from_api >= 0
-
-            responses_per_namespace[namespace] = {"cached": n_from_cache, "api": n_from_api}
-        
-        n_from_api_total = sum(responses_per_namespace[namespace]["api"] for namespace in responses_per_namespace)
-        n_from_cache_total = sum(responses_per_namespace[namespace]["cached"] for namespace in responses_per_namespace)
-
-        if n_from_cache_total > 0 and self.verbose:
-            print(f"Using {n_from_cache_total} cached samples")
-
-        ##-- Step 3. Request from API --##
-        # Request the samples from the API
-        if n_from_api_total > 0:
+        n = len(namespaces)
+        if n > 0:
             if self.verbose:
-                print(f"Requesting {n_from_api_total} samples")
+                print(f"Requesting {n} samples")
 
             start = time.time()
             async with self.limiters[model] as resource:
                 self.clients[model].api_key = resource.data
 
                 if self.providers[model] == "Groq":
-                    response = await self.groq_request(model, n_from_api_total, cache_config, request_timeout)
+                    response = await self.groq_request(model, n, request_config, request_timeout)
                 elif self.providers[model] == "TogetherAI":
-                    response = await self.together_request(model, n_from_api_total, cache_config, request_timeout)
+                    response = await self.together_request(model, n, request_config, request_timeout)
                 else:
-                    response = await self.openai_request(model, n_from_api_total, cache_config, request_timeout)
-                # if self.providers[model] in ["Azure", "OpenAI"]:
-                #     response = await self.openai_request(model, n_from_api_total, cache_config, request_timeout)
-                # else:
-                #     response = await self.groq_request(model, n_from_api_total, cache_config, request_timeout)
-                raw_responses = [(choice.message.content, response.usage.completion_tokens/n_from_api_total, response.usage.prompt_tokens) for choice in response.choices]
+                    response = await self.openai_request(model, n, request_config, request_timeout)
 
-                for retry_count in range(10):
-                    if any([r[0] is None for r in raw_responses]):
-                        if self.verbose:
-                            print(f"Some choices are None, retrying (retry : {retry_count+1})")
-                        raw_responses = [r for r in raw_responses if r[0] is not None]
-                        n_empty = n_from_api_total - len(raw_responses)
-                        if self.providers[model] in ["Azure", "OpenAI"]:
-                            response = await self.openai_request(model, n_empty, cache_config, request_timeout)
-                        else:
-                            response = await self.groq_request(model, n_empty, cache_config, request_timeout)
-                        raw_responses.extend([(choice.message.content, response.usage.completion_tokens/n_from_api_total, response.usage.prompt_tokens) for choice in response.choices])
+                raw_responses = [(choice.message.content, response.usage.completion_tokens/n, response.usage.prompt_tokens) for choice in response.choices]
 
                 stop = time.time()
-                # by communicating the tokens and time used to the resource manager, we can optimize the rate of requests
-                # or maybe we're just using a very simple round robin strategy ;)
-                # ToDo: I have a super sophisticated and only slightly buggy implementation of a leaky bucket rate limiting algo
-                # for GPT3.5 it works worse than round robin, I think because the rate limit for gpt3.5 are so high that it's
-                # easier to just get out of the way and let the next request through
-                # but for GPT4 I've found the leaky bucket to be very more efficient
+
                 time_taken = stop - start
                 tokens_used = response.usage.total_tokens
                 resource.free(time_taken=time_taken, amount_used=tokens_used)
+        
+        self.tabs[tab][model]["completion_tokens"] += sum([response[1] for response in raw_responses])
+        self.tabs[tab][model]["prompt_tokens"] += raw_responses[0][2]
+        responses = [response[0] for response in raw_responses]
 
-                for r in raw_responses:
-                    if r[0] is None:
-                        print(create_box("No content in raw response"))
-                        for a in response.choices:
-                            print(a)
-                        
-                        exit()
-                    
-
-        ##-- Step 4. Requests redistribution --##
-        for n, namespace, used_count, cache_entry, cache_key in zip(namespace_counter.values(), namespace_counter.keys(), used_counts, cache_entries, cache_keys):
-            
-            # Update responses from cache
-            n_cache = responses_per_namespace[namespace]["cached"]
-            cached_responses = [entry for entry in cache_entry[used_count:used_count+n_cache]]
-            self.tabs[tab][model]["completion_tokens"] += sum([entry[1] for entry in cached_responses])
-            self.used_count[cache_key] = self.used_count.get(cache_key, 0) + n_cache
-            responses.extend([entry[0] for entry in cached_responses])
-
-            # Update responses from API
-            n_api = responses_per_namespace[namespace]["api"]
-            api_responses = [raw_responses.pop(0) for _ in range(n_api)]
-            cache_entry.extend(api_responses)
-            self.cache.set(cache_key, cache_entry)
-            self.tabs[tab][model]["completion_tokens"] += sum([response[1] for response in api_responses])
-            self.tabs[tab][model]["actual_completion_tokens"] += sum([response[1] for response in api_responses]) 
-            self.used_count[cache_key] =  self.used_count.get(cache_key, 0) + n_api
-            responses.extend([response[0] for response in api_responses])   
-
-        # Pormpt cost
-        if n_api != 0:
-            self.tabs[tab][model]["prompt_tokens"] += api_responses[0][2]
-            self.tabs[tab][model]["actual_prompt_tokens"] += api_responses[0][2]
-        elif n_cache != 0:
-            self.tabs[tab][model]["prompt_tokens"] += cached_responses[0][2]
-        else:
-            raise Exception("Both n_api and n_cache are zero. This should not happen.")
         
         ##-- Step 5. Rearrange responses --##
         initial_responses = responses.copy()
         mapping = {}
+        namespace_counter = Counter(namespaces)
         for k,v in namespace_counter.items():
             mapping[k] = []
             for i in range(v):
@@ -345,7 +194,7 @@ class CachedOpenAIAPI:
 
 
 
-    async def groq_request(self, model, n, cache_config, request_timeout=30):
+    async def groq_request(self, model, n, CACHE_CONFIG, request_timeout=30):
         responses = []
         
         # Groq currently only allows n=1
@@ -355,11 +204,11 @@ class CachedOpenAIAPI:
                 try:
                     self.groq_requests += 1
                     single_response = await asyncio.wait_for(self.clients[model].chat.completions.create(
-                    **cache_config,
-                    # messages=cache_config["messages"],
-                    # model=cache_config["model"],
-                    # temperature=cache_config["temperature"],
-                    # max_tokens=cache_config["max_tokens"],
+                    **CACHE_CONFIG,
+                    # messages=CACHE_CONFIG["messages"],
+                    # model=CACHE_CONFIG["model"],
+                    # temperature=CACHE_CONFIG["temperature"],
+                    # max_tokens=CACHE_CONFIG["max_tokens"],
                     # timeout=request_timeout,
                     n=1), timeout=request_timeout)
                     assert single_response is not None
@@ -399,7 +248,7 @@ class CachedOpenAIAPI:
         return response
         
 
-    async def together_request(self, model, n, cache_config, request_timeout=30):
+    async def together_request(self, model, n, CACHE_CONFIG, request_timeout=30):
         n_original = n # Used to later verify that all n requests were made
         max_n = 16 # Together AI currently only allows n<=16
         responses = []
@@ -409,11 +258,11 @@ class CachedOpenAIAPI:
                 self.current_sleep_time = min(self.current_sleep_time, self.max_sleep)
                 try:
                     single_response = await asyncio.wait_for(self.clients[model].chat.completions.create(
-                        **cache_config,
-                        # messages=cache_config["messages"],
-                        # model=cache_config["model"],
-                        # temperature=cache_config["temperature"],
-                        # max_tokens=cache_config["max_tokens"],
+                        **CACHE_CONFIG,
+                        # messages=CACHE_CONFIG["messages"],
+                        # model=CACHE_CONFIG["model"],
+                        # temperature=CACHE_CONFIG["temperature"],
+                        # max_tokens=CACHE_CONFIG["max_tokens"],
                         # timeout=request_timeout,
                         n=n_batch), timeout=request_timeout)
                     
@@ -436,7 +285,7 @@ class CachedOpenAIAPI:
 
                 except together.error.InvalidRequestError as e:
                     print(f"Invalid request error\n\n")
-                    print(cache_config)
+                    print(CACHE_CONFIG)
                     print("\n\n")
                     print(e)
                     print("\n\n")
@@ -483,16 +332,16 @@ class CachedOpenAIAPI:
 
 
 
-    async def openai_request(self, model, n, cache_config, request_timeout=30):
+    async def openai_request(self, model, n, CACHE_CONFIG, request_timeout=30):
         while True:
             self.current_sleep_time = min(self.current_sleep_time, self.max_sleep)
             try:
                 response = await asyncio.wait_for(self.clients[model].chat.completions.create(
-                    **cache_config,
-                    # messages=cache_config["messages"],
-                    # model=cache_config["model"],
-                    # temperature=cache_config["temperature"],
-                    # max_tokens=cache_config["max_tokens"],
+                    **CACHE_CONFIG,
+                    # messages=CACHE_CONFIG["messages"],
+                    # model=CACHE_CONFIG["model"],
+                    # temperature=CACHE_CONFIG["temperature"],
+                    # max_tokens=CACHE_CONFIG["max_tokens"],
                     # timeout=request_timeout,
                     n=n), timeout=request_timeout)
 
@@ -561,9 +410,6 @@ class CachedOpenAIAPI:
 
             # Gemma - TogetherAI
             "google/gemma-2-27b-it": {"prompt_tokens": 0.8/1000, "completion_tokens": 0.8/1000},
-
-            "llama" : {"prompt_tokens": 0, "completion_tokens":0},
-            "mixtral" : {"prompt_tokens": 0, "completion_tokens":0},
         }
 
         # Same model just different name

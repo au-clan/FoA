@@ -13,7 +13,7 @@ from diskcache import Cache
 import sys
 sys.path.append(os.getcwd())
 from src.agents.ws import WebShopAgent
-from async_engine.cached_api import CachedOpenAIAPI
+from async_engine.api import API
 from async_engine.batched_api import BatchingAPI
 from data.data import WebShopData
 from utils import create_folder, create_box, update_actual_cost
@@ -28,10 +28,6 @@ hour = time.strftime("%H")
 log_folder = f"logs_recent/ws/{datetime.now().strftime("%m-%d/%H/%M")}/" # Folder in which logs will be saved 
 #log_folder = f"logs_recent/webshop/{day}/{hour}/"
 create_folder(log_folder)
-
-#cache_path = "../../../dlabdata1/potamiti/FoA/caches/ws2"
-#assert os.path.exists(cache_path), "Please run the script from the root directory of the project."
-cache = Cache("ws.db", size_limit=int(2e10))
 
 # According to ReAct
 step_api_config = {
@@ -64,7 +60,7 @@ models = {
     "eval": {"model_name":model, "provider":provider},
 }
 
-api = CachedOpenAIAPI(cache, step_api_config, models=models.values(), resources=2, verbose=True)
+api = API(step_api_config, models=models.values(), resources=2, verbose=True)
 
 # Setting up the data
 dataset = WebShopData()
@@ -219,8 +215,8 @@ async def run(run_options: dict, foa_options: dict, log_file:str):
     puzzle_idxs, puzzles = dataset.get_data(run_options["set"])
 
     ### Debugging
-    # end = 5
-    # puzzle_idxs, puzzles = puzzle_idxs[:end], puzzles[:end]
+    # end = 2
+    # puzzle_idxs, puzzles = puzzle_idxs[:end], puzzles[:end]
 
     # Barriers for each puzzle experiment
     barrier = asyncio.Barrier(len(puzzles))
