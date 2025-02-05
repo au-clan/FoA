@@ -30,6 +30,7 @@ class Resampler:
             "linear_filtered": Resampler.linear_filtered,
             "logistic": Resampler.logistic,
             "max": Resampler.max,
+            "max_unique": Resampler.max_unique, 
             "percentile": Resampler.percentile
         }
 
@@ -85,7 +86,27 @@ class Resampler:
         """
         max_value = max(values)
         values = [value if value==max_value else 0 for value in values]
-        return Resampler.linear(values)
+        total = sum(values)
+        if total == 0:
+            return Resampler.linear(values)
+        else:
+            return [value / total for value in values]
+    
+    @staticmethod
+    def max_unique(values: List[float])-> List[float]:
+        """
+        Computes uniform probability of highest values solely.
+        """
+        max_value = max(values)
+        values = [1 if value==max_value else 0 for value in values]
+        total = sum(values)
+        if total == 0:
+            return [1] + [0] * (len(values) - 1)
+        else:
+            first_one_index = values.index(1)
+            values = [0] * len(values)
+            values[first_one_index] = 1
+            return values
     
     @staticmethod
     def percentile(values: List[float], percentile: float=0.75) -> List[float]:
