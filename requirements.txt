@@ -1,0 +1,8 @@
+diskcache
+openai
+together
+groq
+scipy
+beautifulsoup4
+sympy
+pandas
