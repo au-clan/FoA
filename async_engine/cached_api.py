@@ -246,7 +246,8 @@ class CachedOpenAIAPI:
         ##-- Step 3. Request from API --##
         # Request the samples from the API
         if n_from_api_total > 0:
-            print(f"Requesting {n_from_api_total} samples")
+            if self.verbose:
+                print(f"Requesting {n_from_api_total} samples")
 
             start = time.time()
             async with self.limiters[model] as resource:
@@ -422,6 +423,11 @@ class CachedOpenAIAPI:
                     responses.append(single_response)
                     break
 
+                except Exception as e:
+                    print(e)
+                    await asyncio.sleep(self.current_sleep_time)
+                    self.current_sleep_time *= self.sleep_factor
+
                 except together.error.RateLimitError as e:
                     print(f"Rate limit error, sleeping for {self.current_sleep_time} seconds")
                     print(e)
@@ -455,11 +461,13 @@ class CachedOpenAIAPI:
                     await asyncio.sleep(self.current_sleep_time)
                     self.current_sleep_time *= self.sleep_factor
 
-                except together.error.APIError as e:
-                    print(f"API error, sleeping for {self.current_sleep_time} seconds")
-                    print(e)
-                    await asyncio.sleep(self.current_sleep_time)
-                    self.current_sleep_time *= self.sleep_factor
+                
+
+                # except together.error.APIError as e:
+                #     print(f"API error, sleeping for {self.current_sleep_time} seconds")
+                #     print(e)
+                #     await asyncio.sleep(self.current_sleep_time)
+                #     self.current_sleep_time *= self.sleep_factor
 
                 except asyncio.TimeoutError as e:
                     print(f"Asyncio timeout error, sleeping for {self.current_sleep_time} seconds")
