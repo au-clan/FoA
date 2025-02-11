@@ -42,8 +42,8 @@ To change the configurations of FoA you can use the following.
 - ``--resampling Y``: Sets the resampling strategy. Current iteration supports ``linear``, ``linear_filtered``, ``max``, ``max_unique`` and ``percentile``.
 
 
-## Citations
+<!--## Citations
 Your support would be greatly appreciated if you find FoA interesting or useful. Please acknowledge our work by citing the paper and giving this repository a star. Feel free to contact ```X``` (email to be added once paper is public) or open an issue if you have any questions.
 
 
-```bibtex``` To be added once paper is public.
+```bibtex``` To be added once paper is public.-->
