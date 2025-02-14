@@ -410,6 +410,10 @@ class API:
 
             # Gemma - TogetherAI
             "google/gemma-2-27b-it": {"prompt_tokens": 0.8/1000, "completion_tokens": 0.8/1000},
+
+            #DeepSeek - Groq
+            "deepseek-r1-distill-llama-70b": {"prompt_tokens": 0.8/1000, "completion_tokens": 0.8/1000},
+            "llama-3.2-11b-vision-preview": {"prompt_tokens": 0.8/1000, "completion_tokens": 0.8/1000},
         }
 
         # Same model just different name

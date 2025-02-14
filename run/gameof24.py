@@ -19,7 +19,7 @@ from src.resampling.resampler import Resampler
 from data.data import GameOf24Data
 from utils import create_folder, create_box, update_actual_cost
 
-log_folder = f"logs_recent/gameof24/{datetime.now().strftime("%m-%d/%H/%M")}/" # Folder in which logs will be saved 
+log_folder = f"logs_recent/gameof24/test0/" # Folder in which logs will be saved 
 #log_folder = f"logs_recent/gridsearch/gameof24/"
 create_folder(log_folder)
 
@@ -31,9 +31,10 @@ step_api_config = eval_api_config = {
     "top_k": 50
 }
 
-model = "gpt-4-0613"
-provider = "TogetherAI" if "meta" in model else "OpenAI"
-
+model = "llama-3.2-11b-vision-preview"
+# provider = "TogetherAI" if "meta" in model else "OpenAI"
+provider = "Groq"
+# provider = "TogetherAI"
 models = {
     "step": {"model_name":model, "provider":provider},
     "eval": {"model_name":model, "provider":provider},

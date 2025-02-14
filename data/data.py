@@ -17,7 +17,7 @@ class GameOf24Data:
         elif set == "validation":
             indices = list(range(875,900)) + list(range(1000,1025))
         elif set == "test":
-            indices = list(range(900,1000))
+            indices = list(range(990,997))
         else:
             raise ValueError("Invalid set name")
 
