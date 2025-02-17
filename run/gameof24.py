@@ -32,6 +32,7 @@ step_api_config = eval_api_config = {
 }
 
 model = "llama-3.2-11b-vision-preview"
+#model = "deepseek-r1-distill-llama-70b"
 # provider = "TogetherAI" if "meta" in model else "OpenAI"
 provider = "Groq"
 # provider = "TogetherAI"

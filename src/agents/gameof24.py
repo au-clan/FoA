@@ -40,10 +40,10 @@ class GameOf24Agent:
             steps = "\n".join(state.steps) + "\n"
 
             # Set up CoT prompt
-            if any(author in api.model for author in ["meta", "google", "mistral", "gpt-4o"]):
-                prompt = llama_prompts.cot_prompt.format(input=state.puzzle) + "Steps:\n" + steps + "Answer: "
-            else:
-                prompt = totor_prompts.cot_prompt.format(input=state.puzzle) + "Steps:\n" + steps
+            #if any(author in api.model for author in ["meta", "google", "mistral", "gpt-4o"]):
+            prompt = llama_prompts.cot_prompt.format(input=state.puzzle) + "Steps:\n" + steps + "Answer: "
+            #else:
+            #    prompt = totor_prompts.cot_prompt.format(input=state.puzzle) + "Steps:\n" + steps
 
             # Get the final expression
             suggestions = await api.buffered_request(prompt, key=hash(state), namespace=namespace)
@@ -53,10 +53,10 @@ class GameOf24Agent:
             selected_state = state.current_state
         else:
             # Set up BFS prompt
-            if any(author in api.model for author in ["meta", "google", "mistral", "gpt-4o"]):
-                prompt = llama_prompts.bfs_prompt.format(input=current_state)
-            else:
-                prompt = totor_prompts.bfs_prompt.format(input=current_state)
+            #if any(author in api.model for author in ["meta", "google", "mistral", "gpt-4o"]):
+            prompt = llama_prompts.bfs_prompt.format(input=current_state)
+            #else:
+            #    prompt = totor_prompts.bfs_prompt.format(input=current_state)
 
             # Get the next state
             suggestions = await api.buffered_request(prompt, key=hash(state), namespace=namespace)
@@ -92,17 +92,17 @@ class GameOf24Agent:
         if "left" not in last_step:
             answer = last_step.lower().replace("answer: ", "")
 
-            if any(author in api.model for author in ["meta", "google", "mistral", "gpt-4o"]):
-                prompt = llama_prompts.value_last_step_prompt.format(input=state.puzzle, answer=answer)
-            else:
-                prompt = totor_prompts.value_last_step_prompt.format(input=state.puzzle, answer=answer)
+            #if any(author in api.model for author in ["meta", "google", "mistral", "gpt-4o"]):
+            prompt = llama_prompts.value_last_step_prompt.format(input=state.puzzle, answer=answer)
+            #else:
+            #    prompt = totor_prompts.value_last_step_prompt.format(input=state.puzzle, answer=answer)
             #print(f"Evaluating terminal state that is not correct : {state}")
             return 0
         else:
-            if any(author in api.model for author in ["meta", "google", "mistral", "gpt-4o"]):
-                prompt = llama_prompts.value_prompt.format(input=state.current_state)
-            else:
-                prompt = totor_prompts.value_prompt.format(input=state.current_state)
+            #if any(author in api.model for author in ["meta", "google", "mistral", "gpt-4o"]):
+            prompt = llama_prompts.value_prompt.format(input=state.current_state)
+            #else:
+            #    prompt = totor_prompts.value_prompt.format(input=state.current_state)
 
         if prompt in value_cache and caching:
             value_number = value_cache[prompt]
