@@ -139,3 +139,39 @@ impossible
 Input: {input}
 Answer: {answer}
 Judge:'''
+
+
+reflection_prompt = '''Use numbers and basic arithmetic operations (+ - * /). Each step, you are only allowed to choose two of the remaining numbers to obtain a new number. Do not explain simply list possible next steps as well as all the remaining numbers and nothing else.
+
+Example: 2 8 8 14
+Possible next steps:
+2 + 8 = 10 (left: 8 10 14)
+8 / 2 = 4 (left: 4 8 14)
+14 + 2 = 16 (left: 8 8 16)
+2 * 8 = 16 (left: 8 14 16)
+8 - 2 = 6 (left: 6 8 14)
+
+Example: 1 3
+Possible next steps:
+1 + 3 = 4 (left: 4)
+1 * 3 = 3 (left: 3)
+3 - 1 = 2 (left: 2)
+3 / 1 = 3 (left: 3)
+1 - 3 = -2 (left: -2)
+
+Input: {input}
+Possible next steps:
+
+
+
+In your last attempt you gave the following solution to the 24 puzzle:
+        Numbers: {puzzle}
+        Solution attempt: Step 1: {steps[0]}
+                            Step 2: {steps[1]}
+                            Step 3: {steps[2]}
+                            Step 4: {steps[3]}
+
+
+So for this attempt do not make the same mistakes and keep the following reflection in mind:
+
+{reflection}'''
