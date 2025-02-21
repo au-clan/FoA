@@ -10,6 +10,7 @@ In this paper, we introduce Fleet of Agents (FoA), a novel and intuitive yet pri
 1. Set up a conda environment. TogetherAI or Groq API keys should be set as well if you'd like to test open-source models.
 ```bash
 conda create -n foa python=3.12.3
+conda activate foa
 pip install -r requirements.txt
 conda env config vars set OPENAI_API_KEY=<...>
 conda env config vars set GROQ_API_KEY=<...> # (OPTIONAL)
