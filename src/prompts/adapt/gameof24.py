@@ -42,7 +42,7 @@ Possible next steps:
 
 
 Based on previous attempts to solve the puzzle, here is some advice on how to proceed:
-{reflection}
+{reflexion}
 
 Input: {input}
 Possible next steps:'''
