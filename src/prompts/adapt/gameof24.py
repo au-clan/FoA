@@ -65,7 +65,7 @@ Reflect on the previous attempt and provide a reflection below:
 Reflection:
 '''
 
-summarize_prompt = '''The game of 24 is a math puzzle where players use four numbers and basic arithmetic operations (+ - * /) to make the result equal to 24. Following is a previous attempt at solving the puzzle.
+summary_prompt = '''The game of 24 is a math puzzle where players use four numbers and basic arithmetic operations (+ - * /) to make the result equal to 24. Following is a previous attempt at solving the puzzle.
 
 You made the following list of reflections:
 
