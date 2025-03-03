@@ -75,13 +75,8 @@ Solution attempt:
 
 
 Task:
-1. Check whether each step is valid.
-   - Verify if the arithmetic is correct (e.g., 4 * 6 = 24, 8 - 3 = 5, etc.).
-   - Verify if the step uses numbers that are still available.
-   - Verify if the result of each step is computed correctly and is used in subsequent steps properly.
-2. Identify if any step is incorrect or invalid. 
-   - If you find one or more incorrect steps, specify the first incorrect step only by simply providing the number. 
-   - If all steps are valid then evaluate if given numbers can reach 24 for each step with the following sure, likely or impossible
+1. Evaluate steo
+   - Evaluate if the given numbers at each step can reach 24 for each step with the following sure, likely or impossible
 
    Examples for evaluating:
     10 14
@@ -121,10 +116,12 @@ Task:
     (1 + 3) * 3 = 12
     1 3 3 are all too small
     impossible
+2. Check whether each step is valid.
+   - Verify if the arithmetic is correct (e.g., 4 * 6 = 24, 8 - 3 = 5, etc.).
+   - Verify if the step uses numbers that are still available.
+   - Verify if the result of each step is computed correctly and is used in subsequent steps properly.
 
-I want you to end your response with stating what step went wrong for example:
-
-"Incorrect step: 2"
+IMPORTANT: I want you to end your response with stating what step went wrong for example: "Incorrect step: 2"
 '''
 
 # Updated
