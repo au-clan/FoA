@@ -65,6 +65,17 @@ Reflect on the previous attempt and provide a reflection below:
 Reflection:
 '''
 
+summarize_prompt = '''The game of 24 is a math puzzle where players use four numbers and basic arithmetic operations (+ - * /) to make the result equal to 24. Following is a previous attempt at solving the puzzle.
+
+You made the following list of reflections:
+
+{reflexions}
+
+Summarize all the reflexions to keep it concise and discard duplicates
+
+Summarization of all reflections:
+'''
+
 
 # Updated
 value_prompt = '''Evaluate if given numbers can reach 24 by responding with the following sure, likely or impossible.
