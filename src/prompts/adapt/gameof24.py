@@ -69,7 +69,7 @@ summary_prompt = '''The game of 24 is a math puzzle where players use four numbe
 
 You made the following list of reflections:
 
-{reflexions}
+{reflexion}
 
 Summarize all the reflexions to keep it concise and discard duplicates
 
