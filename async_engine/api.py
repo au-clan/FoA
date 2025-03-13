@@ -44,6 +44,7 @@ class API:
         self.limiters = {}
         self.providers = {}
         self.groq_requests = 0
+        self.lazykey_requests = 0
 
 
         for model in models:
@@ -101,7 +102,7 @@ class API:
                 
             elif provider == "LazyKey":
                 #api keys when making an env
-                api_keys = []
+                api_keys = ["MANGLER API KEY HER!!!!!"]
                 self.clients[model_name] = AsyncKeyHandler(api_keys, AsyncGroq)
 
                 # Limiter Setup
@@ -264,7 +265,6 @@ class API:
 
     async def lazykey_request(self, model, n, CACHE_CONFIG, request_timeout=30):
         responses = []
-
         
         # Groq currently only allows n=1
         for _ in range(n):
@@ -272,7 +272,7 @@ class API:
                 self.current_sleep_time = min(self.current_sleep_time, self.max_sleep)
                 try:
                 
-                    self.groq_requests += 1
+                    self.lazykey_requests += 1
                     single_response = await asyncio.wait_for(self.clients[model].request(
                     **CACHE_CONFIG,
                     # messages=CACHE_CONFIG["messages"],
