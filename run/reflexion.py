@@ -11,6 +11,8 @@ import random
 import numpy as np
 import sys
 import os
+import pickle
+from dotenv import load_dotenv
 
 sys.path.append(os.getcwd()) # Project root!!
 from async_engine.batched_api import BatchingAPI
@@ -147,16 +149,41 @@ async def runReflexionGameOf24(puzzle, num_agents, typeOfReflexion, num_iteratio
         states, num_agents = await solvePuzzle(num_steps, puzzle, num_agents, agent_reflexions)
 
 
+async def create_test_puzzles():
+    num_steps = 4
+    num_agents = 1
+    agent_reflexions = {0:[]}
+    finished_puzzles = []
+    puzzles = ["1, 1, 4, 6", "1, 1, 11, 11", "1, 3, 8, 8", "1 1 1 8", "6 6 6 6", 
+               "1 1 2 12", "1 2 2 6", "1 1 10 12", "2 2 10 10", "1 1 1 12", 
+               "3 4 8 12", "2 4 6 11", "2 2 8 9", "1 5 6 7", "5 8 10 11",
+               "4 4 9 12", "2 5 6 6", "1 1 3 12", "2 2 2 12", "1 1 4 12"]
+    for puzzle in puzzles:
+        states, _ = await solvePuzzle(num_steps, puzzle, num_agents, agent_reflexions)
+        finished_puzzles.append(states)
+    with open("test_puzzles.pkl", "wb") as f:
+        pickle.dump(finished_puzzles, f)
+
+def load_test_puzzles():
+    with open("test_puzzles.pkl", "rb") as f:
+        puzzles = pickle.load(f)
+    return puzzles
+       
+
 async def main():
     num_iterations = 3
     k = 3
-    puzzle = "1 1 4 6"
     num_agents = 4
+    puzzles = load_test_puzzles()
+    # print(puzzles)
+    puzzle = puzzles[0][0].puzzle #1, 1, 4, 6
+    
 
     await runReflexionGameOf24(puzzle, num_agents, "list", num_iterations, k)
     # await runReflexionGameOf24(puzzle, num_agents, "k most recent", num_iterations, k)
     # await runReflexionGameOf24(puzzle, num_agents, "summary", num_iterations, k, "incremental")
     # await runReflexionGameOf24(puzzle, num_agents, "summary", num_iterations, k, "all_previous")
+   
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(main())         

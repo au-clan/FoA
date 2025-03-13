@@ -2,7 +2,7 @@ import os
 import time
 import asyncio
 import traceback
-
+from dotenv import load_dotenv
 
 from copy import deepcopy
 from collections import Counter
@@ -102,7 +102,7 @@ class API:
                 
             elif provider == "LazyKey":
                 #api keys when making an env
-                api_keys = ["MANGLER API KEY HER!!!!!"]
+                api_keys = ["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","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"]
                 self.clients[model_name] = AsyncKeyHandler(api_keys, AsyncGroq)
 
                 # Limiter Setup
