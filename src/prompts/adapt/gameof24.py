@@ -50,15 +50,12 @@ Possible next steps:'''
 reflexion_prompt = '''The game of 24 is a math puzzle where players use four numbers and basic arithmetic operations (+ - * /) to make the result equal to 24. Following is a previous attempt at solving the puzzle.
 Input: {puzzle}
 Solution attempt:
-{steps[0]}
-{steps[1]}
-{steps[2]}
-{steps[3]}
+{steps}
 
 
 Reflect on the previous attempt and provide a reflection below:
 - If there's a mistake, identify it and explain how similar mistakes can be avoided.
-- If the mistake can generalize, provide a general reflection.
+- If the mistake can be generalized, provide a general reflection.
 - Be succint and clear in your reflection.
 - Do not provide a new solution, only a reflection.
 
@@ -121,7 +118,7 @@ Task:
    - Verify if the step uses numbers that are still available.
    - Verify if the result of each step is computed correctly and is used in subsequent steps properly.
 
-IMPORTANT: I want you to end your response with stating what step went wrong for example: "Incorrect step: 2"
+IMPORTANT: I want you to end your response with stating what step went wrong (0 indexed) for example: "Incorrect step: 2"
 '''
 
 # Updated
