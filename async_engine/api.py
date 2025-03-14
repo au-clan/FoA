@@ -102,7 +102,7 @@ class API:
                 
             elif provider == "LazyKey":
                 #api keys when making an env
-                api_keys = ["MANGLER API KEY HER!!!!!"]
+                api_keys = ["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"]
                 self.clients[model_name] = AsyncKeyHandler(api_keys, AsyncGroq)
 
                 # Limiter Setup

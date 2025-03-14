@@ -11,6 +11,7 @@ import random
 import numpy as np
 import sys
 import os
+import matplotlib.pyplot as plt
 
 sys.path.append(os.getcwd()) # Project root!!
 from async_engine.batched_api import BatchingAPI
@@ -39,10 +40,11 @@ api = API(eval_api_config, models=models.values(), resources=2, verbose=False)
 step_batcher = BatchingAPI(api, batch_size=1, timeout=2, model=models["step"]["model_name"], tab="step")
 
 # Attempting to solve the puzzle
-async def solvePuzzle(num_steps, puzzle, num_agents, agent_reflexions):
+async def solvePuzzle(num_steps, puzzle, agent_ids, agent_reflexions):
+    score = 0
     #Create initial state/environment
     states =  {}
-    for agent_id in range(num_agents):
+    for agent_id in agent_ids:
         states[agent_id] = GameOf24State(puzzle=puzzle, current_state=puzzle, steps=[], randomness=random.randint(0,1000))
         
     finished_states = {}
@@ -66,18 +68,15 @@ async def solvePuzzle(num_steps, puzzle, num_agents, agent_reflexions):
             if GameOf24Agent.verify(states[agent_id]) == {"r": 1}:
                 print(f"Puzzle finished by agent {agent_id}: {states[agent_id].puzzle}")
                 finished_states[agent_id] = states.pop(agent_id)
-                num_agents -=1
-
+                agent_ids.remove(agent_id)
+                score +=1
+            
         # If all puzzles have been solved, break
         if not states:
             break
-    return states, num_agents
-    
+    return states, agent_ids, score
 
 async def makeReflexion(puzzle, reflexion_type, num_reflexions, k, states, agent_reflexions, agent_all_reflexions, summary_method):
-    for agent_id in states:
-        print(agent_id)
-        print(type(agent_id))
     step = 3
     agent_tasks = [
         asyncio.create_task(
@@ -101,8 +100,8 @@ async def makeReflexion(puzzle, reflexion_type, num_reflexions, k, states, agent
         return agent_reflexions, agent_all_reflexions
 
     elif reflexion_type == "summary":
-        #Right now makes summary of earlier summary + new reflexions, 
-        # if we want to change this we need to return reflexion and summary, pass summary to solvePuzzle, pass reflexion to makeReflexion
+        for agent_id in states:
+            print("for agent_id: ", agent_id, "agent_reflexions: ", agent_reflexions[agent_id])
         agent_summaries = []
         if summary_method == "incremental":
             agent_summaries = [
@@ -130,33 +129,87 @@ async def makeReflexion(puzzle, reflexion_type, num_reflexions, k, states, agent
         print("unknown type")
         return agent_reflexions, agent_all_reflexions
 
-async def runReflexionGameOf24(puzzle, num_agents, typeOfReflexion, num_iterations, k, summary_method="incremental"):
+async def runReflexionGameOf24(puzzle, agent_ids, typeOfReflexion, num_iterations, k, summary_method="incremental"):
     agent_reflexions = {}
     agent_all_reflexions = {}
     num_steps = 4
-
-    for agent_id in range(num_agents):
+    #game_states = []
+    for agent_id in agent_ids:
         agent_reflexions[agent_id] = []
         agent_all_reflexions[agent_id] = []
     #Without reflexion first
-    states, num_agents = await solvePuzzle(num_steps, puzzle, num_agents, agent_reflexions)
+    states, agent_ids, total_score = await solvePuzzle(num_steps, puzzle, agent_ids, agent_reflexions)
     #Reflect and go again i times
     for i in range(num_iterations):
         agent_reflexions, agent_all_reflexions = await makeReflexion(puzzle, typeOfReflexion, i+1, k, states, agent_reflexions, agent_all_reflexions, summary_method)
         print("reflexions per agent", agent_reflexions)
-        states, num_agents = await solvePuzzle(num_steps, puzzle, num_agents, agent_reflexions)
+        states, agent_ids, score = await solvePuzzle(num_steps, puzzle, agent_ids, agent_reflexions)
+        total_score += score
+        # game_states.append(states)
+    # return game_states
+    return total_score
+    
+    
+
+async def test():
+    score = 0
+    tests = ["1 1 4 6", "1 1 11 11"]
+    num_agents = 4
+    agent_ids = [i for i in range(num_agents)]
+    num_iterations = [2, 4]
+    k = 2
+    for puzzle in tests:
+        for number_of_iterations in num_iterations:
+            #if k < num_iterations:
+                #score = 0
+                #scoreK = await runReflexionGameOf24(puzzle, agent_ids, "k most recent", number_of_iterations, k)
+            scoreList = await runReflexionGameOf24(puzzle, agent_ids, "list", number_of_iterations, k)
+            # scoreSummaryIncrement = await runReflexionGameOf24(puzzle, agent_ids, "summary", number_of_iterations, k, "incremental")
+            # scoreSummaryAll = await runReflexionGameOf24(puzzle, agent_ids, "summary", number_of_iterations, k, "all_previous")
+    plotScore(scoreList)
+
+def plotScore(scoreList):
+    scores = {
+        "list": scoreList,  # Example scores for "list" reflexion
+        "k most recent": [4, 5],  # Example scores for "k most recent" reflexion
+        "summary_incremental": [6, 7],  # Example scores for "summary" with incremental summary method
+        "summary_all_previous": [5, 6]  # Example scores for "summary" with all_previous method
+    }
+    
+    iterations = [2, 4]  # Example number of iterations
+    
+    plt.figure(figsize=(10, 6))
+    for method, score in scores.items():
+        plt.plot(iterations, score, marker='o', label=method)
+    
+    plt.xlabel("Number of Reflexion Iterations")
+    plt.ylabel("Score")
+    plt.title("Performance of Reflexion Methods in Game of 24")
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
 
 
 async def main():
-    num_iterations = 3
+    num_iterations = 7
     k = 3
     puzzle = "1 1 4 6"
     num_agents = 4
+    agent_ids = [i for i in range(num_agents)]
 
-    await runReflexionGameOf24(puzzle, num_agents, "list", num_iterations, k)
-    # await runReflexionGameOf24(puzzle, num_agents, "k most recent", num_iterations, k)
-    # await runReflexionGameOf24(puzzle, num_agents, "summary", num_iterations, k, "incremental")
-    # await runReflexionGameOf24(puzzle, num_agents, "summary", num_iterations, k, "all_previous")
-
+    #await runReflexionGameOf24(puzzle, agent_ids, "list", num_iterations, k)
+    #await runReflexionGameOf24(puzzle, agent_ids, "k most recent", num_iterations, k)
+    await runReflexionGameOf24(puzzle, agent_ids, "summary", num_iterations, k, "incremental")
+    #results = await runReflexionGameOf24(puzzle, agent_ids, "summary", num_iterations, k, "incremental")
+    #await runReflexionGameOf24(puzzle, agent_ids, "summary", num_iterations, k, "all_previous")
+    # n_success = 0
+    # for game in results:
+    #     verifications = [GameOf24Agent.verify(result) for result in game]
+    #     if {"r": 1} in verifications:
+    #         n_success += 1
+    # accuracy = n_success * 100 / len(results)
+    # print(f"Accuracy : {accuracy:.2f}\n")
+    
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(test())

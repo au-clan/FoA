@@ -118,6 +118,12 @@ class GameOf24Agent:
         prompt = llama_prompts.reflexion_prompt.format(puzzle=puzzle, steps=steps)
         reflexion = api.buffered_request(prompt, key=hash(state), namespace=namespace)
         return reflexion
+    
+    @staticmethod
+    async def evaluate_step(puzzle: str, steps: object, state: GameOf24State, api, namespace: tuple)-> str:
+        prompt = llama_prompts.evaluate_prompt.format(puzzle=puzzle, steps=steps)
+        evalution = await api.buffered_request(prompt, key=hash(state), namespace=namespace)
+        return evalution
 
     @staticmethod
     def generate_summary(reflexion, state: GameOf24State, api, namespace) -> str:
