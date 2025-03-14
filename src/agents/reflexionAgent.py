@@ -118,6 +118,14 @@ class GameOf24Agent:
         prompt = llama_prompts.reflexion_prompt.format(puzzle=puzzle, steps=steps)
         reflexion = api.buffered_request(prompt, key=hash(state), namespace=namespace)
         return reflexion
+    
+    @staticmethod
+    def validate(puzzle: str, steps, state: GameOf24State, api, namespace) -> str:
+        validation_prompt = llama_prompts.validation_prompt.format(puzzle=puzzle, steps=steps)
+        validation = api.buffered_request(validation_prompt, key=hash(state), namespace=namespace)
+        value_prompt = llama_prompts.value_prompt.format(validation=validation)
+        value = api.buffered_request(value_prompt, key=hash(state), namespace=namespace)
+        return validation, value
 
     @staticmethod
     def generate_summary(reflexion, state: GameOf24State, api, namespace) -> str:

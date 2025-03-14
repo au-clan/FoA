@@ -276,6 +276,33 @@ Task:
 IMPORTANT: I want you to end your response with stating what step went wrong (0 indexed) for example: "Incorrect step: 2"
 '''
 
+#RAFA prompt
+validation_prompt = '''Evaluate if given formula is a valid move in the game of 24. Especially, check if a number is missing, if the arithmetic is incorrect, or if a number is used that is not in the input or used twice.
+Example
+
+Input: 3 6 8 10
+3 * 6 = 18 (left: 18 8 10)
+valid
+
+Input: 2 6 8 14
+2 * 6 = 1 (left: 1 8 14)
+invalid
+
+Input: 4 6 8 10
+10 * 5 = 50 (left: 6 50)
+invalid
+
+Input: 1 5 7
+5 * 5 = 25 (left: 1 25 7)
+invalid
+
+Now evaluate the followng formula:
+Input: {puzzle}
+{steps[0]}
+{steps[1]}
+{steps[2]}
+{steps[3]}
+'''
 # Updated
 value_prompt = '''Evaluate if given numbers can reach 24 by responding with the following sure, likely or impossible.
 
