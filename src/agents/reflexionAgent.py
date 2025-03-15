@@ -4,11 +4,12 @@ import random
 from utils import parse_suggestions, create_box
 import re
 from sympy import simplify
+from typing import Any, Dict, List, Tuple
 
 class GameOf24Agent:
 
     @staticmethod
-    async def step(state: GameOf24State, api, namespace, reflexion: list)-> GameOf24State:
+    async def step(state: GameOf24State, api, namespace, reflexion: List[str])-> GameOf24State:
         """
         Given a state, returns the next state one.
         """
@@ -39,8 +40,6 @@ class GameOf24Agent:
             # State does not change, only the steps
             selected_suggestion = suggestions
             selected_state = state.current_state
-            
-
 
         else:
             if len(reflexion) == 0:
@@ -72,10 +71,12 @@ class GameOf24Agent:
         )
         return next_state
     
+
     @staticmethod
     def parse_next_state(suggestion: str) -> str:
         return suggestion.split('left: ')[-1].split(')')[0]
     
+
     @staticmethod
     def verify(state: GameOf24State)-> dict:
             """
@@ -113,27 +114,34 @@ class GameOf24Agent:
                     print(e)
                     return {'r': -1}
 
+
     @staticmethod
-    def generate_reflexion(puzzle: str, steps, state: GameOf24State, api, namespace) -> str:
+    def generate_reflexion(puzzle: str, steps: List[str], state: GameOf24State, api, namespace) -> str:
+        """
+        Generates a reflexion based on the puzzle and the steps done
+        """
         prompt = llama_prompts.reflexion_prompt.format(puzzle=puzzle, steps=steps)
         reflexion = api.buffered_request(prompt, key=hash(state), namespace=namespace)
         return reflexion
     
+
     @staticmethod
-    async def evaluate_step(puzzle: str, steps: object, state: GameOf24State, api, namespace: tuple)-> str:
+    async def evaluate_step(puzzle: str, steps: List[str], state: GameOf24State, api, namespace: tuple)-> str:
         prompt = llama_prompts.evaluate_prompt.format(puzzle=puzzle, steps=steps)
         evalution = await api.buffered_request(prompt, key=hash(state), namespace=namespace)
         return evalution
 
-    def validate(puzzle: str, steps, state: GameOf24State, api, namespace) -> str:
+
+    def validate(puzzle: str, steps: List[str], state: GameOf24State, api, namespace) -> str:
         validation_prompt = llama_prompts.validation_prompt.format(puzzle=puzzle, steps=steps)
         validation = api.buffered_request(validation_prompt, key=hash(state), namespace=namespace)
         value_prompt = llama_prompts.value_prompt.format(validation=validation)
         value = api.buffered_request(value_prompt, key=hash(state), namespace=namespace)
         return validation, value
 
+
     @staticmethod
-    def generate_summary(reflexion, state: GameOf24State, api, namespace) -> str:
+    def generate_summary(reflexion: List[str], state: GameOf24State, api, namespace) -> str:
         prompt = llama_prompts.summary_prompt.format(reflexion=reflexion)
         reflexion = api.buffered_request(prompt, key=hash(state), namespace=namespace)
         return reflexion

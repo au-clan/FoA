@@ -8,6 +8,7 @@ import numpy as np
 from scipy.stats import bootstrap
 
 from pathlib import Path
+import pickle
 
 import requests
 from bs4 import BeautifulSoup
@@ -769,4 +770,9 @@ def merge_responses(responses):
     for i, choice in enumerate(merged_response.choices):
         choice.index = i
 
-    return merged_response        
+    return merged_response      
+
+def load_test_puzzles():
+  with open("test_puzzles.pkl", "rb") as f:
+      puzzles = pickle.load(f)
+  return puzzles  
