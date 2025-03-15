@@ -127,21 +127,37 @@ class GameOf24Agent:
 
     @staticmethod
     async def evaluate_step(puzzle: str, steps: List[str], state: GameOf24State, api, namespace: tuple)-> str:
+        """
+        Uses the evaluate prompt which asks the model to determine if a step is invalid or infeasible and return the step.
+        """
         prompt = llama_prompts.evaluate_prompt.format(puzzle=puzzle, steps=steps)
         evalution = await api.buffered_request(prompt, key=hash(state), namespace=namespace)
         return evalution
 
 
     def validate(puzzle: str, steps: List[str], state: GameOf24State, api, namespace) -> str:
+        """
+        Uses the validation prompt to check if the steps are valid.
+        """
         validation_prompt = llama_prompts.validation_prompt.format(puzzle=puzzle, steps=steps)
         validation = api.buffered_request(validation_prompt, key=hash(state), namespace=namespace)
-        value_prompt = llama_prompts.value_prompt.format(validation=validation)
+        return validation
+    
+
+    def value(puzzle: str, steps: List[str], state: GameOf24State, api, namespace) -> str:
+        """
+        Uses the value prompt to estimate the feasibility of the steps.
+        """
+        value_prompt = llama_prompts.value_prompt.format(puzzle=puzzle, steps=steps)
         value = api.buffered_request(value_prompt, key=hash(state), namespace=namespace)
-        return validation, value
+        return value
 
 
     @staticmethod
     def generate_summary(reflexion: List[str], state: GameOf24State, api, namespace) -> str:
+        """
+        Generates a summary of current reflexions
+        """
         prompt = llama_prompts.summary_prompt.format(reflexion=reflexion)
         reflexion = api.buffered_request(prompt, key=hash(state), namespace=namespace)
         return reflexion

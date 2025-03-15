@@ -19,7 +19,7 @@ from dotenv import load_dotenv
 sys.path.append(os.getcwd()) # Project root!!
 from async_engine.api import API
 from async_engine.batched_api import BatchingAPI
-from run.reflexion import runReflexionGameOf24, solvePuzzle
+from run.reflexion import run_reflexion_gameof24, solve_puzzle
 from src.agents.reflexionAgent import GameOf24Agent
 from src.states.gameof24 import GameOf24State
 from utils import load_test_puzzles
@@ -93,7 +93,7 @@ async def create_test_puzzles():
                "3 4 8 12", "2 4 6 11", "2 2 8 9", "1 5 6 7", "5 8 10 11",
                "4 4 9 12", "2 5 6 6", "1 1 3 12", "2 2 2 12", "1 1 4 12"]
     for puzzle in puzzles:
-        states, _ = await solvePuzzle(num_steps, puzzle, num_agents, agent_reflexions)
+        states, _ = await solve_puzzle(num_steps, puzzle, num_agents, agent_reflexions)
         finished_puzzles.append(states)
     with open("test_puzzles.pkl", "wb") as f:
         pickle.dump(finished_puzzles, f)
@@ -123,7 +123,7 @@ async def test_reflexion():
                 else:
                     print(reflexion_type, " stars now")
                 # Run the reflexion game
-                score = await runReflexionGameOf24(
+                score = await run_reflexion_gameof24(
                     states, agent_ids, reflexion_type, num_reflexions, k, summary_method
                 )
 

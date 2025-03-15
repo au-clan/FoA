@@ -41,7 +41,7 @@ step_batcher = BatchingAPI(
     )
 
 
-async def solvePuzzle(num_steps: int, puzzle: str, agent_ids: List[int], agent_reflexions: Dict[int, List[str]]) -> Tuple[Dict[int, GameOf24State], List[int], int]:
+async def solve_puzzle(num_steps: int, puzzle: str, agent_ids: List[int], agent_reflexions: Dict[int, List[str]]) -> Tuple[Dict[int, GameOf24State], List[int], int]:
     """"
     Solves the puzzle either with or without reflections.
     Returns the updated states, remaining agent_ids, and the accumulated score.
@@ -91,7 +91,7 @@ async def solvePuzzle(num_steps: int, puzzle: str, agent_ids: List[int], agent_r
     return states, agent_ids, score
 
 
-async def makeReflexion(
+async def make_reflexion(
     reflexion_type: str, 
     k: int, 
     states: Dict[int, GameOf24State], 
@@ -146,7 +146,7 @@ async def makeReflexion(
                 )
                 for agent_id in states
             ]
-            
+
         #Summary is made from all reflexions
         elif summary_method == "all_previous":
             agent_summaries = [
@@ -169,7 +169,7 @@ async def makeReflexion(
         raise ValueError("Unknown reflexion type")
 
 
-async def runReflexionGameOf24(states: Dict[int, GameOf24State], agent_ids: List[int], typeOfReflexion: str, num_reflexions: int, k: int, summary_method="incremental") -> int:
+async def run_reflexion_gameof24(states: Dict[int, GameOf24State], agent_ids: List[int], typeOfReflexion: str, num_reflexions: int, k: int, summary_method="incremental") -> int:
     """
     Runs a complete Game of 24 with reflexions.
     Returns the total score (number of succesful agents) of the agents.
@@ -186,9 +186,9 @@ async def runReflexionGameOf24(states: Dict[int, GameOf24State], agent_ids: List
 
     #Reflect and go again i times
     for _ in range(num_reflexions):
-        agent_reflexions, agent_all_reflexions = await makeReflexion(typeOfReflexion, k, states, agent_reflexions, agent_all_reflexions, summary_method)
+        agent_reflexions, agent_all_reflexions = await make_reflexion(typeOfReflexion, k, states, agent_reflexions, agent_all_reflexions, summary_method)
         print("reflexions per agent", agent_reflexions)
-        states, agent_ids, score = await solvePuzzle(num_steps, puzzle, agent_ids, agent_reflexions)
+        states, agent_ids, score = await solve_puzzle(num_steps, puzzle, agent_ids, agent_reflexions)
         total_score += score
     return total_score
 
@@ -202,7 +202,7 @@ async def main():
     puzzles = load_test_puzzles()
     state = puzzles[0] #1, 1, 4, 6
 
-    await runReflexionGameOf24(state, agent_ids, "summary", num_reflexions, k, "incremental")
+    await run_reflexion_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
     
 
 if __name__ == "__main__":
