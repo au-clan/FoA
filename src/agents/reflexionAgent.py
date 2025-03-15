@@ -44,9 +44,9 @@ class GameOf24Agent:
 
         else:
             if len(reflexion) == 0:
-                prompt = llama_prompts.bfs_prompt.format(input=current_state) 
+                prompt = llama_prompts.bfs_prompt_single.format(input=current_state) 
             else:
-                prompt = llama_prompts.bfs_reflexion_prompt.format(input=current_state, puzzle = "1 1 4 6", reflexion=reflexion[0]) 
+                prompt = llama_prompts.bfs_reflexion_prompt_single.format(input=current_state, puzzle = "1 1 4 6", reflexion=reflexion[0]) 
 
             suggestions = await api.buffered_request(prompt, key=hash(state), namespace=namespace)
 
@@ -124,6 +124,13 @@ class GameOf24Agent:
         prompt = llama_prompts.evaluate_prompt.format(puzzle=puzzle, steps=steps)
         evalution = await api.buffered_request(prompt, key=hash(state), namespace=namespace)
         return evalution
+
+    def validate(puzzle: str, steps, state: GameOf24State, api, namespace) -> str:
+        validation_prompt = llama_prompts.validation_prompt.format(puzzle=puzzle, steps=steps)
+        validation = api.buffered_request(validation_prompt, key=hash(state), namespace=namespace)
+        value_prompt = llama_prompts.value_prompt.format(validation=validation)
+        value = api.buffered_request(value_prompt, key=hash(state), namespace=namespace)
+        return validation, value
 
     @staticmethod
     def generate_summary(reflexion, state: GameOf24State, api, namespace) -> str:

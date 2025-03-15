@@ -2,7 +2,7 @@ import os
 import time
 import asyncio
 import traceback
-
+from dotenv import load_dotenv
 
 from copy import deepcopy
 from collections import Counter
@@ -102,7 +102,7 @@ class API:
                 
             elif provider == "LazyKey":
                 #api keys when making an env
-                api_keys = ["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"]
+                api_keys = []
                 self.clients[model_name] = AsyncKeyHandler(api_keys, AsyncGroq)
 
                 # Limiter Setup
@@ -488,6 +488,7 @@ class API:
             #DeepSeek - Groq
             "deepseek-r1-distill-llama-70b": {"prompt_tokens": 0.8/1000, "completion_tokens": 0.8/1000},
             "llama-3.2-11b-vision-preview": {"prompt_tokens": 0.8/1000, "completion_tokens": 0.8/1000},
+            "llama-3.3-70b-versatile": {"prompt_tokens": 0.8/1000, "completion_tokens": 0.8/1000},
         }
 
         # Same model just different name

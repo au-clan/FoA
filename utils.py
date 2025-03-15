@@ -770,4 +770,3 @@ def merge_responses(responses):
         choice.index = i
 
     return merged_response        
-       

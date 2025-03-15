@@ -12,6 +12,13 @@ import numpy as np
 import sys
 import os
 import matplotlib.pyplot as plt
+import pickle
+from dotenv import load_dotenv
+import logging
+from datetime import datetime
+
+#from src import states
+
 
 sys.path.append(os.getcwd()) # Project root!!
 from async_engine.batched_api import BatchingAPI
@@ -76,11 +83,11 @@ async def solvePuzzle(num_steps, puzzle, agent_ids, agent_reflexions):
             break
     return states, agent_ids, score
 
-async def makeReflexion(puzzle, reflexion_type, num_reflexions, k, states, agent_reflexions, agent_all_reflexions, summary_method):
+async def makeReflexion(reflexion_type, k, states, agent_reflexions, agent_all_reflexions, summary_method):
     step = 3
     agent_tasks = [
         asyncio.create_task(
-            GameOf24Agent.generate_reflexion(puzzle=puzzle, steps=states[agent_id].steps, state=states[agent_id], api=step_batcher, namespace=(0, f"Agent: {int(agent_id)}", f"Step: {step}")
+            GameOf24Agent.generate_reflexion(puzzle=states[0].puzzle, steps=states[agent_id].steps, state=states[agent_id], api=step_batcher, namespace=(0, f"Agent: {int(agent_id)}", f"Step: {step}")
         )
     )
     for agent_id in states
@@ -129,7 +136,8 @@ async def makeReflexion(puzzle, reflexion_type, num_reflexions, k, states, agent
         print("unknown type")
         return agent_reflexions, agent_all_reflexions
 
-async def runReflexionGameOf24(puzzle, agent_ids, typeOfReflexion, num_iterations, k, summary_method="incremental"):
+async def runReflexionGameOf24(states, agent_ids, typeOfReflexion, num_iterations, k, summary_method="incremental"):
+    puzzle = states[0].puzzle  # Extract puzzle
     agent_reflexions = {}
     agent_all_reflexions = {}
     num_steps = 4
@@ -137,36 +145,19 @@ async def runReflexionGameOf24(puzzle, agent_ids, typeOfReflexion, num_iteration
     for agent_id in agent_ids:
         agent_reflexions[agent_id] = []
         agent_all_reflexions[agent_id] = []
-    #Without reflexion first
-    states, agent_ids, total_score = await solvePuzzle(num_steps, puzzle, agent_ids, agent_reflexions)
+    #Without reflexion first, is now done before
+    #states, agent_ids, total_score = await solvePuzzle(num_steps, puzzle, agent_ids, agent_reflexions)
+    total_score = 0
     #Reflect and go again i times
     for i in range(num_iterations):
-        agent_reflexions, agent_all_reflexions = await makeReflexion(puzzle, typeOfReflexion, i+1, k, states, agent_reflexions, agent_all_reflexions, summary_method)
+        #TODO: change so puzzle not a parameter, but accessed from states
+        agent_reflexions, agent_all_reflexions = await makeReflexion(typeOfReflexion, k, states, agent_reflexions, agent_all_reflexions, summary_method)
         print("reflexions per agent", agent_reflexions)
         states, agent_ids, score = await solvePuzzle(num_steps, puzzle, agent_ids, agent_reflexions)
         total_score += score
         # game_states.append(states)
     # return game_states
     return total_score
-    
-    
-
-async def test():
-    score = 0
-    tests = ["1 1 4 6", "1 1 11 11"]
-    num_agents = 4
-    agent_ids = [i for i in range(num_agents)]
-    num_iterations = [2, 4]
-    k = 2
-    for puzzle in tests:
-        for number_of_iterations in num_iterations:
-            #if k < num_iterations:
-                #score = 0
-                #scoreK = await runReflexionGameOf24(puzzle, agent_ids, "k most recent", number_of_iterations, k)
-            scoreList = await runReflexionGameOf24(puzzle, agent_ids, "list", number_of_iterations, k)
-            # scoreSummaryIncrement = await runReflexionGameOf24(puzzle, agent_ids, "summary", number_of_iterations, k, "incremental")
-            # scoreSummaryAll = await runReflexionGameOf24(puzzle, agent_ids, "summary", number_of_iterations, k, "all_previous")
-    plotScore(scoreList)
 
 def plotScore(scoreList):
     scores = {
@@ -189,19 +180,105 @@ def plotScore(scoreList):
     plt.grid(True)
     plt.show()
 
+#Are we not missing changing this to agent_ids, and then should we not dump states and agent_ids or how do we access these?
+async def create_test_puzzles():
+    num_steps = 4
+    num_agents = 1
+    agent_reflexions = {0:[]}
+    finished_puzzles = []
+    #TODO: 22212 missing from file for some reason
+    puzzles = ["1, 1, 4, 6", "1, 1, 11, 11", "1, 3, 8, 8", "1 1 1 8", "6 6 6 6", 
+               "1 1 2 12", "1 2 2 6", "1 1 10 12", "2 2 10 10", "1 1 1 12", 
+               "3 4 8 12", "2 4 6 11", "2 2 8 9", "1 5 6 7", "5 8 10 11",
+               "4 4 9 12", "2 5 6 6", "1 1 3 12", "2 2 2 12", "1 1 4 12"]
+    for puzzle in puzzles:
+        states, _ = await solvePuzzle(num_steps, puzzle, num_agents, agent_reflexions)
+        finished_puzzles.append(states)
+    with open("test_puzzles.pkl", "wb") as f:
+        pickle.dump(finished_puzzles, f)
 
+def load_test_puzzles():
+    with open("test_puzzles.pkl", "rb") as f:
+        puzzles = pickle.load(f)
+    return puzzles
+
+async def test():
+    tests = ["1 1 4 6", "1 1 11 11"]
+    num_agents = 4
+    agent_ids = [i for i in range(num_agents)]
+    num_iterations = [1,2,3]
+    k = 2
+    for puzzle in tests:
+        for number_of_iterations in num_iterations:
+            if k < number_of_iterations:
+                scoreK = await runReflexionGameOf24(puzzle, agent_ids, "k most recent", number_of_iterations, k)
+            scoreList = await runReflexionGameOf24(puzzle, agent_ids, "list", number_of_iterations, k)
+            scoreSummaryIncrement = await runReflexionGameOf24(puzzle, agent_ids, "summary", number_of_iterations, k, "incremental")
+            scoreSummaryAll = await runReflexionGameOf24(puzzle, agent_ids, "summary", number_of_iterations, k, "all_previous")
+    print(scoreK, scoreList, scoreSummaryIncrement, scoreSummaryAll)
+
+# Setup logging
+logging.basicConfig(filename="test_results.log", level=logging.INFO, format="%(asctime)s - %(message)s")
+
+async def test_reflexion():
+    # Load unfinished puzzles
+    all_puzzles_data = load_test_puzzles()
+
+    num_iterations_list = [2, 4, 8]  # Number of iterations to test
+    k = 2  # K for "k most recent"
+    num_agents = 4  # Number of agents
+    agent_ids = [i for i in range(num_agents)]
+    
+    reflexion_types = ["list", "k most recent", "summary_incremental", "summary_all_previous"]
+    
+    results = []
+
+    for states in all_puzzles_data[0:2]:        
+        for num_iterations in num_iterations_list:
+            for reflexion_type in reflexion_types:
+                summary_method = "incremental" if "incremental" in reflexion_type else "all_previous"
+
+                # Run the reflexion game
+                score = await runReflexionGameOf24(
+                    states, agent_ids, reflexion_type, num_iterations, k, summary_method
+                )
+
+                # Calculate token cost 
+                _, _, token_cost = api.cost(report_tokens=True)
+
+                # Log result
+                result_entry = {
+                    "puzzle": states[0].puzzle,
+                    "num_agents": len(agent_ids),
+                    "num_iterations": num_iterations,
+                    "reflexion_type": reflexion_type,
+                    "token_cost": token_cost,
+                    "score": score,
+                }
+                results.append(result_entry)
+                logging.info(result_entry)
+
+    # Save results to a pickle file
+    with open(f"test_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pkl", "wb") as f:
+        pickle.dump(results, f)
+
+    # Plot the results
+    plotScore([r["score"] for r in results if r["reflexion_type"] == "list"])
 
 async def main():
     num_iterations = 7
     k = 3
-    puzzle = "1 1 4 6"
     num_agents = 4
     agent_ids = [i for i in range(num_agents)]
+    puzzles = load_test_puzzles()
+    # print(puzzles)
+    puzzle = puzzles[0][0].puzzle #1, 1, 4, 6
 
     #await runReflexionGameOf24(puzzle, agent_ids, "list", num_iterations, k)
     #await runReflexionGameOf24(puzzle, agent_ids, "k most recent", num_iterations, k)
     await runReflexionGameOf24(puzzle, agent_ids, "summary", num_iterations, k, "incremental")
     #results = await runReflexionGameOf24(puzzle, agent_ids, "summary", num_iterations, k, "incremental")
+
     #await runReflexionGameOf24(puzzle, agent_ids, "summary", num_iterations, k, "all_previous")
     # n_success = 0
     # for game in results:
@@ -211,5 +288,6 @@ async def main():
     # accuracy = n_success * 100 / len(results)
     # print(f"Accuracy : {accuracy:.2f}\n")
     
+
 if __name__ == "__main__":
-    asyncio.run(test())
+    asyncio.run(test_reflexion())         
