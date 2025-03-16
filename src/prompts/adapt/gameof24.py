@@ -220,10 +220,7 @@ A possible next step:'''
 evaluate_prompt = '''The game of 24 is a math puzzle where players use four numbers and basic arithmetic operations (+ - * /) to make the result equal to 24. Following is a previous attempt at solving the puzzle.
 Input: {puzzle}
 Solution attempt:
-{steps[0]}
-{steps[1]}
-{steps[2]}
-{steps[3]}
+{steps}
 
 
 Task:
@@ -298,10 +295,7 @@ invalid
 
 Now evaluate the followng formula:
 Input: {puzzle}
-{steps[0]}
-{steps[1]}
-{steps[2]}
-{steps[3]}
+{steps}
 '''
 # Updated
 value_prompt = '''Evaluate if given numbers can reach 24 by responding with the following sure, likely or impossible.
@@ -345,7 +339,7 @@ impossible
 1 3 3 are all too small
 impossible
 
-Input: {input}
+Input: {steps}
 '''
 
 
