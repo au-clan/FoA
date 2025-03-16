@@ -96,8 +96,7 @@ async def make_reflexion(
     k: int, 
     states: Dict[int, GameOf24State], 
     agent_reflexions: Dict[int, List[str]], 
-    agent_all_reflexions: Dict[int, List[str]], 
-    summary_method: str
+    agent_all_reflexions: Dict[int, List[str]]
 ) -> Tuple[Dict[int, List[str]], Dict[int, List[str]]]:
     """
     Generates a reflection for each agent based on their current state and the chosen type of reflection.
@@ -128,38 +127,42 @@ async def make_reflexion(
             agent_reflexions[agent_id] = agent_reflexions[agent_id][-k:]
         return agent_reflexions, agent_all_reflexions
         
-    elif reflexion_type == "summary":
+    elif reflexion_type == "summary_incremental":
         for agent_id in states:
             print("for agent_id: ", agent_id, "agent_reflexions: ", agent_reflexions[agent_id])
         agent_summaries = []
 
         #Summary is made from last summary + new reflexions
-        if summary_method == "incremental":
-            agent_summaries = [
-                asyncio.create_task(
-                GameOf24Agent.generate_summary(
-                    agent_reflexions[agent_id], 
-                    state=states[agent_id], 
-                    api=step_batcher, 
-                    namespace=(0, f"Agent: {agent_id}", f"Step : {step}")
-                    )
+        agent_summaries = [
+            asyncio.create_task(
+            GameOf24Agent.generate_summary(
+                agent_reflexions[agent_id], 
+                state=states[agent_id], 
+                api=step_batcher, 
+                namespace=(0, f"Agent: {agent_id}", f"Step : {step}")
                 )
-                for agent_id in states
-            ]
+            )
+            for agent_id in states
+        ]
+        summaries = await asyncio.gather(*agent_summaries)
+
+        for agent_id, summary in zip(states.keys(), summaries):
+            agent_reflexions[agent_id] = [summary] #Replaces reflexions with summary
+        return agent_reflexions, agent_all_reflexions
 
         #Summary is made from all reflexions
-        elif summary_method == "all_previous":
-            agent_summaries = [
-                asyncio.create_task(
-                GameOf24Agent.generate_summary(
-                    reflexion=agent_all_reflexions[agent_id], 
-                    state=states[agent_id], 
-                    api=step_batcher, 
-                    namespace=(0, f"Agent: {agent_id}", f"Step : {step}")
-                    )
+    elif reflexion_type == "summary_all_previous":
+        agent_summaries = [
+            asyncio.create_task(
+            GameOf24Agent.generate_summary(
+                reflexion=agent_all_reflexions[agent_id], 
+                state=states[agent_id], 
+                api=step_batcher, 
+                namespace=(0, f"Agent: {agent_id}", f"Step : {step}")
                 )
-                for agent_id in states
-            ]
+            )
+            for agent_id in states
+        ]
         summaries = await asyncio.gather(*agent_summaries)
 
         for agent_id, summary in zip(states.keys(), summaries):
@@ -169,7 +172,7 @@ async def make_reflexion(
         raise ValueError("Unknown reflexion type")
 
 
-async def run_reflexion_gameof24(states: Dict[int, GameOf24State], agent_ids: List[int], typeOfReflexion: str, num_reflexions: int, k: int, summary_method="incremental") -> int:
+async def run_reflexion_gameof24(states: Dict[int, GameOf24State], agent_ids: List[int], typeOfReflexion: str, num_reflexions: int, k: int) -> int:
     """
     Runs a complete Game of 24 with reflexions.
     Returns the total score (number of succesful agents) of the agents.
@@ -186,7 +189,7 @@ async def run_reflexion_gameof24(states: Dict[int, GameOf24State], agent_ids: Li
 
     #Reflect and go again i times
     for _ in range(num_reflexions):
-        agent_reflexions, agent_all_reflexions = await make_reflexion(typeOfReflexion, k, states, agent_reflexions, agent_all_reflexions, summary_method)
+        agent_reflexions, agent_all_reflexions = await make_reflexion(typeOfReflexion, k, states, agent_reflexions, agent_all_reflexions)
         print("reflexions per agent", agent_reflexions)
         states, agent_ids, score = await solve_puzzle(num_steps, puzzle, agent_ids, agent_reflexions)
         total_score += score

@@ -53,24 +53,34 @@ logging.basicConfig(
 logging.getLogger("httpx").setLevel(logging.WARNING)
 logging.getLogger("urllib3").setLevel(logging.WARNING)
 logging.getLogger("openai").setLevel(logging.WARNING)  # If using OpenAI's SDK
+logging.getLogger("async_engine").setLevel(logging.WARNING)  # If it's coming from async_engine
+logging.getLogger("botocore").setLevel(logging.WARNING)  # If AWS-related
 
+def plotScore(results):
+    """
+    Plots the number of successful agents for each reflexion method based on test results.
+    """
+    scores = {}
+    
+    # Organize scores by reflexion type and number of iterations
+    for entry in results:
+        method = entry["reflexion_type"]
+        num_reflexions = entry["num_reflexions"]
+        score = entry["score"]
+        
+        if method not in scores:
+            scores[method] = {}
+        scores[method][num_reflexions] = score
 
-def plotScore(scoreList):
-    """
-    Plots the number of successfull agents for each reflexion method.
-    """
-    scores = {
-        "list": scoreList,  # Example scores for "list" reflexion
-        "k most recent": [4, 5],  # Example scores for "k most recent" reflexion
-        "summary_incremental": [6, 7],  # Example scores for "summary" with incremental summary method
-        "summary_all_previous": [5, 6]  # Example scores for "summary" with all_previous method
-    }
-    iterations = [2, 4]  # Example number of iterations
     plt.figure(figsize=(10, 6))
 
-    for method, score in scores.items():
-        plt.plot(iterations, score, marker='o', label=method)
-    
+    # Sort by iteration count for proper plotting
+    num_iterations = sorted({entry["num_reflexions"] for entry in results})
+
+    for method, method_scores in scores.items():
+        method_scores_sorted = [method_scores.get(n, 0) for n in num_iterations]
+        plt.plot(num_iterations, method_scores_sorted, marker='o', label=method)
+
     plt.xlabel("Number of Reflexion Iterations")
     plt.ylabel("Score")
     plt.title("Performance of Reflexion Methods in Game of 24")
@@ -117,14 +127,10 @@ async def test_reflexion():
             states[i] = states[0]
         for num_reflexions in num_reflexions_list:
             for reflexion_type in reflexion_types:
-                summary_method = "incremental" if "incremental" in reflexion_type else "all_previous"
-                if summary_method == "all_previous":
-                    print("all_all previous summary starts now:")
-                else:
-                    print(reflexion_type, " stars now")
+                print(reflexion_type, " starts now")
                 # Run the reflexion game
                 score = await run_reflexion_gameof24(
-                    states, agent_ids, reflexion_type, num_reflexions, k, summary_method
+                    states, agent_ids, reflexion_type, num_reflexions, k
                 )
 
                 # Calculate token cost 
@@ -147,7 +153,7 @@ async def test_reflexion():
         pickle.dump(results, f)
 
     # Plot the results
-    plotScore([r["score"] for r in results if r["reflexion_type"] == "list"])
+    plotScore(results)
 
 if __name__ == "__main__":
     asyncio.run(test_reflexion())
