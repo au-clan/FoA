@@ -193,6 +193,32 @@ async def run_reflexion_gameof24(states: Dict[int, GameOf24State], agent_ids: Li
     return total_score
 
 
+async def run_step_wise_gameof24(states: Dict[int, GameOf24State], agent_ids: List[int], typeOfReflexion: str, num_reflexions: int, k: int, summary_method="incremental") -> int:
+    """
+    Runs a complete Game of 24 with step-wise reflexions.
+    Returns the total score (number of succesful agents) of the agents.
+    """
+    #Started this approach where we basically just define the number of steps to be 1 and then run solve_puzzle() 4 times, however
+    #Some changes needs to be made to solve_puzzle() for it to work, for example we need to be able to start from a specific step and 
+    #We need to be able to pass the current states to the function.
+    puzzle = states[0].puzzle
+    agent_reflexions = {}
+    agent_all_reflexions = {}
+    num_steps = 1
+    for agent_id in agent_ids:
+        agent_reflexions[agent_id] = []
+        agent_all_reflexions[agent_id] = []
+    total_score = 0
+
+    for _ in range(num_reflexions):
+        for i in range(4):
+            agent_reflexions, agent_all_reflexions = await make_reflexion(typeOfReflexion, k, states, agent_reflexions, agent_all_reflexions, summary_method)
+            print("reflexions per agent", agent_reflexions)
+            states, agent_ids, score = await solve_puzzle(num_steps, puzzle, agent_ids, agent_reflexions)
+            total_score += score
+    return total_score
+
+
 async def main():
     # Example of running an gameOf24 experiment with reflexion
     num_reflexions = 7
@@ -202,7 +228,8 @@ async def main():
     puzzles = load_test_puzzles()
     state = puzzles[0] #1, 1, 4, 6
 
-    await run_reflexion_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
+    # await run_reflexion_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
+    await run_step_wise_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
     
 
 if __name__ == "__main__":
