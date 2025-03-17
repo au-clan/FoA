@@ -262,7 +262,7 @@ IMPORTANT: I want you to end your response with stating what step went wrong (0 
 '''
 
 #RAFA prompt
-validation_prompt = '''Evaluate if given formula is a valid move in the game of 24. Especially, check if a number is missing, if the arithmetic is incorrect, or if a number is used that is not in the input or used twice. Always end your answer with Invalid or Valid.
+validation_prompt = '''Evaluate if given formula is a valid move in the game of 24. Especially, check if a number is missing, if the arithmetic is incorrect, or if a number is used that is not in the input or used twice. All four numbers does not need to be used for the first three steps. Always end your answer with Invalid or Valid.
 Example
 
 Input: 3 6 8 10
