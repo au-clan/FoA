@@ -116,11 +116,14 @@ class GameOf24Agent:
 
 
     @staticmethod
-    def generate_reflexion(puzzle: str, steps: List[str], state: GameOf24State, api, namespace) -> str:
+    def generate_reflexion(time_of_reflexion: str, puzzle: str, steps: List[str], state: GameOf24State, api, namespace) -> str:
         """
         Generates a reflexion based on the puzzle and the steps done
         """
-        prompt = llama_prompts.reflexion_prompt.format(puzzle=puzzle, steps=steps)
+        if time_of_reflexion == "step_wise":
+            prompt = llama_prompts.reflexion_step_prompt.format(puzzle=puzzle, steps=steps)
+        else:
+            prompt = llama_prompts.reflexion_prompt.format(puzzle=puzzle, steps=steps)
         reflexion = api.buffered_request(prompt, key=hash(state), namespace=namespace)
         return reflexion
     

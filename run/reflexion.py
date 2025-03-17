@@ -133,6 +133,9 @@ async def solve_step_wise(
         print(f"Step {step} : Stepping")
         agent_validations = {}
         agent_values = {}
+
+        #Save previous valid step before stepping
+        previous_states = states.copy()
         agent_tasks = [
             asyncio.create_task(
             GameOf24Agent.step(
@@ -195,49 +198,79 @@ async def solve_step_wise(
         for agent_id, validation, value in zip(states.keys(), validations, values):
             agent_validations[agent_id] = validation
             agent_values[agent_id] = value
-
+            
+            print("validation: ", validation)
             #Check what agents fails and append the agent id's to a list
-            if "invalid" in agent_validations[agent_id] or "impossible" in agent_values[agent_id]:
+            if "Invalid" in agent_validations[agent_id] or "Impossible" in agent_values[agent_id]:
+                print("check for invalid: ", "Invalid" in agent_validations[agent_id])
+                print("check for impossible: ","Impossible" in agent_values[agent_id])
                 print("agent id: ", agent_id, " failed")
                 failed_agents.append(agent_id)
             
         #Make it async
         while (failed_agents != []):
             for agent_id in failed_agents:
+                print("agent_id in failed agent loop: ", agent_id)
                 if agent_num_reflexions[agent_id] >= num_reflexions:
-                    print("agent id: ", agent_id, " got max number reflexions")
                     failed_agents.remove(agent_id)
                 else:
-                    print("checking states: ", states[agent_id])
                     single_state = {agent_id: states[agent_id]}
                     agent_num_reflexions[agent_id] += 1
-                    agent_reflexions = await make_reflexion(reflexion_type, k, single_state, agent_reflexions, agent_all_reflexions)
-
+                    agent_reflexions, agent_all_reflexions = await make_reflexion("step_wise", reflexion_type, k, single_state, agent_reflexions, agent_all_reflexions)
+                    # print("agent_id after reflexion: ", agent_id)
+                    # print("agent reflexions in step wise: ", agent_reflexions)
                     agent_tasks = [
                         asyncio.create_task(
                         GameOf24Agent.step(
-                            states[agent_id], #We need to access the last correct state here, instead of the failed
+                            previous_states[agent_id], 
                             step_batcher, 
                             namespace=(0, f"Agent: {agent_id}", f"Step : {step}"), #TODO: fix namespace stuff
-                            reflexion=agent_reflexions[agent_id])
+                            reflexion=agent_reflexions[agent_id]) 
                         )
                     ]
                     new_states = await asyncio.gather(*agent_tasks) #Fake async, only for one state
 
-                    for agent_id, new_state in zip(states.keys(), new_states):
-                        states[agent_id] = new_state
-                        print(f"Current step for agent {agent_id}: {new_state.steps[-1]} \n")
-
+                    states[agent_id] = new_state
+                    print(f"Current step for agent {agent_id}: {new_state.steps[-1]} \n")
+                        
                     # Evaluate whether a puzzle has been solved, 
-                    for agent_id in list(states.keys()):
-                        if GameOf24Agent.verify(states[agent_id]) == {"r": 1}:
-                            print(f"Puzzle finished by agent {agent_id}: {states[agent_id].puzzle}")
-                            finished_states[agent_id] = states.pop(agent_id)
-                            agent_ids.remove(agent_id)
+                    for new_agent_id in list(states.keys()):
+                        if GameOf24Agent.verify(states[new_agent_id]) == {"r": 1}:
+                            print(f"Puzzle finished by agent {new_agent_id}: {states[new_agent_id].puzzle}")
+                            finished_states[new_agent_id] = states.pop(new_agent_id)
+                            agent_ids.remove(new_agent_id)
                             total_score +=1
                     
+                    #Need to validate the new state
+                    validate_single_task = [
+                            asyncio.create_task(
+                            GameOf24Agent.validate(
+                            states[agent_id].puzzle, 
+                            states[agent_id].steps, 
+                            states[agent_id],
+                            step_batcher,
+                            namespace=(0, f"Agent: {agent_id}", f"Step : {step}") #TODO: fix namespace stuff
+                            )
+                        )
+                    ]
+                    single_validation = await asyncio.gather(*validate_single_task)
+                    agent_validations[agent_id] = single_validation
+                    
+                    value_single_task = [
+                            asyncio.create_task(
+                            GameOf24Agent.value(
+                            states[agent_id].puzzle, 
+                            states[agent_id].steps, 
+                            states[agent_id],
+                            step_batcher,
+                            namespace=(0, f"Agent: {agent_id}", f"Step : {step}") #TODO: fix namespace stuff
+                            )
+                        )
+                    ]
+                    single_value = await asyncio.gather(*value_single_task)
+                    agent_values[agent_id] = single_value
                     #check if it fails or succeeds
-                    if "invalid" in agent_validations[agent_id] or "impossible" in agent_values[agent_id]:
+                    if "Invalid" in agent_validations[agent_id] or "impossible" in agent_values[agent_id]:
                         print("agent id: ", agent_id, " failed again")
                     else:
                         failed_agents.remove(agent_id)
@@ -246,7 +279,8 @@ async def solve_step_wise(
    
 
 async def make_reflexion(
-        reflexion_type: str, 
+        time_of_reflexion: str,
+        reflexion_type: str,
         k: int, 
         states: Dict[int, GameOf24State], 
         agent_reflexions: Dict[int, List[str]], 
@@ -259,7 +293,8 @@ async def make_reflexion(
     agent_tasks = [
         asyncio.create_task(
             GameOf24Agent.generate_reflexion(
-                puzzle=states[0].puzzle, 
+                time_of_reflexion,
+                puzzle=states[agent_id].puzzle, 
                 steps=states[agent_id].steps, 
                 state=states[agent_id], 
                 api=step_batcher, 
@@ -268,7 +303,6 @@ async def make_reflexion(
         )
     ) for agent_id in states ]
     new_reflexions = await asyncio.gather(*agent_tasks)
-    
     for agent_id, reflexion in zip(states.keys(), new_reflexions):
         agent_reflexions[agent_id].append(reflexion)
         agent_all_reflexions[agent_id].append(reflexion) #To store all reflexions there have been
@@ -352,7 +386,7 @@ async def run_reflexion_gameof24(
     if time_of_reflexion == "trial_wise":
         #Reflect and go again i times
         for _ in range(num_reflexions):
-            agent_reflexions, agent_all_reflexions = await make_reflexion(reflexion_type, k, states, agent_reflexions, agent_all_reflexions)
+            agent_reflexions, agent_all_reflexions = await make_reflexion(time_of_reflexion, reflexion_type, k, states, agent_reflexions, agent_all_reflexions)
             print("reflexions per agent", agent_reflexions)
             states, agent_ids, score = await solve_trial_wise(num_steps, puzzle, agent_ids, agent_reflexions)
             total_score += score
@@ -366,7 +400,7 @@ async def main():
     # Solve
     # Do reflexiongame
     # Example of running an gameOf24 experiment with reflexion
-    num_reflexions = 7
+    num_reflexions = 2
     k = 3
     num_agents = 4
     agent_ids = [i for i in range(num_agents)] #To keep track of active agents
