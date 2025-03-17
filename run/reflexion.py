@@ -364,7 +364,7 @@ async def run_reflexion_gameof24(
         time_of_reflexion: str, 
         reflexion_type: str, 
         states: Dict[int, GameOf24State], 
-        agent_ids: List[int], 
+        num_agents: int, 
         num_reflexions: int, 
         k: int
     ) -> int:
@@ -376,6 +376,7 @@ async def run_reflexion_gameof24(
     agent_reflexions = {}
     agent_all_reflexions = {}
     num_steps = 4
+    agent_ids = [i for i in range(num_agents)] # Number of active agents
 
     for agent_id in agent_ids:
         agent_reflexions[agent_id] = []
@@ -403,12 +404,11 @@ async def main():
     num_reflexions = 2
     k = 3
     num_agents = 4
-    agent_ids = [i for i in range(num_agents)] #To keep track of active agents
     puzzles = load_test_puzzles()
     state = puzzles[0] #1, 1, 4, 6
 
     # await run_reflexion_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
-    total_score = await run_reflexion_gameof24("step_wise", "summary_incremental", state, agent_ids, num_reflexions, k)
+    total_score = await run_reflexion_gameof24("step_wise", "summary_incremental", state, num_agents, num_reflexions, k)
     print("total_score: ", total_score)
 
 if __name__ == "__main__":

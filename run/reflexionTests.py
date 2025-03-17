@@ -118,7 +118,6 @@ async def test_reflexion():
     num_reflexions_list = [2, 4, 8]  # Number of iterations to test
     k = 2  # k for "k most recent"
     num_agents = 4  
-    agent_ids = [i for i in range(num_agents)] # Number of active agents
     reflexion_types = ["list", "k most recent", "summary_incremental", "summary_all_previous"]
     results = []
 
@@ -130,7 +129,7 @@ async def test_reflexion():
                 print(reflexion_type, " starts now")
                 # Run the reflexion game
                 score = await run_reflexion_gameof24(
-                    states, agent_ids, reflexion_type, num_reflexions, k
+                    "trial_wise", reflexion_type, states, num_agents, num_reflexions, k
                 )
 
                 # Calculate token cost 
@@ -140,7 +139,7 @@ async def test_reflexion():
                 # Log result
                 result_entry = {
                     "puzzle": states[0].puzzle,
-                    "num_agents": len(agent_ids),
+                    "num_agents": num_agents,
                     "num_reflexions": num_reflexions,
                     "reflexion_type": reflexion_type,
                     "token_cost": token_cost,
