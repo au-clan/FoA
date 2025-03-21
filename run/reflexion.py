@@ -2,6 +2,7 @@
 import asyncio
 import os
 import random
+from secrets import token_bytes
 import sys
 from dataclasses import dataclass
 from typing import Any, Dict, List, Tuple
@@ -34,7 +35,8 @@ api = API(
     )
     
 step_batcher = BatchingAPI(
-    api, batch_size=1, 
+    api, 
+    batch_size=1, 
     timeout=2, 
     model=models["step"]["model_name"], 
     tab="step"
@@ -128,7 +130,6 @@ async def solve_step_wise(
         agent_all_reflexions[agent_id] = []
         agent_num_reflexions[agent_id] = 0
 
-    #Solves with the first reflexion
     for step in range(num_steps):
         print(f"Step {step} : Stepping")
         agent_validations = {}
@@ -383,6 +384,15 @@ async def run_reflexion_gameof24(
         agent_all_reflexions[agent_id] = []
     total_score = 0
 
+    #Making states for all agent_ids, because pickle only has one
+    for agent_id in agent_ids:
+        states[agent_id] = GameOf24State(
+            puzzle=puzzle, 
+            current_state=puzzle, 
+            steps=[], 
+            randomness=random.randint(0,1000)
+            )
+
     # states, agent_ids, score = await solve_trial_wise(num_steps, puzzle, agent_ids, agent_reflexions)
     if time_of_reflexion == "trial_wise":
         #Reflect and go again i times
@@ -393,8 +403,13 @@ async def run_reflexion_gameof24(
             total_score += score
     else: #step_wise
         total_score = await solve_step_wise(num_steps, num_reflexions, k, puzzle, agent_ids, reflexion_type)
+    cost = api.cost(report_tokens=True)
+    token_cost = cost.get("total_tokens")
+    num_used_reflexions = sum(len(reflexions) for reflexions in agent_all_reflexions.values())
     
-    return total_score
+    #For loop counting how many reflexions have been done in total 
+    
+    return total_score, token_cost, num_used_reflexions
 
 
 async def main():
@@ -408,8 +423,9 @@ async def main():
     state = puzzles[0] #1, 1, 4, 6
 
     # await run_reflexion_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
-    total_score = await run_reflexion_gameof24("step_wise", "summary_incremental", state, num_agents, num_reflexions, k)
-    print("total_score: ", total_score)
+    total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", state, num_agents, num_reflexions, k)
+    print("total_score: ", total_score, "token_cost: ", token_cost, "num_used_reflexions: ", num_used_reflexions)
+
 
 if __name__ == "__main__":
     asyncio.run(main())         

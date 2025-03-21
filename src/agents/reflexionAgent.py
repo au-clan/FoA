@@ -45,7 +45,7 @@ class GameOf24Agent:
             if len(reflexion) == 0:
                 prompt = llama_prompts.bfs_prompt_single.format(input=current_state) 
             else:
-                prompt = llama_prompts.bfs_reflexion_prompt_single.format(input=current_state, puzzle = "1 1 4 6", reflexion=reflexion[0]) 
+                prompt = llama_prompts.bfs_reflexion_prompt_single.format(input=current_state, reflexion=reflexion[0]) 
 
             suggestions = await api.buffered_request(prompt, key=hash(state), namespace=namespace)
 

@@ -39,8 +39,20 @@ models = {
     "step": {"model_name":model, "provider":provider},
     "eval": {"model_name":model, "provider":provider},
 }
-api = API(eval_api_config, models=models.values(), resources=2, verbose=False)
-step_batcher = BatchingAPI(api, batch_size=1, timeout=2, model=models["step"]["model_name"], tab="step")
+api = API(
+    eval_api_config, 
+    models=models.values(), 
+    resources=2, 
+    verbose=False
+    )
+
+step_batcher = BatchingAPI(
+    api, 
+    batch_size=1, 
+    timeout=2, 
+    model=models["step"]["model_name"], 
+    tab="step"
+    )
 
 # Setup logging
 logging.basicConfig(
@@ -128,13 +140,9 @@ async def test_reflexion():
             for reflexion_type in reflexion_types:
                 print(reflexion_type, " starts now")
                 # Run the reflexion game
-                score = await run_reflexion_gameof24(
+                score, token_cost, num_used_reflexions = await run_reflexion_gameof24(
                     "trial_wise", reflexion_type, states, num_agents, num_reflexions, k
                 )
-
-                # Calculate token cost 
-                cost = api.cost(report_tokens=True)
-                token_cost = cost.get("total_tokens")
 
                 # Log result
                 result_entry = {
@@ -142,8 +150,9 @@ async def test_reflexion():
                     "num_agents": num_agents,
                     "num_reflexions": num_reflexions,
                     "reflexion_type": reflexion_type,
-                    "token_cost": token_cost,
                     "score": score,
+                    "token_cost": token_cost,
+                    "num_used_reflexions": num_used_reflexions
                 }
                 results.append(result_entry)
                 logging.info(result_entry)
@@ -155,5 +164,25 @@ async def test_reflexion():
     # Plot the results
     plotScore(results)
 
+from src.prompts.adapt import gameof24 as llama_prompts
+
+async def scoreTest():
+    states = []
+    puzzle = "1 1 4 6"
+    states.append(GameOf24State(puzzle=puzzle, current_state=puzzle, steps=[], randomness=random.randint(0, 1000)))
+    namespace= (0, f"Agent: {int(1)}", f"Step: {1}")
+    prompt = llama_prompts.bfs_prompt_single.format(input=states[0]) 
+    #prompt = "Hi can you calculate 3 + 2"
+    evaluation = await api.buffered_request(prompt, key=hash(states[0]), namespace=namespace)
+    #evaluation = await api.request(prompt, namespaces=namespace, model=model)
+    print("evaluation: ", evaluation)
+    print(api.cost())
+    print(api.cost(report_tokens=True))
+    cost = api.cost(report_tokens=True)
+    token_cost = cost.get("total_tokens")
+    print(token_cost)
+    
+
 if __name__ == "__main__":
-    asyncio.run(test_reflexion())
+    #asyncio.run(test_reflexion())
+    asyncio.run(scoreTest())
