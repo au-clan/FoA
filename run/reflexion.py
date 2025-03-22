@@ -42,8 +42,39 @@ step_batcher = BatchingAPI(
     tab="step"
     )
 
-def check_states():
-    pass
+async def check_states(states, step):
+    """
+    Checking whether the current state is valid and determines the likelihood of it succeding.
+    """
+    validate_tasks = [
+            asyncio.create_task(
+            GameOf24Agent.validate(
+                states[agent_id].puzzle, 
+                states[agent_id].steps, 
+                states[agent_id],
+                step_batcher,
+                namespace=(0, f"Agent: {agent_id}", f"Step : {step}") #TODO: fix namespace stuff
+                )
+            )
+            for agent_id in states
+        ]
+    validations = await asyncio.gather(*validate_tasks)
+
+    value_tasks = [
+        asyncio.create_task(
+        GameOf24Agent.value(
+            states[agent_id].puzzle, 
+            states[agent_id].steps, 
+            states[agent_id],
+            step_batcher,
+            namespace=(0, f"Agent: {agent_id}", f"Step : {step}") #TODO: fix namespace stuff
+            )
+        )
+        for agent_id in states      
+    ]
+    values = await asyncio.gather(*value_tasks)
+
+    return validations, values
 
 async def solve_trial_wise(
         num_steps: int, 
@@ -110,11 +141,9 @@ async def solve_step_wise(
     ) -> Tuple[Dict[int, GameOf24State], List[int], int]:
 
     total_score = 0
-    states =  {}
-    agent_reflexions = {}
-    agent_all_reflexions = {}
-    agent_num_reflexions = {}
-    
+    states, finished_states = {}
+    agent_reflexions, agent_all_reflexions, agent_num_reflexions = {}
+
     #Create one state for each agent
     for agent_id in agent_ids:
         states[agent_id] = GameOf24State(
@@ -126,8 +155,7 @@ async def solve_step_wise(
     finished_states = {}
 
     for agent_id in agent_ids:
-        agent_reflexions[agent_id] = []
-        agent_all_reflexions[agent_id] = []
+        agent_reflexions[agent_id], agent_all_reflexions[agent_id] = []
         agent_num_reflexions[agent_id] = 0
 
     for step in range(num_steps):
@@ -161,39 +189,11 @@ async def solve_step_wise(
                 agent_ids.remove(agent_id)
                 total_score +=1
 
-            
         # If all puzzles have been solved, break
         if not states:
             break
 
-        validate_tasks = [
-            asyncio.create_task(
-            GameOf24Agent.validate(
-                states[agent_id].puzzle, 
-                states[agent_id].steps, 
-                states[agent_id],
-                step_batcher,
-                namespace=(0, f"Agent: {agent_id}", f"Step : {step}") #TODO: fix namespace stuff
-                )
-            )
-            for agent_id in states
-        ]
-        validations = await asyncio.gather(*validate_tasks)
-
-        value_tasks = [
-            asyncio.create_task(
-            GameOf24Agent.value(
-                states[agent_id].puzzle, 
-                states[agent_id].steps, 
-                states[agent_id],
-                step_batcher,
-                namespace=(0, f"Agent: {agent_id}", f"Step : {step}") #TODO: fix namespace stuff
-                )
-            )
-            for agent_id in states 
-            
-        ]
-        values = await asyncio.gather(*value_tasks)
+        validations, values = await check_states(states, step)
 
         failed_agents = []
         for agent_id, validation, value in zip(states.keys(), validations, values):
@@ -243,32 +243,35 @@ async def solve_step_wise(
                             total_score +=1
                     
                     #Need to validate the new state
-                    validate_single_task = [
-                            asyncio.create_task(
+                    # single_validation, single_value = validations, values = await check_states(states, step)
+                    validate_tasks = [
+                        asyncio.create_task(
                             GameOf24Agent.validate(
-                            states[agent_id].puzzle, 
-                            states[agent_id].steps, 
-                            states[agent_id],
-                            step_batcher,
-                            namespace=(0, f"Agent: {agent_id}", f"Step : {step}") #TODO: fix namespace stuff
+                                states[agent_id].puzzle, 
+                                states[agent_id].steps, 
+                                states[agent_id],
+                                step_batcher,
+                                namespace=(0, f"Agent: {agent_id}", f"Step : {step}") #TODO: fix namespace stuff
                             )
                         )
+                        for agent_id in states
                     ]
-                    single_validation = await asyncio.gather(*validate_single_task)
-                    agent_validations[agent_id] = single_validation
-                    
-                    value_single_task = [
-                            asyncio.create_task(
+                    single_validation = await asyncio.gather(*validate_tasks)
+
+                    value_tasks = [
+                        asyncio.create_task(
                             GameOf24Agent.value(
-                            states[agent_id].puzzle, 
-                            states[agent_id].steps, 
-                            states[agent_id],
-                            step_batcher,
-                            namespace=(0, f"Agent: {agent_id}", f"Step : {step}") #TODO: fix namespace stuff
+                                states[agent_id].puzzle, 
+                                states[agent_id].steps, 
+                                states[agent_id],
+                                step_batcher,
+                                namespace=(0, f"Agent: {agent_id}", f"Step : {step}") #TODO: fix namespace stuff
                             )
                         )
+                        for agent_id in states      
                     ]
-                    single_value = await asyncio.gather(*value_single_task)
+                    single_value = await asyncio.gather(*value_tasks)
+                    agent_validations[agent_id] = single_validation
                     agent_values[agent_id] = single_value
                     #check if it fails or succeeds
                     if "Invalid" in agent_validations[agent_id] or "impossible" in agent_values[agent_id]:
@@ -423,7 +426,7 @@ async def main():
     state = puzzles[0] #1, 1, 4, 6
 
     # await run_reflexion_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
-    total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", state, num_agents, num_reflexions, k)
+    total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("step_wise", "list", state, num_agents, num_reflexions, k)
     print("total_score: ", total_score, "token_cost: ", token_cost, "num_used_reflexions: ", num_used_reflexions)
 
 
