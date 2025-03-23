@@ -171,18 +171,23 @@ async def scoreTest():
     puzzle = "1 1 4 6"
     states.append(GameOf24State(puzzle=puzzle, current_state=puzzle, steps=[], randomness=random.randint(0, 1000)))
     namespace= (0, f"Agent: {int(1)}", f"Step: {1}")
-    prompt = llama_prompts.bfs_prompt_single.format(input=states[0]) 
-    #prompt = "Hi can you calculate 3 + 2"
-    evaluation = await api.buffered_request(prompt, key=hash(states[0]), namespace=namespace)
-    #evaluation = await api.request(prompt, namespaces=namespace, model=model)
+    #prompt = llama_prompts.bfs_prompt_single.format(input=states[0]) 
+    prompt = "Hi can you calculate 3 + 2"
+    prompt2 = "hello"
+    #evaluation = await api.buffered_request(prompt, key=hash(states[0]), namespace=namespace)
+    evaluation = await api.request(prompt, namespaces=namespace, model=model, tab = "list"+str(2))
+    evaluation = await api.request(prompt2, namespaces=namespace, model=model, tab = "list"+str(4))
     print("evaluation: ", evaluation)
-    print(api.cost())
-    print(api.cost(report_tokens=True))
-    cost = api.cost(report_tokens=True)
+    print(api.cost(tab_name = "list"+str(2), report_tokens=True))
+    print(api.cost(tab_name = "list"+str(4), report_tokens=True))
+    cost = api.cost(tab_name = "list"+str(2), report_tokens=True)
+    token_cost = cost.get("total_tokens")
+    print(token_cost)
+    cost = api.cost(tab_name = "list"+str(4), report_tokens=True)
     token_cost = cost.get("total_tokens")
     print(token_cost)
     
 
 if __name__ == "__main__":
-    #asyncio.run(test_reflexion())
-    asyncio.run(scoreTest())
+    asyncio.run(test_reflexion())
+    #asyncio.run(scoreTest())

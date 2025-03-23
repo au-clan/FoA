@@ -33,16 +33,8 @@ api = API(
     resources=2, 
     verbose=False
     )
-    
-step_batcher = BatchingAPI(
-    api, 
-    batch_size=1, 
-    timeout=2, 
-    model=models["step"]["model_name"], 
-    tab="step"
-    )
 
-async def check_states(states, step):
+async def check_states(step_batcher, states, step):
     """
     Checking whether the current state is valid and determines the likelihood of it succeding.
     """
@@ -77,6 +69,7 @@ async def check_states(states, step):
     return validations, values
 
 async def solve_trial_wise(
+        step_batcher: BatchingAPI,
         num_steps: int, 
         puzzle: str, 
         agent_ids: List[int], 
@@ -132,6 +125,7 @@ async def solve_trial_wise(
 
 
 async def solve_step_wise(
+        step_batcher: BatchingAPI,
         num_steps: int, 
         num_reflexions: int,
         k,
@@ -193,7 +187,7 @@ async def solve_step_wise(
         if not states:
             break
 
-        validations, values = await check_states(states, step)
+        validations, values = await check_states(step_batcher, states, step)
 
         failed_agents = []
         for agent_id, validation, value in zip(states.keys(), validations, values):
@@ -283,6 +277,7 @@ async def solve_step_wise(
    
 
 async def make_reflexion(
+        step_batcher: BatchingAPI,
         time_of_reflexion: str,
         reflexion_type: str,
         k: int, 
@@ -376,6 +371,13 @@ async def run_reflexion_gameof24(
     Runs a complete Game of 24 with reflexions.
     Returns the total score (number of succesful agents) of the agents.
     """
+    step_batcher = BatchingAPI(
+    api, 
+    batch_size=1, 
+    timeout=2, 
+    model=models["step"]["model_name"], 
+    tab=reflexion_type+str(num_reflexions)
+    )
     puzzle = states[0].puzzle
     agent_reflexions = {}
     agent_all_reflexions = {}
@@ -400,13 +402,13 @@ async def run_reflexion_gameof24(
     if time_of_reflexion == "trial_wise":
         #Reflect and go again i times
         for _ in range(num_reflexions):
-            agent_reflexions, agent_all_reflexions = await make_reflexion(time_of_reflexion, reflexion_type, k, states, agent_reflexions, agent_all_reflexions)
+            agent_reflexions, agent_all_reflexions = await make_reflexion(step_batcher, time_of_reflexion, reflexion_type, k, states, agent_reflexions, agent_all_reflexions)
             print("reflexions per agent", agent_reflexions)
-            states, agent_ids, score = await solve_trial_wise(num_steps, puzzle, agent_ids, agent_reflexions)
+            states, agent_ids, score = await solve_trial_wise(step_batcher, num_steps, puzzle, agent_ids, agent_reflexions)
             total_score += score
     else: #step_wise
-        total_score = await solve_step_wise(num_steps, num_reflexions, k, puzzle, agent_ids, reflexion_type)
-    cost = api.cost(report_tokens=True)
+        total_score = await solve_step_wise(step_batcher, num_steps, num_reflexions, k, puzzle, agent_ids, reflexion_type)
+    cost = api.cost(tab_name=reflexion_type+str(num_reflexions), report_tokens=True)
     token_cost = cost.get("total_tokens")
     num_used_reflexions = sum(len(reflexions) for reflexions in agent_all_reflexions.values())
     

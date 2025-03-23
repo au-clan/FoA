@@ -1,44 +1,6 @@
-2025-03-17 16:19:09,328 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'token_cost': 0, 'score': 0}
-2025-03-17 16:19:10,041 - Retrying request to /openai/v1/chat/completions in 1.000000 seconds
-2025-03-17 16:19:10,109 - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
-2025-03-17 16:19:11,083 - Retrying request to /openai/v1/chat/completions in 3.000000 seconds
-2025-03-17 16:19:18,985 - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
-2025-03-17 16:19:18,995 - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
-2025-03-17 16:19:24,078 - Retrying request to /openai/v1/chat/completions in 5.000000 seconds
-2025-03-17 16:19:24,279 - Retrying request to /openai/v1/chat/completions in 6.000000 seconds
-2025-03-17 16:19:29,177 - Retrying request to /openai/v1/chat/completions in 7.000000 seconds
-2025-03-17 16:19:38,776 - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
-2025-03-17 16:19:38,790 - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
-2025-03-17 16:19:43,679 - Retrying request to /openai/v1/chat/completions in 1.000000 seconds
-2025-03-17 16:19:43,680 - Retrying request to /openai/v1/chat/completions in 1.000000 seconds
-2025-03-17 16:19:45,330 - Retrying request to /openai/v1/chat/completions in 6.000000 seconds
-2025-03-17 16:19:45,371 - Retrying request to /openai/v1/chat/completions in 5.000000 seconds
-2025-03-17 16:19:54,080 - Retrying request to /openai/v1/chat/completions in 2.000000 seconds
-2025-03-17 16:19:54,467 - Retrying request to /openai/v1/chat/completions in 2.000000 seconds
-2025-03-17 16:19:58,998 - Retrying request to /openai/v1/chat/completions in 7.000000 seconds
-2025-03-17 16:19:59,081 - Retrying request to /openai/v1/chat/completions in 7.000000 seconds
-2025-03-17 16:20:09,079 - Retrying request to /openai/v1/chat/completions in 3.000000 seconds
-2025-03-17 16:20:09,184 - Retrying request to /openai/v1/chat/completions in 8.000000 seconds
-2025-03-17 16:20:12,152 - Retrying request to /openai/v1/chat/completions in 5.000000 seconds
-2025-03-17 16:20:17,800 - Retrying request to /openai/v1/chat/completions in 1.000000 seconds
-2025-03-17 16:20:17,840 - Retrying request to /openai/v1/chat/completions in 1.000000 seconds
-2025-03-17 16:20:19,181 - Retrying request to /openai/v1/chat/completions in 8.000000 seconds
-2025-03-17 16:20:27,467 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'token_cost': 0, 'score': 0}
-2025-03-17 16:20:29,688 - Retrying request to /openai/v1/chat/completions in 3.000000 seconds
-2025-03-17 16:20:29,709 - Retrying request to /openai/v1/chat/completions in 6.000000 seconds
-2025-03-21 15:22:45,259 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'token_cost': 0, 'score': 1}
-2025-03-21 15:22:46,903 - Retrying request to /openai/v1/chat/completions in 5.000000 seconds
-2025-03-21 15:22:46,903 - Retrying request to /openai/v1/chat/completions in 5.000000 seconds
-2025-03-21 15:24:12,095 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'token_cost': 0, 'score': 0}
-2025-03-21 15:24:14,923 - Retrying request to /openai/v1/chat/completions in 2.000000 seconds
-2025-03-21 15:24:15,946 - Retrying request to /openai/v1/chat/completions in 1.000000 seconds
-2025-03-21 15:24:18,038 - Retrying request to /openai/v1/chat/completions in 1.000000 seconds
-2025-03-21 15:24:18,077 - Retrying request to /openai/v1/chat/completions in 1.000000 seconds
-2025-03-21 15:24:20,146 - Retrying request to /openai/v1/chat/completions in 5.000000 seconds
-2025-03-21 15:24:21,002 - Retrying request to /openai/v1/chat/completions in 8.000000 seconds
-2025-03-21 15:26:43,546 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'token_cost': {'input_tokens': 15679, 'output_tokens': 6495.0, 'total_tokens': 22174.0}, 'score': 0}
-2025-03-21 15:26:46,380 - Retrying request to /openai/v1/chat/completions in 3.000000 seconds
-2025-03-21 15:26:46,388 - Retrying request to /openai/v1/chat/completions in 3.000000 seconds
-2025-03-21 15:28:18,984 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'token_cost': 21437.0, 'score': 0}
-2025-03-21 15:28:22,008 - Retrying request to /openai/v1/chat/completions in 1.000000 seconds
-2025-03-21 15:28:22,015 - Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+2025-03-23 01:01:21,670 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 0, 'token_cost': 19631.0, 'num_used_reflexions': 8}
+2025-03-23 01:02:24,188 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 19419.0, 'num_used_reflexions': 8}
+2025-03-23 01:03:43,512 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 23343.0, 'num_used_reflexions': 8}
+2025-03-23 01:05:01,110 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 0, 'token_cost': 23265.0, 'num_used_reflexions': 8}
+2025-03-23 01:07:12,099 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 4, 'reflexion_type': 'list', 'score': 1, 'token_cost': 39065.0, 'num_used_reflexions': 16}
+2025-03-23 01:09:27,173 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 4, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 40048.0, 'num_used_reflexions': 16}
