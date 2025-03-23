@@ -135,8 +135,11 @@ async def solve_step_wise(
     ) -> Tuple[Dict[int, GameOf24State], List[int], int]:
 
     total_score = 0
-    states, finished_states = {}
-    agent_reflexions, agent_all_reflexions, agent_num_reflexions = {}
+    states = {} 
+    finished_states = {}
+    agent_reflexions = {}
+    agent_all_reflexions = {}
+    agent_num_reflexions = {}
 
     #Create one state for each agent
     for agent_id in agent_ids:
@@ -146,10 +149,10 @@ async def solve_step_wise(
             steps=[], 
             randomness=random.randint(0,1000)
             )
-    finished_states = {}
 
     for agent_id in agent_ids:
-        agent_reflexions[agent_id], agent_all_reflexions[agent_id] = []
+        agent_reflexions[agent_id] = []
+        agent_all_reflexions[agent_id] = []
         agent_num_reflexions[agent_id] = 0
 
     for step in range(num_steps):
@@ -195,6 +198,7 @@ async def solve_step_wise(
             agent_values[agent_id] = value
             
             print("validation: ", validation)
+            print("valuation: ", value)
             #Check what agents fails and append the agent id's to a list
             if "Invalid" in agent_validations[agent_id] or "Impossible" in agent_values[agent_id]:
                 print("check for invalid: ", "Invalid" in agent_validations[agent_id])
@@ -211,9 +215,9 @@ async def solve_step_wise(
                 else:
                     single_state = {agent_id: states[agent_id]}
                     agent_num_reflexions[agent_id] += 1
-                    agent_reflexions, agent_all_reflexions = await make_reflexion("step_wise", reflexion_type, k, single_state, agent_reflexions, agent_all_reflexions)
+                    agent_reflexions, agent_all_reflexions = await make_reflexion(step_batcher, "step_wise", reflexion_type, k, single_state, agent_reflexions, agent_all_reflexions)
                     # print("agent_id after reflexion: ", agent_id)
-                    # print("agent reflexions in step wise: ", agent_reflexions)
+                    print("agent reflexions in step wise: ", agent_reflexions[agent_id])
                     agent_tasks = [
                         asyncio.create_task(
                         GameOf24Agent.step(
@@ -223,10 +227,9 @@ async def solve_step_wise(
                             reflexion=agent_reflexions[agent_id]) 
                         )
                     ]
-                    new_states = await asyncio.gather(*agent_tasks) #Fake async, only for one state
-
-                    states[agent_id] = new_state
-                    print(f"Current step for agent {agent_id}: {new_state.steps[-1]} \n")
+                    reattempt_state = await asyncio.gather(*agent_tasks) #Fake async, only for one state                    
+                    states[agent_id] = reattempt_state[0]
+                    print(f"Current step for agent {agent_id}: {states[agent_id].steps[-1]} \n")
                         
                     # Evaluate whether a puzzle has been solved, 
                     for new_agent_id in list(states.keys()):
@@ -237,7 +240,7 @@ async def solve_step_wise(
                             total_score +=1
                     
                     #Need to validate the new state
-                    # single_validation, single_value = validations, values = await check_states(states, step)
+                    #single_validation, single_value = await check_states(step_batcher, states, step)
                     validate_tasks = [
                         asyncio.create_task(
                             GameOf24Agent.validate(
@@ -248,7 +251,6 @@ async def solve_step_wise(
                                 namespace=(0, f"Agent: {agent_id}", f"Step : {step}") #TODO: fix namespace stuff
                             )
                         )
-                        for agent_id in states
                     ]
                     single_validation = await asyncio.gather(*validate_tasks)
 
@@ -262,13 +264,14 @@ async def solve_step_wise(
                                 namespace=(0, f"Agent: {agent_id}", f"Step : {step}") #TODO: fix namespace stuff
                             )
                         )
-                        for agent_id in states      
                     ]
                     single_value = await asyncio.gather(*value_tasks)
-                    agent_validations[agent_id] = single_validation
-                    agent_values[agent_id] = single_value
+                    agent_validations[agent_id] = single_validation[0]
+                    agent_values[agent_id] = single_value[0]
+                    print("validation for failed agent: ", agent_validations[agent_id])
+                    print("valuations for failed agent: ", agent_values[agent_id])
                     #check if it fails or succeeds
-                    if "Invalid" in agent_validations[agent_id] or "impossible" in agent_values[agent_id]:
+                    if "Invalid" in agent_validations[agent_id] or "Impossible" in agent_values[agent_id]:
                         print("agent id: ", agent_id, " failed again")
                     else:
                         failed_agents.remove(agent_id)
@@ -297,8 +300,7 @@ async def make_reflexion(
                 steps=states[agent_id].steps, 
                 state=states[agent_id], 
                 api=step_batcher, 
-                namespace=(0, f"Agent: {int(agent_id)}", 
-                f"Step: {step}")
+                namespace=(0, f"Agent: {int(agent_id)}", f"Step: {step}") #TODO: Change namespace to not have step
         )
     ) for agent_id in states ]
     new_reflexions = await asyncio.gather(*agent_tasks)
@@ -372,11 +374,11 @@ async def run_reflexion_gameof24(
     Returns the total score (number of succesful agents) of the agents.
     """
     step_batcher = BatchingAPI(
-    api, 
-    batch_size=1, 
-    timeout=2, 
-    model=models["step"]["model_name"], 
-    tab=reflexion_type+str(num_reflexions)
+        api, 
+        batch_size=1, 
+        timeout=2, 
+        model=models["step"]["model_name"], 
+        tab=reflexion_type+str(num_reflexions)
     )
     puzzle = states[0].puzzle
     agent_reflexions = {}
