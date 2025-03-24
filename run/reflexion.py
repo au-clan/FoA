@@ -15,7 +15,7 @@ from utils import load_test_puzzles
 
 step_api_config = eval_api_config = {
     "max_tokens": 1000,
-    "temperature": 0,
+    "temperature": 0.7,
     "top_p": 1,
     "request_timeout": 120,
     "top_k": 50
@@ -291,6 +291,7 @@ async def make_reflexion(
     """
     Generates a reflection for each agent based on their current state and the chosen type of reflection.
     """
+    print("states: ", states)
     step = 3
     agent_tasks = [
         asyncio.create_task(
@@ -391,14 +392,16 @@ async def run_reflexion_gameof24(
         agent_all_reflexions[agent_id] = []
     total_score = 0
 
+    #print("states here: ", states)
+
     #Making states for all agent_ids, because pickle only has one
-    for agent_id in agent_ids:
-        states[agent_id] = GameOf24State(
-            puzzle=puzzle, 
-            current_state=puzzle, 
-            steps=[], 
-            randomness=random.randint(0,1000)
-            )
+    # for agent_id in agent_ids:
+    #     states[agent_id] = GameOf24State(
+    #         puzzle=puzzle, 
+    #         current_state=puzzle, 
+    #         steps=[], 
+    #         randomness=random.randint(0,1000)
+    #         )
 
     # states, agent_ids, score = await solve_trial_wise(num_steps, puzzle, agent_ids, agent_reflexions)
     if time_of_reflexion == "trial_wise":
