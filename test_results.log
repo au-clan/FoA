@@ -13,3 +13,8 @@ There was a mistake above where we did not correctly reflect first time, have to
 2025-03-24 02:56:58,711 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 21433.0, 'num_used_reflexions': 8}
 2025-03-24 02:58:22,955 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 24453.0, 'num_used_reflexions': 8}
 2025-03-24 02:59:37,381 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 0, 'token_cost': 22930.0, 'num_used_reflexions': 8}
+2025-03-25 03:02:00,556 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 4, 'reflexion_type': 'list', 'score': 1, 'token_cost': 41852.0, 'num_used_reflexions': 16}
+2025-03-25 03:04:16,412 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 4, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 42520.0, 'num_used_reflexions': 16}
+2025-03-25 03:07:16,635 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 4, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 52026.0, 'num_used_reflexions': 16}
+2025-03-25 03:09:40,603 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 4, 'reflexion_type': 'summary_all_previous', 'score': 1, 'token_cost': 44104.0, 'num_used_reflexions': 13}
+2025-03-25 03:15:02,550 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 8, 'reflexion_type': 'list', 'score': 0, 'token_cost': 85629.0, 'num_used_reflexions': 32}
