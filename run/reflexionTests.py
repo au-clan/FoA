@@ -127,13 +127,13 @@ async def test_reflexion():
     """
     # Load unfinished puzzles
     all_puzzles_data = load_test_puzzles()
-    num_reflexions_list = [8]  # Number of iterations to test
+    num_reflexions_list = [2]  # Number of iterations to test
     k = 2  # k for "k most recent"
     num_agents = 4  
     reflexion_types = ["list", "k most recent", "summary_incremental", "summary_all_previous"] 
     results = []
 
-    for states in all_puzzles_data[0:1]:
+    for states in all_puzzles_data[1:6]:
         for i in range(num_agents):
             states[i] = states[0]
         for num_reflexions in num_reflexions_list:
