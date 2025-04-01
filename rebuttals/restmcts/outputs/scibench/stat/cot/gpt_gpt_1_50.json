@@ -1,0 +1,15 @@
+[
+{
+    "content": "5.8-5. If the distribution of $Y$ is $b(n, 0.25)$, give a lower bound for $P(|Y / n-0.25|<0.05)$ when\r\n(a) $n=100$.\r\n The unit of the answer should be  .",
+    "solution": "(a) When $n=100$, the distribution of $Y$ is $b(100, 0.25)$.\n\nTo find a lower bound for $P(|Y / n-0.25|<0.05)$, we can rewrite this as $P(0.2 < Y / 100 < 0.3)$.\n\nSince $Y$ follows a binomial distribution, we can use the normal approximation to estimate the probability.\n\nUsing the normal approximation, we can calculate the z-scores for $0.2$ and $0.3$:\n\nFor $0.2$:\n$z_1 = \\frac{0.2 - 0.25}{\\sqrt{\\frac{0.25(1-0.25)}{100}}} = -1$\n\nFor $0.3$:\n$z_2 = \\frac{0.3 - 0.25}{\\sqrt{\\frac{0.25(1-0.25)}{100}}} = 1$\n\nNow, we can calculate the probability $P(-1 < Z < 1)$, where $Z$ is a standard normal variable.\n\n$P(-1 < Z < 1) = 0.6827$\n\nTherefore, the lower bound for $P(|Y / n-0.25|<0.05)$ when $n=100$ is approximately $0.6827$.",
+    "summary": "The final answer is $0.6827$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.25,
+    "cost": {
+        "completion_tokens": 303,
+        "prompt_tokens": 520,
+        "cost": 0.0007145000000000001
+    }
+}
+]

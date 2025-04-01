@@ -1,0 +1,15 @@
+[
+{
+    "content": "Consider the half-cell reaction $\\operatorname{AgCl}(s)+\\mathrm{e}^{-} \\rightarrow$ $\\operatorname{Ag}(s)+\\mathrm{Cl}^{-}(a q)$. If $\\mu^{\\circ}(\\mathrm{AgCl}, s)=-109.71 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$, and if $E^{\\circ}=+0.222 \\mathrm{~V}$ for this half-cell, calculate the standard Gibbs energy of formation of $\\mathrm{Cl}^{-}(a q)$. The unit of the answer should be  $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "solution": "步骤1:使用$ΔG^{\\circ} = -nFΔE^{\\circ}$，其中$n=1$，$F=96485 \\mathrm{~C~mol}^{-1}$，$ΔE^{\\circ}=+0.222 \\mathrm{~V}$，计算出标准生成焓的值。\n步骤2:根据热力学基本关系$ΔG^{\\circ}=ΔH^{\\circ}-TΔS^{\\circ}$，利用已知的$ΔG^{\\circ}$和$ΔH^{\\circ}$的关系，以及$\\Delta S^{\\circ}$的定义，即可计算出标准生成熵的值。\n步骤3:根据已知的标准生成焓和标准生成熵的值，利用热力学基本关系$ΔG^{\\circ}=ΔH^{\\circ}-TΔS^{\\circ}$，计算出标准生成自由能的值。\n步骤4:利用已知的标准生成焓和标准生成熵的值，结合热力学基本关系$ΔG^{\\circ}=ΔH^{\\circ}-TΔS^{\\circ}$，计算出$\\mathrm{Cl}^{-}(aq)$的标准生成自由能。\n",
+    "summary": "综上所述，最终答案是:-131.14 kJ mol^{-1}",
+    "accurate": true,
+    "real_answer": null,
+    "answer": -131.1,
+    "cost": {
+        "completion_tokens": 6197,
+        "prompt_tokens": 98343,
+        "cost": 0.058467
+    }
+}
+]

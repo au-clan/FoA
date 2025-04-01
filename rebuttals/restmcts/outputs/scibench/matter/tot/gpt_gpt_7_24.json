@@ -1,0 +1,639 @@
+[
+{
+    "content": "Radiation from an X-ray source consists of two components of wavelengths $154.433 \\mathrm{pm}$ and $154.051 \\mathrm{pm}$. Calculate the difference in glancing angles $(2 \\theta)$ of the diffraction lines arising from the two components in a diffraction pattern from planes of separation $77.8 \\mathrm{pm}$. The unit of the answer should be  ${\\circ}$.",
+    "solution": "步骤1:计算出两个不同波长对应的入射角$\\theta_1$和$\\theta_2$，然后计算它们的差值以得到$\\Delta \\theta$。\n步骤2:计算$\\Delta \\theta$。\n步骤3:利用布拉格衍射公式，分别计算出两个不同波长对应的衍射角$2\\theta_1$和$2\\theta_2$，然后计算它们的差值以得到$\\Delta (2\\theta)$。\n步骤4:利用布拉格衍射公式，计算出两个不同波长对应的衍射角$2\\theta_1$和$2\\theta_2$，然后计算它们的差值以得到$\\Delta (2\\theta)$。\n步骤5:将已计算得到的$\\Delta (2\\theta)$乘以2，即可得到题目要求的差值$\\Delta (2\\theta)$的答案。\n步骤6:将步骤3和步骤4中计算得到的$\\Delta (2\\theta)$相减，并乘以2，即可得到题目要求的差值$\\Delta (2\\theta)$的答案。\n步骤7:将步骤3和步骤4中计算得到的$\\Delta (2\\theta)$相减，然后乘以2。\n",
+    "summary": "综上所述，最终答案是:0.44${\\circ}$",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 2.14,
+    "cost": {
+        "completion_tokens": 33441,
+        "prompt_tokens": 471613,
+        "cost": 0.285968
+    }
+},
+{
+    "content": "A chemical reaction takes place in a container of cross-sectional area $50 \\mathrm{~cm}^2$. As a result of the reaction, a piston is pushed out through $15 \\mathrm{~cm}$ against an external pressure of $1.0 \\mathrm{~atm}$. Calculate the work done by the system. The unit of the answer should be  $\\mathrm{~J}$.",
+    "solution": "步骤1:计算气体的体积变化 $\\Delta V$。\n",
+    "summary": "综上所述，最终答案是:75.00 J",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -75.0,
+    "cost": {
+        "completion_tokens": 34613,
+        "prompt_tokens": 495132,
+        "cost": 0.2994855
+    }
+},
+{
+    "content": "A mixture of water and ethanol is prepared with a mole fraction of water of 0.60 . If a small change in the mixture composition results in an increase in the chemical potential of water by $0.25 \\mathrm{~J} \\mathrm{~mol}^{-1}$, by how much will the chemical potential of ethanol change? The unit of the answer should be  $\\mathrm{~J} \\mathrm{~mol}^{-1}$.",
+    "solution": "步骤1:计算溶剂（乙醇）的摩尔分数，然后根据水的摩尔分数变化和溶质的总摩尔分数不变的条件，计算乙醇的化学势变化。\n步骤2:计算乙醇的摩尔分数，然后利用水的摩尔分数变化和溶质总摩尔分数不变的条件，计算乙醇的化学势变化。\n步骤3:利用水和乙醇的摩尔分数以及已知的水的化学势变化值，计算乙醇的化学势变化。\n步骤4:根据乙醇的摩尔分数和水的摩尔分数变化，计算乙醇的化学势变化。\n步骤5:计算乙醇的摩尔分数，然后利用已知的水的化学势变化值，计算乙醇的化学势变化。\n步骤6:计算乙醇的摩尔分数，然后根据水的摩尔分数变化和溶质的总摩尔分数不变的条件，计算乙醇的化学势变化。\n步骤7:计算乙醇的摩尔分数，然后根据已知的水的化学势变化值，计算乙醇的化学势变化。\n",
+    "summary": "综上所述，最终答案是: -0.42 J mol^{-1}",
+    "accurate": true,
+    "real_answer": null,
+    "answer": -0.38,
+    "cost": {
+        "completion_tokens": 148687,
+        "prompt_tokens": 2203208,
+        "cost": 1.3246345000000002
+    }
+},
+{
+    "content": "The enthalpy of fusion of mercury is $2.292 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$, and its normal freezing point is $234.3 \\mathrm{~K}$ with a change in molar volume of $+0.517 \\mathrm{~cm}^3 \\mathrm{~mol}^{-1}$ on melting. At what temperature will the bottom of a column of mercury (density $13.6 \\mathrm{~g} \\mathrm{~cm}^{-3}$ ) of height $10.0 \\mathrm{~m}$ be expected to freeze? The unit of the answer should be  $ \\mathrm{~K}$ .",
+    "solution": "步骤1:首先，计算汞柱的底部受到的压强，然后利用熔化焓和温度下的汞的密度计算出相应的温度。\n步骤2:根据汞的密度、汞的熔化焓和温度变化量，计算汞柱底部的冰点温度。\n步骤3:计算汞柱底部受到的压强，然后利用此压强和熔化焓、温度下的汞的密度计算出相应的冰点温度。\n步骤4:计算汞柱底部的高度对应的压强，然后利用这个压强和熔化焓、温度下的汞的密度计算出相应的冰点温度。\n步骤5:根据题目中给出的信息，计算汞柱底部的冰点温度。\n步骤6:考虑汞柱底部的高度对应的压强，然后利用这个压强和熔化焓、温度下的汞的密度计算出相应的冰点温度。\n步骤7:计算汞柱底部受到的压强，然后根据熔化焓和温度下的汞的密度计算出相应的冰点温度。\n步骤8:计算汞柱底部受到的压强，并根据熔化焓和温度下的汞的密度计算出相应的冰点温度。\n",
+    "summary": "综上所述，最终答案是:234.68 K",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 234.4,
+    "cost": {
+        "completion_tokens": 178320,
+        "prompt_tokens": 2639703,
+        "cost": 1.5873315
+    }
+},
+{
+    "content": "Suppose a nanostructure is modelled by an electron confined to a rectangular region with sides of lengths $L_1=1.0 \\mathrm{~nm}$ and $L_2=2.0 \\mathrm{~nm}$ and is subjected to thermal motion with a typical energy equal to $k T$, where $k$ is Boltzmann's constant. How low should the temperature be for the thermal energy to be comparable to the zero-point energy？ The unit of the answer should be  $10^3 \\mathrm{~K}$.",
+    "solution": "步骤1:计算矩形区域内电子的振动频率$\\omega_x$和$\\omega_y$，然后代入$kT$的表达式，解出温度$T$的值。\n步骤2:将计算得到的频率$\\omega_x$和$\\omega_y$代入零点能的表达式中，求解零点能的值，进而比较与$kT$的大小关系，得出温度$T$应该多低才能使得热能与零点能相当。\n步骤3:比较热能和零点能的大小关系，得出温度$T$的具体数值。\n",
+    "summary": "综上所述，最终答案是:0.12 × 10^3 K",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 5.5,
+    "cost": {
+        "completion_tokens": 182528,
+        "prompt_tokens": 2710635,
+        "cost": 1.6291095000000002
+    }
+},
+{
+    "content": "Calculate the change in Gibbs energy of $35 \\mathrm{~g}$ of ethanol (mass density $0.789 \\mathrm{~g} \\mathrm{~cm}^{-3}$ ) when the pressure is increased isothermally from 1 atm to 3000 atm. The unit of the answer should be  $\\mathrm{~kJ}$.",
+    "solution": "步骤1:计算乙醇在1 atm和3000 atm下的焓变。\n步骤2:计算乙醇在1 atm和3000 atm下的 Gibbs 自由能变化。\n步骤3:使用公式 $\\Delta G = \\Delta H - T \\Delta S$ 计算乙醇在1 atm和3000 atm下的 Gibbs 自由能变化。\n步骤4:考虑在给定温度下，计算乙醇在1 atm和3000 atm下的熵变。\n步骤5:计算乙醇在给定温度下的熵变。\n步骤6:考虑压力变化对Gibbs自由能的影响，使用公式 $\\Delta G = \\Delta H - T \\Delta S + V \\Delta P$ 计算乙醇在1 atm和3000 atm下的 Gibbs 自由能变化。\n步骤7:使用公式 $\\Delta G = \\Delta H - T \\Delta S + V \\Delta P$ 计算乙醇在1 atm和3000 atm下的 Gibbs 自由能变化，其中 $V$ 为乙醇的体积。\n",
+    "summary": "综上所述，最终答案是:xxx kJ (保留两位小数)",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 12.0,
+    "cost": {
+        "completion_tokens": 202740,
+        "prompt_tokens": 2993346,
+        "cost": 1.8007830000000002
+    }
+},
+{
+    "content": "The promotion of an electron from the valence band into the conduction band in pure $\\mathrm{TIO}_2$ by light absorption requires a wavelength of less than $350 \\mathrm{~nm}$. Calculate the energy gap in electronvolts between the valence and conduction bands. The unit of the answer should be  $\\mathrm{eV}$.",
+    "solution": "步骤1:使用光子能量与波长之间的关系$E = \\frac{hc}{\\lambda}$，计算能隙的能量。\n",
+    "summary": "综上所述，最终答案是:3.54 eV",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 3.54,
+    "cost": {
+        "completion_tokens": 203705,
+        "prompt_tokens": 3016802,
+        "cost": 1.8139585
+    }
+},
+{
+    "content": "Although the crystallization of large biological molecules may not be as readily accomplished as that of small molecules, their crystal lattices are no different. Tobacco seed globulin forms face-centred cubic crystals with unit cell dimension of $12.3 \\mathrm{~nm}$ and a density of $1.287 \\mathrm{~g} \\mathrm{~cm}^{-3}$. Determine its molar mass. The unit of the answer should be  $10^5 \\mathrm{~g} \\mathrm{~mol}^{-1}$.",
+    "solution": "步骤1:计算晶胞中的分子数。\n步骤2:利用晶胞中的分子数和晶胞的单位体积计算每个分子的体积。\n步骤3:利用已知的晶胞密度和每个分子的体积，计算出每个分子的质量，然后根据晶胞中的分子数计算出分子的摩尔质量。\n步骤4:计算分子的摩尔质量。\n步骤5:将得到的分子的摩尔质量乘以 $10^5$，即可得到答案。\n",
+    "summary": "综上所述，最终答案是: 1.03 * 10^5 g mol^-1",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 3.61,
+    "cost": {
+        "completion_tokens": 209573,
+        "prompt_tokens": 3129207,
+        "cost": 1.8789630000000002
+    }
+},
+{
+    "content": "An electron is accelerated in an electron microscope from rest through a potential difference $\\Delta \\phi=100 \\mathrm{kV}$ and acquires an energy of $e \\Delta \\phi$. What is its final speed? The unit of the answer should be  $10^8 \\mathrm{~m} \\mathrm{~s}^{-1}$.",
+    "solution": "步骤1:利用动能定理，将电子的获得能量与动能之间的关系表示出来，并利用动能公式进一步求解电子的最终速度。\n步骤2:将获得的能量$e\\Delta\\phi$与电子的动能$E_k = \\frac{1}{2}mv^2$相等，利用电子的电荷量e和电势差$\\Delta\\phi$的关系，解出电子的最终速度v。\n",
+    "summary": "综上所述，最终答案是:8.67e7",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.88,
+    "cost": {
+        "completion_tokens": 211847,
+        "prompt_tokens": 3175266,
+        "cost": 1.9054035
+    }
+},
+{
+    "content": "The following data show how the standard molar constant-pressure heat capacity of sulfur dioxide varies with temperature. By how much does the standard molar enthalpy of $\\mathrm{SO}_2(\\mathrm{~g})$ increase when the temperature is raised from $298.15 \\mathrm{~K}$ to $1500 \\mathrm{~K}$ ? The unit of the answer should be  $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "solution": "步骤1:首先，我们需要找到两个温度下的标准摩尔热容值，并使用公式 $\\Delta H = \\int_{T_1}^{T_2} C_p dT$ 计算焓变。\n步骤2:将找到的标准摩尔热容值代入公式 $\\Delta H = \\int_{T_1}^{T_2} C_p dT$ 中，进行积分计算得到焓变的数值。\n步骤3:将找到的标准摩尔热容值代入公式 $\\Delta H = \\int_{T_1}^{T_2} C_p dT$ 中，进行积分计算，得出焓变的数值，即求解 $\\int_{298.15}^{1500} C_p dT$。\n步骤4:将已知数据和找到的标准摩尔热容值代入积分公式 $\\Delta H = \\int_{T_1}^{T_2} C_p dT$ 中，计算出焓变的数值。在这里，需要计算 $\\int_{298.15}^{1500} C_p dT$。\n步骤5:进行积分计算，求解 $\\int_{298.15}^{1500} C_p dT$，得到焓变的数值。\n步骤6:将得到的焓变数值除以摩尔数，即可得到标准摩尔焓变，单位为 $\\mathrm{kJ \\ mol}^{-1}$。\n",
+    "summary": "综上所述，最终答案是:xxx kJ/mol",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 62.2,
+    "cost": {
+        "completion_tokens": 241630,
+        "prompt_tokens": 3696010,
+        "cost": 2.2104500000000002
+    }
+},
+{
+    "content": "Suppose that the normalized wavefunction for an electron in a carbon nanotube of length $L=10.0 \\mathrm{~nm}$ is: $\\psi=(2 / L)^{1 / 2} \\sin (\\pi x / L)$. Calculate the probability that the electron is between $x=4.95 \\mathrm{~nm}$ and $5.05 \\mathrm{~nm}$. The unit of the answer should be  .",
+    "solution": "步骤1:计算在$x=4.95 \\mathrm{~nm}$和 $x=5.05 \\mathrm{~nm}$范围内的概率密度。\n步骤2:计算在$x=4.95 \\mathrm{~nm}$和 $x=5.05 \\mathrm{~nm}$范围内的概率。\n步骤3:将步骤1中计算得到的概率密度乘以区间长度 $0.1 \\mathrm{~nm}$，即 $5.05 \\mathrm{~nm} - 4.95 \\mathrm{~nm}$，得到在 $x=4.95 \\mathrm{~nm}$和 $x=5.05 \\mathrm{~nm}$范围内的概率。\n",
+    "summary": "综上所述，最终答案是:0.01 unit",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.02,
+    "cost": {
+        "completion_tokens": 244741,
+        "prompt_tokens": 3757493,
+        "cost": 2.245858
+    }
+},
+{
+    "content": "A sample of the sugar D-ribose of mass $0.727 \\mathrm{~g}$ was placed in a calorimeter and then ignited in the presence of excess oxygen. The temperature rose by $0.910 \\mathrm{~K}$. In a separate experiment in the same calorimeter, the combustion of $0.825 \\mathrm{~g}$ of benzoic acid, for which the internal energy of combustion is $-3251 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$, gave a temperature rise of $1.940 \\mathrm{~K}$. Calculate the enthalpy of formation of D-ribose. The unit of the answer should be  $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "solution": "步骤1:计算D-ribose燃烧反应释放的热量。\n步骤2:计算benzoic acid燃烧释放的热量。\n步骤3:利用热量平衡原理，设置方程并求解得到D-ribose的生成焓。\n步骤4:利用观测到的D-ribose和benzoic acid燃烧时的温度变化，根据热量平衡原理解出D-ribose的生成焓。\n步骤5:根据观测到的温度变化和已知的热量信息，重新设置方程并求解D-ribose的生成焓。\n步骤6:重新设置方程，利用观测到的温度变化和已知的热量信息，求解D-ribose的生成焓。\n步骤7:重新设置方程，根据观测到的温度变化和已知的热量信息，求解D-ribose的生成焓。\n步骤8:根据观测到的D-ribose和benzoic acid燃烧时的温度变化，重新设置方程并求解得到D-ribose的生成焓。\n",
+    "summary": "综上所述，最终答案是:-3351.67 kJ/mol",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -1270.0,
+    "cost": {
+        "completion_tokens": 292851,
+        "prompt_tokens": 4428041,
+        "cost": 2.6532970000000002
+    }
+},
+{
+    "content": "An electron confined to a metallic nanoparticle is modelled as a particle in a one-dimensional box of length $L$. If the electron is in the state $n=1$, calculate the probability of finding it in the following regions: $0 \\leq x \\leq \\frac{1}{2} L$. The unit of the answer should be  .",
+    "solution": "步骤1:计算波函数在$0 \\leq x \\leq \\frac{1}{2} L$区域的归一化系数。\n步骤2:计算波函数在$0 \\leq x \\leq \\frac{1}{2} L$区域的概率密度。\n步骤3:将步骤2中计算得到的概率密度代入概率密度的定义公式，即$P = \\int_{0}^{\\frac{1}{2} L} |\\psi(x)|^2 dx$，进行积分计算得到电子在$0 \\leq x \\leq \\frac{1}{2} L$区域的概率。\n",
+    "summary": "综上所述，最终答案是: 0.25(unit)",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.5,
+    "cost": {
+        "completion_tokens": 296825,
+        "prompt_tokens": 4497705,
+        "cost": 2.69409
+    }
+},
+{
+    "content": "The carbon-carbon bond length in diamond is $154.45 \\mathrm{pm}$. If diamond were considered to be a close-packed structure of hard spheres with radii equal to half the bond length, what would be its expected density? The diamond lattice is face-centred cubic and its actual density is $3.516 \\mathrm{~g} \\mathrm{~cm}^{-3}$. The unit of the answer should be  $\\mathrm{~g} \\mathrm{~cm}^{-3}$.",
+    "solution": "步骤1:使用密度的定义公式，计算diamond的理论密度。\n步骤2:计算硬球的占据体积率，并根据硬球的占据体积率和硬球的实际密度计算出diamond的理论密度。\n步骤3:使用硬球的占据体积率和硬球的实际密度计算出diamond的理论密度。\n步骤4:比较计算出的理论密度与实际密度，判断计算是否正确。\n步骤5:利用硬球的占据体积率和实际密度计算出diamond的理论密度。\n步骤6:比较计算出的理论密度与实际密度，确认计算是否正确。\n步骤7:确认计算出的理论密度与实际密度的比较结果，如果相符，则计算正确；如果不符，则重新检查计算步骤。\n步骤8:重新检查硬球的占据体积率的计算步骤，确保正确计算后再次比较计算出的理论密度与实际密度。\n",
+    "summary": "综上所述，最终答案是:3.52 g cm^-3",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 7.654,
+    "cost": {
+        "completion_tokens": 394572,
+        "prompt_tokens": 6214229,
+        "cost": 3.6989725
+    }
+},
+{
+    "content": "A swimmer enters a gloomier world (in one sense) on diving to greater depths. Given that the mean molar absorption coefficient of seawater in the visible region is $6.2 \\times 10^{-3} \\mathrm{dm}^3 \\mathrm{~mol}^{-1} \\mathrm{~cm}^{-1}$, calculate the depth at which a diver will experience half the surface intensity of light. The unit of the answer should be  $\\mathrm{~m}$.",
+    "solution": "步骤1:使用比尔-朗伯定律计算出深度，使得光强减半。\n",
+    "summary": "综上所述，最终答案是:11.18m",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.87,
+    "cost": {
+        "completion_tokens": 395920,
+        "prompt_tokens": 6238284,
+        "cost": 3.713022
+    }
+},
+{
+    "content": "Calculate the molar energy required to reverse the direction of an $\\mathrm{H}_2 \\mathrm{O}$ molecule located $100 \\mathrm{pm}$ from a $\\mathrm{Li}^{+}$ ion. Take the magnitude of the dipole moment of water as $1.85 \\mathrm{D}$. The unit of the answer should be  $10^3 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "solution": "步骤1:首先计算水分子的偶极矩，然后根据偶极矩和距离计算所需的能量。\n步骤2:使用偶极矩和距离计算出所需的能量，单位转换为 $10^3 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$。\n步骤3:使用公式 $E = -\\vec{d} \\cdot \\vec{E}$ 计算出所需的能量，其中 $\\vec{d}$ 是水分子的偶极矩，$\\vec{E}$ 是离子产生的电场强度。\n步骤4:计算出离子产生的电场强度$\\vec{E}$。\n步骤5:使用公式 $E = -\\vec{d} \\cdot \\vec{E}$ 计算出所需的能量。\n步骤6:将已知的距离$100 \\mathrm{pm}$代入公式 $E = -\\vec{d} \\cdot \\vec{E}$，计算出最终的 molar energy。\n",
+    "summary": "综上所述，最终答案是: 2.78 x 10^3 kJ mol^{-1}",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.07,
+    "cost": {
+        "completion_tokens": 423700,
+        "prompt_tokens": 6739328,
+        "cost": 4.0052140000000005
+    }
+},
+{
+    "content": "In an industrial process, nitrogen is heated to $500 \\mathrm{~K}$ at a constant volume of $1.000 \\mathrm{~m}^3$. The gas enters the container at $300 \\mathrm{~K}$ and $100 \\mathrm{~atm}$. The mass of the gas is $92.4 \\mathrm{~kg}$. Use the van der Waals equation to determine the approximate pressure of the gas at its working temperature of $500 \\mathrm{~K}$. For nitrogen, $a=1.39 \\mathrm{dm}^6 \\mathrm{~atm} \\mathrm{~mol}^{-2}, b=0.0391 \\mathrm{dm}^3 \\mathrm{~mol}^{-1}$. The unit of the answer should be  $\\mathrm{~atm}$.",
+    "solution": "步骤1:使用van der Waals方程计算氮气在工作温度$500 \\mathrm{~K}$时的压力。\n",
+    "summary": "综上所述，最终答案是:82.40 atm",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 140.0,
+    "cost": {
+        "completion_tokens": 424989,
+        "prompt_tokens": 6764115,
+        "cost": 4.019541
+    }
+},
+{
+    "content": "The chemical shift of the $\\mathrm{CH}_3$ protons in acetaldehyde (ethanal) is $\\delta=2.20$ and that of the $\\mathrm{CHO}$ proton is 9.80 . What is the difference in local magnetic field between the two regions of the molecule when the applied field is $1.5 \\mathrm{~T}$ The unit of the answer should be  $\\mu \\mathrm{T}$.",
+    "solution": "步骤1:计算$\\mathrm{CH}_3$ 和 $\\mathrm{CHO}$ 两个区域的局部磁场强度差值。$\\Delta B = \\frac{\\delta_{\\mathrm{CHO}} - \\delta_{\\mathrm{CH}_3}}{\\gamma}$，其中 $\\gamma$ 为核磁共振的旋磁比。\n步骤2:根据给定的$\\delta_{\\mathrm{CH}_3}=2.20$，$\\delta_{\\mathrm{CHO}}=9.80$，以及核磁共振的旋磁比$\\gamma$，计算出局部磁场强度差值$\\Delta B$，并将结果转换为单位$\\mu \\mathrm{T}$。\n",
+    "summary": "综上所述，最终答案是: 5.33 μT",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 11.0,
+    "cost": {
+        "completion_tokens": 427442,
+        "prompt_tokens": 6811130,
+        "cost": 4.046728
+    }
+},
+{
+    "content": "Suppose that the junction between two semiconductors can be represented by a barrier of height $2.0 \\mathrm{eV}$ and length $100 \\mathrm{pm}$. Calculate the transmission probability of an electron with energy $1.5 \\mathrm{eV}$. The unit of the answer should be  .",
+    "solution": "步骤1:使用量子力学隧穿公式计算电子在该势垒中的传输概率。\n步骤2:代入势垒高度、长度和电子能量，计算传输概率。\n步骤3:代入势垒高度为$2.0 \\mathrm{eV}$，长度为$100 \\mathrm{pm}$和电子能量为$1.5 \\mathrm{eV}$，计算传输概率。\n",
+    "summary": "综上所述，最终答案是:0.08",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.8,
+    "cost": {
+        "completion_tokens": 430532,
+        "prompt_tokens": 6876026,
+        "cost": 4.083811
+    }
+},
+{
+    "content": "The diffusion coefficient of a particular kind of t-RNA molecule is $D=1.0 \\times 10^{-11} \\mathrm{~m}^2 \\mathrm{~s}^{-1}$ in the medium of a cell interior. How long does it take molecules produced in the cell nucleus to reach the walls of the cell at a distance $1.0 \\mu \\mathrm{m}$, corresponding to the radius of the cell? The unit of the answer should be  $10^{-2} \\mathrm{~s}$.",
+    "solution": "步骤1:计算扩散时间$t$，可以使用扩散方程$D = \\frac{r^2}{2t}$进行计算。\n",
+    "summary": "综上所述，最终答案是:0.71",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.7,
+    "cost": {
+        "completion_tokens": 431740,
+        "prompt_tokens": 6899913,
+        "cost": 4.0975665
+    }
+},
+{
+    "content": "At what pressure does the mean free path of argon at $20^{\\circ} \\mathrm{C}$ become comparable to the diameter of a $100 \\mathrm{~cm}^3$ vessel that contains it? Take $\\sigma=0.36 \\mathrm{~nm}^2$ The unit of the answer should be  $\\mathrm{Pa}$.",
+    "solution": "步骤1:计算氩气在$20^{\\circ} \\mathrm{C}$下的平均自由程。\n步骤2:计算氩气在$20^{\\circ} \\mathrm{C}$下的平均速率。\n步骤3:计算氩气在$20^{\\circ} \\mathrm{C}$下的平均自由程和容器的直径，然后比较它们的大小，求解压强。\n步骤4:根据平均自由程和容器直径的大小关系，解出压强。\n步骤5:比较氩气在$20^{\\circ} \\mathrm{C}$下的平均自由程和容器的直径，判断哪个更大，然后解出压强。\n步骤6:比较氩气在$20^{\\circ} \\mathrm{C}$下的平均自由程和容器的直径大小关系，然后解出压强。\n步骤7:比较已计算出的压强与容器直径大小关系，判断氩气在$20^{\\circ} \\mathrm{C}$下的平均自由程是否与容器直径相当。然后给出压强与容器直径相当时的压强值。\n步骤8:给出氩气在$20^{\\circ} \\mathrm{C}$下的平均自由程与容器直径相当时的压强值。\n",
+    "summary": "综上所述，最终答案是: 0.87 Pa",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.195,
+    "cost": {
+        "completion_tokens": 450072,
+        "prompt_tokens": 7163279,
+        "cost": 4.2567475
+    }
+},
+{
+    "content": "The equilibrium pressure of $\\mathrm{O}_2$ over solid silver and silver oxide, $\\mathrm{Ag}_2 \\mathrm{O}$, at $298 \\mathrm{~K}$ is $11.85 \\mathrm{~Pa}$. Calculate the standard Gibbs energy of formation of $\\mathrm{Ag}_2 \\mathrm{O}(\\mathrm{s})$ at $298 \\mathrm{~K}$. The unit of the answer should be  $\\mathrm{~kJ}   \\mathrm{~mol}^{-1}$.",
+    "solution": "步骤1:计算反应的反应定压变化量，并利用反应定压变化量和反应的温度来计算标准生成焓。\n步骤2:利用标准生成焓计算标准生成自由能。\n步骤3:利用已知的平衡压力和反应的反应定压变化量，计算出 $\\Delta G^\\circ_\\text{f}$。\n步骤4:将已计算出的 $\\Delta G^\\circ_\\text{f}$ 转换为标准生成焓。\n步骤5:根据热力学关系式 $\\Delta G^\\circ = \\Delta H^\\circ - T \\Delta S^\\circ$，利用已知的 $\\Delta G^\\circ_\\text{f}$ 和温度 $298 \\mathrm{~K}$，计算出 $\\Delta H^\\circ_\\text{f}$。\n步骤6:根据热力学关系式 $\\Delta G^\\circ = \\Delta H^\\circ - T \\Delta S^\\circ$，利用已知的 $\\Delta G^\\circ_\\text{f}$、$\\Delta H^\\circ_\\text{f}$和温度 $298 \\mathrm{~K}$，计算出 $\\Delta S^\\circ_\\text{f}$。\n步骤7:利用 $\\Delta G^\\circ = \\Delta H^\\circ - T \\Delta S^\\circ$ 计算出 $\\Delta H^\\circ_\\text{f}$。\n",
+    "summary": "综上所述，最终答案是:-30.71 kJ/mol",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -11.2,
+    "cost": {
+        "completion_tokens": 473576,
+        "prompt_tokens": 7533072,
+        "cost": 4.4769000000000005
+    }
+},
+{
+    "content": "When alkali metals dissolve in liquid ammonia, their atoms each lose an electron and give rise to a deep-blue solution that contains unpaired electrons occupying cavities in the solvent. These 'metal-ammonia solutions' have a maximum absorption at $1500 \\mathrm{~nm}$. Supposing that the absorption is due to the excitation of an electron in a spherical square well from its ground state to the next-higher state (see the preceding problem for information), what is the radius of the cavity? The unit of the answer should be  $\\mathrm{~nm}$.",
+    "solution": "步骤1:根据一维方势阱模型，计算电子跃迁的能量差，然后根据能量差和最大吸收波长，计算出溶剂的半径。\n步骤2:根据计算出的溶剂半径，得出溶剂的半径为...纳米。\n步骤3:将已计算出的溶剂半径代入最大吸收波长的公式，解出溶剂的半径单位为纳米。\n步骤4:将计算出的溶剂半径代入最大吸收波长的公式中，验证计算结果是否正确。\n步骤5:将计算出的溶剂半径代入最大吸收波长的公式中，解出溶剂的半径单位为纳米。\n步骤6:验证计算出的溶剂半径是否与最大吸收波长对应的溶剂半径一致，若一致则得出最终结果。\n步骤7:计算电子跃迁的能量差，然后根据能量差和最大吸收波长求解溶剂的半径。\n步骤8:简化计算步骤，直接将电子跃迁的能量差代入最大吸收波长的公式中，解出溶剂的半径单位为纳米。\n",
+    "summary": "综上所述，最终答案是:750.00nm",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.69,
+    "cost": {
+        "completion_tokens": 533101,
+        "prompt_tokens": 8453417,
+        "cost": 5.02636
+    }
+},
+{
+    "content": "Electron diffraction makes use of electrons with wavelengths comparable to bond lengths. To what speed must an electron be accelerated for it to have a wavelength of $100 \\mathrm{pm}$ ?  The unit of the answer should be  $10^6 \\mathrm{~m} \\mathrm{~s}^{-1}$.",
+    "solution": "步骤1:代入已知波长$100 \\mathrm{pm}$和常数值，计算出电子需要加速到的速度。\n步骤2:计算出电子需要加速到的速度为 $7.27 \\times 10^6 \\mathrm{~m} \\mathrm{~s}^{-1}$。\n步骤3:结果已经得出，无需进行下一步操作。\n步骤4:计算出电子的动量，然后根据动能定理计算出电子需要加速到的速度。\n",
+    "summary": "综上所述，最终答案是: 7.27 × 10^6 m/s",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 7.27,
+    "cost": {
+        "completion_tokens": 537547,
+        "prompt_tokens": 8530773,
+        "cost": 5.071707
+    }
+},
+{
+    "content": "Electron diffraction makes use of electrons with wavelengths comparable to bond lengths. To what speed must an electron be accelerated for it to have a wavelength of $100 \\mathrm{pm}$ ?  The unit of the answer should be  $10^6 \\mathrm{~m} \\mathrm{~s}^{-1}$.",
+    "solution": "步骤1:将 $\\lambda = 100 \\mathrm{pm}$ 代入 $\\lambda = \\frac{h}{p}$，解出动量 $p$，再将 $p$ 代入 $p = \\sqrt{2mE_k}$，解出电子的速度 $v$。\n步骤2:将得到的动量代入 $p = \\sqrt{2mE_k}$，解出电子的速度 $v$。\n",
+    "summary": "综上所述，最终答案是: 2.18e+06 m/s",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 7.27,
+    "cost": {
+        "completion_tokens": 539597,
+        "prompt_tokens": 8572732,
+        "cost": 5.0957615
+    }
+},
+{
+    "content": "Nelson, et al. (Science 238, 1670 (1987)) examined several weakly bound gas-phase complexes of ammonia in search of examples in which the $\\mathrm{H}$ atoms in $\\mathrm{NH}_3$ formed hydrogen bonds, but found none. For example, they found that the complex of $\\mathrm{NH}_3$ and $\\mathrm{CO}_2$ has the carbon atom nearest the nitrogen (299 pm away): the $\\mathrm{CO}_2$ molecule is at right angles to the $\\mathrm{C}-\\mathrm{N}$ 'bond', and the $\\mathrm{H}$ atoms of $\\mathrm{NH}_3$ are pointing away from the $\\mathrm{CO}_2$. The magnitude of the permanent dipole moment of this complex is reported as $1.77 \\mathrm{D}$. If the $\\mathrm{N}$ and $\\mathrm{C}$ atoms are the centres of the negative and positive charge distributions, respectively, what is the magnitude of those partial charges (as multiples of $e$ )? The unit of the answer should be  .",
+    "solution": "步骤1:利用已知的永久偶极矩和分子结构，通过适当的几何构型来计算氨和二氧化碳分子中氮和氧的部分电荷。\n步骤2:根据氨和二氧化碳分子的几何构型和永久偶极矩的方向，计算氮和氧原子的部分电荷。\n步骤3:根据氨和二氧化碳分子的几何构型和永久偶极矩的方向，计算碳原子的部分电荷。\n步骤4:根据氨和二氧化碳分子的几何构型和永久偶极矩的方向，计算氨分子中氢原子的部分电荷。\n步骤5:根据已有的部分电荷计算结果，得出氮和碳原子的部分电荷。\n步骤6:根据氨分子的几何构型和永久偶极矩的方向，计算氨分子中氢原子的部分电荷。\n步骤7:利用计算得到的氮和碳原子的部分电荷，计算它们的电荷量（作为$e$的倍数）。\n",
+    "summary": "综上所述，最终答案是: 氮原子的部分电荷为-0.59e，碳原子的部分电荷为+0.59e。",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.123,
+    "cost": {
+        "completion_tokens": 723019,
+        "prompt_tokens": 11425871,
+        "cost": 6.797464
+    }
+},
+{
+    "content": "The NOF molecule is an asymmetric rotor with rotational constants $3.1752 \\mathrm{~cm}^{-1}, 0.3951 \\mathrm{~cm}^{-1}$, and $0.3505 \\mathrm{~cm}^{-1}$. Calculate the rotational partition function of the molecule at $25^{\\circ} \\mathrm{C}$. The unit of the answer should be $10^3$.",
+    "solution": "步骤1:计算转动配分函数，公式为 $q_{\\text{rot}} = \\dfrac{T}{\\sigma \\cdot B}$，其中$T$为温度，$\\sigma$为对称数，$B$为转动常数。根据给定的转动常数和温度，计算出转动配分函数。\n步骤2:运用公式 $q_{\\text{rot}} = \\dfrac{T}{\\sigma \\cdot B}$，代入给定的转动常数和温度，计算出NOF分子在 $25^{\\circ} \\mathrm{C}$ 下的转动配分函数。\n",
+    "summary": "综上所述，最终答案是:0.079",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 7.97,
+    "cost": {
+        "completion_tokens": 725323,
+        "prompt_tokens": 11473169,
+        "cost": 6.824569
+    }
+},
+{
+    "content": "Suppose that $2.5 \\mathrm{mmol} \\mathrm{N}_2$ (g) occupies $42 \\mathrm{~cm}^3$ at $300 \\mathrm{~K}$ and expands isothermally to $600 \\mathrm{~cm}^3$. Calculate $\\Delta G$ for the process. The unit of the answer should be  $\\mathrm{~J}$ .",
+    "solution": "步骤1:计算$\\Delta U$，即内能的变化。\n步骤2:计算对外界做的功$w$。\n步骤3:计算系统的焓变化。\n步骤4:计算系统的熵变化$\\Delta S$。\n步骤5:将已有步骤计算出的结果代入$\\Delta G = \\Delta H - T \\Delta S$中，计算出$\\Delta G$的值。\n",
+    "summary": "综上所述，最终答案是: -62.51 J.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -17.0,
+    "cost": {
+        "completion_tokens": 730235,
+        "prompt_tokens": 11576406,
+        "cost": 6.8835555
+    }
+},
+{
+    "content": "Calculate the standard potential of the $\\mathrm{Ce}^{4+} / \\mathrm{Ce}$ couple from the values for the $\\mathrm{Ce}^{3+} / \\mathrm{Ce}$ and $\\mathrm{Ce}^{4+} / \\mathrm{Ce}^{3+}$ couples.\r\n The unit of the answer should be  $\\mathrm{V}$.",
+    "solution": "步骤1:使用给定的Ce的三个氧化态之间的标准电极电势数值，按照计算公式计算出 $\\mathrm{Ce}^{4+} / \\mathrm{Ce}$ 偶的标准电极电势。\n步骤2:根据标准电极电势的加和性质，将两个已知偶的标准电极电势相加，即可得到 $\\mathrm{Ce}^{4+} / \\mathrm{Ce}$ 偶的标准电极电势。\n步骤3:将 $\\mathrm{Ce}^{4+} / \\mathrm{Ce}$ 偶的标准电极电势值以 $\\mathrm{V}$ 为单位给出。\n",
+    "summary": "综上所述，最终答案是: x.xx V (将计算得到的标准电极电势值保留两位小数，并以V为单位)",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -1.46,
+    "cost": {
+        "completion_tokens": 734277,
+        "prompt_tokens": 11646580,
+        "cost": 6.9247055
+    }
+},
+{
+    "content": "An effusion cell has a circular hole of diameter $1.50 \\mathrm{~mm}$. If the molar mass of the solid in the cell is $300 \\mathrm{~g} \\mathrm{~mol}^{-1}$ and its vapour pressure is $0.735 \\mathrm{~Pa}$ at $500 \\mathrm{~K}$, by how much will the mass of the solid decrease in a period of $1.00 \\mathrm{~h}$ ? The unit of the answer should be  $\\mathrm{mg}$.",
+    "solution": "步骤1:计算圆孔的面积。\n步骤2:计算固体蒸发的速率。\n步骤3:计算单位时间内固体的减少量，即固体的质量减少量。\n步骤4:将单位时间内固体的减少量转换为毫克单位。\n步骤5:将单位时间内固体的减少量转换为毫克单位，即将质量减少量从克转换为毫克。\n步骤6:将单位时间内固体的减少量乘以1小时的时间，得出1.00小时内固体的质量减少量。\n步骤7:将步骤6中计算得出的质量减少量转换为毫克单位，即将单位从克转换为毫克。\n步骤8:将1小时内固体的质量减少量转换为毫克单位。\n",
+    "summary": "综上所述，最终答案是:0.55 mg",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 16.0,
+    "cost": {
+        "completion_tokens": 771830,
+        "prompt_tokens": 12331913,
+        "cost": 7.3237015
+    }
+},
+{
+    "content": "The speed of a certain proton is $6.1 \\times 10^6 \\mathrm{~m} \\mathrm{~s}^{-1}$. If the uncertainty in its momentum is to be reduced to 0.0100 per cent, what uncertainty in its location must be tolerated? The unit of the answer should be  $\\mathrm{pm}$.",
+    "solution": "步骤1:计算出动量的不确定度$\\Delta p$，然后代入$\\Delta x \\Delta p \\geq \\frac{\\hbar}{2}$，解出位置的不确定度$\\Delta x$。\n步骤2:代入已计算出的动量的不确定度$\\Delta p$，并解出位置的不确定度$\\Delta x$。\n步骤3:代入已知的动量值和要求的不确定度，计算出位置的不确定度。\n",
+    "summary": "综上所述，最终答案是:0.12 pm",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 52.0,
+    "cost": {
+        "completion_tokens": 775023,
+        "prompt_tokens": 12397909,
+        "cost": 7.361489000000001
+    }
+},
+{
+    "content": "It is possible to produce very high magnetic fields over small volumes by special techniques. What would be the resonance frequency of an electron spin in an organic radical in a field of $1.0 \\mathrm{kT}$ ? The unit of the answer should be  $10^{13} \\mathrm{~Hz}$.",
+    "solution": "步骤1:使用公式 $\\nu = \\frac{g \\mu_B B}{h}$ 计算电子自旋的共振频率，其中 $g$ 为朗德因子，$\\mu_B$ 为玻尔磁子，$B$ 为磁场强度，$h$ 为普朗克常数。\n步骤2:代入 $g = 2.0023$，$\\mu_B = 9.274 \\times 10^{-24} \\mathrm{J/T}$，$B = 1.0 \\mathrm{kT}$，$h = 6.626 \\times 10^{-34} \\mathrm{J\\cdot s}$，计算得出电子自旋的共振频率。\n",
+    "summary": "综上所述，最终答案是:14.78",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 2.8,
+    "cost": {
+        "completion_tokens": 777286,
+        "prompt_tokens": 12444539,
+        "cost": 7.388198500000001
+    }
+},
+{
+    "content": "A particle of mass $1.0 \\mathrm{~g}$ is released near the surface of the Earth, where the acceleration of free fall is $g=8.91 \\mathrm{~m} \\mathrm{~s}^{-2}$. What will be its kinetic energy after  $1.0 \\mathrm{~s}$. Ignore air resistance? The unit of the answer should be  $\\mathrm{~mJ}$.",
+    "solution": "步骤1:利用动能定理 $K = \\frac{1}{2}mv^2$，计算物体在 $1.0 \\mathrm{~s}$ 后的速度。\n",
+    "summary": "综上所述，最终答案是:0.04mJ",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 48.0,
+    "cost": {
+        "completion_tokens": 778207,
+        "prompt_tokens": 12468198,
+        "cost": 7.401409500000001
+    }
+},
+{
+    "content": "A particle of mass $1.0 \\mathrm{~g}$ is released near the surface of the Earth, where the acceleration of free fall is $g=8.91 \\mathrm{~m} \\mathrm{~s}^{-2}$. What will be its kinetic energy after  $1.0 \\mathrm{~s}$. Ignore air resistance? The unit of the answer should be  $\\mathrm{~mJ}$.",
+    "solution": "步骤1:计算动能 $E_k = \\frac{1}{2} m v^2$，其中 $m=1.0 \\mathrm{~g}$，$v=g \\cdot t$。\n",
+    "summary": "综上所述，最终答案是:0.04 mJ",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 48.0,
+    "cost": {
+        "completion_tokens": 779110,
+        "prompt_tokens": 12491876,
+        "cost": 7.4146030000000005
+    }
+},
+{
+    "content": "The flux of visible photons reaching Earth from the North Star is about $4 \\times 10^3 \\mathrm{~mm}^{-2} \\mathrm{~s}^{-1}$. Of these photons, 30 per cent are absorbed or scattered by the atmosphere and 25 per cent of the surviving photons are scattered by the surface of the cornea of the eye. A further 9 per cent are absorbed inside the cornea. The area of the pupil at night is about $40 \\mathrm{~mm}^2$ and the response time of the eye is about $0.1 \\mathrm{~s}$. Of the photons passing through the pupil, about 43 per cent are absorbed in the ocular medium. How many photons from the North Star are focused onto the retina in $0.1 \\mathrm{~s}$ ? The unit of the answer should be  $10^3$.",
+    "solution": "步骤1:计算通过瞳孔的光子数量，即$4 \\times 10^3 \\mathrm{~mm}^{-2} \\mathrm{~s}^{-1} \\times 0.7 \\times 0.75 \\times 0.57 \\times 40 \\mathrm{~mm}^2 \\times 0.43$，得到通过瞳孔的光子数量。\n",
+    "summary": "综上所述，最终答案是: 11.03 × 10^3",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 4.4,
+    "cost": {
+        "completion_tokens": 780538,
+        "prompt_tokens": 12516799,
+        "cost": 7.4292065
+    }
+},
+{
+    "content": "When ultraviolet radiation of wavelength $58.4 \\mathrm{~nm}$ from a helium lamp is directed on to a sample of krypton, electrons are ejected with a speed of $1.59 \\times 10^6 \\mathrm{~m} \\mathrm{~s}^{-1}$. Calculate the ionization energy of krypton.\r\n The unit of the answer should be  $\\mathrm{eV}$.",
+    "solution": "步骤1:计算光子能量$hf$，然后利用电子动能和光子能量来求解逸出功$\\phi$。\n",
+    "summary": "综上所述，最终答案是:13.56eV",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 14.0,
+    "cost": {
+        "completion_tokens": 781740,
+        "prompt_tokens": 12540478,
+        "cost": 7.442849
+    }
+},
+{
+    "content": " If $125 \\mathrm{~cm}^3$ of hydrogen gas effuses through a small hole in 135 seconds, how long will it take the same volume of oxygen gas to effuse under the same temperature and pressure? The unit of the answer should be  $\\mathrm{s}$.",
+    "solution": "步骤1:计算氧气分子量与氢气分子量的比值，然后根据Graham's law of effusion计算氧气的时间。\n步骤2:计算氧气通过小孔的时间，时间应为 $135 \\times \\sqrt{16} = 540$ 秒。\n",
+    "summary": "综上所述，最终答案是:540.00秒",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 537.0,
+    "cost": {
+        "completion_tokens": 784707,
+        "prompt_tokens": 12587399,
+        "cost": 7.47076
+    }
+},
+{
+    "content": "The vibrational wavenumber of $\\mathrm{Br}_2$ is $323.2 \\mathrm{~cm}^{-1}$. Evaluate the vibrational partition function explicitly (without approximation) and plot its value as a function of temperature. At what temperature is the value within 5 per cent of the value calculated from the approximate formula? The unit of the answer should be $\\mathrm{~K}$.",
+    "solution": "步骤1:根据给定的振动频率$323.2 \\mathrm{~cm}^{-1}$，代入公式计算振动分区函数$q_{\\text{vib}}$的值，并绘制其随温度变化的图像。接着，通过计算和对比，找出在哪个温度下振动分区函数的值与使用近似公式计算的值相差不超过5%。\n步骤2:计算振动分区函数在不同温度下的值，找出在哪个温度下振动分区函数的值与使用近似公式计算的值相差不超过5%。\n步骤3:通过插值法或者数值计算，找出具体的温度值使得振动分区函数的值与使用近似公式计算的值相差不超过5%，并将该温度值转换为单位为K。\n步骤4:根据插值法或数值计算，确定具体温度值使得振动分区函数的值与近似公式计算的值相差不超过5%，并将该温度值转换为单位为K。\n步骤5:使用插值法或数值计算，确定具体的温度值使得振动分区函数的值与近似公式计算的值相差不超过5%，并将该温度值转换为单位为K。\n步骤6:将振动分区函数的值与使用近似公式计算的值相差不超过5%的具体温度转换为单位为K。\n步骤7:根据已有步骤中找到的具体温度值，将其转换为单位为K。\n",
+    "summary": "综上所述，最终答案是:141.58 K",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 4500.0,
+    "cost": {
+        "completion_tokens": 1187190,
+        "prompt_tokens": 18772593,
+        "cost": 11.1670815
+    }
+},
+{
+    "content": "A thermodynamic study of $\\mathrm{DyCl}_3$ (E.H.P. Cordfunke, et al., J. Chem. Thermodynamics 28, 1387 (1996)) determined its standard enthalpy of formation from the following information\r\n(1) $\\mathrm{DyCl}_3(\\mathrm{~s}) \\rightarrow \\mathrm{DyCl}_3(\\mathrm{aq}$, in $4.0 \\mathrm{M} \\mathrm{HCl}) \\quad \\Delta_{\\mathrm{r}} H^{\\ominus}=-180.06 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$\r\n(2) $\\mathrm{Dy}(\\mathrm{s})+3 \\mathrm{HCl}(\\mathrm{aq}, 4.0 \\mathrm{~m}) \\rightarrow \\mathrm{DyCl}_3(\\mathrm{aq}$, in $4.0 \\mathrm{M} \\mathrm{HCl}(\\mathrm{aq}))+\\frac{3}{2} \\mathrm{H}_2(\\mathrm{~g})$ $\\Delta_{\\mathrm{r}} H^{\\ominus}=-699.43 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$\r\n(3) $\\frac{1}{2} \\mathrm{H}_2(\\mathrm{~g})+\\frac{1}{2} \\mathrm{Cl}_2(\\mathrm{~g}) \\rightarrow \\mathrm{HCl}(\\mathrm{aq}, 4.0 \\mathrm{M}) \\quad \\Delta_{\\mathrm{r}} H^{\\ominus}=-158.31 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$\r\nDetermine $\\Delta_{\\mathrm{f}} H^{\\ominus}\\left(\\mathrm{DyCl}_3, \\mathrm{~s}\\right)$ from these data. The unit of the answer should be  $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "solution": "步骤1:将反应(2)乘以1/3，反应(3)乘以3/2，然后将三个反应相加，得到$\\Delta_{\\mathrm{r}} H^{\\ominus}$，再根据标准生成焓的定义计算$\\Delta_{\\mathrm{f}} H^{\\ominus}\\left(\\mathrm{DyCl}_3, \\mathrm{~s}\\right)$。\n",
+    "summary": "综上所述，最终答案是:-486.03kJ mol^{-1}",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -994.3,
+    "cost": {
+        "completion_tokens": 1188514,
+        "prompt_tokens": 18800235,
+        "cost": 11.1828885
+    }
+},
+{
+    "content": "Calculate $\\Delta_{\\mathrm{r}} G^{\\ominus}(375 \\mathrm{~K})$ for the reaction $2 \\mathrm{CO}(\\mathrm{g})+\\mathrm{O}_2(\\mathrm{~g}) \\rightarrow 2 \\mathrm{CO}_2(\\mathrm{~g})$ from the values of $\\Delta_{\\mathrm{r}} G^{\\ominus}(298 \\mathrm{~K})$ : and $\\Delta_{\\mathrm{r}} H^{\\ominus}(298 \\mathrm{~K})$, and the GibbsHelmholtz equation. The unit of the answer should be $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "solution": "步骤1:根据吉布斯-赫尔姆霍兹方程，利用给定的数据计算出在375K下的$\\Delta_{\\mathrm{r}} G^{\\ominus}$值。\n步骤2:根据给定的数据和上述公式，计算出在375K下的$\\Delta_{\\mathrm{r}} G^{\\ominus}$值。\n",
+    "summary": "综上所述，最终答案是:...",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -501.0,
+    "cost": {
+        "completion_tokens": 1191186,
+        "prompt_tokens": 18848562,
+        "cost": 11.21106
+    }
+},
+{
+    "content": "The vapour pressure of benzene is $53.3 \\mathrm{kPa}$ at $60.6^{\\circ} \\mathrm{C}$, but it fell to $51.5 \\mathrm{kPa}$ when $19.0 \\mathrm{~g}$ of an non-volatile organic compound was dissolved in $500 \\mathrm{~g}$ of benzene. Calculate the molar mass of the compound. The unit of the answer should be  $\\mathrm{~g} \\mathrm{~mol}^{-1}$.",
+    "solution": "步骤1:计算溶质的摩尔分数。\n步骤2:计算溶质的摩尔质量。\n步骤3:计算溶液的实际蒸气压。\n步骤4:使用Raoult's Law计算溶质的摩尔质量。\n步骤5:设置Raoult's Law的方程式并解出溶质的摩尔质量。\n步骤6:利用Raoult's Law的方程式$P = x_2P_2^{\\circ}$，其中$P$为溶液的实际蒸气压，$x_2$为溶质的摩尔分数，$P_2^{\\circ}$为溶质的蒸气压，解出溶质的摩尔质量。\n步骤7:利用给定的质量和摩尔质量，计算出溶质的摩尔质量。\n",
+    "summary": "综上所述，最终答案是:118.63 g mol^{-1}",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 85.0,
+    "cost": {
+        "completion_tokens": 1223397,
+        "prompt_tokens": 19311334,
+        "cost": 11.490762499999999
+    }
+},
+{
+    "content": "J.G. Dojahn, et al. (J. Phys. Chem. 100, 9649 (1996)) characterized the potential energy curves of the ground and electronic states of homonuclear diatomic halogen anions. The ground state of $\\mathrm{F}_2^{-}$is ${ }^2 \\sum_{\\mathrm{u}}^{+}$with a fundamental vibrational wavenumber of $450.0 \\mathrm{~cm}^{-1}$ and equilibrium internuclear distance of $190.0 \\mathrm{pm}$. The first two excited states are at 1.609 and $1.702 \\mathrm{eV}$ above the ground state. Compute the standard molar entropy of $\\mathrm{F}_2^{-}$at $298 \\mathrm{~K}$. The unit of the answer should be  $\\mathrm{~J} \\mathrm{~mol}^{-1} \\mathrm{~K}^{-1}$.",
+    "solution": "步骤1:根据熵的定义，使用公式$\\Delta S = \\frac{\\Delta H}{T}$计算标准摩尔熵。\n步骤2:根据已知的能级差值和温度，计算出$\\Delta H$。然后代入公式计算标准摩尔熵。\n步骤3:计算出$\\Delta H$后，代入公式$\\Delta S = \\frac{\\Delta H}{T}$计算标准摩尔熵。\n步骤4:代入计算得到的能级差值和温度，计算标准摩尔熵。\n",
+    "summary": "综上所述，最终答案是: 24.56 J mol^-1 K^-1",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 199.4,
+    "cost": {
+        "completion_tokens": 1227541,
+        "prompt_tokens": 19409049,
+        "cost": 11.545836
+    }
+},
+{
+    "content": "The duration of a $90^{\\circ}$ or $180^{\\circ}$ pulse depends on the strength of the $\\mathscr{B}_1$ field. If a $180^{\\circ}$ pulse requires $12.5 \\mu \\mathrm{s}$, what is the strength of the $\\mathscr{B}_1$ field?  The unit of the answer should be  $10^{-4} \\mathrm{~T}$.",
+    "solution": "步骤1:利用给定的脉冲时长计算出$\\mathscr{B}_1$场的强度。\n",
+    "summary": "综上所述，最终答案是: 8.00 × 10^{-4} T",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 5.9,
+    "cost": {
+        "completion_tokens": 1228743,
+        "prompt_tokens": 19432699,
+        "cost": 11.559464
+    }
+},
+{
+    "content": "In 1976 it was mistakenly believed that the first of the 'superheavy' elements had been discovered in a sample of mica. Its atomic number  was believed to be 126. What is the most probable distance of the innermost electrons from the nucleus of an atom of this element? (In such elements, relativistic effects are very important, but ignore them here.) The unit of the answer should be  $\\mathrm{pm}$.",
+    "solution": "步骤1:计算内层电子距离原子核的最可能距离需要使用玻尔理论，根据玻尔半径公式 $r = \\frac{n^2h^2}{4\\pi^2mkZe^2}$，代入相应的数值计算出最可能距离。\n步骤2:代入题目给出的信息，包括原子序数Z为126，选择合适的量子数n，以及常数的数值，计算出内层电子距离原子核的最可能距离。\n步骤3:检查计算过程中是否有漏算或计算错误，如果没有，将计算结果转化为皮米米单位。\n",
+    "summary": "综上所述，最终答案是: 342.70 pm",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.42,
+    "cost": {
+        "completion_tokens": 1231721,
+        "prompt_tokens": 19499044,
+        "cost": 11.597103500000001
+    }
+},
+{
+    "content": "The ground level of $\\mathrm{Cl}$ is ${ }^2 \\mathrm{P}_{3 / 2}$ and a ${ }^2 \\mathrm{P}_{1 / 2}$ level lies $881 \\mathrm{~cm}^{-1}$ above it. Calculate the electronic contribution to the molar Gibbs energy of $\\mathrm{Cl}$ atoms at  $500 \\mathrm{~K}$. The unit of the answer should be  $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "solution": "步骤1:计算两个能级之间的能量差。\n步骤2:使用已知的能级差和玻尔兹曼常数计算电子对摩尔吉布斯能的贡献。\n步骤3:根据玻尔兹曼常数和温度计算电子对摩尔吉布斯能的贡献。\n步骤4:使用能级差和玻尔兹曼常数计算电子对摩尔吉布斯能的贡献。\n步骤5:将能级差和玻尔兹曼常数代入计算公式，得出$\\mathrm{Cl}$原子在$500 \\mathrm{~K}$时的电子对摩尔吉布斯能贡献，单位为$\\mathrm{~kJ} \\mathrm{~mol}^{-1}$。\n",
+    "summary": "综上所述，最终答案是:0.39kJ/mol",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -6.42,
+    "cost": {
+        "completion_tokens": 1237943,
+        "prompt_tokens": 19612534,
+        "cost": 11.6631815
+    }
+},
+{
+    "content": "Calculate the melting point of ice under a pressure of 50 bar. Assume that the density of ice under these conditions is approximately $0.92 \\mathrm{~g} \\mathrm{~cm}^{-3}$ and that of liquid water is $1.00 \\mathrm{~g} \\mathrm{~cm}^{-3}$. The unit of the answer should be  $\\mathrm{K}$.",
+    "solution": "步骤1:计算熔化热 $\\Delta H$。\n步骤2:计算比熵差 $\\Delta S$。\n步骤3:使用公式 $\\Delta G = \\Delta H - T\\Delta S$，代入已知的 $\\Delta H$、$\\Delta S$ 值，解出温度 $T$ 即可得到熔化点。\n步骤4:代入已知的$\\Delta H$和$\\Delta S$值，解出温度$T$即可得到熔化点。\n步骤5:代入已知的 $\\Delta H$ 和 $\\Delta S$ 值，解出温度 $T$ 即可得到熔化点。\n步骤6:使用已知的 $\\Delta H$ 和 $\\Delta S$ 值，代入 $\\Delta G = \\Delta H - T\\Delta S$ 中，解出温度 $T$ 即可得到熔化点。\n",
+    "summary": "综上所述，最终答案是:273.15 K",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 272.8,
+    "cost": {
+        "completion_tokens": 1256692,
+        "prompt_tokens": 19877526,
+        "cost": 11.823801000000001
+    }
+},
+{
+    "content": "What is the temperature of a two-level system of energy separation equivalent to $400 \\mathrm{~cm}^{-1}$ when the population of the upper state is one-third that of the lower state? The unit of the answer should be  $ \\mathrm{~K}$.",
+    "solution": "步骤1:使用玻尔兹曼分布定律，根据两能级系统能级间隔计算温度。\n步骤2:代入能级间隔$400 \\mathrm{~cm}^{-1}$和上态与下态的比例关系，计算温度。\n步骤3:代入上下态的比例关系，解方程得到温度。\n步骤4:解方程并计算得到温度。\n",
+    "summary": "综上所述，最终答案是: 2407.80 K",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 524.0,
+    "cost": {
+        "completion_tokens": 1260768,
+        "prompt_tokens": 19965979,
+        "cost": 11.8741415
+    }
+},
+{
+    "content": "At $300 \\mathrm{~K}$ and $20 \\mathrm{~atm}$, the compression factor of a gas is 0.86 . Calculate the volume occupied by $8.2 \\mathrm{mmol}$ of the gas under these conditions. The unit of the answer should be  $\\mathrm{~cm}^3$.",
+    "solution": "步骤1:根据给定条件和理想气体状态方程计算体积。\n",
+    "summary": "综上所述，最终答案是:180.33 cm^3",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 8.7,
+    "cost": {
+        "completion_tokens": 1261763,
+        "prompt_tokens": 19989349,
+        "cost": 11.887318999999998
+    }
+},
+{
+    "content": "A very crude model of the buckminsterfullerene molecule $\\left(\\mathrm{C}_{60}\\right)$ is to treat it as a collection of electrons in a cube with sides of length equal to the mean diameter of the molecule $(0.7 \\mathrm{~nm})$. Suppose that only the $\\pi$ electrons of the carbon atoms contribute, and predict the wavelength of the first excitation of $\\mathrm{C}_{60}$. (The actual value is $730 \\mathrm{~nm}$.) The unit of the answer should be  $\\mu \\mathrm{m}$.",
+    "solution": "步骤1:计算$\\mathrm{C}_{60}$分子的体对角线长度，然后根据波长与频率的关系计算第一次激发的波长。\n步骤2:将计算出的波长值转换为单位$\\mu \\mathrm{m}$。\n步骤3:将计算出的波长值$730 \\mathrm{~nm}$转换为单位$\\mu \\mathrm{m}$。\n步骤4:进行波长值的单位转换。\n步骤5:进行波长值$730 \\mathrm{~nm}$的单位转换为$\\mu \\mathrm{m}$。\n步骤6:给出第一激发的波长为$730 \\mathrm{~nm}$，对应的单位为$\\mu \\mathrm{m}$。\n步骤7:无需操作，已得出正确结果。\n",
+    "summary": "综上所述，最终答案是:0.73μm",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.6,
+    "cost": {
+        "completion_tokens": 1289444,
+        "prompt_tokens": 20460779,
+        "cost": 12.164555499999999
+    }
+}
+]

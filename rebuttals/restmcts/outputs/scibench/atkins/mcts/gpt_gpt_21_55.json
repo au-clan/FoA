@@ -1,0 +1,25 @@
+[
+{
+    "content": "1 1 4 6",
+    "solution": "1 + 1 = 2 (left: 2 4 6)\n",
+    "summary": "The final answer is $24$.",
+    "finish": -1,
+    "value_samples": [
+        {
+            "steps": "1 + 1 = 2 (left: 2 4 6)\n",
+            "value": 1.0
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 4 6)\n",
+            "value": 0
+        }
+    ],
+    "answer": "",
+    "accurate": false,
+    "cost": {
+        "completion_tokens": 2199,
+        "prompt_tokens": 8946,
+        "cost": 0.0145185
+    }
+}
+]

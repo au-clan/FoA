@@ -1,0 +1,758 @@
+[
+{
+    "content": "1 1 4 6",
+    "solution": "1 * 1 = 1 (left: 1 4 6)\n1 / 4 = 0.25 (left: 0.25 6)\n6 / 0.25 = 24 (left: 24)\nAnswer: ((1 * 1) / 4) * 6 = 24\n",
+    "finish": -1,
+    "value_samples": [
+        {
+            "steps": "1 * 1 = 1 (left: 1 4 6)\n1 / 4 = 0.25 (left: 0.25 6)\n6 / 0.25 = 24 (left: 24)\nAnswer: ((1 * 1) / 4) * 6 = 24\n",
+            "value": 1.0
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 4 6)\n1 / 4 = 0.25 (left: 0.25 6)\n6 / 0.25 = 24 (left: 24)\nAnswer: (1 * 1) / (4 / 6) = 24\n",
+            "value": 0.5
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 4 6)\n1 / 4 = 0.25 (left: 0.25 6)\n6 - 0.25 = 5.75 (left: 5.75)\n",
+            "value": 0.25
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 4 6)\n1 / 4 = 0.25 (left: 0.25 6)\n0.25 * 6 = 1.5 (left: 1.5)\n",
+            "value": 0.25
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 4 6)\n1 / 4 = 0.25 (left: 0.25 6)\n6 / 0.25 = 24 (left: 24)\n",
+            "value": 0.75
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 4 6)\n6 - 1 = 5 (left: 4 5)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 4 6)\n1 + 4 = 5 (left: 5 6)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 4 6)\n1 / 4 = 0.25 (left: 0.25 6)\n",
+            "value": 0.5
+        },
+        {
+            "steps": "6 - 4 = 2 (left: 1 2 6)\n",
+            "value": 0
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 4 6)\n",
+            "value": 0.25
+        },
+        {
+            "steps": "4 * 1 = 4 (left: 4 4 6)\n",
+            "value": 0
+        }
+    ],
+    "answer": "",
+    "accurate": false,
+    "cost": {
+        "completion_tokens": 2578,
+        "prompt_tokens": 10794,
+        "cost": 0.01748
+    }
+},
+{
+    "content": "1 1 11 11",
+    "solution": "1 + 1 = 2 (left: 2 11 11)\n2 + 11 = 13 (left: 11 13)\n11 + 13 = 24 (left: 24)\nAnswer: ((1 + 1) + 11) + 11 = 24\n",
+    "finish": -1,
+    "value_samples": [
+        {
+            "steps": "1 + 1 = 2 (left: 2 11 11)\n2 + 11 = 13 (left: 11 13)\n11 + 13 = 24 (left: 24)\nAnswer: ((1 + 1) + 11) + 11 = 24\n",
+            "value": 1.0
+        },
+        {
+            "steps": "1 + 1 = 2 (left: 2 11 11)\n2 + 11 = 13 (left: 11 13)\n13 - 11 = 2 (left: 2)\n",
+            "value": 0.25
+        },
+        {
+            "steps": "1 + 1 = 2 (left: 2 11 11)\n2 + 11 = 13 (left: 11 13)\n11 + 13 = 24 (left: 24)\n",
+            "value": 0.75
+        },
+        {
+            "steps": "1 + 1 = 2 (left: 2 11 11)\n2 + 11 = 13 (left: 11 13)\n11 - 13 = -2 (left: -2)\n",
+            "value": 0.25
+        },
+        {
+            "steps": "1 + 1 = 2 (left: 2 11 11)\n2 + 11 = 13 (left: 11 13)\n11 / 13 = 0.8461538461538461 (left: 0.8461538461538461)\n",
+            "value": 0.25
+        },
+        {
+            "steps": "1 + 1 = 2 (left: 2 11 11)\n2 + 11 = 13 (left: 11 13)\n",
+            "value": 0.5
+        },
+        {
+            "steps": "1 + 1 = 2 (left: 2 11 11)\n11 / 2 = 5.5 (left: 5.5 11)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "1 + 1 = 2 (left: 2 11 11)\n11 * 2 = 22 (left: 11 22)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "1 + 1 = 2 (left: 2 11 11)\n",
+            "value": 0.25
+        },
+        {
+            "steps": "1 - 1 = 0 (left: 0 11 11)\n",
+            "value": 0
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 11 11)\n",
+            "value": 0
+        }
+    ],
+    "answer": "",
+    "accurate": true,
+    "cost": {
+        "completion_tokens": 4891,
+        "prompt_tokens": 21780,
+        "cost": 0.03511550000000001
+    }
+},
+{
+    "content": "1 1 3 8",
+    "solution": "3 * 1 = 3 (left: 3 1 8)\n1 * 8 = 8 (left: 3 8)\n3 * 8 = 24 (left: 24)\nAnswer: (3 * 1) * (8 * 1) = 24\n",
+    "finish": -1,
+    "value_samples": [
+        {
+            "steps": "3 * 1 = 3 (left: 3 1 8)\n1 * 8 = 8 (left: 3 8)\n3 * 8 = 24 (left: 24)\nAnswer: (3 * 1) * (8 - 1) = 24\n",
+            "value": 0.5
+        },
+        {
+            "steps": "3 * 1 = 3 (left: 3 1 8)\n1 * 8 = 8 (left: 3 8)\n3 * 8 = 24 (left: 24)\nAnswer: (3 * 1) * (1 * 8) = 24\n",
+            "value": 0.5
+        },
+        {
+            "steps": "3 * 1 = 3 (left: 3 1 8)\n1 * 8 = 8 (left: 3 8)\n3 * 8 = 24 (left: 24)\nAnswer: (3 * 1) * (8 * 1) = 24\n",
+            "value": 1.0
+        },
+        {
+            "steps": "3 * 1 = 3 (left: 3 1 8)\n1 * 8 = 8 (left: 3 8)\n3 * 8 = 24 (left: 24)\n",
+            "value": 0.75
+        },
+        {
+            "steps": "3 * 1 = 3 (left: 3 1 8)\n1 * 8 = 8 (left: 3 8)\n8 / 3 = 2.67 (left: 2.67)\n",
+            "value": 0.25
+        },
+        {
+            "steps": "3 * 1 = 3 (left: 3 1 8)\n1 * 8 = 8 (left: 3 8)\n8 - 3 = 5 (left: 5)\n",
+            "value": 0.25
+        },
+        {
+            "steps": "3 * 1 = 3 (left: 3 1 8)\n1 * 8 = 8 (left: 3 8)\n8 - 3 = 5 (left: 5 8)\n",
+            "value": 0.25
+        },
+        {
+            "steps": "3 * 1 = 3 (left: 3 1 8)\n1 * 8 = 8 (left: 3 8)\n3 + 8 = 11 (left: 8 11)\n",
+            "value": 0.25
+        },
+        {
+            "steps": "3 * 1 = 3 (left: 3 1 8)\n1 * 8 = 8 (left: 3 8)\n",
+            "value": 0.5
+        },
+        {
+            "steps": "3 * 1 = 3 (left: 3 1 8)\n8 - 1 = 7 (left: 3 7)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "3 * 1 = 3 (left: 3 1 8)\n1 + 8 = 9 (left: 3 9)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "3 * 1 = 3 (left: 3 1 8)\n8 / 3 = 2 (left: 2 8)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "8 - 3 = 5 (left: 1 5 8)\n",
+            "value": 0
+        },
+        {
+            "steps": "3 * 1 = 3 (left: 3 1 8)\n",
+            "value": 0.25
+        },
+        {
+            "steps": "3 * 1 = 3 (left: 1 3 8)\n",
+            "value": 0
+        },
+        {
+            "steps": "8 - 1 = 7 (left: 1 3 7)\n",
+            "value": 0
+        }
+    ],
+    "answer": "",
+    "accurate": true,
+    "cost": {
+        "completion_tokens": 8633,
+        "prompt_tokens": 37521,
+        "cost": 0.060598000000000006
+    }
+},
+{
+    "content": "1 1 1 8",
+    "solution": "1 * 1 = 1 (left: 1 1 8)\n1 * 1 = 1 (left: 1 8)\n8 - 1 = 7 (left: 7 8)\n7 + 8 = 15 (left: 8 15)\n8 + 15 = 23 (left: 23)\n",
+    "finish": -1,
+    "value_samples": [
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 8)\n1 * 1 = 1 (left: 1 8)\n8 - 1 = 7 (left: 7 8)\n7 + 8 = 15 (left: 8 15)\n8 + 15 = 23 (left: 23)\n",
+            "value": 1.0
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 8)\n1 * 1 = 1 (left: 1 8)\n8 - 1 = 7 (left: 7 8)\n7 + 8 = 15 (left: 8 15)\n8 - 15 = -7 (left: -7)\n",
+            "value": 0.6000000000000001
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 8)\n1 * 1 = 1 (left: 1 8)\n8 - 1 = 7 (left: 7 8)\n7 + 8 = 15 (left: 8 15)\n8 * 15 = 120 (left: 120)\n",
+            "value": 0.6000000000000001
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 8)\n1 * 1 = 1 (left: 1 8)\n8 - 1 = 7 (left: 7 8)\n7 + 8 = 15 (left: 8 15)\n15 - 8 = 7 (left: 7)\n",
+            "value": 0.6000000000000001
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 8)\n1 * 1 = 1 (left: 1 8)\n8 - 1 = 7 (left: 7 8)\n7 * 8 = 56 (left: 56)\n",
+            "value": 0.4
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 8)\n1 * 1 = 1 (left: 1 8)\n8 - 1 = 7 (left: 7 8)\n7 + 8 = 15 (left: 15)\n",
+            "value": 0.4
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 8)\n1 * 1 = 1 (left: 1 8)\n8 - 1 = 7 (left: 7 8)\n8 / 7 = 1.14 (left: 1.14)\n",
+            "value": 0.4
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 8)\n1 * 1 = 1 (left: 1 8)\n8 - 1 = 7 (left: 7 8)\n7 + 8 = 15 (left: 8 15)\n",
+            "value": 0.8
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 8)\n1 * 1 = 1 (left: 1 8)\n1 + 8 = 9\n",
+            "value": 0.2
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 8)\n1 * 1 = 1 (left: 1 8)\n8 - 1 = 7 (left: 7)\n",
+            "value": 0.2
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 8)\n1 * 1 = 1 (left: 1 8)\n1 * 8 = 8 (left: 8 8)\n",
+            "value": 0.2
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 8)\n1 * 1 = 1 (left: 1 8)\n8 - 1 = 7 (left: 7 8)\n",
+            "value": 0.6000000000000001
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 8)\n1 * 1 = 1 (left: 1 8)\n1 + 8 = 9 (left: 8 9)\n",
+            "value": 0.2
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 8)\n1 / 1 = 1 (left: 1 8)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 8)\n1 * 1 = 1 (left: 1 8)\n",
+            "value": 0.4
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 8)\n8 / 1 = 8 (left: 1 8)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "8 - 1 = 7 (left: 1 1 7)\n",
+            "value": 0
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 8)\n",
+            "value": 0.2
+        }
+    ],
+    "answer": "",
+    "accurate": false,
+    "cost": {
+        "completion_tokens": 14888,
+        "prompt_tokens": 70565,
+        "cost": 0.1132915
+    }
+},
+{
+    "content": "6 6 6 6",
+    "solution": "6 * 6 = 36 (left: 6 6 36)\n6 / 6 = 1 (left: 1 36)\n36 / 1 = 36 (left: 36)\n",
+    "finish": -1,
+    "value_samples": [
+        {
+            "steps": "6 * 6 = 36 (left: 6 6 36)\n6 / 6 = 1 (left: 1 36)\n1 * 36 = 36 (left: 36)\n",
+            "value": 0.3333333333333333
+        },
+        {
+            "steps": "6 * 6 = 36 (left: 6 6 36)\n6 / 6 = 1 (left: 1 36)\n36 / 1 = 36 (left: 36)\n",
+            "value": 1.0
+        },
+        {
+            "steps": "6 * 6 = 36 (left: 6 6 36)\n6 / 6 = 1 (left: 1 36)\n1 + 36 = 37 (left: 37)\n",
+            "value": 0.3333333333333333
+        },
+        {
+            "steps": "6 * 6 = 36 (left: 6 6 36)\n6 / 6 = 1 (left: 1 36)\n36 - 1 = 35 (left: 35)\n",
+            "value": 0.3333333333333333
+        },
+        {
+            "steps": "6 * 6 = 36 (left: 6 6 36)\n6 - 6 = 0 (left: 0 36)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "6 * 6 = 36 (left: 6 6 36)\n6 * 6 = 36 (left: 6 36)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "6 * 6 = 36 (left: 6 6 36)\n6 / 6 = 1 (left: 1 36)\n",
+            "value": 0.6666666666666666
+        },
+        {
+            "steps": "6 * 6 = 36 (left: 6 6 36)\n36 / 6 = 6 (left: 6 6)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "6 - 6 = 0 (left: 0 6 6)\n",
+            "value": 0
+        },
+        {
+            "steps": "6 * 6 = 36 (left: 6 6 36)\n",
+            "value": 0.3333333333333333
+        }
+    ],
+    "answer": "",
+    "accurate": false,
+    "cost": {
+        "completion_tokens": 16631,
+        "prompt_tokens": 78031,
+        "cost": 0.125362
+    }
+},
+{
+    "content": "1 1 2 12",
+    "solution": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 12 2)\n12 - 2 = 10 (left: 2 10)\n10 / 2 = 5 (left: 2 5)\n",
+    "finish": -1,
+    "value_samples": [
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 12 2)\n12 - 2 = 10 (left: 2 10)\n10 / 2 = 5 (left: 2 5)\n",
+            "value": 1.0
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 12 2)\n12 - 2 = 10 (left: 2 10)\n10 / 2 = 5 (left: 5)\n",
+            "value": 0.7142857142857142
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 12 2)\n12 - 2 = 10 (left: 2 10)\n2 + 10 = 12 (left: 12)\n",
+            "value": 0.7142857142857142
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 12 2)\n12 - 2 = 10 (left: 2 10)\n2 * 10 = 20 (left: 20)\n",
+            "value": 0.7142857142857142
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 12 2)\n12 - 2 = 10 (left: 10)\n",
+            "value": 0.5714285714285714
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 12 2)\n12 - 2 = 10 (left: 2 10)\n",
+            "value": 0.8571428571428571
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 12 2)\n12 / 2 = 6 (left: 6)\n",
+            "value": 0.5714285714285714
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 12 2)\n12 + 2 = 14 (left: 14)\n",
+            "value": 0.5714285714285714
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 - 6 = -4 (left: -4 2)\n",
+            "value": 0.42857142857142855
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 12 2)\n",
+            "value": 0.7142857142857142
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 + 2 = 4 (left: 6)\n",
+            "value": 0.42857142857142855
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n6 / 2 = 3 (left: 3 2)\n",
+            "value": 0.42857142857142855
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 2 12 2)\n2 + 12 = 14 (left: 2 14 2)\n",
+            "value": 0.2857142857142857
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 2 12 2)\n12 / 2 = 6 (left: 6 2)\n",
+            "value": 0.2857142857142857
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n",
+            "value": 0.5714285714285714
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 2 12 2)\n2 * 12 = 24 (left: 24 2)\n",
+            "value": 0.2857142857142857
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 + 6 = 8 (left: 8 2)\n",
+            "value": 0.14285714285714285
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 12 2)\n",
+            "value": 0.14285714285714285
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n6 - 2 = 4 (left: 4 2)\n",
+            "value": 0.14285714285714285
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n2 * 6 = 12 (left: 2 12 2)\n",
+            "value": 0.42857142857142855
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 / 2 = 6 (left: 2 6 2)\n",
+            "value": 0.2857142857142857
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n2 * 12 = 24 (left: 2 24 2)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 - 2 = 10 (left: 10 2)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n12 - 2 = 10 (left: 2 10 2)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "1 + 1 = 2 (left: 2 2 12)\n",
+            "value": 0
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 12 2)\n",
+            "value": 0.14285714285714285
+        },
+        {
+            "steps": "2 * 1 = 2 (left: 2 2 12)\n",
+            "value": 0
+        },
+        {
+            "steps": "12 - 1 = 11 (left: 1 2 11)\n",
+            "value": 0
+        }
+    ],
+    "answer": "",
+    "accurate": false,
+    "cost": {
+        "completion_tokens": 30773,
+        "prompt_tokens": 136253,
+        "cost": 0.219766
+    }
+},
+{
+    "content": "1 2 2 6",
+    "solution": "6 - 2 = 4 (left: 2 4 6)\n4 * 6 = 24 (left: 2 24)\n24 - 2 = 22 (left: 22)\n",
+    "finish": -1,
+    "value_samples": [
+        {
+            "steps": "6 - 2 = 4 (left: 2 4 6)\n4 * 6 = 24 (left: 2 24)\n24 + 2 = 26 (left: 26)\n",
+            "value": 0.3333333333333333
+        },
+        {
+            "steps": "6 - 2 = 4 (left: 2 4 6)\n4 * 6 = 24 (left: 2 24)\n2 * 24 = 48 (left: 48)\n",
+            "value": 0.3333333333333333
+        },
+        {
+            "steps": "6 - 2 = 4 (left: 2 4 6)\n4 * 6 = 24 (left: 2 24)\n2 + 24 = 26 (left: 26)\n",
+            "value": 0.3333333333333333
+        },
+        {
+            "steps": "6 - 2 = 4 (left: 2 4 6)\n4 * 6 = 24 (left: 2 24)\n24 - 2 = 22 (left: 22)\n",
+            "value": 1.0
+        },
+        {
+            "steps": "6 - 2 = 4 (left: 2 4 6)\n4 * 6 = 24 (left: 2 24)\n24 / 2 = 12 (left: 12)\n",
+            "value": 0.3333333333333333
+        },
+        {
+            "steps": "6 - 2 = 4 (left: 2 4 6)\n4 + 2 = 6 (left: 6 6)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "6 - 2 = 4 (left: 2 4 6)\n2 + 4 = 6 (left: 6 6)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "6 - 2 = 4 (left: 2 4 6)\n6 - 2 = 4 (left: 4 6)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "6 - 2 = 4 (left: 2 4 6)\n4 * 6 = 24 (left: 2 24)\n",
+            "value": 0.6666666666666666
+        },
+        {
+            "steps": "6 - 2 = 4 (left: 2 4)\n",
+            "value": 0
+        },
+        {
+            "steps": "2 * 2 = 4 (left: 4 2 6)\n",
+            "value": 0
+        },
+        {
+            "steps": "6 - 2 = 4 (left: 2 4 6)\n",
+            "value": 0.3333333333333333
+        },
+        {
+            "steps": "6 - 2 = 4 (left: 1 4 6)\n",
+            "value": 0
+        }
+    ],
+    "answer": "",
+    "accurate": false,
+    "cost": {
+        "completion_tokens": 34370,
+        "prompt_tokens": 155537,
+        "cost": 0.2504905
+    }
+},
+{
+    "content": "1 1 10 12",
+    "solution": "12 - 10 = 2 (left: 1 2 12)\n1 * 2 = 2 (left: 2 12)\n2 * 12 = 24 (left: 24)\nAnswer: (1 * (1 + 10)) * 12 = 24\n",
+    "finish": -1,
+    "value_samples": [
+        {
+            "steps": "12 - 10 = 2 (left: 1 2 12)\n1 * 2 = 2 (left: 2 12)\n2 * 12 = 24 (left: 24)\nAnswer: (1 * (12 - 10)) * 2 = 24\n",
+            "value": 0.5
+        },
+        {
+            "steps": "12 - 10 = 2 (left: 1 2 12)\n1 * 2 = 2 (left: 2 12)\n2 * 12 = 24 (left: 24)\nAnswer: (1 * (1 + 10)) * 12 = 24\n",
+            "value": 1.0
+        },
+        {
+            "steps": "12 - 10 = 2 (left: 1 2 12)\n1 * 2 = 2 (left: 2 12)\n2 * 12 = 24 (left: 24)\n",
+            "value": 0.75
+        },
+        {
+            "steps": "12 - 10 = 2 (left: 1 2 12)\n1 * 2 = 2 (left: 2 12)\n12 / 2 = 6 (left: 6)\n",
+            "value": 0.25
+        },
+        {
+            "steps": "12 - 10 = 2 (left: 1 2 12)\n1 * 2 = 2 (left: 2 12)\n12 - 2 = 10 (left: 10)\n",
+            "value": 0.25
+        },
+        {
+            "steps": "12 - 10 = 2 (left: 1 2 12)\n12 - 1 = 11 (left: 2 11)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "12 - 10 = 2 (left: 1 2 12)\n1 * 2 = 2 (left: 2 12)\n",
+            "value": 0.5
+        },
+        {
+            "steps": "12 - 10 = 2 (left: 1 2 12)\n1 + 2 = 3 (left: 3 12)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "12 - 10 = 2 (left: 1 2 12)\n12 - 2 = 10 (left: 1 10)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "10 / 1 = 10 (left: 1 10 12)\n",
+            "value": 0
+        },
+        {
+            "steps": "12 / 1 = 12 (left: 1 10 12)\n",
+            "value": 0
+        },
+        {
+            "steps": "10 + 1 = 11 (left: 1 11 12)\n",
+            "value": 0
+        },
+        {
+            "steps": "1 - 1 = 0 (left: 0 10 12)\n",
+            "value": 0
+        },
+        {
+            "steps": "12 - 10 = 2 (left: 1 2 12)\n",
+            "value": 0.25
+        }
+    ],
+    "answer": "",
+    "accurate": false,
+    "cost": {
+        "completion_tokens": 38870,
+        "prompt_tokens": 176825,
+        "cost": 0.2846725
+    }
+},
+{
+    "content": "2 2 10 10",
+    "solution": "2 * 2 = 4 (left: 4 10 10)\n10 * 4 = 40 (left: 10 10 40)\n10 / 10 = 1 (left: 1 10 40)\n10 * 1 = 10 (left: 10 40)\n40 / 10 = 4 (left: 4 40)\n40 - 4 = 36 (left: 36)\n",
+    "finish": -1,
+    "value_samples": [
+        {
+            "steps": "2 * 2 = 4 (left: 4 10 10)\n10 * 4 = 40 (left: 10 10 40)\n10 / 10 = 1 (left: 1 10 40)\n10 * 1 = 10 (left: 10 40)\n40 / 10 = 4 (left: 4 40)\n40 - 4 = 36 (left: 36)\n",
+            "value": 1.0
+        },
+        {
+            "steps": "2 * 2 = 4 (left: 4 10 10)\n10 * 4 = 40 (left: 10 10 40)\n10 / 10 = 1 (left: 1 10 40)\n10 * 1 = 10 (left: 10 40)\n40 / 10 = 4 (left: 4 40)\n40 / 4 = 10 (left: 10)\n",
+            "value": 0.6666666666666666
+        },
+        {
+            "steps": "2 * 2 = 4 (left: 4 10 10)\n10 * 4 = 40 (left: 10 10 40)\n10 / 10 = 1 (left: 1 10 40)\n10 * 1 = 10 (left: 10 40)\n40 / 10 = 4 (left: 4 40)\n4 * 10 = 40 (left: 40)\n",
+            "value": 0.6666666666666666
+        },
+        {
+            "steps": "2 * 2 = 4 (left: 4 10 10)\n10 * 4 = 40 (left: 10 10 40)\n10 / 10 = 1 (left: 1 10 40)\n10 * 1 = 10 (left: 10 40)\n10 + 40 = 50 (left: 40)\n",
+            "value": 0.5
+        },
+        {
+            "steps": "2 * 2 = 4 (left: 4 10 10)\n10 * 4 = 40 (left: 10 10 40)\n10 / 10 = 1 (left: 1 10 40)\n10 * 1 = 10 (left: 10 40)\n40 - 10 = 30 (left: 30)\n",
+            "value": 0.5
+        },
+        {
+            "steps": "2 * 2 = 4 (left: 4 10 10)\n10 * 4 = 40 (left: 10 10 40)\n10 / 10 = 1 (left: 1 10 40)\n10 * 1 = 10 (left: 10 40)\n40 / 10 = 4 (left: 4)\n",
+            "value": 0.5
+        },
+        {
+            "steps": "2 * 2 = 4 (left: 4 10 10)\n10 * 4 = 40 (left: 10 10 40)\n10 / 10 = 1 (left: 1 10 40)\n10 * 1 = 10 (left: 10 40)\n40 / 10 = 4 (left: 4 40)\n",
+            "value": 0.8333333333333333
+        },
+        {
+            "steps": "2 * 2 = 4 (left: 4 10 10)\n10 * 4 = 40 (left: 10 10 40)\n10 / 10 = 1 (left: 1 10 40)\n40 - 1 = 39 (left: 10 39)\n",
+            "value": 0.3333333333333333
+        },
+        {
+            "steps": "2 * 2 = 4 (left: 4 10 10)\n10 * 4 = 40 (left: 10 10 40)\n10 / 10 = 1 (left: 1 10 40)\n40 / 1 = 40 (left: 40)\n",
+            "value": 0.3333333333333333
+        },
+        {
+            "steps": "2 * 2 = 4 (left: 4 10 10)\n10 * 4 = 40 (left: 10 10 40)\n10 / 10 = 1 (left: 1 10 40)\n10 * 1 = 10 (left: 10 40)\n",
+            "value": 0.6666666666666666
+        },
+        {
+            "steps": "2 * 2 = 4 (left: 4 10 10)\n10 * 4 = 40 (left: 10 10 40)\n10 / 10 = 1 (left: 1 10 40)\n40 - 10 = 30 (left: 1 30)\n",
+            "value": 0.3333333333333333
+        },
+        {
+            "steps": "2 * 2 = 4 (left: 4 10 10)\n10 * 4 = 40 (left: 10 10 40)\n10 / 10 = 1 (left: 1 10 40)\n10 - 1 = 9 (left: 9 40)\n",
+            "value": 0.3333333333333333
+        },
+        {
+            "steps": "2 * 2 = 4 (left: 4 10 10)\n10 * 4 = 40 (left: 10 10 40)\n10 / 10 = 1 (left: 1 10 40)\n",
+            "value": 0.5
+        },
+        {
+            "steps": "2 * 2 = 4 (left: 4 10 10)\n10 * 4 = 40 (left: 10 10 40)\n10 * 4 = 40 (left: 40 40)\n",
+            "value": 0.16666666666666666
+        },
+        {
+            "steps": "2 * 2 = 4 (left: 4 10 10)\n10 * 4 = 40 (left: 10 10 40)\n40 - 10 = 30 (left: 10 30)\n",
+            "value": 0.16666666666666666
+        },
+        {
+            "steps": "2 * 2 = 4 (left: 4 10 10)\n10 * 4 = 40 (left: 10 10 40)\n10 * 10 = 100 (left: 40 100)\n",
+            "value": 0.16666666666666666
+        },
+        {
+            "steps": "2 * 2 = 4 (left: 4 10 10)\n10 / 4 = 2.5 (left: 2.5 10 10)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "2 * 2 = 4 (left: 4 10 10)\n10 - 4 = 6 (left: 6 10 10)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "2 * 2 = 4 (left: 4 10 10)\n10 * 4 = 40 (left: 10 10 40)\n",
+            "value": 0.3333333333333333
+        },
+        {
+            "steps": "2 * 2 = 4 (left: 4 10 10)\n",
+            "value": 0.16666666666666666
+        },
+        {
+            "steps": "10 / 2 = 5 (left: 2 10 5)\n",
+            "value": 0
+        },
+        {
+            "steps": "10 / 2 = 5 (left: 2 5 10)\n",
+            "value": 0
+        }
+    ],
+    "answer": "",
+    "accurate": false,
+    "cost": {
+        "completion_tokens": 44105,
+        "prompt_tokens": 195505,
+        "cost": 0.31531
+    }
+},
+{
+    "content": "1 1 1 12",
+    "solution": "1 * 1 = 1 (left: 1 1 12)\n1 + 1 = 2 (left: 2 12)\n2 * 12 = 24 (left: 24)\nAnswer: (1 * 1) * (1 + 12) = 24\n",
+    "finish": -1,
+    "value_samples": [
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 12)\n1 + 1 = 2 (left: 2 12)\n2 * 12 = 24 (left: 24)\nAnswer: (1 * 1) + (1 + 1) * 12 = 24\n",
+            "value": 0.5
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 12)\n1 + 1 = 2 (left: 2 12)\n2 * 12 = 24 (left: 24)\nAnswer: (1 * 1) * (1 + 12) = 24\n",
+            "value": 1.0
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 12)\n1 + 1 = 2 (left: 2 12)\n2 + 12 = 14\n",
+            "value": 0.25
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 12)\n1 + 1 = 2 (left: 2 12)\n2 * 12 = 24 (left: 24)\n",
+            "value": 0.75
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 12)\n12 - 1 = 11 (left: 1 11)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 12)\n1 + 1 = 2 (left: 2 12)\n",
+            "value": 0.5
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 12)\n12 / 1 = 12 (left: 1 12)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "1 + 1 = 2 (left: 2 1 12)\n",
+            "value": 0
+        },
+        {
+            "steps": "12 - 1 = 11 (left: 1 1 11)\n",
+            "value": 0
+        },
+        {
+            "steps": "1 + 1 = 2 (left: 1 2 12)\n",
+            "value": 0
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 1 12)\n",
+            "value": 0.25
+        }
+    ],
+    "answer": "",
+    "accurate": false,
+    "cost": {
+        "completion_tokens": 47184,
+        "prompt_tokens": 210078,
+        "cost": 0.33870900000000004
+    }
+}
+]

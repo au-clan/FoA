@@ -1,0 +1,15 @@
+[
+{
+    "content": "Radiation from an X-ray source consists of two components of wavelengths $154.433 \\mathrm{pm}$ and $154.051 \\mathrm{pm}$. Calculate the difference in glancing angles $(2 \\theta)$ of the diffraction lines arising from the two components in a diffraction pattern from planes of separation $77.8 \\mathrm{pm}$. The unit of the answer should be  ${\\circ}$.",
+    "solution": "步骤1:计算第一个波长对应的入射角$\\theta_1 = \\sin^{-1}\\left(\\frac{n\\lambda_1}{2d}\\right)$和第二个波长对应的入射角$\\theta_2 = \\sin^{-1}\\left(\\frac{n\\lambda_2}{2d}\\right)$，然后计算两者的差值$\\Delta\\theta = |\\theta_1 - \\theta_2|$，最后将差值转换为角度制。\n",
+    "summary": "综上所述，最终答案是: 0.09°",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 2.14,
+    "cost": {
+        "completion_tokens": 1300,
+        "prompt_tokens": 23892,
+        "cost": 0.013896
+    }
+}
+]

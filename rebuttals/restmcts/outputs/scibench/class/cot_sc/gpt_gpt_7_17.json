@@ -1,0 +1,613 @@
+[
+{
+    "content": " An automobile with a mass of $1000 \\mathrm{~kg}$, including passengers, settles $1.0 \\mathrm{~cm}$ closer to the road for every additional $100 \\mathrm{~kg}$ of passengers. It is driven with a constant horizontal component of speed $20 \\mathrm{~km} / \\mathrm{h}$ over a washboard road with sinusoidal bumps. The amplitude and wavelength of the sine curve are $5.0 \\mathrm{~cm}$ and $20 \\mathrm{~cm}$, respectively. The distance between the front and back wheels is $2.4 \\mathrm{~m}$. Find the amplitude of oscillation of the automobile, assuming it moves vertically as an undamped driven harmonic oscillator. Neglect the mass of the wheels and springs and assume that the wheels are always in contact with the road.\r\n The unit of the answer should be  $ \\mathrm{~mm}$.",
+    "solution": "1. Calculate the total mass of the automobile, including passengers:\n$1000 \\mathrm{~kg} + 100 \\mathrm{~kg} = 1100 \\mathrm{~kg}$\n\n2. Calculate the change in height for every additional 100 kg of passengers:\n$1.0 \\mathrm{~cm} / 100 \\mathrm{~kg} = 0.01 \\mathrm{~cm/kg}$\n\n3. Calculate the change in height due to the additional passengers:\n$0.01 \\mathrm{~cm/kg} \\times 100 \\mathrm{~kg} = 1.0 \\mathrm{~cm}$\n\n4. Since the bumps on the road are sinusoidal, we know that the amplitude of oscillation is half the height of the bump. Therefore, the amplitude of oscillation due to the bumps on the road is:\n$5.0 \\mathrm{~cm} / 2 = 2.5 \\mathrm{~cm}$\n\n5. Calculate the total change in height of the automobile due to both the additional passengers and the bumps on the road:\n$1.0 \\mathrm{~cm} + 2.5 \\mathrm{~cm} = 3.5 \\mathrm{~cm}$\n\n6. Convert the total change in height to millimeters:\n$3.5 \\mathrm{~cm} \\times 10 = 35 \\mathrm{~mm}$\n\nTherefore, the amplitude of oscillation of the automobile, assuming it moves vertically as an undamped driven harmonic oscillator, is $35 \\mathrm{~mm}$.",
+    "summary": "The final answer is $35 \\mathrm{~mm}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -0.16,
+    "cost": {
+        "completion_tokens": 9000,
+        "prompt_tokens": 18391,
+        "cost": 0.0226955
+    }
+},
+{
+    "content": "Find the shortest path between the $(x, y, z)$ points $(0,-1,0)$ and $(0,1,0)$ on the conical surface $z=1-\\sqrt{x^2+y^2}$. What is the length of the path? Note: this is the shortest mountain path around a volcano. The unit of the answer should be .",
+    "solution": "1. The first step is to determine the equation of the curve that lies on the conical surface between the two points. This can be done by setting $z=1-\\sqrt{x^2+y^2}$ and solving for $z$.\n\n2. Next, we need to parameterize the curve. One way to do this is to use cylindrical coordinates, where $x=r\\cos\\theta$, $y=r\\sin\\theta$, and $z=z$. This allows us to express the curve as $(r\\cos\\theta, r\\sin\\theta, 1-\\sqrt{r^2})$.\n\n3. To find the shortest path between the two points, we need to minimize the arc length integral. The arc length formula in cylindrical coordinates is given by:\n\n$ds = \\sqrt{(dr)^2 + (r d\\theta)^2 + (dz)^2}$\n\n4. Substitute the parameterized curve into the arc length formula and integrate over the range of $\\theta$ that goes from $0$ to $2\\pi$.\n\n5. Once you have the integral set up, evaluate it to find the length of the shortest path between the two points.\n\nBy following these steps, you can find the shortest path between the given points on the conical surface and determine the length of the path.",
+    "summary": "The final answer is $2\\pi$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 2.534324263,
+    "cost": {
+        "completion_tokens": 16778,
+        "prompt_tokens": 30934,
+        "cost": 0.040634
+    }
+},
+{
+    "content": "A simple pendulum of length $b$ and bob with mass $m$ is attached to a massless support moving vertically upward with constant acceleration $a$. Determine the period for small oscillations.\r\n The unit of the answer should be  $\\sqrt{\\frac{b}{a+g}}$.",
+    "solution": "1. First, draw a free body diagram of the pendulum when it is at an angle $\\theta$ from the vertical. The forces acting on the bob are the tension in the string and the gravitational force.\n\n2. Use Newton's second law to write the equation of motion for the pendulum in the radial direction. The equation would be:\n$$ m(b\\theta'') = -mg\\sin(\\theta) + T $$\n\n3. Resolve the tension $T$ into its radial and tangential components. The radial component is $T\\cos(\\theta)$ and the tangential component is $T\\sin(\\theta)$.\n\n4. Substitute the expression for $T$ into the equation of motion and simplify. This will give you the differential equation for the motion of the pendulum.\n\n5. For small angles ($\\theta << 1$), you can approximate $\\sin(\\theta)$ to be approximately equal to $\\theta$. This simplifies the differential equation.\n\n6. The differential equation can be written as:\n$$ \\theta'' + \\left(\\frac{g}{b} + a\\right)\\theta = 0 $$\n\n7. This is a simple harmonic oscillator equation with angular frequency $\\omega = \\sqrt{\\frac{g}{b} + a}$.\n\n8. The period $T$ of the pendulum can be calculated using the formula $T = \\frac{2\\pi}{\\omega}$. Substitute the value of $\\omega$ and simplify to get the period in terms of $a$ and $b$.\n\n9. The period can be expressed in the desired form as $T = 2\\pi\\sqrt{\\frac{b}{a+g}}$.",
+    "summary": "The final answer is $2\\pi\\sqrt{\\frac{b}{a+g}}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 6.283185307,
+    "cost": {
+        "completion_tokens": 26677,
+        "prompt_tokens": 44881,
+        "cost": 0.062456000000000005
+    }
+},
+{
+    "content": "In the blizzard of ' 88 , a rancher was forced to drop hay bales from an airplane to feed her cattle. The plane flew horizontally at $160 \\mathrm{~km} / \\mathrm{hr}$ and dropped the bales from a height of $80 \\mathrm{~m}$ above the flat range. She wanted the bales of hay to land $30 \\mathrm{~m}$ behind the cattle so as to not hit them. How far behind the cattle should she push the bales out of the airplane? The unit of the answer should be $\\mathrm{~m}$ .",
+    "solution": "1. First, we need to calculate the time it takes for the bales to fall from the airplane to the ground. We can use the following kinematic equation: \n\n$y = v_{0}t + \\frac{1}{2}at^2$\n\nwhere:\n- $y$ is the height of the drop (80m)\n- $v_{0}$ is the initial velocity (0 m/s)\n- $a$ is the acceleration due to gravity (-9.8 m/s^2)\n- $t$ is the time taken\n\nRearranging the equation, we get:\n\n$80 = \\frac{1}{2}(-9.8)t^2$\n\nSolving for $t$, we get $t = \\sqrt{\\frac{160}{9.8}} \\approx 4.08$ seconds.\n\n2. Next, we need to calculate the horizontal distance the bales travel while falling. This can be calculated using the equation:\n\n$x = v_{x}t$\n\nwhere:\n- $x$ is the horizontal distance\n- $v_{x}$ is the horizontal velocity of the plane (160 km/hr = 44.44 m/s)\n- $t$ is the time taken (4.08 seconds)\n\nSubstitute the values and calculate, we get $x = 44.44 \\times 4.08 \\approx 181.33$ meters.\n\n3. Finally, we need to calculate the distance behind the cattle that the bales should be pushed out of the airplane. Since the bales need to land 30m behind the cattle, we add this distance to the calculated horizontal distance:\n\n$181.33 + 30 = 211.33$ meters.\n\nTherefore, the rancher should push the bales out of the airplane about 211.33 meters behind the cattle.",
+    "summary": "The final answer is $211.33$ meters.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 210.0,
+    "cost": {
+        "completion_tokens": 34022,
+        "prompt_tokens": 58922,
+        "cost": 0.080494
+    }
+},
+{
+    "content": "Consider a damped harmonic oscillator. After four cycles the amplitude of the oscillator has dropped to $1 / e$ of its initial value. Find the ratio of the frequency of the damped oscillator to its natural frequency.\r\n The unit of the answer should be .",
+    "solution": "1. The amplitude of a damped harmonic oscillator is given by:\n\nA(t) = A0 * e^(-ζωnt) \n\nwhere A(t) is the amplitude at time t, A0 is the initial amplitude, ζ is the damping ratio, ωn is the natural frequency, and t is the time.\n\n2. After four cycles, the amplitude has dropped to 1/e of its initial value, so we can write:\n\nA(4T) = A0 * e^(-4ζωnT) = A0 / e\n\n3. Simplifying the above equation, we get:\n\ne^(-4ζωnT) = 1/e\n\n4. Taking the natural logarithm of both sides, we get:\n\n-4ζωnT = -1\n\nζωnT = 1/4\n\n5. The ratio of the frequency of the damped oscillator to its natural frequency is given by:\n\nωd/ωn = √(1 - ζ^2)\n\n6. Substituting the value of ζωnT from step 4 into the above equation, we get:\n\nωd/ωn = √(1 - (1/4)^2) = √(1 - 1/16) = √(15/16) = √15 / 4\n\nTherefore, the ratio of the frequency of the damped oscillator to its natural frequency is √15 / 4.",
+    "summary": "The final answer is $\\sqrt{15} / 4$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.9992093669,
+    "cost": {
+        "completion_tokens": 42665,
+        "prompt_tokens": 71220,
+        "cost": 0.0996075
+    }
+},
+{
+    "content": "What is the minimum escape velocity of a spacecraft from the moon? The unit of the answer should be $\\mathrm{~m} / \\mathrm{s}$ .",
+    "solution": "Step 1: Determine the gravitational acceleration on the surface of the moon.\nThe gravitational acceleration on the surface of the moon is approximately $1.62 \\, \\mathrm{m/s^2}$.\n\nStep 2: Use the formula for escape velocity.\nThe formula for escape velocity is given by $v = \\sqrt{2gR}$, where $v$ is the escape velocity, $g$ is the gravitational acceleration, and $R$ is the radius of the moon.\n\nStep 3: Find the radius of the moon.\nThe radius of the moon is approximately $1.737 \\times 10^6 \\, \\mathrm{m}$.\n\nStep 4: Plug in the values and calculate the escape velocity.\n$v = \\sqrt{2 \\times 1.62 \\, \\mathrm{m/s^2} \\times 1.737 \\times 10^6 \\, \\mathrm{m}}$\n\n$v = \\sqrt{5.57 \\times 10^6} \\approx 2,360 \\, \\mathrm{m/s}$.\n\nTherefore, the minimum escape velocity of a spacecraft from the moon is approximately $2,360 \\, \\mathrm{m/s}$.",
+    "summary": "The final answer is $2,360 \\, \\mathrm{m/s}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 2380.0,
+    "cost": {
+        "completion_tokens": 48830,
+        "prompt_tokens": 80237,
+        "cost": 0.1133635
+    }
+},
+{
+    "content": "Find the value of the integral $\\int_S \\mathbf{A} \\cdot d \\mathbf{a}$, where $\\mathbf{A}=x \\mathbf{i}-y \\mathbf{j}+z \\mathbf{k}$ and $S$ is the closed surface defined by the cylinder $c^2=x^2+y^2$. The top and bottom of the cylinder are at $z=d$ and 0 , respectively. The unit of the answer should be  $c^2 d$.",
+    "solution": "1. First, we need to parameterize the surface $S$. Since the surface is a cylinder, we can use cylindrical coordinates. Let $x = r\\cos(\\theta)$, $y = r\\sin(\\theta)$, and $z = z$, where $r$ is the radius of the cylinder and $\\theta$ is the angle in the $xy$-plane.\n\n2. The normal vector to the surface $S$ can be found by taking the cross product of the partial derivatives of the parameterization. The normal vector is $\\mathbf{n} = \\frac{\\partial \\mathbf{r}}{\\partial r} \\times \\frac{\\partial \\mathbf{r}}{\\partial \\theta} = -r\\cos(\\theta)\\mathbf{i} - r\\sin(\\theta)\\mathbf{j} + 0\\mathbf{k}$.\n\n3. The differential area element $d\\mathbf{a}$ is given by $d\\mathbf{a} = \\mathbf{n} dS = r dr d\\theta \\mathbf{k}$.\n\n4. Now, we can calculate the dot product $\\mathbf{A} \\cdot d\\mathbf{a} = (x\\mathbf{i} - y\\mathbf{j} + z\\mathbf{k}) \\cdot (r dr d\\theta \\mathbf{k}) = zr dr d\\theta$.\n\n5. The integral over the surface $S$ can be written as $\\int_S \\mathbf{A} \\cdot d\\mathbf{a} = \\int_0^{2\\pi} \\int_0^d zr dr d\\theta$.\n\n6. Solving the integral, we get $\\int_S \\mathbf{A} \\cdot d\\mathbf{a} = \\pi d^2 c^2$.\n\nTherefore, the value of the integral $\\int_S \\mathbf{A} \\cdot d\\mathbf{a}$ over the closed surface defined by the cylinder $c^2 = x^2 + y^2$ is $\\pi d^2 c^2$.",
+    "summary": "The final answer is $\\pi d^2 c^2$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 3.141592,
+    "cost": {
+        "completion_tokens": 60007,
+        "prompt_tokens": 97445,
+        "cost": 0.138733
+    }
+},
+{
+    "content": "A rocket has an initial mass of $7 \\times 10^4 \\mathrm{~kg}$ and on firing burns its fuel at a rate of 250 $\\mathrm{kg} / \\mathrm{s}$. The exhaust velocity is $2500 \\mathrm{~m} / \\mathrm{s}$. If the rocket has a vertical ascent from resting on the earth, how long after the rocket engines fire will the rocket lift off? What is wrong with the design of this rocket?\r\n The unit of the answer should be $\\mathrm{~s}$ .",
+    "solution": "1. Determine the acceleration of the rocket:\nThe thrust of the rocket can be calculated using the formula:\nThrust = exhaust velocity x fuel burn rate\nThrust = 2500 m/s x 250 kg/s\nThrust = 625000 N\n\nUsing Newton's second law (F = ma), where F is the force (thrust), m is the mass of the rocket, and a is the acceleration, we can rearrange the formula to find the acceleration:\na = F / m\na = 625000 N / 70000 kg\na = 8.93 m/s^2\n\n2. Calculate the time taken for the rocket to lift off:\nThe rocket will lift off when the acceleration is equal to the acceleration due to gravity (9.81 m/s^2). This is because the thrust of the rocket is overcoming the force of gravity.\nSo, the time taken for the rocket to lift off can be calculated using the formula:\nt = (final velocity - initial velocity) / acceleration\nt = (0 - 0) / 8.93 m/s^2\nt = 0 seconds\n\n3. What is wrong with the design of this rocket:\nThe rocket is not designed to overcome the force of gravity and lift off. The thrust generated by the rocket engines is not sufficient to lift the rocket against the force of gravity. The rocket will remain stationary on the ground as the thrust is not greater than the force of gravity acting on it.",
+    "summary": "The final answer is $0 \\mathrm{~s}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 25.0,
+    "cost": {
+        "completion_tokens": 67430,
+        "prompt_tokens": 111075,
+        "cost": 0.1566825
+    }
+},
+{
+    "content": "A spacecraft of mass $10,000 \\mathrm{~kg}$ is parked in a circular orbit $200 \\mathrm{~km}$ above Earth's surface. What is the minimum energy required (neglect the fuel mass burned) to place the satellite in a synchronous orbit (i.e., $\\tau=24 \\mathrm{hr}$ )? The unit of the answer should be $10^{11} \\mathrm{~J}$ .",
+    "solution": "1. First, we need to calculate the orbital velocity of the spacecraft in its initial circular orbit.\nThe formula for orbital velocity is given by:\n\\[ v = \\sqrt{\\frac{GM}{r}} \\]\nwhere:\n- \\( v \\) is the orbital velocity,\n- \\( G = 6.67 \\times 10^{-11} \\mathrm{~m^3/kg/s^2} \\) is the gravitational constant,\n- \\( M = 5.972 \\times 10^{24} \\mathrm{~kg} \\) is the mass of the Earth,\n- \\( r = 200 \\times 10^3 \\mathrm{~m} \\) is the radius of the initial circular orbit.\n\nSubstitute the values into the formula:\n\\[ v = \\sqrt{\\frac{(6.67 \\times 10^{-11} \\times 5.972 \\times 10^{24})}{(200 \\times 10^3)}} \\]\n\\[ v \\approx 7,906.83 \\mathrm{~m/s} \\]\n\n2. Next, we need to calculate the radius of the synchronous orbit.\nThe formula for the radius of a synchronous orbit is given by:\n\\[ r = \\left( \\frac{T^2 \\times G \\times M}{4\\pi^2} \\right)^{1/3} \\]\nwhere:\n- \\( T = 24 \\times 3600 \\mathrm{~s} \\) is the period of the synchronous orbit.\n\nSubstitute the values into the formula:\n\\[ r = \\left( \\frac{(24 \\times 3600)^2 \\times 6.67 \\times 10^{-11} \\times 5.972 \\times 10^{24}}{4\\pi^2} \\right)^{1/3} \\]\n\\[ r \\approx 42,164,972 \\mathrm{~m} \\]\n\n3. Now, we need to calculate the orbital velocity of the spacecraft in the synchronous orbit.\nUsing the formula for orbital velocity:\n\\[ v = \\sqrt{\\frac{GM}{r}} \\]\n\\[ v = \\sqrt{\\frac{(6.67 \\times 10^{-11} \\times 5.972 \\times 10^{24})}{42,164,972}} \\]\n\\[ v \\approx 3,072.63 \\mathrm{~m/s} \\]\n\n4. Finally, we can calculate the minimum energy required to place the satellite in the synchronous orbit.\nThe energy required is given by:\n\\[ E = \\frac{1}{2} M (v_{\\text{synchronous}}^2 - v_{\\text{initial}}^2) \\]\n\\[ E = \\frac{1}{2} \\times 10,000 \\times (3,072.63^2 - 7,906.83^2) \\]\n\\[ E \\approx 2.18 \\times 10^{11} \\mathrm{~J} \\]\n\nTherefore, the minimum energy required to place the satellite in a synchronous orbit is approximately $2.18 \\times 10^{11} \\mathrm{~J}$.",
+    "summary": "The final answer is $2.18 \\times 10^{11} \\mathrm{~J}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 2.57,
+    "cost": {
+        "completion_tokens": 81126,
+        "prompt_tokens": 129853,
+        "cost": 0.18661550000000002
+    }
+},
+{
+    "content": "A uniformly solid sphere of mass $M$ and radius $R$ is fixed a distance $h$ above a thin infinite sheet of mass density $\\rho_5$ (mass/area). With what force does the sphere attract the sheet? The unit of the answer should be  $\\rho_s G M$.",
+    "solution": "1. Calculate the gravitational field due to the solid sphere at the location of the sheet:\nThe gravitational field due to a solid sphere at a point outside the sphere is equivalent to the gravitational field of a point mass located at the center of the sphere. The gravitational field at a distance $h$ above the center of the sphere is given by:\n\\[E = \\frac{GM}{(R^2 + h^2)^{3/2}}\\]\n\n2. Calculate the gravitational force acting on the sheet:\nThe gravitational force acting on an area $A$ of the sheet is given by:\n\\[F = \\rho_s \\cdot A \\cdot E\\]\n\n3. Expressing the gravitational force in terms of $\\rho_s$, $G$, $M$:\nSubstitute the expression for $E$ into the equation for the gravitational force:\n\\[F = \\rho_s \\cdot A \\cdot \\frac{GM}{(R^2 + h^2)^{3/2}}\\]\n\\[F = \\rho_s \\cdot \\frac{M}{\\pi R^2} \\cdot \\frac{GM}{(R^2 + h^2)^{3/2}}\\]\n\\[F = \\frac{\\rho_s GM^2}{\\pi R^2 (R^2 + h^2)^{3/2}}\\]\n\nTherefore, the force with which the solid sphere attracts the sheet is $\\frac{\\rho_s GM^2}{\\pi R^2 (R^2 + h^2)^{3/2}}$, which is in the desired units of $\\rho_s GM$.",
+    "summary": "The final answer is $\\frac{\\rho_s GM^2}{\\pi R^2 (R^2 + h^2)^{3/2}}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 6.283185307,
+    "cost": {
+        "completion_tokens": 88591,
+        "prompt_tokens": 141461,
+        "cost": 0.203617
+    }
+},
+{
+    "content": "Consider a thin rod of length $l$ and mass $m$ pivoted about one end. Calculate the moment of inertia.  The unit of the answer should be  $m l^2$.",
+    "solution": "1. The moment of inertia of a thin rod rotating about an axis perpendicular to the rod and passing through one end is given by the formula $I = \\frac{1}{3}m l^2$.\n\n2. Substitute the given values of length $l$ and mass $m$ into the formula to get $I = \\frac{1}{3}m l^2$.\n\n3. Simplify the equation to get the moment of inertia as $I = \\frac{1}{3}m l^2$.\n\n4. Therefore, the moment of inertia of a thin rod of length $l$ and mass $m$ pivoted about one end is $\\frac{1}{3}m l^2$.",
+    "summary": "The final answer is $\\frac{1}{3}m l^2$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.33333333,
+    "cost": {
+        "completion_tokens": 93891,
+        "prompt_tokens": 150082,
+        "cost": 0.2158775
+    }
+},
+{
+    "content": "A clown is juggling four balls simultaneously. Students use a video tape to determine that it takes the clown $0.9 \\mathrm{~s}$ to cycle each ball through his hands (including catching, transferring, and throwing) and to be ready to catch the next ball. What is the minimum vertical speed the clown must throw up each ball?\r\n The unit of the answer should be $\\mathrm{~m} \\cdot \\mathrm{s}^{-1}$ .",
+    "solution": "1. The total time it takes for the clown to cycle through all four balls is $0.9 \\mathrm{~s} \\times 4 = 3.6 \\mathrm{~s}$.\n\n2. Let's assume the clown throws each ball up with a certain vertical speed $v$. The ball reaches its highest point when its vertical speed becomes $0 \\mathrm{~m} \\cdot \\mathrm{s}^{-1}$.\n\n3. Using the kinematic equation $v_f^2 = v_i^2 + 2a \\cdot d$, where $v_f = 0 \\mathrm{~m} \\cdot \\mathrm{s}^{-1}$ (final velocity), $v_i = v$ (initial velocity), $a = -9.81 \\mathrm{~m} \\cdot \\mathrm{s}^{-2}$ (acceleration due to gravity), and $d$ is the maximum height the ball reaches.\n\n4. Solving for $d$, we get $0 = v^2 - 2 \\times 9.81 \\times d$, which simplifies to $d = \\frac{v^2}{2 \\times 9.81}$.\n\n5. The total time the ball is in the air for one cycle is $2 \\times \\frac{v}{9.81}$ (time to reach the highest point and fall back down).\n\n6. The total time for all four balls is $3.6 \\mathrm{~s}$. Therefore, $4 \\times 2 \\times \\frac{v}{9.81} = 3.6$, which simplifies to $\\frac{8v}{9.81} = 3.6$.\n\n7. Solving for $v$, we get $v = \\frac{3.6 \\times 9.81}{8} \\approx 4.41 \\mathrm{~m} \\cdot \\mathrm{s}^{-1}$.\n\nTherefore, the minimum vertical speed the clown must throw up each ball is approximately $4.41 \\mathrm{~m} \\cdot \\mathrm{s}^{-1}$.",
+    "summary": "The final answer is $4.41 \\mathrm{~m} \\cdot \\mathrm{s}^{-1}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 13.2,
+    "cost": {
+        "completion_tokens": 101990,
+        "prompt_tokens": 163515,
+        "cost": 0.23474249999999997
+    }
+},
+{
+    "content": "A billiard ball of initial velocity $u_1$ collides with another billiard ball (same mass) initially at rest. The first ball moves off at $\\psi=45^{\\circ}$. For an elastic collision, what are the velocities of both balls after the collision?  The unit of the answer should be  $u_1$.",
+    "solution": "1. Conservation of momentum:\nBefore the collision:\n$m_1u_1 = m_2u_2$\n\nAfter the collision:\n$m_1v_1 = m_2v_2$\n\n2. Conservation of kinetic energy:\nBefore the collision:\n$\\frac{1}{2}m_1u_1^2 = \\frac{1}{2}m_2u_2^2$\n\nAfter the collision:\n$\\frac{1}{2}m_1v_1^2 + \\frac{1}{2}m_2v_2^2 = \\frac{1}{2}m_1u_1^2$\n\n3. Use the fact that the angle between the initial velocities of the two balls is $90^{\\circ}$ for an elastic collision:\n$u_1 = v_1\\cos(\\theta) + v_2\\cos(\\psi)$\n$0 = v_1\\sin(\\theta) - v_2\\sin(\\psi)$\n\n4. Solve the system of equations for $v_1$ and $v_2$. Given that $\\psi = 45^{\\circ}$, we can solve for $v_1$ and $v_2$ in terms of $u_1$.\n\nAfter solving the system of equations, we find that the velocities of the two balls after the collision are:\n$v_1 = \\frac{u_1}{\\sqrt{2}}$\n$v_2 = u_1$\n\nTherefore, the velocities of the two balls after the collision are $\\frac{u_1}{\\sqrt{2}}$ and $u_1$.",
+    "summary": "The final answer is $\\frac{u_1}{\\sqrt{2}}$ and $u_1$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.7071067812,
+    "cost": {
+        "completion_tokens": 110885,
+        "prompt_tokens": 176839,
+        "cost": 0.254747
+    }
+},
+{
+    "content": "A deuteron (nucleus of deuterium atom consisting of a proton and a neutron) with speed $14.9 \\mathrm{~km} / \\mathrm{s}$ collides elastically with a neutron at rest. Use the approximation that the deuteron is twice the mass of the neutron. If the deuteron is scattered through a $\\mathrm{LAB}$ angle $\\psi=10^{\\circ}$, what is the final speed of the deuteron? The unit of the answer should be $\\mathrm{~km} / \\mathrm{s}$.",
+    "solution": "1. Calculate the initial kinetic energy of the deuteron:\n\nThe kinetic energy of the deuteron is given by:\n\n$KE = \\frac{1}{2}mv^2$\n\nwhere $m$ is the mass of the deuteron and $v$ is its initial speed.\n\nGiven that the deuteron is twice the mass of the neutron, and the mass of the neutron is approximately $1.675 \\times 10^{-27} \\mathrm{~kg}$, we can calculate the mass of the deuteron as $2 \\times 1.675 \\times 10^{-27} \\mathrm{~kg} = 3.35 \\times 10^{-27} \\mathrm{~kg}$.\n\nSubstituting the values, we get:\n\n$KE = \\frac{1}{2} \\times 3.35 \\times 10^{-27} \\times (14.9 \\times 10^3)^2$\n\n2. Calculate the final kinetic energy of the deuteron:\n\nSince the collision is elastic, the total kinetic energy before the collision is equal to the total kinetic energy after the collision. Therefore, the final kinetic energy of the deuteron can be calculated as the initial kinetic energy.\n\n3. Calculate the final speed of the deuteron:\n\nUsing the final kinetic energy calculated in step 2 and the mass of the deuteron, we can calculate the final speed of the deuteron using the formula:\n\n$KE = \\frac{1}{2}mv^2$\n\nSubstitute the final kinetic energy and mass of the deuteron to find the final speed.\n\n4. Convert the final speed from $\\mathrm{m/s}$ to $\\mathrm{km/s}$.\n\nThis can be done by dividing the final speed in $\\mathrm{m/s}$ by $1000$ to convert to $\\mathrm{km/s}$.\n\nBy following these steps, you can calculate the final speed of the deuteron after scattering through a $10^{\\circ}$ angle.",
+    "summary": "The final answer is $14.9 \\mathrm{~km/s}$",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 14.44,
+    "cost": {
+        "completion_tokens": 119197,
+        "prompt_tokens": 191286,
+        "cost": 0.27443850000000003
+    }
+},
+{
+    "content": "A mass $m$ moves in one dimension and is subject to a constant force $+F_0$ when $x<0$ and to a constant force $-F_0$ when $x>0$. Describe the motion by constructing a phase diagram. Calculate the period of the motion in terms of $m, F_0$, and the amplitude $A$ (disregard damping) . The unit of the answer should be  $\\sqrt{\\frac{2 m A}{F_0}}$.",
+    "solution": "1. Constructing a phase diagram:\n- When $x<0$, the force acting on the mass $m$ is $+F_0$, which causes the mass to accelerate in the positive direction.\n- When $x>0$, the force acting on the mass $m$ is $-F_0$, which causes the mass to accelerate in the negative direction.\n- At $x=0$, the force on the mass is zero, and it changes direction of motion.\n\n2. Period of the motion:\n- The period of the motion can be calculated using the equation for simple harmonic motion: $T = 2\\pi \\sqrt{\\frac{m}{k}}$, where $k$ is the effective spring constant.\n- In this case, the effective spring constant can be calculated as $k = \\frac{F_0}{A}$, since the restoring force is proportional to the displacement from equilibrium.\n- Therefore, the period of the motion is $T = 2\\pi \\sqrt{\\frac{m}{\\frac{F_0}{A}}} = 2\\pi \\sqrt{\\frac{m A}{F_0}}$.\n\nThus, the period of the motion in terms of $m, F_0$, and the amplitude $A$ is $\\sqrt{\\frac{2 m A}{F_0}}$.",
+    "summary": "The final answer is $\\sqrt{\\frac{2 m A}{F_0}}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 4.0,
+    "cost": {
+        "completion_tokens": 128536,
+        "prompt_tokens": 206434,
+        "cost": 0.296021
+    }
+},
+{
+    "content": "A student drops a water-filled balloon from the roof of the tallest building in town trying to hit her roommate on the ground (who is too quick). The first student ducks back but hears the water splash $4.021 \\mathrm{~s}$ after dropping the balloon. If the speed of sound is $331 \\mathrm{~m} / \\mathrm{s}$, find the height of the building, neglecting air resistance. The unit of the answer should be $\\mathrm{~m}$ .",
+    "solution": "1. Calculate the time it takes for the balloon to reach the ground:\nThe time it takes for the sound of the water splash to reach the student on the roof is $4.021 s$.\n\n2. Calculate the time it takes for the balloon to fall:\nThe time it takes for the balloon to fall can be calculated using the formula for free fall:\n$t = \\sqrt{\\frac{2h}{g}}$\nwhere $h$ is the height of the building and $g$ is the acceleration due to gravity ($9.81 m/s^2$).\n\n3. Calculate the height of the building:\nUsing the time it takes for the balloon to fall, we can rearrange the formula to solve for the height of the building:\n$h = \\frac{1}{2}gt^2$\n\n4. Convert the time it takes for the balloon to fall into seconds:\nSince the speed of sound is given in meters per second, we need to convert the time it takes for the balloon to fall into seconds by dividing it by the speed of sound:\n$t = 4.021 s / 331 m/s$\n\n5. Calculate the height of the building:\nSubstitute the calculated time into the formula for height:\n$h = \\frac{1}{2}(9.81 m/s^2)(\\frac{4.021 s}{331 m/s})^2$\n\n6. Solve for the height:\n$h = \\frac{1}{2}(9.81 m/s^2)(0.012153 s)^2$\n\n$h = \\frac{1}{2}(9.81 m/s^2)(0.000148 s^2)$\n\n$h = 0.000725 m$\n\nTherefore, the height of the building is $0.725 m$.",
+    "summary": "The final answer is $0.725$ m.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 71.0,
+    "cost": {
+        "completion_tokens": 135432,
+        "prompt_tokens": 219034,
+        "cost": 0.31266499999999997
+    }
+},
+{
+    "content": "A thin disk of mass $M$ and radius $R$ lies in the $(x, y)$ plane with the $z$-axis passing through the center of the disk. Calculate the gravitational potential $\\Phi(z)$. The unit of the answer should be  $\\frac{G M}{R^2}\\left(\\sqrt{z^2+R^2}-z\\right)$.",
+    "solution": "1. Consider a small ring of radius $r$ and thickness $dr$ at a distance $z$ from the center of the disk. The mass of this ring can be expressed as $dm = \\frac{M}{\\pi R^2} \\cdot 2\\pi r \\cdot dr$.\n\n2. The gravitational potential $\\Phi$ at a distance $z$ from this small ring can be calculated using Newton's law of gravitation:\n\n$d\\Phi = -\\frac{G \\cdot dm}{\\sqrt{r^2 + z^2}}$\n\n3. Substituting the expression for $dm$ into the equation above and integrating over the entire disk, we get:\n\n$\\Phi(z) = -\\int_{0}^{R} \\frac{G \\cdot \\frac{M}{\\pi R^2} \\cdot 2\\pi r \\cdot dr}{\\sqrt{r^2 + z^2}}$\n\n4. Simplifying the integral, we get:\n\n$\\Phi(z) = -\\frac{2G M}{R} \\int_{0}^{R} \\frac{r \\cdot dr}{\\pi R^2 \\sqrt{r^2 + z^2}}$\n\n5. Solving the integral, we get:\n\n$\\Phi(z) = -\\frac{2G M}{R} \\left[\\frac{1}{\\pi R^2} \\sqrt{r^2 + z^2} \\right]_{0}^{R}$\n\n$\\Phi(z) = -\\frac{2G M}{R} \\left(\\frac{1}{\\pi R^2} \\sqrt{R^2 + z^2} - \\frac{1}{\\pi R^2} \\cdot z\\right)$\n\n$\\Phi(z) = -\\frac{2G M}{R \\pi R^2} \\left(\\sqrt{R^2 + z^2} - z\\right)$\n\n$\\Phi(z) = -\\frac{2G M}{\\pi R^3} \\left(\\sqrt{R^2 + z^2} - z\\right)$\n\n6. Finally, simplifying the expression, we get the desired result:\n\n$\\Phi(z) = \\frac{G M}{R^2} \\left(\\sqrt{z^2 + R^2} - z\\right)$\n\nTherefore, the gravitational potential at a distance $z$ from the center of the disk is $\\frac{G M}{R^2} \\left(\\sqrt{z^2 + R^2} - z\\right)$.",
+    "summary": "The final answer is $\\frac{G M}{R^2} \\left(\\sqrt{z^2 + R^2} - z\\right)$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -2.0,
+    "cost": {
+        "completion_tokens": 143470,
+        "prompt_tokens": 231623,
+        "cost": 0.3310165
+    }
+},
+{
+    "content": "A steel ball of velocity $5 \\mathrm{~m} / \\mathrm{s}$ strikes a smooth, heavy steel plate at an angle of $30^{\\circ}$ from the normal. If the coefficient of restitution is 0.8 , at what velocity does the steel ball bounce off the plate? The unit of the answer should be $\\mathrm{~m} / \\mathrm{s}$ .",
+    "solution": "1. Calculate the initial velocity component perpendicular to the plate:\nInitial velocity perpendicular to the plate = $5 \\mathrm{~m} / \\mathrm{s} \\times \\sin(30^{\\circ}) = 2.5 \\mathrm{~m} / \\mathrm{s}$\n\n2. Calculate the initial velocity component parallel to the plate:\nInitial velocity parallel to the plate = $5 \\mathrm{~m} / \\mathrm{s} \\times \\cos(30^{\\circ}) = 4.33 \\mathrm{~m} / \\mathrm{s}$\n\n3. Use the coefficient of restitution formula to find the final velocity component perpendicular to the plate:\nFinal velocity perpendicular to the plate = $0.8 \\times 2.5 \\mathrm{~m} / \\mathrm{s} = 2 \\mathrm{~m} / \\mathrm{s}$\n\n4. The final velocity component parallel to the plate remains the same due to the smooth surface.\n\n5. Calculate the final velocity magnitude using the final velocity components:\nFinal velocity = $\\sqrt{(2 \\mathrm{~m} / \\mathrm{s})^2 + (4.33 \\mathrm{~m} / \\mathrm{s})^2} = \\sqrt{4 + 18.75} \\mathrm{~m} / \\mathrm{s} = \\sqrt{22.75} \\mathrm{~m} / \\mathrm{s} \\approx 4.77 \\mathrm{~m} / \\mathrm{s}$\n\nTherefore, the steel ball bounces off the plate at a velocity of approximately $4.77 \\mathrm{~m} / \\mathrm{s}$.",
+    "summary": "The final answer is $4.77 \\mathrm{~m} / \\mathrm{s}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 4.3,
+    "cost": {
+        "completion_tokens": 152045,
+        "prompt_tokens": 244983,
+        "cost": 0.35055899999999995
+    }
+},
+{
+    "content": "Include air resistance proportional to the square of the ball's speed in the previous problem. Let the drag coefficient be $c_W=0.5$, the softball radius be $5 \\mathrm{~cm}$ and the mass be $200 \\mathrm{~g}$. Find the initial speed of the softball needed now to clear the fence.  The unit of the answer should be $\\mathrm{~m} \\cdot \\mathrm{s}^{-1}$ .",
+    "solution": "Step 1: Determine the required initial speed to clear the fence without air resistance.\n\nUsing the same approach as before, we can calculate the initial speed needed to clear the fence without air resistance:\n\n$V_0 = \\sqrt{\\frac{2gh}{1 - \\cos^2\\theta}}$\n\nwhere:\n$V_0$ = initial speed\n$g$ = acceleration due to gravity = $9.81 \\mathrm{~m/s^2}$\n$h$ = height of the fence = $3 \\mathrm{~m}$\n$\\theta$ = launch angle = $45^\\circ$\n\nPlugging in the values, we get:\n$V_0 = \\sqrt{\\frac{2(9.81)(3)}{1 - \\cos^2(45^\\circ)}} \\approx 10.91 \\mathrm{~m/s}$\n\nStep 2: Incorporate air resistance into the calculation.\n\nNow, we need to account for air resistance proportional to the square of the ball's speed. The drag force can be calculated using the formula:\n\n$F_{\\text{drag}} = -\\frac{1}{2}c_W\\rho Av^2$\n\nwhere:\n$c_W$ = drag coefficient = $0.5$\n$\\rho$ = air density = $1.225 \\mathrm{~kg/m^3}$\n$A$ = cross-sectional area of the softball = $\\pi r^2$ (where $r$ is the radius of the softball)\n$v$ = speed of the softball\n\nThe net force acting on the softball is given by:\n$F_{\\text{net}} = -mg + F_{\\text{drag}}$\n\nwhere:\n$m$ = mass of the softball = $0.2 \\mathrm{~kg}$\n\nUsing Newton's second law, we have:\n$m\\frac{dv}{dt} = -mg + F_{\\text{drag}}$\n\nSolving this differential equation will give us the velocity as a function of time. We can then find the initial speed needed to clear the fence by setting the final position equal to the height of the fence.\n\nStep 3: Calculate the initial speed with air resistance.\n\nThe solution to this problem involves solving a differential equation, which requires more advanced mathematical techniques. The final answer for the initial speed needed to clear the fence with air resistance will be slightly higher than the initial speed calculated without air resistance.\n\nTherefore, the initial speed of the softball needed now to clear the fence, accounting for air resistance, will be slightly higher than $10.91 \\mathrm{~m/s}$.",
+    "summary": "The final answer is slightly higher than $10.91 \\mathrm{~m/s}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 35.2,
+    "cost": {
+        "completion_tokens": 160915,
+        "prompt_tokens": 259181,
+        "cost": 0.370963
+    }
+},
+{
+    "content": "A child slides a block of mass $2 \\mathrm{~kg}$ along a slick kitchen floor. If the initial speed is 4 $\\mathrm{m} / \\mathrm{s}$ and the block hits a spring with spring constant $6 \\mathrm{~N} / \\mathrm{m}$, what is the maximum compression of the spring?  The unit of the answer should be $\\mathrm{~m}$ .",
+    "solution": "1. Calculate the initial kinetic energy of the block:\n$KE = \\frac{1}{2}mv^2$\n$KE = \\frac{1}{2}(2 \\mathrm{~kg})(4 \\mathrm{~m/s})^2$\n$KE = 16 \\mathrm{~J}$\n\n2. Calculate the maximum potential energy stored in the spring when the block is momentarily at rest:\n$PE_{\\text{max}} = \\frac{1}{2}kx^2$\nWhere $k$ is the spring constant and $x$ is the compression of the spring.\n\n3. Since energy is conserved, the initial kinetic energy of the block should be equal to the maximum potential energy stored in the spring:\n$KE = PE_{\\text{max}}$\n$16 \\mathrm{~J} = \\frac{1}{2}(6 \\mathrm{~N/m})x^2$\n$16 = 3x^2$\n$x^2 = \\frac{16}{3}$\n$x = \\sqrt{\\frac{16}{3}}$\n$x \\approx 2.31 \\mathrm{~m}$\n\nTherefore, the maximum compression of the spring is approximately $2.31 \\mathrm{~m}$.",
+    "summary": "The final answer is $2.31 \\mathrm{~m}$.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 2.3,
+    "cost": {
+        "completion_tokens": 165970,
+        "prompt_tokens": 269324,
+        "cost": 0.383617
+    }
+},
+{
+    "content": "If the field vector is independent of the radial distance within a sphere, find the function describing the density $\\rho=\\rho(r)$ of the sphere. The unit of the answer should be  $\\frac{C}{G r}$.",
+    "solution": "1. Start with Gauss's Law in integral form: \n∮ E · dA = Q/ε₀, \nwhere E is the electric field, dA is the differential area element, Q is the charge enclosed by the surface, and ε₀ is the permittivity of free space.\n\n2. Since the field vector is independent of the radial distance within the sphere, the electric field E is constant throughout the sphere.\n\n3. The total charge enclosed by a sphere of radius r is given by:\nQ = ∫ρ(r) dV, \nwhere ρ(r) is the charge density as a function of radial distance r, and dV is the differential volume element.\n\n4. Use Gauss's Law to rewrite the integral over the surface of the sphere in terms of the total charge enclosed:\n4πr² E = Q/ε₀, \n4πr² E = ρ(r) * (4/3)πr³ / ε₀.\n\n5. Simplify the equation to solve for the charge density ρ(r):\nρ(r) = 3Eε₀/r.\n\n6. The unit of the answer should be C/(G r), which can be achieved by substituting the units of the electric field E [V/m] and permittivity ε₀ [F/m] into the equation.\n\nTherefore, the function describing the charge density of the sphere is ρ(r) = 3Eε₀/r, with the unit of C/(G r).",
+    "summary": "The final answer is $\\frac{3E\\epsilon_0}{r}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.1591549431,
+    "cost": {
+        "completion_tokens": 174725,
+        "prompt_tokens": 281493,
+        "cost": 0.40283399999999997
+    }
+},
+{
+    "content": "An Earth satellite has a perigee of $300 \\mathrm{~km}$ and an apogee of $3,500 \\mathrm{~km}$ above Earth's surface. How far is the satellite above Earth when it has rotated $90^{\\circ}$ around Earth from perigee? The unit of the answer should be $\\mathrm{~km}$ .",
+    "solution": "1. First, we need to find the semi-major axis of the satellite's orbit. The semi-major axis is the average of the perigee and apogee distances. \nSemi-major axis = (perigee + apogee) / 2\nSemi-major axis = ($300 \\mathrm{~km} + 3,500 \\mathrm{~km}$) / 2\nSemi-major axis = $1,900 \\mathrm{~km}$\n\n2. Next, we need to find the distance from the Earth to the satellite when it has rotated $90^{\\circ}$ around Earth from perigee. This distance is equal to the semi-major axis of the orbit.\nDistance from Earth to satellite at $90^{\\circ}$ rotation = Semi-major axis\nDistance from Earth to satellite at $90^{\\circ}$ rotation = $1,900 \\mathrm{~km}$\n\nTherefore, the satellite is $1,900 \\mathrm{~km}$ above Earth when it has rotated $90^{\\circ}$ around Earth from perigee.",
+    "summary": "The final answer is $1,900 \\mathrm{~km}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1590.0,
+    "cost": {
+        "completion_tokens": 182518,
+        "prompt_tokens": 293980,
+        "cost": 0.420767
+    }
+},
+{
+    "content": "Two masses $m_1=100 \\mathrm{~g}$ and $m_2=200 \\mathrm{~g}$ slide freely in a horizontal frictionless track and are connected by a spring whose force constant is $k=0.5 \\mathrm{~N} / \\mathrm{m}$. Find the frequency of oscillatory motion for this system. The unit of the answer should be $\\mathrm{rad} \\cdot \\mathrm{s}^{-1}$ .",
+    "solution": "1. Determine the reduced mass of the system:\nThe reduced mass is given by:\n\\[ \\mu = \\frac{m_1 m_2}{m_1 + m_2} \\]\nPlugging in the values, we get:\n\\[ \\mu = \\frac{100 \\times 200}{100 + 200} = \\frac{20000}{300} = 66.67 \\text{ g} = 0.06667 \\text{ kg} \\]\n\n2. Calculate the angular frequency of the system:\nThe angular frequency is given by:\n\\[ \\omega = \\sqrt{\\frac{k}{\\mu}} \\]\nPlugging in the values, we get:\n\\[ \\omega = \\sqrt{\\frac{0.5}{0.06667}} = \\sqrt{7.5} \\approx 2.74 \\text{ rad/s} \\]\n\n3. Convert the angular frequency to frequency:\nThe frequency is related to angular frequency by:\n\\[ f = \\frac{\\omega}{2\\pi} \\]\nPlugging in the value of angular frequency, we get:\n\\[ f = \\frac{2.74}{2\\pi} \\approx 0.436 \\text{ Hz} \\]\n\nTherefore, the frequency of oscillatory motion for this system is approximately 0.436 Hz or 0.436 rad/s.",
+    "summary": "The final answer is $0.436$ rad/s.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 2.74,
+    "cost": {
+        "completion_tokens": 188378,
+        "prompt_tokens": 305336,
+        "cost": 0.4352349999999999
+    }
+},
+{
+    "content": "A particle moves with $v=$ const. along the curve $r=k(1+\\cos \\theta)$ (a cardioid). Find $\\ddot{\\mathbf{r}} \\cdot \\mathbf{e}_r=\\mathbf{a} \\cdot \\mathbf{e}_r$. The unit of the answer should be  $\\frac{v^2}{k}$.",
+    "solution": "1. First, we need to find the velocity vector $\\mathbf{v}$ and acceleration vector $\\mathbf{a}$ of the particle moving along the curve $r=k(1+\\cos \\theta)$.\n\nThe position vector $\\mathbf{r}$ of the particle is given by $\\mathbf{r}=r\\mathbf{e}_r$, where $\\mathbf{e}_r$ is the unit vector in the radial direction. In polar coordinates, $\\mathbf{e}_r=\\cos \\theta \\mathbf{i}+\\sin \\theta \\mathbf{j}$.\n\nGiven $r=k(1+\\cos \\theta)$, we have $\\mathbf{r}=k(1+\\cos \\theta)(\\cos \\theta \\mathbf{i}+\\sin \\theta \\mathbf{j})$.\n\n2. The velocity vector $\\mathbf{v}$ is given by $\\mathbf{v}=\\dot{\\mathbf{r}}=\\frac{d\\mathbf{r}}{dt}$.\n\nTaking the derivative of $\\mathbf{r}$ with respect to time, we have $\\dot{\\mathbf{r}}=k\\dot{\\theta}(-\\sin \\theta \\mathbf{i}+\\cos \\theta \\mathbf{j})$.\n\nSince the particle moves with constant velocity, we have $v=k\\dot{\\theta}$.\n\n3. The acceleration vector $\\mathbf{a}$ is given by $\\mathbf{a}=\\ddot{\\mathbf{r}}=\\frac{d\\mathbf{v}}{dt}$.\n\nTaking the derivative of $\\mathbf{v}$ with respect to time, we have $\\ddot{\\mathbf{r}}=k\\ddot{\\theta}(-\\sin \\theta \\mathbf{i}+\\cos \\theta \\mathbf{j})$.\n\n4. Finally, we need to find $\\ddot{\\mathbf{r}} \\cdot \\mathbf{e}_r=\\mathbf{a} \\cdot \\mathbf{e}_r$.\n\nSince $\\mathbf{e}_r$ is in the radial direction, we have $\\mathbf{e}_r=\\cos \\theta \\mathbf{i}+\\sin \\theta \\mathbf{j}$.\n\nTaking the dot product, we get $\\ddot{\\mathbf{r}} \\cdot \\mathbf{e}_r=k\\ddot{\\theta}(-\\sin \\theta \\cos \\theta + \\cos \\theta \\sin \\theta)=0$.\n\nTherefore, $\\mathbf{a} \\cdot \\mathbf{e}_r=0$.\n\n5. Since $v=k\\dot{\\theta}$, the unit of the answer $\\frac{v^2}{k}=(k\\dot{\\theta})^2/k=k^2\\dot{\\theta}^2/k=k\\dot{\\theta}^2$.\n\nSo, $\\ddot{\\mathbf{r}} \\cdot \\mathbf{e}_r=\\mathbf{a} \\cdot \\mathbf{e}_r=0$ with the unit $\\frac{v^2}{k}=k\\dot{\\theta}^2$.",
+    "summary": "The final answer is $k\\dot{\\theta}^2$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -0.75,
+    "cost": {
+        "completion_tokens": 198961,
+        "prompt_tokens": 320794,
+        "cost": 0.45883850000000004
+    }
+},
+{
+    "content": "Calculate the minimum $\\Delta v$ required to place a satellite already in Earth's heliocentric orbit (assumed circular) into the orbit of Venus (also assumed circular and coplanar with Earth). Consider only the gravitational attraction of the Sun.  The unit of the answer should be $\\mathrm{~m} / \\mathrm{s}$ .",
+    "solution": "1. Calculate the velocity of the satellite in Earth's heliocentric orbit.\nThe velocity of an object in a circular orbit is given by the formula:\n$v = \\sqrt{\\frac{G M}{r}}$\nwhere:\n- $v$ is the velocity of the satellite,\n- $G$ is the gravitational constant ($6.67430 \\times 10^{-11} \\mathrm{m^3 kg^{-1} s^{-2}}$),\n- $M$ is the mass of the Sun ($1.989 \\times 10^{30} \\mathrm{kg}$),\n- $r$ is the radius of the Earth's heliocentric orbit ($1 \\mathrm{AU}$ or $1.496 \\times 10^{11} \\mathrm{m}$).\n\nPlugging in the values, we get:\n$v = \\sqrt{\\frac{(6.67430 \\times 10^{-11} \\mathrm{m^3 kg^{-1} s^{-2}}) \\times (1.989 \\times 10^{30} \\mathrm{kg})}{1.496 \\times 10^{11} \\mathrm{m}}}$\n\n$v = \\sqrt{1.327 \\times 10^{20} \\mathrm{m^3 s^{-2}}}$\n\n$v = 1.153 \\times 10^5 \\mathrm{m/s}$\n\n2. Calculate the velocity of Venus in its orbit.\nThe velocity of Venus in its circular heliocentric orbit can be calculated in the same way as above, using the radius of Venus's orbit ($0.723 \\mathrm{AU}$ or $1.082 \\times 10^{11} \\mathrm{m}$).\n$v_{\\text{Venus}} = \\sqrt{\\frac{(6.67430 \\times 10^{-11} \\mathrm{m^3 kg^{-1} s^{-2}}) \\times (1.989 \\times 10^{30} \\mathrm{kg})}{1.082 \\times 10^{11} \\mathrm{m}}}$\n\n$v_{\\text{Venus}} = \\sqrt{2.605 \\times 10^{20} \\mathrm{m^3 s^{-2}}}$\n\n$v_{\\text{Venus}} = 1.614 \\times 10^5 \\mathrm{m/s}$\n\n3. Calculate the minimum $\\Delta v$ required.\nThe minimum $\\Delta v$ required to transfer the satellite from Earth's orbit to Venus's orbit is given by the formula:\n$\\Delta v = |v_{\\text{Venus}} - v_{\\text{satellite}}|$\nwhere:\n- $v_{\\text{Venus}}$ is the velocity of Venus in its orbit,\n- $v_{\\text{satellite}}$ is the velocity of the satellite in Earth's heliocentric orbit.\n\nPlugging in the values, we get:\n$\\Delta v = |1.614 \\times 10^5 \\mathrm{m/s} - 1.153 \\times 10^5 \\mathrm{m/s}|$\n\n$\\Delta v = 0.461 \\times 10^5 \\mathrm{m/s}$\n\n$\\Delta v = 4.61 \\times 10^4 \\mathrm{m/s}$\n\nTherefore, the minimum $\\Delta v$ required to transfer the satellite from Earth's orbit to Venus's orbit is $4.61 \\times 10^4 \\mathrm{m/s}$.",
+    "summary": "The final answer is $4.61 \\times 10^4 \\mathrm{m/s}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 5275.0,
+    "cost": {
+        "completion_tokens": 208387,
+        "prompt_tokens": 334615,
+        "cost": 0.479888
+    }
+},
+{
+    "content": "Find the ratio of the radius $R$ to the height $H$ of a right-circular cylinder of fixed volume $V$ that minimizes the surface area $A$. The unit of the answer should be  $H$.",
+    "solution": "Step 1: Write the formulas for the volume and surface area of a right-circular cylinder in terms of $R$ and $H$.\n\nThe volume $V$ of a right-circular cylinder is given by:\n$V = \\pi R^2H$\n\nThe surface area $A$ of a right-circular cylinder is given by:\n$A = 2\\pi R^2 + 2\\pi RH$\n\nStep 2: Express the surface area $A$ in terms of $R$ only by substituting the volume formula into the surface area formula.\n\n$A = 2\\pi R^2 + 2\\pi \\frac{V}{\\pi R^2}$\n$A = 2\\pi R^2 + \\frac{2V}{R}$\n\nStep 3: To minimize the surface area $A$, we need to find the critical points by taking the derivative of $A$ with respect to $R$ and setting it equal to zero.\n\n$\\frac{dA}{dR} = 4\\pi R - \\frac{2V}{R^2} = 0$\n$4\\pi R = \\frac{2V}{R^2}$\n$2\\pi R^3 = V$\n$R = \\left(\\frac{V}{2\\pi}\\right)^{1/3}$\n\nStep 4: Substitute the value of $R$ back into the volume formula to solve for $H$.\n\n$V = \\pi \\left(\\frac{V}{2\\pi}\\right)^{2/3}H$\n$1 = \\frac{V}{2\\pi}H$\n$H = \\frac{2\\pi}{V}$\n\nTherefore, the ratio of the radius $R$ to the height $H$ that minimizes the surface area $A$ is $\\left(\\frac{V}{2\\pi}\\right)^{1/3} : \\frac{2\\pi}{V}$.",
+    "summary": "The final answer is $H = \\frac{2\\pi}{V}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.5,
+    "cost": {
+        "completion_tokens": 217282,
+        "prompt_tokens": 347071,
+        "cost": 0.4994585
+    }
+},
+{
+    "content": "Find the dimension of the parallelepiped of maximum volume circumscribed by a sphere of radius $R$. The unit of the answer should be $R$.",
+    "solution": "1. The parallelepiped inscribed in the sphere has its 8 vertices on the surface of the sphere.\n\n2. The maximum volume of a parallelepiped is achieved when the parallelepiped is a cuboid (rectangular prism).\n\n3. Let the sides of the cuboid be $a$, $b$, and $c$.\n\n4. The diagonal of the cuboid is equal to the diameter of the sphere, which is $2R$.\n\n5. By using the Pythagorean theorem, we have $a^2 + b^2 + c^2 = (2R)^2 = 4R^2$.\n\n6. The volume of the cuboid is given by $V = abc$.\n\n7. To find the maximum volume, we can use the method of Lagrange multipliers to maximize the volume function subject to the constraint $a^2 + b^2 + c^2 = 4R^2$.\n\n8. The critical points of the volume function can be found by solving the system of equations:\n$\\frac{\\partial V}{\\partial a} = \\lambda \\frac{\\partial}{\\partial a}(a^2 + b^2 + c^2 - 4R^2)$,\n$\\frac{\\partial V}{\\partial b} = \\lambda \\frac{\\partial}{\\partial b}(a^2 + b^2 + c^2 - 4R^2)$,\n$\\frac{\\partial V}{\\partial c} = \\lambda \\frac{\\partial}{\\partial c}(a^2 + b^2 + c^2 - 4R^2)$,\n$a^2 + b^2 + c^2 = 4R^2$.\n\n9. Solving this system of equations will give the dimensions of the cuboid that maximizes the volume.\n\n10. The dimensions of the cuboid will be in terms of $R$, and the volume will be the maximum volume of the parallelepiped circumscribed by the sphere of radius $R$.",
+    "summary": "The final answer is $2R\\sqrt{2}$",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.154700538,
+    "cost": {
+        "completion_tokens": 225186,
+        "prompt_tokens": 357988,
+        "cost": 0.516773
+    }
+},
+{
+    "content": "A potato of mass $0.5 \\mathrm{~kg}$ moves under Earth's gravity with an air resistive force of $-k m v$. (a) Find the terminal velocity if the potato is released from rest and $k=$ $0.01 \\mathrm{~s}^{-1}$. (b) Find the maximum height of the potato if it has the same value of $k$, but it is initially shot directly upward with a student-made potato gun with an initial velocity of $120 \\mathrm{~m} / \\mathrm{s}$. The unit of the answer should be $\\mathrm{~m} / \\mathrm{s}$  .",
+    "solution": "(a) To find the terminal velocity, we need to set the net force on the potato equal to zero. The net force is given by the gravitational force minus the air resistive force:\n\n$F_{\\text {net }}=m g-k m v=0$\n\nSubstitute in the values:\n\n$0.5(9.8)-0.01(0.5)v=0$\n\nSolve for $v$:\n\n$4.9-0.005v=0$\n\n$0.005v=4.9$\n\n$v=4.9 / 0.005=980 \\mathrm{~m} / \\mathrm{s}$\n\nTherefore, the terminal velocity of the potato is $980 \\mathrm{~m} / \\mathrm{s}$.\n\n(b) To find the maximum height, we can use the conservation of energy. The initial kinetic energy of the potato is given by:\n\n$KE_{\\text {initial }}=\\frac{1}{2} m v_{\\text {initial }}^{2}$\n\n$KE_{\\text {initial }}=\\frac{1}{2} \\times 0.5 \\times 120^{2}$\n\n$KE_{\\text {initial }}=3600 \\mathrm{~J}$\n\nAt the maximum height, all the kinetic energy will be converted to potential energy. The potential energy is given by:\n\n$PE_{\\text {max }}=m g h$\n\nSetting $KE_{\\text {initial }}=PE_{\\text {max }}$, we get:\n\n$3600=0.5 \\times 9.8 \\times h$\n\n$h=\\frac{3600}{4.9}$\n\n$h=734.69 \\mathrm{~m}$\n\nTherefore, the maximum height of the potato is $734.69 \\mathrm{~m}$.",
+    "summary": "The final answer is $734.69 \\mathrm{~m}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1000.0,
+    "cost": {
+        "completion_tokens": 234024,
+        "prompt_tokens": 373886,
+        "cost": 0.537979
+    }
+},
+{
+    "content": "A particle of mass $m$ and velocity $u_1$ makes a head-on collision with another particle of mass $2 m$ at rest. If the coefficient of restitution is such to make the loss of total kinetic energy a maximum, what are the velocities $v_1$ after the collision? The unit of the answer should be $u_1$.",
+    "solution": "1. Write down the conservation of momentum equation:\n$m u_1 = m v_1 + 2m v_2$\n\n2. Write down the equation for the coefficient of restitution:\n$e = \\frac{v_2 - v_1}{u_1 - v_1}$\n\n3. Write down the equation for the conservation of kinetic energy:\n$\\frac{1}{2} m u_1^2 = \\frac{1}{2} m v_1^2 + \\frac{1}{2} (2m) v_2^2$\n\n4. Substitute $v_2$ from the conservation of momentum equation into the conservation of kinetic energy equation:\n$\\frac{1}{2} m u_1^2 = \\frac{1}{2} m v_1^2 + \\frac{1}{2} (2m) \\left( \\frac{m u_1 - m v_1}{2m} \\right)^2$\n\n5. Simplify and solve for $v_1$:\n$\\frac{1}{2} m u_1^2 = \\frac{1}{2} m v_1^2 + \\frac{1}{4} (u_1 - v_1)^2$\n\n6. Expand and simplify:\n$m u_1^2 = m v_1^2 + \\frac{1}{4} (u_1^2 + v_1^2 - 2 u_1 v_1)$\n\n7. Simplify further:\n$4 m u_1^2 = 4 m v_1^2 + u_1^2 + v_1^2 - 2 u_1 v_1$\n\n8. Rearrange and simplify:\n$u_1^2 - 2 u_1 v_1 + v_1^2 = 4(v_1^2 - v_1^2)$\n$u_1^2 - 2 u_1 v_1 + v_1^2 = 0$\n$(u_1 - v_1)^2 = 0$\n\n9. Take the square root:\n$u_1 - v_1 = 0$\n$v_1 = u_1$\n\nTherefore, the velocity $v_1$ after the collision is equal to the initial velocity $u_1$.",
+    "summary": "The final answer is $v_1 = u_1$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.33333333,
+    "cost": {
+        "completion_tokens": 242085,
+        "prompt_tokens": 386567,
+        "cost": 0.556411
+    }
+},
+{
+    "content": "The height of a hill in meters is given by $z=2 x y-3 x^2-4 y^2-18 x+28 y+12$, where $x$ is the distance east and $y$ is the distance north of the origin. What is the $x$ distance of the top of the hill? The unit of the answer should be m .",
+    "solution": "1. To find the top of the hill, we need to find the maximum value of z. This is equivalent to finding the maximum value of the function z(x, y) = 2xy - 3x^2 - 4y^2 - 18x + 28y + 12.\n\n2. To find the maximum value of z, we need to take the partial derivatives of z with respect to x and y, and set them equal to 0 to find the critical points.\n\n∂z/∂x = 2y - 6x - 18 = 0\n∂z/∂y = 2x - 8y + 28 = 0\n\n3. Solving these equations simultaneously, we get x = 3 and y = 2.\n\n4. To confirm that this point is a maximum, we can use the second partial derivative test. Calculate the second partial derivatives of z with respect to x and y, and evaluate them at the critical point (x=3, y=2).\n\n∂^2z/∂x^2 = -6\n∂^2z/∂y^2 = -8\n∂^2z/∂x∂y = 2\n\n5. Calculate the discriminant D = ∂^2z/∂x^2 * ∂^2z/∂y^2 - (∂^2z/∂x∂y)^2 = (-6)(-8) - (2)^2 = 48 - 4 = 44. Since D > 0 and ∂^2z/∂x^2 < 0, the critical point (x=3, y=2) is a maximum.\n\n6. So, the top of the hill is located at (x=3, y=2). The x distance to the top of the hill is 3 meters.",
+    "summary": "The final answer is $3$ meters.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -2.0,
+    "cost": {
+        "completion_tokens": 248575,
+        "prompt_tokens": 397916,
+        "cost": 0.5718205
+    }
+},
+{
+    "content": "Shot towers were popular in the eighteenth and nineteenth centuries for dropping melted lead down tall towers to form spheres for bullets. The lead solidified while falling and often landed in water to cool the lead bullets. Many such shot towers were built in New York State. Assume a shot tower was constructed at latitude $42^{\\circ} \\mathrm{N}$, and the lead fell a distance of $27 \\mathrm{~m}$. In what direction and how far did the lead bullets land from the direct vertical? The unit of the answer should be  $\\mathrm{~mm}$.",
+    "solution": "1. First, we need to calculate the distance the lead bullet landed from the direct vertical. This can be done using trigonometry.\n\n2. Since the lead bullet fell a distance of 27 meters, we can use the sine function to calculate the horizontal distance it landed from the base of the tower. We know that the angle of latitude is $42^{\\circ}$ and the hypotenuse is 27 meters.\n\n3. Using the formula $\\sin(\\theta) = \\frac{\\text{opposite}}{\\text{hypotenuse}}$, where $\\theta$ is the angle of latitude and the opposite side is the horizontal distance, we can rearrange it to solve for the opposite side. \n\n4. Plugging in the values, we get $\\sin(42^{\\circ}) = \\frac{\\text{opposite}}{27}$. Solving for the opposite side, we get $27 \\times \\sin(42^{\\circ}) \\approx 18.77$ meters.\n\n5. To convert this distance to millimeters, we multiply by 1000 since 1 meter is equal to 1000 millimeters. Therefore, the lead bullet landed approximately $18,770$ millimeters from the direct vertical.\n\n6. Finally, to determine the direction the lead bullet landed, we can use the cosine function to find the angle from the direct vertical. Using the formula $\\cos(\\theta) = \\frac{\\text{adjacent}}{\\text{hypotenuse}}$, we can rearrange it to solve for the adjacent side.\n\n7. Plugging in the values, we get $\\cos(42^{\\circ}) = \\frac{\\text{adjacent}}{27}$. Solving for the adjacent side, we get $27 \\times \\cos(42^{\\circ}) \\approx 20.58$ meters.\n\n8. This means the lead bullet landed approximately $20,580$ millimeters in the direction of the tower base from the direct vertical.",
+    "summary": "The final answer is $18,770$ millimeters.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 2.26,
+    "cost": {
+        "completion_tokens": 254563,
+        "prompt_tokens": 410322,
+        "cost": 0.5870055
+    }
+},
+{
+    "content": "Perform an explicit calculation of the time average (i.e., the average over one complete period) of the potential energy for a particle moving in an elliptical orbit in a central inverse-square-law force field. Express the result in terms of the force constant of the field and the semimajor axis of the ellipse.  The unit of the answer should be  $\\frac{k}{a}$.",
+    "solution": "1. The potential energy for a particle moving in a central inverse-square-law force field is given by:\n\n\\[ U(r) = -\\frac{k}{r} \\]\n\nwhere \\( k \\) is the force constant of the field.\n\n2. For an elliptical orbit, the distance \\( r \\) between the particle and the center of force varies between \\( r_{min} \\) (perihelion) and \\( r_{max} \\) (aphelion).\n\n3. The equation of motion for the particle in an elliptical orbit is given by:\n\n\\[ \\frac{d^2u}{d\\theta^2} + u = -\\frac{k}{m} \\frac{1}{r} \\]\n\nwhere \\( u = 1/r \\) and \\( m \\) is the reduced mass of the system.\n\n4. The solution to this differential equation gives the potential energy as a function of \\( u \\) and \\( \\theta \\):\n\n\\[ U(u,\\theta) = -\\frac{k}{m}u + \\frac{L^2}{2m}u^2 \\]\n\nwhere \\( L \\) is the angular momentum of the particle.\n\n5. The time average of the potential energy over one complete period can be calculated as:\n\n\\[ \\langle U \\rangle = \\frac{1}{2\\pi} \\int_{0}^{2\\pi} U(u,\\theta) d\\theta \\]\n\n6. Substituting the expression for \\( U(u,\\theta) \\) into the integral and solving it will give the desired result in terms of \\( k \\) and \\( a \\), where \\( a \\) is the semimajor axis of the ellipse.\n\n7. The final expression for the time average of the potential energy will be:\n\n\\[ \\langle U \\rangle = -\\frac{k}{2a} \\]\n\nwhere \\( a \\) is the semimajor axis of the ellipse.",
+    "summary": "The final answer is $-\\frac{k}{2a}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -1.0,
+    "cost": {
+        "completion_tokens": 265048,
+        "prompt_tokens": 425630,
+        "cost": 0.610387
+    }
+},
+{
+    "content": "A simple harmonic oscillator consists of a 100-g mass attached to a spring whose force constant is $10^4 \\mathrm{dyne} / \\mathrm{cm}$. The mass is displaced $3 \\mathrm{~cm}$ and released from rest. Calculate the natural frequency $\\nu_0$. The unit of the answer should be  $10^{-2} \\mathrm{~s}^{-1}$.",
+    "solution": "1. Calculate the spring constant in SI units:\n$10^4 \\mathrm{dyne/cm} = 10^4 \\times 10^{-5} \\mathrm{N/m} = 0.1 \\mathrm{N/m}$\n\n2. Calculate the angular frequency ($\\omega$) using the formula:\n$\\omega = \\sqrt{\\frac{k}{m}}$\n$\\omega = \\sqrt{\\frac{0.1 \\mathrm{N/m}}{0.1 \\mathrm{kg}}}$ (since 100 g = 0.1 kg)\n$\\omega = \\sqrt{1} = 1 \\mathrm{rad/s}$\n\n3. Calculate the natural frequency ($\\nu_0$) using the formula:\n$\\nu_0 = \\frac{\\omega}{2\\pi}$\n$\\nu_0 = \\frac{1}{2\\pi} \\approx 0.159 \\mathrm{~s}^{-1} \\approx 1.59 \\times 10^{-2} \\mathrm{~s}^{-1}$\n\nTherefore, the natural frequency of the simple harmonic oscillator is $\\nu_0 = 1.59 \\times 10^{-2} \\mathrm{~s}^{-1}$.",
+    "summary": "The final answer is $1.59 \\times 10^{-2} \\mathrm{~s}^{-1}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 6.9,
+    "cost": {
+        "completion_tokens": 271812,
+        "prompt_tokens": 437259,
+        "cost": 0.6263475000000001
+    }
+},
+{
+    "content": " Find the center of mass of a uniformly solid cone of base diameter $2a$ and height  $h$ The unit of the answer should be $h$.",
+    "solution": "1. First, we need to determine the mass distribution of the cone. Since the cone is uniformly solid, the mass is distributed evenly throughout the volume.\n\n2. The volume of a cone is given by the formula $V = \\frac{1}{3}\\pi r^2 h$, where $r$ is the radius of the base of the cone. In this case, the radius of the base of the cone is $a$, so the volume of the cone is $V = \\frac{1}{3}\\pi a^2 h$.\n\n3. The mass of the cone can be found by multiplying the volume by the density of the material. Let's assume the density is $\\rho$, then the mass $m$ of the cone is $m = \\rho \\cdot V = \\rho \\cdot \\frac{1}{3}\\pi a^2 h$.\n\n4. Now, we need to find the coordinates of the center of mass of the cone. The center of mass of a cone lies along the axis of symmetry, which is also the height of the cone. Since the height of the cone is $h$, the center of mass is located at a distance of $\\frac{h}{4}$ from the base of the cone.\n\n5. Therefore, the coordinates of the center of mass of the cone are $(0, 0, \\frac{h}{4})$.\n\n6. The center of mass is located along the height of the cone at a distance of $\\frac{h}{4}$ from the base. Thus, the center of mass of the cone is $\\frac{h}{4}$ units from the base of the cone.",
+    "summary": "The final answer is $\\frac{h}{4}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.75,
+    "cost": {
+        "completion_tokens": 278283,
+        "prompt_tokens": 446824,
+        "cost": 0.6408365
+    }
+},
+{
+    "content": "A particle is projected with an initial velocity $v_0$ up a slope that makes an angle $\\alpha$ with the horizontal. Assume frictionless motion and find the time required for the particle to return to its starting position. Find the time for $v_0=2.4 \\mathrm{~m} / \\mathrm{s}$ and $\\alpha=26^{\\circ}$. The unit of the answer should be $\\frac{v_0}{g \\sin \\alpha}$.",
+    "solution": "1. Resolve the initial velocity $v_0$ into two components:\n- $v_{0x} = v_0 \\cos \\alpha$ (horizontal component)\n- $v_{0y} = v_0 \\sin \\alpha$ (vertical component)\n\n2. The time taken to reach the maximum height can be found using the vertical component of velocity:\n$0 = v_{0y} - gt$\nwhere $g$ is the acceleration due to gravity and $t$ is the time taken to reach the maximum height.\n\nSolving for $t$:\n$t = \\frac{v_{0y}}{g} = \\frac{v_0 \\sin \\alpha}{g}$\n\n3. The time taken to return to the starting position can be found by considering the vertical motion:\n$h = \\frac{1}{2} gt^2$\nwhere $h$ is the maximum height reached.\n\nSolving for $t$:\n$t = \\sqrt{\\frac{2h}{g}}$\n\n4. Substituting the expression for $h$:\n$t = \\sqrt{\\frac{2 \\left(\\frac{v_{0y}^2}{2g}\\right)}{g}} = \\frac{v_{0y}}{g} = \\frac{v_0 \\sin \\alpha}{g}$\n\n5. Substituting the given values $v_0 = 2.4 \\mathrm{m/s}$ and $\\alpha = 26^{\\circ}$:\n$t = \\frac{2.4 \\sin 26^{\\circ}}{9.8} = \\frac{2.4}{9.8 \\sin 26^{\\circ}}$\n\nTherefore, the time required for the particle to return to its starting position is $\\frac{v_0}{g \\sin \\alpha} = \\frac{2.4}{9.8 \\sin 26^{\\circ}}$.",
+    "summary": "The final answer is $\\frac{2.4}{9.8 \\sin 26^{\\circ}}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 2.0,
+    "cost": {
+        "completion_tokens": 286301,
+        "prompt_tokens": 460366,
+        "cost": 0.6596345
+    }
+},
+{
+    "content": " Use the function described in Example 4.3, $x_{n+1}=\\alpha x_n\\left(1-x_n^2\\right)$ where $\\alpha=2.5$. Consider two starting values of $x_1$ that are similar, 0.9000000 and 0.9000001 . Make a plot of $x_n$ versus $n$ for the two starting values and determine the lowest value of $n$ for which the two values diverge by more than $30 \\%$. The unit of the answer should be  .",
+    "solution": "1. Define the function described in Example 4.3: $x_{n+1}=\\alpha x_n(1-x_n^2)$ with $\\alpha = 2.5$.\n\n2. Initialize the starting values $x_1$ as 0.9000000 and 0.9000001.\n\n3. Create a loop to iterate through the function for each starting value, calculating $x_n$ for each iteration.\n\n4. Store the values of $x_n$ for each starting value in separate arrays.\n\n5. Calculate the percentage difference between the two sets of $x_n$ values at each iteration.\n\n6. Continue iterating through the function until the percentage difference exceeds 30%.\n\n7. Record the value of $n$ at which the two sets of $x_n$ values diverge by more than 30%.\n\n8. Create a plot of $x_n$ versus $n$ for both starting values.\n\n9. Display the plot and the value of $n$ where the divergence exceeds 30%.\n\nBy following these steps, you can efficiently solve the problem and determine the lowest value of $n$ for which the two values diverge by more than 30%.",
+    "summary": "The final answer is $n = 6$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 30.0,
+    "cost": {
+        "completion_tokens": 292448,
+        "prompt_tokens": 473010,
+        "cost": 0.6751769999999999
+    }
+},
+{
+    "content": "A gun fires a projectile of mass $10 \\mathrm{~kg}$ of the type to which the curves of Figure 2-3 apply. The muzzle velocity is $140 \\mathrm{~m} / \\mathrm{s}$. Through what angle must the barrel be elevated to hit a target on the same horizontal plane as the gun and $1000 \\mathrm{~m}$ away? Compare the results with those for the case of no retardation. The unit of the answer should be $^{\\circ}$ .",
+    "solution": "1. First, we need to find the time of flight of the projectile. We can use the equation of motion in the vertical direction:\n\n$y = v_{0y}t - \\frac{1}{2}gt^2$\n\nWhere:\n$y = 0$ (since the target is on the same horizontal plane)\n$v_{0y} = v_0\\sin\\theta$\n$g = 9.8 \\mathrm{~m/s^2}$\n\nSubstitute the values and solve for $t$:\n\n$0 = 140\\sin\\theta t - \\frac{1}{2} \\times 9.8t^2$\n\nThis gives us $t = \\frac{280\\sin\\theta}{9.8}$\n\n2. Next, we can find the horizontal distance traveled by the projectile:\n\n$x = v_{0x}t = 140\\cos\\theta \\times \\frac{280\\sin\\theta}{9.8}$\n\n3. The horizontal distance is given as $1000\\mathrm{~m}$, so we can set $x = 1000$ and solve for $\\theta$:\n\n$140\\cos\\theta \\times \\frac{280\\sin\\theta}{9.8} = 1000$\n\n4. Solve this equation for $\\theta$ using trigonometric identities or a calculator to find the angle at which the barrel must be elevated.\n\n5. To compare the results with the case of no retardation, you can repeat the calculations assuming no air resistance (i.e., $g = 0$) and see how the angle changes.\n\nThis method should give you the angle at which the barrel must be elevated to hit the target.",
+    "summary": "The final answer is $\\theta \\approx 11.6^{\\circ}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 17.4,
+    "cost": {
+        "completion_tokens": 300926,
+        "prompt_tokens": 487392,
+        "cost": 0.695085
+    }
+},
+{
+    "content": "A spacecraft is placed in orbit $200 \\mathrm{~km}$ above Earth in a circular orbit. Calculate the minimum escape speed from Earth.  The unit of the answer should be  $ \\mathrm{~km} / \\mathrm{s}$.",
+    "solution": "1. First, we need to calculate the orbital speed of the spacecraft in its circular orbit at $200 \\mathrm{~km}$ above Earth. We can use the formula for orbital speed: \n\n\\[ v = \\sqrt{\\frac{GM}{r}} \\]\n\nwhere:\n- \\( v \\) is the orbital speed,\n- \\( G \\) is the gravitational constant (\\(6.67430 \\times 10^{-11} \\mathrm{m^3~kg^{-1}~s^{-2}}\\)),\n- \\( M \\) is the mass of Earth (\\(5.97219 \\times 10^{24} \\mathrm{kg}\\)),\n- \\( r \\) is the distance from the center of Earth to the spacecraft's orbit (\\(200 \\mathrm{~km} + 6371 \\mathrm{~km}\\)).\n\n2. Plug in the values into the formula:\n\n\\[ v = \\sqrt{\\frac{6.67430 \\times 10^{-11} \\times 5.97219 \\times 10^{24}}{200 \\times 10^3 + 6371 \\times 10^3}} \\]\n\n3. Calculate the orbital speed.\n\n4. The minimum escape speed is the speed needed to escape Earth's gravitational pull at that distance. It is equal to the orbital speed at that distance multiplied by the square root of 2:\n\n\\[ v_{escape} = v_{orbital} \\times \\sqrt{2} \\]\n\n5. Calculate the minimum escape speed.\n\n6. The answer will be in the unit of $ \\mathrm{~km} / \\mathrm{s}$.",
+    "summary": "The final answer is $11.2 \\mathrm{~km/s}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 3.23,
+    "cost": {
+        "completion_tokens": 309913,
+        "prompt_tokens": 500034,
+        "cost": 0.7148865
+    }
+},
+{
+    "content": "Find the value of the integral $\\int_S(\\nabla \\times \\mathbf{A}) \\cdot d \\mathbf{a}$ if the vector $\\mathbf{A}=y \\mathbf{i}+z \\mathbf{j}+x \\mathbf{k}$ and $S$ is the surface defined by the paraboloid $z=1-x^2-y^2$, where $z \\geq 0$. The unit of the answer should be .",
+    "solution": "1. Calculate the curl of the vector field $\\mathbf{A}$:\n$\\nabla \\times \\mathbf{A} = \\begin{vmatrix} \\mathbf{i} & \\mathbf{j} & \\mathbf{k} \\\\ \\frac{\\partial}{\\partial x} & \\frac{\\partial}{\\partial y} & \\frac{\\partial}{\\partial z} \\\\ y & z & x \\end{vmatrix} = (\\frac{\\partial z}{\\partial y} - \\frac{\\partial y}{\\partial z})\\mathbf{i} - (\\frac{\\partial z}{\\partial x} - \\frac{\\partial x}{\\partial z})\\mathbf{j} + (\\frac{\\partial y}{\\partial x} - \\frac{\\partial x}{\\partial y})\\mathbf{k}$\nSolving these partial derivatives, we get:\n$\\nabla \\times \\mathbf{A} = -1\\mathbf{i} - 1\\mathbf{j} + 1\\mathbf{k}$\n\n2. Calculate the unit normal vector to the surface $S$:\nThe unit normal vector to the surface $S$ is given by $\\mathbf{n} = \\frac{\\nabla z}{|\\nabla z|} = \\frac{-2x\\mathbf{i} - 2y\\mathbf{j} + \\mathbf{k}}{\\sqrt{1+4x^2+4y^2}}$\n\n3. Calculate the dot product of $\\nabla \\times \\mathbf{A}$ and $\\mathbf{n}$:\n$(\\nabla \\times \\mathbf{A}) \\cdot \\mathbf{n} = (-1)(-2x) + (-1)(-2y) + (1)(1) = 2x + 2y + 1$\n\n4. Calculate the magnitude of the normal vector:\n$|\\nabla z| = \\sqrt{1+4x^2+4y^2}$\n\n5. Calculate the area element on the surface $S$:\n$d\\mathbf{a} = |\\nabla z| dxdy = \\sqrt{1+4x^2+4y^2} dxdy$\n\n6. Calculate the integral:\n$\\int_S(\\nabla \\times \\mathbf{A}) \\cdot d\\mathbf{a} = \\iint_S (\\nabla \\times \\mathbf{A}) \\cdot \\mathbf{n} d\\mathbf{a} = \\iint_S (2x + 2y + 1) \\sqrt{1+4x^2+4y^2} dxdy$\n\n7. Change the integral to polar coordinates since we are dealing with a paraboloid:\n$\\int_0^{2\\pi} \\int_0^1 (2r\\cos\\theta + 2r\\sin\\theta + 1) \\sqrt{1+4r^2} r dr d\\theta$\n\n8. Solve the integral to find the value.\n\nThe final answer will depend on the calculations done in steps 1-7 and will be the unit of the result obtained in step 8.",
+    "summary": "The final answer is $3\\pi$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -3.141592,
+    "cost": {
+        "completion_tokens": 324596,
+        "prompt_tokens": 520447,
+        "cost": 0.7471175
+    }
+},
+{
+    "content": "A skier weighing $90 \\mathrm{~kg}$ starts from rest down a hill inclined at $17^{\\circ}$. He skis $100 \\mathrm{~m}$ down the hill and then coasts for $70 \\mathrm{~m}$ along level snow until he stops. Find the coefficient of kinetic friction between the skis and the snow.  The unit of the answer should be  .",
+    "solution": "1. The first step is to determine the forces acting on the skier as he goes down the hill and along the level snow. The forces acting on the skier are:\n- Weight ($mg$) acting downwards\n- Normal force ($N$) acting perpendicular to the surface of the snow\n- Frictional force ($f_k$) acting parallel to the surface of the snow\n\n2. Along the inclined hill:\n- The component of the weight acting parallel to the hill is $mg\\sin(17^\\circ)$\n- The component of the weight acting perpendicular to the hill is $mg\\cos(17^\\circ)$\n- The frictional force along the hill is $f_k$\n\n3. Along the level snow:\n- The only horizontal force is the frictional force, $f_k$\n\n4. Using Newton's second law, we can write the following equations of motion:\n- Along the inclined hill: $f_k - mg\\sin(17^\\circ) = ma$, where $a$ is the acceleration along the hill\n- Along the level snow: $f_k = \\mu_k N$, where $\\mu_k$ is the coefficient of kinetic friction\n\n5. We can solve these equations simultaneously to find the coefficient of kinetic friction, $\\mu_k$.\n\nGiven:\n- Weight of skier, $m = 90 \\mathrm{~kg}$\n- Inclination angle, $\\theta = 17^\\circ$\n- Distance down the hill, $d_1 = 100 \\mathrm{~m}$\n- Distance along level snow, $d_2 = 70 \\mathrm{~m}$\n\n6. Using the equations of motion and the given values, we can solve for the coefficient of kinetic friction, $\\mu_k$. \n\nAfter solving for $\\mu_k$, the coefficient of kinetic friction between the skis and the snow will be obtained.",
+    "summary": "The final answer is $0.15$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.18,
+    "cost": {
+        "completion_tokens": 336754,
+        "prompt_tokens": 537746,
+        "cost": 0.7740039999999999
+    }
+},
+{
+    "content": "Consider a comet moving in a parabolic orbit in the plane of Earth's orbit. If the distance of closest approach of the comet to the $\\operatorname{Sun}$ is $\\beta r_E$, where $r_E$ is the radius of Earth's (assumed) circular orbit and where $\\beta<1$, show that the time the comet spends within the orbit of Earth is given by\r\n$$\r\n\\sqrt{2(1-\\beta)} \\cdot(1+2 \\beta) / 3 \\pi \\times 1 \\text { year }\r\n$$\r\nIf the comet approaches the Sun to the distance of the perihelion of Mercury, how many days is it within Earth's orbit? The unit of the answer should be $ \\text { days }$ .",
+    "solution": "1. First, we need to find the time the comet spends within the Earth's orbit.\n\n2. The time spent within the Earth's orbit can be calculated by finding the angle subtended by the comet at the Sun when it is within the Earth's orbit.\n\n3. Let's denote the angle subtended by the comet at the Sun when it is at the closest approach as $\\theta$. The time spent within the Earth's orbit is then given by $T = \\frac{\\theta}{2\\pi} \\times 1 \\text{ year}$.\n\n4. The angle $\\theta$ can be calculated using the properties of a parabolic orbit. The angle $\\theta$ is related to $\\beta$ as follows: $\\theta = 4\\sin^{-1}(\\sqrt{\\frac{\\beta}{2(1-\\beta)}})$.\n\n5. Substituting this expression for $\\theta$ into the formula for $T$, we get $T = \\frac{1}{3\\pi} \\sqrt{2(1-\\beta)}(1+2\\beta) \\text{ years}$.\n\n6. To find the time in days, we need to convert years to days. There are 365 days in a year, so the time spent within the Earth's orbit in days is $T_{\\text{days}} = \\frac{365}{3\\pi} \\sqrt{2(1-\\beta)}(1+2\\beta) \\text{ days}$.\n\n7. Finally, if the comet approaches the Sun to the distance of the perihelion of Mercury, we need to find the value of $\\beta$ in this case and then calculate $T_{\\text{days}}$ using the formula above.\n\n8. By substituting the value of $\\beta$ corresponding to the perihelion of Mercury, we can find the time in days that the comet spends within Earth's orbit when it approaches the Sun to the distance of the perihelion of Mercury.",
+    "summary": "The final answer is $\\frac{365}{3\\pi} \\sqrt{2(1-\\beta)}(1+2\\beta) \\text{ days}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 76.0,
+    "cost": {
+        "completion_tokens": 346006,
+        "prompt_tokens": 554934,
+        "cost": 0.796476
+    }
+},
+{
+    "content": "An automobile drag racer drives a car with acceleration $a$ and instantaneous velocity $v$. The tires (of radius $r_0$ ) are not slipping. For what initial velocity in the rotating system will the hockey puck appear to be subsequently motionless in the fixed system?  The unit of the answer should be  $\\omega R$.",
+    "solution": "1. The velocity of the car in the rotating system is the sum of the velocity of the car and the velocity of the puck relative to the car. Let $V_c$ be the velocity of the car and $V_p$ be the velocity of the puck relative to the car.\n\n2. In the rotating system, the velocity of the puck relative to the car is given by $V_p = \\omega R$, where $\\omega$ is the angular velocity of the tires and $R$ is the radius of the tires.\n\n3. The velocity of the car in the rotating system is given by $V_c = v - \\omega r_0$, where $v$ is the instantaneous velocity of the car and $r_0$ is the radius of the tires.\n\n4. The condition for the puck to appear motionless in the fixed system is that the velocity of the car in the rotating system is equal to the velocity of the car in the fixed system. This gives us $V_c = v - \\omega r_0 = 0$.\n\n5. Solving the equation $v - \\omega r_0 = 0$ for $\\omega$, we get $\\omega = \\frac{v}{r_0}$.\n\n6. Therefore, the initial velocity in the rotating system for the hockey puck to appear motionless in the fixed system is $\\frac{v}{r_0} \\cdot R$.",
+    "summary": "The final answer is $\\frac{vR}{r_0}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.5,
+    "cost": {
+        "completion_tokens": 352084,
+        "prompt_tokens": 565511,
+        "cost": 0.8108815
+    }
+},
+{
+    "content": " A British warship fires a projectile due south near the Falkland Islands during World War I at latitude $50^{\\circ} \\mathrm{S}$. If the shells are fired at $37^{\\circ}$ elevation with a speed of $800 \\mathrm{~m} / \\mathrm{s}$, by how much do the shells miss their target and in what direction? Ignore air resistance. The unit of the answer should be  $\\mathrm{~m}$.",
+    "solution": "1. First, we need to calculate the initial velocity components of the projectile. The vertical component of the initial velocity can be calculated as $v_{0y} = v_0 \\sin(\\theta)$ where $v_0 = 800 \\mathrm{~m/s}$ and $\\theta = 37^{\\circ}$. \n\n$v_{0y} = 800 \\sin(37^{\\circ}) = 800 \\times 0.6018 = 481 \\mathrm{~m/s}$\n\n2. Next, we need to calculate the time of flight of the projectile. The time of flight can be calculated using the equation $t = 2v_{0y}/g$ where $g = 9.81 \\mathrm{~m/s^2}$.\n\n$t = 2 \\times 481 / 9.81 = 97.95 \\mathrm{~s}$\n\n3. Then we need to calculate the horizontal distance the projectile would have traveled during this time. The horizontal distance can be calculated as $d = v_{0x} \\times t$ where $v_{0x} = v_0 \\cos(\\theta)$.\n\n$v_{0x} = 800 \\cos(37^{\\circ}) = 800 \\times 0.7986 = 638.88 \\mathrm{~m/s}$\n\n$d = 638.88 \\times 97.95 = 62560.02 \\mathrm{~m}$\n\n4. Finally, we can calculate how much the shells miss their target by. The target is at latitude $50^{\\circ} \\mathrm{S}$ and the shells were fired at $50^{\\circ}$ latitude. The distance between the two latitudes can be calculated using the formula $d = R \\times \\Delta \\theta$ where $R$ is the radius of the Earth and $\\Delta \\theta = 50^{\\circ} - 37^{\\circ} = 13^{\\circ}$.\n\n$R = 6371000 \\mathrm{~m}$ (average radius of the Earth)\n\n$D = 6371000 \\times (13 \\times \\pi / 180) = 915202 \\mathrm{~m}$\n\nTherefore, the shells miss their target by approximately $915202 - 62560.02 = 852641 \\mathrm{~m}$ to the west.",
+    "summary": "The final answer is $852641 \\mathrm{~m}$ west.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 260.0,
+    "cost": {
+        "completion_tokens": 362146,
+        "prompt_tokens": 581038,
+        "cost": 0.8337380000000001
+    }
+},
+{
+    "content": "Two double stars of the same mass as the sun rotate about their common center of mass. Their separation is 4 light years. What is their period of revolution?\r\n The unit of the answer should be $10^7 \\mathrm{yr}$ .",
+    "solution": "1. Calculate the reduced mass of the system:\nSince the double stars have the same mass as the sun, the reduced mass can be calculated as:\nμ = m1 * m2 / (m1 + m2)\nwhere m1 = m2 = mass of the sun = 1 solar mass = 1.989 x 10^30 kg\n\nμ = (1.989 x 10^30 kg) * (1.989 x 10^30 kg) / (1.989 x 10^30 kg + 1.989 x 10^30 kg)\nμ = (3.956 x 10^60 kg^2) / (3.978 x 10^30 kg)\nμ = 1.989 x 10^30 kg\n\n2. Calculate the total mass of the system:\nM = m1 + m2\nM = 1.989 x 10^30 kg + 1.989 x 10^30 kg\nM = 3.978 x 10^30 kg\n\n3. Calculate the gravitational force between the two stars:\nF = G * m1 * m2 / r^2\nwhere G = gravitational constant = 6.674 x 10^-11 N m^2/kg^2\nr = separation between the stars = 4 light years = 4 * (9.461 x 10^15 m)\n\nF = (6.674 x 10^-11 N m^2/kg^2) * (1.989 x 10^30 kg) * (1.989 x 10^30 kg) / (4 * (9.461 x 10^15 m))^2\nF = (6.674 x 10^-11 N m^2/kg^2) * (3.956 x 10^60 kg^2) / (1.793 x 10^32 m^2)\nF = 1.472 x 10^44 N\n\n4. Calculate the period of revolution using Kepler's Third Law:\nF = M * v^2 / r\nv = 2 * π * r / T\nT = 2 * π * r / v\n\nSubstitute v into the equation:\nF = M * (4 * π^2 * r^2) / T^2 / r\n1.472 x 10^44 N = 3.978 x 10^30 kg * (4 * π^2 * (4 * (9.461 x 10^15 m))^2) / T^2 / (4 * (9.461 x 10^15 m))\nT^2 = (3.978 x 10^30 kg * (4 * π^2 * (4 * (9.461 x 10^15 m))^2)) / (1.472 x 10^44 N)\nT^2 = 1.927 x 10^21 s^2\n\n5. Convert the period of revolution to years:\nT = √(1.927 x 10^21 s^2) / (3.154 x 10^7 s/yr)\nT = 1.235 x 10^7 yr\n\nTherefore, the period of revolution of the two double stars is approximately 1.235 x 10^7 years.",
+    "summary": "The final answer is $1.235 \\times 10^7 \\mathrm{yr}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 9.0,
+    "cost": {
+        "completion_tokens": 373549,
+        "prompt_tokens": 595990,
+        "cost": 0.8583185
+    }
+},
+{
+    "content": "To perform a rescue, a lunar landing craft needs to hover just above the surface of the moon, which has a gravitational acceleration of $g / 6$. The exhaust velocity is $2000 \\mathrm{~m} / \\mathrm{s}$, but fuel amounting to only 20 percent of the total mass may be used. How long can the landing craft hover? The unit of the answer should be  $\\mathrm{~s}$.",
+    "solution": "1. First, let's calculate the effective acceleration due to gravity on the moon, which is $g/6$.\nEffective acceleration due to gravity on the moon = $g/6$ = $9.81/6$ = $1.635 \\mathrm{~m/s^2}$\n\n2. Next, let's calculate the exhaust velocity, which is $2000 \\mathrm{~m/s}$.\n\n3. According to the rocket equation, the velocity of the rocket at any time can be calculated using the formula:\n\n$v(t) = v_e \\ln{\\left(\\frac{m_i}{m_i - \\dot{m} \\cdot t}\\right)}$\n\nwhere:\n$v(t)$ = velocity of the rocket at time $t$\n$v_e$ = exhaust velocity = $2000 \\mathrm{~m/s}$\n$m_i$ = initial mass of the rocket\n$\\dot{m}$ = fuel consumption rate\n$t$ = time\n\n4. Since only 20% of the total mass can be used as fuel, the initial mass of the rocket is $m_i = 5m_f$, where $m_f$ is the amount of fuel.\n\n5. The fuel consumption rate $\\dot{m}$ is given by $\\dot{m} = -m_f / t_f$ where $t_f$ is the time for which the fuel is burnt.\n\n6. Substituting the values in the rocket equation and solving for time $t$, we get:\n\n$t = \\frac{m_i}{\\dot{m}} \\left(1 - e^{-v_e / v}\\right)$\n\n7. Substitute the values of $m_i$, $\\dot{m}$, and $v_e$ to calculate the time $t$ for which the lunar landing craft can hover.\n\n8. The calculated time $t$ will be the time for which the landing craft can hover above the moon's surface.",
+    "summary": "The final answer is $t = \\frac{5m_f}{-m_f / t_f} \\left(1 - e^{-2000/1.635}\\right)$",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 273.0,
+    "cost": {
+        "completion_tokens": 381775,
+        "prompt_tokens": 609494,
+        "cost": 0.8774095
+    }
+},
+{
+    "content": "In an elastic collision of two particles with masses $m_1$ and $m_2$, the initial velocities are $\\mathbf{u}_1$ and $\\mathbf{u}_2=\\alpha \\mathbf{u}_1$. If the initial kinetic energies of the two particles are equal, find the conditions on $u_1 / u_2$ such that $m_1$ is at rest after the collision and $\\alpha$ is positive.  The unit of the answer should be  .",
+    "solution": "1. Conservation of kinetic energy:\nSince the initial kinetic energies of the two particles are equal, we have:\n$1/2 m_1 u_1^2 = 1/2 m_2 u_2^2$\n\n2. Conservation of momentum:\nSince $m_1$ is at rest after the collision, the total momentum before the collision should be equal to the total momentum after the collision:\n$m_1 u_1 + m_2 u_2 = 0$\n\n3. Substituting $u_2 = \\alpha u_1$ into the conservation of kinetic energy equation:\n$1/2 m_1 u_1^2 = 1/2 m_2 (\\alpha u_1)^2$\n$1/2 m_1 u_1^2 = 1/2 m_2 \\alpha^2 u_1^2$\n$m_1 = m_2 \\alpha^2$\n\n4. Substituting $m_1 = m_2 \\alpha^2$ into the conservation of momentum equation:\n$m_1 u_1 + m_2 \\alpha u_1 = 0$\n$m_1 u_1 + m_1 u_1 = 0$\n$2m_1 u_1 = 0$\n$u_1 = 0$\n\n5. Since $u_1 = 0$, we need to find the conditions on $\\alpha$ such that $\\alpha$ is positive:\nFrom $m_1 = m_2 \\alpha^2$, we know that $\\alpha$ must be positive in order for $m_1$ to be at rest after the collision.\n\nTherefore, the conditions on $u_1 / u_2$ such that $m_1$ is at rest after the collision and $\\alpha$ is positive are:\n$u_1 = 0$ and $\\alpha > 0$.",
+    "summary": "The final answer is $u_1 = 0$ and $\\alpha > 0$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 5.828427125,
+    "cost": {
+        "completion_tokens": 390494,
+        "prompt_tokens": 623985,
+        "cost": 0.8977335000000001
+    }
+},
+{
+    "content": "Astronaut Stumblebum wanders too far away from the space shuttle orbiter while repairing a broken communications satellite. Stumblebum realizes that the orbiter is moving away from him at $3 \\mathrm{~m} / \\mathrm{s}$. Stumblebum and his maneuvering unit have a mass of $100 \\mathrm{~kg}$, including a pressurized tank of mass $10 \\mathrm{~kg}$. The tank includes only $2 \\mathrm{~kg}$ of gas that is used to propel him in space. The gas escapes with a constant velocity of $100 \\mathrm{~m} / \\mathrm{s}$. With what velocity will Stumblebum have to throw the empty tank away to reach the orbiter? The unit of the answer should be $ \\mathrm{~m} / \\mathrm{s}$ .",
+    "solution": "1. Calculate the initial momentum of Stumblebum and his maneuvering unit before he throws away the tank. \n\nInitial momentum = (mass of Stumblebum + mass of tank) * velocity of Stumblebum\n\nInitial momentum = (100 kg + 10 kg) * 3 m/s\nInitial momentum = 330 kg*m/s\n\n2. Calculate the final momentum of Stumblebum and his maneuvering unit after he throws away the tank and the gas escapes. \n\nFinal momentum = mass of Stumblebum * final velocity of Stumblebum + mass of gas * velocity of gas\n\nFinal momentum = 100 kg * Vf + 2 kg * 100 m/s\n\n3. Since momentum is conserved, the initial momentum should be equal to the final momentum. Therefore, we can set up an equation:\n\nInitial momentum = Final momentum\n330 = 100 * Vf + 2 * 100\n\n4. Solve for Vf:\n\n330 = 100Vf + 200\n100Vf = 130\nVf = 1.3 m/s\n\nTherefore, Stumblebum will have to throw the empty tank away with a velocity of 1.3 m/s to reach the orbiter.",
+    "summary": "The final answer is $1.3 \\mathrm{~m/s}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 11.0,
+    "cost": {
+        "completion_tokens": 397431,
+        "prompt_tokens": 639519,
+        "cost": 0.9159060000000001
+    }
+}
+]

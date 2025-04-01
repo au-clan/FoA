@@ -1,0 +1,639 @@
+[
+{
+    "content": "Radiation from an X-ray source consists of two components of wavelengths $154.433 \\mathrm{pm}$ and $154.051 \\mathrm{pm}$. Calculate the difference in glancing angles $(2 \\theta)$ of the diffraction lines arising from the two components in a diffraction pattern from planes of separation $77.8 \\mathrm{pm}$. The unit of the answer should be  ${\\circ}$.",
+    "solution": "1. Calculate the angles of diffraction for each wavelength using the Bragg's Law formula:\n\\[ n \\lambda = 2d \\sin \\theta \\]\n\n2. For the first wavelength $\\lambda_1 = 154.433 \\mathrm{pm}$:\n\\[ 1 \\times 154.433 = 2 \\times 77.8 \\times \\sin \\theta_1 \\]\n\\[ \\sin \\theta_1 = \\frac{154.433}{2 \\times 77.8} \\]\n\\[ \\theta_1 = \\arcsin \\left( \\frac{154.433}{2 \\times 77.8} \\right) \\]\n\n3. For the second wavelength $\\lambda_2 = 154.051 \\mathrm{pm}$:\n\\[ 1 \\times 154.051 = 2 \\times 77.8 \\times \\sin \\theta_2 \\]\n\\[ \\sin \\theta_2 = \\frac{154.051}{2 \\times 77.8} \\]\n\\[ \\theta_2 = \\arcsin \\left( \\frac{154.051}{2 \\times 77.8} \\right) \\]\n\n4. Calculate the difference in glancing angles:\n\\[ \\Delta \\theta = |\\theta_1 - \\theta_2| \\]\n\n5. Convert the angle from radians to degrees:\n\\[ \\Delta \\theta_{\\circ} = \\Delta \\theta \\times \\frac{180}{\\pi} \\]\n\n6. Substitute the values and calculate the final answer in degrees.\n\nThis method will give you the difference in glancing angles between the diffraction lines from the two components in the X-ray source.",
+    "summary": "The final answer is $0.112^{\\circ}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 2.14,
+    "cost": {
+        "completion_tokens": 365,
+        "prompt_tokens": 622,
+        "cost": 0.0008585000000000001
+    }
+},
+{
+    "content": "A chemical reaction takes place in a container of cross-sectional area $50 \\mathrm{~cm}^2$. As a result of the reaction, a piston is pushed out through $15 \\mathrm{~cm}$ against an external pressure of $1.0 \\mathrm{~atm}$. Calculate the work done by the system. The unit of the answer should be  $\\mathrm{~J}$.",
+    "solution": "Step 1: Convert the area to square meters.\n$50 \\mathrm{~cm}^2 = 50 \\times 10^{-4} \\mathrm{~m}^2 = 5 \\times 10^{-3} \\mathrm{~m}^2$\n\nStep 2: Calculate the force applied by the external pressure.\nPressure = $1.0 \\mathrm{~atm} = 1.0 \\times 10^5 \\mathrm{~Pa}$\nForce = Pressure $\\times$ Area = $1.0 \\times 10^5 \\times 5 \\times 10^{-3} = 500 \\mathrm{~N}$\n\nStep 3: Calculate the work done by the system.\nWork = Force $\\times$ distance = $500 \\mathrm{~N} \\times 15 \\mathrm{~cm} = 7500 \\mathrm{~N \\cdot cm}$\n$1 \\mathrm{~N \\cdot m} = 1 \\mathrm{~J}$, so $7500 \\mathrm{~N \\cdot cm} = 7500 \\mathrm{~J}$\n\nTherefore, the work done by the system is $7500 \\mathrm{~J}$.",
+    "summary": "The final answer is $7500 \\mathrm{~J}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -75.0,
+    "cost": {
+        "completion_tokens": 638,
+        "prompt_tokens": 1145,
+        "cost": 0.0015295
+    }
+},
+{
+    "content": "A mixture of water and ethanol is prepared with a mole fraction of water of 0.60 . If a small change in the mixture composition results in an increase in the chemical potential of water by $0.25 \\mathrm{~J} \\mathrm{~mol}^{-1}$, by how much will the chemical potential of ethanol change? The unit of the answer should be  $\\mathrm{~J} \\mathrm{~mol}^{-1}$.",
+    "solution": "1. We know that the mole fraction of water in the mixture is 0.60, which means the mole fraction of ethanol is 0.40.\n\n2. The change in the chemical potential of water is given as $0.25 \\mathrm{~J} \\mathrm{~mol}^{-1}$.\n\n3. To find the change in the chemical potential of ethanol, we can use the following equation:\n\n$\\Delta \\mu_{\\text{ethanol}} = -\\frac{x_{\\text{water}}}{x_{\\text{ethanol}}} \\times \\Delta \\mu_{\\text{water}}$\n\n4. Substituting the values, we get:\n\n$\\Delta \\mu_{\\text{ethanol}} = -\\frac{0.60}{0.40} \\times 0.25 = -0.375 \\mathrm{~J} \\mathrm{~mol}^{-1}$\n\n5. Therefore, the change in the chemical potential of ethanol is $-0.375 \\mathrm{~J} \\mathrm{~mol}^{-1}$.",
+    "summary": "The final answer is $-0.375 \\mathrm{~J} \\mathrm{~mol}^{-1}$.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": -0.38,
+    "cost": {
+        "completion_tokens": 890,
+        "prompt_tokens": 1657,
+        "cost": 0.0021635
+    }
+},
+{
+    "content": "The enthalpy of fusion of mercury is $2.292 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$, and its normal freezing point is $234.3 \\mathrm{~K}$ with a change in molar volume of $+0.517 \\mathrm{~cm}^3 \\mathrm{~mol}^{-1}$ on melting. At what temperature will the bottom of a column of mercury (density $13.6 \\mathrm{~g} \\mathrm{~cm}^{-3}$ ) of height $10.0 \\mathrm{~m}$ be expected to freeze? The unit of the answer should be  $ \\mathrm{~K}$ .",
+    "solution": "1. Calculate the mass of the column of mercury:\nGiven: Height = 10.0 m, Density = 13.6 g cm^-3\nVolume = Height x Area of base\nArea of base = 1 cm^2 x 1 cm^2 = 1 cm^2\nVolume = 10.0 m x 100 cm/m x 100 cm/m = 100,000 cm^3\nMass = Volume x Density = 100,000 cm^3 x 13.6 g cm^-3 = 1,360,000 g = 1360 kg\n\n2. Calculate the heat required to freeze the column of mercury:\nHeat = Mass x Enthalpy of fusion = 1360 kg x 2.292 kJ mol^-1 = 3115.52 kJ\n\n3. Calculate the moles of mercury in the column:\nMolar mass of mercury = 200.59 g mol^-1\nMoles = Mass / Molar mass = 1360,000 g / 200.59 g mol^-1 = 6791.84 mol\n\n4. Calculate the change in volume upon freezing:\nChange in volume = Moles x Change in molar volume = 6791.84 mol x 0.517 cm^3 mol^-1 = 3510.77 cm^3\n\n5. Calculate the decrease in height of the column upon freezing:\nDecrease in height = Change in volume / Area of base = 3510.77 cm^3 / 1 cm^2 = 3510.77 cm\n\n6. Calculate the new height of the column after freezing:\nNew height = Original height - Decrease in height = 10.0 m - 35.10 cm = 9.649 m\n\n7. Calculate the new freezing point of mercury:\nNew freezing point = Normal freezing point - (Change in volume / Volume) = 234.3 K - (3510.77 cm^3 / 100,000 cm^3) = 230.849 K\n\nTherefore, the bottom of the column of mercury is expected to freeze at approximately 230.85 K.",
+    "summary": "The final answer is $230.85 \\mathrm{~K}$",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 234.4,
+    "cost": {
+        "completion_tokens": 1351,
+        "prompt_tokens": 2489,
+        "cost": 0.003271
+    }
+},
+{
+    "content": "Suppose a nanostructure is modelled by an electron confined to a rectangular region with sides of lengths $L_1=1.0 \\mathrm{~nm}$ and $L_2=2.0 \\mathrm{~nm}$ and is subjected to thermal motion with a typical energy equal to $k T$, where $k$ is Boltzmann's constant. How low should the temperature be for the thermal energy to be comparable to the zero-point energy？ The unit of the answer should be  $10^3 \\mathrm{~K}$.",
+    "solution": "1. The zero-point energy of a system is the minimum possible energy that a quantum mechanical system may have. For a particle confined to a 1D box, the zero-point energy is given by $E_0 = \\frac{h^2}{8mL^2}$, where $h$ is the Planck constant, $m$ is the mass of the particle, and $L$ is the length of the box.\n\n2. In this case, we have a 2D system, so we need to calculate the zero-point energy for an electron confined to a 2D rectangular region. The zero-point energy for a 2D system is given by $E_0 = \\frac{h^2}{8m}( \\frac{1}{L_1^2} + \\frac{1}{L_2^2})$.\n\n3. Given that the typical thermal energy is $kT$, we need to find the temperature at which the thermal energy is comparable to the zero-point energy. This means we need to find the temperature at which $kT \\approx E_0$.\n\n4. Setting $kT = E_0$, we can solve for temperature $T$ using the equation $kT = E_0$. Plugging in the expressions for $kT$ and $E_0$ and solving for $T$, we get:\n\n$kT = \\frac{h^2}{8m}( \\frac{1}{L_1^2} + \\frac{1}{L_2^2})$\n\n$T = \\frac{h^2}{8mk}( \\frac{1}{L_1^2} + \\frac{1}{L_2^2})$\n\n5. Plugging in the values for $h$, $m$, $k$, $L_1$, and $L_2$, we can calculate the temperature $T$:\n\n$T = \\frac{(6.63 \\times 10^{-34} \\mathrm{~J\\cdot s})^2}{8 \\times 9.11 \\times 10^{-31} \\mathrm{~kg} \\times 1.38 \\times 10^{-23} \\mathrm{~J/K}}( \\frac{1}{(1.0 \\times 10^{-9} \\mathrm{~m})^2} + \\frac{1}{(2.0 \\times 10^{-9} \\mathrm{~m})^2})$\n\n6. Calculating the temperature, we get $T \\approx 3.6 \\times 10^3 \\mathrm{~K}$.\n\nTherefore, the temperature should be around $3.6 \\times 10^3 \\mathrm{~K}$ for the thermal energy to be comparable to the zero-point energy in this nanostructure.",
+    "summary": "The final answer is $3.6 \\times 10^3 \\mathrm{~K}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 5.5,
+    "cost": {
+        "completion_tokens": 1961,
+        "prompt_tokens": 3402,
+        "cost": 0.0046425
+    }
+},
+{
+    "content": "Calculate the change in Gibbs energy of $35 \\mathrm{~g}$ of ethanol (mass density $0.789 \\mathrm{~g} \\mathrm{~cm}^{-3}$ ) when the pressure is increased isothermally from 1 atm to 3000 atm. The unit of the answer should be  $\\mathrm{~kJ}$.",
+    "solution": "Step 1: Calculate the volume of $35 \\mathrm{~g}$ of ethanol.\nGiven mass density of ethanol is $0.789 \\mathrm{~g} \\mathrm{~cm}^{-3}$, we can calculate the volume using the formula:\nVolume = Mass / Density\nVolume = $35 \\mathrm{~g} / 0.789 \\mathrm{~g} \\mathrm{~cm}^{-3}$\nVolume = $44.30 \\mathrm{~cm}^{3}$\n\nStep 2: Calculate the initial Gibbs energy at 1 atm pressure.\nGiven that the initial pressure is 1 atm, we can calculate the initial Gibbs energy using the equation:\n$\\Delta G = \\Delta G^{\\circ} + RT \\ln \\left( \\frac{P_{final}}{P_{initial}} \\right)$\nwhere $\\Delta G^{\\circ}$ is the standard Gibbs energy change, $R$ is the gas constant, $T$ is the temperature, and $P_{final}$ and $P_{initial}$ are the final and initial pressures respectively.\n\nStep 3: Calculate the final Gibbs energy at 3000 atm pressure.\nUsing the same formula as above, we can calculate the final Gibbs energy at 3000 atm pressure.\n\nStep 4: Calculate the change in Gibbs energy.\nThe change in Gibbs energy is given by:\n$\\Delta G = \\Delta G_{final} - \\Delta G_{initial}$\n\nStep 5: Convert the change in Gibbs energy to kJ.\nGiven that the standard unit for Gibbs energy is Joules, we can convert the result to kJ by dividing by 1000.\n\nBy following these steps, we can calculate the change in Gibbs energy of $35 \\mathrm{~g}$ of ethanol when the pressure is increased isothermally from 1 atm to 3000 atm in kJ.",
+    "summary": "The final answer is $-33.6 \\mathrm{~kJ}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 12.0,
+    "cost": {
+        "completion_tokens": 2368,
+        "prompt_tokens": 4037,
+        "cost": 0.0055705
+    }
+},
+{
+    "content": "The promotion of an electron from the valence band into the conduction band in pure $\\mathrm{TIO}_2$ by light absorption requires a wavelength of less than $350 \\mathrm{~nm}$. Calculate the energy gap in electronvolts between the valence and conduction bands. The unit of the answer should be  $\\mathrm{eV}$.",
+    "solution": "1. First, we need to convert the given wavelength from nanometers to meters:\n$350 \\mathrm{~nm} = 350 \\times 10^{-9} \\mathrm{~m} = 3.5 \\times 10^{-7} \\mathrm{~m}$.\n\n2. Next, we can use the energy-wavelength relationship in photon energy:\n$E = \\frac{hc}{\\lambda}$,\nwhere $E$ is the energy of a photon, $h$ is Planck's constant ($6.626 \\times 10^{-34} \\mathrm{~J\\cdot s}$), $c$ is the speed of light ($3.00 \\times 10^8 \\mathrm{~m/s}$), and $\\lambda$ is the wavelength.\n\n3. Now, we can calculate the energy of a photon with the given wavelength:\n$E = \\frac{(6.626 \\times 10^{-34} \\mathrm{~J\\cdot s})(3.00 \\times 10^8 \\mathrm{~m/s})}{3.5 \\times 10^{-7} \\mathrm{~m}}$\n$E = \\frac{1.988 \\times 10^{-25} \\mathrm{~J\\cdot m}}{3.5 \\times 10^{-7} \\mathrm{~m}}$\n$E = 5.68 \\times 10^{-19} \\mathrm{~J}$.\n\n4. Finally, we can convert this energy to electronvolts (eV) using the conversion factor $1 \\mathrm{~eV} = 1.602 \\times 10^{-19} \\mathrm{~J}$:\n$E = \\frac{5.68 \\times 10^{-19} \\mathrm{~J}}{1.602 \\times 10^{-19} \\mathrm{~J/eV}}$\n$E = 3.55 \\mathrm{~eV}$.\n\nTherefore, the energy gap between the valence and conduction bands in $\\mathrm{TiO}_2$ is $3.55 \\mathrm{~eV}$.",
+    "summary": "The final answer is $3.55 \\mathrm{~eV}$.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 3.54,
+    "cost": {
+        "completion_tokens": 2829,
+        "prompt_tokens": 4727,
+        "cost": 0.006607000000000001
+    }
+},
+{
+    "content": "Although the crystallization of large biological molecules may not be as readily accomplished as that of small molecules, their crystal lattices are no different. Tobacco seed globulin forms face-centred cubic crystals with unit cell dimension of $12.3 \\mathrm{~nm}$ and a density of $1.287 \\mathrm{~g} \\mathrm{~cm}^{-3}$. Determine its molar mass. The unit of the answer should be  $10^5 \\mathrm{~g} \\mathrm{~mol}^{-1}$.",
+    "solution": "1. Calculate the volume of the unit cell:\nSince the unit cell is face-centered cubic, the volume can be calculated as:\nVolume = (side length)^3 * 4/3\nGiven side length = 12.3 nm, the volume = (12.3 nm)^3 * 4/3 = 1925.23 nm^3\n\n2. Convert the volume to cm^3:\n1 nm = 1e-7 cm\nTherefore, 1925.23 nm^3 = 1925.23 * (1e-7)^3 cm^3 = 1.92523e-20 cm^3\n\n3. Calculate the mass of the unit cell:\nDensity = mass / volume\nRearranging the formula, we get:\nMass = Density * Volume\nGiven density = 1.287 g/cm^3, mass = 1.287 g/cm^3 * 1.92523e-20 cm^3 = 2.481e-20 g\n\n4. Calculate the number of molecules in the unit cell:\nThe mass of the unit cell in grams is equal to the molar mass of the substance in grams.\nGiven Avogadro's number = 6.022e23 molecules/mol, we can calculate the number of molecules in the unit cell:\nNumber of molecules = mass / molar mass = 2.481e-20 g / molar mass\n\n5. Calculate the molar mass:\nBy rearranging the formula in step 4, we get:\nMolar mass = 2.481e-20 g / Number of molecules\nSubstitute the given unit of the answer (10^5 g/mol) into the formula to solve for the molar mass in the desired unit.",
+    "summary": "The final answer is $5.15 \\times 10^5 \\mathrm{~g} \\mathrm{~mol}^{-1}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 3.61,
+    "cost": {
+        "completion_tokens": 3223,
+        "prompt_tokens": 5412,
+        "cost": 0.0075405
+    }
+},
+{
+    "content": "An electron is accelerated in an electron microscope from rest through a potential difference $\\Delta \\phi=100 \\mathrm{kV}$ and acquires an energy of $e \\Delta \\phi$. What is its final speed? The unit of the answer should be  $10^8 \\mathrm{~m} \\mathrm{~s}^{-1}$.",
+    "solution": "1. The potential difference $\\Delta \\phi$ is given as $100 \\mathrm{kV}$.\n\n2. The energy acquired by the electron is $e \\Delta \\phi$, where $e$ is the charge of an electron ($1.6 \\times 10^{-19} \\ \\mathrm{C}$).\n\n3. The kinetic energy gained by the electron is equal to the work done by the electric field. Therefore, $e \\Delta \\phi = \\frac{1}{2} m v^2$, where $m$ is the mass of the electron and $v$ is the final speed of the electron.\n\n4. Rearranging the equation, we get $v = \\sqrt{\\frac{2e \\Delta \\phi}{m}}$.\n\n5. Substituting the values for $e$ ($1.6 \\times 10^{-19} \\ \\mathrm{C}$), $\\Delta \\phi$ ($100 \\ \\mathrm{kV} = 100 \\times 10^3 \\ \\mathrm{V}$), and the mass of an electron ($9.11 \\times 10^{-31} \\ \\mathrm{kg}$), we get:\n\n$v = \\sqrt{\\frac{2 \\times 1.6 \\times 10^{-19} \\times 100 \\times 10^3}{9.11 \\times 10^{-31}}}$\n\n$v = \\sqrt{\\frac{3.2 \\times 10^{-17} \\times 10^5}{9.11 \\times 10^{-31}}}$\n\n$v = \\sqrt{\\frac{2.912 \\times 10^{-11}}{9.11 \\times 10^{-31}}}$\n\n$v = \\sqrt{3.197 \\times 10^{19}}$\n\n$v = 5.65 \\times 10^8 \\ \\mathrm{m/s}$\n\nTherefore, the final speed of the electron is $5.65 \\times 10^8 \\ \\mathrm{m/s}$ or $565 \\ \\mathrm{km/s}$.",
+    "summary": "The final answer is $5.65 \\times 10^8 \\mathrm{~m} \\mathrm{~s}^{-1}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.88,
+    "cost": {
+        "completion_tokens": 3680,
+        "prompt_tokens": 6080,
+        "cost": 0.008560000000000002
+    }
+},
+{
+    "content": "The following data show how the standard molar constant-pressure heat capacity of sulfur dioxide varies with temperature. By how much does the standard molar enthalpy of $\\mathrm{SO}_2(\\mathrm{~g})$ increase when the temperature is raised from $298.15 \\mathrm{~K}$ to $1500 \\mathrm{~K}$ ? The unit of the answer should be  $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "solution": "Step 1: Calculate the change in heat capacity\nTo find the change in enthalpy, we first need to calculate the change in heat capacity ($\\Delta C_p$) between $298.15 \\mathrm{~K}$ and $1500 \\mathrm{~K}$. The equation for this calculation is:\n$$\\Delta C_p = \\int_{T_1}^{T_2} C_p \\mathrm{d}T$$\nwhere $C_p$ is the heat capacity at a given temperature, $T_1$ is the initial temperature (298.15 K), and $T_2$ is the final temperature (1500 K).\n\nStep 2: Calculate the change in enthalpy\nOnce we have the change in heat capacity, we can calculate the change in enthalpy ($\\Delta H$) using the following equation:\n$$\\Delta H = \\Delta C_p \\times (T_2 - T_1)$$\n\nStep 3: Convert the units\nFinally, convert the unit of the answer to $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$ by dividing the result by 1000.\n\nBy following these steps, you can calculate the standard molar enthalpy of $\\mathrm{SO}_2(\\mathrm{~g})$ when the temperature is raised from $298.15 \\mathrm{~K}$ to $1500 \\mathrm{~K}$.",
+    "summary": "The final answer is $-275.15 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 62.2,
+    "cost": {
+        "completion_tokens": 4005,
+        "prompt_tokens": 6670,
+        "cost": 0.0093425
+    }
+},
+{
+    "content": "Suppose that the normalized wavefunction for an electron in a carbon nanotube of length $L=10.0 \\mathrm{~nm}$ is: $\\psi=(2 / L)^{1 / 2} \\sin (\\pi x / L)$. Calculate the probability that the electron is between $x=4.95 \\mathrm{~nm}$ and $5.05 \\mathrm{~nm}$. The unit of the answer should be  .",
+    "solution": "1. The probability of finding the electron between two points $a$ and $b$ is given by:\n\\[ P(a \\leq x \\leq b) = \\int_{a}^{b} |\\psi|^2 dx \\]\n\n2. Substituting the given wavefunction $\\psi$ into the probability formula:\n\\[ P(4.95 \\leq x \\leq 5.05) = \\int_{4.95}^{5.05} \\left| \\sqrt{\\frac{2}{L}} \\sin\\left(\\frac{\\pi x}{L}\\right) \\right|^2 dx \\]\n\n3. Simplify the expression inside the integral:\n\\[ P(4.95 \\leq x \\leq 5.05) = \\int_{4.95}^{5.05} \\left( \\frac{2}{L} \\sin\\left(\\frac{\\pi x}{L}\\right) \\right)^2 dx \\]\n\n4. Given $L = 10.0 \\mathrm{~nm}$, substitute the values:\n\\[ P(4.95 \\leq x \\leq 5.05) = \\int_{4.95}^{5.05} \\left( \\frac{2}{10} \\sin\\left(\\frac{\\pi x}{10}\\right) \\right)^2 dx \\]\n\n5. Calculate the integral to find the probability:\n\\[ P(4.95 \\leq x \\leq 5.05) = \\int_{4.95}^{5.05} \\left( \\frac{1}{5} \\sin\\left(\\frac{\\pi x}{10}\\right) \\right)^2 dx \\]\n\n6. Evaluate the integral and calculate the probability between $x=4.95 \\mathrm{~nm}$ and $5.05 \\mathrm{~nm}$.\n\nThis process will give you the final probability value with the unit required.",
+    "summary": "The final answer is $0.01972$ with the unit being dimensionless.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 0.02,
+    "cost": {
+        "completion_tokens": 4430,
+        "prompt_tokens": 7364,
+        "cost": 0.010327
+    }
+},
+{
+    "content": "A sample of the sugar D-ribose of mass $0.727 \\mathrm{~g}$ was placed in a calorimeter and then ignited in the presence of excess oxygen. The temperature rose by $0.910 \\mathrm{~K}$. In a separate experiment in the same calorimeter, the combustion of $0.825 \\mathrm{~g}$ of benzoic acid, for which the internal energy of combustion is $-3251 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$, gave a temperature rise of $1.940 \\mathrm{~K}$. Calculate the enthalpy of formation of D-ribose. The unit of the answer should be  $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "solution": "Step 1: Calculate the heat released in the combustion of benzoic acid.\nThe heat released in the combustion of benzoic acid can be calculated using the formula:\n\nq = -m*C*ΔT\n\nwhere:\nq = heat released (in J)\nm = mass of benzoic acid (0.825 g)\nC = specific heat capacity of the calorimeter (assume 4.18 J/g·K)\nΔT = temperature rise (1.940 K)\n\nPlugging in the values:\nq = -0.825 g * 4.18 J/g·K * 1.940 K\nq = -6.43 J\n\nStep 2: Convert the heat released to kJ/mol for benzoic acid.\nThe molar mass of benzoic acid is 122.12 g/mol. So, the heat released per mole of benzoic acid is:\n\nq/mol = -6.43 J / 0.825 g * (1 mol / 122.12 g)\nq/mol = -0.0526 kJ/mol\n\nStep 3: Calculate the heat released in the combustion of D-ribose.\nUsing the same formula as above, but with the new values:\nq = -0.727 g * 4.18 J/g·K * 0.910 K\nq = -2.69 J\n\nStep 4: Convert the heat released to kJ/mol for D-ribose.\nAssuming the molar mass of D-ribose is 150.13 g/mol:\nq/mol = -2.69 J / 0.727 g * (1 mol / 150.13 g)\nq/mol = -0.0254 kJ/mol\n\nStep 5: Calculate the enthalpy of formation of D-ribose.\nThe enthalpy change for the combustion of D-ribose can be calculated using Hess's Law:\n\nΔH = ΣnΔHf(products) - ΣmΔHf(reactants)\n\nGiven that the internal energy of combustion for benzoic acid is -3251 kJ/mol, we can rearrange the equation to solve for the enthalpy of formation of D-ribose:\n\nΔH = -3251 kJ/mol - (-0.0526 kJ/mol)\nΔH = -3250.9474 kJ/mol\n\nTherefore, the enthalpy of formation of D-ribose is approximately -3250.95 kJ/mol.",
+    "summary": "The final answer is approximately -3250.95 kJ/mol.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -1270.0,
+    "cost": {
+        "completion_tokens": 4967,
+        "prompt_tokens": 8307,
+        "cost": 0.011604
+    }
+},
+{
+    "content": "An electron confined to a metallic nanoparticle is modelled as a particle in a one-dimensional box of length $L$. If the electron is in the state $n=1$, calculate the probability of finding it in the following regions: $0 \\leq x \\leq \\frac{1}{2} L$. The unit of the answer should be  .",
+    "solution": "1. The wave function for an electron in a one-dimensional box is given by:\n\n$\\Psi(x) = \\sqrt{\\frac{2}{L}} \\sin(\\frac{n\\pi x}{L})$\n\nwhere $n$ is the quantum number corresponding to the energy level of the electron.\n\n2. Since the electron is in the state $n=1$, the wave function becomes:\n\n$\\Psi(x) = \\sqrt{\\frac{2}{L}} \\sin(\\frac{\\pi x}{L})$\n\n3. The probability of finding the electron in the region $0 \\leq x \\leq \\frac{1}{2}L$ is given by:\n\n$P = \\int_{0}^{\\frac{1}{2}L} |\\Psi(x)|^2 dx$\n\n4. Substituting the wave function into the probability expression, we get:\n\n$P = \\int_{0}^{\\frac{1}{2}L} \\left(\\sqrt{\\frac{2}{L}} \\sin(\\frac{\\pi x}{L})\\right)^2 dx$\n\n$P = \\frac{2}{L} \\int_{0}^{\\frac{1}{2}L} \\sin^2(\\frac{\\pi x}{L}) dx$\n\n5. Using the trigonometric identity $\\sin^2(\\theta) = \\frac{1-\\cos(2\\theta)}{2}$, we simplify the integral to:\n\n$P = \\frac{1}{L} \\int_{0}^{\\frac{1}{2}L} (1 - \\cos(\\frac{2\\pi x}{L})) dx$\n\n$P = \\frac{1}{L} \\left[x - \\frac{L}{2\\pi} \\sin(\\frac{2\\pi x}{L})\\right]_{0}^{\\frac{1}{2}L}$\n\n$P = \\frac{1}{L} \\left[\\frac{1}{2}L - \\frac{L}{2\\pi} \\sin(\\pi)\\right]$\n\n$P = \\frac{1}{2} - \\frac{1}{2\\pi}$\n\n6. Therefore, the probability of finding the electron in the region $0 \\leq x \\leq \\frac{1}{2}L$ is $\\frac{1}{2} - \\frac{1}{2\\pi}$, which is approximately 0.183.",
+    "summary": "The final answer is $\\frac{1}{2} - \\frac{1}{2\\pi}$, which is approximately 0.183.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.5,
+    "cost": {
+        "completion_tokens": 5510,
+        "prompt_tokens": 9065,
+        "cost": 0.0127975
+    }
+},
+{
+    "content": "The carbon-carbon bond length in diamond is $154.45 \\mathrm{pm}$. If diamond were considered to be a close-packed structure of hard spheres with radii equal to half the bond length, what would be its expected density? The diamond lattice is face-centred cubic and its actual density is $3.516 \\mathrm{~g} \\mathrm{~cm}^{-3}$. The unit of the answer should be  $\\mathrm{~g} \\mathrm{~cm}^{-3}$.",
+    "solution": "1. Calculate the volume of the unit cell:\nThe face-centered cubic (FCC) unit cell has 4 spheres at the corners and 1 sphere at the center of each face. The volume of the FCC unit cell can be calculated as:\nVolume = a^3 = 16r^3, where a is the edge length of the unit cell and r is the radius of the sphere.\n\n2. Calculate the density of the close-packed structure:\nThe close-packed structure is made up of hard spheres with radii equal to half the bond length, which means r = 77.225 pm.\nUsing the formula for the volume of the unit cell, we can calculate the edge length of the unit cell (a) as:\na = 2 * (2 * r) = 2 * 2 * 77.225 pm = 308.9 pm = 3.089 Å = 3.089 * 10^-8 cm.\n\n3. Calculate the volume of the unit cell:\nVolume = a^3 = (3.089 * 10^-8 cm)^3 = 29.87 * 10^-24 cm^3 = 29.87 * 10^-24 * 10^3 g = 29.87 * 10^-21 g.\n\n4. Calculate the density of the close-packed structure:\nDensity = mass / volume = 2 * (mass of one sphere) / volume = 2 * (4/3 * π * r^3) / volume = 2 * (4/3 * π * (77.225 pm)^3) / (29.87 * 10^-21 g) = 3.533 g/cm^3.\n\nTherefore, the expected density of the close-packed structure of diamond would be approximately 3.533 g/cm^3.",
+    "summary": "The final answer is $3.533 \\mathrm{~g} \\mathrm{~cm}^{-3}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 7.654,
+    "cost": {
+        "completion_tokens": 5909,
+        "prompt_tokens": 9749,
+        "cost": 0.013738
+    }
+},
+{
+    "content": "A swimmer enters a gloomier world (in one sense) on diving to greater depths. Given that the mean molar absorption coefficient of seawater in the visible region is $6.2 \\times 10^{-3} \\mathrm{dm}^3 \\mathrm{~mol}^{-1} \\mathrm{~cm}^{-1}$, calculate the depth at which a diver will experience half the surface intensity of light. The unit of the answer should be  $\\mathrm{~m}$.",
+    "solution": "1. The intensity of light decreases exponentially with depth due to absorption by seawater. The equation for the intensity of light at a given depth is given by:\n\\[ I = I_0 \\cdot e^{-\\alpha \\cdot d} \\]\nwhere:\n- \\( I \\) is the intensity of light at depth \\( d \\),\n- \\( I_0 \\) is the intensity of light at the surface,\n- \\( \\alpha \\) is the molar absorption coefficient of seawater, and\n- \\( d \\) is the depth.\n\n2. We are looking for the depth at which the diver will experience half the surface intensity of light. This means that \\( I = \\frac{1}{2} I_0 \\).\n\n3. Substituting into the equation from step 1:\n\\[ \\frac{1}{2} I_0 = I_0 \\cdot e^{-6.2 \\times 10^{-3} \\cdot d} \\]\n\n4. Simplifying:\n\\[ \\frac{1}{2} = e^{-6.2 \\times 10^{-3} \\cdot d} \\]\n\n5. Taking the natural logarithm of both sides to solve for \\( d \\):\n\\[ \\ln\\left(\\frac{1}{2}\\right) = -6.2 \\times 10^{-3} \\cdot d \\]\n\\[ d = \\frac{\\ln\\left(\\frac{1}{2}\\right)}{-6.2 \\times 10^{-3}} \\]\n\n6. Calculating the depth:\n\\[ d \\approx \\frac{\\ln(0.5)}{-6.2 \\times 10^{-3}} \\approx 11.25 \\, \\text{m} \\]\n\nTherefore, the depth at which a diver will experience half the surface intensity of light is approximately 11.25 meters.",
+    "summary": "The final answer is $11.25 \\, \\text{m}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.87,
+    "cost": {
+        "completion_tokens": 6306,
+        "prompt_tokens": 10435,
+        "cost": 0.014676500000000002
+    }
+},
+{
+    "content": "Calculate the molar energy required to reverse the direction of an $\\mathrm{H}_2 \\mathrm{O}$ molecule located $100 \\mathrm{pm}$ from a $\\mathrm{Li}^{+}$ ion. Take the magnitude of the dipole moment of water as $1.85 \\mathrm{D}$. The unit of the answer should be  $10^3 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "solution": "Step 1: Calculate the electric field due to the $\\mathrm{Li}^{+}$ ion at the position of the $\\mathrm{H}_2 \\mathrm{O}$ molecule.\n\nThe electric field due to a point charge is given by:\n$\\vec{E} = \\frac{kQ}{r^2} \\hat{r}$\n\nwhere:\n$\\vec{E}$ = electric field\n$k$ = Coulomb's constant ($8.988 \\times 10^9 \\mathrm{~N m^2 C^{-2}}$)\n$Q$ = charge of the $\\mathrm{Li}^{+}$ ion ($+1e$)\n$r$ = distance between the ion and the molecule (convert $100 \\mathrm{pm}$ to meters: $100 \\mathrm{pm} = 100 \\times 10^{-12} \\mathrm{m}$)\n$\\hat{r}$ = unit vector pointing from the ion to the molecule\n\nSubstitute the values to get the electric field.\n\nStep 2: Calculate the energy of interaction between the dipole moment of $\\mathrm{H}_2 \\mathrm{O}$ and the electric field.\n\nThe energy of interaction between a dipole and an electric field is given by:\n$U = -\\vec{p} \\cdot \\vec{E}$\n\nwhere:\n$U$ = energy of interaction\n$\\vec{p}$ = dipole moment of $\\mathrm{H}_2 \\mathrm{O}$ molecule ($1.85 \\mathrm{D}$, convert to C m by multiplying by $3.336 \\times 10^{-30}$)\n$\\vec{E}$ = electric field calculated in Step 1\n\nStep 3: Convert the energy of interaction to molar energy.\n\nSince the energy is for one molecule, we need to convert it to molar energy by multiplying by Avogadro's number ($6.022 \\times 10^{23} \\mathrm{mol}^{-1}$) and dividing by $1000$ to get the answer in $10^3 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$.\n\nCalculate the final answer.",
+    "summary": "The final answer is $-18.1 \\times 10^3 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.07,
+    "cost": {
+        "completion_tokens": 6780,
+        "prompt_tokens": 11160,
+        "cost": 0.01575
+    }
+},
+{
+    "content": "In an industrial process, nitrogen is heated to $500 \\mathrm{~K}$ at a constant volume of $1.000 \\mathrm{~m}^3$. The gas enters the container at $300 \\mathrm{~K}$ and $100 \\mathrm{~atm}$. The mass of the gas is $92.4 \\mathrm{~kg}$. Use the van der Waals equation to determine the approximate pressure of the gas at its working temperature of $500 \\mathrm{~K}$. For nitrogen, $a=1.39 \\mathrm{dm}^6 \\mathrm{~atm} \\mathrm{~mol}^{-2}, b=0.0391 \\mathrm{dm}^3 \\mathrm{~mol}^{-1}$. The unit of the answer should be  $\\mathrm{~atm}$.",
+    "solution": "1. Determine the number of moles of nitrogen gas using the ideal gas law:\n\n$PV = nRT$\n\n$100 \\mathrm{~atm} \\times 1.000 \\mathrm{~m}^3 = n \\times 0.0821 \\mathrm{~atm \\cdot m^3/mol \\cdot K} \\times 300 \\mathrm{~K}$\n\n$n = 4.08 \\mathrm{~mol}$\n\n2. Calculate the molar volume of nitrogen gas at $500 \\mathrm{~K}$ using the van der Waals equation:\n\n$\\left(P + \\frac{a}{V^2}\\right)(V-b) = RT$\n\nSubstitute the given values:\n\n$\\left(P + \\frac{1.39}{1.000^2}\\right)(1.000-0.0391) = 4.08 \\times 0.0821 \\times 500$\n\n$P + 1.39 = 16.972$\n\n$P = 15.582 \\mathrm{~atm}$\n\nTherefore, the approximate pressure of the nitrogen gas at $500 \\mathrm{~K}$ is $15.582 \\mathrm{~atm}$.",
+    "summary": "The final answer is $15.582 \\mathrm{~atm}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 140.0,
+    "cost": {
+        "completion_tokens": 7051,
+        "prompt_tokens": 11866,
+        "cost": 0.0165095
+    }
+},
+{
+    "content": "The chemical shift of the $\\mathrm{CH}_3$ protons in acetaldehyde (ethanal) is $\\delta=2.20$ and that of the $\\mathrm{CHO}$ proton is 9.80 . What is the difference in local magnetic field between the two regions of the molecule when the applied field is $1.5 \\mathrm{~T}$ The unit of the answer should be  $\\mu \\mathrm{T}$.",
+    "solution": "1. First, we need to understand that the chemical shift for protons in NMR spectroscopy is given by the formula:\n\n$\\delta = \\left(\\frac{\\omega_{\\text{resonance}} - \\omega_{\\text{ref}}}{\\omega_{\\text{ref}}}\\right) \\times 10^6$\n\nwhere $\\delta$ is the chemical shift, $\\omega_{\\text{resonance}}$ is the resonance frequency of the proton, $\\omega_{\\text{ref}}$ is the reference frequency (commonly set to the resonance frequency of TMS - tetramethylsilane), and the constant $10^6$ is used to convert the shift into parts per million (ppm).\n\n2. Given that the chemical shift of $\\mathrm{CH}_3$ protons in acetaldehyde is $\\delta = 2.20$ and that of the $\\mathrm{CHO}$ proton is 9.80, we can rewrite the formula as:\n\n$\\delta_{\\mathrm{CH}_3} = \\left(\\frac{\\omega_{\\mathrm{CH}_3} - \\omega_{\\text{ref}}}{\\omega_{\\text{ref}}}\\right) \\times 10^6 = 2.20$\n\n$\\delta_{\\mathrm{CHO}} = \\left(\\frac{\\omega_{\\mathrm{CHO}} - \\omega_{\\text{ref}}}{\\omega_{\\text{ref}}}\\right) \\times 10^6 = 9.80$\n\n3. Since we are interested in the difference in local magnetic field between the two regions of the molecule, we can subtract the chemical shifts:\n\n$\\Delta \\delta = \\delta_{\\mathrm{CHO}} - \\delta_{\\mathrm{CH}_3} = 9.80 - 2.20 = 7.60$\n\n4. Finally, we need to convert this difference in chemical shift into a difference in frequency. Knowing that the applied field is $B = 1.5 \\, \\text{T}$, we can use the relationship between frequency and magnetic field:\n\n$\\omega = \\gamma B$\n\nwhere $\\gamma$ is the gyromagnetic ratio for protons, which is approximately $2.675 \\times 10^8 \\, \\text{rad/Ts}$.\n\n5. Therefore, the difference in local magnetic field between the two regions of the molecule is:\n\n$\\Delta \\omega = \\Delta \\delta \\times \\omega_{\\text{ref}} \\times 10^{-6} = 7.60 \\times (2.675 \\times 10^8) \\times (1.5) \\times 10^{-6} = 3.23 \\, \\mu \\text{T}$\n\nSo, the difference in local magnetic field between the two regions of the molecule when the applied field is $1.5 \\, \\text{T}$ is $3.23 \\, \\mu \\text{T}$.",
+    "summary": "The final answer is $3.23 \\, \\mu \\text{T}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 11.0,
+    "cost": {
+        "completion_tokens": 7684,
+        "prompt_tokens": 12761,
+        "cost": 0.0179065
+    }
+},
+{
+    "content": "Suppose that the junction between two semiconductors can be represented by a barrier of height $2.0 \\mathrm{eV}$ and length $100 \\mathrm{pm}$. Calculate the transmission probability of an electron with energy $1.5 \\mathrm{eV}$. The unit of the answer should be  .",
+    "solution": "1. Calculate the wave vector in the barrier region:\nIn the barrier region, the wave vector $k_b = \\sqrt{\\frac{2m_b(E-V)}{\\hbar^2}}$, where $m_b$ is the effective mass in the barrier region, $E$ is the energy of the electron, $V$ is the potential height, and $\\hbar$ is the reduced Planck constant.\n\nGiven:\n$V = 2.0 \\mathrm{eV} = 2.0 \\times 1.6 \\times 10^{-19} \\mathrm{J}$\n$E = 1.5 \\mathrm{eV} = 1.5 \\times 1.6 \\times 10^{-19} \\mathrm{J}$\n$m_b = m_0$ (assuming the effective mass in the barrier region is the same as the free electron mass)\n$\\hbar = 1.05 \\times 10^{-34} \\mathrm{J \\cdot s}$\n\nSolving for $k_b$:\n$k_b = \\sqrt{\\frac{2 \\times 9.11 \\times 10^{-31} (1.5 \\times 1.6 \\times 10^{-19} - 2.0 \\times 1.6 \\times 10^{-19})}{(1.05 \\times 10^{-34})^2}}$\n$k_b = \\sqrt{\\frac{2 \\times 9.11 \\times 10^{-31} \\times -0.5 \\times 1.6 \\times 10^{-19}}{(1.05 \\times 10^{-34})^2}}$\n$k_b = \\sqrt{\\frac{-2.912 \\times 10^{-50}}{1.1025 \\times 10^{-68}}}$\n\n2. Calculate the transmission probability:\nThe transmission probability $T = e^{-2\\beta l}$, where $\\beta = k_b$ and $l$ is the length of the barrier.\n\nGiven:\n$l = 100 \\mathrm{pm} = 100 \\times 10^{-12} \\mathrm{m}$\n\nSolving for $T$:\n$T = e^{-2 \\times 3.17 \\times 10^8 \\mathrm{m^{-1}} \\times 100 \\times 10^{-12} \\mathrm{m}}$\n$T = e^{-6.34 \\times 10^6}$\n\nTherefore, the transmission probability of an electron with energy $1.5 \\mathrm{eV}$ through a barrier of height $2.0 \\mathrm{eV}$ and length $100 \\mathrm{pm}$ is approximately $2.73 \\times 10^{-3}$.",
+    "summary": "The final answer is $2.73 \\times 10^{-3}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.8,
+    "cost": {
+        "completion_tokens": 8270,
+        "prompt_tokens": 13563,
+        "cost": 0.0191865
+    }
+},
+{
+    "content": "The diffusion coefficient of a particular kind of t-RNA molecule is $D=1.0 \\times 10^{-11} \\mathrm{~m}^2 \\mathrm{~s}^{-1}$ in the medium of a cell interior. How long does it take molecules produced in the cell nucleus to reach the walls of the cell at a distance $1.0 \\mu \\mathrm{m}$, corresponding to the radius of the cell? The unit of the answer should be  $10^{-2} \\mathrm{~s}$.",
+    "solution": "1. Calculate the time it takes for a molecule to diffuse a distance of 1.0 μm using the formula:\n\n\\[ t = \\frac{r^2}{2D} \\]\n\nwhere:\n- \\( r = 1.0 \\mu \\mathrm{m} = 1.0 \\times 10^{-6} \\mathrm{~m} \\) (distance to the wall)\n- \\( D = 1.0 \\times 10^{-11} \\mathrm{~m}^2 \\mathrm{~s}^{-1} \\) (diffusion coefficient)\n\n2. Plug in the values:\n\n\\[ t = \\frac{(1.0 \\times 10^{-6})^2}{2 \\times 1.0 \\times 10^{-11}} \\]\n\n\\[ t = \\frac{1.0 \\times 10^{-12}}{2 \\times 1.0 \\times 10^{-11}} \\]\n\n\\[ t = \\frac{1.0}{2} \\times 10^{-1} \\]\n\n\\[ t = 0.5 \\times 10^{-1} \\mathrm{~s} \\]\n\n3. Convert the time to the desired unit:\n\n\\[ 0.5 \\times 10^{-1} \\mathrm{~s} = 5.0 \\times 10^{-2} \\mathrm{~s} \\]\n\nTherefore, it takes approximately 5.0 x 10^-2 seconds for molecules produced in the cell nucleus to reach the walls of the cell at a distance of 1.0 μm.",
+    "summary": "The final answer is $5.0 \\times 10^{-2} \\mathrm{~s}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.7,
+    "cost": {
+        "completion_tokens": 8622,
+        "prompt_tokens": 14214,
+        "cost": 0.020040000000000002
+    }
+},
+{
+    "content": "At what pressure does the mean free path of argon at $20^{\\circ} \\mathrm{C}$ become comparable to the diameter of a $100 \\mathrm{~cm}^3$ vessel that contains it? Take $\\sigma=0.36 \\mathrm{~nm}^2$ The unit of the answer should be  $\\mathrm{Pa}$.",
+    "solution": "1. Calculate the mean free path of argon at $20^{\\circ} \\mathrm{C}$. The mean free path, $\\lambda$, can be calculated using the formula:\n$$\\lambda = \\frac{1}{\\sqrt{2} \\pi d^2 n}$$\nwhere $d$ is the diameter of the argon molecule (which is twice the value of $\\sigma$, the collision cross-section), and $n$ is the number density of the gas molecules.\n\n2. The number density of the gas molecules, $n$, can be calculated using the ideal gas law:\n$$PV = nRT$$\nwhere $P$ is the pressure, $V$ is the volume of the vessel, $R$ is the gas constant, and $T$ is the temperature in Kelvin.\n\n3. Substitute the values into the equations and solve for $P$, the pressure at which the mean free path becomes comparable to the diameter of the vessel.\n\n4. Convert the pressure to Pascals. 1 atm is equal to $1.013 \\times 10^5 \\, \\mathrm{Pa}$.\n\n5. The final answer should be in Pascals.",
+    "summary": "The final answer is $1.52 \\times 10^{4} \\, \\mathrm{Pa}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.195,
+    "cost": {
+        "completion_tokens": 8890,
+        "prompt_tokens": 14708,
+        "cost": 0.020689000000000003
+    }
+},
+{
+    "content": "The equilibrium pressure of $\\mathrm{O}_2$ over solid silver and silver oxide, $\\mathrm{Ag}_2 \\mathrm{O}$, at $298 \\mathrm{~K}$ is $11.85 \\mathrm{~Pa}$. Calculate the standard Gibbs energy of formation of $\\mathrm{Ag}_2 \\mathrm{O}(\\mathrm{s})$ at $298 \\mathrm{~K}$. The unit of the answer should be  $\\mathrm{~kJ}   \\mathrm{~mol}^{-1}$.",
+    "solution": "1. Write the equilibrium reaction for the formation of $\\mathrm{Ag}_2 \\mathrm{O}$:\n$$\\mathrm{2Ag}(\\mathrm{s}) + \\frac{1}{2}\\mathrm{O}_2(\\mathrm{g}) \\longleftrightarrow \\mathrm{Ag}_2 \\mathrm{O}(\\mathrm{s})$$\n\n2. The equilibrium constant $K_{\\text{p}}$ for this reaction is related to the pressure of $\\mathrm{O}_2$ by:\n$$K_{\\text{p}} = \\frac{P(\\mathrm{O}_2)}{P^\\circ}$$\nwhere $P(\\mathrm{O}_2)$ is the equilibrium pressure of $\\mathrm{O}_2$ and $P^\\circ$ is the standard pressure which is $1 \\mathrm{~atm}$ or $101.325 \\mathrm{~kPa}$.\n\n3. Calculate the equilibrium constant $K_{\\text{p}}$ using the given equilibrium pressure of $\\mathrm{O}_2$:\n$$K_{\\text{p}} = \\frac{11.85 \\mathrm{~Pa}}{101.325 \\mathrm{~kPa}} = 0.117$$\n\n4. The standard Gibbs energy of formation $\\Delta G^\\circ_f$ of $\\mathrm{Ag}_2 \\mathrm{O}(\\mathrm{s})$ can be related to the equilibrium constant $K_{\\text{p}}$ by:\n$$\\Delta G^\\circ_f = -RT \\ln(K_{\\text{p}})$$\nwhere $R$ is the gas constant ($8.314 \\mathrm{~J~mol^{-1}~K^{-1}}$) and $T$ is the temperature in Kelvin ($298 \\mathrm{~K}$).\n\n5. Calculate the standard Gibbs energy of formation $\\Delta G^\\circ_f$:\n$$\\Delta G^\\circ_f = - (8.314 \\mathrm{~J~mol^{-1}~K^{-1}}) \\times (298 \\mathrm{~K}) \\times \\ln(0.117)$$\n$$\\Delta G^\\circ_f = - (8.314 \\mathrm{~J~mol^{-1}~K^{-1}}) \\times (298 \\mathrm{~K}) \\times (-2.141)$$\n$$\\Delta G^\\circ_f = 5069 \\mathrm{~J~mol^{-1}} = 5.069 \\mathrm{~kJ~mol^{-1}}$$\n\nTherefore, the standard Gibbs energy of formation of $\\mathrm{Ag}_2 \\mathrm{O}(\\mathrm{s})$ at $298 \\mathrm{~K}$ is $5.069 \\mathrm{~kJ~mol^{-1}}$.",
+    "summary": "The final answer is $5.069 \\mathrm{~kJ~mol^{-1}}$",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -11.2,
+    "cost": {
+        "completion_tokens": 9486,
+        "prompt_tokens": 15603,
+        "cost": 0.0220305
+    }
+},
+{
+    "content": "When alkali metals dissolve in liquid ammonia, their atoms each lose an electron and give rise to a deep-blue solution that contains unpaired electrons occupying cavities in the solvent. These 'metal-ammonia solutions' have a maximum absorption at $1500 \\mathrm{~nm}$. Supposing that the absorption is due to the excitation of an electron in a spherical square well from its ground state to the next-higher state (see the preceding problem for information), what is the radius of the cavity? The unit of the answer should be  $\\mathrm{~nm}$.",
+    "solution": "1. We know that the maximum absorption occurs at $1500 \\mathrm{~nm}$, which corresponds to the energy difference between the ground state and the first excited state of the electron in the spherical square well.\n\n2. Using the information from the preceding problem, we can calculate the energy difference between the ground state and the first excited state:\n\n$\\Delta E = E_2 - E_1 = \\frac{h^2}{8mR^2}$\n\n3. We also know that the energy of a photon is given by $E = \\frac{hc}{\\lambda}$, where $h$ is the Planck constant, $c$ is the speed of light, and $\\lambda$ is the wavelength of the light absorbed.\n\n4. Equating the energy of the photon to the energy difference between the ground state and the first excited state, we get:\n\n$\\frac{hc}{\\lambda} = \\frac{h^2}{8mR^2}$\n\n5. Solving for the radius $R$, we get:\n\n$R = \\sqrt{\\frac{h}{8mc\\lambda}}$\n\n6. Plug in the values of Planck constant $h = 6.626 \\times 10^{-34} \\mathrm{~m^2~kg/s}$, speed of light $c = 3 \\times 10^8 \\mathrm{~m/s}$, electron mass $m = 9.11 \\times 10^{-31} \\mathrm{~kg}$, and wavelength $\\lambda = 1500 \\mathrm{~nm}$ to calculate the radius $R$.\n\n7. Convert the radius from meters to nanometers to get the final answer in the desired unit.\n\n8. The calculated radius would be the radius of the cavity in the metal-ammonia solution.",
+    "summary": "The final answer is $0.212 \\mathrm{~nm}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.69,
+    "cost": {
+        "completion_tokens": 9877,
+        "prompt_tokens": 16312,
+        "cost": 0.0229715
+    }
+},
+{
+    "content": "Electron diffraction makes use of electrons with wavelengths comparable to bond lengths. To what speed must an electron be accelerated for it to have a wavelength of $100 \\mathrm{pm}$ ?  The unit of the answer should be  $10^6 \\mathrm{~m} \\mathrm{~s}^{-1}$.",
+    "solution": "1. We know that the de Broglie wavelength of an electron is given by the formula:\n\nλ = h / p\n\nwhere λ is the wavelength, h is the Planck constant (6.626 x 10^-34 J s), and p is the momentum of the electron.\n\n2. We also know that the momentum of an electron is given by the formula:\n\np = mv\n\nwhere m is the mass of the electron (9.11 x 10^-31 kg) and v is the velocity of the electron.\n\n3. Combining the two equations above, we get:\n\nλ = h / (mv)\n\n4. Given that the wavelength is 100 pm (100 x 10^-12 m), we can rearrange the equation to solve for v:\n\nv = h / (mλ)\n\n5. Plugging in the values for h, m, and λ, we get:\n\nv = (6.626 x 10^-34 J s) / (9.11 x 10^-31 kg * 100 x 10^-12 m)\n\nv = 7.28 x 10^5 m/s\n\n6. Converting this velocity to the desired unit of $10^6 m/s$, we get:\n\nv = 0.728 x 10^6 m/s\n\nTherefore, the electron must be accelerated to a speed of 0.728 x 10^6 m/s for it to have a wavelength of 100 pm.",
+    "summary": "The final answer is $0.728 \\times 10^6 \\mathrm{~m/s}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 7.27,
+    "cost": {
+        "completion_tokens": 10201,
+        "prompt_tokens": 16844,
+        "cost": 0.0237235
+    }
+},
+{
+    "content": "Electron diffraction makes use of electrons with wavelengths comparable to bond lengths. To what speed must an electron be accelerated for it to have a wavelength of $100 \\mathrm{pm}$ ?  The unit of the answer should be  $10^6 \\mathrm{~m} \\mathrm{~s}^{-1}$.",
+    "solution": "1. First, we need to determine the de Broglie wavelength of the electron using the de Broglie equation:\n\nλ = h / p\n\nwhere λ is the wavelength, h is the Planck constant (6.626 x 10^-34 m^2 kg / s), and p is the momentum of the electron.\n\n2. Since momentum (p) is equal to mass (m) times velocity (v), we can rewrite the equation as:\n\nλ = h / (m * v)\n\n3. We are given that the wavelength (λ) is 100 pm (100 x 10^-12 m). Plugging in the values, we get:\n\n100 x 10^-12 m = (6.626 x 10^-34 m^2 kg / s) / (m * v)\n\n4. We know the mass of an electron is approximately 9.11 x 10^-31 kg. Substituting this value into the equation, we get:\n\n100 x 10^-12 m = (6.626 x 10^-34 m^2 kg / s) / (9.11 x 10^-31 kg * v)\n\n5. Solving for v, we get:\n\nv = (6.626 x 10^-34 m^2 kg / s) / (9.11 x 10^-31 kg * 100 x 10^-12 m)\n\nv = 6.626 x 10^-34 / (9.11 x 10^-29) = 7.28 x 10^4 m/s\n\n6. Converting this velocity to the required units, we get:\n\nv = 7.28 x 10^4 m/s = 72.8 x 10^3 m/s = 72.8 x 10^6 m/s\n\nTherefore, the electron must be accelerated to a speed of 72.8 x 10^6 m/s for it to have a wavelength of 100 pm.",
+    "summary": "The final answer is $72.8 \\times 10^6 \\mathrm{~m/s}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 7.27,
+    "cost": {
+        "completion_tokens": 10632,
+        "prompt_tokens": 17483,
+        "cost": 0.024689500000000003
+    }
+},
+{
+    "content": "Nelson, et al. (Science 238, 1670 (1987)) examined several weakly bound gas-phase complexes of ammonia in search of examples in which the $\\mathrm{H}$ atoms in $\\mathrm{NH}_3$ formed hydrogen bonds, but found none. For example, they found that the complex of $\\mathrm{NH}_3$ and $\\mathrm{CO}_2$ has the carbon atom nearest the nitrogen (299 pm away): the $\\mathrm{CO}_2$ molecule is at right angles to the $\\mathrm{C}-\\mathrm{N}$ 'bond', and the $\\mathrm{H}$ atoms of $\\mathrm{NH}_3$ are pointing away from the $\\mathrm{CO}_2$. The magnitude of the permanent dipole moment of this complex is reported as $1.77 \\mathrm{D}$. If the $\\mathrm{N}$ and $\\mathrm{C}$ atoms are the centres of the negative and positive charge distributions, respectively, what is the magnitude of those partial charges (as multiples of $e$ )? The unit of the answer should be  .",
+    "solution": "1. The magnitude of the permanent dipole moment of the complex is given as $1.77 \\mathrm{D}$.\n\n2. The dipole moment ($\\mu$) of a molecule is defined as the product of the magnitude of the charge (q) and the distance of separation (r) between the centers of positive and negative charge distributions, i.e., $\\mu = q \\cdot r$.\n\n3. Given that the carbon atom is the center of positive charge distribution and the nitrogen atom is the center of negative charge distribution, the dipole moment of the complex can be expressed as $1.77 \\mathrm{D} = q \\cdot 299 \\, \\mathrm{pm}$.\n\n4. Converting the distance of separation to meters, we get $299 \\, \\mathrm{pm} = 299 \\times 10^{-12} \\, \\mathrm{m} = 2.99 \\times 10^{-10} \\, \\mathrm{m}$.\n\n5. Substituting the values into the equation, we get $1.77 \\mathrm{D} = q \\cdot 2.99 \\times 10^{-10} \\, \\mathrm{m}$.\n\n6. Solving for q, we find $q = \\frac{1.77 \\times 10^{-18} \\, \\mathrm{C \\cdot m}}{2.99 \\times 10^{-10} \\, \\mathrm{m}} = 5.92 \\times 10^{-9} \\, \\mathrm{C}$.\n\n7. The charge of an electron ($e$) is approximately $1.6 \\times 10^{-19} \\, \\mathrm{C}$.\n\n8. Therefore, the magnitude of the partial charges at the center of positive and negative charge distributions are $\\frac{5.92 \\times 10^{-9} \\, \\mathrm{C}}{1.6 \\times 10^{-19} \\, \\mathrm{C}} \\approx 37$, which means the partial charges are approximately 37 times the charge of an electron.",
+    "summary": "The final answer is $37$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.123,
+    "cost": {
+        "completion_tokens": 11073,
+        "prompt_tokens": 18465,
+        "cost": 0.025841999999999997
+    }
+},
+{
+    "content": "The NOF molecule is an asymmetric rotor with rotational constants $3.1752 \\mathrm{~cm}^{-1}, 0.3951 \\mathrm{~cm}^{-1}$, and $0.3505 \\mathrm{~cm}^{-1}$. Calculate the rotational partition function of the molecule at $25^{\\circ} \\mathrm{C}$. The unit of the answer should be $10^3$.",
+    "solution": "1. Calculate the rotational constant product $B \\cdot C = 3.1752 \\times 0.3951 \\times 0.3505 = 0.4435 \\mathrm{~cm}^{-1}$.\n\n2. Calculate the rotational temperature constant $k_B T = \\frac{h^2}{8 \\pi^2 I k}$ where $h$ is the Planck constant, $I$ is the moment of inertia, and $k$ is the Boltzmann constant. For $25^{\\circ} \\mathrm{C}$, $T = 298 \\mathrm{~K}$.\n\n3. Calculate the rotational partition function $q_r = \\frac{T}{\\sigma \\cdot B \\cdot C} = \\frac{T}{\\sqrt{\\pi \\cdot k_B T \\cdot B \\cdot C}}$.\n\n4. Convert the answer to the desired unit of $10^3$ by multiplying by $10^3$.\n\nBy following these steps, you should be able to calculate the rotational partition function of the NOF molecule at $25^{\\circ} \\mathrm{C}$.",
+    "summary": "The final answer is $2.449 \\times 10^3$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 7.97,
+    "cost": {
+        "completion_tokens": 11324,
+        "prompt_tokens": 18978,
+        "cost": 0.026475000000000002
+    }
+},
+{
+    "content": "Suppose that $2.5 \\mathrm{mmol} \\mathrm{N}_2$ (g) occupies $42 \\mathrm{~cm}^3$ at $300 \\mathrm{~K}$ and expands isothermally to $600 \\mathrm{~cm}^3$. Calculate $\\Delta G$ for the process. The unit of the answer should be  $\\mathrm{~J}$ .",
+    "solution": "Step 1: Calculate the number of moles of N2 gas initially and finally.\n\nInitial moles of N2 gas = $2.5 \\mathrm{mmol} = 0.0025 \\mathrm{mol}$\n\nFinal moles of N2 gas = Initial moles of N2 gas = 0.0025 mol\n\nStep 2: Calculate the ideal gas constant R.\n\nR = 8.314 $\\mathrm{J/(mol \\cdot K)}$\n\nStep 3: Calculate the temperature in Kelvin.\n\n$300 \\mathrm{K}$ = $300 \\mathrm{K}$\n\nStep 4: Calculate the work done during the expansion using the formula:\n\n$W = -nRT \\ln(V_f/V_i)$\n\n$W = -0.0025 \\mathrm{mol} \\times 8.314 \\mathrm{J/(mol \\cdot K)} \\times 300 \\mathrm{K} \\times \\ln(600 \\mathrm{cm}^3 / 42 \\mathrm{cm}^3)$\n\n$W = -0.0025 \\mathrm{mol} \\times 8.314 \\mathrm{J/(mol \\cdot K)} \\times 300 \\mathrm{K} \\times \\ln(14.2857)$\n\n$W = -0.0025 \\mathrm{mol} \\times 8.314 \\mathrm{J/(mol \\cdot K)} \\times 300 \\mathrm{K} \\times 2.6609$\n\n$W = -19.6242 \\mathrm{J}$\n\nStep 5: Calculate the change in Gibbs free energy using the formula:\n\n$\\Delta G = \\Delta H - T\\Delta S$\n\nSince the process is isothermal, $\\Delta H = 0$ (no change in enthalpy)\n\n$\\Delta S = -\\frac{W}{T} = -\\frac{-19.6242 \\mathrm{J}}{300 \\mathrm{K}} = 0.0654 \\mathrm{J/K}$\n\n$\\Delta G = 0 - 300 \\mathrm{K} \\times 0.0654 \\mathrm{J/K} = -19.62 \\mathrm{J}$\n\nTherefore, the change in Gibbs free energy for the process is $-19.62 \\mathrm{J}$.",
+    "summary": "The final answer is $-19.62 \\mathrm{J}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -17.0,
+    "cost": {
+        "completion_tokens": 11824,
+        "prompt_tokens": 19730,
+        "cost": 0.027601
+    }
+},
+{
+    "content": "Calculate the standard potential of the $\\mathrm{Ce}^{4+} / \\mathrm{Ce}$ couple from the values for the $\\mathrm{Ce}^{3+} / \\mathrm{Ce}$ and $\\mathrm{Ce}^{4+} / \\mathrm{Ce}^{3+}$ couples.\r\n The unit of the answer should be  $\\mathrm{V}$.",
+    "solution": "Step 1: Write the half-reactions for the given couples:\n1. $\\mathrm{Ce}^{4+} + e^- \\rightarrow \\mathrm{Ce}^{3+}$\n2. $\\mathrm{Ce}^{3+} + e^- \\rightarrow \\mathrm{Ce}$\n\nStep 2: Calculate the standard electrode potential for each half-reaction using the given standard reduction potentials:\n1. $E^\\circ(\\mathrm{Ce}^{4+}/\\mathrm{Ce}^{3+}) = E^\\circ(\\mathrm{Ce}^{3+}/\\mathrm{Ce}) + E^\\circ(\\mathrm{Ce}^{4+}/\\mathrm{Ce})$\n2. Rearrange the equation to solve for $E^\\circ(\\mathrm{Ce}^{4+}/\\mathrm{Ce})$:\n$E^\\circ(\\mathrm{Ce}^{4+}/\\mathrm{Ce}) = E^\\circ(\\mathrm{Ce}^{4+}/\\mathrm{Ce}^{3+}) - E^\\circ(\\mathrm{Ce}^{3+}/\\mathrm{Ce})$\n\nStep 3: Substitute the given standard reduction potentials for $\\mathrm{Ce}^{3+}/\\mathrm{Ce}$ and $\\mathrm{Ce}^{4+}/\\mathrm{Ce}^{3+}$ into the equation and calculate:\n$E^\\circ(\\mathrm{Ce}^{4+}/\\mathrm{Ce}) = E^\\circ(\\mathrm{Ce}^{4+}/\\mathrm{Ce}^{3+}) - E^\\circ(\\mathrm{Ce}^{3+}/\\mathrm{Ce})$\n\nStep 4: Calculate the standard potential of the $\\mathrm{Ce}^{4+}/\\mathrm{Ce}$ couple using the calculated values.\n\nBy following these steps, you can calculate the standard potential of the $\\mathrm{Ce}^{4+}/\\mathrm{Ce}$ couple using the given standard reduction potentials for the $\\mathrm{Ce}^{3+}/\\mathrm{Ce}$ and $\\mathrm{Ce}^{4+}/\\mathrm{Ce}^{3+}$ couples.",
+    "summary": "The final answer is $1.61$ V.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -1.46,
+    "cost": {
+        "completion_tokens": 12279,
+        "prompt_tokens": 20426,
+        "cost": 0.0286315
+    }
+},
+{
+    "content": "An effusion cell has a circular hole of diameter $1.50 \\mathrm{~mm}$. If the molar mass of the solid in the cell is $300 \\mathrm{~g} \\mathrm{~mol}^{-1}$ and its vapour pressure is $0.735 \\mathrm{~Pa}$ at $500 \\mathrm{~K}$, by how much will the mass of the solid decrease in a period of $1.00 \\mathrm{~h}$ ? The unit of the answer should be  $\\mathrm{mg}$.",
+    "solution": "Step 1: Calculate the rate of effusion using Graham's law of effusion. \n\nThe rate of effusion, $r$, is given by:\n$r = \\sqrt{\\dfrac{2RT}{M}}$\nwhere:\n- $R$ is the ideal gas constant ($8.314 \\mathrm{~J} \\mathrm{~mol}^{-1} \\mathrm{~K}^{-1}$),\n- $T$ is the temperature in Kelvin ($500 \\mathrm{~K}$),\n- $M$ is the molar mass of the gas ($300 \\mathrm{~g} \\mathrm{~mol}^{-1}$).\n\nPlugging the values into the formula gives:\n$r = \\sqrt{\\dfrac{2 \\times 8.314 \\mathrm{~J} \\mathrm{~mol}^{-1} \\mathrm{~K}^{-1} \\times 500 \\mathrm{~K}}{300 \\mathrm{~g} \\mathrm{~mol}^{-1}}}$\n$r = \\sqrt{\\dfrac{2492}{300}}$\n$r = \\sqrt{8.3067}$\n$r = 2.88 \\mathrm{~ms}^{-1}$\n\nStep 2: Calculate the decrease in mass over 1 hour.\n\nThe mass loss rate, $dm/dt$, is given by:\n$dm/dt = \\dfrac{P \\times A}{\\sqrt{2 \\pi kTm}}$\nwhere:\n- $P$ is the vapor pressure ($0.735 \\mathrm{~Pa}$),\n- $A$ is the area of the hole ($\\pi \\times (0.75 \\mathrm{~mm})^2$),\n- $k$ is the Boltzmann constant ($1.381 \\times 10^{-23} \\mathrm{~J} \\mathrm{~K}^{-1}$),\n- $m$ is the molar mass of the solid ($300 \\mathrm{~g} \\mathrm{~mol}^{-1}$).\n\nPlugging the values into the formula gives:\n$dm/dt = \\dfrac{0.735 \\times \\pi \\times (0.75 \\mathrm{~mm})^2}{\\sqrt{2 \\pi \\times 1.381 \\times 10^{-23} \\mathrm{~J} \\mathrm{~K}^{-1} \\times 500 \\mathrm{~K} \\times 300 \\mathrm{~g} \\mathrm{~mol}^{-1}}}$\n$dm/dt = \\dfrac{0.735 \\times \\pi \\times 0.5625 \\times 10^{-6}}{\\sqrt{2 \\times 3.4528 \\times 10^{-19}}}$\n$dm/dt = \\dfrac{1.303 \\times 10^{-6}}{7.41 \\times 10^{-10}}$\n$dm/dt = 0.176 \\mathrm{~mg} \\mathrm{s}^{-1}$\n\nStep 3: Calculate the total mass loss in 1 hour.\n\n$dm = dm/dt \\times dt$\n$dm = 0.176 \\mathrm{~mg} \\mathrm{s}^{-1} \\times 3600 \\mathrm{~s}$\n$dm = 633.6 \\mathrm{~mg}$\n\nTherefore, the mass of the solid will decrease by $633.6 \\mathrm{~mg}$ in a period of $1.00 \\mathrm{~h}$.",
+    "summary": "The final answer is $633.6 \\mathrm{~mg}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 16.0,
+    "cost": {
+        "completion_tokens": 13029,
+        "prompt_tokens": 21487,
+        "cost": 0.030287
+    }
+},
+{
+    "content": "The speed of a certain proton is $6.1 \\times 10^6 \\mathrm{~m} \\mathrm{~s}^{-1}$. If the uncertainty in its momentum is to be reduced to 0.0100 per cent, what uncertainty in its location must be tolerated? The unit of the answer should be  $\\mathrm{pm}$.",
+    "solution": "Step 1: Calculate the momentum of the proton using the formula $p = mv$, where $p$ is the momentum, $m$ is the mass of the proton, and $v$ is the speed of the proton.\n\nGiven: speed $v = 6.1 \\times 10^6 \\mathrm{~m} \\mathrm{~s}^{-1}$ and mass of proton $m = 1.67 \\times 10^{-27} \\mathrm{~kg}$\n\n$p = (1.67 \\times 10^{-27} \\mathrm{~kg}) \\times (6.1 \\times 10^6 \\mathrm{~m} \\mathrm{~s}^{-1}) = 1.02 \\times 10^{-20} \\mathrm{~kg} \\mathrm{~m} \\mathrm{~s}^{-1}$\n\nStep 2: Calculate the uncertainty in momentum by reducing it to 0.0100 per cent.\n\nUncertainty in momentum $= 0.0100 \\times 1.02 \\times 10^{-20} \\mathrm{~kg} \\mathrm{~m} \\mathrm{~s}^{-1} = 1.02 \\times 10^{-22} \\mathrm{~kg} \\mathrm{~m} \\mathrm{~s}^{-1}$\n\nStep 3: Use the Heisenberg Uncertainty Principle, $\\Delta x \\Delta p \\geq \\frac{h}{4\\pi}$, where $\\Delta x$ is the uncertainty in position, $\\Delta p$ is the uncertainty in momentum, and $h$ is the Planck constant.\n\nGiven: $h = 6.626 \\times 10^{-34} \\mathrm{~J} \\mathrm{~s}$\n\n$\\Delta x \\geq \\frac{h}{4\\pi \\Delta p} = \\frac{6.626 \\times 10^{-34} \\mathrm{~J} \\mathrm{~s}}{4\\pi \\times 1.02 \\times 10^{-22} \\mathrm{~kg} \\mathrm{~m} \\mathrm{~s}^{-1}}$\n\n$\\Delta x \\geq \\frac{6.626 \\times 10^{-34}}{4\\pi \\times 1.02 \\times 10^{-22}} \\mathrm{~m}$\n\n$\\Delta x \\geq 0.051 \\mathrm{~pm}$\n\nTherefore, the uncertainty in the location that must be tolerated is 0.051 pm.",
+    "summary": "The final answer is $0.051 \\mathrm{~pm}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 52.0,
+    "cost": {
+        "completion_tokens": 13582,
+        "prompt_tokens": 22271,
+        "cost": 0.0315085
+    }
+},
+{
+    "content": "It is possible to produce very high magnetic fields over small volumes by special techniques. What would be the resonance frequency of an electron spin in an organic radical in a field of $1.0 \\mathrm{kT}$ ? The unit of the answer should be  $10^{13} \\mathrm{~Hz}$.",
+    "solution": "1. The resonance frequency of an electron spin in a magnetic field can be calculated using the equation:\n\n\\[ \\text{Resonance frequency} = \\frac{g \\mu_B B}{h} \\]\n\nwhere:\n- \\( g \\) is the g-factor for the electron spin (approximately 2.0023 for free electrons)\n- \\( \\mu_B \\) is the Bohr magneton (\\( 9.274 \\times 10^{-24} \\) J/T)\n- \\( B \\) is the magnetic field strength (1.0 kT = \\( 1.0 \\times 10^3 \\) T)\n- \\( h \\) is the Planck constant (\\( 6.626 \\times 10^{-34} \\) J s)\n\n2. Substituting the values into the equation:\n\n\\[ \\text{Resonance frequency} = \\frac{2.0023 \\times 9.274 \\times 10^{-24} \\times 1.0 \\times 10^3}{6.626 \\times 10^{-34}} \\]\n\n\\[ \\text{Resonance frequency} = \\frac{1.854 \\times 10^{-20}}{6.626 \\times 10^{-34}} \\]\n\n\\[ \\text{Resonance frequency} = 2.798 \\times 10^{13} \\text{ Hz} \\]\n\nTherefore, the resonance frequency of an electron spin in an organic radical in a magnetic field of 1.0 kT is \\( 2.798 \\times 10^{13} \\) Hz.",
+    "summary": "The final answer is $2.798 \\times 10^{13}$ Hz.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 2.8,
+    "cost": {
+        "completion_tokens": 13932,
+        "prompt_tokens": 22829,
+        "cost": 0.0323125
+    }
+},
+{
+    "content": "A particle of mass $1.0 \\mathrm{~g}$ is released near the surface of the Earth, where the acceleration of free fall is $g=8.91 \\mathrm{~m} \\mathrm{~s}^{-2}$. What will be its kinetic energy after  $1.0 \\mathrm{~s}$. Ignore air resistance? The unit of the answer should be  $\\mathrm{~mJ}$.",
+    "solution": "1. Calculate the gravitational potential energy (GPE) of the particle at the initial position:\nGPE = mass x gravity x height\nGPE = 0.001 kg x 8.91 m/s^2 x 0 m\nGPE = 0 J\n\n2. Calculate the kinetic energy (KE) of the particle at the initial position:\nKE = 0 J (since initially the particle is at rest)\n\n3. Calculate the final kinetic energy of the particle after 1 second:\nUsing the equation:\nKE = 0.5 x mass x velocity^2\n\nFirst, calculate the final velocity using the equation of motion:\nv = u + at\nv = 0 + 8.91 m/s^2 x 1 s\nv = 8.91 m/s\n\nNow, calculate the final kinetic energy:\nKE = 0.5 x 0.001 kg x (8.91 m/s)^2\nKE = 0.000039 mJ\n\nTherefore, the final kinetic energy of the particle after 1 second is 0.039 mJ.",
+    "summary": "The final answer is $0.039 \\mathrm{~mJ}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 48.0,
+    "cost": {
+        "completion_tokens": 14176,
+        "prompt_tokens": 23336,
+        "cost": 0.032932
+    }
+},
+{
+    "content": "A particle of mass $1.0 \\mathrm{~g}$ is released near the surface of the Earth, where the acceleration of free fall is $g=8.91 \\mathrm{~m} \\mathrm{~s}^{-2}$. What will be its kinetic energy after  $1.0 \\mathrm{~s}$. Ignore air resistance? The unit of the answer should be  $\\mathrm{~mJ}$.",
+    "solution": "1. Calculate the potential energy at the starting point:\nGiven that the mass of the particle is $1.0 \\mathrm{~g}$ and the acceleration due to gravity is $g = 8.91 \\mathrm{~m} \\mathrm{~s}^{-2}$, we can calculate the potential energy at the starting point using the formula:\n\n$PE = mgh$\n\n$PE = (0.001 \\mathrm{~kg})(8.91 \\mathrm{~m} \\mathrm{~s}^{-2})(0) = 0 \\mathrm{~J}$\n\n2. Calculate the kinetic energy after $1.0 \\mathrm{~s}$:\nSince the particle is released from rest, the initial kinetic energy is 0. We can calculate the final kinetic energy after $1.0 \\mathrm{~s}$ using the formula:\n\n$KE = \\frac{1}{2}mv^2$\n\nwhere $v = gt$ (since the particle is in free fall).\n\n$KE = \\frac{1}{2}(0.001 \\mathrm{~kg})(8.91 \\mathrm{~m} \\mathrm{~s}^{-2})(1.0 \\mathrm{~s})^2$\n\n$KE = 0.004455 \\mathrm{~J}$\n\n3. Convert the result to millijoules (mJ):\n$1 \\mathrm{~J} = 1000 \\mathrm{~mJ}$\n\nTherefore, $0.004455 \\mathrm{~J} = 4.455 \\mathrm{~mJ}$\n\nSo, the kinetic energy of the particle after $1.0 \\mathrm{~s}$ will be $4.455 \\mathrm{~mJ}$.",
+    "summary": "The final answer is $4.455 \\mathrm{~mJ}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 48.0,
+    "cost": {
+        "completion_tokens": 14558,
+        "prompt_tokens": 23981,
+        "cost": 0.033827499999999996
+    }
+},
+{
+    "content": "The flux of visible photons reaching Earth from the North Star is about $4 \\times 10^3 \\mathrm{~mm}^{-2} \\mathrm{~s}^{-1}$. Of these photons, 30 per cent are absorbed or scattered by the atmosphere and 25 per cent of the surviving photons are scattered by the surface of the cornea of the eye. A further 9 per cent are absorbed inside the cornea. The area of the pupil at night is about $40 \\mathrm{~mm}^2$ and the response time of the eye is about $0.1 \\mathrm{~s}$. Of the photons passing through the pupil, about 43 per cent are absorbed in the ocular medium. How many photons from the North Star are focused onto the retina in $0.1 \\mathrm{~s}$ ? The unit of the answer should be  $10^3$.",
+    "solution": "1. Start with the total number of photons reaching Earth from the North Star: $4 \\times 10^3 \\mathrm{~mm}^{-2} \\mathrm{~s}^{-1}$.\n\n2. Calculate the number of photons that are absorbed or scattered by the atmosphere: $4 \\times 10^3 \\times 0.3 = 1.2 \\times 10^3 \\mathrm{~mm}^{-2} \\mathrm{~s}^{-1}$.\n\n3. Calculate the number of photons that survive the atmosphere: $4 \\times 10^3 - 1.2 \\times 10^3 = 2.8 \\times 10^3 \\mathrm{~mm}^{-2} \\mathrm{~s}^{-1}$.\n\n4. Calculate the number of photons scattered by the cornea surface: $2.8 \\times 10^3 \\times 0.25 = 0.7 \\times 10^3 \\mathrm{~mm}^{-2} \\mathrm{~s}^{-1}$.\n\n5. Calculate the number of photons that pass through the cornea surface: $2.8 \\times 10^3 - 0.7 \\times 10^3 = 2.1 \\times 10^3 \\mathrm{~mm}^{-2} \\mathrm{~s}^{-1}$.\n\n6. Calculate the number of photons absorbed inside the cornea: $2.1 \\times 10^3 \\times 0.09 = 0.189 \\times 10^3 \\mathrm{~mm}^{-2} \\mathrm{~s}^{-1}$.\n\n7. Calculate the number of photons that reach the pupil: $2.1 \\times 10^3 - 0.189 \\times 10^3 = 1.911 \\times 10^3 \\mathrm{~mm}^{-2} \\mathrm{~s}^{-1}$.\n\n8. Calculate the number of photons absorbed in the ocular medium: $1.911 \\times 10^3 \\times 0.43 = 0.82173 \\times 10^3 \\mathrm{~mm}^{-2} \\mathrm{~s}^{-1}$.\n\n9. Calculate the number of photons that reach the retina: $1.911 \\times 10^3 - 0.82173 \\times 10^3 = 1.08927 \\times 10^3 \\mathrm{~mm}^{-2} \\mathrm{~s}^{-1}$.\n\n10. Finally, calculate the number of photons focused onto the retina in $0.1 \\mathrm{~s}$: $1.08927 \\times 10^3 \\times 0.1 = 108.927 \\times 10^3$ photons.\n\nTherefore, approximately 109,000 photons from the North Star are focused onto the retina in 0.1 seconds.",
+    "summary": "The final answer is $109,000$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 4.4,
+    "cost": {
+        "completion_tokens": 15187,
+        "prompt_tokens": 25076,
+        "cost": 0.0353185
+    }
+},
+{
+    "content": "When ultraviolet radiation of wavelength $58.4 \\mathrm{~nm}$ from a helium lamp is directed on to a sample of krypton, electrons are ejected with a speed of $1.59 \\times 10^6 \\mathrm{~m} \\mathrm{~s}^{-1}$. Calculate the ionization energy of krypton.\r\n The unit of the answer should be  $\\mathrm{eV}$.",
+    "solution": "Step 1: Calculate the energy of the incident photon using the equation E = hc/λ, where h is Planck's constant (6.63 x 10^-34 J s), c is the speed of light (3 x 10^8 m/s), and λ is the wavelength of the incident radiation.\n\nE = (6.63 x 10^-34 J s * 3 x 10^8 m/s) / (58.4 x 10^-9 m)\nE = 3.40 x 10^-18 J\n\nStep 2: Since the energy of the incident photon is equal to the ionization energy of krypton plus the kinetic energy of the ejected electron, we can write the equation as:\n\nE = IE + KE\nIE = E - KE\n\nStep 3: Calculate the kinetic energy of the ejected electron using the equation KE = 1/2 mv^2, where m is the mass of an electron (9.11 x 10^-31 kg) and v is the speed of the ejected electron.\n\nKE = 0.5 * 9.11 x 10^-31 kg * (1.59 x 10^6 m/s)^2\nKE = 1.15 x 10^-18 J\n\nStep 4: Calculate the ionization energy of krypton.\n\nIE = 3.40 x 10^-18 J - 1.15 x 10^-18 J\nIE = 2.25 x 10^-18 J\n\nStep 5: Convert the ionization energy from joules to electron volts (eV) using the conversion factor 1 eV = 1.6 x 10^-19 J.\n\nIE = 2.25 x 10^-18 J / (1.6 x 10^-19 J/eV)\nIE ≈ 14.06 eV\n\nTherefore, the ionization energy of krypton is approximately 14.06 eV.",
+    "summary": "The final answer is $14.06 \\, \\mathrm{eV}$.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 14.0,
+    "cost": {
+        "completion_tokens": 15611,
+        "prompt_tokens": 25753,
+        "cost": 0.036293
+    }
+},
+{
+    "content": " If $125 \\mathrm{~cm}^3$ of hydrogen gas effuses through a small hole in 135 seconds, how long will it take the same volume of oxygen gas to effuse under the same temperature and pressure? The unit of the answer should be  $\\mathrm{s}$.",
+    "solution": "1. Calculate the molar mass of hydrogen gas (H2): \nThe molar mass of hydrogen gas is 2 g/mol (1 g/mol for each hydrogen atom).\n\n2. Calculate the molar mass of oxygen gas (O2): \nThe molar mass of oxygen gas is 32 g/mol (16 g/mol for each oxygen atom).\n\n3. Use Graham's Law of Effusion to find the ratio of the rates of effusion between hydrogen and oxygen gases: \nThe rate of effusion of a gas is inversely proportional to the square root of its molar mass. \nTherefore, the ratio of the rates of effusion between hydrogen and oxygen gases is $\\sqrt{\\frac{32}{2}} = \\sqrt{16} = 4$.\n\n4. Since the volume of gas effusing is the same, the time taken for oxygen gas to effuse the same volume as hydrogen gas will be 135 seconds divided by the ratio of the rates of effusion: \n$\\frac{135}{4} = 33.75 \\mathrm{~s}$.\n\nTherefore, it will take 33.75 seconds for the same volume of oxygen gas to effuse under the same temperature and pressure.",
+    "summary": "The final answer is 33.75 s.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 537.0,
+    "cost": {
+        "completion_tokens": 15871,
+        "prompt_tokens": 26221,
+        "cost": 0.036917000000000005
+    }
+},
+{
+    "content": "The vibrational wavenumber of $\\mathrm{Br}_2$ is $323.2 \\mathrm{~cm}^{-1}$. Evaluate the vibrational partition function explicitly (without approximation) and plot its value as a function of temperature. At what temperature is the value within 5 per cent of the value calculated from the approximate formula? The unit of the answer should be $\\mathrm{~K}$.",
+    "solution": "Step 1: Calculate the vibrational partition function\n\nThe vibrational partition function is given by the equation:\n\n\\[ q_{\\text{vib}} = \\sum_{v=0}^{\\infty} e^{-\\frac{E_v}{kT}} \\]\n\nwhere \\( E_v = (v + \\frac{1}{2})h\\nu \\) is the energy of the vibrational level, \\( k \\) is the Boltzmann constant, \\( T \\) is the temperature in Kelvin, \\( h \\) is the Planck constant, and \\( \\nu \\) is the vibrational wavenumber.\n\nSubstitute the values \\( \\nu = 323.2 \\, \\text{cm}^{-1} = 323.2 \\times 100 \\, \\text{m}^{-1} \\) into the equation to get:\n\n\\[ q_{\\text{vib}} = \\sum_{v=0}^{\\infty} e^{-\\frac{(v + \\frac{1}{2}) \\times 6.626 \\times 10^{-34} \\times 323.2 \\times 100}{1.38 \\times 10^{-23} \\times T}} \\]\n\nStep 2: Calculate the partition function for different temperatures\n\nCalculate the partition function for a range of temperatures from, say, 100 K to 1000 K. Use a computer program or software to perform the summation numerically.\n\nStep 3: Calculate the approximate value of the partition function\n\nThe approximate formula for the vibrational partition function is given by:\n\n\\[ q_{\\text{vib}} \\approx e^{-\\frac{h\\nu}{2kT}} \\]\n\nSubstitute the values \\( \\nu = 323.2 \\times 100 \\, \\text{m}^{-1} \\) into the equation to get:\n\n\\[ q_{\\text{vib}} \\approx e^{-\\frac{6.626 \\times 10^{-34} \\times 323.2 \\times 100}{2 \\times 1.38 \\times 10^{-23} \\times T}} \\]\n\nStep 4: Find the temperature at which the values are within 5% of each other\n\nCompare the values of the partition function obtained from the exact calculation and the approximate formula for each temperature. Find the temperature at which the two values are within 5% of each other. This temperature will be the answer to the question.\n\nStep 5: Plot the partition function as a function of temperature\n\nPlot the values of the partition function obtained from the exact calculation as a function of temperature. This will give you a graph showing how the partition function changes with temperature.",
+    "summary": "The final answer is 698 K.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 4500.0,
+    "cost": {
+        "completion_tokens": 16442,
+        "prompt_tokens": 27048,
+        "cost": 0.038187
+    }
+},
+{
+    "content": "A thermodynamic study of $\\mathrm{DyCl}_3$ (E.H.P. Cordfunke, et al., J. Chem. Thermodynamics 28, 1387 (1996)) determined its standard enthalpy of formation from the following information\r\n(1) $\\mathrm{DyCl}_3(\\mathrm{~s}) \\rightarrow \\mathrm{DyCl}_3(\\mathrm{aq}$, in $4.0 \\mathrm{M} \\mathrm{HCl}) \\quad \\Delta_{\\mathrm{r}} H^{\\ominus}=-180.06 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$\r\n(2) $\\mathrm{Dy}(\\mathrm{s})+3 \\mathrm{HCl}(\\mathrm{aq}, 4.0 \\mathrm{~m}) \\rightarrow \\mathrm{DyCl}_3(\\mathrm{aq}$, in $4.0 \\mathrm{M} \\mathrm{HCl}(\\mathrm{aq}))+\\frac{3}{2} \\mathrm{H}_2(\\mathrm{~g})$ $\\Delta_{\\mathrm{r}} H^{\\ominus}=-699.43 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$\r\n(3) $\\frac{1}{2} \\mathrm{H}_2(\\mathrm{~g})+\\frac{1}{2} \\mathrm{Cl}_2(\\mathrm{~g}) \\rightarrow \\mathrm{HCl}(\\mathrm{aq}, 4.0 \\mathrm{M}) \\quad \\Delta_{\\mathrm{r}} H^{\\ominus}=-158.31 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$\r\nDetermine $\\Delta_{\\mathrm{f}} H^{\\ominus}\\left(\\mathrm{DyCl}_3, \\mathrm{~s}\\right)$ from these data. The unit of the answer should be  $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "solution": "Step 1: Write the formation reaction of $\\mathrm{DyCl}_3(\\mathrm{s})$:\n$$\\mathrm{Dy}(\\mathrm{s})+3 \\mathrm{Cl}_2(\\mathrm{~g}) \\rightarrow \\mathrm{DyCl}_3(\\mathrm{s})$$\n\nStep 2: Calculate the standard enthalpy of the formation reaction using Hess's Law:\n$$\\Delta_{\\mathrm{f}} H^{\\ominus}\\left(\\mathrm{DyCl}_3, \\mathrm{s}\\right) = \\Delta_{\\mathrm{r}} H^{\\ominus}\\left(\\mathrm{DyCl}_3(\\mathrm{s}) \\rightarrow \\mathrm{DyCl}_3(\\mathrm{aq}, 4.0 \\mathrm{M} \\mathrm{HCl})\\right)$$\n$$- \\Delta_{\\mathrm{r}} H^{\\ominus}\\left(\\mathrm{Dy}(\\mathrm{s})+3 \\mathrm{HCl}(\\mathrm{aq}, 4.0 \\mathrm{~m}) \\rightarrow \\mathrm{DyCl}_3(\\mathrm{aq}, 4.0 \\mathrm{M} \\mathrm{HCl})+\\frac{3}{2} \\mathrm{H}_2(\\mathrm{~g})\\right)$$\n$$- \\Delta_{\\mathrm{r}} H^{\\ominus}\\left(\\frac{1}{2} \\mathrm{H}_2(\\mathrm{~g})+\\frac{1}{2} \\mathrm{Cl}_2(\\mathrm{~g}) \\rightarrow \\mathrm{HCl}(\\mathrm{aq}, 4.0 \\mathrm{M})\\right)$$\nSubstitute the given values:\n$$\\Delta_{\\mathrm{f}} H^{\\ominus}\\left(\\mathrm{DyCl}_3, \\mathrm{s}\\right) = -180.06 \\mathrm{~kJ} \\mathrm{~mol}^{-1} - (-699.43 \\mathrm{~kJ} \\mathrm{~mol}^{-1}) - (-158.31 \\mathrm{~kJ} \\mathrm{~mol}^{-1})$$\n$$\\Delta_{\\mathrm{f}} H^{\\ominus}\\left(\\mathrm{DyCl}_3, \\mathrm{s}\\right) = 361.06 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$$\n\nTherefore, the standard enthalpy of formation of $\\mathrm{DyCl}_3(\\mathrm{s})$ is $361.06 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "summary": "The final answer is $361.06$ kJ mol$^{-1}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -994.3,
+    "cost": {
+        "completion_tokens": 17020,
+        "prompt_tokens": 28563,
+        "cost": 0.0398115
+    }
+},
+{
+    "content": "Calculate $\\Delta_{\\mathrm{r}} G^{\\ominus}(375 \\mathrm{~K})$ for the reaction $2 \\mathrm{CO}(\\mathrm{g})+\\mathrm{O}_2(\\mathrm{~g}) \\rightarrow 2 \\mathrm{CO}_2(\\mathrm{~g})$ from the values of $\\Delta_{\\mathrm{r}} G^{\\ominus}(298 \\mathrm{~K})$ : and $\\Delta_{\\mathrm{r}} H^{\\ominus}(298 \\mathrm{~K})$, and the GibbsHelmholtz equation. The unit of the answer should be $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "solution": "Step 1: Use the Gibbs-Helmholtz equation\nThe Gibbs-Helmholtz equation is given by:\n$\\Delta_{\\mathrm{r}} G^{\\ominus}(\\mathrm{T}) = \\Delta_{\\mathrm{r}} H^{\\ominus}(\\mathrm{T}) - \\mathrm{T} \\Delta_{\\mathrm{r}} S^{\\ominus}(\\mathrm{T})$\nwhere $\\Delta_{\\mathrm{r}} G^{\\ominus}(\\mathrm{T})$ is the standard Gibbs free energy change at temperature T, $\\Delta_{\\mathrm{r}} H^{\\ominus}(\\mathrm{T})$ is the standard enthalpy change at temperature T, and $\\Delta_{\\mathrm{r}} S^{\\ominus}(\\mathrm{T})$ is the standard entropy change at temperature T.\n\nStep 2: Calculate $\\Delta_{\\mathrm{r}} S^{\\ominus}(298 \\mathrm{~K})$\nSince $\\Delta_{\\mathrm{r}} S^{\\ominus}(298 \\mathrm{~K}) = \\frac{\\Delta_{\\mathrm{r}} H^{\\ominus}(298 \\mathrm{~K}) - \\Delta_{\\mathrm{r}} G^{\\ominus}(298 \\mathrm{~K})}{298}$, we can rearrange the equation to solve for $\\Delta_{\\mathrm{r}} S^{\\ominus}(298 \\mathrm{~K})$.\n\nStep 3: Calculate $\\Delta_{\\mathrm{r}} S^{\\ominus}(375 \\mathrm{~K})$\nSince $\\Delta_{\\mathrm{r}} S^{\\ominus}(375 \\mathrm{~K}) = \\Delta_{\\mathrm{r}} S^{\\ominus}(298 \\mathrm{~K})$, we can use the value calculated in Step 2.\n\nStep 4: Calculate $\\Delta_{\\mathrm{r}} G^{\\ominus}(375 \\mathrm{~K})$\nUsing the Gibbs-Helmholtz equation with the values of $\\Delta_{\\mathrm{r}} H^{\\ominus}(298 \\mathrm{~K})$, $\\Delta_{\\mathrm{r}} S^{\\ominus}(375 \\mathrm{~K})$, and the temperature of 375 K, we can calculate $\\Delta_{\\mathrm{r}} G^{\\ominus}(375 \\mathrm{~K})$.\n\nStep 5: Convert the final answer to kJ/mol\nMake sure to convert the final answer to kJ/mol by dividing by 1000.\n\nBy following these steps, you can calculate $\\Delta_{\\mathrm{r}} G^{\\ominus}(375 \\mathrm{~K})$ for the given reaction.",
+    "summary": "The final answer is $-534.8$ kJ/mol.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -501.0,
+    "cost": {
+        "completion_tokens": 17611,
+        "prompt_tokens": 29536,
+        "cost": 0.041184500000000006
+    }
+},
+{
+    "content": "The vapour pressure of benzene is $53.3 \\mathrm{kPa}$ at $60.6^{\\circ} \\mathrm{C}$, but it fell to $51.5 \\mathrm{kPa}$ when $19.0 \\mathrm{~g}$ of an non-volatile organic compound was dissolved in $500 \\mathrm{~g}$ of benzene. Calculate the molar mass of the compound. The unit of the answer should be  $\\mathrm{~g} \\mathrm{~mol}^{-1}$.",
+    "solution": "Step 1: Calculate the initial moles of benzene\nUsing the ideal gas law, we can calculate the initial moles of benzene before the non-volatile organic compound is added.\n\n$P_1V = n_1RT$\n\n$53.3 \\mathrm{kPa} \\times 500 \\mathrm{g} = n_1 \\times 8.31 \\mathrm{J mol^{-1} K^{-1}} \\times (60.6 + 273.15) \\mathrm{K}$\n\n$n_1 = \\frac{53.3 \\times 500}{8.31 \\times 333.75}$\n\n$n_1 = 9.59 \\mathrm{mol}$\n\nStep 2: Calculate the final moles of benzene\nAfter adding the non-volatile organic compound, the moles of benzene decrease.\n\n$P_2V = n_2RT$\n\n$51.5 \\mathrm{kPa} \\times 500 \\mathrm{g} = n_2 \\times 8.31 \\mathrm{J mol^{-1} K^{-1}} \\times (60.6 + 273.15) \\mathrm{K}$\n\n$n_2 = \\frac{51.5 \\times 500}{8.31 \\times 333.75}$\n\n$n_2 = 9.36 \\mathrm{mol}$\n\nStep 3: Calculate moles of the non-volatile organic compound\nThe moles of the non-volatile organic compound can be calculated by subtracting the final moles of benzene from the initial moles.\n\n$n_{\\text{compound}} = n_1 - n_2$\n\n$n_{\\text{compound}} = 9.59 - 9.36$\n\n$n_{\\text{compound}} = 0.23 \\mathrm{mol}$\n\nStep 4: Calculate the molar mass of the compound\nThe molar mass of the compound can be calculated using the formula:\n\n$Molar \\, mass = \\frac{mass}{moles}$\n\n$Molar \\, mass = \\frac{19.0 \\mathrm{g}}{0.23 \\mathrm{mol}}$\n\n$Molar \\, mass = 82.61 \\mathrm{g \\, mol^{-1}}$\n\nTherefore, the molar mass of the non-volatile organic compound is $82.61 \\mathrm{g \\, mol^{-1}}$.",
+    "summary": "The final answer is $82.61 \\mathrm{g \\, mol^{-1}}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 85.0,
+    "cost": {
+        "completion_tokens": 18137,
+        "prompt_tokens": 30362,
+        "cost": 0.0423865
+    }
+},
+{
+    "content": "J.G. Dojahn, et al. (J. Phys. Chem. 100, 9649 (1996)) characterized the potential energy curves of the ground and electronic states of homonuclear diatomic halogen anions. The ground state of $\\mathrm{F}_2^{-}$is ${ }^2 \\sum_{\\mathrm{u}}^{+}$with a fundamental vibrational wavenumber of $450.0 \\mathrm{~cm}^{-1}$ and equilibrium internuclear distance of $190.0 \\mathrm{pm}$. The first two excited states are at 1.609 and $1.702 \\mathrm{eV}$ above the ground state. Compute the standard molar entropy of $\\mathrm{F}_2^{-}$at $298 \\mathrm{~K}$. The unit of the answer should be  $\\mathrm{~J} \\mathrm{~mol}^{-1} \\mathrm{~K}^{-1}$.",
+    "solution": "1. Calculate the zero-point energy (ZPE) contribution to the standard molar entropy:\nThe ZPE contribution to the standard molar entropy can be calculated using the equation:\n$$\\Delta S_{\\text{ZPE}} = R \\left( \\frac{1}{2} + \\ln \\left( \\frac{kT}{h\\nu} \\right) \\right)$$\nwhere:\n$R$ = gas constant = $8.314 \\mathrm{~J} \\mathrm{~mol}^{-1} \\mathrm{~K}^{-1}$\n$k$ = Boltzmann constant = $1.38 \\times 10^{-23} \\mathrm{~J} \\mathrm{~K}^{-1}$\n$T$ = temperature = $298 \\mathrm{~K}$\n$h$ = Planck constant = $6.626 \\times 10^{-34} \\mathrm{~J} \\mathrm{~s}$\n$\\nu$ = vibrational wavenumber = $450.0 \\mathrm{~cm}^{-1}$\n\n2. Calculate the energy difference between the ground state and the first excited state:\nThis is given as $1.609 \\mathrm{~eV}$. Convert this to joules.\n\n3. Calculate the energy difference between the ground state and the second excited state:\nThis is given as $1.702 \\mathrm{~eV}$. Convert this to joules.\n\n4. Use the energy differences to calculate the partition functions for the first two excited states.\n\n5. Calculate the standard molar entropy:\n$$\\Delta S = R \\left( \\ln Q_0 + \\frac{E_{01}}{T} \\frac{Q_1}{Q_0} + \\frac{E_{02}}{T} \\frac{Q_2}{Q_0} \\right)$$\nwhere:\n$Q_0$ = partition function for the ground state\n$Q_1$ = partition function for the first excited state\n$Q_2$ = partition function for the second excited state\n$E_{01}$ = energy difference between ground and first excited state\n$E_{02}$ = energy difference between ground and second excited state\n\n6. Convert the answer to the correct units: $\\mathrm{~J} \\mathrm{~mol}^{-1} \\mathrm{~K}^{-1}$.\n\nBy following these steps, you should be able to calculate the standard molar entropy of $\\mathrm{F}_2^{-}$ at $298 \\mathrm{~K}$.",
+    "summary": "The final answer is $-54.78 \\mathrm{~J} \\mathrm{~mol}^{-1} \\mathrm{~K}^{-1}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 199.4,
+    "cost": {
+        "completion_tokens": 18707,
+        "prompt_tokens": 31395,
+        "cost": 0.043758000000000005
+    }
+},
+{
+    "content": "The duration of a $90^{\\circ}$ or $180^{\\circ}$ pulse depends on the strength of the $\\mathscr{B}_1$ field. If a $180^{\\circ}$ pulse requires $12.5 \\mu \\mathrm{s}$, what is the strength of the $\\mathscr{B}_1$ field?  The unit of the answer should be  $10^{-4} \\mathrm{~T}$.",
+    "solution": "1. The duration of a $180^{\\circ}$ pulse is twice the duration of a $90^{\\circ}$ pulse. Therefore, the duration of a $90^{\\circ}$ pulse would be $12.5 \\mu \\mathrm{s} / 2 = 6.25 \\mu \\mathrm{s}$.\n\n2. The relationship between the pulse duration ($\\tau$), the gyromagnetic ratio ($\\gamma$), the strength of the $\\mathscr{B}_1$ field, and the angle of rotation ($\\theta$) is given by:\n$$\\tau = \\frac{\\theta}{\\gamma \\mathscr{B}_1}$$\n\n3. For a $90^{\\circ}$ pulse, $\\theta = 90^{\\circ} = \\frac{\\pi}{2}$, and for a $180^{\\circ}$ pulse, $\\theta = 180^{\\circ} = \\pi$. \n\n4. We can set up two equations based on the given pulse durations:\n$$6.25 \\times 10^{-6} = \\frac{\\pi}{2 \\times \\gamma \\times \\mathscr{B}_1}$$\n$$12.5 \\times 10^{-6} = \\frac{\\pi}{\\gamma \\times \\mathscr{B}_1}$$\n\n5. Solving these equations simultaneously, we find:\n$$\\mathscr{B}_1 = \\frac{\\pi}{\\gamma} \\times \\frac{12.5 \\times 10^{-6}}{6.25 \\times 10^{-6}} = 2 \\times 10^{-4} \\mathrm{~T}$$\n\n6. Finally, converting the answer to the specified unit:\n$$\\mathscr{B}_1 = 2 \\times 10^{-4} \\mathrm{~T} = 20 \\times 10^{-5} \\mathrm{~T} = 20 \\times 10^{-4} \\mathrm{~T}$$\n\nTherefore, the strength of the $\\mathscr{B}_1$ field is $20 \\times 10^{-4} \\mathrm{~T}$.",
+    "summary": "The final answer is $20 \\times 10^{-4} \\mathrm{~T}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 5.9,
+    "cost": {
+        "completion_tokens": 19177,
+        "prompt_tokens": 32126,
+        "cost": 0.0448285
+    }
+},
+{
+    "content": "In 1976 it was mistakenly believed that the first of the 'superheavy' elements had been discovered in a sample of mica. Its atomic number  was believed to be 126. What is the most probable distance of the innermost electrons from the nucleus of an atom of this element? (In such elements, relativistic effects are very important, but ignore them here.) The unit of the answer should be  $\\mathrm{pm}$.",
+    "solution": "1. Determine the atomic radius of an element with atomic number 126:\nThe atomic radius of an element generally increases as you move down a group in the periodic table. Since element 126 would be in the same group as elements like lead and bismuth, we can estimate its atomic radius to be around 175 pm.\n\n2. Calculate the distance of the innermost electrons from the nucleus:\nThe innermost electrons are located in the first energy level, which is closest to the nucleus. The distance of the innermost electrons from the nucleus can be estimated using the formula for the radius of the first Bohr orbit:\nr = (0.529 * n^2) / Z\nwhere r is the radius in angstroms, n is the principal quantum number (1 for the first energy level), and Z is the atomic number.\n\nPlugging in the values:\nr = (0.529 * 1^2) / 126\nr = 0.0042 angstroms\nConverting angstroms to picometers:\nr = 0.0042 * 100 pm\nr = 0.42 pm\n\n3. Since this value is very small compared to the estimated atomic radius of 175 pm, we can conclude that the innermost electrons are essentially at the nucleus in this superheavy element.\n\nTherefore, the most probable distance of the innermost electrons from the nucleus of an atom of this element is approximately 0.42 pm.",
+    "summary": "The final answer is $0.42$ pm.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 0.42,
+    "cost": {
+        "completion_tokens": 19488,
+        "prompt_tokens": 32705,
+        "cost": 0.0455845
+    }
+},
+{
+    "content": "The ground level of $\\mathrm{Cl}$ is ${ }^2 \\mathrm{P}_{3 / 2}$ and a ${ }^2 \\mathrm{P}_{1 / 2}$ level lies $881 \\mathrm{~cm}^{-1}$ above it. Calculate the electronic contribution to the molar Gibbs energy of $\\mathrm{Cl}$ atoms at  $500 \\mathrm{~K}$. The unit of the answer should be  $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "solution": "1. Calculate the energy difference between the two levels:\n$\\Delta E = 881 \\mathrm{~cm}^{-1} \\times 1.2398 \\times 10^{-4} \\mathrm{~eV} \\mathrm{~cm} = 0.109 \\mathrm{~eV}$\n\n2. Convert the energy to Joules:\n$E = \\Delta E \\times 1.602 \\times 10^{-19} \\mathrm{~J} \\mathrm{~eV} = 1.74 \\times 10^{-20} \\mathrm{~J}$\n\n3. Calculate the partition function:\n$Q = e^{-\\Delta E / kT} = e^{-1.74 \\times 10^{-20} \\mathrm{~J} / (1.381 \\times 10^{-23} \\mathrm{~J} \\mathrm{~K}^{-1} \\times 500 \\mathrm{~K})} = 0.995$\n\n4. Calculate the electronic contribution to the molar Gibbs energy:\n$\\Delta G = -kT \\ln Q = -1.381 \\times 10^{-23} \\mathrm{~J} \\mathrm{~K}^{-1} \\times 500 \\mathrm{~K} \\times \\ln(0.995) = -107.7 \\mathrm{~J} \\mathrm{~mol}^{-1}$\n\n5. Convert the result to kJ/mol:\n$\\Delta G = -107.7 \\mathrm{~J} \\mathrm{~mol}^{-1} \\times 10^{-3} \\mathrm{~kJ} \\mathrm{~J}^{-1} = -0.1077 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$\n\nTherefore, the electronic contribution to the molar Gibbs energy of $\\mathrm{Cl}$ atoms at  $500 \\mathrm{~K}$ is $-0.1077 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "summary": "The final answer is $-0.1077 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -6.42,
+    "cost": {
+        "completion_tokens": 19942,
+        "prompt_tokens": 33446,
+        "cost": 0.046636
+    }
+},
+{
+    "content": "Calculate the melting point of ice under a pressure of 50 bar. Assume that the density of ice under these conditions is approximately $0.92 \\mathrm{~g} \\mathrm{~cm}^{-3}$ and that of liquid water is $1.00 \\mathrm{~g} \\mathrm{~cm}^{-3}$. The unit of the answer should be  $\\mathrm{K}$.",
+    "solution": "1. Calculate the difference in density between ice and liquid water:\nDensity difference = 1.00 g/cm^3 - 0.92 g/cm^3 = 0.08 g/cm^3\n\n2. Determine the change in volume when ice melts into liquid water under the given pressure:\nVolume change = Density difference / Density of water = 0.08 g/cm^3 / 1.00 g/cm^3 = 0.08 cm^3\n\n3. Use the Clausius-Clapeyron equation to calculate the melting point of ice under the given pressure:\nln(P2/P1) = ΔHvap/R * (1/T2 - 1/T1)\nln(50 bar/1 bar) = 40.79 kJ/mol / 8.314 J/molK * (1/T2 - 1/273.15 K)\nln(50) = 4910.41 * (1/T2 - 0.00366)\nln(50) / 4910.41 = 1/T2 - 0.00366\n1/T2 = 0.00366 + ln(50) / 4910.41\nT2 = 1 / (0.00366 + ln(50) / 4910.41)\n\n4. Convert the temperature from Celsius to Kelvin:\nT(K) = T(C) + 273.15\n\n5. Substitute the values and calculate the melting point of ice under 50 bar pressure:\nT(K) = 1 / (0.00366 + ln(50) / 4910.41) + 273.15\n\nBy solving the equation, we can find the melting point of ice under 50 bar pressure in Kelvin.",
+    "summary": "The final answer is $273.77 \\mathrm{~K}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 272.8,
+    "cost": {
+        "completion_tokens": 20321,
+        "prompt_tokens": 34075,
+        "cost": 0.047519000000000006
+    }
+},
+{
+    "content": "What is the temperature of a two-level system of energy separation equivalent to $400 \\mathrm{~cm}^{-1}$ when the population of the upper state is one-third that of the lower state? The unit of the answer should be  $ \\mathrm{~K}$.",
+    "solution": "1. Calculate the energy separation in Joules:\n$400 \\mathrm{~cm}^{-1} = 400 \\times 3.3356 \\times 10^{-23} \\mathrm{~J} = 1.34 \\times 10^{-20} \\mathrm{~J}$\n\n2. Let $E_1$ be the energy of the lower state and $E_2$ be the energy of the upper state. We know that $E_2 - E_1 = 1.34 \\times 10^{-20} \\mathrm{~J}$.\n\n3. Given that the population of the upper state is one-third that of the lower state, the Boltzmann distribution gives us:\n$\\frac{n_2}{n_1} = e^{-(E_2-E_1)/kT} = e^{-1/3}$\n$\\frac{n_2}{n_1} = e^{-1/3} = \\frac{1}{3} \\Rightarrow n_2 = \\frac{1}{3}n_1$\n\n4. Now, using the fact that the total population is conserved, $n_1 + n_2 = 1$, we can solve for $n_1$ and $n_2$:\n$n_1 + \\frac{1}{3}n_1 = 1 \\Rightarrow \\frac{4}{3}n_1 = 1 \\Rightarrow n_1 = \\frac{3}{4}$ and $n_2 = \\frac{1}{4}$.\n\n5. The partition function $q$ of the system is given by $q = e^{-E_1/kT} + e^{-E_2/kT}$. Substituting the known values:\n$q = e^{-E_1/kT} + e^{-(E_1+1.34 \\times 10^{-20})/kT} = \\frac{3}{4} + \\frac{1}{4}e^{-1.34 \\times 10^{-20}/kT}$\n\n6. Since $q = 1$, we can solve for $kT$:\n$\\frac{3}{4} + \\frac{1}{4}e^{-1.34 \\times 10^{-20}/kT} = 1 \\Rightarrow e^{-1.34 \\times 10^{-20}/kT} = \\frac{1}{4} \\Rightarrow -\\frac{1.34 \\times 10^{-20}}{kT} = \\ln(\\frac{1}{4})$\n$kT = \\frac{1.34 \\times 10^{-20}}{\\ln(4)} \\approx 3.52 \\times 10^{-21} \\mathrm{~J}$\n\n7. Finally, convert the energy to Kelvin using the Boltzmann constant $k = 1.38 \\times 10^{-23} \\mathrm{~J/K}$:\n$T = \\frac{3.52 \\times 10^{-21}}{1.38 \\times 10^{-23}} \\approx 255.07 \\mathrm{~K}$\n\nTherefore, the temperature of the two-level system is approximately $255 \\mathrm{~K}$.",
+    "summary": "The final answer is $255 \\mathrm{~K}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 524.0,
+    "cost": {
+        "completion_tokens": 21012,
+        "prompt_tokens": 34964,
+        "cost": 0.049
+    }
+},
+{
+    "content": "At $300 \\mathrm{~K}$ and $20 \\mathrm{~atm}$, the compression factor of a gas is 0.86 . Calculate the volume occupied by $8.2 \\mathrm{mmol}$ of the gas under these conditions. The unit of the answer should be  $\\mathrm{~cm}^3$.",
+    "solution": "1. Calculate the molar volume of the gas at the given conditions using the ideal gas law: $PV = nRT$\n$V = \\frac{nRT}{P}$\n\n2. Convert the given amount of gas from moles to volume:\n$8.2 \\mathrm{~mmol} = 0.0082 \\mathrm{~mol}$\n\n3. Plug in the values into the equation:\n$V = \\frac{0.0082 \\times 0.0821 \\times 300}{20}$\n$V = \\frac{0.0201186}{20}$\n$V = 0.00100593 \\mathrm{~m}^3$\n\n4. Convert the volume from $\\mathrm{~m}^3$ to $\\mathrm{~cm}^3$:\n$1 \\mathrm{~m}^3 = 1000 \\mathrm{~cm}^3$\n$0.00100593 \\mathrm{~m}^3 = 0.00100593 \\times 1000 \\mathrm{~cm}^3$\n$V = 1.00593 \\mathrm{~cm}^3$\n\nTherefore, the volume occupied by $8.2 \\mathrm{~mmol}$ of gas at $300 \\mathrm{~K}$ and $20 \\mathrm{~atm}$ is $1.00593 \\mathrm{~cm}^3$.",
+    "summary": "The final answer is $1.00593 \\mathrm{~cm}^3$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 8.7,
+    "cost": {
+        "completion_tokens": 21329,
+        "prompt_tokens": 35505,
+        "cost": 0.049746
+    }
+},
+{
+    "content": "A very crude model of the buckminsterfullerene molecule $\\left(\\mathrm{C}_{60}\\right)$ is to treat it as a collection of electrons in a cube with sides of length equal to the mean diameter of the molecule $(0.7 \\mathrm{~nm})$. Suppose that only the $\\pi$ electrons of the carbon atoms contribute, and predict the wavelength of the first excitation of $\\mathrm{C}_{60}$. (The actual value is $730 \\mathrm{~nm}$.) The unit of the answer should be  $\\mu \\mathrm{m}$.",
+    "solution": "1. Calculate the volume of the cube:\nThe formula for the volume of a cube is $V = s^3$, where $s$ is the length of a side. Given that the mean diameter of the molecule is $0.7 \\, \\text{nm}$, the length of a side of the cube would be half of that, so $s = 0.35 \\, \\text{nm}$.\n\nCalculating the volume:\n$V = (0.35 \\, \\text{nm})^3 = 0.042875 \\, \\text{nm}^3$\n\n2. Calculate the number of carbon atoms in $\\mathrm{C}_{60}$:\nEach carbon atom contributes 2 $\\pi$ electrons. So, for $\\mathrm{C}_{60}$, there are $60 \\times 2 = 120$ $\\pi$ electrons.\n\n3. Calculate the average electron density:\nThe average electron density is given by $n = \\dfrac{\\text{Number of electrons}}{\\text{Volume}}$.\n\nSubstitute the values:\n$n = \\dfrac{120}{0.042875} = 2800 \\, \\text{nm}^{-3}$\n\n4. Calculate the de Broglie wavelength:\nThe de Broglie wavelength is given by $\\lambda = \\dfrac{h}{p}$, where $h$ is Planck's constant and $p$ is the momentum of the electron. The momentum of the electron can be calculated using $p = \\sqrt{2mE}$, where $m$ is the mass of an electron and $E$ is the energy of the first excitation.\n\nGiven that the first excitation energy is the energy required to excite one electron to a higher energy level, we can calculate it using the formula $E = \\dfrac{h^2}{8mL^2}$, where $L$ is the length of the cube (0.7 nm).\n\nSubstitute the values:\n$E = \\dfrac{(6.63 \\times 10^{-34} \\, \\text{J s})^2}{8 \\times (9.11 \\times 10^{-31} \\, \\text{kg}) \\times (0.7 \\times 10^{-9} \\, \\text{m})^2} = 2.6 \\times 10^{-19} \\, \\text{J}$\n\nNow, calculate the momentum:\n$p = \\sqrt{2 \\times (9.11 \\times 10^{-31} \\, \\text{kg}) \\times (2.6 \\times 10^{-19} \\, \\text{J})} = 3.3 \\times 10^{-25} \\, \\text{kg m/s}$\n\nFinally, calculate the de Broglie wavelength:\n$\\lambda = \\dfrac{6.63 \\times 10^{-34} \\, \\text{J s}}{3.3 \\times 10^{-25} \\, \\text{kg m/s}} = 2.0 \\times 10^{-9} \\, \\text{m} = 2.0 \\, \\mu \\text{m}$\n\nTherefore, the predicted wavelength of the first excitation of $\\mathrm{C}_{60}$ is $2.0 \\, \\mu \\text{m}$, which is slightly different from the actual value of $730 \\, \\text{nm}$.",
+    "summary": "The final answer is $2.0 \\, \\mu \\text{m}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.6,
+    "cost": {
+        "completion_tokens": 22067,
+        "prompt_tokens": 36562,
+        "cost": 0.0513815
+    }
+}
+]

@@ -1,0 +1,15 @@
+[
+{
+    "content": "In an orienteering class, you have the goal of moving as far (straight-line distance) from base camp as possible by making three straight-line moves. You may use the following displacements in any order: (a) $\\vec{a}, 2.0 \\mathrm{~km}$ due east (directly toward the east); (b) $\\vec{b}, 2.0 \\mathrm{~km} 30^{\\circ}$ north of east (at an angle of $30^{\\circ}$ toward the north from due east); (c) $\\vec{c}, 1.0 \\mathrm{~km}$ due west. Alternatively, you may substitute either $-\\vec{b}$ for $\\vec{b}$ or $-\\vec{c}$ for $\\vec{c}$. What is the greatest distance you can be from base camp at the end of the third displacement? (We are not concerned about the direction.) The unit of the answer should be  m.",
+    "solution": "步骤1:首先，我们可以选择$\\vec{a}$位移，向东移动2.0 km。\n步骤2:选择$\\vec{b}$移动。\n步骤3:接下来我们可以选择$-\\vec{c}$移动。\n步骤4:最大距离将会是2.0 km + 2.0 km - 1.0 km = 3.0 km，所以我们应该继续选择$-\\vec{c}$移动。\n步骤5:继续选择$\\vec{c}$移动。\n",
+    "summary": "综上所述，最终答案是:3.00 km",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 4.8,
+    "cost": {
+        "completion_tokens": 5528,
+        "prompt_tokens": 115387,
+        "cost": 0.0659855
+    }
+}
+]

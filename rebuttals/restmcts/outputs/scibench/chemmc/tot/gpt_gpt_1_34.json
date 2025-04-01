@@ -1,0 +1,15 @@
+[
+{
+    "content": "Calculate the de Broglie wavelength for (a) an electron with a kinetic energy of $100 \\mathrm{eV}$ The unit of the answer should be nm .",
+    "solution": "步骤1:计算电子的动量 $p = \\sqrt{2mE}$，其中 $m$ 为电子的质量，$E$ 为电子的动能。\n步骤2:代入计算得到的动量 $p$ 值，计算出电子的de Broglie波长。\n步骤3:将计算得到的de Broglie波长单位转换为纳米。\n",
+    "summary": "综上所述，最终答案是: 0.12 nm",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 0.123,
+    "cost": {
+        "completion_tokens": 2787,
+        "prompt_tokens": 67536,
+        "cost": 0.037948499999999996
+    }
+}
+]

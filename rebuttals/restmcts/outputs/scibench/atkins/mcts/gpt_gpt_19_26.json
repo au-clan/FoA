@@ -1,0 +1,29 @@
+[
+{
+    "content": "1 1 4 6",
+    "solution": "Input: 3 9 3 5\n",
+    "summary": "The final answer is $24$.",
+    "finish": 2,
+    "value_samples": [
+        {
+            "steps": "Input: 3 9 3 5\n",
+            "value": 1.0
+        },
+        {
+            "steps": "1 - 1 = 0 (left: 0 4 6)\n",
+            "value": 0
+        },
+        {
+            "steps": "4 + 1 = 5 (left: 1 4 6)\n",
+            "value": 0
+        }
+    ],
+    "answer": "",
+    "accurate": false,
+    "cost": {
+        "completion_tokens": 1335,
+        "prompt_tokens": 2788,
+        "cost": 0.0048495
+    }
+}
+]

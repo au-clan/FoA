@@ -1,0 +1,29 @@
+[
+{
+    "content": "1 1 4 6",
+    "solution": "1 * 1 = 1 (left: 1 4 6)",
+    "summary": "The final answer is $24$.",
+    "finish": 2,
+    "value_samples": [
+        {
+            "steps": "1 + 1 = 2 (left: 2 4 6)",
+            "value": 0
+        },
+        {
+            "steps": "4 * 1 = 4 (left: 4 4 6)",
+            "value": 0
+        },
+        {
+            "steps": "1 * 1 = 1 (left: 1 4 6)",
+            "value": 1.0
+        }
+    ],
+    "answer": "",
+    "accurate": false,
+    "cost": {
+        "completion_tokens": 1123,
+        "prompt_tokens": 3670,
+        "cost": 0.006066500000000001
+    }
+}
+]

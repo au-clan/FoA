@@ -1,0 +1,15 @@
+[
+{
+    "content": "Suppose that $10.0 \\mathrm{~mol} \\mathrm{C}_2 \\mathrm{H}_6(\\mathrm{~g})$ is confined to $4.860 \\mathrm{dm}^3$ at $27^{\\circ} \\mathrm{C}$. Predict the pressure exerted by the ethane from the perfect gas. The unit of the answer should be $\\mathrm{atm}$ .",
+    "solution": "1. Calculate the number of moles of ethane:\n$10.0 \\mathrm{~mol} \\mathrm{C}_2 \\mathrm{H}_6 = \\frac{10.0 \\mathrm{~mol}}{2} = 5.0 \\mathrm{~mol}$\n\n2. Use the ideal gas law equation:\n$PV = nRT$\n\n3. Rearrange the equation to solve for pressure:\n$P = \\frac{nRT}{V}$\n\n4. Plug in the values:\n$P = \\frac{(5.0 \\mathrm{~mol})(0.0821 \\mathrm{~atm~dm^3/mol~K})(300 \\mathrm{~K})}{4.860 \\mathrm{~dm^3}}$\n\n5. Calculate the pressure:\n$P = \\frac{(5.0)(0.0821)(300)}{4.860} = 12.23 \\mathrm{~atm}$\n\nTherefore, the pressure exerted by the ethane is 12.23 atm.",
+    "summary": "The final answer is $12.23 \\mathrm{~atm}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 50.7,
+    "cost": {
+        "completion_tokens": 716,
+        "prompt_tokens": 1487,
+        "cost": 0.0018175
+    }
+}
+]

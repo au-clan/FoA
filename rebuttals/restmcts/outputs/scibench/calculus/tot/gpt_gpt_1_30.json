@@ -1,0 +1,15 @@
+[
+{
+    "content": "A fluid has density $870 \\mathrm{~kg} / \\mathrm{m}^3$ and flows with velocity $\\mathbf{v}=z \\mathbf{i}+y^2 \\mathbf{j}+x^2 \\mathbf{k}$, where $x, y$, and $z$ are measured in meters and the components of $\\mathbf{v}$ in meters per second. Find the rate of flow outward through the cylinder $x^2+y^2=4$, $0 \\leqslant z \\leqslant 1$.\r\n The unit of the answer should be  $\\mathrm{kg}/\\mathrm{s}$.",
+    "solution": "步骤1:计算流体通过圆柱体表面的流出速率，可以通过计算流体通过单位面积的流出质量来实现。根据质量守恒定律，流体通过圆柱体表面的流出速率可以表示为$\\rho \\cdot \\mathbf{v} \\cdot \\mathbf{n} dS$，其中$\\rho$为流体密度，$\\mathbf{v}$为流体速度向量，$\\mathbf{n}$为表面单位法向量，$dS$为单位面积。接下来可以继续计算流体通过圆柱体表面的流出速率。\n步骤2:继续计算流体通过圆柱体表面的流出速率，使用公式$\\rho \\cdot \\mathbf{v} \\cdot \\mathbf{n} dS$，其中$\\rho=870\\mathrm{~kg/m^3}$为流体密度，$\\mathbf{v}=z \\mathbf{i}+y^2 \\mathbf{j}+x^2 \\mathbf{k}$为流体速度向量，$\\mathbf{n}$为表面单位法向量，$dS$为单位面积。\n步骤3:计算单位法向量$\\mathbf{n}$和单位面积$dS$，然后将它们代入公式$\\rho \\cdot \\mathbf{v} \\cdot \\mathbf{n} dS$中进行计算，最终得出流体通过圆柱体表面的流出速率。\n步骤4:将圆柱体表面$x^2+y^2=4$和$0 \\leqslant z \\leqslant 1$代入计算流体通过圆柱体表面的流出速率。\n步骤5:计算圆柱体表面的单位法向量$\\mathbf{n}$和单位面积$dS$，然后将其代入公式$\\rho \\cdot \\mathbf{v} \\cdot \\mathbf{n} dS$中进行计算，得出流体通过圆柱体表面的流出速率。\n步骤6:将计算得出的流出速率乘以圆柱体表面的总面积，即$\\pi \\cdot 4 \\cdot 1$，即可得出流体通过圆柱体表面的总流出质量。\n步骤7:将流体通过圆柱体表面的总流出质量除以时间间隔，即$1$秒，即可得到流体通过圆柱体表面的流出速率，即答案。\n步骤8:将得出的流出速率乘以流体密度$870\\mathrm{~kg/m^3}$，即可得到流体通过圆柱体表面的流出速率，单位为$\\mathrm{kg/s}$，即为最终答案。\n",
+    "summary": "综上所述，最终答案是: 139.30 kg/s",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.0,
+    "cost": {
+        "completion_tokens": 17540,
+        "prompt_tokens": 314353,
+        "cost": 0.1834865
+    }
+}
+]

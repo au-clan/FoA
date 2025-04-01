@@ -1,0 +1,444 @@
+[
+{
+    "content": "Use the $D_0$ value of $\\mathrm{H}_2(4.478 \\mathrm{eV})$ and the $D_0$ value of $\\mathrm{H}_2^{+}(2.651 \\mathrm{eV})$ to calculate the first ionization energy of $\\mathrm{H}_2$ (that is, the energy needed to remove an electron from $\\mathrm{H}_2$ ). The unit of the answer should be  $\\mathrm{eV}$.",
+    "solution": "步骤1:计算$\\mathrm{H}_2$的第一电离能，可以通过$D_0(\\mathrm{H}_2) - D_0(\\mathrm{H}_2^{+})$来得到。\n步骤2:计算$4.478 \\mathrm{eV} - 2.651 \\mathrm{eV}$得到$\\mathrm{H}_2$的第一电离能。\n",
+    "summary": "综上所述，最终答案是:1.83 eV",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 15.425,
+    "cost": {
+        "completion_tokens": 2260,
+        "prompt_tokens": 46777,
+        "cost": 0.0267785
+    }
+},
+{
+    "content": "Calculate the energy of one mole of UV photons of wavelength $300 \\mathrm{~nm}$ and compare it with a typical single-bond energy of $400 \\mathrm{~kJ} / \\mathrm{mol}$. The unit of the answer should be  $\\mathrm{~kJ} / \\mathrm{mol}$.",
+    "solution": "步骤1:首先，使用能量和波长之间的关系$E = \\frac{hc}{\\lambda}$计算出UV光子的能量。\n",
+    "summary": "综上所述，最终答案是: 662.67 kJ/mol",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 399.0,
+    "cost": {
+        "completion_tokens": 3310,
+        "prompt_tokens": 70100,
+        "cost": 0.040014999999999995
+    }
+},
+{
+    "content": "Calculate the magnitude of the spin angular momentum of a proton. Give a numerical answer.  The unit of the answer should be  $10^{-35} \\mathrm{~J} \\mathrm{~s}$.",
+    "solution": "步骤1:计算 $\\sqrt{3} \\frac{\\hbar}{2}$ 的值，得出质子的自旋角动量大小。\n步骤2:将 $\\sqrt{3} \\frac{\\hbar}{2}$ 的值计算出来，即可得到质子的自旋角动量大小。\n步骤3:计算 $\\sqrt{3} \\frac{\\hbar}{2}$ 的值，即可得到质子的自旋角动量大小。\n步骤4:将 $\\sqrt{3} \\frac{\\hbar}{2}$ 乘以 $10^{-35}$，即可得到质子的自旋角动量大小。\n步骤5:将 $\\sqrt{3} \\frac{\\hbar}{2}$ 的值乘以 $10^{-35}$，即可得到质子的自旋角动量大小，并且单位为 $10^{-35} \\mathrm{~J} \\mathrm{~s}$。\n步骤6:将 $\\sqrt{3} \\frac{\\hbar}{2}$ 的值乘以 $10^{-35}$ 并加上单位，即得到质子的自旋角动量大小为... $10^{-35} \\mathrm{~J} \\mathrm{~s}$。\n",
+    "summary": "综上所述，最终答案是: 1.50e-35 J s",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 9.13,
+    "cost": {
+        "completion_tokens": 16197,
+        "prompt_tokens": 313641,
+        "cost": 0.181116
+    }
+},
+{
+    "content": "The ${ }^7 \\mathrm{Li}^1 \\mathrm{H}$ ground electronic state has $D_0=2.4287 \\mathrm{eV}, \\nu_e / c=1405.65 \\mathrm{~cm}^{-1}$, and $\\nu_e x_e / c=23.20 \\mathrm{~cm}^{-1}$, where $c$ is the speed of light. (These last two quantities are usually designated $\\omega_e$ and $\\omega_e x_e$ in the literature.) Calculate $D_e$ for ${ }^7 \\mathrm{Li}^1 \\mathrm{H}$. The unit of the answer should be  $\\mathrm{eV}$.",
+    "solution": "步骤1:使用Morse势能函数的公式$D_e = D_0 - \\frac{1}{2} \\nu_e x_e$，带入已知量计算$D_e$的值。\n",
+    "summary": "综上所述，最终答案是: 2.2577 eV",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 2.5151,
+    "cost": {
+        "completion_tokens": 17140,
+        "prompt_tokens": 337887,
+        "cost": 0.1946535
+    }
+},
+{
+    "content": "The positron has charge $+e$ and mass equal to the electron mass. Calculate in electronvolts the ground-state energy of positronium-an \"atom\" that consists of a positron and an electron. The unit of the answer should be $\\mathrm{eV}$.",
+    "solution": "步骤1:Calculate the reduced mass of the positronium system.\n步骤2:计算正电子子系统的减少质量。\n步骤3:使用减少质量计算正电子子系统的基态能量。\n步骤4:将计算得到的基态能量转换为电子伏特的单位。\n步骤5:将计算得到的正电子子系统的基态能量转换为电子伏特的单位。\n步骤6:计算正负电子体系的基态能量，并将其转换为电子伏特的单位。\n步骤7:将正电子子系统的基态能量与电子的基态能量相加，得到正负电子体系的基态能量，并将其转换为电子伏特的单位。\n步骤8:输出正负电子体系的基态能量，单位为电子伏特。\n",
+    "summary": "综上所述，最终答案是:6.80eV",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -6.8,
+    "cost": {
+        "completion_tokens": 35762,
+        "prompt_tokens": 604168,
+        "cost": 0.355727
+    }
+},
+{
+    "content": "What is the value of the angular-momentum quantum number $l$ for a $t$ orbital? The unit of the answer should be  .",
+    "solution": "步骤1:确定$t$轨道对应的主量子数$n$，然后计算出$l$的取值范围。\n步骤2:$l$的取值范围为$0 \\leq l \\leq 2$。\n步骤3:因此，$t$轨道对应的$l$的取值为$l = 0, 1, 2$。\n步骤4:结合已知信息，确定$t$轨道对应的$l$的具体取值。\n步骤5:根据规律，$t$轨道的$l$值应为0、1或2其中一个。因此，下一步是确定$t$轨道对应的$l$的具体取值。\n步骤6:确定$t$轨道对应的$l$的具体取值，即$l = 0, 1$或$2$中的一个。\n",
+    "summary": "综上所述，最终答案是: 0, 1, 2",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 14.0,
+    "cost": {
+        "completion_tokens": 42642,
+        "prompt_tokens": 728494,
+        "cost": 0.42821000000000004
+    }
+},
+{
+    "content": "How many states belong to the carbon configurations $1 s^2 2 s^2 2 p^2$? The unit of the answer should be  .",
+    "solution": "步骤1:计算2p轨道的可能状态数。根据泡利不相容原理，2p轨道有三个子轨道，每个子轨道可以容纳两个电子，所以总共有6个状态。\n",
+    "summary": "综上所述，最终答案是:6",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 15.0,
+    "cost": {
+        "completion_tokens": 43729,
+        "prompt_tokens": 751631,
+        "cost": 0.44140899999999994
+    }
+},
+{
+    "content": "Calculate the energy needed to compress three carbon-carbon single bonds and stretch three carbon-carbon double bonds to the benzene bond length $1.397 Å$. Assume a harmonicoscillator potential-energy function for bond stretching and compression. Typical carboncarbon single- and double-bond lengths are 1.53 and $1.335 Å$; typical stretching force constants for carbon-carbon single and double bonds are 500 and $950 \\mathrm{~N} / \\mathrm{m}$. The unit of the answer should be  $\\mathrm{kcal} / \\mathrm{mol}$.",
+    "solution": "步骤1:计算碳-碳单键和双键的势能差，然后根据该差值和单键、双键的拉伸压缩力常数计算能量。\n步骤2:计算三个碳-碳单键和三个碳-碳双键的总能量，然后将能量单位转换为 $\\mathrm{kcal} / \\mathrm{mol}$。\n步骤3:将三个碳-碳单键和三个碳-碳双键的能量相加，得到总能量。\n步骤4:将总能量除以 Avogadro 常数 $6.022 \\times 10^{23}$ 来得到每个分子的平均总能量。\n步骤5:根据给定的数据和已有步骤，计算碳-碳单键和双键的拉伸和压缩能量。\n",
+    "summary": "综上所述，最终答案是: 122.84 kcal/mol",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 27.0,
+    "cost": {
+        "completion_tokens": 74402,
+        "prompt_tokens": 1200830,
+        "cost": 0.7120179999999999
+    }
+},
+{
+    "content": "When a particle of mass $9.1 \\times 10^{-28} \\mathrm{~g}$ in a certain one-dimensional box goes from the $n=5$ level to the $n=2$ level, it emits a photon of frequency $6.0 \\times 10^{14} \\mathrm{~s}^{-1}$. Find the length of the box. The unit of the answer should be $\\mathrm{~nm}$.",
+    "solution": "步骤1:利用能量守恒原理，写出能级跃迁释放光子的能量表达式，并根据光子频率和能量公式，解出箱子的长度。\n步骤2:计算箱子的长度。\n",
+    "summary": "综上所述，最终答案是: 60.00 nm",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.8,
+    "cost": {
+        "completion_tokens": 76614,
+        "prompt_tokens": 1247350,
+        "cost": 0.738596
+    }
+},
+{
+    "content": "Use the normalized Numerov-method harmonic-oscillator wave functions found by going from -5 to 5 in steps of 0.1 to estimate the probability of being in the classically forbidden region for the $v=0$ state. The unit of the answer should be  .",
+    "solution": "步骤1:根据$v=0$状态的波函数，计算在经典禁区的概率。\n步骤2:计算波函数在经典禁区的取值，即在势能高于总能量的区域内，波函数的值。\n步骤3:计算波函数在经典禁区内的衰减情况，即根据数值解计算出波函数在禁区内的取值。\n步骤4:计算经典禁区内的波函数的平方，并对其进行归一化处理，得出概率值。\n步骤5:得到的概率值即为在$v=0$状态下在经典禁区的概率，单位为。\n步骤6:将经典禁区内波函数的平方值，并得出概率值。\n步骤7:对计算得到的概率值进行归一化处理，确保结果的单位正确。\n",
+    "summary": "综上所述，最终答案是:单位为1",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.16,
+    "cost": {
+        "completion_tokens": 157791,
+        "prompt_tokens": 2625162,
+        "cost": 1.5492675
+    }
+},
+{
+    "content": "Calculate the de Broglie wavelength of an electron moving at 1/137th the speed of light. (At this speed, the relativistic correction to the mass is negligible.) The unit of the answer should be $\\mathrm{~nm}$.",
+    "solution": "步骤1:计算电子的动能，然后根据动能和速度的关系求得电子的动量。\n步骤2:利用电子的动量和德布罗意波长的公式，计算电子的德布罗意波长。\n步骤3:使用德布罗意波长公式 $\\lambda = \\frac{h}{p}$，其中$h$为普朗克常数，$p$为电子的动量，计算电子的德布罗意波长。\n步骤4:使用公式 $\\lambda = \\frac{h}{p}$，其中 $h$ 为普朗克常数，$p$ 为电子的动量，计算电子的德布罗意波长。\n",
+    "summary": "综上所述，最终答案是:0.429 nm",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.332,
+    "cost": {
+        "completion_tokens": 303723,
+        "prompt_tokens": 4919393,
+        "cost": 2.9152810000000002
+    }
+},
+{
+    "content": "Calculate the angle that the spin vector $S$ makes with the $z$ axis for an electron with spin function $\\alpha$. The unit of the answer should be  $^{\\circ}$.",
+    "solution": "步骤1:确定自旋函数$\\alpha$的具体形式，然后将其表示成自旋向上和自旋向下的线性组合，进而计算$S$与$z$轴的夹角。\n步骤2:根据计算得到的自旋向上和自旋向下的线性组合，使用对应的矩阵表示自旋算符$S_z$，并对其进行归一化处理，最后计算得到$S_z$的期望值。\n步骤3:使用$S_z$的期望值和自旋矩阵的性质，计算$S$与$z$轴的夹角。\n步骤4:使用$S_z$的期望值和$S$与$S_z$的关系，计算$S$与$z$轴的夹角。\n步骤5:计算得到$S$与$z$轴的夹角的具体数值，以$^{\\circ}$为单位。\n步骤6:根据已有步骤中计算得到的自旋函数$\\alpha$的具体形式，使用对应的矩阵表示自旋算符$S_x$和$S_y$，并计算它们的期望值。\n步骤7:使用$S_x$和$S_y$的期望值，计算$S$与$x$轴和$y$轴的夹角。\n步骤8:根据自旋函数α的具体形式和$S_z$的期望值，计算得到$S$与$z$轴的夹角。\n",
+    "summary": "综上所述，最终答案是:...",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 54.7,
+    "cost": {
+        "completion_tokens": 333778,
+        "prompt_tokens": 5357512,
+        "cost": 3.179423
+    }
+},
+{
+    "content": "The AM1 valence electronic energies of the atoms $\\mathrm{H}$ and $\\mathrm{O}$ are $-11.396 \\mathrm{eV}$ and $-316.100 \\mathrm{eV}$, respectively. For $\\mathrm{H}_2 \\mathrm{O}$ at its AM1-calculated equilibrium geometry, the AM1 valence electronic energy (core-core repulsion omitted) is $-493.358 \\mathrm{eV}$ and the AM1 core-core repulsion energy is $144.796 \\mathrm{eV}$. For $\\mathrm{H}(g)$ and $\\mathrm{O}(g), \\Delta H_{f, 298}^{\\circ}$ values are 52.102 and $59.559 \\mathrm{kcal} / \\mathrm{mol}$, respectively. Find the AM1 prediction of $\\Delta H_{f, 298}^{\\circ}$ of $\\mathrm{H}_2 \\mathrm{O}(g)$. The unit of the answer should be  $\\mathrm{kcal} / \\mathrm{mol}$.",
+    "solution": "步骤1:计算 $\\mathrm{H}_2 \\mathrm{O}(g)$ 的 $\\Delta H_{f, 298}^{\\circ}$，用 $\\Delta H_{f, 298}^{\\circ}(\\mathrm{H}_2 \\mathrm{O}(g)) = \\Delta H_{f, 298}^{\\circ}(\\mathrm{H}(g)) + \\Delta H_{f, 298}^{\\circ}(\\mathrm{O}(g)) + \\text{AM1 价电子能量} + \\text{AM1 核-核排斥能}$。最后将结果转换为 $\\mathrm{kcal} / \\mathrm{mol}$ 单位。\n步骤2:将 $\\Delta H_{f, 298}^{\\circ}(\\mathrm{H}_2 \\mathrm{O}(g)) = 52.102 + 59.559 + (-493.358) + 144.796$ 计算出结果，并转换为 $\\mathrm{kcal} / \\mathrm{mol}$ 单位。\n",
+    "summary": "综上所述，最终答案是: -236.901 kcal/mol",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -59.24,
+    "cost": {
+        "completion_tokens": 336957,
+        "prompt_tokens": 5408614,
+        "cost": 3.2097425
+    }
+},
+{
+    "content": "Given that $D_e=4.75 \\mathrm{eV}$ and $R_e=0.741 Å$ for the ground electronic state of $\\mathrm{H}_2$, find $U\\left(R_e\\right)$ for this state. The unit of the answer should be  $\\mathrm{eV}$.",
+    "solution": "步骤1:使用势能公式 $U\\left(R_e\\right) = -D_e$，代入 $D_e=4.75 \\mathrm{eV}$，计算得到 $U\\left(R_e\\right)$ 的值。\n",
+    "summary": "综上所述，最终答案是:-4.75 eV",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -31.95,
+    "cost": {
+        "completion_tokens": 337923,
+        "prompt_tokens": 5432002,
+        "cost": 3.2228855000000003
+    }
+},
+{
+    "content": "For $\\mathrm{NaCl}, R_e=2.36 Å$. The ionization energy of $\\mathrm{Na}$ is $5.14 \\mathrm{eV}$, and the electron affinity of $\\mathrm{Cl}$ is $3.61 \\mathrm{eV}$. Use the simple model of $\\mathrm{NaCl}$ as a pair of spherical ions in contact to estimate $D_e$. [One debye (D) is $3.33564 \\times 10^{-30} \\mathrm{C} \\mathrm{m}$.] The unit of the answer should be  $\\mathrm{eV}$.",
+    "solution": "步骤1:计算$\\mathrm{NaCl}$的电离能$D_e$。根据公式$D_e = \\frac{(I_{\\mathrm{Na}} + E_{\\mathrm{Cl}})^2}{4R_e}$，代入$I_{\\mathrm{Na}} = 5.14 \\mathrm{eV}$，$E_{\\mathrm{Cl}} = 3.61 \\mathrm{eV}$，$R_e = 2.36 Å$，计算出$D_e$的值。\n",
+    "summary": "综上所述，最终答案是:9.15eV",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 4.56,
+    "cost": {
+        "completion_tokens": 339243,
+        "prompt_tokens": 5456224,
+        "cost": 3.2369765000000004
+    }
+},
+{
+    "content": "Find the number of CSFs in a full CI calculation of $\\mathrm{CH}_2 \\mathrm{SiHF}$ using a 6-31G** basis set. The unit of the answer should be $10^{28} $.",
+    "solution": "步骤1:生成所有的CSFs。\n步骤2:计算生成的CSFs的线性组合，得到CI波函数。\n步骤3:计算CI波函数的期望值，得到最终的结果。\n步骤4:计算所有可能的CSFs的个数。\n步骤5:计算$\\mathrm{CH}_2 \\mathrm{SiHF}$分子在6-31G**基组下所有可能的CSFs的个数。\n步骤6:将计算得到的CSFs的个数乘以$10^{28}$作为最终答案。\n步骤7:将计算得到的CSFs的个数乘以$10^{28}$得到最终结果。\n",
+    "summary": "综上所述，最终答案是:... (根据具体计算结果填入)",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.86,
+    "cost": {
+        "completion_tokens": 376896,
+        "prompt_tokens": 6132497,
+        "cost": 3.6315925000000004
+    }
+},
+{
+    "content": "Calculate the ratio of the electrical and gravitational forces between a proton and an electron. The unit of the answer should be  $10^{39}$.",
+    "solution": "步骤1:计算出电荷之间的库仑力和质量之间的引力的比值。\n步骤2:代入质子和电子的电荷量和质量，计算比值。\n步骤3:代入质子和电子的电荷量和质量，计算得出电荷和引力之间的比值。\n步骤4:计算具体数值，得到电荷和引力之间的比值。\n步骤5:将之前计算得到的比值乘以 $10^{39}$。\n步骤6:将步骤4计算得到的比值乘以 $10^{39}$，即可得到电荷和引力之间的比值的单位为 $10^{39}$。\n步骤7:结果已经得出，无需进行下一步计算。\n步骤8:将电荷和引力之间的比值乘以 $10^{39}$。\n",
+    "summary": "综上所述，最终答案是:39.33 × 10^39",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 2.0,
+    "cost": {
+        "completion_tokens": 435303,
+        "prompt_tokens": 6931995,
+        "cost": 4.118952
+    }
+},
+{
+    "content": "A one-particle, one-dimensional system has the state function\r\n$$\r\n\\Psi=(\\sin a t)\\left(2 / \\pi c^2\\right)^{1 / 4} e^{-x^2 / c^2}+(\\cos a t)\\left(32 / \\pi c^6\\right)^{1 / 4} x e^{-x^2 / c^2}\r\n$$\r\nwhere $a$ is a constant and $c=2.000 Å$. If the particle's position is measured at $t=0$, estimate the probability that the result will lie between $2.000 Å$ and $2.001 Å$. The unit of the answer should be  .",
+    "solution": "步骤1:首先，需要计算波函数在$t=0$时的值。\n",
+    "summary": "综上所述，最终答案是:0.07 Å",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.000216,
+    "cost": {
+        "completion_tokens": 436190,
+        "prompt_tokens": 6956226,
+        "cost": 4.132398
+    }
+},
+{
+    "content": "A one-particle, one-dimensional system has the state function\r\n$$\r\n\\Psi=(\\sin a t)\\left(2 / \\pi c^2\\right)^{1 / 4} e^{-x^2 / c^2}+(\\cos a t)\\left(32 / \\pi c^6\\right)^{1 / 4} x e^{-x^2 / c^2}\r\n$$\r\nwhere $a$ is a constant and $c=2.000 Å$. If the particle's position is measured at $t=0$, estimate the probability that the result will lie between $2.000 Å$ and $2.001 Å$. The unit of the answer should be  .",
+    "solution": "步骤1:计算波函数的模方$|\\Psi(x,t)|^2$并在$[2.000 Å, 2.001 Å]$范围内积分得到概率值。\n",
+    "summary": "综上所述，最终答案是:0.03",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.000216,
+    "cost": {
+        "completion_tokens": 437057,
+        "prompt_tokens": 6976391,
+        "cost": 4.143781
+    }
+},
+{
+    "content": "The $J=2$ to 3 rotational transition in a certain diatomic molecule occurs at $126.4 \\mathrm{GHz}$, where $1 \\mathrm{GHz} \\equiv 10^9 \\mathrm{~Hz}$. Find the frequency of the $J=5$ to 6 absorption in this molecule. The unit of the answer should be  $\\mathrm{GHz}$.",
+    "solution": "步骤1:计算$J=5$ to 6转动跃迁的频率。根据转动能级之间的能量差公式$\\Delta E = B \\cdot J (J+1)$，可以计算出$J=5$到$J=6$的能量差，然后将其转换为频率单位$\\mathrm{GHz}$。\n步骤2:将能量差转换为频率单位$\\mathrm{GHz}$。计算得到$J=5$到$J=6$的吸收频率。\n步骤3:将$J=5$到$J=6$的能量差除以$h$，其中$h$为普朗克常数，即$E=h \\cdot \\nu$，得到频率单位为$\\mathrm{GHz}$的吸收频率。\n步骤4:将能量差除以普朗克常数$h$，即$E=h \\cdot \\nu$，得到$J=5$到$J=6$的吸收频率。计算并得出结果。\n",
+    "summary": "综上所述，最终答案是: 254.6 GHz",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 252.8,
+    "cost": {
+        "completion_tokens": 441882,
+        "prompt_tokens": 7070840,
+        "cost": 4.198243000000001
+    }
+},
+{
+    "content": "Assume that the charge of the proton is distributed uniformly throughout the volume of a sphere of radius $10^{-13} \\mathrm{~cm}$. Use perturbation theory to estimate the shift in the ground-state hydrogen-atom energy due to the finite proton size. The potential energy experienced by the electron when it has penetrated the nucleus and is at distance $r$ from the nuclear center is $-e Q / 4 \\pi \\varepsilon_0 r$, where $Q$ is the amount of proton charge within the sphere of radius $r$. The evaluation of the integral is simplified by noting that the exponential factor in $\\psi$ is essentially equal to 1 within the nucleus.\r\n The unit of the answer should be  $10^{-8} \\mathrm{eV}$.",
+    "solution": "步骤1:根据题目所给的势能公式，计算电子在核心内运动时受到的电势能。\n",
+    "summary": "综上所述，最终答案是: -0.85eV",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.2,
+    "cost": {
+        "completion_tokens": 443263,
+        "prompt_tokens": 7095296,
+        "cost": 4.2125425
+    }
+},
+{
+    "content": "An electron in a three-dimensional rectangular box with dimensions of $5.00 Å, 3.00 Å$, and $6.00 Å$ makes a radiative transition from the lowest-lying excited state to the ground state. Calculate the frequency of the photon emitted. The unit of the answer should be  $10^{14} \\mathrm{~s}^{-1}$.",
+    "solution": "步骤1:首先计算最低激发态和基态之间的能量差，然后利用能量等于光子频率乘以普朗克常数的公式计算光子的频率。\n步骤2:计算最低激发态和基态之间的能量差。\n步骤3:使用能量和频率的关系，将光子的能量转换为频率。\n步骤4:将能量差代入能量和频率的关系公式，计算出光子的频率。\n步骤5:计算最低激发态和基态之间的能量差，然后代入公式计算光子的频率。\n步骤6:将所计算得到的能量差代入能量和频率的关系公式，计算出光子的频率。\n步骤7:计算最低激发态和基态之间的能量差，并代入能量和频率的关系公式，计算出光子的频率。\n",
+    "summary": "综上所述，最终答案是:3.00 × 10^14 s^-1",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 7.58,
+    "cost": {
+        "completion_tokens": 584009,
+        "prompt_tokens": 8904002,
+        "cost": 5.3280145
+    }
+},
+{
+    "content": "Do $\\mathrm{HF} / 6-31 \\mathrm{G}^*$ geometry optimizations on one conformers of $\\mathrm{HCOOH}$ with $\\mathrm{OCOH}$ dihedral angle of $0^{\\circ}$. Calculate the dipole moment. The unit of the answer should be  $\\mathrm{D}$.",
+    "solution": "步骤1:进行$\\mathrm{HF} / 6-31 \\mathrm{G}^*$基组的几何优化，然后计算$\\mathrm{HCOOH}$分子的偶极矩。将答案单位转换为$\\mathrm{D}$。\n步骤2:调整$\\mathrm{HCOOH}$分子的构象，使得$\\mathrm{OCOH}$二面角为$0^{\\circ}$，然后重新计算偶极矩。\n步骤3:继续对$\\mathrm{HCOOH}$分子进行HF/6-31G*基组的优化，并计算偶极矩。\n步骤4:调整$\\mathrm{HCOOH}$分子的构象，使得$\\mathrm{OCOH}$二面角为$60^{\\circ}$，然后重新进行HF/6-31G*基组的优化，并计算偶极矩。\n步骤5:调整$\\mathrm{HCOOH}$分子的构象，使得$\\mathrm{OCOH}$二面角为$120^{\\circ}$，然后重新进行HF/6-31G*基组的优化，并计算偶极矩。\n步骤6:绘制$\\mathrm{OCOH}$二面角与偶极矩之间的关系图。\n步骤7:进行数据分析，找出$\\mathrm{OCOH}$二面角与偶极矩之间的规律，并进一步探讨分子构象对偶极矩的影响。\n",
+    "summary": "综上所述，最终答案是: xx.xxD",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.41,
+    "cost": {
+        "completion_tokens": 706171,
+        "prompt_tokens": 10410846,
+        "cost": 6.2646795
+    }
+},
+{
+    "content": "Frozen-core $\\mathrm{SCF} / \\mathrm{DZP}$ and CI-SD/DZP calculations on $\\mathrm{H}_2 \\mathrm{O}$ at its equilibrium geometry gave energies of -76.040542 and -76.243772 hartrees. Application of the Davidson correction brought the energy to -76.254549 hartrees. Find the coefficient of $\\Phi_0$ in the normalized CI-SD wave function. The unit of the answer should be  .",
+    "solution": "步骤1:由于CI-SD波函数是通过对Slater行列式进行线性组合得到的，而主态$\\Phi_0$对应的Slater行列式会对应最大的系数，因此我们可以通过计算归一化系数来得到$\\Phi_0$的系数。\n步骤2:计算CI-SD波函数的归一化系数，从中得到$\\Phi_0$的系数。\n",
+    "summary": "综上所述，最终答案是: 1.00",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 0.9731,
+    "cost": {
+        "completion_tokens": 883076,
+        "prompt_tokens": 13049576,
+        "cost": 7.8494019999999995
+    }
+},
+{
+    "content": "Let $w$ be the variable defined as the number of heads that show when two coins are tossed simultaneously. Find $\\langle w\\rangle$. The unit of the answer should be  .",
+    "solution": "步骤1:期望值的计算公式为 $\\langle w\\rangle = p_1x_1 + p_2x_2 + ... + p_nx_n$，其中$p_i$为事件发生的概率，$x_i$为事件发生时的值。在这个问题中，两枚硬币朝上的次数分别可以为0, 1, 2，而每种情况的概率为$\\frac{1}{4}$, $\\frac{1}{2}$, $\\frac{1}{4}$。\n",
+    "summary": "综上所述，最终答案是:1.00",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 1.0,
+    "cost": {
+        "completion_tokens": 884464,
+        "prompt_tokens": 13072756,
+        "cost": 7.863074
+    }
+},
+{
+    "content": "Calculate the force on an alpha particle passing a gold atomic nucleus at a distance of $0.00300 Å$. The unit of the answer should be  $\\mathrm{~N}$.",
+    "solution": "步骤1:计算金原子核和α粒子之间的库仑力，使用公式$F = k \\frac{q_1q_2}{r^2}$进行计算。其中，金原子核的电荷量为正电子电荷的79倍，α粒子为带正电荷的粒子。记得将距离$r$转换为标准国际单位制。\n",
+    "summary": "综上所述，最终答案是: 4.49e-10 N",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.405,
+    "cost": {
+        "completion_tokens": 885828,
+        "prompt_tokens": 13095997,
+        "cost": 7.8767404999999995
+    }
+},
+{
+    "content": "When an electron in a certain excited energy level in a one-dimensional box of length $2.00  Å$ makes a transition to the ground state, a photon of wavelength $8.79 \\mathrm{~nm}$ is emitted. Find the quantum number of the initial state. The unit of the answer should be .",
+    "solution": "步骤1:使用能级跃迁的公式 $E = \\frac{hc}{\\lambda} = \\frac{h^2}{8mL^2} \\left( n_f^2 - n_i^2 \\right)$，其中 $n_f$ 为最终态的量子数（基态为1），$\\lambda$ 为波长，$h$ 为普朗克常数，$m$ 为电子质量，$L$ 为盒子长度，解出初始态的量子数 $n_i$。\n",
+    "summary": "综上所述，最终答案是:4",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 4.0,
+    "cost": {
+        "completion_tokens": 887107,
+        "prompt_tokens": 13119607,
+        "cost": 7.890464
+    }
+},
+{
+    "content": "For a macroscopic object of mass $1.0 \\mathrm{~g}$ moving with speed $1.0 \\mathrm{~cm} / \\mathrm{s}$ in a one-dimensional box of length $1.0 \\mathrm{~cm}$, find the quantum number $n$. The unit of the answer should be $10^{26}$.",
+    "solution": "步骤1:由于给定了物体的质量和速度，可以计算出其动能和动量，然后利用量子力学的原理来量子化这些物理量，从而得出其对应的量子数。\n步骤2:量子化物体的动能和动量，然后利用相应的量子力学公式计算出量子数$n$。\n步骤3:计算物体的动能和动量，然后使用量子力学公式得出量子数$n$。计算公式为$E_n = \\frac{n^2 \\pi^2 \\hbar^2}{2mL^2}$和$p_n = \\frac{n \\pi \\hbar}{L}$，其中$n$为量子数，$\\hbar$为约化普朗克常数，$m$为物体质量，$L$为箱子长度。\n步骤4:将物体的质量、速度代入动能和动量的公式中，然后代入量子力学公式计算出量子数$n$。\n",
+    "summary": "综上所述，最终答案是: 10.00 * 10^26",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 3.0,
+    "cost": {
+        "completion_tokens": 930396,
+        "prompt_tokens": 13960607,
+        "cost": 8.3758975
+    }
+},
+{
+    "content": "For the $\\mathrm{H}_2$ ground electronic state, $D_0=4.4781 \\mathrm{eV}$. Find $\\Delta H_0^{\\circ}$ for $\\mathrm{H}_2(g) \\rightarrow 2 \\mathrm{H}(g)$ in $\\mathrm{kJ} / \\mathrm{mol}$ The unit of the answer should be  $\\mathrm{~kJ} / \\mathrm{mol}$.",
+    "solution": "步骤1:使用公式$\\Delta H_0^{\\circ} = 2D_0$，代入$D_0=4.4781 \\mathrm{eV}$计算得到结果。\n",
+    "summary": "综上所述，最终答案是:8.96",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 432.07,
+    "cost": {
+        "completion_tokens": 931365,
+        "prompt_tokens": 13984270,
+        "cost": 8.3891825
+    }
+},
+{
+    "content": "The contribution of molecular vibrations to the molar internal energy $U_{\\mathrm{m}}$ of a gas of nonlinear $N$-atom molecules is (zero-point vibrational energy not included) $U_{\\mathrm{m}, \\mathrm{vib}}=R \\sum_{s=1}^{3 N-6} \\theta_s /\\left(e^{\\theta_s / T}-1\\right)$, where $\\theta_s \\equiv h \\nu_s / k$ and $\\nu_s$ is the vibrational frequency of normal mode $s$. Calculate the contribution to $U_{\\mathrm{m}, \\text { vib }}$ at $25^{\\circ} \\mathrm{C}$ of a normal mode with wavenumber $\\widetilde{v} \\equiv v_s / c$ of $900 \\mathrm{~cm}^{-1}$. The unit of the answer should be  $\\mathrm{kJ} / \\mathrm{mol}$.",
+    "solution": "步骤1:将 $\\theta_s$ 中的 $\\nu_s$ 替换为 $\\widetilde{v} \\equiv v_s / c$，然后代入表达式计算出 $U_{\\mathrm{m}, \\text { vib }}$。\n步骤2:将 $\\theta_s$ 中的 $\\nu_s$ 替换为 $900 \\mathrm{~cm}^{-1}/c$，然后代入表达式计算出 $U_{\\mathrm{m}, \\text { vib }}$。\n步骤3:将计算得到的 $U_{\\mathrm{m}, \\text { vib }}$ 结果乘以 $8.314 \\times 10^{-3}$，即常数 $R$ 的值，以转换为 $\\mathrm{kJ} / \\mathrm{mol}$ 的单位。\n步骤4:将已计算得到的 $U_{\\mathrm{m}, \\text { vib }}$ 结果乘以 $8.314 \\times 10^{-3}$，得到最终的贡献值并以 $\\mathrm{kJ} / \\mathrm{mol}$ 的单位表示。\n",
+    "summary": "综上所述，最终答案是:0.58kJ/mol",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.14,
+    "cost": {
+        "completion_tokens": 936845,
+        "prompt_tokens": 14084324,
+        "cost": 8.4474295
+    }
+},
+{
+    "content": "Calculate the magnitude of the spin magnetic moment of an electron. The unit of the answer should be  $10^{-23} \\mathrm{~J} / \\mathrm{T}$.",
+    "solution": "步骤1:使用公式 $\\mu_s = g \\frac{e}{2m_e} \\hbar$ 计算电子的自旋磁矩大小。其中，$g$ 是朗德因子，取2；$e$ 是电子电荷；$m_e$ 是电子质量；$\\hbar$ 是约化普朗克常数。\n步骤2:代入 $g=2, e=1.6 \\times 10^{-19} \\mathrm{C}, m_e=9.11 \\times 10^{-31} \\mathrm{kg}, \\hbar=1.05 \\times 10^{-34} \\mathrm{J \\cdot s}$ 进行计算得出结果。\n",
+    "summary": "综上所述，最终答案是: 9.28",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.61,
+    "cost": {
+        "completion_tokens": 938900,
+        "prompt_tokens": 14130266,
+        "cost": 8.473483
+    }
+},
+{
+    "content": "A particle is subject to the potential energy $V=a x^4+b y^4+c z^4$. If its ground-state energy is $10 \\mathrm{eV}$, calculate $\\langle V\\rangle$ for the ground state. The unit of the answer should be  $\\mathrm{eV}$.",
+    "solution": "步骤1:计算基态能量$E_0$。\n",
+    "summary": "综上所述，最终答案是:10.00 eV",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 3.333333333,
+    "cost": {
+        "completion_tokens": 939954,
+        "prompt_tokens": 14153536,
+        "cost": 8.486699
+    }
+},
+{
+    "content": "For an electron in a certain rectangular well with a depth of $20.0 \\mathrm{eV}$, the lowest energy level lies $3.00 \\mathrm{eV}$ above the bottom of the well. Find the width of this well. Hint: Use $\\tan \\theta=\\sin \\theta / \\cos \\theta$ The unit of the answer should be $\\mathrm{~nm}$.",
+    "solution": "步骤1:首先，可以利用势阱的能量公式$E = \\frac{h^2}{8mL^2}$来求解势阱的宽度$L$。\n步骤2:将给定的能量值代入$E = \\frac{h^2}{8mL^2}$，并解出势阱的宽度$L$。\n步骤3:将给定的深度$20.0 \\mathrm{eV}$和最低能级距离$3.00 \\mathrm{eV}$代入$L = \\frac{h}{2\\sqrt{2m(E_0-E_1)}}$，解出势阱的宽度。\n步骤4:将已知的深度和最低能级距离代入$L = \\frac{h}{2\\sqrt{2m(E_0-E_1)}}$，计算得出势阱的宽度。\n步骤5:将已知的深度$20.0 \\mathrm{eV}$和最低能级距离$3.00 \\mathrm{eV}$代入$L = \\frac{h}{2\\sqrt{2m(E_0-E_1)}}$，计算得出势阱的宽度。\n",
+    "summary": "综上所述，最终答案是:1.90 nm",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.264,
+    "cost": {
+        "completion_tokens": 946026,
+        "prompt_tokens": 14267142,
+        "cost": 8.55261
+    }
+},
+{
+    "content": "Calculate the uncertainty $\\Delta L_z$ for the hydrogen-atom stationary state: $2 p_z$. The unit of the answer should be  .",
+    "solution": "步骤1:利用角动量不确定性原理$\\Delta L_z \\Delta \\phi \\geq \\frac{h}{2}$，其中$h$为普朗克常数，$\\Delta \\phi$为$2p_z$轨道的角度不确定性，求解$\\Delta L_z$。\n",
+    "summary": "综上所述，最终答案是:ħ",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.0,
+    "cost": {
+        "completion_tokens": 947050,
+        "prompt_tokens": 14290136,
+        "cost": 8.565643
+    }
+}
+]

@@ -1,0 +1,873 @@
+[
+{
+    "content": "Consider the half-cell reaction $\\operatorname{AgCl}(s)+\\mathrm{e}^{-} \\rightarrow$ $\\operatorname{Ag}(s)+\\mathrm{Cl}^{-}(a q)$. If $\\mu^{\\circ}(\\mathrm{AgCl}, s)=-109.71 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$, and if $E^{\\circ}=+0.222 \\mathrm{~V}$ for this half-cell, calculate the standard Gibbs energy of formation of $\\mathrm{Cl}^{-}(a q)$. The unit of the answer should be  $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "solution": "1. The standard Gibbs energy change for a half-cell reaction can be related to the standard electrode potential by the equation:\n\n$\\Delta G^{\\circ} = -nF E^{\\circ}$\n\nwhere:\n$\\Delta G^{\\circ}$ = standard Gibbs energy change\n$n$ = number of moles of electrons transferred in the reaction\n$F$ = Faraday constant (96,485 C/mol)\n$E^{\\circ}$ = standard electrode potential\n\n2. In the given half-cell reaction, one mole of electrons is transferred, so $n = 1$.\n\n3. Substituting the values into the equation:\n\n$\\Delta G^{\\circ} = -1 \\times 96485 \\times 0.222$\n\n$\\Delta G^{\\circ} = -21402.57$ J/mol\n\n4. Converting the result to kJ/mol:\n\n$\\Delta G^{\\circ} = -21.40257$ kJ/mol\n\n5. The standard Gibbs energy of formation of $\\mathrm{Cl}^{-}(aq)$ can be calculated using the equation:\n\n$\\Delta G^{\\circ}_{f}(\\mathrm{Cl}^{-}) = \\Delta G^{\\circ}(\\mathrm{AgCl}) + \\Delta G^{\\circ}(\\mathrm{Ag})$\n\n6. We know that $\\Delta G^{\\circ}(\\mathrm{AgCl}) = -109.71$ kJ/mol from the given data.\n\n7. The standard Gibbs energy of formation of $\\mathrm{Ag}$ is $0$ kJ/mol.\n\n8. Substituting the values into the equation:\n\n$\\Delta G^{\\circ}_{f}(\\mathrm{Cl}^{-}) = -109.71 + 0$\n\n$\\Delta G^{\\circ}_{f}(\\mathrm{Cl}^{-}) = -109.71$ kJ/mol\n\nTherefore, the standard Gibbs energy of formation of $\\mathrm{Cl}^{-}(aq)$ is $-109.71$ kJ/mol.",
+    "summary": "The final answer is $-109.71$ kJ/mol.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -131.1,
+    "cost": {
+        "completion_tokens": 9098,
+        "prompt_tokens": 16369,
+        "cost": 0.021831500000000004
+    }
+},
+{
+    "content": "$\\mathrm{N}_2 \\mathrm{O}_3$ dissociates according to the equilibrium $\\mathrm{N}_2 \\mathrm{O}_3(\\mathrm{~g}) \\rightleftharpoons \\mathrm{NO}_2(\\mathrm{~g})+\\mathrm{NO}(\\mathrm{g})$. At $298 \\mathrm{~K}$ and one bar pressure, the degree of dissociation defined as the ratio of moles of $\\mathrm{NO}_2(g)$ or $\\mathrm{NO}(g)$ to the moles of the reactant assuming no dissociation occurs is $3.5 \\times 10^{-3}$. Calculate $\\Delta G_R^{\\circ}$ for this reaction. The unit of the answer should be  $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "solution": "Step 1: Write the expression for the equilibrium constant, $K_c$.\nThe equilibrium constant, $K_c$, is given by:\n$K_c = \\frac{[\\mathrm{NO}_2][\\mathrm{NO}]}{[\\mathrm{N}_2\\mathrm{O}_3]}$\n\nStep 2: Use the degree of dissociation to find the equilibrium concentrations.\nLet the initial moles of $\\mathrm{N}_2\\mathrm{O}_3$ be $x$. At equilibrium, $3.5 \\times 10^{-3}x$ moles of $\\mathrm{NO}_2$ and $\\mathrm{NO}$ will be formed. Therefore, the equilibrium concentrations are:\n$[\\mathrm{NO}_2] = [\\mathrm{NO}] = 3.5 \\times 10^{-3}x$\n$[\\mathrm{N}_2\\mathrm{O}_3] = x$\n\nStep 3: Substitute the equilibrium concentrations into the expression for $K_c$.\n$K_c = \\frac{(3.5 \\times 10^{-3}x)(3.5 \\times 10^{-3}x)}{x^2} = (3.5 \\times 10^{-3})^2$\n\nStep 4: Calculate $\\Delta G_R^{\\circ}$ using the relationship between $\\Delta G_R^{\\circ}$ and $K_c$.\n$\\Delta G_R^{\\circ} = -RT\\ln(K_c)$\n$R = 8.314 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1}$ (gas constant)\n$T = 298 \\mathrm{~K}$\n\nNow, plug in the values:\n$\\Delta G_R^{\\circ} = -(8.314)(298)\\ln((3.5 \\times 10^{-3})^2) \\approx -57.2 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$\n\nTherefore, $\\Delta G_R^{\\circ}$ for this reaction is approximately $-57.2 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "summary": "The final answer is $-57.2 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 28.0,
+    "cost": {
+        "completion_tokens": 18970,
+        "prompt_tokens": 34596,
+        "cost": 0.045752999999999995
+    }
+},
+{
+    "content": "Approximately how many oxygen molecules arrive each second at the mitochondrion of an active person with a mass of $84 \\mathrm{~kg}$ ? The following data are available: Oxygen consumption is about $40 . \\mathrm{mL}$ of $\\mathrm{O}_2$ per minute per kilogram of body weight, measured at $T=300 . \\mathrm{K}$ and $P=1.00 \\mathrm{~atm}$. In an adult there are about $1.6 \\times 10^{10}$ cells per kg body mass. Each cell contains about 800 . mitochondria. The unit of the answer should be $10^6$ .",
+    "solution": "1. Calculate the total oxygen consumption per minute for the person:\nTotal oxygen consumption = (40 mL/min/kg) x 84 kg = 3360 mL/min\n\n2. Convert the total oxygen consumption to molecules per minute:\n1 mole of O2 = 22.4 L at STP\n1 mole of O2 = 6.022 x 10^23 molecules\n\n3360 mL/min x (1 L/1000 mL) x (1 mole/22.4 L) x (6.022 x 10^23 molecules/mole) = 9.04 x 10^21 molecules/min\n\n3. Calculate the number of oxygen molecules arriving at each mitochondrion per minute:\nTotal number of mitochondria = 1.6 x 10^10 cells/kg x 84 kg x 800 mitochondria = 1.28 x 10^13 mitochondria\n\nNumber of oxygen molecules arriving at each mitochondrion per minute = 9.04 x 10^21 molecules/min / 1.28 x 10^13 mitochondria = 7.06 x 10^8 molecules/min\n\n4. Convert the number of oxygen molecules arriving at each mitochondrion per minute to per second:\n7.06 x 10^8 molecules/min x (1 min/60 sec) = 1.18 x 10^7 molecules/sec\n\nTherefore, approximately 11.8 million oxygen molecules arrive at each mitochondrion of an active person with a mass of 84 kg every second.",
+    "summary": "The final answer is $11.8$ million.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.27,
+    "cost": {
+        "completion_tokens": 27261,
+        "prompt_tokens": 50123,
+        "cost": 0.065953
+    }
+},
+{
+    "content": "In a FRET experiment designed to monitor conformational changes in T4 lysozyme, the fluorescence intensity fluctuates between 5000 and 10,000 counts per second.\r\nAssuming that 7500 counts represents a FRET efficiency of 0.5 , what is the change in FRET pair separation distance during the reaction? For the tetramethylrhodamine/texas red FRET pair employed $r_0=50 . Å$. The unit of the answer should be  $Å$.",
+    "solution": "1. Calculate the FRET efficiency (E) for the given fluorescence intensity range:\nE = (I - I_min) / (I_max - I_min)\nwhere I = 7500 counts, I_min = 5000 counts, I_max = 10000 counts\nE = (7500 - 5000) / (10000 - 5000)\nE = 0.5\n\n2. Use the formula for FRET efficiency in terms of the donor-acceptor separation distance (r):\nE = 1 / (1 + (r / r_0)^6)\nwhere r_0 = 50 Å\n\n3. Rearrange the formula to solve for r:\nr = r_0 * ((1 / E) - 1)^(1/6)\nr = 50 * ((1 / 0.5) - 1)^(1/6)\nr = 50 * (2 - 1)^(1/6)\nr = 50 * 1^(1/6)\nr = 50 Å\n\nTherefore, the change in FRET pair separation distance during the reaction is 50 Å.",
+    "summary": "The final answer is 50 Å.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 12.0,
+    "cost": {
+        "completion_tokens": 34320,
+        "prompt_tokens": 63210,
+        "cost": 0.083085
+    }
+},
+{
+    "content": "An air conditioner is a refrigerator with the inside of the house acting as the cold reservoir and the outside atmosphere acting as the hot reservoir. Assume that an air conditioner consumes $1.70 \\times 10^3 \\mathrm{~W}$ of electrical power, and that it can be idealized as a reversible Carnot refrigerator. If the coefficient of performance of this device is 3.30 , how much heat can be extracted from the house in a day? The unit of the answer should be  $10^8 \\mathrm{~J}$.",
+    "solution": "1. First, we need to calculate the amount of heat absorbed from the cold reservoir (inside the house). We can use the Carnot efficiency formula:\n\n\\[ \\text{Efficiency} = \\frac{T_{\\text{hot}} - T_{\\text{cold}}}{T_{\\text{hot}}} \\]\n\nGiven that the coefficient of performance (COP) is 3.30, we know that:\n\n\\[ \\text{COP} = \\frac{\\text{Heat absorbed from cold reservoir}}{\\text{Work input}} \\]\n\n2. We are given the COP, so we can rearrange the formula to find the heat absorbed from the cold reservoir:\n\n\\[ \\text{Heat absorbed from cold reservoir} = \\text{COP} \\times \\text{Work input} \\]\n\n3. The work input can be calculated by multiplying the power input by the time interval (1 day = 86400 seconds):\n\n\\[ \\text{Work input} = \\text{Power input} \\times \\text{Time interval} \\]\n\n\\[ \\text{Work input} = 1.70 \\times 10^3 \\times 86400 = 146880 \\times 10^3 \\mathrm{~J} \\]\n\n4. Now we can substitute the values into the equation to find the heat absorbed from the cold reservoir:\n\n\\[ \\text{Heat absorbed from cold reservoir} = 3.30 \\times 146880 \\times 10^3 = 484704 \\times 10^3 \\mathrm{~J} \\]\n\n5. Finally, we convert the answer to the desired units:\n\n\\[ 484704 \\times 10^3 \\mathrm{~J} = 4.84704 \\times 10^8 \\mathrm{~J} \\]\n\nTherefore, the amount of heat that can be extracted from the house in a day is $4.84704 \\times 10^8 \\mathrm{~J}$.",
+    "summary": "The final answer is $4.84704 \\times 10^8 \\mathrm{~J}$.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 4.85,
+    "cost": {
+        "completion_tokens": 42919,
+        "prompt_tokens": 77843,
+        "cost": 0.1033
+    }
+},
+{
+    "content": "An air conditioner is a refrigerator with the inside of the house acting as the cold reservoir and the outside atmosphere acting as the hot reservoir. Assume that an air conditioner consumes $1.70 \\times 10^3 \\mathrm{~W}$ of electrical power, and that it can be idealized as a reversible Carnot refrigerator. If the coefficient of performance of this device is 3.30 , how much heat can be extracted from the house in a day? The unit of the answer should be  $10^8 \\mathrm{~J}$.",
+    "solution": "Step 1: Calculate the efficiency of the Carnot refrigerator using the coefficient of performance (COP):\nCOP = $\\frac{Q_{\\text{c}}}{W_{\\text{in}}}$\nwhere $Q_{\\text{c}}$ is the heat extracted from the cold reservoir (house) and $W_{\\text{in}}$ is the work input (electrical power consumed).\n\nGiven COP = 3.30, $W_{\\text{in}} = 1.70 \\times 10^3 \\mathrm{~W}$, we can solve for $Q_{\\text{c}}$:\n$3.30 = \\frac{Q_{\\text{c}}}{1.70 \\times 10^3}$\n$Q_{\\text{c}} = 3.30 \\times 1.70 \\times 10^3$\n$Q_{\\text{c}} = 5.61 \\times 10^3 \\mathrm{~J}$\n\nStep 2: Calculate the heat extracted per second (power) from the house:\n$5.61 \\times 10^3 \\mathrm{~J}$ per second\n\nStep 3: Calculate the heat extracted per day:\nThere are 24 hours in a day, each with 3600 seconds:\n$5.61 \\times 10^3 \\times 3600 \\times 24 = 483.84 \\times 10^6 \\mathrm{~J}$\n\nTherefore, the heat extracted from the house in a day is $4.84 \\times 10^8 \\mathrm{~J}$.",
+    "summary": "The final answer is $4.84 \\times 10^8 \\mathrm{~J}$.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 4.85,
+    "cost": {
+        "completion_tokens": 51983,
+        "prompt_tokens": 92931,
+        "cost": 0.12444
+    }
+},
+{
+    "content": "You have collected a tissue specimen that you would like to preserve by freeze drying. To ensure the integrity of the specimen, the temperature should not exceed $-5.00{ }^{\\circ} \\mathrm{C}$. The vapor pressure of ice at $273.16 \\mathrm{~K}$ is $624 \\mathrm{~Pa}$. What is the maximum pressure at which the freeze drying can be carried out? The unit of the answer should be  $\\mathrm{~Pa}$.",
+    "solution": "1. The maximum pressure at which freeze drying can be carried out is determined by the triple point of water, where all three phases (solid, liquid, gas) coexist in equilibrium.\n\n2. At the triple point of water, the vapor pressure of ice is equal to the vapor pressure of water. At $273.16 \\mathrm{~K}$, the vapor pressure of ice is given as $624 \\mathrm{~Pa}$.\n\n3. The maximum pressure at which freeze drying can be carried out is the vapor pressure of ice at $273.16 \\mathrm{~K}$, which is $624 \\mathrm{~Pa}$.\n\nTherefore, the maximum pressure at which freeze drying can be carried out is $624 \\mathrm{~Pa}$.",
+    "summary": "The final answer is $624 \\mathrm{~Pa}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 425.0,
+    "cost": {
+        "completion_tokens": 58861,
+        "prompt_tokens": 105543,
+        "cost": 0.141063
+    }
+},
+{
+    "content": "The molar constant volume heat capacity for $\\mathrm{I}_2(\\mathrm{~g})$ is $28.6 \\mathrm{~J} \\mathrm{~mol}^{-1} \\mathrm{~K}^{-1}$. What is the vibrational contribution to the heat capacity? You can assume that the contribution from the electronic degrees of freedom is negligible. The unit of the answer should be  $\\mathrm{~J} \\mathrm{~mol}^{-1} \\mathrm{~K}^{-1}$.",
+    "solution": "1. First, we need to know the total molar heat capacity ($C_{\\text{total}}$) of $\\mathrm{I}_2(\\mathrm{~g})$. The molar constant volume heat capacity ($C_V$) is given as $28.6 \\mathrm{~J} \\mathrm{~mol}^{-1} \\mathrm{~K}^{-1}$.\n\n2. The total molar heat capacity ($C_{\\text{total}}$) can be expressed as the sum of the molar constant volume heat capacity ($C_V$) and the vibrational contribution to the heat capacity ($C_{\\text{vib}}$).\n   \\[ C_{\\text{total}} = C_V + C_{\\text{vib}} \\]\n\n3. Since the contribution from the electronic degrees of freedom is negligible, we can assume that the vibrational contribution to the heat capacity is the only other significant contribution.\n   \\[ C_{\\text{vib}} = C_{\\text{total}} - C_V \\]\n\n4. Substituting the given values into the equation:\n   \\[ C_{\\text{vib}} =  C_{\\text{total}} - C_V = 0 + C_V = 28.6 \\mathrm{~J} \\mathrm{~mol}^{-1} \\mathrm{~K}^{-1} \\]\n\n5. Therefore, the vibrational contribution to the heat capacity of $\\mathrm{I}_2(\\mathrm{~g})$ is $28.6 \\mathrm{~J} \\mathrm{~mol}^{-1} \\mathrm{~K}^{-1}$.",
+    "summary": "The final answer is $28.6 \\mathrm{~J} \\mathrm{~mol}^{-1} \\mathrm{~K}^{-1}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 7.82,
+    "cost": {
+        "completion_tokens": 68590,
+        "prompt_tokens": 120981,
+        "cost": 0.1633755
+    }
+},
+{
+    "content": "The diffusion coefficient for $\\mathrm{CO}_2$ at $273 \\mathrm{~K}$ and $1 \\mathrm{~atm}$ is $1.00 \\times 10^{-5} \\mathrm{~m}^2 \\mathrm{~s}^{-1}$. Estimate the collisional cross section of $\\mathrm{CO}_2$ given this diffusion coefficient. The unit of the answer should be  $\\mathrm{~nm}^2$.",
+    "solution": "1. The diffusion coefficient $D$ is related to the collisional cross section $\\sigma$ by the equation:\n$$D = \\frac{kT}{3\\pi \\eta d}$$\nwhere:\n- $k$ is the Boltzmann constant ($1.38 \\times 10^{-23} \\mathrm{~m}^2 \\mathrm{kg} \\mathrm{~s}^{-2} \\mathrm{~K}^{-1}$),\n- $T$ is the temperature (in Kelvin),\n- $\\eta$ is the viscosity of the gas,\n- $d$ is the diameter of the gas molecule.\n\n2. To estimate the collisional cross section, we need to rearrange the equation to solve for $\\sigma$:\n$$\\sigma = \\frac{kT}{3\\pi \\eta D}$$\n\n3. Given:\n- $T = 273 \\mathrm{~K}$,\n- $D = 1.00 \\times 10^{-5} \\mathrm{~m}^2 \\mathrm{~s}^{-1}$.\n\n4. The viscosity of $\\mathrm{CO}_2$ at $273 \\mathrm{~K}$ and $1 \\mathrm{~atm}$ is approximately $0.000018 \\mathrm{~kg} \\mathrm{~m}^{-1} \\mathrm{~s}^{-1}$.\n\n5. The diameter of $\\mathrm{CO}_2$ molecule is approximately $0.33 \\mathrm{~nm}$.\n\n6. Substituting the values into the equation:\n$$\\sigma = \\frac{(1.38 \\times 10^{-23} \\mathrm{~m}^2 \\mathrm{kg} \\mathrm{~s}^{-2} \\mathrm{~K}^{-1})(273 \\mathrm{~K})}{3\\pi (0.000018 \\mathrm{~kg} \\mathrm{~m}^{-1} \\mathrm{~s}^{-1})(1.00 \\times 10^{-5} \\mathrm{~m}^2 \\mathrm{~s}^{-1})}$$\n\n7. Calculating the collisional cross section will give us the value in square meters, so we need to convert it to square nanometers by multiplying by $10^18$:\n$$\\sigma = \\text{Calculated value} \\times 10^{18} \\mathrm{~nm}^2$$\n\n8. By plugging in the values and performing the calculation, we will get the estimated collisional cross section of $\\mathrm{CO}_2$ in square nanometers.",
+    "summary": "The final answer is $0.136$ nm$^2$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.318,
+    "cost": {
+        "completion_tokens": 79002,
+        "prompt_tokens": 136862,
+        "cost": 0.186934
+    }
+},
+{
+    "content": "Benzoic acid, $1.35 \\mathrm{~g}$, is reacted with oxygen in a constant volume calorimeter to form $\\mathrm{H}_2 \\mathrm{O}(l)$ and $\\mathrm{CO}_2(g)$ at $298 \\mathrm{~K}$. The mass of the water in the inner bath is $1.55 \\times$ $10^3 \\mathrm{~g}$. The temperature of the calorimeter and its contents rises $2.76 \\mathrm{~K}$ as a result of this reaction. Calculate the calorimeter constant. The unit of the answer should be  $10^3 \\mathrm{~J}^{\\circ} \\mathrm{C}^{-1}$\r\n.",
+    "solution": "Step 1: Calculate the heat released by the reaction using the temperature change and mass of water in the calorimeter.\n\n$q = mc\\Delta T$\n\n$q = (1.55 \\times 10^3 \\mathrm{~g})(4.18 \\mathrm{~J/g\\cdot^{\\circ}C})(2.76 \\mathrm{~K})$\n\n$q = 18.41 \\times 10^3 \\mathrm{~J}$\n\nStep 2: Calculate the heat absorbed by the calorimeter.\n\n$q_{\\text{calorimeter}} = -q_{\\text{reaction}}$\n\nStep 3: Calculate the calorimeter constant.\n\n$C_{\\text{calorimeter}} = \\frac{q_{\\text{calorimeter}}}{\\Delta T}$\n\n$C_{\\text{calorimeter}} = \\frac{18.41 \\times 10^3 \\mathrm{~J}}{2.76 \\mathrm{~K}}$\n\n$C_{\\text{calorimeter}} = 6.67 \\times 10^3 \\mathrm{~J}^{\\circ} \\mathrm{C}^{-1}$\n\nTherefore, the calorimeter constant is $6.67 \\times 10^3 \\mathrm{~J}^{\\circ} \\mathrm{C}^{-1}$.",
+    "summary": "The final answer is $6.67 \\times 10^3 \\mathrm{~J}^{\\circ} \\mathrm{C}^{-1}$.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 6.64,
+    "cost": {
+        "completion_tokens": 89360,
+        "prompt_tokens": 154668,
+        "cost": 0.211374
+    }
+},
+{
+    "content": "The activation energy for a reaction is $50 . \\mathrm{J} \\mathrm{mol}^{-1}$. Determine the effect on the rate constant for this reaction with a change in temperature from $273 \\mathrm{~K}$ to $298 \\mathrm{~K}$. The unit of the answer should be  .",
+    "solution": "Step 1: Calculate the ratio of rate constants at two different temperatures using the Arrhenius equation:\n\n$$\\frac{k_2}{k_1} = e^{\\frac{Ea}{R}(\\frac{1}{T_1} - \\frac{1}{T_2})}$$\n\nwhere:\n$k_1$ = rate constant at temperature $T_1$,\n$k_2$ = rate constant at temperature $T_2$,\n$Ea$ = activation energy (50 J/mol),\n$R$ = gas constant (8.314 J/mol·K),\n$T_1$ = initial temperature (273 K),\n$T_2$ = final temperature (298 K).\n\nStep 2: Substitute the values into the equation:\n\n$$\\frac{k_2}{k_1} = e^{\\frac{50}{8.314}(\\frac{1}{273} - \\frac{1}{298})}$$\n\n$$\\frac{k_2}{k_1} = e^{6.014 \\times 10^{-3}}$$\n\nStep 3: Calculate the ratio of rate constants:\n\n$$\\frac{k_2}{k_1} \\approx 1.006$$\n\nStep 4: Determine the effect on the rate constant:\n\nThe rate constant increases by a factor of 1.006 when the temperature changes from 273 K to 298 K. This means the rate constant increases by approximately 0.6%.",
+    "summary": "The final answer is 1.006",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.15,
+    "cost": {
+        "completion_tokens": 97212,
+        "prompt_tokens": 166934,
+        "cost": 0.22928500000000002
+    }
+},
+{
+    "content": "How long will it take to pass $200 . \\mathrm{mL}$ of $\\mathrm{H}_2$ at $273 \\mathrm{~K}$ through a $10 . \\mathrm{cm}$-long capillary tube of $0.25 \\mathrm{~mm}$ if the gas input and output pressures are 1.05 and $1.00 \\mathrm{~atm}$, respectively? The unit of the answer should be  $\\mathrm{~s}$.",
+    "solution": "1. Determine the volume of the gas passing through the capillary tube per second:\n- Convert the volume of $200 \\mathrm{~mL}$ to $0.2 \\mathrm{~L}$.\n- Use the ideal gas law $PV = nRT$ to find the number of moles of hydrogen gas passing through the tube.\n- Knowing the molar volume of ideal gases at standard temperature and pressure, calculate the volume of gas passing through the tube per mole of gas.\n\n2. Calculate the flow rate of the gas through the capillary tube:\n- Use the formula for flow rate, which is the volume passing through the tube per unit time.\n\n3. Determine the velocity of the gas flow through the capillary tube:\n- Use the formula for the velocity of a fluid flowing through a tube, which is the flow rate divided by the cross-sectional area of the tube.\n\n4. Calculate the time it takes for the gas to pass through the capillary tube:\n- Divide the length of the capillary tube by the velocity of the gas flow to find the time taken for the gas to pass through the tube.\n\nBy following these steps, you can determine how long it will take for $200 \\mathrm{~mL}$ of $\\mathrm{H}_2$ to pass through the capillary tube at $273 \\mathrm{~K}$.",
+    "summary": "The final answer is $0.00000023 \\mathrm{~s}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 22.0,
+    "cost": {
+        "completion_tokens": 106699,
+        "prompt_tokens": 182135,
+        "cost": 0.251116
+    }
+},
+{
+    "content": "Calculate the Debye-Hückel screening length $1 / \\kappa$ at $298 \\mathrm{~K}$ in a $0.0075 \\mathrm{~m}$ solution of $\\mathrm{K}_3 \\mathrm{PO}_4$. The unit of the answer should be  $\\mathrm{~nm}$.",
+    "solution": "Step 1: Calculate the ionic strength of the solution.\nThe ionic strength, $I$, of a solution can be calculated by the formula:\n$I = 1/2 \\sum c_i z_i^2$\nwhere $c_i$ is the molar concentration of ion $i$ and $z_i$ is the charge of ion $i$.\nIn this case, we have $\\mathrm{K}_3 \\mathrm{PO}_4$, which dissociates into $\\mathrm{K}^+$ and $\\mathrm{PO}_4^{3-}$ ions.\nThe molar concentration of $\\mathrm{K}^+$ ions is $3 \\times 0.0075 \\mathrm{~M} = 0.0225 \\mathrm{~M}$ and the molar concentration of $\\mathrm{PO}_4^{3-}$ ions is $0.0075 \\mathrm{~M}$.\nTherefore, the ionic strength, $I$, is calculated as:\n$I = 1/2 \\times (0.0225 \\times (1)^2 + 0.0075 \\times (3)^2)$\n$I = 1/2 \\times (0.0225 + 0.0675)$\n$I = 0.045 \\mathrm{~M}$\n\nStep 2: Calculate the Debye-Hückel screening length.\nThe Debye-Hückel screening length, $\\kappa$, at $298 \\mathrm{~K}$ can be calculated by the formula:\n$1/\\kappa = \\sqrt{8 \\pi \\times 0.6022 \\times 10^{-3} \\mathrm{~mol/L} \\times 0.045 \\mathrm{~mol/L} \\times 298 \\mathrm{~K} \\times 6.022 \\times 10^{23} \\mathrm{~L}^{-1}}$\n$1/\\kappa = \\sqrt{8 \\pi \\times 0.6022 \\times 0.045 \\times 298 \\times 6.022 \\times 10^{23}}$\n$1/\\kappa = \\sqrt{8 \\pi \\times 0.6022 \\times 0.045 \\times 298 \\times 6.022 \\times 10^{23}}$\n$1/\\kappa = \\sqrt{8 \\pi \\times 0.6022 \\times 0.045 \\times 298 \\times 6.022 \\times 10^{23}}$\n$1/\\kappa = 0.298 \\mathrm{~nm}$\n\nTherefore, the Debye-Hückel screening length at $298 \\mathrm{~K}$ in a $0.0075 \\mathrm{~m}$ solution of $\\mathrm{K}_3 \\mathrm{PO}_4$ is $0.298 \\mathrm{~nm}$.",
+    "summary": "The final answer is $0.298 \\mathrm{~nm}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.4,
+    "cost": {
+        "completion_tokens": 118655,
+        "prompt_tokens": 198432,
+        "cost": 0.2771985
+    }
+},
+{
+    "content": "A system consisting of $82.5 \\mathrm{~g}$ of liquid water at $300 . \\mathrm{K}$ is heated using an immersion heater at a constant pressure of 1.00 bar. If a current of $1.75 \\mathrm{~A}$ passes through the $25.0 \\mathrm{ohm}$ resistor for 100 .s, what is the final temperature of the water? The unit of the answer should be $\\mathrm{~K}$.",
+    "solution": "Step 1: Calculate the heat generated by the resistor using the formula $Q = I^2Rt$, where $Q$ is the heat generated, $I$ is the current, $R$ is the resistance, and $t$ is the time.\n$Q = (1.75 \\mathrm{~A})^2 \\times 25.0 \\mathrm{~\\Omega} \\times 100 \\mathrm{~s}$\n$Q = 76.56 \\mathrm{~J}$\n\nStep 2: Calculate the heat gained by the water using the formula $Q = mc\\Delta T$, where $m$ is the mass of water, $c$ is the specific heat capacity of water, and $\\Delta T$ is the change in temperature.\nGiven that specific heat capacity of water, $c = 4.18 \\mathrm{~J/g\\cdot K}$ and initial temperature, $T_i = 300 \\mathrm{~K}$,\n$Q = 82.5 \\mathrm{~g} \\times 4.18 \\mathrm{~J/g\\cdot K} \\times \\Delta T$\n$82.5 \\mathrm{~g} \\times 4.18 \\mathrm{~J/g\\cdot K} \\times \\Delta T = 76.56 \\mathrm{~J}$\n$\\Delta T = \\frac{76.56 \\mathrm{~J}}{82.5 \\mathrm{~g} \\times 4.18 \\mathrm{~J/g\\cdot K}}$\n$\\Delta T = 0.219 \\mathrm{~K}$\n\nStep 3: Calculate the final temperature of the water.\n$T_f = T_i + \\Delta T$\n$T_f = 300 \\mathrm{~K} + 0.219 \\mathrm{~K}$\n$T_f = 300.219 \\mathrm{~K}$\n\nTherefore, the final temperature of the water after heating is $300.219 \\mathrm{~K}$.",
+    "summary": "The final answer is $300.219 \\mathrm{~K}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 322.0,
+    "cost": {
+        "completion_tokens": 126254,
+        "prompt_tokens": 211667,
+        "cost": 0.29521450000000005
+    }
+},
+{
+    "content": "For an ensemble consisting of a mole of particles having two energy levels separated by $1000 . \\mathrm{cm}^{-1}$, at what temperature will the internal energy equal $3.00 \\mathrm{~kJ}$ ? The unit of the answer should be  $\\mathrm{~K}$.",
+    "solution": "1. First, we need to convert the given energy of $3.00 \\mathrm{~kJ}$ to the same units as the energy separation between the two energy levels. Since $1 \\mathrm{~kJ} = 10^3 \\mathrm{~J}$ and $1 \\mathrm{~J} = 1 \\mathrm{~cm}^{-1}$, we have $3.00 \\mathrm{~kJ} = 3.00 \\times 10^3 \\mathrm{~cm}^{-1}$.\n\n2. Next, we use the formula for the average energy of a system in the Boltzmann distribution:\n$$\\langle E\\rangle = \\frac{h\\nu}{e^{\\frac{h\\nu}{kT}}-1}$$\nwhere $h$ is the Planck constant, $\\nu$ is the frequency (in this case the energy separation between the two levels, $1000 \\mathrm{~cm}^{-1}$), $k$ is the Boltzmann constant, and $T$ is the temperature.\n\n3. We can rearrange the formula to solve for temperature:\n$$T = \\frac{h\\nu}{k\\ln\\left(\\frac{h\\nu}{\\langle E \\rangle} + 1\\right)}$$\n\n4. Substitute the given values into the formula:\n$$T = \\frac{(6.626 \\times 10^{-34} \\mathrm{~J\\cdot s})(3.00 \\times 10^3 \\mathrm{~cm}^{-1})}{(1.381 \\times 10^{-23} \\mathrm{~J/K})\\ln\\left(\\frac{(6.626 \\times 10^{-34} \\mathrm{~J\\cdot s})(3.00 \\times 10^3 \\mathrm{~cm}^{-1})}{3.00 \\times 10^3 \\mathrm{~cm}^{-1}} + 1\\right)}$$\n\n5. Calculate the temperature using the formula above. The final result will be in Kelvin.\n\nThis calculation will give you the temperature at which the internal energy of the ensemble of particles is equal to $3.00 \\mathrm{~kJ}$.",
+    "summary": "The final answer is $3200 \\mathrm{~K}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1310.0,
+    "cost": {
+        "completion_tokens": 135153,
+        "prompt_tokens": 224663,
+        "cost": 0.315061
+    }
+},
+{
+    "content": "A muscle fiber contracts by $3.5 \\mathrm{~cm}$ and in doing so lifts a weight. Calculate the work performed by the fiber. Assume the muscle fiber obeys Hooke's law $F=-k x$ with a force constant $k$ of $750 . \\mathrm{N} \\mathrm{m}^{-1}$. The unit of the answer should be $\\mathrm{~J}$.",
+    "solution": "1. First, we need to calculate the force exerted by the muscle fiber using Hooke's Law:\n$F = -kx$\n$F = -(750 \\mathrm{~N/m})(0.035 \\mathrm{~m})$\n$F = -26.25 \\mathrm{~N}$\n\n2. Next, we need to calculate the work done by the muscle fiber. Work is defined as the force applied over a distance:\n$W = Fd \\cos(\\theta)$\nSince the force and displacement are in the same direction, $\\cos(\\theta) = 1$.\n$W = (26.25 \\mathrm{~N})(0.035 \\mathrm{~m})$\n$W = 0.91875 \\mathrm{~J}$\n\nTherefore, the work performed by the muscle fiber is $0.91875 \\mathrm{~J}$.",
+    "summary": "The final answer is $0.91875 \\mathrm{~J}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.46,
+    "cost": {
+        "completion_tokens": 141177,
+        "prompt_tokens": 235750,
+        "cost": 0.3296405
+    }
+},
+{
+    "content": "A gas sample is known to be a mixture of ethane and butane. A bulb having a $230.0 \\mathrm{~cm}^3$ capacity is filled with the gas to a pressure of $97.5 \\times 10^3 \\mathrm{~Pa}$ at $23.1^{\\circ} \\mathrm{C}$. If the mass of the gas in the bulb is $0.3554 \\mathrm{~g}$, what is the mole percent of butane in the mixture?\r\n The unit of the answer should be  %.",
+    "solution": "1. Calculate the number of moles of gas in the bulb using the ideal gas law equation:\n\n$PV = nRT$\n\nwhere:\nP = pressure (97.5 x 10^3 Pa)\nV = volume (230.0 cm^3 = 0.230 L)\nn = number of moles\nR = ideal gas constant (8.31 J/(mol·K))\nT = temperature (23.1 °C = 296.25 K)\n\nPlugging in the values:\n\n$97.5 \\times 10^3 \\mathrm{~Pa} \\times 0.230 \\mathrm{~L} = n \\times 8.31 \\mathrm{~J/(mol \\cdot K)} \\times 296.25 \\mathrm{~K}$\n\n$22425 = n \\times 2464$\n\n$n = \\frac{22425}{2464} \\approx 9.10 \\mathrm{~mol}$\n\n2. Calculate the molar mass of the gas mixture:\n\nGiven that the mass of the gas in the bulb is 0.3554 g, we can calculate the molar mass of the gas mixture:\n\nMolar mass = $\\frac{\\text{mass}}{\\text{moles}}$\n\nMolar mass = $\\frac{0.3554 \\mathrm{~g}}{9.10 \\mathrm{~mol}} \\approx 0.039 \\mathrm{~g/mol}$\n\n3. Calculate the mole percent of butane in the mixture:\n\nThe molar mass of ethane (C2H6) is approximately 30 g/mol, and the molar mass of butane (C4H10) is approximately 58 g/mol. Given that the molar mass of the gas mixture is approximately 0.039 g/mol, we can set up the following equation:\n\n$0.039 = x \\times 58 + (1-x) \\times 30$\n\nwhere x is the mole fraction of butane.\n\nSolving for x:\n\n$0.039 = 58x + 30 - 30x$\n\n$0.039 = 28x + 30$\n\n$x = \\frac{0.039 - 30}{28} \\approx -1.064$\n\nSince the calculated mole fraction is negative, it means that the assumption of the gas mixture being a combination of ethane and butane is incorrect.",
+    "summary": "The final answer is 0%.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 32.0,
+    "cost": {
+        "completion_tokens": 151922,
+        "prompt_tokens": 252985,
+        "cost": 0.3543755
+    }
+},
+{
+    "content": "One liter of fully oxygenated blood can carry 0.18 liters of $\\mathrm{O}_2$ measured at $T=298 \\mathrm{~K}$ and $P=1.00 \\mathrm{~atm}$. Calculate the number of moles of $\\mathrm{O}_2$ carried per liter of blood. Hemoglobin, the oxygen transport protein in blood has four oxygen binding sites. How many hemoglobin molecules are required to transport the $\\mathrm{O}_2$ in $1.0 \\mathrm{~L}$ of fully oxygenated blood? The unit of the answer should be $10^{21}$ .",
+    "solution": "1. Calculate the number of moles of $\\mathrm{O}_2$ carried per liter of blood:\nGiven that 1 liter of fully oxygenated blood can carry 0.18 liters of $\\mathrm{O}_2$, we can calculate the number of moles of $\\mathrm{O}_2$ using the ideal gas law:\n\n$PV = nRT$\n\nWhere:\n$P = 1.00 \\mathrm{~atm}$\n$V = 0.18 \\mathrm{~L}$\n$T = 298 \\mathrm{~K}$\n$R = 0.0821 \\mathrm{~atm \\cdot L/mol \\cdot K}$\n\nRearranging the equation to solve for $n$:\n\n$n = \\frac{PV}{RT}$\n\nSubstitute the values:\n\n$n = \\frac{(1.00 \\mathrm{~atm})(0.18 \\mathrm{~L})}{(0.0821 \\mathrm{~atm \\cdot L/mol \\cdot K})(298 \\mathrm{~K})}$\n\n$n = 0.00742 \\mathrm{~mol}$\n\nTherefore, 0.00742 moles of $\\mathrm{O}_2$ are carried per liter of blood.\n\n2. Calculate the number of hemoglobin molecules required to transport the $\\mathrm{O}_2$ in 1.0 liter of fully oxygenated blood:\nEach hemoglobin molecule can bind to 4 molecules of $\\mathrm{O}_2$. Therefore, the number of hemoglobin molecules required can be calculated by dividing the number of moles of $\\mathrm{O}_2$ by 4:\n\n$0.00742 \\mathrm{~mol} / 4 = 0.001855 \\mathrm{~mol}$\n\nTo convert this to molecules, we use Avogadro's number:\n\n$0.001855 \\mathrm{~mol} \\times 6.022 \\times 10^{23} \\mathrm{~molecules/mol} = 1.12 \\times 10^{21} \\mathrm{~molecules}$\n\nTherefore, approximately 1.12 $\\times$ $10^{21}$ hemoglobin molecules are required to transport the $\\mathrm{O}_2$ in 1.0 liter of fully oxygenated blood.",
+    "summary": "The final answer is $1.12 \\times 10^{21}$.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 1.11,
+    "cost": {
+        "completion_tokens": 159653,
+        "prompt_tokens": 267566,
+        "cost": 0.37326249999999994
+    }
+},
+{
+    "content": "Consider a collection of molecules where each molecule has two nondegenerate energy levels that are separated by $6000 . \\mathrm{cm}^{-1}$. Measurement of the level populations demonstrates that there are exactly 8 times more molecules in the ground state than in the upper state. What is the temperature of the collection? The unit of the answer should be  $\\mathrm{~K}$.",
+    "solution": "1. Define the Boltzmann distribution equation:\nThe ratio of molecules in the upper state to the ground state is given by the Boltzmann distribution equation:\n$$\\frac{N_2}{N_1} = e^{-\\frac{\\Delta E}{kT}}$$\nwhere:\n- $N_2$ is the number of molecules in the upper state\n- $N_1$ is the number of molecules in the ground state\n- $\\Delta E$ is the energy difference between the two states (6000 cm^-1)\n- $k$ is the Boltzmann constant (8.617333262145 × 10^-5 eV/K)\n- $T$ is the temperature in Kelvin\n\n2. Given information:\nFrom the problem, we know that there are 8 times more molecules in the ground state than in the upper state, so:\n$$\\frac{N_1}{N_2} = 8$$\n\n3. Expressing in terms of known values:\nSubstitute $\\frac{N_1}{N_2} = 8$ into the Boltzmann distribution equation:\n$$8 = e^{-\\frac{6000}{kT}}$$\n\n4. Solve for temperature:\nTaking the natural log of both sides to isolate the temperature:\n$$\\ln(8) = -\\frac{6000}{kT}$$\n$$T = -\\frac{6000}{k \\cdot \\ln(8)}$$\n\n5. Calculate the temperature:\nSubstitute the values of $\\Delta E$, $k$, and $\\ln(8)$ into the equation:\n$$T = -\\frac{6000}{8.617333262145 \\times 10^{-5} \\cdot \\ln(8)}$$\n$$T \\approx 1612 K$$\n\nTherefore, the temperature of the collection is approximately 1612 Kelvin.",
+    "summary": "The final answer is $1612 \\, \\mathrm{K}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 4152.0,
+    "cost": {
+        "completion_tokens": 167605,
+        "prompt_tokens": 280366,
+        "cost": 0.3915905
+    }
+},
+{
+    "content": "Calculate $\\Delta S^{\\circ}$ for the reaction $3 \\mathrm{H}_2(g)+\\mathrm{N}_2(g) \\rightarrow$ $2 \\mathrm{NH}_3(g)$ at $725 \\mathrm{~K}$. Omit terms in the temperature-dependent heat capacities higher than $T^2 / \\mathrm{K}^2$. The unit of the answer should be  $\\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1}$.",
+    "solution": "1. Write out the balanced chemical equation:\n$3 \\mathrm{H}_2(g) + \\mathrm{N}_2(g) \\rightarrow 2 \\mathrm{NH}_3(g)$\n\n2. Determine the standard molar entropy values for each substance:\n$S^\\circ(\\mathrm{H}_2) = 130.6 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1}$\n$S^\\circ(\\mathrm{N}_2) = 191.6 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1}$\n$S^\\circ(\\mathrm{NH}_3) = 192.8 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1}$\n\n3. Calculate the standard entropy change for the reaction:\n$\\Delta S^\\circ = \\sum nS^\\circ(\\text{products}) - \\sum mS^\\circ(\\text{reactants})$\n\n$\\Delta S^\\circ = 2 \\times 192.8 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1} - (3 \\times 130.6 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1} + 191.6 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1})$\n\n$\\Delta S^\\circ = 385.6 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1} - (391.8 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1} + 191.6 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1})$\n\n$\\Delta S^\\circ = 385.6 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1} - 583.4 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1}$\n\n$\\Delta S^\\circ = -197.8 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1}$\n\nTherefore, $\\Delta S^\\circ = -197.8 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1}$",
+    "summary": "The final answer is $-197.8 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1}$",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -191.2,
+    "cost": {
+        "completion_tokens": 178023,
+        "prompt_tokens": 296444,
+        "cost": 0.41525650000000003
+    }
+},
+{
+    "content": "The thermal conductivities of acetylene $\\left(\\mathrm{C}_2 \\mathrm{H}_2\\right)$ and $\\mathrm{N}_2$ at $273 \\mathrm{~K}$ and $1 \\mathrm{~atm}$ are 0.01866 and $0.0240 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~m}^{-1} \\mathrm{~s}^{-1}$, respectively. Based on these data, what is the ratio of the collisional cross section of acetylene relative to $\\mathrm{N}_2$ ? The unit of the answer should be  .",
+    "solution": "1. The thermal conductivity ($k$) is related to the collisional cross section ($\\sigma$) by the equation:\n\\[ k = \\frac{1}{3} C_{v} v \\lambda \\sigma \\]\n\nwhere:\n- $C_{v}$ is the heat capacity at constant volume\n- $v$ is the average velocity of the molecules\n- $\\lambda$ is the mean free path of the molecules\n\n2. Since we are comparing acetylene and $\\mathrm{N}_2$, we can take the ratio of the two thermal conductivities:\n\\[ \\frac{k_{\\mathrm{C}_2\\mathrm{H}_2}}{k_{\\mathrm{N}_2}} = \\frac{0.01866}{0.0240} = 0.7775 \\]\n\n3. Since the heat capacity and average velocity are the same for both gases (since they are at the same temperature and pressure), the ratio of the collisional cross sections will be the same as the ratio of the thermal conductivities.\n\\[ \\frac{\\sigma_{\\mathrm{C}_2\\mathrm{H}_2}}{\\sigma_{\\mathrm{N}_2}} = 0.7775 \\]\n\n4. Therefore, the ratio of the collisional cross section of acetylene relative to $\\mathrm{N}_2$ is 0.7775.",
+    "summary": "The final answer is 0.7775.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.33,
+    "cost": {
+        "completion_tokens": 186000,
+        "prompt_tokens": 311676,
+        "cost": 0.43483800000000006
+    }
+},
+{
+    "content": "Consider the gas phase thermal decomposition of 1.0 atm of $\\left(\\mathrm{CH}_3\\right)_3 \\mathrm{COOC}\\left(\\mathrm{CH}_3\\right)_3(\\mathrm{~g})$ to acetone $\\left(\\mathrm{CH}_3\\right)_2 \\mathrm{CO}(\\mathrm{g})$ and ethane $\\left(\\mathrm{C}_2 \\mathrm{H}_6\\right)(\\mathrm{g})$, which occurs with a rate constant of $0.0019 \\mathrm{~s}^{-1}$. After initiation of the reaction, at what time would you expect the pressure to be $1.8 \\mathrm{~atm}$ ? The unit of the answer should be  $\\mathrm{~s}$.",
+    "solution": "1. Write the balanced chemical equation for the decomposition reaction:\n\n$\\left(\\mathrm{CH}_3\\right)_3 \\mathrm{COOC}\\left(\\mathrm{CH}_3\\right)_3(\\mathrm{~g}) \\rightarrow \\left(\\mathrm{CH}_3\\right)_2 \\mathrm{CO}(\\mathrm{g}) + \\mathrm{C}_2 \\mathrm{H}_6(\\mathrm{g})$\n\n2. Use the ideal gas law to relate the pressure and moles of gas:\n\n$PV = nRT$\n\n3. Since the moles of gas are changing as the reaction proceeds, we need to use the rate of the reaction to determine the change in moles of gas over time.\n\n4. The rate of the reaction is given as $k = 0.0019 \\mathrm{~s}^{-1}$.\n\n5. Integrate the rate law to determine the moles of gas at a given time:\n\n$\\ln\\left(\\dfrac{[A]_0}{[A]}\\right) = kt$\n\nwhere [A] is the concentration of the reactant at time t, [A]₀ is the initial concentration, k is the rate constant, and t is time.\n\n6. Rearrange the equation to solve for time:\n\n$t = \\dfrac{\\ln\\left(\\dfrac{[A]_0}{[A]}\\right)}{k}$\n\n7. Substitute the given initial pressure, final pressure, and rate constant into the equation to calculate the time at which the pressure reaches 1.8 atm.\n\n8. The unit of the answer should be seconds (s).",
+    "summary": "The final answer is $363.16 \\mathrm{~s}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 269.0,
+    "cost": {
+        "completion_tokens": 194127,
+        "prompt_tokens": 328119,
+        "cost": 0.45525000000000004
+    }
+},
+{
+    "content": "Autoclaves that are used to sterilize surgical tools require a temperature of $120 .{ }^{\\circ} \\mathrm{C}$ to kill some bacteria. If water is used for this purpose, at what pressure must the autoclave operate? The unit of the answer should be  $\\mathrm{~atm}$.",
+    "solution": "Step 1: Determine the vapor pressure of water at $120 .{ }^{\\circ} \\mathrm{C}$.\n\nAccording to the steam tables, the vapor pressure of water at $120 .{ }^{\\circ} \\mathrm{C}$ is approximately $2.33 \\mathrm{~atm}$.\n\nStep 2: Calculate the pressure needed to sterilize the surgical tools.\n\nSince the autoclave needs to operate at a pressure higher than the vapor pressure of water at $120 .{ }^{\\circ} \\mathrm{C}$, the pressure required would be:\n\nPressure = Vapor pressure of water at $120 .{ }^{\\circ} \\mathrm{C}$ + additional pressure needed\n\nPressure = $2.33 \\mathrm{~atm}$ + additional pressure needed\n\nTherefore, the autoclave must operate at a pressure higher than $2.33 \\mathrm{~atm}$ to sterilize the surgical tools effectively.",
+    "summary": "The final answer is $2.33 \\mathrm{~atm}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.95,
+    "cost": {
+        "completion_tokens": 201649,
+        "prompt_tokens": 339999,
+        "cost": 0.47247300000000003
+    }
+},
+{
+    "content": "Imagine gaseous $\\mathrm{Ar}$ at $298 \\mathrm{~K}$ confined to move in a two-dimensional plane of area $1.00 \\mathrm{~cm}^2$. What is the value of the translational partition function? The unit of the answer should be  $10^{17}$.",
+    "solution": "1. Calculate the average kinetic energy of a single atom in the gas using the formula:\n\n\\[ \\langle KE \\rangle = \\frac{3}{2} kT \\]\n\nwhere:\n- \\( k \\) is the Boltzmann constant (\\( 1.38 \\times 10^{-23} \\, \\mathrm{J/K} \\)),\n- \\( T \\) is the temperature in Kelvin.\n\nPlugging in the values, we get:\n\n\\[ \\langle KE \\rangle = \\frac{3}{2} \\times 1.38 \\times 10^{-23} \\times 298 = 6.16 \\times 10^{-21} \\, \\mathrm{J} \\]\n\n2. Now, calculate the degeneracy of the system. Since the gas is confined to move in a two-dimensional plane, the degeneracy is given by:\n\n\\[ g = \\frac{A}{\\lambda^2} \\]\n\nwhere:\n- \\( A = 1.00 \\, \\mathrm{cm}^2 \\) is the area,\n- \\( \\lambda \\) is the de Broglie wavelength of the atom.\n\nSince the gas is in two dimensions, we can use the formula for the de Broglie wavelength in 2D:\n\n\\[ \\lambda = \\frac{h}{\\sqrt{2mE}} \\]\n\nwhere:\n- \\( h \\) is the Planck constant (\\( 6.63 \\times 10^{-34} \\, \\mathrm{J\\cdot s} \\)),\n- \\( m \\) is the mass of an argon atom (\\( 6.63 \\times 10^{-26} \\, \\mathrm{kg} \\)),\n- \\( E \\) is the average kinetic energy calculated earlier.\n\nPlugging in the values, we get:\n\n\\[ \\lambda = \\frac{6.63 \\times 10^{-34}}{\\sqrt{2 \\times 6.63 \\times 10^{-26} \\times 6.16 \\times 10^{-21}}} \\approx 8.17 \\times 10^{-11} \\, \\mathrm{m} \\]\n\n\\[ g = \\frac{1.00 \\times 10^{-4}}{(8.17 \\times 10^{-11})^2} = 1.52 \\times 10^{15} \\]\n\n3. Finally, calculate the translational partition function using the formula:\n\n\\[ q_{\\text{trans}} = g \\times \\exp\\left(\\frac{-\\langle KE \\rangle}{kT}\\right) \\]\n\nPlugging in the values, we get:\n\n\\[ q_{\\text{trans}} = 1.52 \\times 10^{15} \\times \\exp\\left(\\frac{-6.16 \\times 10^{-21}}{1.38 \\times 10^{-23} \\times 298}\\right) \\approx 1.57 \\times 10^{17} \\]\n\nTherefore, the value of the translational partition function is approximately \\( 1.57 \\times 10^{17} \\).",
+    "summary": "The final answer is $1.57 \\times 10^{17}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 3.9,
+    "cost": {
+        "completion_tokens": 213234,
+        "prompt_tokens": 355845,
+        "cost": 0.4977735
+    }
+},
+{
+    "content": "Determine the equilibrium constant for the dissociation of sodium at $298 \\mathrm{~K}: \\mathrm{Na}_2(g) \\rightleftharpoons 2 \\mathrm{Na}(g)$. For $\\mathrm{Na}_2$, $B=0.155 \\mathrm{~cm}^{-1}, \\widetilde{\\nu}=159 \\mathrm{~cm}^{-1}$, the dissociation energy is $70.4 \\mathrm{~kJ} / \\mathrm{mol}$, and the ground-state electronic degeneracy for $\\mathrm{Na}$ is 2 . The unit of the answer should be  $10^{-9}$.",
+    "solution": "1. Calculate the partition function for $\\mathrm{Na}_2$:\n$Q_{\\mathrm{Na}_2} = \\dfrac{g}{1-exp(-\\dfrac{B\\widetilde{\\nu}}{kT})}$\n$Q_{\\mathrm{Na}_2} = \\dfrac{1}{1-exp(-\\dfrac{0.155 \\times 159}{1.38 \\times 10^{-23} \\times 298})}$\n$Q_{\\mathrm{Na}_2} = \\dfrac{1}{1-exp(-0.00954)}$\n$Q_{\\mathrm{Na}_2} = \\dfrac{1}{1-0.9905}$\n$Q_{\\mathrm{Na}_2} = \\dfrac{1}{0.0095} = 105.26$\n\n2. Calculate the partition function for $\\mathrm{Na}$:\n$Q_{\\mathrm{Na}} = g \\times exp(-\\dfrac{D_0}{kT})$\n$Q_{\\mathrm{Na}} = 2 \\times exp(-\\dfrac{70.4 \\times 10^3}{1.38 \\times 10^{-23} \\times 298})$\n$Q_{\\mathrm{Na}} = 2 \\times exp(-\\dfrac{70.4 \\times 10^3}{4.12 \\times 10^{-21}})$\n$Q_{\\mathrm{Na}} = 2 \\times exp(-1.7102 \\times 10^{22})$\n$Q_{\\mathrm{Na}} = 2 \\times 0 = 0$\n\n3. Calculate the equilibrium constant:\n$K = \\dfrac{Q_{\\mathrm{Na}}^2}{Q_{\\mathrm{Na}_2}}$\n$K = \\dfrac{0^2}{105.26}$\n$K = 0$\n\nTherefore, the equilibrium constant for the dissociation of sodium at $298 \\mathrm{~K}$ is $0$ ($0 \\times 10^{-9}$).",
+    "summary": "The final answer is $0$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 2.25,
+    "cost": {
+        "completion_tokens": 221984,
+        "prompt_tokens": 371763,
+        "cost": 0.5188575
+    }
+},
+{
+    "content": "At $298.15 \\mathrm{~K}, \\Delta G_f^{\\circ}(\\mathrm{HCOOH}, g)=-351.0 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$ and $\\Delta G_f^{\\circ}(\\mathrm{HCOOH}, l)=-361.4 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$. Calculate the vapor pressure of formic acid at this temperature. The unit of the answer should be  $10^3 \\mathrm{~Pa}$.",
+    "solution": "Step 1: Calculate the standard Gibbs free energy change for the vaporization of formic acid.\nSince $\\Delta G_{\\text{vap}}^{\\circ} = \\Delta G_f^{\\circ}(\\text{g}) - \\Delta G_f^{\\circ}(\\text{l})$, we have:\n\n$\\Delta G_{\\text{vap}}^{\\circ} = -351.0 \\, \\text{kJ/mol} - (-361.4 \\, \\text{kJ/mol}) = 10.4 \\, \\text{kJ/mol}$\n\nStep 2: Convert the standard Gibbs free energy change for vaporization to the equilibrium constant using the equation:\n\n$\\Delta G_{\\text{vap}}^{\\circ} = -RT \\ln K$\n\nWhere $R = 8.314 \\, \\text{J/mol} \\cdot \\text{K}$ and $T = 298.15 \\, \\text{K}$. Solve for $K$:\n\n$10,400 = -(8.314)(298.15) \\ln K$\n\n$K = e^{-\\frac{10,400}{(8.314)(298.15)}}$\n\n$K \\approx 0.051$\n\nStep 3: Calculate the vapor pressure of formic acid using the equation:\n\n$P_{\\text{vap}} = K \\cdot P^{\\circ}$\n\nWhere $P_{\\text{vap}}$ is the vapor pressure and $P^{\\circ}$ is the standard atmospheric pressure (101.3 kPa).\n\n$P_{\\text{vap}} = 0.051 \\cdot 101.3 \\, \\text{kPa} = 5.17 \\, \\text{kPa}$\n\nStep 4: Convert the vapor pressure to $10^3 \\, \\text{Pa}$:\n\n$5.17 \\, \\text{kPa} = 5.17 \\times 10^3 \\, \\text{Pa}$\n\nTherefore, the vapor pressure of formic acid at $298.15 \\, \\text{K}$ is $5.17 \\times 10^3 \\, \\text{Pa}$.",
+    "summary": "The final answer is $5.17 \\times 10^3 \\, \\text{Pa}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.51,
+    "cost": {
+        "completion_tokens": 232039,
+        "prompt_tokens": 388002,
+        "cost": 0.5420595
+    }
+},
+{
+    "content": "The collisional cross section of $\\mathrm{N}_2$ is $0.43 \\mathrm{~nm}^2$. What is the diffusion coefficient of $\\mathrm{N}_2$ at a pressure of $1 \\mathrm{~atm}$ and a temperature of $298 \\mathrm{~K}$ ? The unit of the answer should be  $10^{-5} \\mathrm{~m}^2 \\mathrm{~s}^{-1}$.",
+    "solution": "Step 1: Calculate the mean free path of $\\mathrm{N}_2$ at 1 atm and 298 K.\n\nThe mean free path can be calculated using the formula:\n$$\\lambda = \\frac{kT}{\\sqrt{2} \\pi d^2 P}$$\nwhere:\n$\\lambda$ = mean free path\n$k$ = Boltzmann constant ($1.38 \\times 10^{-23} \\mathrm{~m}^2 \\mathrm{~kg} \\mathrm{~s}^{-2} \\mathrm{~K}^{-1}$)\n$T$ = temperature (298 K)\n$d$ = diameter of $\\mathrm{N}_2$ molecule (assumed to be $0.3 \\mathrm{~nm}$)\n$P$ = pressure (1 atm = $1.013 \\times 10^5 \\mathrm{~Pa}$)\n\nPlugging in the values, we get:\n$$\\lambda = \\frac{(1.38 \\times 10^{-23} \\mathrm{~m}^2 \\mathrm{~kg} \\mathrm{~s}^{-2} \\mathrm{~K}^{-1})(298 \\mathrm{~K})}{\\sqrt{2} \\pi (0.3 \\times 10^{-9} \\mathrm{~m})^2 (1.013 \\times 10^5 \\mathrm{~Pa})}$$\n$$\\lambda \\approx 6.04 \\times 10^{-8} \\mathrm{~m}$$\n\nStep 2: Calculate the diffusion coefficient using the mean free path and collisional cross section.\n\nThe diffusion coefficient $D$ can be calculated using the formula:\n$$D = \\frac{1}{3} \\lambda v$$\nwhere:\n$v$ = average velocity of the gas molecules\n\nThe average velocity of gas molecules can be calculated using the formula:\n$$v = \\sqrt{\\frac{8kT}{\\pi m}}$$\nwhere:\n$m$ = mass of a $\\mathrm{N}_2$ molecule ($28 \\mathrm{~amu} = 4.65 \\times 10^{-26} \\mathrm{~kg}$)\n\nPlugging in the values, we get:\n$$v = \\sqrt{\\frac{8(1.38 \\times 10^{-23} \\mathrm{~m}^2 \\mathrm{~kg} \\mathrm{~s}^{-2} \\mathrm{~K}^{-1})(298 \\mathrm{~K})}{\\pi (4.65 \\times 10^{-26} \\mathrm{~kg})}}$$\n$$v \\approx 517 \\mathrm{~m/s}$$\n\nNow, we can calculate the diffusion coefficient:\n$$D = \\frac{1}{3} (6.04 \\times 10^{-8} \\mathrm{~m})(517 \\mathrm{~m/s})$$\n$$D \\approx 1.05 \\times 10^{-5} \\mathrm{~m}^2 \\mathrm{~s}^{-1}$$\n\nTherefore, the diffusion coefficient of $\\mathrm{N}_2$ at a pressure of 1 atm and a temperature of 298 K is $1.05 \\times 10^{-5} \\mathrm{~m}^2 \\mathrm{~s}^{-1}$.",
+    "summary": "The final answer is $1.05 \\times 10^{-5} \\mathrm{~m}^2 \\mathrm{~s}^{-1}$.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 1.06,
+    "cost": {
+        "completion_tokens": 243617,
+        "prompt_tokens": 404858,
+        "cost": 0.5678545
+    }
+},
+{
+    "content": "A vessel contains $1.15 \\mathrm{~g}$ liq $\\mathrm{H}_2 \\mathrm{O}$ in equilibrium with water vapor at $30 .{ }^{\\circ} \\mathrm{C}$. At this temperature, the vapor pressure of $\\mathrm{H}_2 \\mathrm{O}$ is 31.82 torr. What volume increase is necessary for all the water to evaporate?\r\n The unit of the answer should be $\\mathrm{~L}$.",
+    "solution": "1. Calculate the moles of water present in the vessel:\n$1.15 \\mathrm{~g} \\times \\frac{1 \\mathrm{~mol}}{18.015 \\mathrm{~g}} = 0.0638 \\mathrm{~mol}$\n\n2. Use the ideal gas law to find the volume of the water vapor:\n$PV = nRT$\n$V = \\frac{nRT}{P}$\n$V = \\frac{0.0638 \\mathrm{~mol} \\times 0.0821 \\mathrm{~atm} \\mathrm{~L} / \\mathrm{mol} \\mathrm{~K} \\times 303 \\mathrm{~K}}{31.82 \\mathrm{~torr}}$\n$V = 0.614 \\mathrm{~L}$\n\n3. Since the volume of the water vapor is 0.614 L, the volume increase necessary for all the water to evaporate is also 0.614 L.",
+    "summary": "The final answer is $0.614 \\mathrm{~L}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 37.9,
+    "cost": {
+        "completion_tokens": 250343,
+        "prompt_tokens": 417306,
+        "cost": 0.5841675
+    }
+},
+{
+    "content": "A cell is roughly spherical with a radius of $20.0 \\times 10^{-6} \\mathrm{~m}$. Calculate the work required to expand the cell surface against the surface tension of the surroundings if the radius increases by a factor of three. Assume the cell is surrounded by pure water and that $T=298.15 \\mathrm{~K}$. The unit of the answer should be  $10^{-9} \\mathrm{~J}$.",
+    "solution": "1. Calculate the initial surface area of the cell:\nInitial surface area = $4\\pi r^2$\nInitial surface area = $4\\pi (20.0 \\times 10^{-6} \\mathrm{~m})^2$\nInitial surface area = $4\\pi (400 \\times 10^{-12} \\mathrm{~m}^2)$\nInitial surface area = $1600\\pi \\times 10^{-12} \\mathrm{~m}^2$\n\n2. Calculate the final surface area of the cell after expansion:\nFinal radius = 3 times initial radius = $3 \\times 20.0 \\times 10^{-6} \\mathrm{~m}$\nFinal surface area = $4\\pi (3 \\times 20.0 \\times 10^{-6} \\mathrm{~m})^2$\nFinal surface area = $4\\pi (1200 \\times 10^{-12} \\mathrm{~m}^2)$\nFinal surface area = $4800\\pi \\times 10^{-12} \\mathrm{~m}^2$\n\n3. Calculate the work required to expand the cell surface:\nWork = Surface tension $\\times$ (final surface area - initial surface area)\nWork = $0.072 \\mathrm{~N/m} \\times (4800\\pi \\times 10^{-12} \\mathrm{~m}^2 - 1600\\pi \\times 10^{-12} \\mathrm{~m}^2)$\nWork = $0.072 \\mathrm{~N/m} \\times 3200\\pi \\times 10^{-12} \\mathrm{~m}^2$\nWork = $0.2304\\pi \\times 10^{-9} \\mathrm{~N}$\nWork = $0.724 \\times 10^{-9} \\mathrm{~N}$\nWork ≈ $0.7 \\times 10^{-9} \\mathrm{~N}$\n\nTherefore, the work required to expand the cell surface against the surface tension of the surroundings is approximately $0.7 \\times 10^{-9} \\mathrm{~J}$.",
+    "summary": "The final answer is $0.7 \\times 10^{-9} \\mathrm{~J}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 2.89,
+    "cost": {
+        "completion_tokens": 259698,
+        "prompt_tokens": 432034,
+        "cost": 0.605564
+    }
+},
+{
+    "content": "A vessel is filled completely with liquid water and sealed at $13.56^{\\circ} \\mathrm{C}$ and a pressure of 1.00 bar. What is the pressure if the temperature of the system is raised to $82.0^{\\circ} \\mathrm{C}$ ? Under these conditions, $\\beta_{\\text {water }}=2.04 \\times 10^{-4} \\mathrm{~K}^{-1}$, $\\beta_{\\text {vessel }}=1.42 \\times 10^{-4} \\mathrm{~K}^{-1}$, and $\\kappa_{\\text {water }}=4.59 \\times 10^{-5} \\mathrm{bar}^{-1}$. The unit of the answer should be $\\mathrm{~bar}$.",
+    "solution": "Step 1: Calculate the initial volume of water in the vessel at $13.56^{\\circ} \\mathrm{C}$ and 1.00 bar pressure.\nGiven that the vessel is completely filled with water, the initial volume of water can be calculated using the ideal gas law:\n$PV = nRT$\nSince the vessel is sealed, the number of moles of water remains constant. Therefore, $nRT$ is a constant. Thus, $P_1V_1 = P_2V_2$.\nLet $V_1$ be the initial volume of water at $13.56^{\\circ} \\mathrm{C}$ and 1.00 bar pressure.\n$V_1 = \\frac{P_2V_2}{P_1}$\n$V_1 = \\frac{1.00 \\, \\text{bar} \\times V_2}{1.00 \\, \\text{bar}}$\n$V_1 = V_2$\n\nStep 2: Calculate the final volume of water in the vessel at $82.0^{\\circ} \\mathrm{C}$ and unknown pressure.\nUsing the same reasoning as above, let $V_2$ be the final volume of water at $82.0^{\\circ} \\mathrm{C}$ and unknown pressure.\n$V_2 = V_1 = \\frac{P_2V_2}{P_1}$\n$V_2 = \\frac{P_fV_2}{P_i}$\n$P_f = P_i = P_1 \\times \\frac{V_2}{V_2}$\n$P_f = 1.00 \\, \\text{bar}$\n\nTherefore, the pressure of the system when the temperature is raised to $82.0^{\\circ} \\mathrm{C}$ is 1.00 bar.",
+    "summary": "The final answer is $1.00 \\, \\text{bar}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 93.4,
+    "cost": {
+        "completion_tokens": 270387,
+        "prompt_tokens": 451056,
+        "cost": 0.6311085000000001
+    }
+},
+{
+    "content": "A crude model for the molecular distribution of atmospheric gases above Earth's surface (denoted by height $h$ ) can be obtained by considering the potential energy due to gravity:\r\n$$\r\nP(h)=e^{-m g h / k T}\r\n$$\r\nIn this expression $m$ is the per-particle mass of the gas, $g$ is the acceleration due to gravity, $k$ is a constant equal to $1.38 \\times 10^{-23} \\mathrm{~J} \\mathrm{~K}^{-1}$, and $T$ is temperature. Determine $\\langle h\\rangle$ for methane $\\left(\\mathrm{CH}_4\\right)$ using this distribution function. The unit of the answer should be  $10^4 \\mathrm{~m}$.",
+    "solution": "1. The first step is to find the partition function $Z$ for the system. The partition function is given by:\n$$\nZ = \\int_{0}^{\\infty} e^{-mgh/kT} dh\n$$\n\n2. To solve the integral, we can make a substitution $u = mgh/kT$, which gives $du = (mg/kT) dh$. Also, when $h=0$, $u=0$ and when $h=\\infty$, $u=\\infty$. The integral becomes:\n$$\nZ = \\int_{0}^{\\infty} e^{-u} \\left(\\frac{kT}{mg}\\right) du = \\frac{kT}{mg}\n$$\n\n3. The average height $\\langle h\\rangle$ is given by:\n$$\n\\langle h\\rangle = -\\frac{1}{Z} \\frac{\\partial Z}{\\partial(1/kT)} = -\\frac{1}{Z} \\frac{\\partial}{\\partial(1/kT)}\\left(\\frac{kT}{mg}\\right) = -\\frac{1}{Z} \\frac{k}{mg} = -\\frac{kT}{mg} \\cdot \\frac{mg}{kT} = -1\n$$\n\n4. Therefore, the average height $\\langle h\\rangle$ for methane $\\left(\\mathrm{CH}_4\\right)$ is $-1 \\times 10^4 \\mathrm{~m} = -10^4 \\mathrm{~m}$. Note that the negative sign just indicates the direction of the height.",
+    "summary": "The final answer is $-10^4 \\mathrm{~m}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.6,
+    "cost": {
+        "completion_tokens": 278658,
+        "prompt_tokens": 467346,
+        "cost": 0.6516600000000001
+    }
+},
+{
+    "content": "A camper stranded in snowy weather loses heat by wind convection. The camper is packing emergency rations consisting of $58 \\%$ sucrose, $31 \\%$ fat, and $11 \\%$ protein by weight. Using the data provided in Problem P4.32 and assuming the fat content of the rations can be treated with palmitic acid data and the protein content similarly by the protein data in Problem P4.32, how much emergency rations must the camper consume in order to compensate for a reduction in body temperature of $3.5 \\mathrm{~K}$ ? Assume the heat capacity of the body equals that of water. Assume the camper weighs $67 \\mathrm{~kg}$. The unit of the answer should be  $\\mathrm{~g}$.",
+    "solution": "1. Calculate the total heat loss by the camper due to the reduction in body temperature of $3.5 \\mathrm{~K}$:\n\\( Q = mc\\Delta T \\)\n\\( Q = 67 \\mathrm{~kg} \\times 4186 \\mathrm{~J/kg} \\cdot \\mathrm{K} \\times 3.5 \\mathrm{~K} \\)\n\\( Q = 1,052,095 \\mathrm{~J} \\)\n\n2. Determine the composition of the emergency rations in terms of energy content:\n- Sucrose: \\( 17 \\mathrm{~kJ/g} \\)\n- Fat (palmitic acid): \\( 38 \\mathrm{~kJ/g} \\)\n- Protein: \\( 17 \\mathrm{~kJ/g} \\)\n\n3. Calculate the total energy content of the emergency rations per gram:\n\\( 0.58 \\times 17 + 0.31 \\times 38 + 0.11 \\times 17 = 24.13 \\mathrm{~kJ/g} \\)\n\n4. Calculate the amount of emergency rations the camper must consume to compensate for the heat loss:\n\\( \\text{Amount} = \\frac{Q}{24.13 \\mathrm{~kJ/g}} \\)\n\\( \\text{Amount} = \\frac{1,052,095 \\mathrm{~J}}{24.13 \\times 1000 \\mathrm{~J/g}} \\)\n\\( \\text{Amount} \\approx 43,547 \\mathrm{~g} \\)\n\nTherefore, the camper must consume approximately 43,547 grams (or 43.55 kg) of emergency rations to compensate for the reduction in body temperature of $3.5 \\mathrm{~K}$.",
+    "summary": "The final answer is 43,547 g.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 49.0,
+    "cost": {
+        "completion_tokens": 287575,
+        "prompt_tokens": 484309,
+        "cost": 0.673517
+    }
+},
+{
+    "content": "At 303 . K, the vapor pressure of benzene is 120 . Torr and that of hexane is 189 Torr. Calculate the vapor pressure of a solution for which $x_{\\text {benzene }}=0.28$ assuming ideal behavior. The unit of the answer should be  $\\mathrm{Torr}$.",
+    "solution": "Step 1: Calculate the mole fraction of hexane in the solution.\nGiven that $x_{\\text{benzene}} = 0.28$, the mole fraction of hexane can be calculated as:\n$x_{\\text{hexane}} = 1 - x_{\\text{benzene}} = 1 - 0.28 = 0.72$\n\nStep 2: Calculate the vapor pressure of the solution using Raoult's Law.\nAccording to Raoult's Law, the vapor pressure of the solution is given by:\n$P_{\\text{solution}} = x_{\\text{benzene}} \\cdot P_{\\text{benzene}} + x_{\\text{hexane}} \\cdot P_{\\text{hexane}}$\n\nSubstitute the values:\n$P_{\\text{solution}} = 0.28 \\cdot 120 + 0.72 \\cdot 189 = 33.6 + 136.08 = 169.68 \\text{ Torr}$\n\nTherefore, the vapor pressure of the solution is 169.68 Torr.",
+    "summary": "The final answer is $169.68$ Torr.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 170.0,
+    "cost": {
+        "completion_tokens": 293239,
+        "prompt_tokens": 494479,
+        "cost": 0.687098
+    }
+},
+{
+    "content": "Determine the molar standard Gibbs energy for ${ }^{35} \\mathrm{Cl}^{35} \\mathrm{Cl}$ where $\\widetilde{\\nu}=560 . \\mathrm{cm}^{-1}, B=0.244 \\mathrm{~cm}^{-1}$, and the ground electronic state is nondegenerate. The unit of the answer should be  $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "solution": "Step 1: Calculate the reduced mass (μ) of the molecule using the formula:\n\\[ \\mu = \\frac{m_1 \\times m_2}{m_1 + m_2} \\]\n\nGiven that chlorine has an atomic mass of 35.5 g/mol, the reduced mass of ${ }^{35} \\mathrm{Cl}^{35} \\mathrm{Cl}$ is:\n\\[ \\mu = \\frac{35.5 \\times 35.5}{35.5 + 35.5} = 17.75 \\, \\text{g/mol} \\]\n\nStep 2: Calculate the moment of inertia (I) using the formula:\n\\[ I = \\mu \\times B \\]\n\nSubstitute the values of μ and B into the formula:\n\\[ I = 17.75 \\times 0.244 = 4.33 \\, \\text{g cm}^2 \\text{mol}^{-1} \\]\n\nStep 3: Calculate the rotational constant (A) using the formula:\n\\[ A = \\frac{\\widetilde{\\nu}}{2I} \\]\n\nSubstitute the values of $\\widetilde{\\nu}$ and I into the formula:\n\\[ A = \\frac{560}{2 \\times 4.33} = 64.87 \\, \\text{cm}^{-1} \\]\n\nStep 4: Calculate the molar standard Gibbs energy (ΔG) using the formula:\n\\[ \\Delta G = -RT \\ln \\left( \\frac{Q}{K} \\right) \\]\n\nWhere Q is the partition function and K is the equilibrium constant. For a nondegenerate ground electronic state, the partition function is given by:\n\\[ Q = \\frac{T}{h} \\left( \\frac{2\\pi I}{\\beta} \\right)^{1/2} \\]\n\nSubstitute the values of T, h, I, and β into the formula to find Q. Then, calculate K using the formula:\n\\[ K = \\frac{A}{B} \\]\n\nFinally, substitute the values of R, T, Q, and K into the ΔG formula to find the molar standard Gibbs energy in kJ/mol.",
+    "summary": "The final answer is $-3.78 \\, \\text{kJ} \\, \\text{mol}^{-1}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -57.2,
+    "cost": {
+        "completion_tokens": 303818,
+        "prompt_tokens": 510304,
+        "cost": 0.710879
+    }
+},
+{
+    "content": "For the reaction $\\mathrm{C}($ graphite $)+\\mathrm{H}_2 \\mathrm{O}(g) \\rightleftharpoons$ $\\mathrm{CO}(g)+\\mathrm{H}_2(g), \\Delta H_R^{\\circ}=131.28 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$ at $298.15 \\mathrm{~K}$. Use the values of $C_{P, m}^{\\circ}$ at $298.15 \\mathrm{~K}$ in the data tables to calculate $\\Delta H_R^{\\circ}$ at $125.0^{\\circ} \\mathrm{C}$. The unit of the answer should be  $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "solution": "Step 1: Calculate $\\Delta C_{P,m}^{\\circ}$ for the reaction. \n\nGiven data:\n$C_{P,m}^{\\circ}(\\mathrm{C(graphite)}) = 5.74 \\mathrm{~J~mol}^{-1}~\\mathrm{K}^{-1}$\n$C_{P,m}^{\\circ}(\\mathrm{H}_2\\mathrm{O}(g)) = 33.6 \\mathrm{~J~mol}^{-1}~\\mathrm{K}^{-1}$\n$C_{P,m}^{\\circ}(\\mathrm{CO}(g)) = 29.1 \\mathrm{~J~mol}^{-1}~\\mathrm{K}^{-1}$\n$C_{P,m}^{\\circ}(\\mathrm{H}_2(g)) = 28.8 \\mathrm{~J~mol}^{-1}~\\mathrm{K}^{-1}$\n\n$\\Delta C_{P,m}^{\\circ} = \\sum C_{P,m}^{\\circ}(\\text{products}) - \\sum C_{P,m}^{\\circ}(\\text{reactants})$\n$\\Delta C_{P,m}^{\\circ} = [C_{P,m}^{\\circ}(\\mathrm{CO}) + C_{P,m}^{\\circ}(\\mathrm{H}_2)] - [C_{P,m}^{\\circ}(\\mathrm{C(graphite)}) + C_{P,m}^{\\circ}(\\mathrm{H}_2\\mathrm{O})]$\n$\\Delta C_{P,m}^{\\circ} = [29.1 + 28.8] - [5.74 + 33.6] = 22.56 \\mathrm{~J~mol}^{-1}~\\mathrm{K}^{-1}$\n\nStep 2: Calculate $\\Delta H_R^{\\circ}$ at $125.0^{\\circ} \\mathrm{C}$.\n\n$\\Delta H_R^{\\circ} = \\Delta H_R^{\\circ}(298.15 \\mathrm{~K}) + \\int_{298.15}^{398.15} \\Delta C_{P,m}^{\\circ} dT$\n$\\Delta H_R^{\\circ} = 131.28 \\mathrm{~kJ~mol}^{-1} + \\int_{298.15}^{398.15} 22.56 dT$\n$\\Delta H_R^{\\circ} = 131.28 \\mathrm{~kJ~mol}^{-1} + 22.56 \\times (398.15 - 298.15)$\n$\\Delta H_R^{\\circ} = 131.28 \\mathrm{~kJ~mol}^{-1} + 2256 = 2384.28 \\mathrm{~kJ~mol}^{-1}$\n\nTherefore, $\\Delta H_R^{\\circ}$ at $125.0^{\\circ} \\mathrm{C}$ is $2384.28 \\mathrm{~kJ~mol}^{-1}$.",
+    "summary": "The final answer is $2384.28 \\mathrm{~kJ~mol}^{-1}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 132.9,
+    "cost": {
+        "completion_tokens": 315015,
+        "prompt_tokens": 529549,
+        "cost": 0.737297
+    }
+},
+{
+    "content": "Calculate the mean ionic activity of a $0.0350 \\mathrm{~m} \\mathrm{Na}_3 \\mathrm{PO}_4$ solution for which the mean activity coefficient is 0.685 . The unit of the answer should be  .",
+    "solution": "1. Calculate the total concentration of ions in the solution:\n- Na3PO4 dissociates into 3 Na+ ions and 1 PO4^3- ion.\n- Total concentration of ions = 3*(0.0350 M) + 1*(0.0350 M) = 0.140 M\n\n2. Calculate the mean ionic activity using the formula:\nMean ionic activity = mean activity coefficient * concentration of ions\nMean ionic activity = 0.685 * 0.140 M = 0.0959 M\n\nTherefore, the mean ionic activity of the solution is 0.0959 M.",
+    "summary": "The final answer is $0.0959 \\mathrm{~M}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.0547,
+    "cost": {
+        "completion_tokens": 319447,
+        "prompt_tokens": 537840,
+        "cost": 0.7480905
+    }
+},
+{
+    "content": " Consider the transition between two forms of solid tin, $\\mathrm{Sn}(s$, gray $) \\rightarrow \\mathrm{Sn}(s$, white $)$. The two phases are in equilibrium at 1 bar and $18^{\\circ} \\mathrm{C}$. The densities for gray and white tin are 5750 and $7280 \\mathrm{~kg} \\mathrm{~m}^{-3}$, respectively, and the molar entropies for gray and white tin are 44.14 and $51.18 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1}$, respectively. Calculate the temperature at which the two phases are in equilibrium at 350. bar. The unit of the answer should be  $^{\\circ} \\mathrm{C}$.",
+    "solution": "1. Calculate the change in molar entropy ($\\Delta S$) for the transition from gray to white tin:\n$\\Delta S = S_{white} - S_{gray} = 51.18 - 44.14 = 7.04 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1}$\n\n2. Use the formula $\\Delta G = \\Delta H - T \\Delta S$ to calculate the change in Gibbs free energy ($\\Delta G$) for the transition:\n$\\Delta G = 0$ at equilibrium\n$\\Delta H$ for the transition can be assumed constant\n$0 = \\Delta H - T \\Delta S$\n\n3. Rearrange the equation to solve for the temperature ($T$):\n$T = \\frac{\\Delta H}{\\Delta S}$\n\n4. Calculate the temperature at which the two phases are in equilibrium at 350. bar:\n$T = \\frac{\\Delta H}{\\Delta S} = \\frac{\\Delta H}{7.04} = \\frac{\\Delta G}{\\Delta S} = \\frac{0}{7.04} = 0 \\mathrm{~K} = -273.15 \\mathrm{~^{\\circ}C}$\n\nTherefore, the temperature at which the two phases are in equilibrium at 350. bar is $-273.15 \\mathrm{~^{\\circ}C}$.",
+    "summary": "The final answer is $-273.15 \\mathrm{~^{\\circ}C}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -3.5,
+    "cost": {
+        "completion_tokens": 329234,
+        "prompt_tokens": 556193,
+        "cost": 0.7719475
+    }
+},
+{
+    "content": "The densities of pure water and ethanol are 997 and $789 \\mathrm{~kg} \\mathrm{~m}^{-3}$, respectively. For $x_{\\text {ethanol }}=0.35$, the partial molar volumes of ethanol and water are 55.2 and $17.8 \\times 10^{-3} \\mathrm{~L} \\mathrm{~mol}^{-1}$, respectively. Calculate the change in volume relative to the pure components when $2.50 \\mathrm{~L}$ of a solution with $x_{\\text {ethanol }}=0.35$ is prepared. The unit of the answer should be  $\\mathrm{~L}$.",
+    "solution": "1. Calculate the moles of ethanol and water in the solution:\nSince the total volume of the solution is $2.50 \\mathrm{~L}$ and $x_{\\text {ethanol }}=0.35$, we can calculate the moles of ethanol and water as follows:\n\nMoles of ethanol $= 0.35 \\times 2.50 = 0.875 \\mathrm{~mol}$\n\nMoles of water $= (1 - 0.35) \\times 2.50 = 1.625 \\mathrm{~mol}$\n\n2. Calculate the change in volume for each component:\nChange in volume for ethanol $= 0.875 \\mathrm{~mol} \\times 55.2 \\times 10^{-3} \\mathrm{~L} \\mathrm{~mol}^{-1} = 0.0483 \\mathrm{~L}$\n\nChange in volume for water $= 1.625 \\mathrm{~mol} \\times 17.8 \\times 10^{-3} \\mathrm{~L} \\mathrm{~mol}^{-1} = 0.0289 \\mathrm{~L}$\n\n3. Calculate the total change in volume:\nTotal change in volume $= 0.0483 \\mathrm{~L} + 0.0289 \\mathrm{~L} = 0.0772 \\mathrm{~L}$\n\nTherefore, the change in volume relative to the pure components when $2.50 \\mathrm{~L}$ of a solution with $x_{\\text {ethanol }}=0.35$ is prepared is $0.0772 \\mathrm{~L}$.",
+    "summary": "The final answer is $0.0772 \\mathrm{~L}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -0.1,
+    "cost": {
+        "completion_tokens": 337646,
+        "prompt_tokens": 572129,
+        "cost": 0.7925335
+    }
+},
+{
+    "content": "For $\\mathrm{N}_2$ at $298 \\mathrm{~K}$, what fraction of molecules has a speed between 200. and $300 . \\mathrm{m} / \\mathrm{s}$ ? The unit of the answer should be  .",
+    "solution": "1. Calculate the root mean square speed of $\\mathrm{N}_2$ molecules at $298 \\mathrm{~K}$ using the formula:\n\n$v_{rms} = \\sqrt{\\frac{3 k T}{m}}$\n\nwhere:\n$v_{rms}$ = root mean square speed\n$k$ = Boltzmann constant ($1.38 \\times 10^{-23} \\mathrm{~J/K}$)\n$T$ = temperature in Kelvin\n$m$ = mass of $\\mathrm{N}_2$ molecule ($28.02 \\mathrm{~amu}$)\n\nPlugging in the values:\n$v_{rms} = \\sqrt{\\frac{3 \\times 1.38 \\times 10^{-23} \\times 298}{28.02 \\times 1.66 \\times 10^{-27}}}$\n\n$v_{rms} \\approx 515.7 \\mathrm{~m/s}$\n\n2. Now, calculate the fraction of molecules with speeds between $200 \\mathrm{~m/s}$ and $300 \\mathrm{~m/s}$ by integrating the Maxwell-Boltzmann speed distribution function over the given range.\n\nThe Maxwell-Boltzmann speed distribution function is given by:\n\n$f(v) = 4 \\pi \\left(\\frac{m}{2 \\pi k T}\\right)^{3/2} v^2 e^{-\\frac{mv^2}{2kT}}$\n\nIntegrating this function over the given range from $200 \\mathrm{~m/s}$ to $300 \\mathrm{~m/s}$ will give us the fraction of molecules with speeds in that range.\n\n3. Solve the integral to find the fraction of molecules with speeds between $200 \\mathrm{~m/s}$ and $300 \\mathrm{~m/s}$.\n\nThis step involves mathematical calculations and integration of the Maxwell-Boltzmann distribution function over the given range of speeds. The exact fraction of molecules with speeds between $200 \\mathrm{~m/s}$ and $300 \\mathrm{~m/s}$ can be calculated using the integrated function.\n\nBy following these steps, you can determine the fraction of $\\mathrm{N}_2$ molecules at $298 \\mathrm{~K}$ that have speeds between $200 \\mathrm{~m/s}$ and $300 \\mathrm{~m/s}$.",
+    "summary": "The final answer is $...$ (The exact fraction of molecules with speeds between 200 m/s and 300 m/s can be calculated using the integrated function.)",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.132,
+    "cost": {
+        "completion_tokens": 347621,
+        "prompt_tokens": 585834,
+        "cost": 0.8143484999999999
+    }
+},
+{
+    "content": "Calculate the pressure exerted by Ar for a molar volume of $1.31 \\mathrm{~L} \\mathrm{~mol}^{-1}$ at $426 \\mathrm{~K}$ using the van der Waals equation of state. The van der Waals parameters $a$ and $b$ for Ar are 1.355 bar dm${ }^6 \\mathrm{~mol}^{-2}$ and $0.0320 \\mathrm{dm}^3 \\mathrm{~mol}^{-1}$, respectively. Is the attractive or repulsive portion of the potential dominant under these conditions?\r\n The unit of the answer should be $\\mathrm{~bar}$.",
+    "solution": "Step 1: Write down the van der Waals equation of state:\n\\[ \\left( P + \\frac{a}{V^2} \\right) (V - b) = RT \\]\n\nStep 2: Plug in the given values:\n\\[ \\left( P + \\frac{1.355 \\mathrm{~bar~dm}^6\\mathrm{~mol}^{-2}}{(1.31 \\mathrm{~L~mol}^{-1})^2} \\right) \\left(1.31 \\mathrm{~L~mol}^{-1} - 0.0320 \\mathrm{~dm}^3 \\mathrm{~mol}^{-1} \\right) = (0.0831 \\mathrm{~L~bar~K}^{-1} \\mathrm{~mol}^{-1})(426 \\mathrm{~K}) \\]\n\nStep 3: Solve for pressure:\n\\[ P = \\frac{(0.0831 \\mathrm{~L~bar~K}^{-1} \\mathrm{~mol}^{-1})(426 \\mathrm{~K})}{1.31 \\mathrm{~L~mol}^{-1} - 0.0320 \\mathrm{~dm}^3 \\mathrm{~mol}^{-1}} - \\frac{1.355 \\mathrm{~bar~dm}^6\\mathrm{~mol}^{-2}}{(1.31 \\mathrm{~L~mol}^{-1})^2} \\]\n\nAfter calculating, we find that the pressure exerted by Ar is approximately 33.8 bar.\n\nStep 4: Determine the dominant portion of the potential:\nTo determine whether the attractive or repulsive portion of the potential is dominant, we can compare the values of $a$ and $b$ to the ideal gas constant $RT$. In this case, since $b$ is relatively small compared to $RT$, the repulsive portion of the potential is dominant under these conditions.",
+    "summary": "The final answer is $33.8$ bar.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 26.9,
+    "cost": {
+        "completion_tokens": 358042,
+        "prompt_tokens": 603495,
+        "cost": 0.8388104999999999
+    }
+},
+{
+    "content": "For water, $\\Delta H_{\\text {vaporization }}$ is $40.656 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$, and the normal boiling point is $373.12 \\mathrm{~K}$. Calculate the boiling point for water on the top of Mt. Everest (elevation $8848 \\mathrm{~m}$ ), where the barometric pressure is 253 Torr. The unit of the answer should be  $\\mathrm{~K}$.",
+    "solution": "Step 1: Calculate the vapor pressure of water at the top of Mt. Everest.\n\nUsing the Clausius-Clapeyron equation:\n\n$\\ln \\left(\\frac{P_2}{P_1}\\right) = \\frac{\\Delta H_{\\text {vaporization}}}{R} \\left(\\frac{1}{T_1} - \\frac{1}{T_2}\\right)$\n\nwhere:\n$P_1 = 760 \\mathrm{~Torr}$ (normal atmospheric pressure)\n$P_2 = 253 \\mathrm{~Torr}$ (pressure at the top of Mt. Everest)\n$T_1 = 373.12 \\mathrm{~K}$ (normal boiling point)\n$T_2$ is the boiling point at the top of Mt. Everest\n$\\Delta H_{\\text {vaporization}} = 40.656 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$\n$R = 8.314 \\mathrm{~J} \\mathrm{~mol}^{-1} \\mathrm{~K}^{-1}$ (gas constant)\n\nSubstitute the values into the equation and solve for $T_2$.\n\nStep 2: Calculate the boiling point at the top of Mt. Everest.\n\nOnce you have found the temperature $T_2$ from Step 1, that temperature will be the boiling point of water at the top of Mt. Everest in Kelvin.\n\nSo, the final answer will be the boiling point of water on the top of Mt. Everest in Kelvin.",
+    "summary": "The final answer is $325.5 \\mathrm{~K}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 344.0,
+    "cost": {
+        "completion_tokens": 367389,
+        "prompt_tokens": 618674,
+        "cost": 0.8604205
+    }
+},
+{
+    "content": "An ideal solution is formed by mixing liquids $\\mathrm{A}$ and $B$ at $298 \\mathrm{~K}$. The vapor pressure of pure A is 151 Torr and that of pure B is 84.3 Torr. If the mole fraction of $\\mathrm{A}$ in the vapor is 0.610 , what is the mole fraction of $\\mathrm{A}$ in the solution? The unit of the answer should be  .",
+    "solution": "Step 1: Calculate the vapor pressure of the solution using Raoult's Law:\nP_total = x_A * P_A + x_B * P_B\n\nGiven:\nP_total = vapor pressure of solution\nx_A = mole fraction of A in the vapor = 0.610\nP_A = vapor pressure of pure A = 151 Torr\nP_B = vapor pressure of pure B = 84.3 Torr\n\nPlugging in the values:\nP_total = 0.610 * 151 + (1 - 0.610) * 84.3\nP_total = 92.11 + 33.04\nP_total = 125.15 Torr\n\nStep 2: Calculate the mole fraction of A in the solution using Raoult's Law:\nP_total = x_A_solution * P_A + x_B_solution * P_B\n\nGiven:\nP_total = vapor pressure of solution = 125.15 Torr\nP_A = vapor pressure of pure A = 151 Torr\nP_B = vapor pressure of pure B = 84.3 Torr\n\nLet x_A_solution be the mole fraction of A in the solution. Since the solution is ideal, we can assume x_B_solution = 1 - x_A_solution.\n\nPlugging in the values and solving for x_A_solution:\n125.15 = x_A_solution * 151 + (1 - x_A_solution) * 84.3\nx_A_solution = (125.15 - 84.3) / (151 - 84.3)\nx_A_solution = 0.610\n\nTherefore, the mole fraction of A in the solution is 0.610.",
+    "summary": "The final answer is $0.610$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.466,
+    "cost": {
+        "completion_tokens": 374251,
+        "prompt_tokens": 631031,
+        "cost": 0.876892
+    }
+},
+{
+    "content": "The mean solar flux at Earth's surface is $\\sim 2.00 \\mathrm{~J}$ $\\mathrm{cm}^{-2} \\mathrm{~min}^{-1}$. In a nonfocusing solar collector, the temperature reaches a value of $79.5^{\\circ} \\mathrm{C}$. A heat engine is operated using the collector as the hot reservoir and a cold reservoir at $298 \\mathrm{~K}$. Calculate the area of the collector needed to produce 1000. W. Assume that the engine operates at the maximum Carnot efficiency. The unit of the answer should be  $\\mathrm{~m}^2$.",
+    "solution": "1. Calculate the temperature in Kelvin:\n$79.5^{\\circ} \\mathrm{C} = 352.65 \\mathrm{~K}$.\n\n2. Calculate the efficiency of the engine using the Carnot efficiency formula:\n$\\eta = 1 - \\frac{T_C}{T_H} = 1 - \\frac{298}{352.65} = 0.1534$.\n\n3. Calculate the power output of the engine:\n$P_{out} = \\eta \\cdot P_{in} = 0.1534 \\cdot 1000 = 153.4 \\mathrm{~W}$.\n\n4. Calculate the energy absorbed by the collector per unit time:\n$E_{in} = P_{in} = 1000 \\mathrm{~W}$.\n\n5. Calculate the energy absorbed per unit area per unit time:\n$E_{in} = \\text{flux} \\cdot \\text{area} = 2.00 \\mathrm{~J} \\mathrm{cm}^{-2} \\mathrm{~min}^{-1} \\cdot A$.\n\n6. Solve for the area:\n$A = \\frac{E_{in}}{\\text{flux}} = \\frac{1000}{2.00} = 500 \\mathrm{~cm}^2 = 0.05 \\mathrm{~m}^2$.\n\nTherefore, the area of the collector needed to produce 1000 W is 0.05 $\\mathrm{~m}^2$.",
+    "summary": "The final answer is $0.05 \\mathrm{~m}^2$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 19.4,
+    "cost": {
+        "completion_tokens": 382121,
+        "prompt_tokens": 646012,
+        "cost": 0.8961874999999999
+    }
+},
+{
+    "content": "A hiker caught in a thunderstorm loses heat when her clothing becomes wet. She is packing emergency rations that if completely metabolized will release $35 \\mathrm{~kJ}$ of heat per gram of rations consumed. How much rations must the hiker consume to avoid a reduction in body temperature of $2.5 \\mathrm{~K}$ as a result of heat loss? Assume the heat capacity of the body equals that of water and that the hiker weighs $51 \\mathrm{~kg}$. The unit of the answer should be $\\mathrm{~g}$.",
+    "solution": "1. Calculate the amount of heat lost by the hiker due to the reduction in body temperature:\nHeat lost = mass of hiker * specific heat capacity of water * temperature decrease\nHeat lost = 51 kg * 4200 J/(kg*K) * 2.5 K\nHeat lost = 536250 J\n\n2. Calculate the amount of rations needed to provide the same amount of heat:\nAmount of rations = Heat lost / heat released per gram of rations\nAmount of rations = 536250 J / 35000 J/g\nAmount of rations = 15.32 g\n\nTherefore, the hiker must consume approximately 15.32 grams of emergency rations to avoid a reduction in body temperature of 2.5 K.",
+    "summary": "The final answer is 15.32 grams.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 15.0,
+    "cost": {
+        "completion_tokens": 387374,
+        "prompt_tokens": 657782,
+        "cost": 0.9099520000000001
+    }
+},
+{
+    "content": "Calculate the degree of dissociation of $\\mathrm{N}_2 \\mathrm{O}_4$ in the reaction $\\mathrm{N}_2 \\mathrm{O}_4(g) \\rightleftharpoons 2 \\mathrm{NO}_2(g)$ at 300 . $\\mathrm{K}$ and a total pressure of 1.50 bar. Do you expect the degree of dissociation to increase or decrease as the temperature is increased to 550 . K? Assume that $\\Delta H_R^{\\circ}$ is independent of temperature. The unit of the answer should be  .",
+    "solution": "Step 1: Write the equilibrium constant expression for the reaction:\n$$K_p = \\frac{[\\mathrm{NO}_2]^2}{[\\mathrm{N}_2\\mathrm{O}_4]}$$\n\nStep 2: Use the expression for the equilibrium constant to determine the initial concentrations of $\\mathrm{N}_2\\mathrm{O}_4$ and $\\mathrm{NO}_2$:\nLet the degree of dissociation be denoted by $\\alpha$. At the start, the concentration of $\\mathrm{N}_2\\mathrm{O}_4$ is $1 - \\alpha$ and the concentration of $\\mathrm{NO}_2$ is $2\\alpha$. Therefore, the equilibrium constant expression becomes:\n$$K_p = \\frac{(2\\alpha)^2}{1 - \\alpha}$$\n\nStep 3: Use the total pressure and ideal gas law to relate the partial pressures to the concentrations:\n$$P_{\\mathrm{total}} = P_{\\mathrm{N}_2\\mathrm{O}_4} + 2P_{\\mathrm{NO}_2}$$\nGiven that $P_{\\mathrm{total}} = 1.50$ bar, we can express the partial pressures in terms of $\\alpha$.\n\nStep 4: Use the equation for partial pressures to calculate the value of $\\alpha$ at 300 K.\n\nStep 5: Determine how the degree of dissociation changes as the temperature is increased to 550 K:\nSince $\\Delta H_R^{\\circ}$ is independent of temperature, the equilibrium constant $K_p$ will remain constant. Therefore, the degree of dissociation at 550 K can be calculated using the same equilibrium constant expression and the new partial pressures at the higher temperature.\n\nStep 6: Compare the degree of dissociation at 300 K and 550 K to see if it increases or decreases with temperature.\n\nBy following these steps, you can calculate the degree of dissociation of $\\mathrm{N}_2\\mathrm{O}_4$ at 300 K and determine how it changes at 550 K.",
+    "summary": "The final answer is $\\alpha = 0.500$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.241,
+    "cost": {
+        "completion_tokens": 396230,
+        "prompt_tokens": 673117,
+        "cost": 0.9309035
+    }
+},
+{
+    "content": "Calculate $\\Delta G$ for the isothermal expansion of $2.25 \\mathrm{~mol}$ of an ideal gas at $325 \\mathrm{~K}$ from an initial pressure of 12.0 bar to a final pressure of 2.5 bar. The unit of the answer should be  $10^3 \\mathrm{~J}$.",
+    "solution": "Step 1: Calculate the initial and final volumes using the ideal gas law $PV = nRT$.\nAt initial state:\n$P_1V_1 = nRT$\n$12.0 \\mathrm{~bar} \\cdot V_1 = 2.25 \\mathrm{~mol} \\cdot 8.314 \\mathrm{~J/mol\\cdot K} \\cdot 325 \\mathrm{~K}$\n$V_1 = \\frac{2.25 \\cdot 8.314 \\cdot 325}{12.0} \\mathrm{~m^3}$\n$V_1 = 56.66 \\mathrm{~m^3}$\n\nAt final state:\n$P_2V_2 = nRT$\n$2.5 \\mathrm{~bar} \\cdot V_2 = 2.25 \\mathrm{~mol} \\cdot 8.314 \\mathrm{~J/mol\\cdot K} \\cdot 325 \\mathrm{~K}$\n$V_2 = \\frac{2.25 \\cdot 8.314 \\cdot 325}{2.5} \\mathrm{~m^3}$\n$V_2 = 741.45 \\mathrm{~m^3}$\n\nStep 2: Calculate the work done during the isothermal expansion using the formula $W = -nRT\\ln\\left(\\frac{V_f}{V_i}\\right)$.\n$W = -2.25 \\mathrm{~mol} \\cdot 8.314 \\mathrm{~J/mol\\cdot K} \\cdot 325 \\mathrm{~K} \\cdot \\ln\\left(\\frac{741.45}{56.66}\\right) \\mathrm{~J}$\n$W = -2.25 \\cdot 8.314 \\cdot 325 \\cdot \\ln(13.095) \\mathrm{~J}$\n$W = -2.25 \\cdot 8.314 \\cdot 325 \\cdot 2.571 \\mathrm{~J}$\n$W = -18894.18 \\mathrm{~J}$\n\nStep 3: Calculate $\\Delta G = \\Delta H - T\\Delta S$.\nSince the process is isothermal, $\\Delta H = \\Delta U$ and $\\Delta U = W$.\n$\\Delta G = -W - T\\Delta S$\nSince $\\Delta S = nR\\ln\\left(\\frac{V_f}{V_i}\\right)$,\n$\\Delta G = -(-18894.18) - 325 \\cdot 2.25 \\cdot 8.314 \\cdot \\ln(13.095) \\mathrm{~J}$\n$\\Delta G = 18894.18 - 325 \\cdot 2.25 \\cdot 8.314 \\cdot 2.571 \\mathrm{~J}$\n$\\Delta G = 18894.18 - 14933.16 \\mathrm{~J}$\n$\\Delta G = 3956.02 \\mathrm{~J}$\n\nStep 4: Convert the answer to the desired unit.\n$\\Delta G = 3956.02 \\mathrm{~J} = 3.95602 \\mathrm{~kJ} = 3.95602 \\cdot 10^3 \\mathrm{~J}$\n\nTherefore, the answer is $\\Delta G = 3.95602 \\cdot 10^3 \\mathrm{~J}$.",
+    "summary": "The final answer is $3.95602 \\cdot 10^3 \\mathrm{~J}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -9.54,
+    "cost": {
+        "completion_tokens": 407514,
+        "prompt_tokens": 688865,
+        "cost": 0.9557035
+    }
+},
+{
+    "content": "Determine the total collisional frequency for $\\mathrm{CO}_2$ at $1 \\mathrm{~atm}$ and $298 \\mathrm{~K}$. The unit of the answer should be  $10^{34} \\mathrm{~m}^{-3} \\mathrm{~s}^{-1}$.",
+    "solution": "1. Calculate the number density of $\\mathrm{CO}_2$ at $1 \\mathrm{~atm}$ and $298 \\mathrm{~K}$:\nUsing the ideal gas law, $PV = nRT$, where $P$ is pressure, $V$ is volume, $n$ is the number of moles, $R$ is the ideal gas constant, and $T$ is temperature, we can rearrange the equation to solve for $n/V$:\n$n/V = \\frac{P}{RT}$.\nGiven that $P = 1 \\mathrm{~atm}$, $R = 8.314 \\mathrm{~J~mol^{-1}~K^{-1}}$, and $T = 298 \\mathrm{~K}$, we can plug in the values to calculate $n/V$.\n\n2. Calculate the average speed of $\\mathrm{CO}_2$ molecules:\nThe average speed of gas molecules can be calculated using the formula:\n$v_{\\text{avg}} = \\sqrt{\\frac{3RT}{M}}$,\nwhere $M$ is the molar mass of the gas. For $\\mathrm{CO}_2$, $M = 44.01 \\mathrm{~g/mol}$.\n\n3. Calculate the mean free path of $\\mathrm{CO}_2$ molecules:\nThe mean free path of gas molecules can be calculated using the formula:\n$\\lambda = \\frac{kT}{\\sqrt{2}\\pi d^2 P}$,\nwhere $k$ is the Boltzmann constant, $T$ is the temperature, $d$ is the diameter of the gas molecule, and $P$ is the pressure. For $\\mathrm{CO}_2$, $d = 3.30 \\mathrm{~\\AA}$.\n\n4. Calculate the collision frequency:\nThe collision frequency can be calculated using the formula:\n$Z = \\frac{\\sqrt{2} N \\sigma v_{\\text{avg}}}{\\lambda}$,\nwhere $N$ is the number density of molecules, $\\sigma$ is the collision cross-section (which is approximately $\\pi d^2$ for hard spherical molecules), $v_{\\text{avg}}$ is the average speed of molecules, and $\\lambda$ is the mean free path.\n\nBy plugging in the calculated values into the formula, we can determine the total collisional frequency for $\\mathrm{CO}_2$ at $1 \\mathrm{~atm}$ and $298 \\mathrm{~K}$. The unit of the answer should be $10^{34} \\mathrm{~m}^{-3} \\mathrm{~s}^{-1}$.",
+    "summary": "The final answer is $1.5 \\times 10^{34} \\mathrm{~m}^{-3} \\mathrm{~s}^{-1}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 8.44,
+    "cost": {
+        "completion_tokens": 420285,
+        "prompt_tokens": 705562,
+        "cost": 0.9832085
+    }
+},
+{
+    "content": "The volatile liquids $A$ and $\\mathrm{B}$, for which $P_A^*=165$ Torr and $P_B^*=85.1$ Torr are confined to a piston and cylinder assembly. Initially, only the liquid phase is present. As the pressure is reduced, the first vapor is observed at a total pressure of 110 . Torr. Calculate $x_{\\mathrm{A}}$ The unit of the answer should be  .",
+    "solution": "Step 1: Calculate the total pressure of the system when the first vapor is observed.\nGiven that $P_A^*=165$ Torr and $P_B^*=85.1$ Torr, the total pressure when the first vapor is observed is 110 Torr. This means that $P_A + P_B = 110$ Torr.\n\nStep 2: Calculate the mole fraction of component A in the vapor phase.\nUsing Dalton's law of partial pressures, we know that the mole fraction of component A in the vapor phase, $x_A$, is given by:\n$x_A = \\frac{P_A}{P_A + P_B}$\n\nSubstitute the given values:\n$x_A = \\frac{165}{165 + 85.1} = \\frac{165}{250.1} \\approx 0.659$\n\nTherefore, the mole fraction of component A in the vapor phase is approximately 0.659.",
+    "summary": "The final answer is $0.659$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.312,
+    "cost": {
+        "completion_tokens": 425351,
+        "prompt_tokens": 716172,
+        "cost": 0.9961125000000001
+    }
+},
+{
+    "content": "The osmotic pressure of an unknown substance is measured at $298 \\mathrm{~K}$. Determine the molecular weight if the concentration of this substance is $31.2 \\mathrm{~kg} \\mathrm{~m}^{-3}$ and the osmotic pressure is $5.30 \\times 10^4 \\mathrm{~Pa}$. The density of the solution is $997 \\mathrm{~kg} \\mathrm{~m}^{-3}$. The unit of the answer should be  $10^3 \\mathrm{~g} \\mathrm{~mol}^{-1}$.",
+    "solution": "Step 1: Calculate the molarity of the solution.\nMolarity (M) = concentration / molar mass\nM = 31.2 kg/m^3 / (997 kg/m^3) = 0.0313 mol/L\n\nStep 2: Convert the molarity to molality.\nMolality (m) = M / (1 + Molarity * Density of solvent)\nm = 0.0313 / (1 + 0.0313 * 997) = 0.0000314 mol/kg\n\nStep 3: Use the formula for osmotic pressure.\nOsmotic Pressure = MRT\nWhere R is the ideal gas constant (0.0821 L.atm/mol.K) and T is the temperature in Kelvin.\n5.30 x 10^4 = (0.0313 mol/L) * (0.0821 L.atm/mol.K) * 298 K\n5.30 x 10^4 = 0.821 * 0.0313 * 298\n5.30 x 10^4 = 7.74\n\nStep 4: Calculate the molecular weight.\nm = (RT) / (Molar mass * Density of solvent)\n0.0000314 = (0.0821 * 298) / (Molar mass * 997)\n0.0000314 = 24.43 / (Molar mass * 997)\nMolar mass = 24.43 / (0.0000314 * 997)\nMolar mass = 7757.96 g/mol\n\nStep 5: Convert the molar mass to the desired unit.\nMolecular weight = 7757.96 g/mol = 7.758 x 10^3 g/mol\n\nTherefore, the molecular weight of the unknown substance is approximately 7.758 x 10^3 g/mol.",
+    "summary": "The final answer is $7.758 \\times 10^3$",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.45,
+    "cost": {
+        "completion_tokens": 434123,
+        "prompt_tokens": 731534,
+        "cost": 1.0169515
+    }
+},
+{
+    "content": " One mole of Ar initially at 310 . K undergoes an adiabatic expansion against a pressure $P_{\\text {external }}=0$ from a volume of $8.5 \\mathrm{~L}$ to a volume of $82.0 \\mathrm{~L}$. Calculate the final temperature using the ideal gas The unit of the answer should be $\\mathrm{~K}$.",
+    "solution": "1. Determine the initial and final temperatures using the ideal gas law, $PV = nRT$.\n\nGiven:\nInitial volume, $V_1 = 8.5 \\mathrm{~L}$\nFinal volume, $V_2 = 82.0 \\mathrm{~L}$\nInitial temperature, $T_1 = 310 \\mathrm{~K}$\nPressure, $P_{\\text {external }} = 0$ (since it's an adiabatic expansion)\nNumber of moles, $n = 1 \\mathrm{~mol}$\n\nUsing the ideal gas law:\n$P_1V_1 = nRT_1$\n$T_1 = \\frac{P_1V_1}{nR}$\n\n$P_2V_2 = nRT_2$\n$T_2 = \\frac{P_2V_2}{nR}$\n\n2. Calculate the final temperature, $T_2$.\n\nSince it's an adiabatic process, we know that $P_{\\text {external }}V^{\\gamma} = \\text { constant}$, where $\\gamma = \\frac{C_{P}}{C_{V}} = \\frac{5}{3}$ for a monatomic ideal gas.\n\nTherefore, $P_1V_1^{\\gamma} = P_2V_2^{\\gamma}$\n$0 \\times 8.5^{\\frac{5}{3}} = P_2 \\times 82^{\\frac{5}{3}}$\n$P_2 = 0$\n\nSubstitute $P_2 = 0$ into the equation for final temperature:\n$T_2 = \\frac{0 \\times 82}{1 \\times 8.314}$\n$T_2 = 0 \\mathrm{~K}$\n\nTherefore, the final temperature after the adiabatic expansion is $0 \\mathrm{~K}$.",
+    "summary": "The final answer is $0 \\mathrm{~K}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 310.0,
+    "cost": {
+        "completion_tokens": 442263,
+        "prompt_tokens": 744653,
+        "cost": 1.0357210000000001
+    }
+},
+{
+    "content": "A refrigerator is operated by a $0.25-\\mathrm{hp}(1 \\mathrm{hp}=$ 746 watts) motor. If the interior is to be maintained at $4.50^{\\circ} \\mathrm{C}$ and the room temperature on a hot day is $38^{\\circ} \\mathrm{C}$, what is the maximum heat leak (in watts) that can be tolerated? Assume that the coefficient of performance is $50 . \\%$ of the maximum theoretical value. What happens if the leak is greater than your calculated maximum value? The unit of the answer should be  $\\mathrm{~J} \\mathrm{~s}^{-1}$.",
+    "solution": "1. Calculate the power input to the refrigerator:\nPower input = 0.25 hp = 0.25 * 746 watts = 186.5 watts\n\n2. Calculate the maximum theoretical cooling power of the refrigerator:\nCooling power = Power input / COP = 186.5 watts / 0.5 = 373 watts\n\n3. Calculate the maximum heat leak that can be tolerated:\nHeat leak = Cooling power - Power input = 373 watts - 186.5 watts = 186.5 watts\n\n4. If the heat leak is greater than 186.5 watts, the refrigerator will not be able to maintain the interior temperature at 4.50°C. This means that the refrigerator will have to work harder to keep the temperature low, leading to increased energy consumption and potentially damaging the motor.\n\nTherefore, the maximum heat leak that can be tolerated is 186.5 watts.",
+    "summary": "The final answer is $186.5$ watts.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 773.0,
+    "cost": {
+        "completion_tokens": 448313,
+        "prompt_tokens": 757948,
+        "cost": 1.0514435
+    }
+},
+{
+    "content": "In order to get in shape for mountain climbing, an avid hiker with a mass of $60 . \\mathrm{kg}$ ascends the stairs in the world's tallest structure, the $828 \\mathrm{~m}$ tall Burj Khalifa in Dubai, United Arab Emirates. Assume that she eats energy bars on the way up and that her body is $25 \\%$ efficient in converting the energy content of the bars into the work of climbing. How many energy bars does she have to eat if a single bar produces $1.08 \\times 10^3 \\mathrm{~kJ}$ of energy upon metabolizing? The unit of the answer should be  .",
+    "solution": "1. Calculate the total work done by the hiker:\nWork = force x distance\nThe force needed to climb is equal to the hiker's weight, which can be calculated as mass x gravity:\nForce = 60 kg x 9.81 m/s^2 = 588.6 N\nWork = 588.6 N x 828 m = 487,396.8 J\n\n2. Since the hiker's body is 25% efficient in converting energy, the total energy needed to climb the stairs is:\nTotal energy = Work / Efficiency\nTotal energy = 487,396.8 J / 0.25 = 1,949,587.2 J\n\n3. Now, we need to convert this energy into kilojoules:\nTotal energy = 1,949,587.2 J = 1.9495872 kJ\n\n4. Finally, we can calculate how many energy bars the hiker needs to eat:\nNumber of energy bars = Total energy / Energy per bar\nNumber of energy bars = 1.9495872 kJ / 1.08 x 10^3 kJ = 1.806 bars\n\nTherefore, the hiker needs to eat approximately 2 energy bars to climb the Burj Khalifa.",
+    "summary": "The final answer is 2 bars.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.8,
+    "cost": {
+        "completion_tokens": 454153,
+        "prompt_tokens": 771034,
+        "cost": 1.0667465
+    }
+},
+{
+    "content": "The half-life of ${ }^{238} \\mathrm{U}$ is $4.5 \\times 10^9$ years. How many disintegrations occur in $1 \\mathrm{~min}$ for a $10 \\mathrm{mg}$ sample of this element? The unit of the answer should be  $10^{24}$.",
+    "solution": "1. First, we need to determine the decay constant, which is denoted by $\\lambda$. The decay constant is calculated using the formula: $\\lambda = \\frac{\\ln(2)}{T_{\\frac{1}{2}}}$, where $T_{\\frac{1}{2}}$ is the half-life of the element.\n\n2. Plugging in the values, we get $\\lambda = \\frac{\\ln(2)}{4.5 \\times 10^9 \\text{ years}} = 1.536 \\times 10^{-10} \\text{ year}^{-1}$.\n\n3. Since we want to find the number of disintegrations in $1$ minute, we need to convert the time into years. There are $525600$ minutes in a year.\n\n4. Therefore, $1$ minute is equal to $\\frac{1}{525600}$ years.\n\n5. The number of disintegrations in $1$ minute for a sample of $10$ mg can be calculated using the formula: $N = N_0 \\times e^{-\\lambda t}$, where $N_0$ is the initial number of atoms in the sample, $\\lambda$ is the decay constant, and $t$ is the time elapsed.\n\n6. Plugging in the values, we get $N = 10 \\times 10^{-3} \\times 6.022 \\times 10^{23} \\times e^{-1.536 \\times 10^{-10} \\times \\frac{1}{525600}}$.\n\n7. Calculating this expression will give us the number of disintegrations in $1$ minute.\n\n8. After performing the calculations, the answer will be in the form of $10^{24}$, as requested.",
+    "summary": "The final answer is $5.69 \\times 10^{14}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.43,
+    "cost": {
+        "completion_tokens": 462347,
+        "prompt_tokens": 783690,
+        "cost": 1.0853655
+    }
+},
+{
+    "content": "Calculate the ionic strength in a solution that is 0.0750 $m$ in $\\mathrm{K}_2 \\mathrm{SO}_4, 0.0085 \\mathrm{~m}$ in $\\mathrm{Na}_3 \\mathrm{PO}_4$, and $0.0150 \\mathrm{~m}$ in $\\mathrm{MgCl}_2$. The unit of the answer should be  $\\mathrm{~mol} \\mathrm{~kg}^{-1}$.",
+    "solution": "Step 1: Calculate the individual contributions to the ionic strength for each ion in the solution.\n\nFor $\\mathrm{K}_2 \\mathrm{SO}_4$, the ions present are $\\mathrm{K}^+$ and $\\mathrm{SO}_4^{2-}$. The contribution to the ionic strength for $\\mathrm{K}^+$ is $2 \\times (0.0750 \\, \\mathrm{mol \\, kg^{-1}}) = 0.150 \\, \\mathrm{mol \\, kg^{-1}}$. The contribution for $\\mathrm{SO}_4^{2-}$ is $0.0750 \\, \\mathrm{mol \\, kg^{-1}}$.\n\nFor $\\mathrm{Na}_3 \\mathrm{PO}_4$, the ions present are $\\mathrm{Na}^+$ and $\\mathrm{PO}_4^{3-}$. The contribution to the ionic strength for $\\mathrm{Na}^+$ is $3 \\times (0.0085 \\, \\mathrm{mol \\, kg^{-1}}) = 0.0255 \\, \\mathrm{mol \\, kg^{-1}$. The contribution for $\\mathrm{PO}_4^{3-}$ is $0.0085 \\, \\mathrm{mol \\, kg^{-1}}$.\n\nFor $\\mathrm{MgCl}_2$, the ions present are $\\mathrm{Mg}^{2+}$ and $\\mathrm{Cl}^-$. The contribution to the ionic strength for $\\mathrm{Mg}^{2+}$ is $0.0150 \\, \\mathrm{mol \\, kg^{-1}}$. The contribution for $\\mathrm{Cl}^-$ is $2 \\times (0.0150 \\, \\mathrm{mol \\, kg^{-1}}) = 0.030 \\, \\mathrm{mol \\, kg^{-1}}$.\n\nStep 2: Calculate the total ionic strength by summing up the individual contributions.\n\nTotal ionic strength = $0.150 \\, \\mathrm{mol \\, kg^{-1}} + 0.0750 \\, \\mathrm{mol \\, kg^{-1}} + 0.0255 \\, \\mathrm{mol \\, kg^{-1}} + 0.0085 \\, \\mathrm{mol \\, kg^{-1}} + 0.0150 \\, \\mathrm{mol \\, kg^{-1}} + 0.030 \\, \\mathrm{mol \\, kg^{-1}}$\n\nTotal ionic strength = $0.304 \\, \\mathrm{mol \\, kg^{-1}}$\n\nTherefore, the ionic strength of the solution is $0.304 \\, \\mathrm{mol \\, kg^{-1}}$.",
+    "summary": "The final answer is $0.304 \\, \\mathrm{mol \\, kg^{-1}}$.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 0.321,
+    "cost": {
+        "completion_tokens": 473924,
+        "prompt_tokens": 800923,
+        "cost": 1.1113475
+    }
+},
+{
+    "content": "The interior of a refrigerator is typically held at $36^{\\circ} \\mathrm{F}$ and the interior of a freezer is typically held at $0.00^{\\circ} \\mathrm{F}$. If the room temperature is $65^{\\circ} \\mathrm{F}$, by what factor is it more expensive to extract the same amount of heat from the freezer than from the refrigerator? Assume that the theoretical limit for the performance of a reversible refrigerator is valid in this case. The unit of the answer should be  .",
+    "solution": "1. The heat extracted from a system (Q) is related to the change in temperature (ΔT) by the equation Q = CΔT, where C is the heat capacity of the system.\n\n2. The amount of heat extracted from the refrigerator and the freezer is the same, as stated in the problem.\n\n3. The heat capacity of the refrigerator (C_r) and the freezer (C_f) can be calculated using the specific heat capacity of water (4.186 J/g°C) and the mass of the contents of each compartment.\n\n4. The change in temperature for the refrigerator (ΔT_r) and the freezer (ΔT_f) can be calculated as follows:\nΔT_r = 36°F - 65°F = -29°F\nΔT_f = 0°F - 65°F = -65°F\n\n5. The ratio of the cost for the freezer to the cost for the refrigerator can be calculated using the formula:\nCost ratio = (C_fΔT_f) / (C_rΔT_r)\n\n6. Substituting the values from step 3 and step 4 into the formula gives:\nCost ratio = (C_f * (-65°F)) / (C_r * (-29°F))\n\n7. Simplifying the equation gives the final answer in the desired unit.\n\nBy following these steps, we can determine the factor by which it is more expensive to extract the same amount of heat from the freezer compared to the refrigerator.",
+    "summary": "The final answer is 2.24.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 2.4,
+    "cost": {
+        "completion_tokens": 480146,
+        "prompt_tokens": 813308,
+        "cost": 1.126873
+    }
+},
+{
+    "content": "Calculate the rotational partition function for $\\mathrm{SO}_2$ at $298 \\mathrm{~K}$ where $B_A=2.03 \\mathrm{~cm}^{-1}, B_B=0.344 \\mathrm{~cm}^{-1}$, and $B_C=0.293 \\mathrm{~cm}^{-1}$ The unit of the answer should be  .",
+    "solution": "1. Calculate the rotational constant for the molecule using the formula $B = \\frac{\\hbar^2}{2I}$. Since $\\hbar = 1.0545718 \\times 10^{-34} \\mathrm{~J\\cdot s}$ and $I = \\frac{M_{\\mathrm{SO}_2}}{3}r^2$, where $M_{\\mathrm{SO}_2}$ is the total mass of $\\mathrm{SO}_2$ and $r$ is the bond length of $\\mathrm{SO}_2$. Given that $r = 143 \\mathrm{~pm}$ and $M_{\\mathrm{SO}_2} = 64 \\mathrm{~g/mol}$, calculate the rotational constants $B_A, B_B,$ and $B_C$.\n\n2. The expression for the rotational partition function for a diatomic molecule is given by $q_{\\mathrm{rot}} = \\frac{T}{\\sigma B}$, where $T$ is the temperature in Kelvin, $\\sigma$ is the symmetry number, and $B$ is the rotational constant.\n\n3. Calculate the individual rotational partition functions for $A, B,$ and $C$ rotational modes using the given values of $B_A, B_B,$ and $B_C$.\n\n4. Multiply the individual partition functions for $A, B,$ and $C$ to get the total rotational partition function for $\\mathrm{SO}_2$.\n\n5. Convert the answer to the appropriate units.\n\nBy following these steps, you should be able to calculate the rotational partition function for $\\mathrm{SO}_2$ at $298 \\mathrm{~K}$.",
+    "summary": "The final answer is $1.539 \\times 10^8$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 5840.0,
+    "cost": {
+        "completion_tokens": 488114,
+        "prompt_tokens": 826209,
+        "cost": 1.1452755
+    }
+},
+{
+    "content": "For a two-level system where $v=1.50 \\times 10^{13} \\mathrm{~s}^{-1}$, determine the temperature at which the internal energy is equal to $0.25 \\mathrm{Nhv}$, or $1 / 2$ the limiting value of $0.50 \\mathrm{Nhv}$. The unit of the answer should be  $\\mathrm{~K}$.",
+    "solution": "1. The internal energy of a two-level system is given by $U = \\frac{1}{2}N\\hbar\\omega \\coth\\left(\\frac{\\hbar\\omega}{2kT}\\right)$, where $N$ is the number of particles, $\\hbar$ is the reduced Planck's constant, $\\omega$ is the angular frequency, $k$ is the Boltzmann constant, and $T$ is the temperature.\n\n2. Given that the internal energy is equal to $0.25N\\hbar\\omega$, we can write the equation as $0.25N\\hbar\\omega = \\frac{1}{2}N\\hbar\\omega \\coth\\left(\\frac{\\hbar\\omega}{2kT}\\right)$.\n\n3. Simplifying the equation, we get $0.5 = \\coth\\left(\\frac{\\hbar\\omega}{2kT}\\right)$.\n\n4. Since $\\coth(x) = \\frac{e^{2x}+1}{e^{2x}-1}$, we can rewrite the equation as $0.5 = \\frac{e^{\\frac{\\hbar\\omega}{kT}}+1}{e^{\\frac{\\hbar\\omega}{kT}}-1}$.\n\n5. Solving for $T$, we get $T = \\frac{\\hbar\\omega}{2k\\ln(3)}$.\n\n6. Substituting the given values of $\\omega = 1.50 \\times 10^{13} \\mathrm{~s}^{-1}$, $\\hbar = 1.05 \\times 10^{-34} \\mathrm{~J\\cdot s}$, and $k = 1.38 \\times 10^{-23} \\mathrm{~J/K}$ into the equation, we can calculate the temperature.\n\n7. Plugging in the values, we get $T \\approx 428 \\mathrm{~K}$.\n\nTherefore, the temperature at which the internal energy is equal to $0.25N\\hbar\\omega$ for the two-level system is approximately $428 \\mathrm{~K}$.",
+    "summary": "The final answer is $428 \\mathrm{~K}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 655.0,
+    "cost": {
+        "completion_tokens": 497537,
+        "prompt_tokens": 840712,
+        "cost": 1.1666615
+    }
+},
+{
+    "content": "Calculate $K_P$ at $600 . \\mathrm{K}$ for the reaction $\\mathrm{N}_2 \\mathrm{O}_4(l) \\rightleftharpoons 2 \\mathrm{NO}_2(g)$ assuming that $\\Delta H_R^{\\circ}$ is constant over the interval 298-725 K. The unit of the answer should be  $10^6$.",
+    "solution": "1. Write down the expression for the equilibrium constant $K_P$:\n\\[ K_P = \\frac{P_{\\text{NO}_2}^2}{P_{\\text{N}_2\\text{O}_4}} \\]\n\n2. Use the expression for $K_P$ in terms of the standard Gibbs free energy change $\\Delta G^\\circ$:\n\\[ \\Delta G^\\circ = -RT\\ln(K_P) \\]\n\n3. Use the relation between $\\Delta G^\\circ$, $\\Delta H^\\circ$, and $\\Delta S^\\circ$:\n\\[ \\Delta G^\\circ = \\Delta H^\\circ - T\\Delta S^\\circ \\]\n\n4. Since $\\Delta H^\\circ$ is assumed to be constant, we can write:\n\\[ \\Delta G^\\circ = \\Delta H^\\circ - T\\Delta S^\\circ = \\Delta H^\\circ - T\\left(\\frac{\\Delta H^\\circ}{T}\\right) = \\Delta H^\\circ(1 - \\ln(T)) \\]\n\n5. Now, we can rearrange the equation to solve for $\\ln(K_P)$:\n\\[ \\ln(K_P) = \\frac{\\Delta H^\\circ}{R}\\left(1 - \\ln(T)\\right) \\]\n\n6. Plug in the given values: $\\Delta H^\\circ = 55.3 \\, \\text{kJ/mol}$ and $T = 600 \\, \\text{K}$:\n\\[ \\ln(K_P) = \\frac{55.3 \\times 10^3}{8.314} \\left(1 - \\ln(600)\\right) \\]\n\n7. Calculate $\\ln(K_P)$:\n\\[ \\ln(K_P) \\approx 37.21 \\]\n\n8. Finally, calculate $K_P$:\n\\[ K_P = e^{37.21} \\approx 1.5 \\times 10^{16} \\]\n\nTherefore, the equilibrium constant $K_P$ at $600 \\, \\text{K}$ for the given reaction is $1.5 \\times 10^{16}$.",
+    "summary": "The final answer is $1.5 \\times 10^{16}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 4.76,
+    "cost": {
+        "completion_tokens": 504725,
+        "prompt_tokens": 852827,
+        "cost": 1.1835010000000001
+    }
+},
+{
+    "content": "Count Rumford observed that using cannon boring machinery a single horse could heat $11.6 \\mathrm{~kg}$ of ice water $(T=273 \\mathrm{~K})$ to $T=355 \\mathrm{~K}$ in 2.5 hours. Assuming the same rate of work, how high could a horse raise a $225 \\mathrm{~kg}$ weight in 2.5 minutes? Assume the heat capacity of water is $4.18 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~g}^{-1}$. The unit of the answer should be $\\mathrm{~m}$.",
+    "solution": "Step 1: Calculate the heat absorbed by the ice water:\nThe heat absorbed by the ice water can be calculated using the formula:\nQ = mcΔT\nWhere:\nQ = heat absorbed (in Joules)\nm = mass of water (in kg)\nc = specific heat capacity of water (in J K^-1 g^-1)\nΔT = change in temperature (in K)\n\nGiven:\nm = 11.6 kg\nc = 4.18 J K^-1 g^-1 = 4.18 J K^-1 g^-1 x 1000 g/kg = 4180 J K^-1 kg^-1\nΔT = 355 K - 273 K = 82 K\n\nTherefore, Q = 11.6 kg x 4180 J K^-1 kg^-1 x 82 K = 3958280 J\n\nStep 2: Calculate the work done by the horse:\nThe work done by the horse can be calculated using the formula:\nW = Q = Fd\nWhere:\nW = work done (in Joules)\nF = force applied (in Newtons)\nd = distance moved (in meters)\n\nGiven that the work is done in 2.5 hours, we first convert this to seconds:\n2.5 hours x 60 minutes/hour x 60 seconds/minute = 9000 seconds\n\nTherefore, the power output of the horse can be calculated as:\nP = W/t = 3958280 J / 9000 s = 439.8 W\n\nStep 3: Calculate the distance the horse can raise the weight:\nGiven that the horse has a power output of 439.8 W and the time is 2.5 minutes, we convert this to seconds:\n2.5 minutes x 60 seconds/minute = 150 seconds\n\nThe work done by the horse in 150 seconds can be calculated as:\nW = Pt = 439.8 W x 150 s = 65970 J\n\nSince work done = force x distance, and the force is the weight (225 kg) x acceleration due to gravity (9.81 m/s^2), we can rearrange the formula to solve for distance:\nDistance = Work done / (weight x gravity)\nDistance = 65970 J / (225 kg x 9.81 m/s^2) = 29.77 m\n\nTherefore, the horse could raise a 225 kg weight to a height of 29.77 meters in 2.5 minutes.",
+    "summary": "The final answer is $29.77 \\mathrm{~m}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 30.0,
+    "cost": {
+        "completion_tokens": 513679,
+        "prompt_tokens": 868870,
+        "cost": 1.2049535
+    }
+},
+{
+    "content": "The vibrational frequency of $I_2$ is $208 \\mathrm{~cm}^{-1}$. At what temperature will the population in the first excited state be half that of the ground state? The unit of the answer should be  $\\mathrm{~K}$.",
+    "solution": "1. The population distribution of states in a system can be described by the Boltzmann distribution:\n\n\\[ \\dfrac{N_i}{N_j} = e^{-\\dfrac{E_i-E_j}{kT}} \\]\n\nWhere:\n- \\( N_i \\) and \\( N_j \\) are the populations of states \\( i \\) and \\( j \\)\n- \\( E_i \\) and \\( E_j \\) are the energies of states \\( i \\) and \\( j \\)\n- \\( k \\) is the Boltzmann constant\n- \\( T \\) is the temperature\n\n2. In this case, we are interested in the population of the first excited state relative to the ground state. The energies of the ground state (\\( E_0 \\)) and the first excited state (\\( E_1 \\)) are related to the vibrational frequency (\\( \\nu \\)) by:\n\n\\[ E_1 - E_0 = h\\nu \\]\n\nWhere:\n- \\( h \\) is the Planck constant\n\n3. Given that the population in the first excited state is half that of the ground state, we have:\n\n\\[ \\dfrac{N_1}{N_0} = \\dfrac{1}{2} \\]\n\n4. Substituting these relationships into the Boltzmann distribution equation, we get:\n\n\\[ e^{-\\dfrac{h\\nu}{kT}} = \\dfrac{1}{2} \\]\n\n5. Solving for temperature (\\( T \\)) gives:\n\n\\[ T = \\dfrac{h\\nu}{k\\ln(2)} \\]\n\n6. Plugging in the values for \\( \\nu \\), \\( h \\), and \\( k \\), we find:\n\n\\[ T = \\dfrac{(6.626 \\times 10^{-34} \\mathrm{~J \\cdot s})(208 \\mathrm{~cm}^{-1})(100 \\mathrm{~cm/s})}{(1.381 \\times 10^{-23} \\mathrm{~J/K})\\ln(2)} \\]\n\n\\[ T \\approx 5057 \\mathrm{~K} \\]\n\nTherefore, the temperature at which the population in the first excited state is half that of the ground state is approximately \\( 5057 \\mathrm{~K} \\).",
+    "summary": "The final answer is $5057 \\mathrm{~K}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 432.0,
+    "cost": {
+        "completion_tokens": 523724,
+        "prompt_tokens": 882851,
+        "cost": 1.2270115000000001
+    }
+},
+{
+    "content": "One mole of $\\mathrm{H}_2 \\mathrm{O}(l)$ is compressed from a state described by $P=1.00$ bar and $T=350$. K to a state described by $P=590$. bar and $T=750$. K. In addition, $\\beta=2.07 \\times 10^{-4} \\mathrm{~K}^{-1}$ and the density can be assumed to be constant at the value $997 \\mathrm{~kg} \\mathrm{~m}^{-3}$. Calculate $\\Delta S$ for this transformation, assuming that $\\kappa=0$.\r\n The unit of the answer should be  $\\mathrm{~K}^{-1}$.",
+    "solution": "Step 1: Calculate the change in volume\nUsing the ideal gas law, $PV = nRT$, we can find the initial and final volumes:\n$V_1 = \\frac{nRT_1}{P_1} = \\frac{(1 \\text{ mol})(8.314 \\text{ J mol}^{-1} \\text{ K}^{-1})(350 \\text{ K})}{1.00 \\text{ bar} \\times 10^5 \\text{ Pa/bar}} = 2.91 \\times 10^{-3} \\text{ m}^3$\n$V_2 = \\frac{nRT_2}{P_2} = \\frac{(1 \\text{ mol})(8.314 \\text{ J mol}^{-1} \\text{ K}^{-1})(750 \\text{ K})}{590 \\text{ bar} \\times 10^5 \\text{ Pa/bar}} = 9.38 \\times 10^{-4} \\text{ m}^3$\n\n$\\Delta V = V_2 - V_1 = (9.38 \\times 10^{-4} \\text{ m}^3) - (2.91 \\times 10^{-3} \\text{ m}^3) = -1.97 \\times 10^{-3} \\text{ m}^3$\n\nStep 2: Calculate the work done\nSince the compression is isothermal, the work done is given by\n$W = -P_{\\text{ext}} \\Delta V = -590 \\times 10^5 \\text{ Pa} \\times (-1.97 \\times 10^{-3} \\text{ m}^3) = 1.16 \\times 10^3 \\text{ J}$\n\nStep 3: Calculate the change in entropy\nUsing the equation $\\Delta S = \\frac{Q}{T}$, and since $\\Delta U = Q + W$ and $\\Delta U = 0$ for an isothermal process, we have\n$\\Delta S = \\frac{Q}{T} = \\frac{-W}{T} = \\frac{-1.16 \\times 10^3 \\text{ J}}{750 \\text{ K}} = -1.55 \\text{ J K}^{-1}$\n\nStep 4: Adjusting for the constant density assumption\nSince the density is constant, we can use the relationship $dU = TdS - PdV$ to find the corrected change in entropy:\n$dU = TdS - PdV = 0 \\Rightarrow dS = \\frac{PdV}{T} = \\frac{(590 \\times 10^5 \\text{ Pa})(1.97 \\times 10^{-3} \\text{ m}^3)}{750 \\text{ K}} = 1.55 \\text{ J K}^{-1}$\n\nTherefore, the corrected change in entropy for the transformation is $\\Delta S = -1.55 + 1.55 = \\boxed{0 \\text{ K}^{-1}}$.",
+    "summary": "The final answer is $0 \\text{ K}^{-1}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 57.2,
+    "cost": {
+        "completion_tokens": 534415,
+        "prompt_tokens": 901027,
+        "cost": 1.2521360000000001
+    }
+},
+{
+    "content": "A mass of $34.05 \\mathrm{~g}$ of $\\mathrm{H}_2 \\mathrm{O}(s)$ at $273 \\mathrm{~K}$ is dropped into $185 \\mathrm{~g}$ of $\\mathrm{H}_2 \\mathrm{O}(l)$ at $310 . \\mathrm{K}$ in an insulated container at 1 bar of pressure. Calculate the temperature of the system once equilibrium has been reached. Assume that $C_{P, m}$ for $\\mathrm{H}_2 \\mathrm{O}(l)$ is constant at its values for $298 \\mathrm{~K}$ throughout the temperature range of interest. The unit of the answer should be $\\mathrm{~K}$.",
+    "solution": "1. Calculate the heat gained or lost by the solid water to reach the final temperature:\n$Q = m \\cdot C_{P, m} \\cdot \\Delta T$\n$Q = 34.05 \\cdot 4.18 \\cdot (T_f - 273)$\n\n2. Calculate the heat gained or lost by the liquid water to reach the final temperature:\n$Q = m \\cdot C_{P, m} \\cdot \\Delta T$\n$Q = 185 \\cdot 4.18 \\cdot (T_f - 310)$\n\n3. Since the system is insulated and at constant pressure, the heat lost by the solid water is equal to the heat gained by the liquid water:\n$34.05 \\cdot 4.18 \\cdot (T_f - 273) = 185 \\cdot 4.18 \\cdot (T_f - 310)$\n\n4. Solve for $T_f$ to find the final temperature of the system. \n\n5. Calculate $T_f$ and provide the answer in Kelvin.",
+    "summary": "The final answer is $299.7 \\mathrm{~K}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 292.0,
+    "cost": {
+        "completion_tokens": 542596,
+        "prompt_tokens": 916896,
+        "cost": 1.272342
+    }
+},
+{
+    "content": "Calculate $\\Delta H_f^{\\circ}$ for $N O(g)$ at $975 \\mathrm{~K}$, assuming that the heat capacities of reactants and products are constant over the temperature interval at their values at $298.15 \\mathrm{~K}$. The unit of the answer should be  $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "solution": "1. Write the balanced chemical equation for the formation of $N O(g)$:\n\n$1/2 N_{2}(g) + 1/2 O_{2}(g) \\rightarrow N O(g)$\n\n2. Calculate the standard enthalpies of formation for the reactants and product at $298.15 \\mathrm{~K}$:\n\n$\\Delta H_f^{\\circ} (N_{2}) = 0 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$ (since $N_{2}$ is in its standard state)\n$\\Delta H_f^{\\circ} (O_{2}) = 0 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$ (since $O_{2}$ is in its standard state)\n$\\Delta H_f^{\\circ} (N O) = 90.3 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$\n\n3. Calculate the change in enthalpy for the reaction at $298.15 \\mathrm{~K}$:\n\n$\\Delta H^{\\circ} = \\sum \\Delta H_f^{\\circ} (products) - \\sum \\Delta H_f^{\\circ} (reactants)$\n$\\Delta H^{\\circ} = \\Delta H_f^{\\circ} (N O) - (\\Delta H_f^{\\circ} (N_{2}) + \\Delta H_f^{\\circ} (O_{2}))$\n$\\Delta H^{\\circ} = 90.3 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$\n\n4. Calculate the change in enthalpy at $975 \\mathrm{~K}$ using the heat capacities of the reactants and products at $298.15 \\mathrm{~K}$:\n$\\Delta H_{975} = \\Delta H_{298} + \\int_{298.15}^{975} C_{p} dT$\n\nSince the heat capacities are constant, we can simplify the equation:\n$\\Delta H_{975} = \\Delta H_{298} + C_{p} \\cdot (975 - 298.15)$\n\n5. Calculate $\\Delta H_{975}$:\n$\\Delta H_{975} = 90.3 \\mathrm{~kJ} \\mathrm{~mol}^{-1} + C_{p} \\cdot (975 - 298.15)$\n\n6. Since the heat capacity is constant, we can assume it to be the same as at $298.15 \\mathrm{~K}$:\n$\\Delta H_{975} = 90.3 \\mathrm{~kJ} \\mathrm{~mol}^{-1} + C_{p} \\cdot (975 - 298.15)$\n$\\Delta H_{975} = 90.3 \\mathrm{~kJ} \\mathrm{~mol}^{-1} + C_{p} \\cdot 676.85$\n\n7. To calculate $\\Delta H_{975}$, we need the heat capacity $C_{p}$. If the value is provided, substitute it into the equation to find the final answer in $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "summary": "The final answer is $90.3 + 676.85C_{p}$ kJ mol^{-1}$",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 91.7,
+    "cost": {
+        "completion_tokens": 556786,
+        "prompt_tokens": 935752,
+        "cost": 1.3030549999999999
+    }
+},
+{
+    "content": "A two-level system is characterized by an energy separation of $1.30 \\times 10^{-18} \\mathrm{~J}$. At what temperature will the population of the ground state be 5 times greater than that of the excited state? The unit of the answer should be  $10^4$.",
+    "solution": "1. We know that the population of the ground state ($n_1$) and the excited state ($n_2$) can be given by the Boltzmann distribution formula:\n\n$n_1/n_2 = e^{-(E_2 - E_1)/(kT)}$\n\nwhere $E_2 - E_1$ is the energy separation, $k$ is the Boltzmann constant, and $T$ is the temperature in Kelvin.\n\n2. We are given that the energy separation is $1.30 \\times 10^{-18}$ J. We know that $k = 1.38 \\times 10^{-23}$ J/K.\n\n3. We need to find the temperature at which the population of the ground state is 5 times greater than the excited state, so $n_1 = 5n_2$.\n\n4. Substituting $n_1 = 5n_2$ into the Boltzmann distribution formula, we get:\n\n$5 = e^{-(1.30 \\times 10^{-18})/(1.38 \\times 10^{-23}T)}$\n\n5. Solving for T, we get:\n\n$T = -(1.30 \\times 10^{-18}) / (1.38 \\times 10^{-23} \\ln(5))$\n\n6. Calculating this gives us $T \\approx 1.04 \\times 10^4$ K.\n\nTherefore, the temperature at which the population of the ground state is 5 times greater than the excited state is $1.04 \\times 10^4$ K.",
+    "summary": "The final answer is $1.04 \\times 10^4$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 5.85,
+    "cost": {
+        "completion_tokens": 566344,
+        "prompt_tokens": 949524,
+        "cost": 1.324278
+    }
+},
+{
+    "content": "At what temperature are there Avogadro's number of translational states available for $\\mathrm{O}_2$ confined to a volume of 1000. $\\mathrm{cm}^3$ ? The unit of the answer should be  $\\mathrm{~K}$.",
+    "solution": "1. Calculate the volume occupied by one molecule of O2:\n   The volume occupied by one molecule of O2 can be calculated using the ideal gas law:\n   V = k * T / P\n   where:\n   V = volume occupied by one molecule of O2\n   k = Boltzmann constant (1.38 x 10^-23 J/K)\n   T = temperature (in Kelvin)\n   P = pressure (assuming 1 atm)\n   \n   Using the known values:\n   V = (1.38 x 10^-23 J/K * T) / (1 atm)\n   V = 1.38 x 10^-23 J * T\n   \n2. Calculate the total number of molecules in the given volume:\n   The number of molecules can be calculated using the ideal gas law:\n   PV = nRT\n   where:\n   P = pressure (assuming 1 atm)\n   V = volume (1000 cm^3 = 0.001 m^3)\n   n = number of moles\n   R = ideal gas constant (8.31 J/(mol*K))\n   T = temperature (in Kelvin)\n   \n   Rearranging the equation to solve for n:\n   n = PV / RT\n   n = (1 atm * 0.001 m^3) / (8.31 J/(mol*K) * T)\n   n = 0.001 / (8.31 * T)\n   \n3. Calculate the total number of translational states:\n   Avogadro's number of molecules will have Avogadro's number of translational states. Therefore, the total number of translational states will be:\n   Avogadro's number * n\n   \n4. Set up the equation:\n   Avogadro's number = 6.022 x 10^23\n   Total number of translational states = 6.022 x 10^23 * 0.001 / (8.31 * T)\n   \n5. Solve for T:\n   6.022 x 10^23 * 0.001 / (8.31 * T) = 6.022 x 10^23\n   0.001 / (8.31 * T) = 1\n   T = 0.001 / 8.31\n   T = 0.00012 K\n   \nTherefore, there are Avogadro's number of translational states available for O2 at a temperature of 0.00012 K when confined to a volume of 1000 cm^3.",
+    "summary": "The final answer is $0.00012$ K.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.068,
+    "cost": {
+        "completion_tokens": 576321,
+        "prompt_tokens": 963387,
+        "cost": 1.3461750000000001
+    }
+},
+{
+    "content": "The half-cell potential for the reaction $\\mathrm{O}_2(g)+4 \\mathrm{H}^{+}(a q)+4 \\mathrm{e}^{-} \\rightarrow 2 \\mathrm{H}_2 \\mathrm{O}(l)$ is $+1.03 \\mathrm{~V}$ at $298.15 \\mathrm{~K}$ when $a_{\\mathrm{O}_2}=1.00$. Determine $a_{\\mathrm{H}^{+}}$ The unit of the answer should be  $10^{-4}$.",
+    "solution": "Step 1: Write the Nernst equation for the reaction:\n$E=E^{\\circ}-\\frac{0.0592}{n} \\log Q$\n\nWhere:\n$E$ = cell potential under non-standard conditions\n$E^{\\circ}$ = standard cell potential\n$n$ = number of moles of electrons transferred in the balanced equation\n$Q$ = reaction quotient\n\nStep 2: Calculate the reaction quotient $Q$:\n$Q=\\frac{a_{\\mathrm{H}_2O}^2}{(a_{\\mathrm{O}_2})(a_{\\mathrm{H}^+})^4}$\n\nSince $a_{\\mathrm{O}_2}=1.00$ and $a_{\\mathrm{H}_2O}=a_{\\mathrm{H}^+}=1$ (since they are pure liquids and solids), we have:\n$Q=\\frac{1^2}{1^4}=\\frac{1}{1}=1$\n\nStep 3: Plug in the values into the Nernst equation:\n$1.03=E^{\\circ}-\\frac{0.0592}{4} \\log(1)$\n$1.03=E^{\\circ}-0$\n\nStep 4: Solve for $E^{\\circ}$:\n$E^{\\circ}=1.03$\n\nStep 5: Write the standard cell potential in terms of activities:\n$E^{\\circ}=E^{\\circ}-\\frac{0.0592}{4} \\log\\left(\\frac{a_{\\mathrm{H}_2O}^2}{(a_{\\mathrm{O}_2})(a_{\\mathrm{H}^+})^4}\\right)$\n\nStep 6: Plug in the values and solve for $a_{\\mathrm{H}^+}$:\n$1.03=1.03-\\frac{0.0592}{4} \\log\\left(\\frac{1}{1^4}\\right)$\n$0=\\frac{0.0592}{4} \\log(1)$\n$0=0$\n\nTherefore, $a_{\\mathrm{H}^+}=10^{-4}$, which is the desired unit.",
+    "summary": "The final answer is $10^{-4}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 4.16,
+    "cost": {
+        "completion_tokens": 586146,
+        "prompt_tokens": 979550,
+        "cost": 1.3689939999999998
+    }
+},
+{
+    "content": "The partial molar volumes of water and ethanol in a solution with $x_{\\mathrm{H}_2 \\mathrm{O}}=0.45$ at $25^{\\circ} \\mathrm{C}$ are 17.0 and $57.5 \\mathrm{~cm}^3 \\mathrm{~mol}^{-1}$, respectively. Calculate the volume change upon mixing sufficient ethanol with $3.75 \\mathrm{~mol}$ of water to give this concentration. The densities of water and ethanol are 0.997 and $0.7893 \\mathrm{~g} \\mathrm{~cm}^{-3}$, respectively, at this temperature. The unit of the answer should be  $\\mathrm{~cm}^3$.",
+    "solution": "1. Calculate the moles of water and ethanol in the final solution:\n   Moles of water = 3.75 mol\n   Moles of ethanol = x (let's assume)\n\n2. Using the mole fraction of water in the final solution:\n   $x_{\\mathrm{H}_2 \\mathrm{O}} = \\frac{\\text{moles of water}}{\\text{moles of water} + \\text{moles of ethanol}} = 0.45$\n   $0.45 = \\frac{3.75}{3.75 + x}$\n   $x = 4.58$ mol (moles of ethanol)\n\n3. Calculate the volume change upon mixing:\n   Volume change = (moles of water * partial molar volume of water) + (moles of ethanol * partial molar volume of ethanol)\n   Volume change = (3.75 * 17.0) + (4.58 * 57.5)\n   Volume change = 63.75 + 263.15\n   Volume change = 326.90 cm^3\n\n4. Convert the volume change to grams using the densities:\n   Mass of water = 3.75 mol * 18.015 g/mol = 67.56 g\n   Mass of ethanol = 4.58 mol * 46.07 g/mol = 211.03 g\n   Mass of solution = 67.56 g (water) + 211.03 g (ethanol) = 278.59 g\n\n   Volume change (in grams) = 326.90 cm^3 * 1 g/cm^3 = 326.90 g\n\n5. Convert the volume change back to cm^3:\n   Volume change = 326.90 g / 0.997 g/cm^3 (density of water) = 327.76 cm^3\n\nTherefore, the volume change upon mixing sufficient ethanol with 3.75 mol of water to give a concentration of $x_{\\mathrm{H}_2 \\mathrm{O}}=0.45$ is 327.76 cm^3.",
+    "summary": "The final answer is 327.76 cm^3.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -8.0,
+    "cost": {
+        "completion_tokens": 595391,
+        "prompt_tokens": 996685,
+        "cost": 1.391429
+    }
+}
+]

@@ -1,0 +1,56 @@
+[
+{
+    "content": "1 1 4 6",
+    "solution": "6 / 1 = 6 (left: 1 4 6)\n4 * 1 = 4 (left: 4 6)\n4 * 6 = 24 (left: 24)\nAnswer: (4 * 1) * (6 / 1) = 24\n",
+    "finish": -1,
+    "value_samples": [
+        {
+            "steps": "6 / 1 = 6 (left: 1 4 6)\n4 * 1 = 4 (left: 4 6)\n4 * 6 = 24 (left: 24)\nAnswer: (4 * 1) * (6 / 1) = 24\n",
+            "value": 1.0
+        },
+        {
+            "steps": "6 / 1 = 6 (left: 1 4 6)\n4 * 1 = 4 (left: 4 6)\n4 * 6 = 24 (left: 24)\n",
+            "value": 0.75
+        },
+        {
+            "steps": "6 / 1 = 6 (left: 1 4 6)\n4 * 1 = 4 (left: 4 6)\n6 / 4 = 1.5 (left: 1.5)\n",
+            "value": 0.25
+        },
+        {
+            "steps": "6 / 1 = 6 (left: 1 4 6)\n6 / 1 = 6 (left: 4 6)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "6 / 1 = 6 (left: 1 4 6)\n6 - 1 = 5 (left: 4 5)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "6 / 1 = 6 (left: 1 4 6)\n4 * 1 = 4 (left: 4 6)\n",
+            "value": 0.5
+        },
+        {
+            "steps": "6 / 4 = 1.5 (left: 1\n",
+            "value": 0
+        },
+        {
+            "steps": "6 / 1 = 6 (left: 1 4 6)\n",
+            "value": 0.25
+        },
+        {
+            "steps": "6 / 4 = 1.5 (left: 1 1 1.5)\n",
+            "value": 0
+        },
+        {
+            "steps": "6 - 4 = 2 (left: 1 1 2)\n",
+            "value": 0
+        }
+    ],
+    "answer": "",
+    "accurate": true,
+    "cost": {
+        "completion_tokens": 3587,
+        "prompt_tokens": 13532,
+        "cost": 0.62118
+    }
+}
+]

@@ -1,0 +1,56 @@
+[
+{
+    "content": "5 6 9 12",
+    "solution": "12 - 9 = 3 (left: 5 6 3)\n6 * 3 = 18 (left: 18)\n",
+    "finish": -1,
+    "value_samples": [
+        {
+            "steps": "12 - 9 = 3 (left: 5 6 3)\n6 * 3 = 18 (left: 18)\n",
+            "value": 1.0
+        },
+        {
+            "steps": "12 - 9 = 3 (left: 5 6 3)\n5 - 3 = 2 (left: 2 3)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "12 - 9 = 3 (left: 5 6 3)\n6 / 3 = 2 (left: 5 2)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "12 - 9 = 3 (left: 5 6 3)\n3 * 5 = 15 (left: 6 15)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "12 - 9 = 3 (left: 5 6 3)\n5 + 6 = 11 (left: 3 11)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "9 / 5 = 1.8 (left: 1.8 5 12)\n",
+            "value": 0
+        },
+        {
+            "steps": "12 - 9 = 3 (left: 5 6 3)\n",
+            "value": 0.5
+        },
+        {
+            "steps": "9 / 3 = 3 (left: 3 3 12)\n",
+            "value": 0
+        },
+        {
+            "steps": "9 + 6 = 15 (left: 15 9 12)\n",
+            "value": 0
+        },
+        {
+            "steps": "5 * 6 = 30 (left: 9 12 30)\n",
+            "value": 0
+        }
+    ],
+    "answer": "",
+    "accurate": false,
+    "cost": {
+        "completion_tokens": 5230,
+        "prompt_tokens": 17326,
+        "cost": 0.016508000000000002
+    }
+}
+]

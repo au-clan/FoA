@@ -1,0 +1,80 @@
+[
+{
+    "content": "Suppose that $10.0 \\mathrm{~mol} \\mathrm{C}_2 \\mathrm{H}_6(\\mathrm{~g})$ is confined to $4.860 \\mathrm{dm}^3$ at $27^{\\circ} \\mathrm{C}$. Predict the pressure exerted by the ethane from the perfect gas. The unit of the answer should be $\\mathrm{atm}$ .",
+    "solution": "步骤1:计算气体的压强，代入$P = \\frac{nRT}{V}$，其中$n=10.0 \\mathrm{~mol}, R=0.0821 \\mathrm{~atm \\cdot dm^3/mol \\cdot K}, T=27+273 \\mathrm{~K}, V=4.860 \\mathrm{~dm^3}$，求得压强的值。\n步骤2:代入$n=10.0 \\mathrm{~mol}, R=0.0821 \\mathrm{~atm \\cdot dm^3/mol \\cdot K}, T=27+273 \\mathrm{~K}, V=4.860 \\mathrm{~dm^3$，计算得到压强的值。\n",
+    "summary": "综上所述，最终答案是:44.53.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 50.7,
+    "cost": {
+        "completion_tokens": 1868,
+        "prompt_tokens": 46883,
+        "cost": 0.0262435
+    }
+},
+{
+    "content": "Assume all gases are perfect unless stated otherwise. Unless otherwise stated, thermodynamic data are for 298.15 K. Calculate the standard enthalpy of solution of $\\mathrm{AgCl}(\\mathrm{s})$ in water from the enthalpies of formation of the solid and the aqueous ions. The unit of the answer should be $\\mathrm{kJ} \\mathrm{mol}^{-1}$.",
+    "solution": "步骤1:计算$\\mathrm{AgCl}(\\mathrm{s})$、$\\mathrm{Ag}^+(\\mathrm{aq})$和$\\mathrm{Cl}^-(\\mathrm{aq})$的标准生成焓。\n步骤2:根据热力学定义，标准生成焓的计算公式为$\\Delta H^\\circ_{\\text{solution}} = \\Delta H^\\circ_{\\text{formation, ions}} - \\Delta H^\\circ_{\\text{formation, solid}}$，代入已有数据，计算出$\\mathrm{AgCl}(\\mathrm{s})$在水中溶解的标准生成焓。单位应为$\\mathrm{kJ} \\mathrm{mol}^{-1}$。\n步骤3:根据步骤2中的公式，计算出$\\mathrm{AgCl}(\\mathrm{s})$在水中溶解的标准生成焓。单位应为$\\mathrm{kJ} \\mathrm{mol}^{-1}$。\n",
+    "summary": "综上所述，最终答案是: x.xx (请根据具体数据计算出结果并填入)",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 65.49,
+    "cost": {
+        "completion_tokens": 6040,
+        "prompt_tokens": 117375,
+        "cost": 0.0677475
+    }
+},
+{
+    "content": "Assume that all gases are perfect and that data refer to 298.15 K unless otherwise stated. Calculate the change in chemical potential of a perfect gas when its pressure is increased isothermally from $1.8 \\mathrm{~atm}$ to $29.5 \\mathrm{~atm}$ at $40^{\\circ} \\mathrm{C}$. The unit of the answer should be $\\mathrm{kJ} \\mathrm{mol}^{-1}$.",
+    "solution": "步骤1:使用化学势的定义公式 $\\Delta \\mu = RT \\ln \\left( \\frac{P_f}{P_i} \\right)$，其中$P_f$为最终压力，$P_i$为初始压力，$R$为气体常数，$T$为温度，来计算化学势的变化。\n",
+    "summary": "综上所述，最终答案是:-11.47 kJ mol^{-1}",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 7.3,
+    "cost": {
+        "completion_tokens": 7270,
+        "prompt_tokens": 141274,
+        "cost": 0.081542
+    }
+},
+{
+    "content": "Assume that all gases are perfect and that data refer to 298.15 K unless otherwise stated. 3.1(a) Calculate the change in entropy when $25 \\mathrm{~kJ}$ of energy is transferred reversibly and isothermally as heat to a large block of iron at $100^{\\circ} \\mathrm{C}$. The unit of the answer should be $\\mathrm{J} \\mathrm{K}^{-1}$ .",
+    "solution": "步骤1:计算熵的变化，使用公式$\\Delta S = \\frac{Q}{T}$，将能量$25 \\mathrm{~kJ}$转化为焦耳并将温度转化为开尔文后进行计算。\n",
+    "summary": "综上所述，最终答案是: 83.33 J K^-1",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 67.0,
+    "cost": {
+        "completion_tokens": 8455,
+        "prompt_tokens": 164974,
+        "cost": 0.09516949999999999
+    }
+},
+{
+    "content": "Assume that all gases are perfect and that data refer to 298.15 K unless otherwise stated. A sample consisting of $3.00 \\mathrm{~mol}$ of diatomic perfect gas molecules at $200 \\mathrm{~K}$ is compressed reversibly and adiabatically until its temperature reaches $250 \\mathrm{~K}$. Given that $C_{V, \\mathrm{~m}}=27.5 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1}$, calculate $q$. The unit of the answer should be  .",
+    "solution": "步骤1:计算内能变化$\\Delta U$。\n",
+    "summary": "综上所述，最终答案是: -165.00 J.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.0,
+    "cost": {
+        "completion_tokens": 9628,
+        "prompt_tokens": 188931,
+        "cost": 0.1089075
+    }
+},
+{
+    "content": "Assume all gases are perfect unless stated otherwise. Unless otherwise stated, thermodynamic data are for 298.15 K. For the reaction $\\mathrm{C}_2 \\mathrm{H}_5 \\mathrm{OH}(\\mathrm{l})+3 \\mathrm{O}_2(\\mathrm{~g}) \\rightarrow 2 \\mathrm{CO}_2(\\mathrm{~g})+3 \\mathrm{H}_2 \\mathrm{O}(\\mathrm{g})$, $\\Delta_{\\mathrm{r}} U^\\ominus=-1373 \\mathrm{~kJ} \\mathrm{~mol}^{-1}$ at $298 \\mathrm{~K}$, calculate $\\Delta_{\\mathrm{r}} H^{\\ominus}$. The unit of the answer should be $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$.",
+    "solution": "步骤1:根据热力学公式，标准焓变与标准内能变的关系为 $\\Delta_{\\mathrm{r}} H^{\\ominus} = \\Delta_{\\mathrm{r}} U^\\ominus + \\Delta_{\\mathrm{r}} (PV)^\\ominus$，其中 $\\Delta_{\\mathrm{r}} (PV)^\\ominus$ 为反应的标准体积功。因为反应在常压下进行，可以忽略这一项，所以下一步就是直接计算标准焓变。\n",
+    "summary": "综上所述，最终答案是:-1373 kJ mol^-1",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -1368.0,
+    "cost": {
+        "completion_tokens": 10791,
+        "prompt_tokens": 213788,
+        "cost": 0.12308050000000001
+    }
+}
+]

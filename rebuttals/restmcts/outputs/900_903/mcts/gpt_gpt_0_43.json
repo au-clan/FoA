@@ -1,0 +1,140 @@
+[
+{
+    "content": "4 5 6 10",
+    "solution": "10 - 5 = 5 (left: 4 6 10)\n4 * 6 = 24 (left: 24)\nAnswer: 4 * (6 + (10 - 5)) = 24\n",
+    "finish": -1,
+    "value_samples": [
+        {
+            "steps": "10 - 5 = 5 (left: 4 6 10)\n4 * 6 = 24 (left: 24)\nAnswer: 4 * (10 - 5) * 6 = 24\n",
+            "value": 0.3333333333333333
+        },
+        {
+            "steps": "10 - 5 = 5 (left: 4 6 10)\n4 * 6 = 24 (left: 24)\nAnswer: 4 * (6 + (10 - 5)) = 24\n",
+            "value": 1.0
+        },
+        {
+            "steps": "10 - 5 = 5 (left: 4 6 10)\n4 + 6 = 10 (left: 10 10)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "10 - 5 = 5 (left: 4 6 10)\n4 * 6 = 24 (left: 24)\n",
+            "value": 0.6666666666666666
+        },
+        {
+            "steps": "10 - 5 = 5 (left: 4 6 10)\n10 / 4 = 2.5 (left: 2.5 10)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "6 - 4 = 2 (left: 2 4 10)\n",
+            "value": 0
+        },
+        {
+            "steps": "10 - 5 = 5 (left: 4 6 10)\n",
+            "value": 0.3333333333333333
+        },
+        {
+            "steps": "5 + 6 = 11 (left: 4 11 10)\n",
+            "value": 0
+        }
+    ],
+    "answer": "",
+    "accurate": false,
+    "cost": {
+        "completion_tokens": 1964,
+        "prompt_tokens": 6812,
+        "cost": 0.006352
+    }
+},
+{
+    "content": "1 2 4 7",
+    "solution": "1 * 2 = 2 (left: 2 4 7)\n4 + 7 = 11 (left: 2 11)\n2 * 11 = 22 (left: 22)\n",
+    "finish": -1,
+    "value_samples": [
+        {
+            "steps": "1 * 2 = 2 (left: 2 4 7)\n4 + 7 = 11 (left: 2 11)\n2 * 11 = 22 (left: 22)\n",
+            "value": 1.0
+        },
+        {
+            "steps": "1 * 2 = 2 (left: 2 4 7)\n4 + 7 = 11 (left: 2 11)\n2 + 11 = 13 (left: 13)\n",
+            "value": 0.3333333333333333
+        },
+        {
+            "steps": "1 * 2 = 2 (left: 2 4 7)\n4 - 2 = 2 (left: 2 7)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "1 * 2 = 2 (left: 2 4 7)\n7 - 2 = 5 (left: 4 5)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "1 * 2 = 2 (left: 2 4 7)\n4 + 7 = 11 (left: 2 11)\n",
+            "value": 0.6666666666666666
+        },
+        {
+            "steps": "1 + 2 = 3 (left: 3 4 7)\n",
+            "value": 0
+        },
+        {
+            "steps": "7 - 2 = 5 (left: 1 2 5)\n",
+            "value": 0
+        },
+        {
+            "steps": "1 * 2 = 2 (left: 2 4 7)\n",
+            "value": 0.3333333333333333
+        }
+    ],
+    "answer": "",
+    "accurate": false,
+    "cost": {
+        "completion_tokens": 5910,
+        "prompt_tokens": 25199,
+        "cost": 0.0214645
+    }
+},
+{
+    "content": "2 5 8 11",
+    "solution": "5 * 8 = 40 (left: 2 40 11)\n40 - 11 = 29 (left: 2 29)\n29 - 2 = 27 (left: 27)\n",
+    "finish": -1,
+    "value_samples": [
+        {
+            "steps": "5 * 8 = 40 (left: 2 40 11)\n40 - 11 = 29 (left: 2 29)\n29 - 2 = 27 (left: 27)\n",
+            "value": 1.0
+        },
+        {
+            "steps": "5 * 8 = 40 (left: 2 40 11)\n40 - 11 = 29 (left: 2 29)\n2 * 29 = 58 (left: 58)\n",
+            "value": 0.3333333333333333
+        },
+        {
+            "steps": "5 * 8 = 40 (left: 2 40 11)\n40 / 2 = 20 (left: 20 11)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "5 * 8 = 40 (left: 2 40 11)\n40 / 11 = 3.64 (left: 2 3.64)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "5 * 8 = 40 (left: 2 40 11)\n40 - 11 = 29 (left: 2 29)\n",
+            "value": 0.6666666666666666
+        },
+        {
+            "steps": "5 * 8 = 40 (left: 2 40 11)\n",
+            "value": 0.3333333333333333
+        },
+        {
+            "steps": "11 - 2 = 9 (left: 2 5 9)\n",
+            "value": 0
+        },
+        {
+            "steps": "5 + 8 = 13 (left: 2 13 11)\n",
+            "value": 0
+        }
+    ],
+    "answer": "",
+    "accurate": false,
+    "cost": {
+        "completion_tokens": 11992,
+        "prompt_tokens": 53100,
+        "cost": 0.044538
+    }
+}
+]

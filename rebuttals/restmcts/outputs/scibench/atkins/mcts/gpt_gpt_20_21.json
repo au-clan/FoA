@@ -1,0 +1,41 @@
+[
+{
+    "content": "1 1 4 6",
+    "solution": "6 - 1 = 5 (left: 1 4 5)\n1 + 4 = 5 (left: 5 5)\n",
+    "summary": "The final answer is $24$.",
+    "finish": -1,
+    "value_samples": [
+        {
+            "steps": "6 - 1 = 5 (left: 1 4 5)\n1 + 4 = 5 (left: 5 5)\n",
+            "value": 1.0
+        },
+        {
+            "steps": "6 - 1 = 5 (left: 1 4 5)\n4 - 1 = 3 (left: 3 5)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "6 - 1 = 5 (left: 1 4 5)\n9 / 3 = 3 (left: 3 9 12)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "1 + 1 = 2 (left: 2 4 6)\n",
+            "value": 0
+        },
+        {
+            "steps": "6 - 1 = 5 (left: 1 4 5)\n",
+            "value": 0.5
+        },
+        {
+            "steps": "10 - 5 = 5 (left: 3 5 10)\n",
+            "value": 0
+        }
+    ],
+    "answer": "",
+    "accurate": false,
+    "cost": {
+        "completion_tokens": 7713,
+        "prompt_tokens": 30190,
+        "cost": 0.049141500000000005
+    }
+}
+]

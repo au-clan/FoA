@@ -1,0 +1,61 @@
+[
+{
+    "content": "1 1 4 6",
+    "solution": "6 - 1 = 5 (left: 1 4 5)\n9 + 3 = 12 (left: 12 12)\n12 + 12 = 24 (left: 24)\nAnswer: (6 - 1) * (1 + 4) * 12 = 24\n",
+    "summary": "The final answer is $24$.",
+    "finish": -1,
+    "value_samples": [
+        {
+            "steps": "6 - 1 = 5 (left: 1 4 5)\n9 + 3 = 12 (left: 12 12)\n12 + 12 = 24 (left: 24)\nAnswer: (6 - 1) * (4 + 1) = 24\n",
+            "value": 0.5
+        },
+        {
+            "steps": "6 - 1 = 5 (left: 1 4 5)\n9 + 3 = 12 (left: 12 12)\n12 + 12 = 24 (left: 24)\nAnswer: (6 - 1) * (1 + 4) = 24\n",
+            "value": 0.5
+        },
+        {
+            "steps": "6 - 1 = 5 (left: 1 4 5)\n9 + 3 = 12 (left: 12 12)\n12 + 12 = 24 (left: 24)\nAnswer: (6 - 1) * (1 + 4) * 12 = 24\n",
+            "value": 1.0
+        },
+        {
+            "steps": "6 - 1 = 5 (left: 1 4 5)\n9 + 3 = 12 (left: 12 12)\n12 + 12 = 24 (left: 24)\n",
+            "value": 0.75
+        },
+        {
+            "steps": "6 - 1 = 5 (left: 1 4 5)\n9 + 3 = 12 (left: 12 12)\n12 + 12 = 24\n",
+            "value": 0.25
+        },
+        {
+            "steps": "6 - 1 = 5 (left: 1 4 5)\n3 * 9 = 27 (left: 27)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "6 - 1 = 5 (left: 1 4 5)\n8 / 2 = 4 (left: 4 8)\n",
+            "value": 0.0
+        },
+        {
+            "steps": "6 - 1 = 5 (left: 1 4 5)\n9 + 3 = 12 (left: 12 12)\n",
+            "value": 0.5
+        },
+        {
+            "steps": "Input: 3 6 9 12\n",
+            "value": 0
+        },
+        {
+            "steps": "6 - 1 = 5 (left: 1 4 5)\n",
+            "value": 0.25
+        },
+        {
+            "steps": "3 * 5 = 15 (left: 15 1 2)\n",
+            "value": 0
+        }
+    ],
+    "answer": "",
+    "accurate": false,
+    "cost": {
+        "completion_tokens": 2870,
+        "prompt_tokens": 12027,
+        "cost": 0.0194755
+    }
+}
+]

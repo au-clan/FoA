@@ -1,0 +1,119 @@
+[
+{
+    "content": "In an orienteering class, you have the goal of moving as far (straight-line distance) from base camp as possible by making three straight-line moves. You may use the following displacements in any order: (a) $\\vec{a}, 2.0 \\mathrm{~km}$ due east (directly toward the east); (b) $\\vec{b}, 2.0 \\mathrm{~km} 30^{\\circ}$ north of east (at an angle of $30^{\\circ}$ toward the north from due east); (c) $\\vec{c}, 1.0 \\mathrm{~km}$ due west. Alternatively, you may substitute either $-\\vec{b}$ for $\\vec{b}$ or $-\\vec{c}$ for $\\vec{c}$. What is the greatest distance you can be from base camp at the end of the third displacement? (We are not concerned about the direction.) The unit of the answer should be  m.",
+    "solution": "步骤1:首先，我们可以选择向东移动2.0km。\n步骤2:选择向北偏东30度方向移动2.0km。\n步骤3:选择向西移动1.0km。\n步骤4:我们应该选择向北偏东30度方向移动2.0km，以最大化距离。\n",
+    "summary": "综上所述，最终答案是:4.00km",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 4.8,
+    "cost": {
+        "completion_tokens": 3955,
+        "prompt_tokens": 78660,
+        "cost": 0.0452625
+    }
+},
+{
+    "content": "\"Top gun\" pilots have long worried about taking a turn too tightly. As a pilot's body undergoes centripetal acceleration, with the head toward the center of curvature, the blood pressure in the brain decreases, leading to loss of brain function.\r\nThere are several warning signs. When the centripetal acceleration is $2 g$ or $3 g$, the pilot feels heavy. At about $4 g$, the pilot's vision switches to black and white and narrows to \"tunnel vision.\" If that acceleration is sustained or increased, vision ceases and, soon after, the pilot is unconscious - a condition known as $g$-LOC for \" $g$-induced loss of consciousness.\"\r\n\r\nWhat is the magnitude of the acceleration, in $g$ units, of a pilot whose aircraft enters a horizontal circular turn with a velocity of $\\vec{v}_i=(400 \\hat{\\mathrm{i}}+500 \\hat{\\mathrm{j}}) \\mathrm{m} / \\mathrm{s}$ and $24.0 \\mathrm{~s}$ later leaves the turn with a velocity of $\\vec{v}_f=(-400 \\hat{\\mathrm{i}}-500 \\hat{\\mathrm{j}}) \\mathrm{m} / \\mathrm{s}$ ? The unit of the answer should be  $\\mathrm{m} / \\mathrm{s}^2$.",
+    "solution": "步骤1:首先计算飞行员的初始动能和最终动能，然后根据动能定理计算向心加速度的大小。\n步骤2:根据已有步骤，计算飞行员的初始动能和最终动能，然后使用动能定理计算向心加速度的大小。\n步骤3:根据飞行员的初始和最终速度，使用向心加速度的公式 $a_c = \\frac{v^2}{r}$ 计算出向心加速度的大小。\n",
+    "summary": "综上所述，最终答案是: 49.48 m/s^2",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 83.81,
+    "cost": {
+        "completion_tokens": 7693,
+        "prompt_tokens": 154877,
+        "cost": 0.088978
+    }
+},
+{
+    "content": "The world’s largest ball of string is about 2 m in radius. To the nearest order of magnitude, what is the total length L of the string in the ball? The unit of the answer should be  $10^6$ m.",
+    "solution": "步骤1:利用球体积和绳的长度之间的关系，计算总长度L。\n",
+    "summary": "综上所述，最终答案是: 10.47 * 10^6 m",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 2.0,
+    "cost": {
+        "completion_tokens": 8667,
+        "prompt_tokens": 178042,
+        "cost": 0.1020215
+    }
+},
+{
+    "content": "You drive a beat-up pickup truck along a straight road for $8.4 \\mathrm{~km}$ at $70 \\mathrm{~km} / \\mathrm{h}$, at which point the truck runs out of gasoline and stops. Over the next $30 \\mathrm{~min}$, you walk another $2.0 \\mathrm{~km}$ farther along the road to a gasoline station.\r\nWhat is your overall displacement from the beginning of your drive to your arrival at the station? The unit of the answer should be  km.",
+    "solution": "步骤1:计算驾驶过程中的位移，然后加上步行过程中的位移，即可得到整个过程的总位移。\n步骤2:计算驾驶过程中的位移，即$8.4 \\mathrm{~km}$。\n步骤3:计算步行过程中的位移，即$2.0 \\mathrm{~km}$。\n",
+    "summary": "综上所述，最终答案是: 10.40 km",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 10.4,
+    "cost": {
+        "completion_tokens": 11135,
+        "prompt_tokens": 235465,
+        "cost": 0.134435
+    }
+},
+{
+    "content": "A heavy object can sink into the ground during an earthquake if the shaking causes the ground to undergo liquefaction, in which the soil grains experience little friction as they slide over one another. The ground is then effectively quicksand. The possibility of liquefaction in sandy ground can be predicted in terms of the void ratio $e$ for a sample of the ground:\r\n$$\r\ne=\\frac{V_{\\text {voids }}}{V_{\\text {grains }}} .\r\n$$\r\nHere, $V_{\\text {grains }}$ is the total volume of the sand grains in the sample and $V_{\\text {voids }}$ is the total volume between the grains (in the voids). If $e$ exceeds a critical value of 0.80 , liquefaction can occur during an earthquake. What is the corresponding sand density $\\rho_{\\text {sand }}$ ? Solid silicon dioxide (the primary component of sand) has a density of $\\rho_{\\mathrm{SiO}_2}=2.600 \\times 10^3 \\mathrm{~kg} / \\mathrm{m}^3$. The unit of the answer should be  $10^3 \\mathrm{~kg} / \\mathrm{m}^3$.",
+    "solution": "步骤1:首先计算void ratio $e$，然后判断 $e$ 是否大于0.80，最后根据给定的信息计算沙密度。\n步骤2:使用void ratio $e$和solid silicon dioxide的密度$\\rho_{\\mathrm{SiO}_2}$，通过公式 $\\rho_{\\text {sand }} = \\frac{\\rho_{\\mathrm{SiO}_2}}{1+e}$ 计算沙密度。\n步骤3:根据已有的void ratio $e$和solid silicon dioxide的密度$\\rho_{\\mathrm{SiO}_2}$，使用公式 $\\rho_{\\text {sand }} = \\frac{\\rho_{\\mathrm{SiO}_2}}{1+e}$ 计算沙密度。\n",
+    "summary": "综上所述，最终答案是:2.000",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.4,
+    "cost": {
+        "completion_tokens": 14417,
+        "prompt_tokens": 298853,
+        "cost": 0.171052
+    }
+},
+{
+    "content": "What is the angle $\\phi$ between $\\vec{a}=3.0 \\hat{\\mathrm{i}}-4.0 \\hat{\\mathrm{j}}$ and $\\vec{b}=$ $-2.0 \\hat{\\mathrm{i}}+3.0 \\hat{\\mathrm{k}}$ ? (Caution: Although many of the following steps can be bypassed with a vector-capable calculator, you will learn more about scalar products if, at least here, you use these steps.) The unit of the answer should be  $^{\\circ}$.",
+    "solution": "步骤1:计算$\\vec{a} \\cdot \\vec{b}$，然后使用公式$\\cos{\\phi} = \\frac{\\vec{a} \\cdot \\vec{b}}{|\\vec{a}||\\vec{b}|}$来求解夹角$\\phi$。\n步骤2:使用反余弦函数求解夹角$\\phi$，即$\\phi = \\arccos{\\left(\\frac{\\vec{a} \\cdot \\vec{b}}{|\\vec{a}||\\vec{b}|}\\right)}$。\n",
+    "summary": "综上所述，最终答案是:90.00°",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 109.0,
+    "cost": {
+        "completion_tokens": 16571,
+        "prompt_tokens": 341952,
+        "cost": 0.1958325
+    }
+},
+{
+    "content": "During a storm, a crate of crepe is sliding across a slick, oily parking lot through a displacement $\\vec{d}=(-3.0 \\mathrm{~m}) \\hat{\\mathrm{i}}$ while a steady wind pushes against the crate with a force $\\vec{F}=(2.0 \\mathrm{~N}) \\hat{\\mathrm{i}}+(-6.0 \\mathrm{~N}) \\hat{\\mathrm{j}}$. The situation and coordinate axes are shown in Figure. If the crate has a kinetic energy of $10 \\mathrm{~J}$ at the beginning of displacement $\\vec{d}$, what is its kinetic energy at the end of $\\vec{d}$ ? The unit of the answer should be  J.",
+    "solution": "步骤1:计算合外力沿位移方向所做的功。\n",
+    "summary": "综上所述，最终答案是:7.5 J",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 4.0,
+    "cost": {
+        "completion_tokens": 17616,
+        "prompt_tokens": 366243,
+        "cost": 0.2095455
+    }
+},
+{
+    "content": "When the force on an object depends on the position of the object, we cannot find the work done by it on the object by simply multiplying the force by the displacement. The reason is that there is no one value for the force-it changes. So, we must find the work in tiny little displacements and then add up all the work results. We effectively say, \"Yes, the force varies over any given tiny little displacement, but the variation is so small we can approximate the force as being constant during the displacement.\" Sure, it is not precise, but if we make the displacements infinitesimal, then our error becomes infinitesimal and the result becomes precise. But, to add an infinite number of work contributions by hand would take us forever, longer than a semester. So, we add them up via an integration, which allows us to do all this in minutes (much less than a semester).\r\n\r\nForce $\\vec{F}=\\left(3 x^2 \\mathrm{~N}\\right) \\hat{\\mathrm{i}}+(4 \\mathrm{~N}) \\hat{\\mathrm{j}}$, with $x$ in meters, acts on a particle, changing only the kinetic energy of the particle. How much work is done on the particle as it moves from coordinates $(2 \\mathrm{~m}, 3 \\mathrm{~m})$ to $(3 \\mathrm{~m}, 0 \\mathrm{~m})$ ? Does the speed of the particle increase, decrease, or remain the same? The unit of the answer should be  J.",
+    "solution": "步骤1:计算力沿路径从$(2\\mathrm{~m}, 3\\mathrm{~m})$到$(3\\mathrm{~m}, 0\\mathrm{~m})$的路径积分，即$\\int_{(2,3)}^{(3,0)} \\vec{F} \\cdot d\\vec{r}$，并计算出做的功。\n步骤2:根据计算出的做功值，利用功-能定理来判断粒子的速度变化情况。根据功-能定理，做的功等于粒子动能的变化量，即$W=\\Delta KE$。根据功的计算结果和已知的信息，进一步判断粒子的速度是增加、减少还是保持不变。\n步骤3:根据功-能定理，做的功等于粒子动能的变化量，即$W=\\Delta KE$。根据计算出的做功值和已知的信息，进一步判断粒子的速度是增加、减少还是保持不变。\n",
+    "summary": "综上所述，最终答案是:26 J，粒子的速度会增加。",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 7.0,
+    "cost": {
+        "completion_tokens": 22581,
+        "prompt_tokens": 444911,
+        "cost": 0.25632699999999997
+    }
+},
+{
+    "content": " The charges of an electron and a positron are $-e$ and $+e$. The mass of each is $9.11 \\times 10^{-31} \\mathrm{~kg}$. What is the ratio of the electrical force to the gravitational force between an electron and a positron?\r\n The unit of the answer should be $10^{42}$.",
+    "solution": "步骤1:计算电力和引力的比值公式为 $k\\left(\\frac{q_1q_2}{r^2}\\right) / \\left(\\frac{Gm_1m_2}{r^2}\\right)$，其中$k$为库仑常数，$q_1$和$q_2$分别为电子和正电子的电荷，$r$为它们之间的距离，$G$为万有引力常数，$m_1$和$m_2$分别为电子和正电子的质量。\n步骤2:将电子和正电子的电荷$q_1$和$q_2$分别代入为$-e$和$+e$，将质量$m_1$和$m_2$代入为$9.11 \\times 10^{-31} \\mathrm{~kg}$，继续计算比值。\n步骤3:将$q_1 = -e$，$q_2 = +e$，$m_1 = m_2 = 9.11 \\times 10^{-31} \\mathrm{~kg}$代入比值公式进行计算。\n",
+    "summary": "综上所述，最终答案是: $2.40 \\times 10^{42}$",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 4.16,
+    "cost": {
+        "completion_tokens": 25827,
+        "prompt_tokens": 516438,
+        "cost": 0.2969595
+    }
+}
+]

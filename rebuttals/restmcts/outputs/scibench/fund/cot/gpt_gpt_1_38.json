@@ -1,0 +1,15 @@
+[
+{
+    "content": "In an orienteering class, you have the goal of moving as far (straight-line distance) from base camp as possible by making three straight-line moves. You may use the following displacements in any order: (a) $\\vec{a}, 2.0 \\mathrm{~km}$ due east (directly toward the east); (b) $\\vec{b}, 2.0 \\mathrm{~km} 30^{\\circ}$ north of east (at an angle of $30^{\\circ}$ toward the north from due east); (c) $\\vec{c}, 1.0 \\mathrm{~km}$ due west. Alternatively, you may substitute either $-\\vec{b}$ for $\\vec{b}$ or $-\\vec{c}$ for $\\vec{c}$. What is the greatest distance you can be from base camp at the end of the third displacement? (We are not concerned about the direction.) The unit of the answer should be  m.",
+    "solution": "1. Start by moving 2.0 km due east, represented by vector $\\vec{a}$.\n2. Next, move 2.0 km at an angle of $30^\\circ$ north of east, represented by vector $\\vec{b}$.\n3. Finally, move 1.0 km due west, represented by vector $\\vec{c}$.\n\nTo maximize the distance from the base camp, we want to find the net displacement by adding or subtracting the vectors in a way that gives us the greatest magnitude.\n\nThe net displacement can be calculated as follows:\n$\\vec{d} = \\vec{a} + \\vec{b} + \\vec{c}$\n\nSubstitute the values of $\\vec{a}$, $\\vec{b}$, and $\\vec{c$}:\n$\\vec{d} = 2.0 \\mathrm{~km} \\, \\text{due east} + 2.0 \\mathrm{~km} \\, 30^\\circ \\text{north of east} + 1.0 \\mathrm{~km} \\, \\text{due west}$\n\nUsing vector addition to find the net displacement:\n$\\vec{d} = 2.0 \\mathrm{~km} \\, \\text{due east} + 2.0 \\cos(30^\\circ) \\mathrm{~km} \\, \\text{due north} + 1.0 \\mathrm{~km} \\, \\text{due west}$\n\n$\\vec{d} = 2.0 \\mathrm{~km} \\, \\text{due east} + 1.732 \\mathrm{~km} \\, \\text{due north} + 1.0 \\mathrm{~km} \\, \\text{due west}$\n\nThe greatest distance from the base camp at the end of the third displacement is the magnitude of the net displacement vector $\\vec{d}$:\n$|\\vec{d}| = \\sqrt{(2.0)^2 + (1.732)^2 + (1.0)^2} \\, \\mathrm{km}$\n\nCalculating the magnitude:\n$|\\vec{d}| = \\sqrt{4 + 2.996 + 1} = \\sqrt{7.996} \\approx 2.83 \\, \\mathrm{km}$\n\nConverting to meters:\n$2.83 \\, \\mathrm{km} = 2830 \\, \\mathrm{m}$\n\nTherefore, the greatest distance you can be from the base camp at the end of the third displacement is approximately 2830 meters.",
+    "summary": "The final answer is $2830 \\, \\mathrm{m}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 4.8,
+    "cost": {
+        "completion_tokens": 561,
+        "prompt_tokens": 1055,
+        "cost": 0.001369
+    }
+}
+]

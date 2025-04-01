@@ -1,0 +1,15 @@
+[
+{
+    "content": "Suppose that $10.0 \\mathrm{~mol} \\mathrm{C}_2 \\mathrm{H}_6(\\mathrm{~g})$ is confined to $4.860 \\mathrm{dm}^3$ at $27^{\\circ} \\mathrm{C}$. Predict the pressure exerted by the ethane from the perfect gas. The unit of the answer should be $\\mathrm{atm}$ .",
+    "solution": "步骤1:计算气体的压强，即 $P = \\frac{nRT}{V}$。其中 $n = 10.0 \\mathrm{~mol}$, $R = 0.0821 \\mathrm{~L \\cdot atm/mol \\cdot K}$, $T = 27^{\\circ} \\mathrm{C} = 300 \\mathrm{~K}$, $V = 4.860 \\mathrm{dm}^3$。计算得到压强的数值，并加上单位$\\mathrm{atm}$。\n步骤2:根据理想气体方程 $P = \\frac{nRT}{V}$，代入已知的数值计算得到气体的压强。\n",
+    "summary": "综上所述，最终答案是: 5.05 atm",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 50.7,
+    "cost": {
+        "completion_tokens": 1232,
+        "prompt_tokens": 29014,
+        "cost": 0.044136999999999996
+    }
+}
+]

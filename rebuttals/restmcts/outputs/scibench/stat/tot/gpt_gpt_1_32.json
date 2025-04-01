@@ -1,0 +1,15 @@
+[
+{
+    "content": "5.8-5. If the distribution of $Y$ is $b(n, 0.25)$, give a lower bound for $P(|Y / n-0.25|<0.05)$ when\r\n(a) $n=100$.\r\n The unit of the answer should be  .",
+    "solution": "步骤1:应用切比雪夫不等式，得到$P(|Y / n-0.25|<0.05)$的下界。\n",
+    "summary": "综上所述，最终答案是:0.95",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.25,
+    "cost": {
+        "completion_tokens": 1372,
+        "prompt_tokens": 23374,
+        "cost": 0.013745
+    }
+}
+]

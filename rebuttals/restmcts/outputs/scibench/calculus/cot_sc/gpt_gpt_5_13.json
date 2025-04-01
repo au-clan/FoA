@@ -1,0 +1,548 @@
+[
+{
+    "content": "A fluid has density $870 \\mathrm{~kg} / \\mathrm{m}^3$ and flows with velocity $\\mathbf{v}=z \\mathbf{i}+y^2 \\mathbf{j}+x^2 \\mathbf{k}$, where $x, y$, and $z$ are measured in meters and the components of $\\mathbf{v}$ in meters per second. Find the rate of flow outward through the cylinder $x^2+y^2=4$, $0 \\leqslant z \\leqslant 1$.\r\n The unit of the answer should be  $\\mathrm{kg}/\\mathrm{s}$.",
+    "solution": "1. The rate of flow outward through the cylinder can be calculated using the divergence theorem. The divergence theorem states that the outward flux of a vector field through a closed surface is equal to the volume integral of the divergence of the vector field over the region enclosed by the surface.\n\n2. The divergence of a vector field $\\mathbf{v}$ is given by $\\nabla \\cdot \\mathbf{v} = \\frac{\\partial v_x}{\\partial x} + \\frac{\\partial v_y}{\\partial y} + \\frac{\\partial v_z}{\\partial z}$.\n\n3. In this case, the divergence of $\\mathbf{v}$ is $\\nabla \\cdot \\mathbf{v} = \\frac{\\partial z}{\\partial x} + \\frac{\\partial (y^2)}{\\partial y} + \\frac{\\partial (x^2)}{\\partial z} = 2x + 2y$.\n\n4. The volume integral over the region enclosed by the surface $x^2+y^2=4$, $0 \\leq z \\leq 1$ can be written as $\\iiint_V (\\nabla \\cdot \\mathbf{v}) dV$. This region can be represented in cylindrical coordinates as $0 \\leq \\theta \\leq 2\\pi$, $0 \\leq r \\leq 2$, $0 \\leq z \\leq 1$.\n\n5. Therefore, the rate of flow outward through the cylinder can be calculated as $\\iint_S \\mathbf{v} \\cdot \\mathbf{n} dS$, where $\\mathbf{n}$ is the unit outward normal to the surface of the cylinder and $dS$ is the differential area element on the surface.\n\n6. Finally, calculate the dot product $\\mathbf{v} \\cdot \\mathbf{n}$ and integrate over the surface to find the rate of flow outward through the cylinder. The unit of the answer will be $\\mathrm{kg}/\\mathrm{s}$.",
+    "summary": "The final answer is $16\\pi \\mathrm{~kg/s}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.0,
+    "cost": {
+        "completion_tokens": 9050,
+        "prompt_tokens": 16233,
+        "cost": 0.021691500000000002
+    }
+},
+{
+    "content": "Suppose that $2 \\mathrm{~J}$ of work is needed to stretch a spring from its natural length of $30 \\mathrm{~cm}$ to a length of $42 \\mathrm{~cm}$. How far beyond its natural length will a force of $30 \\mathrm{~N}$ keep the spring stretched? The unit of the answer should be  $\\mathrm{cm}$.",
+    "solution": "1. Calculate the spring constant $k$ using the work done formula:\n\\[ W = \\frac{1}{2}kx^2 \\]\nwhere $W = 2 \\mathrm{~J}$, $x = 42 \\mathrm{~cm} - 30 \\mathrm{~cm} = 12 \\mathrm{~cm}$, and $k$ is the spring constant.\n\nSubstitute the values into the formula and solve for $k$:\n\\[ 2 = \\frac{1}{2}k(12)^2 \\]\n\\[ 2 = 72k \\]\n\\[ k = \\frac{2}{72} = \\frac{1}{36} \\mathrm{~N/cm} \\]\n\n2. Use Hooke's Law to find the distance beyond the natural length the spring will be stretched by a force of $30 \\mathrm{~N}$:\n\\[ F = kx \\]\n\\[ 30 = \\frac{1}{36}x \\]\n\\[ x = 1080 \\mathrm{~cm} = 10.8 \\mathrm{~m} \\]\n\nTherefore, a force of $30 \\mathrm{~N}$ will keep the spring stretched $10.8 \\mathrm{~cm}$ beyond its natural length.",
+    "summary": "The final answer is $10.8 \\mathrm{~cm}$.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 10.8,
+    "cost": {
+        "completion_tokens": 15608,
+        "prompt_tokens": 27720,
+        "cost": 0.037272
+    }
+},
+{
+    "content": "Find the work done by a force $\\mathbf{F}=8 \\mathbf{i}-6 \\mathbf{j}+9 \\mathbf{k}$ that moves an object from the point $(0,10,8)$ to the point $(6,12,20)$ along a straight line. The distance is measured in meters and the force in newtons. The unit of the answer should be  $\\mathrm{J}$.",
+    "solution": "1. Calculate the displacement vector $\\mathbf{d}$:\n$\\mathbf{d} = (6-0)\\mathbf{i} + (12-10)\\mathbf{j} + (20-8)\\mathbf{k} = 6\\mathbf{i} + 2\\mathbf{j} + 12\\mathbf{k}$\n\n2. Calculate the magnitude of the displacement vector $|\\mathbf{d}|$:\n$|\\mathbf{d}| = \\sqrt{(6)^2 + (2)^2 + (12)^2} = \\sqrt{36 + 4 + 144} = \\sqrt{184} = 2\\sqrt{46}$ meters\n\n3. Calculate the work done by the force $\\mathbf{F}$:\n$\\text{Work} = \\mathbf{F} \\cdot \\mathbf{d} = (8\\mathbf{i} - 6\\mathbf{j} + 9\\mathbf{k}) \\cdot (6\\mathbf{i} + 2\\mathbf{j} + 12\\mathbf{k})$\n$\\text{Work} = 8(6) - 6(2) + 9(12) = 48 - 12 + 108 = 144$ joules\n\nTherefore, the work done by the force $\\mathbf{F}$ in moving the object from $(0,10,8)$ to $(6,12,20)$ is 144 joules.",
+    "summary": "The final answer is $144$ joules.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 144.0,
+    "cost": {
+        "completion_tokens": 22546,
+        "prompt_tokens": 39905,
+        "cost": 0.0537715
+    }
+},
+{
+    "content": "A ball is thrown at an angle of $45^{\\circ}$ to the ground. If the ball lands $90 \\mathrm{~m}$ away, what was the initial speed of the ball?\r\n The unit of the answer should be  $\\mathrm{m}/\\mathrm{s}$.",
+    "solution": "1. Break the initial velocity into its horizontal and vertical components.\n2. The horizontal component of the initial velocity remains constant throughout the motion since no horizontal force is acting on the ball.\n3. The vertical component of the initial velocity at the highest point is zero as the ball changes direction.\n4. Use the horizontal distance formula $d = v_{0x} \\cdot t$ to find the time of flight.\n5. Use the vertical distance formula $y = v_{0y} \\cdot t - \\frac{1}{2}gt^2$ to find the initial vertical velocity component.\n6. Use the Pythagorean theorem to find the initial speed of the ball.\n7. Calculate the initial speed of the ball using the formula $v_0 = \\sqrt{v_{0x}^2 + v_{0y}^2}$.\n8. Substitute the known values and calculate the initial speed of the ball in meters per second.",
+    "summary": "The final answer is $31.62 \\mathrm{~m/s}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 30.0,
+    "cost": {
+        "completion_tokens": 30424,
+        "prompt_tokens": 51741,
+        "cost": 0.0715065
+    }
+},
+{
+    "content": "Show how to approximate the required work by a Riemann sum. Then express the work as an integral and evaluate it. A leaky 10-kg bucket is lifted from the ground to a height of $12 \\mathrm{~m}$ at a constant speed with a rope that weighs $0.8 \\mathrm{~kg} / \\mathrm{m}$. Initially the bucket contains $36 \\mathrm{~kg}$ of water, but the water leaks at a constant rate and finishes draining just as the bucket reaches the 12-m level. How much work is done?\r\n The unit of the answer should be  $\\mathrm{J}$.",
+    "solution": "1. We first need to find the total weight being lifted, including the bucket, water, and the rope. The total weight is 10 kg (bucket) + 36 kg (water) + 0.8 kg/m * 12 m (rope) = 10 + 36 + 9.6 = 55.6 kg.\n\n2. The work done in lifting the bucket is equal to the force required to lift it multiplied by the distance it is lifted. The force required to lift it is the weight of the bucket plus water plus rope, which is 55.6 kg * 9.8 m/s^2 (acceleration due to gravity) = 545.68 N.\n\n3. The distance the bucket is lifted is 12 m.\n\n4. To approximate the required work by a Riemann sum, we can divide the distance into small intervals, calculate the force required to lift the bucket at each interval, and then sum up the work done at each interval.\n\n5. The Riemann sum can be expressed as: $\\sum_{i=1}^{n} F(x_i) \\Delta x_i$, where $F(x_i)$ is the force required at interval $i$ and $\\Delta x_i$ is the width of interval $i$.\n\n6. As the bucket is lifted at a constant speed, the force required remains constant at 545.68 N and the intervals are all equal at 12/n m.\n\n7. The Riemann sum can be simplified to $545.68 \\times 12/n \\times n$, which simplifies to 545.68 * 12 = 6548.16 J.\n\n8. To express the work as an integral, we can use the formula $\\int_{a}^{b} F(x) dx$, where $F(x)$ is the force function and $a$ and $b$ are the limits of integration.\n\n9. In this case, $F(x) = 545.68$ and the limits of integration are 0 (starting point) and 12 (final point).\n\n10. The integral becomes $\\int_{0}^{12} 545.68 dx$ = $545.68x|_{0}^{12}$ = $545.68 \\times 12$ = 6548.16 J.\n\nTherefore, the work done in lifting the leaky bucket to a height of 12 m is approximately 6548.16 J.",
+    "summary": "The final answer is $6548.16$ J.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 3857.0,
+    "cost": {
+        "completion_tokens": 38796,
+        "prompt_tokens": 67085,
+        "cost": 0.0917365
+    }
+},
+{
+    "content": "Find the volume of the described solid $S$. The base of $S$ is an elliptical region with boundary curve $9 x^2+4 y^2=36$. Cross-sections perpendicular to the $x$-axis are isosceles right triangles with hypotenuse in the base. The unit of the answer should be  .",
+    "solution": "1. First, we need to find the equation of the ellipse. The given equation $9x^2 + 4y^2 = 36$ can be rewritten as $\\frac{x^2}{4} + \\frac{y^2}{9} = 1$. This represents an ellipse with major axis along the x-axis and minor axis along the y-axis.\n\n2. The area of the base of the solid can be found by integrating the equation of the ellipse over the x-axis. The equation of the ellipse is $A = \\int_{-2}^{2} 2\\sqrt{9 - \\frac{9}{4}x^2} dx$. Solving this integral will give us the area of the base.\n\n3. Next, we need to find the height of the isosceles right triangle at any given x-coordinate. Since the hypotenuse of the triangle is along the ellipse, the height can be found by taking the y-coordinate of the ellipse at that x-coordinate. The height will be $2\\sqrt{9 - \\frac{9}{4}x^2}$.\n\n4. The volume of each isosceles right triangle cross-section can be found by taking the area of the triangle, which is $\\frac{1}{2} \\times (\\text{height})^2$. So, the volume of each cross-section at a given x-coordinate is $\\frac{1}{2} \\times (2\\sqrt{9 - \\frac{9}{4}x^2})^2$.\n\n5. Finally, to find the total volume of the solid $S$, we need to integrate the volume of each cross-section over the x-axis. The volume of $S$ will be $V = \\int_{-2}^{2} \\frac{1}{2} \\times (2\\sqrt{9 - \\frac{9}{4}x^2})^2 dx$. Solving this integral will give us the total volume of the solid $S$.\n\nBy following these steps and solving the integrals involved, we can find the volume of the described solid $S$.",
+    "summary": "The final answer is $24\\pi$.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 24.0,
+    "cost": {
+        "completion_tokens": 46999,
+        "prompt_tokens": 79920,
+        "cost": 0.11045850000000002
+    }
+},
+{
+    "content": "A swimming pool is circular with a $40-\\mathrm{ft}$ diameter. The depth is constant along east-west lines and increases linearly from $2 \\mathrm{ft}$ at the south end to $7 \\mathrm{ft}$ at the north end. Find the volume of water in the pool. The unit of the answer should be  $\\mathrm{ft}^3$.",
+    "solution": "1. First, we need to determine the average depth of the pool. Since the depth increases linearly from 2 ft to 7 ft along the north-south direction, the average depth will be the average of these two depths, which is (2 ft + 7 ft) / 2 = 4.5 ft.\n\n2. Next, we need to calculate the radius of the pool. The radius is half of the diameter, so the radius is 40 ft / 2 = 20 ft.\n\n3. Now, we can calculate the volume of the pool using the formula for the volume of a cylinder, which is V = πr^2h, where r is the radius and h is the height.\n\n4. Substituting the values we have calculated, the volume of the pool is V = π(20 ft)^2 * 4.5 ft = 1800π ft^3.\n\n5. Finally, we can approximate the volume using 3.14 as the value of π, so the volume of water in the pool is approximately 1800 * 3.14 ≈ 5652 ft^3.\n\nTherefore, the volume of water in the pool is approximately 5652 ft^3.",
+    "summary": "The final answer is $5652$ ft$^3$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 5654.86677646,
+    "cost": {
+        "completion_tokens": 52693,
+        "prompt_tokens": 90426,
+        "cost": 0.1242525
+    }
+},
+{
+    "content": "The orbit of Halley's comet, last seen in 1986 and due to return in 2062, is an ellipse with eccentricity 0.97 and one focus at the sun. The length of its major axis is $36.18 \\mathrm{AU}$. [An astronomical unit (AU) is the mean distance between the earth and the sun, about 93 million miles.] Find a polar equation for the orbit of Halley's comet. What is the maximum distance from the comet to the sun? The unit of the answer should be  $\\mathrm{AU}$.",
+    "solution": "1. The general form of a polar equation for an ellipse with one focus at the pole is:\n\n$r = \\frac{a(1-e^2)}{1 + e\\cdot \\cos(\\theta)}$\n\nwhere:\n- $r$ is the distance from the focus (in this case, the sun) to a point on the ellipse\n- $a$ is the semi-major axis of the ellipse\n- $e$ is the eccentricity of the ellipse\n- $\\theta$ is the angle between the major axis and the line connecting the focus to the point on the ellipse\n\n2. Given that the length of the major axis is $36.18 \\mathrm{AU}$, the semi-major axis $a$ is half of this length:\n\n$a = \\frac{36.18}{2} = 18.09\\mathrm{AU}$\n\n3. Substituting the values of $a$ and $e$ into the general form of the polar equation, we get:\n\n$r = \\frac{18.09(1-0.97^2)}{1 + 0.97\\cdot \\cos(\\theta)}$\n\n$r = \\frac{18.09(1-0.9409)}{1 + 0.97\\cdot \\cos(\\theta)}$\n\n$r = \\frac{18.09(0.0591)}{1 + 0.97\\cdot \\cos(\\theta)}$\n\n$r = \\frac{1.068519}{1 + 0.97\\cdot \\cos(\\theta)}$\n\nTherefore, the polar equation for the orbit of Halley's comet is $r = \\frac{1.068519}{1 + 0.97\\cdot \\cos(\\theta)}$.\n\n4. To find the maximum distance from the comet to the sun, we need to find the maximum value of $r$. This occurs when $\\cos(\\theta) = -1$:\n\n$r_{max} = \\frac{1.068519}{1 - 0.97} = \\frac{1.068519}{0.03} = 35.6173\\mathrm{AU}$\n\nTherefore, the maximum distance from the comet to the sun is $35.6173\\mathrm{AU}$.",
+    "summary": "The final answer is $35.6173\\mathrm{AU}$.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 35.64,
+    "cost": {
+        "completion_tokens": 62341,
+        "prompt_tokens": 106538,
+        "cost": 0.14678049999999998
+    }
+},
+{
+    "content": " If a ball is thrown into the air with a velocity of $40 \\mathrm{ft} / \\mathrm{s}$, its height in feet $t$ seconds later is given by $y=40 t-16 t^2$. Find the average velocity for the time period beginning when $t=2$ and lasting 0.5 second. The unit of the answer should be $\\mathrm{ft} / \\mathrm{s}$.",
+    "solution": "1. First, we need to find the height of the ball at $t=2$ seconds. \n   Plugging $t=2$ into the equation $y=40t-16t^2$:\n   $y = 40(2) - 16(2)^2$\n   $y = 80 - 64$\n   $y = 16$ feet\n\n2. Next, we need to find the height of the ball at $t=2.5$ seconds. \n   Plugging $t=2.5$ into the equation $y=40t-16t^2$:\n   $y = 40(2.5) - 16(2.5)^2$\n   $y = 100 - 100$\n   $y = 0$ feet\n\n3. Now, we calculate the average velocity for the time period from $t=2$ to $t=2.5$ seconds.\n   Average velocity is given by the change in position divided by the change in time.\n   Change in position = $0 - 16 = -16$ feet\n   Change in time = $2.5 - 2 = 0.5$ seconds\n   Average velocity = $\\frac{-16}{0.5} = -32 \\, \\mathrm{ft/s}$\n\nTherefore, the average velocity for the time period beginning when $t=2$ and lasting 0.5 seconds is $-32 \\, \\mathrm{ft/s}$.",
+    "summary": "The final answer is $-32 \\, \\mathrm{ft/s}$.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": -32.0,
+    "cost": {
+        "completion_tokens": 68371,
+        "prompt_tokens": 117788,
+        "cost": 0.1614505
+    }
+},
+{
+    "content": "A CAT scan produces equally spaced cross-sectional views of a human organ that provide information about the organ otherwise obtained only by surgery. Suppose that a CAT scan of a human liver shows cross-sections spaced $1.5 \\mathrm{~cm}$ apart. The liver is $15 \\mathrm{~cm}$ long and the cross-sectional areas, in square centimeters, are $0,18,58,79,94,106,117,128,63$, 39 , and 0 . Use the Midpoint Rule to estimate the volume of the liver.\r\n The unit of the answer should be  $\\mathrm{cm}^3$.",
+    "solution": "1. Calculate the average of each pair of consecutive cross-sectional areas: \n- Average of 0 and 18 = 9 \n- Average of 18 and 58 = 38 \n- Average of 58 and 79 = 68.5 \n- Average of 79 and 94 = 86.5 \n- Average of 94 and 106 = 100 \n- Average of 106 and 117 = 111.5 \n- Average of 117 and 128 = 122.5 \n- Average of 128 and 63 = 95.5 \n- Average of 63 and 39 = 51 \n- Average of 39 and 0 = 19.5 \n\n2. Multiply each average by the spacing between the cross-sections (1.5 cm) to get the volume of each segment: \n- 9 * 1.5 = 13.5 cm^3 \n- 38 * 1.5 = 57 cm^3 \n- 68.5 * 1.5 = 102.75 cm^3 \n- 86.5 * 1.5 = 129.75 cm^3 \n- 100 * 1.5 = 150 cm^3 \n- 111.5 * 1.5 = 167.25 cm^3 \n- 122.5 * 1.5 = 183.75 cm^3 \n- 95.5 * 1.5 = 143.25 cm^3 \n- 51 * 1.5 = 76.5 cm^3 \n- 19.5 * 1.5 = 29.25 cm^3 \n\n3. Sum up all the volumes to get the total estimated volume of the liver: \n13.5 + 57 + 102.75 + 129.75 + 150 + 167.25 + 183.75 + 143.25 + 76.5 + 29.25 = 952.5 cm^3 \n\nTherefore, the estimated volume of the liver using the Midpoint Rule is 952.5 cm^3.",
+    "summary": "The final answer is $952.5$ cm$^3$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1110.0,
+    "cost": {
+        "completion_tokens": 76887,
+        "prompt_tokens": 133167,
+        "cost": 0.18191400000000002
+    }
+},
+{
+    "content": "A manufacturer of corrugated metal roofing wants to produce panels that are $28 \\mathrm{in}$. wide and $2 \\mathrm{in}$. thick by processing flat sheets of metal as shown in the figure. The profile of the roofing takes the shape of a sine wave. Verify that the sine curve has equation $y=\\sin (\\pi x / 7)$ and find the width $w$ of a flat metal sheet that is needed to make a 28-inch panel. (Use your calculator to evaluate the integral correct to four significant digits.)\r\n The unit of the answer should be  $\\mathrm{in}$.",
+    "solution": "Step 1: Determine the equation of the sine curve.\nThe sine curve has equation $y = \\sin(\\pi x / 7)$. This equation represents one complete wave of the sine curve with a wavelength of $14$ inches. \n\nStep 2: Determine the width of one complete wave of the sine curve.\nTo find the width of one complete wave, we need to find the period of the sine curve. The period of a sine curve is given by $2\\pi / \\text{coefficient of } x$, which in this case is $2\\pi / ( \\pi / 7) = 14$ inches. \n\nStep 3: Determine the width of the flat metal sheet needed to make a 28-inch panel.\nSince one complete wave of the sine curve has a width of 14 inches, two complete waves will have a width of $28$ inches. Therefore, the width of the flat metal sheet needed to make a 28-inch panel is $28$ inches. \n\nStep 4: Evaluate the integral to confirm the calculation.\nThe integral of $\\sin(\\pi x / 7)$ from $0$ to $14$ (one complete wave) will give us the width of one complete wave. Evaluating this integral using a calculator should give us $14$ inches. \n\nTherefore, the width $w$ of a flat metal sheet needed to make a 28-inch panel is $\\boxed{28 \\text{ inches}}$.",
+    "summary": "The final answer is $28$ inches.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 29.36,
+    "cost": {
+        "completion_tokens": 83323,
+        "prompt_tokens": 146410,
+        "cost": 0.19818950000000002
+    }
+},
+{
+    "content": "The dye dilution method is used to measure cardiac output with $6 \\mathrm{mg}$ of dye. The dye concentrations, in $\\mathrm{mg} / \\mathrm{L}$, are modeled by $c(t)=20 t e^{-0.6 t}, 0 \\leqslant t \\leqslant 10$, where $t$ is measured in seconds. Find the cardiac output. The unit of the answer should be  $\\mathrm{L}/\\mathrm{min}$.",
+    "solution": "1. To find the cardiac output using the dye dilution method, we need to calculate the area under the curve of the dye concentration function $c(t)$.\n\n2. The cardiac output can be calculated using the formula:\nCardiac output = $\\dfrac{\\text{Amount of dye injected}}{\\text{Area under the curve of the dye concentration function}}$\n\n3. The amount of dye injected is given as $6 \\mathrm{mg}$.\n\n4. To find the area under the curve of the dye concentration function $c(t)$, we need to integrate the function $c(t)$ over the interval $0 \\leqslant t \\leqslant 10$:\n$A = \\int_{0}^{10} 20te^{-0.6t} dt$\n\n5. By integrating the function, we get:\n$A = \\left[-33.3333e^{-0.6t}(t+5)\\right]_{0}^{10} \\approx 33.3333 \\text{mg/L} \\cdot s$\n\n6. Now, we can calculate the cardiac output:\nCardiac output = $\\dfrac{6 \\text{mg}}{33.3333 \\text{mg/L} \\cdot s} = \\dfrac{6}{33.3333} \\text{L/min} \\approx 0.18 \\text{L/min}$\n\nTherefore, the cardiac output using the dye dilution method is approximately $0.18 \\mathrm{L/min}$.",
+    "summary": "The final answer is $0.18 \\text{L/min}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 6.6,
+    "cost": {
+        "completion_tokens": 91544,
+        "prompt_tokens": 160373,
+        "cost": 0.2175025
+    }
+},
+{
+    "content": "A planning engineer for a new alum plant must present some estimates to his company regarding the capacity of a silo designed to contain bauxite ore until it is processed into alum. The ore resembles pink talcum powder and is poured from a conveyor at the top of the silo. The silo is a cylinder $100 \\mathrm{ft}$ high with a radius of $200 \\mathrm{ft}$. The conveyor carries ore at a rate of $60,000 \\pi \\mathrm{~ft}^3 / \\mathrm{h}$ and the ore maintains a conical shape whose radius is 1.5 times its height. If, at a certain time $t$, the pile is $60 \\mathrm{ft}$ high, how long will it take for the pile to reach the top of the silo? The unit of the answer should be  $\\mathrm{h}$.",
+    "solution": "1. Calculate the volume of the conical pile of bauxite ore when it is $60 \\mathrm{ft}$ high.\nThe volume of a cone can be calculated using the formula $V = \\frac{1}{3} \\pi r^2 h$, where $r$ is the radius of the cone and $h$ is the height of the cone.\nGiven that the radius of the cone is 1.5 times its height, we can set $r = 1.5h$.\nSubstitute $r = 1.5h$ into the formula and $h = 60 \\mathrm{ft}$:\n$V = \\frac{1}{3} \\pi (1.5h)^2 h = \\frac{1}{3} \\pi (2.25h^2)h = \\frac{3.375}{3} \\pi h^3 = 1.125 \\pi h^3$.\nSubstitute the height $h = 60 \\mathrm{ft}$ into the formula:\n$V = 1.125 \\pi (60)^3 = 1.125 \\pi (216,000) = 243,000 \\pi \\mathrm{ft}^3$.\n\n2. Calculate the time it takes to fill the silo to a height of $60 \\mathrm{ft}$.\nThe rate at which the conveyor carries ore is $60,000 \\pi \\mathrm{~ft}^3 / \\mathrm{h}$.\nDivide the volume of the conical pile by the rate of the conveyor to find the time it takes to reach a height of $60 \\mathrm{ft}$:\n$Time = \\frac{243,000 \\pi \\mathrm{ft}^3}{60,000 \\pi \\mathrm{~ft}^3 / \\mathrm{h}} = 4.05 \\mathrm{h}$.\n\nTherefore, it will take approximately $4.05$ hours for the pile of bauxite ore to reach the top of the silo.",
+    "summary": "The final answer is $4.05$ hours.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 9.8,
+    "cost": {
+        "completion_tokens": 101400,
+        "prompt_tokens": 179227,
+        "cost": 0.24171350000000003
+    }
+},
+{
+    "content": "A boatman wants to cross a canal that is $3 \\mathrm{~km}$ wide and wants to land at a point $2 \\mathrm{~km}$ upstream from his starting point. The current in the canal flows at $3.5 \\mathrm{~km} / \\mathrm{h}$ and the speed of his boat is $13 \\mathrm{~km} / \\mathrm{h}$. How long will the trip take?\r\n The unit of the answer should be  $\\mathrm{min}$.",
+    "solution": "1. Calculate the speed of the boat relative to the water:\nBoat speed = 13 km/h\nCurrent speed = 3.5 km/h\nRelative speed = Boat speed - Current speed\nRelative speed = 13 km/h - 3.5 km/h\nRelative speed = 9.5 km/h\n\n2. Calculate the time it takes for the boatman to cross the canal:\nDistance to cross = 3 km\nTime = Distance / Speed\nTime = 3 km / 9.5 km/h\nTime = 0.316 hours\n\n3. Calculate the time it takes for the boatman to travel upstream:\nDistance upstream = 2 km\nSpeed upstream = Relative speed = 9.5 km/h\nTime upstream = Distance upstream / Speed upstream\nTime upstream = 2 km / 9.5 km/h\nTime upstream = 0.211 hours\n\n4. Add the time for crossing the canal and the time for traveling upstream:\nTotal time = Time to cross + Time to travel upstream\nTotal time = 0.316 hours + 0.211 hours\nTotal time = 0.527 hours\n\n5. Convert the total time from hours to minutes:\nTotal time in minutes = 0.527 hours x 60 minutes/hour\nTotal time in minutes = 31.6 minutes\n\nTherefore, the trip will take approximately 31.6 minutes.",
+    "summary": "The final answer is 31.6$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 20.2,
+    "cost": {
+        "completion_tokens": 108181,
+        "prompt_tokens": 191968,
+        "cost": 0.2582555
+    }
+},
+{
+    "content": "Find the area bounded by the curves $y=\\cos x$ and $y=\\cos ^2 x$ between $x=0$ and $x=\\pi$. The unit of the answer should be  .",
+    "solution": "1. First, we need to find the points of intersection of the two curves. Set $\\cos x = \\cos^2 x$ and solve for x:\n\n$\\cos x = \\cos^2 x$\n$\\cos x - \\cos^2 x = 0$\n$\\cos x(1 - \\cos x) = 0$\n$\\cos x = 0$ or $\\cos x = 1$\n\nSo, the curves intersect at $x=\\frac{\\pi}{2}$ and $x=\\pi$.\n\n2. Next, we need to find the area between the curves. We can do this by finding the definite integral of the difference between the two functions over the interval from $x=0$ to $x=\\pi$:\n\n$A = \\int_0^\\pi (\\cos^2 x - \\cos x) dx$\n\n3. We can simplify the integral by using the double angle identity for cosine:\n\n$A = \\int_0^\\pi (\\frac{1+\\cos 2x}{2} - \\cos x) dx$\n\n$A = \\int_0^\\pi (\\frac{1}{2} + \\frac{1}{2}\\cos 2x - \\cos x) dx$\n\n$A = \\frac{x}{2} + \\frac{1}{4}\\sin 2x - \\sin x |_0^\\pi$\n\n4. Evaluate the integral at the upper and lower limits:\n\n$A = \\frac{\\pi}{2} + \\frac{1}{4}\\sin 2\\pi - \\sin \\pi - \\frac{0}{2} - \\frac{1}{4}\\sin 0 + \\sin 0$\n\n$A = \\frac{\\pi}{2} + 0 - 0 - 0 - 0$\n\n5. Therefore, the area bounded by the curves $y=\\cos x$ and $y=\\cos^2 x$ between $x=0$ and $x=\\pi$ is $\\frac{\\pi}{2}$ square units.",
+    "summary": "The final answer is $\\frac{\\pi}{2}$.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 2.0,
+    "cost": {
+        "completion_tokens": 117170,
+        "prompt_tokens": 204381,
+        "cost": 0.2779455
+    }
+},
+{
+    "content": "A sled is pulled along a level path through snow by a rope. A 30-lb force acting at an angle of $40^{\\circ}$ above the horizontal moves the sled $80 \\mathrm{ft}$. Find the work done by the force. The unit of the answer should be  $\\mathrm{ft-lb}$.",
+    "solution": "1. Resolve the force into its horizontal and vertical components:\nThe horizontal component of the force can be found by multiplying the force by the cosine of the angle:\n$F_{\\text{horizontal}} = 30 \\text{ lb} \\cdot \\cos(40^{\\circ})$\n$F_{\\text{horizontal}} = 30 \\text{ lb} \\cdot \\cos(40^{\\circ})$\n$F_{\\text{horizontal}} = 30 \\text{ lb} \\cdot 0.766 = 22.98 \\text{ lb}$\n\n2. Calculate the work done by the horizontal component of the force:\nWork done = force $\\times$ distance\nWork done = $22.98 \\text{ lb} \\times 80 \\text{ ft}$\nWork done = $1838.4 \\text{ ft-lb}$\n\nSo, the work done by the 30-lb force pulling the sled along a level path through snow is 1838.4 ft-lb.",
+    "summary": "The final answer is $1838.4$ ft-lb.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1838.50666349,
+    "cost": {
+        "completion_tokens": 122396,
+        "prompt_tokens": 214037,
+        "cost": 0.2906125
+    }
+},
+{
+    "content": " If $R$ is the total resistance of three resistors, connected in parallel, with resistances $R_1, R_2, R_3$, then\r\n$$\r\n\\frac{1}{R}=\\frac{1}{R_1}+\\frac{1}{R_2}+\\frac{1}{R_3}\r\n$$\r\nIf the resistances are measured in ohms as $R_1=25 \\Omega$, $R_2=40 \\Omega$, and $R_3=50 \\Omega$, with a possible error of $0.5 \\%$ in each case, estimate the maximum error in the calculated value of $R$. The unit of the answer should be  $\\Omega$.",
+    "solution": "Step 1: Calculate the value of $R$ using the given resistances:\n$$\n\\frac{1}{R}=\\frac{1}{25}+\\frac{1}{40}+\\frac{1}{50}\n$$\n$$\n\\frac{1}{R}=\\frac{8}{200}+\\frac{5}{200}+\\frac{4}{200}\n$$\n$$\n\\frac{1}{R}=\\frac{17}{200}\n$$\n$$\nR=\\frac{200}{17} \\approx 11.7647 \\Omega\n$$\n\nStep 2: Calculate the possible error in each resistance:\nFor $R_1=25 \\Omega$:\n$0.5\\%$ of $25 \\Omega = 0.005 \\times 25 = 0.125 \\Omega$\n\nFor $R_2=40 \\Omega$:\n$0.5\\%$ of $40 \\Omega = 0.005 \\times 40 = 0.2 \\Omega$\n\nFor $R_3=50 \\Omega$:\n$0.5\\%$ of $50 \\Omega = 0.005 \\times 50 = 0.25 \\Omega$\n\nStep 3: Calculate the maximum error in the calculated value of $R$:\nUsing error propagation, the maximum error in the sum of resistances is the sum of the individual maximum errors. Therefore, the maximum error in the calculated value of $R$ is:\n$$\n\\text{Error in } R = 0.125 \\Omega + 0.2 \\Omega + 0.25 \\Omega = 0.575 \\Omega\n$$\n\nTherefore, the estimated maximum error in the calculated value of $R$ is $0.575 \\Omega$.",
+    "summary": "The final answer is $0.575 \\, \\Omega$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 0.05882352941,
+    "cost": {
+        "completion_tokens": 132247,
+        "prompt_tokens": 231619,
+        "cost": 0.31418
+    }
+},
+{
+    "content": "The length and width of a rectangle are measured as $30 \\mathrm{~cm}$ and $24 \\mathrm{~cm}$, respectively, with an error in measurement of at most $0.1 \\mathrm{~cm}$ in each. Use differentials to estimate the maximum error in the calculated area of the rectangle.\r\n The unit of the answer should be  $\\mathrm{cm^2}$.",
+    "solution": "1. First, calculate the area of the rectangle using the given measurements:\n   Area = length x width\n   Area = $30 \\mathrm{~cm} \\times 24 \\mathrm{~cm}$\n   Area = $720 \\mathrm{~cm^2}$\n\n2. Next, determine the maximum possible error in the length and width:\n   Maximum error = 0.1 $\\mathrm{~cm}$\n\n3. Now, use differentials to estimate the maximum error in the calculated area:\n   Let $A$ be the area of the rectangle, $l$ be the length, and $w$ be the width.\n   Then, $dA = w dl + l dw$\n   \n   Given that $dl = dw = 0.1 \\mathrm{~cm}$ and $l = 30 \\mathrm{~cm}$, $w = 24 \\mathrm{~cm}$:\n   $dA = (24 \\mathrm{~cm}) (0.1 \\mathrm{~cm}) + (30 \\mathrm{~cm}) (0.1 \\mathrm{~cm})$\n   $dA = 2.4 \\mathrm{~cm^2} + 3 \\mathrm{~cm^2}$\n   $dA = 5.4 \\mathrm{~cm^2}$\n\n4. Therefore, the estimated maximum error in the calculated area of the rectangle is $5.4 \\mathrm{~cm^2}$.\n\nSo, the maximum error in the calculated area of the rectangle is $5.4 \\mathrm{~cm^2}$.",
+    "summary": "The final answer is $5.4 \\mathrm{~cm^2}$.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 5.4,
+    "cost": {
+        "completion_tokens": 137735,
+        "prompt_tokens": 242027,
+        "cost": 0.327616
+    }
+},
+{
+    "content": "The planet Mercury travels in an elliptical orbit with eccentricity 0.206 . Its minimum distance from the sun is $4.6 \\times 10^7 \\mathrm{~km}$. Find its maximum distance from the sun. The unit of the answer should be  $\\mathrm{10^7} \\mathrm{~km}$.",
+    "solution": "1. The eccentricity of an ellipse is the ratio of the distance between the foci and the length of the major axis. In this case, the eccentricity is 0.206, and the minimum distance from the sun is 4.6 x 10^7 km.\n\n2. The formula to find the maximum distance from the sun (aphelion) in an elliptical orbit is:\n   Aphelion = Perihelion / (1 - eccentricity)\n\n3. Substituting the given values into the formula:\n   Aphelion = 4.6 x 10^7 km / (1 - 0.206)\n   Aphelion = 4.6 x 10^7 km / 0.794\n   Aphelion = 5.79 x 10^7 km\n\n4. Therefore, the maximum distance from the sun (aphelion) is 5.79 x 10^7 km.",
+    "summary": "The final answer is $5.79 \\times 10^7$ km.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 7.0,
+    "cost": {
+        "completion_tokens": 145577,
+        "prompt_tokens": 254245,
+        "cost": 0.345488
+    }
+},
+{
+    "content": "Use differentials to estimate the amount of tin in a closed tin can with diameter $8 \\mathrm{~cm}$ and height $12 \\mathrm{~cm}$ if the tin is $0.04 \\mathrm{~cm}$ thick. The unit of the answer should be  $\\mathrm{cm^3}$.",
+    "solution": "1. First, we need to find the volume of the entire tin can. The tin can be thought of as a cylinder with another cylinder (the thickness of the tin) removed from the inside. \n\n2. The volume of the entire tin can (including the tin itself) can be calculated using the formula for the volume of a cylinder: $V = \\pi r^2 h$, where $r$ is the radius of the tin can and $h$ is the height of the tin can.\n\n3. Given that the diameter of the tin can is $8 \\mathrm{~cm}$, the radius $r$ is half of that, so $r = 4 \\mathrm{~cm}$. The height $h$ is $12 \\mathrm{~cm}$.\n\n4. Substituting the values into the formula, we get $V = \\pi (4 \\mathrm{~cm})^2 \\times 12 \\mathrm{~cm} = 192 \\pi \\mathrm{~cm^3}$.\n\n5. Next, we need to find the volume of the tin itself. This can also be thought of as a cylinder, with a radius of $4 \\mathrm{~cm}$ (same as the tin can) and a height of $12 \\mathrm{~cm}$.\n\n6. The volume of the tin can be calculated in the same way: $V_{\\text{tin}} = \\pi (4 \\mathrm{~cm})^2 \\times 12 \\mathrm{~cm} = 192 \\pi \\mathrm{~cm^3}$.\n\n7. Since the tin is $0.04 \\mathrm{~cm}$ thick, the volume of the tin itself is the volume of the outer cylinder minus the volume of the inner cylinder: $V_{\\text{tin}} = V - V_{\\text{tin}} = 192 \\pi \\mathrm{~cm^3} - 192 \\pi \\mathrm{~cm^3} = 0 \\mathrm{~cm^3}$.\n\n8. Therefore, the estimated amount of tin in the closed tin can is $0 \\mathrm{~cm^3}$.",
+    "summary": "The final answer is $0 \\mathrm{~cm^3}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 16.0,
+    "cost": {
+        "completion_tokens": 155112,
+        "prompt_tokens": 268016,
+        "cost": 0.366676
+    }
+},
+{
+    "content": "Show how to approximate the required work by a Riemann sum. Then express the work as an integral and evaluate it.  A cable that weighs $2 \\mathrm{~lb} / \\mathrm{ft}$ is used to lift $800 \\mathrm{~lb}$ of coal up a mine shaft $500 \\mathrm{~ft}$ deep. Find the work done.\r\n The unit of the answer should be  $\\mathrm{ft-lb}$.",
+    "solution": "Step 1: Approximate the required work by a Riemann sum.\nWe can divide the depth of the mine shaft into small intervals of equal width, let's say $\\Delta x$. The weight of the cable at a depth $x$ is $2x$ lb/ft, since the cable weighs $2$ lb/ft. The work done to lift a small mass $\\Delta m$ at a depth $x$ is approximately $2x \\Delta m$. The total work done is then approximated by the Riemann sum:\n\\[W \\approx \\sum_{i=1}^{n} 2x_i \\Delta m_i\\]\nwhere $x_i$ is the depth at the $i$-th interval and $\\Delta m_i$ is the mass at that interval.\n\nStep 2: Express the work as an integral.\nTo find the exact work done, we need to take the limit as the width of the intervals approaches zero:\n\\[W = \\int_{0}^{500} 2x \\, dx\\]\n\nStep 3: Evaluate the integral.\n\\[W = \\left[x^2\\right]_{0}^{500} = 500^2 = 250,000\\]\n\nTherefore, the work done to lift $800$ lb of coal up a mine shaft $500$ ft deep using a cable that weighs $2$ lb/ft is $250,000$ ft-lb.",
+    "summary": "The final answer is $250,000$ ft-lb.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 650000.0,
+    "cost": {
+        "completion_tokens": 162030,
+        "prompt_tokens": 280292,
+        "cost": 0.383191
+    }
+},
+{
+    "content": " A patient takes $150 \\mathrm{mg}$ of a drug at the same time every day. Just before each tablet is taken, 5$\\%$ of the drug remains in the body. What quantity of the drug is in the body after the third tablet?  The unit of the answer should be  $\\mathrm{mg}$.",
+    "solution": "1. Initially, the patient takes the first tablet of $150 \\mathrm{mg}$, so after taking the tablet, $95\\%$ of the drug remains in the body. \n\n2. After the second tablet is taken, $5\\%$ of the remaining $95\\%$ from the first tablet remains in the body. This can be calculated as $0.05 \\times 0.95 \\times 150 \\mathrm{mg} = 7.125 \\mathrm{mg}$.\n\n3. After the third tablet is taken, $5\\%$ of the remaining $7.125 \\mathrm{mg}$ from the second tablet remains in the body. This can be calculated as $0.05 \\times 7.125 \\mathrm{mg} = 0.35625 \\mathrm{mg}$.\n\nTherefore, after the third tablet is taken, there is approximately $0.35625 \\mathrm{mg}$ of the drug remaining in the body.",
+    "summary": "The final answer is $0.35625 \\mathrm{mg}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 157.875,
+    "cost": {
+        "completion_tokens": 166810,
+        "prompt_tokens": 289501,
+        "cost": 0.3949655
+    }
+},
+{
+    "content": "A $360-\\mathrm{lb}$ gorilla climbs a tree to a height of $20 \\mathrm{~ft}$. Find the work done if the gorilla reaches that height in 5 seconds. The unit of the answer should be  $\\mathrm{ft-lb}$.",
+    "solution": "Step 1: Calculate the gravitational potential energy of the gorilla at the top of the tree.\n\nThe gravitational potential energy ($PE$) of an object at a height $h$ above the ground can be calculated using the formula:\n\n$PE = mgh$\n\nwhere:\n$PE$ = gravitational potential energy\n$m$ = mass of the object (360 lb)\n$g$ = acceleration due to gravity (32 ft/s^2)\n$h$ = height (20 ft)\n\nSubstitute the given values into the formula:\n\n$PE = (360 \\text{ lb})(32 \\text{ ft/s}^2)(20 \\text{ ft})$\n$PE = 230400 \\text{ ft-lb}$\n\nStep 2: Calculate the work done by the gorilla to climb the tree.\n\nThe work done ($W$) by the gorilla is equal to the change in potential energy, which is the gravitational potential energy at the top of the tree minus the initial potential energy at the bottom of the tree.\n\n$W = PE_{\\text{top}} - PE_{\\text{bottom}}$\n\nSince the gorilla starts at the bottom of the tree, the initial potential energy is zero. Therefore:\n\n$W = PE = 230400 \\text{ ft-lb}$\n\nSo, the work done by the gorilla to climb the tree to a height of 20 ft in 5 seconds is $\\boxed{230400 \\text{ ft-lb}}$.",
+    "summary": "The final answer is $230400 \\text{ ft-lb}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 7200.0,
+    "cost": {
+        "completion_tokens": 172851,
+        "prompt_tokens": 299503,
+        "cost": 0.40902800000000006
+    }
+},
+{
+    "content": "Find the area of triangle $A B C$, correct to five decimal places, if\r\n$$\r\n|A B|=10 \\mathrm{~cm} \\quad|B C|=3 \\mathrm{~cm} \\quad \\angle A B C=107^{\\circ}\r\n$$ The unit of the answer should be  $\\mathrm{cm^2}$.",
+    "solution": "1. Use the Law of Cosines to find the length of side AC:\n$$\n|AC|^2 = |AB|^2 + |BC|^2 - 2|AB||BC|\\cos(\\angle ABC)\n$$\n$$\n|AC|^2 = 10^2 + 3^2 - 2(10)(3)\\cos(107^\\circ)\n$$\n$$\n|AC|^2 = 100 + 9 - 60\\cos(107^\\circ)\n$$\n$$\n|AC|^2 = 109 - 60\\cos(107^\\circ)\n$$\n$$\n|AC| \\approx 10.07089 \\text{ cm}\n$$\n\n2. Use Heron's formula to find the area of the triangle:\n$$\n\\text{Area} = \\sqrt{s(s-|AB|)(s-|BC|)(s-|AC|)}\n$$\nwhere $s$ is the semiperimeter of the triangle:\n$$\ns = \\frac{|AB| + |BC| + |AC|}{2}\n$$\n$$\ns = \\frac{10 + 3 + 10.07089}{2}\n$$\n$$\ns \\approx 11.53545\n$$\nNow, plug in the values:\n$$\n\\text{Area} = \\sqrt{11.53545(11.53545-10)(11.53545-3)(11.53545-10.07089)}\n$$\n$$\n\\text{Area} = \\sqrt{11.53545(1.53545)(8.53545)(1.46455)}\n$$\n$$\n\\text{Area} = \\sqrt{168.1826}\n$$\n$$\n\\text{Area} \\approx 12.97365 \\text{ cm}^2\n$$\n\nTherefore, the area of triangle ABC is approximately 12.97365 $\\text{cm}^2$.",
+    "summary": "The final answer is $12.97365$ $\\text{cm}^2$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 14.34457,
+    "cost": {
+        "completion_tokens": 181046,
+        "prompt_tokens": 312272,
+        "cost": 0.427705
+    }
+},
+{
+    "content": "Use Stokes' Theorem to evaluate $\\int_C \\mathbf{F} \\cdot d \\mathbf{r}$, where $\\mathbf{F}(x, y, z)=x y \\mathbf{i}+y z \\mathbf{j}+z x \\mathbf{k}$, and $C$ is the triangle with vertices $(1,0,0),(0,1,0)$, and $(0,0,1)$, oriented counterclockwise as viewed from above.\r\n The unit of the answer should be  .",
+    "solution": "Step 1: Calculate the curl of the vector field $\\mathbf{F}$.\nThe curl of $\\mathbf{F}$ is given by:\n$$\\nabla \\times \\mathbf{F} = \\begin{vmatrix} \\mathbf{i} & \\mathbf{j} & \\mathbf{k} \\\\ \\frac{\\partial}{\\partial x} & \\frac{\\partial}{\\partial y} & \\frac{\\partial}{\\partial z} \\\\ x y & y z & z x \\end{vmatrix}$$\n$$= \\left( \\frac{\\partial(z x)}{\\partial y} - \\frac{\\partial(y z)}{\\partial z} \\right) \\mathbf{i} - \\left( \\frac{\\partial(z x)}{\\partial x} - \\frac{\\partial(x y)}{\\partial z} \\right) \\mathbf{j} + \\left( \\frac{\\partial(y z)}{\\partial x} - \\frac{\\partial(x y)}{\\partial y} \\right) \\mathbf{k}$$\n$$= (x - y) \\mathbf{i} - (z - x) \\mathbf{j} + (y - z) \\mathbf{k}$$\n\nStep 2: Calculate the surface normal to the triangle.\nThe surface normal to the triangle with vertices $(1,0,0),(0,1,0)$, and $(0,0,1)$ is given by the cross product of the two vectors formed by these vertices:\n$$\\mathbf{n} = \\begin{vmatrix} \\mathbf{i} & \\mathbf{j} & \\mathbf{k} \\\\ 1 & 0 & 0 \\\\ 0 & 1 & 0 \\end{vmatrix} = \\mathbf{i} + \\mathbf{j} + \\mathbf{k}$$\n\nStep 3: Calculate the surface integral using Stokes' Theorem.\nStokes' Theorem states that the surface integral of the curl of a vector field over a surface is equal to the line integral of the vector field over the boundary of the surface. Therefore, we have:\n$$\\int_C \\mathbf{F} \\cdot d \\mathbf{r} = \\iint_S (\\nabla \\times \\mathbf{F}) \\cdot \\mathbf{n} \\, dS$$\n$$= \\iint_S ((x - y) \\mathbf{i} - (z - x) \\mathbf{j} + (y - z) \\mathbf{k}) \\cdot (\\mathbf{i} + \\mathbf{j} + \\mathbf{k}) \\, dS$$\n$$= \\iint_S (x - y + z - x + y - z) \\, dS$$\n$$= \\iint_S 0 \\, dS$$\n$$= 0$$\n\nTherefore, the value of the line integral $\\int_C \\mathbf{F} \\cdot d \\mathbf{r}$ is 0.",
+    "summary": "The final answer is $0$. The unit of the answer should be the same as the unit of the vector field $\\mathbf{F}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": -0.5,
+    "cost": {
+        "completion_tokens": 194598,
+        "prompt_tokens": 331985,
+        "cost": 0.45788950000000006
+    }
+},
+{
+    "content": "A hawk flying at $15 \\mathrm{~m} / \\mathrm{s}$ at an altitude of $180 \\mathrm{~m}$ accidentally drops its prey. The parabolic trajectory of the falling prey is described by the equation\r\n$$\r\ny=180-\\frac{x^2}{45}\r\n$$\r\nuntil it hits the ground, where $y$ is its height above the ground and $x$ is the horizontal distance traveled in meters. Calculate the distance traveled by the prey from the time it is dropped until the time it hits the ground. Express your answer correct to the nearest tenth of a meter. The unit of the answer should be  $\\mathrm{m}$.",
+    "solution": "1. To find the distance traveled by the prey from the time it is dropped until it hits the ground, we need to find the horizontal distance traveled ($x$) when the prey hits the ground.\n\n2. When the prey hits the ground, its height above the ground ($y$) is 0. So, we can set $y=0$ in the equation $y=180-\\frac{x^2}{45}$ and solve for $x$.\n\n0 = 180 - x^2/45\nx^2 = 45 * 180\nx = sqrt(45 * 180)\nx = sqrt(8100)\nx = 90\n\n3. Therefore, the horizontal distance traveled by the prey from the time it is dropped until it hits the ground is 90 meters.",
+    "summary": "The final answer is $90$ meters.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 209.1,
+    "cost": {
+        "completion_tokens": 198770,
+        "prompt_tokens": 343402,
+        "cost": 0.469856
+    }
+},
+{
+    "content": "The intensity of light with wavelength $\\lambda$ traveling through a diffraction grating with $N$ slits at an angle $\\theta$ is given by $I(\\theta)=N^2 \\sin ^2 k / k^2$, where $k=(\\pi N d \\sin \\theta) / \\lambda$ and $d$ is the distance between adjacent slits. A helium-neon laser with wavelength $\\lambda=632.8 \\times 10^{-9} \\mathrm{~m}$ is emitting a narrow band of light, given by $-10^{-6}<\\theta<10^{-6}$, through a grating with 10,000 slits spaced $10^{-4} \\mathrm{~m}$ apart. Use the Midpoint Rule with $n=10$ to estimate the total light intensity $\\int_{-10^{-6}}^{10^{-6}} I(\\theta) d \\theta$ emerging from the grating. The unit of the answer should be  .",
+    "solution": "1. Calculate $k$:\n$k = \\frac{\\pi N d \\sin \\theta}{\\lambda} = \\frac{\\pi \\times 10000 \\times 10^{-4} \\times \\sin \\theta}{632.8 \\times 10^{-9}}$\n\n2. Calculate $I(\\theta)$:\n$I(\\theta) = N^2 \\frac{\\sin^2 k}{k^2} = 10000^2 \\frac{\\sin^2 k}{k^2}$\n\n3. Use the Midpoint Rule with $n=10$ to estimate the total light intensity:\n$\\Delta \\theta = \\frac{10^{-6} - (-10^{-6})}{10} = 2 \\times 10^{-7}$\n\n4. Calculate the sum of the intensities at the midpoints of each subinterval:\n$\\sum_{i=1}^{10} I(\\theta_i) \\Delta \\theta$, where $\\theta_i = -10^{-6} + (2i-1) \\Delta \\theta$\n\n5. Add up the values to get the estimated total light intensity emerging from the grating.\n\n6. Provide the resulting value with the appropriate units.",
+    "summary": "The final answer is $3.142 \\times 10^{-3} \\mathrm{~W/m^2}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 59.4,
+    "cost": {
+        "completion_tokens": 205453,
+        "prompt_tokens": 359917,
+        "cost": 0.48813799999999996
+    }
+},
+{
+    "content": "A model for the surface area of a human body is given by $S=0.1091 w^{0.425} h^{0.725}$, where $w$ is the weight (in pounds), $h$ is the height (in inches), and $S$ is measured in square feet. If the errors in measurement of $w$ and $h$ are at most $2 \\%$, use differentials to estimate the maximum percentage error in the calculated surface area. The unit of the answer should be  $\\%$.",
+    "solution": "1. First, we need to find the differential of the surface area function $S=0.1091 w^{0.425} h^{0.725}$ with respect to $w$ and $h$.\n\n$dS = 0.425(0.1091)w^{-0.575}h^{0.725}dw + 0.725(0.1091)w^{0.425}h^{-0.275}dh$\n\n2. Next, we need to find the percentage error in $S$ with respect to the percentage errors in $w$ and $h$.\n\nLet $e_w$ be the percentage error in $w$ and $e_h$ be the percentage error in $h$. Then,\n\n$\\frac{de_S}{S} = \\frac{0.425(0.1091)w^{-0.575}h^{0.725}dw}{0.1091 w^{0.425} h^{0.725}} + \\frac{0.725(0.1091)w^{0.425}h^{-0.275}dh}{0.1091 w^{0.425} h^{0.725}}$\n\n$\\frac{de_S}{S} = 0.425\\frac{dw}{w} + 0.725\\frac{dh}{h}$\n\n3. Given that the errors in $w$ and $h$ are at most $2\\%$, we can substitute $e_w = 0.02$ and $e_h = 0.02$ into the equation above to find the maximum percentage error in $S$.\n\n$\\frac{de_S}{S} = 0.425(0.02) + 0.725(0.02) = 0.02(0.425 + 0.725) = 0.02(1.15) = 0.023$\n\nTherefore, the maximum percentage error in the calculated surface area of the human body is $2.3\\%$.",
+    "summary": "The final answer is $2.3\\%$.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 2.3,
+    "cost": {
+        "completion_tokens": 214790,
+        "prompt_tokens": 375419,
+        "cost": 0.5098945
+    }
+},
+{
+    "content": "The temperature at the point $(x, y, z)$ in a substance with conductivity $K=6.5$ is $u(x, y, z)=2 y^2+2 z^2$. Find the rate of heat flow inward across the cylindrical surface $y^2+z^2=6$, $0 \\leqslant x \\leqslant 4$ The unit of the answer should be  .",
+    "solution": "1. First, we need to find the gradient of the temperature function $u(x, y, z) = 2y^2 + 2z^2$. The gradient is given by: \n\n∇u = $\\begin{pmatrix} \\frac{\\partial u}{\\partial x} \\\\ \\frac{\\partial u}{\\partial y} \\\\ \\frac{\\partial u}{\\partial z} \\end{pmatrix}$ = $\\begin{pmatrix} 0 \\\\ 4y \\\\ 4z \\end{pmatrix}$\n\n2. Next, we need to find the unit normal vector to the cylindrical surface $y^2 + z^2 = 6$. The normal vector is given by: \n\n$\\begin{pmatrix} \\frac{2y}{\\sqrt{2y^2 + 2z^2}} \\\\ \\frac{2z}{\\sqrt{2y^2 + 2z^2}} \\end{pmatrix}$ \n\nEvaluating this at the points on the cylindrical surface, we get: \n\n$\\begin{pmatrix} \\frac{y}{\\sqrt{3}} \\\\ \\frac{z}{\\sqrt{3}} \\end{pmatrix}$\n\n3. Now, we need to find the dot product of the gradient of the temperature function and the unit normal vector at the cylindrical surface: \n\n∇u • n = $\\begin{pmatrix} 0 \\\\ 4y \\\\ 4z \\end{pmatrix}$ • $\\begin{pmatrix} \\frac{y}{\\sqrt{3}} \\\\ \\frac{z}{\\sqrt{3}} \\end{pmatrix}$ = 4y * $\\frac{y}{\\sqrt{3}}$ + 4z * $\\frac{z}{\\sqrt{3}}$ = $\\frac{4(y^2 + z^2)}{\\sqrt{3}}$\n\n4. Finally, we need to find the rate of heat flow inward across the cylindrical surface by using the formula: \n\nRate of heat flow = -K(∇u • n) * Area\n\nSubstitute the values of K, ∇u • n and the area of the cylindrical surface to get the final answer in the appropriate units.",
+    "summary": "The final answer is $-52\\sqrt{3}$ units.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 3920.70763168,
+    "cost": {
+        "completion_tokens": 223916,
+        "prompt_tokens": 389800,
+        "cost": 0.5307740000000001
+    }
+},
+{
+    "content": "If a ball is thrown into the air with a velocity of $40 \\mathrm{ft} / \\mathrm{s}$, its height (in feet) after $t$ seconds is given by $y=40 t-16 t^2$. Find the velocity when $t=2$. The unit of the answer should be  $\\mathrm{ft} / \\mathrm{s}$.",
+    "solution": "1. First, we need to find the derivative of the height function $y=40t-16t^2$ with respect to time $t$ to get the velocity function.\n\n$y = 40t - 16t^2$\n\n$\\frac{dy}{dt} = 40 - 32t$\n\n2. Now, we need to find the velocity when $t=2$ seconds.\n\n$\\frac{dy}{dt} = 40 - 32(2)$\n\n$\\frac{dy}{dt} = 40 - 64$\n\n$\\frac{dy}{dt} = -24$\n\n3. Therefore, the velocity when $t=2$ seconds is $-24 \\, \\mathrm{ft} / \\mathrm{s}$.",
+    "summary": "The final answer is $-24 \\, \\mathrm{ft} / \\mathrm{s}$.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": -24.0,
+    "cost": {
+        "completion_tokens": 227210,
+        "prompt_tokens": 397850,
+        "cost": 0.5397400000000001
+    }
+},
+{
+    "content": "A woman walks due west on the deck of a ship at $3 \\mathrm{mi} / \\mathrm{h}$. The ship is moving north at a speed of $22 \\mathrm{mi} / \\mathrm{h}$. Find the speed of the woman relative to the surface of the water. The unit of the answer should be  $\\mathrm{mi}/\\mathrm{h}$.",
+    "solution": "1. First, we need to understand that the speed of the woman relative to the surface of the water is the vector sum of her speed on the ship and the speed of the ship itself.\n\n2. The woman is walking due west at 3 mi/h, which means her velocity vector points in the west direction with a magnitude of 3 mi/h.\n\n3. The ship is moving north at 22 mi/h, so its velocity vector points in the north direction with a magnitude of 22 mi/h.\n\n4. To find the speed of the woman relative to the surface of the water, we need to combine these two velocity vectors. We can do this using vector addition.\n\n5. Since the woman is walking due west and the ship is moving north, the two velocity vectors are perpendicular to each other. This means we can use the Pythagorean theorem to find the magnitude of the resultant velocity vector.\n\n6. The magnitude of the resultant velocity vector is given by:\n$\\sqrt{3^2 + 22^2} =  \\sqrt{9 + 484} = \\sqrt{493} \\approx 22.2$ mi/h\n\n7. Therefore, the speed of the woman relative to the surface of the water is approximately 22.2 mi/h.",
+    "summary": "The final answer is 22.2 mi/h.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 22.2036033112,
+    "cost": {
+        "completion_tokens": 232544,
+        "prompt_tokens": 408071,
+        "cost": 0.5528515
+    }
+},
+{
+    "content": "A $360-\\mathrm{lb}$ gorilla climbs a tree to a height of $20 \\mathrm{~ft}$. Find the work done if the gorilla reaches that height in 10 seconds.  The unit of the answer should be $\\mathrm{ft-lb}$.",
+    "solution": "1. First, we need to calculate the potential energy gained by the gorilla as it climbs the tree. The potential energy formula is given by $PE = mgh$, where $m$ is the mass of the gorilla, $g$ is the acceleration due to gravity (approximately $32 \\mathrm{~ft/s^2}$), and $h$ is the height climbed.\n\n2. Plugging in the values, we get $PE = (360 \\mathrm{~lb})(32 \\mathrm{~ft/s^2})(20 \\mathrm{~ft}) = 230400 \\mathrm{~ft-lb}$.\n\n3. Since work done is equal to the change in potential energy, the work done by the gorilla in climbing the tree is $230400 \\mathrm{~ft-lb}$.\n\nTherefore, the work done by the gorilla in climbing the tree to a height of $20 \\mathrm{~ft}$ in 10 seconds is $230400 \\mathrm{~ft-lb}$.",
+    "summary": "The final answer is $230400 \\mathrm{~ft-lb}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 7200.0,
+    "cost": {
+        "completion_tokens": 238431,
+        "prompt_tokens": 417924,
+        "cost": 0.5666085000000001
+    }
+},
+{
+    "content": " A ball is thrown eastward into the air from the origin (in the direction of the positive $x$-axis). The initial velocity is $50 \\mathrm{i}+80 \\mathrm{k}$, with speed measured in feet per second. The spin of the ball results in a southward acceleration of $4 \\mathrm{ft} / \\mathrm{s}^2$, so the acceleration vector is $\\mathbf{a}=-4 \\mathbf{j}-32 \\mathbf{k}$. What speed does the ball land?\r\n The unit of the answer should be  $\\mathrm{ft}/\\mathrm{s}$.",
+    "solution": "1. Find the time it takes for the ball to land:\nSince the ball is thrown eastward, the only acceleration that affects the time it takes to land is the downward acceleration due to gravity. The only component of the acceleration vector that affects this is the $-32 \\mathbf{k}$ component. \nUsing the equation of motion $s = ut + \\frac{1}{2}at^2$, where $s$ is the displacement, $u$ is the initial velocity, $a$ is the acceleration, and $t$ is the time taken, we can set $s = 0$ (since the ball lands), $u = 80$ (initial velocity in the $k$ direction), $a = -32$ (acceleration due to gravity), and solve for $t$.\n$0 = 80t - 16t^2$\n$16t^2 - 80t = 0$\n$16t(t - 5) = 0$\n$t = 0$ or $t = 5$\n\nSince time cannot be negative, the time taken for the ball to land is 5 seconds.\n\n2. Find the final velocity of the ball when it lands:\nTo find the final velocity of the ball when it lands, we need to consider both the initial velocity and the acceleration due to the spin of the ball.\nThe acceleration vector $\\mathbf{a} = -4 \\mathbf{j} - 32 \\mathbf{k}$ has no effect on the horizontal motion of the ball, so the final velocity in the $i$ direction will remain the same as the initial velocity, which is $50 \\mathrm{i}$.\nIn the $k$ direction, the final velocity will be the initial velocity plus the acceleration due to the spin times the time taken to land.\n$v_f = v_i + at$\n$v_f = 80 - 32 \\cdot 5$\n$v_f = 80 - 160$\n$v_f = -80$\n\nTherefore, the speed at which the ball lands is $80 \\mathrm{ft/s}$.",
+    "summary": "The final answer is $80 \\mathrm{ft/s}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 96.4365076099,
+    "cost": {
+        "completion_tokens": 247776,
+        "prompt_tokens": 434039,
+        "cost": 0.5886835
+    }
+},
+{
+    "content": "The demand function for a commodity is given by\r\n$$\r\np=2000-0.1 x-0.01 x^2\r\n$$\r\nFind the consumer surplus when the sales level is 100 . The unit of the answer should be  $\\$$.",
+    "solution": "Step 1: Calculate the equilibrium price and quantity demanded\n\nTo find the equilibrium price and quantity demanded, we need to set the demand function equal to the price at which the commodity is sold. In this case, the price is $p$ and the quantity demanded is $x$. So, we have:\n\n$$\np = 2000 - 0.1x - 0.01x^2\n$$\n\nGiven that the sales level is 100, we can substitute $x = 100$ into the equation to find the equilibrium price:\n\n$$\np = 2000 - 0.1(100) - 0.01(100)^2 \\\\\np = 2000 - 10 - 1 \\\\\np = 1989\n$$\n\nTherefore, the equilibrium price when the sales level is 100 is $1989, and the quantity demanded is 100.\n\nStep 2: Calculate consumer surplus\n\nConsumer surplus is the difference between what consumers are willing to pay for a good and what they actually pay. It represents the benefit that consumers receive from purchasing a good at a price that is lower than what they are willing to pay.\n\nTo calculate consumer surplus, we need to find the area of the triangle formed by the demand curve, the price axis, and the quantity demanded. The formula for consumer surplus in this case is:\n\n$$\nCS = \\frac{1}{2} \\times (p_0 - p_e) \\times q\n$$\n\nwhere:\n- $p_0$ is the highest price consumers are willing to pay (in this case, $2000$)\n- $p_e$ is the equilibrium price (in this case, $1989$)\n- $q$ is the quantity demanded (in this case, $100$)\n\nSubstitute these values into the formula:\n\n$$\nCS = \\frac{1}{2} \\times (2000 - 1989) \\times 100 \\\\\nCS = \\frac{1}{2} \\times 11 \\times 100 \\\\\nCS = \\frac{1}{2} \\times 1100 \\\\\nCS = 550\n$$\n\nTherefore, the consumer surplus when the sales level is 100 is $\\$550.",
+    "summary": "The final answer is $550.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 7166.67,
+    "cost": {
+        "completion_tokens": 254751,
+        "prompt_tokens": 444926,
+        "cost": 0.6045895
+    }
+},
+{
+    "content": "The linear density in a rod $8 \\mathrm{~m}$ long is $12 / \\sqrt{x+1} \\mathrm{~kg} / \\mathrm{m}$, where $x$ is measured in meters from one end of the rod. Find the average density of the rod. The unit of the answer should be  $\\mathrm{~kg} / \\mathrm{m}$.",
+    "solution": "1. To find the average density of the rod, we need to consider the total mass of the rod and the total length of the rod.\n\n2. The linear density of the rod at a distance $x$ from one end is given by $12 / \\sqrt{x+1} \\mathrm{~kg} / \\mathrm{m}$.\n\n3. To find the mass of an infinitesimally small element $\\Delta x$ at position $x$ along the rod, we can use the formula $\\mu(x) \\Delta x$, where $\\mu(x)$ is the linear density at position $x$.\n\n4. The total mass of the rod can be found by integrating this expression over the length of the rod:\n\n$\\int_{0}^{8} \\mu(x) dx = \\int_{0}^{8} \\frac{12}{\\sqrt{x+1}} dx$\n\n5. After integrating, we get the total mass of the rod.\n\n6. The average density of the rod can be found by dividing the total mass by the total length of the rod:\n\nAverage density = Total mass / Total length\n\n7. Calculate the average density using the total mass and total length values.\n\n8. The final answer will be in units of $\\mathrm{~kg} / \\mathrm{m}$.",
+    "summary": "The final answer is $6 \\mathrm{~kg} / \\mathrm{m}$.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 6.0,
+    "cost": {
+        "completion_tokens": 260358,
+        "prompt_tokens": 455436,
+        "cost": 0.618255
+    }
+},
+{
+    "content": "A variable force of $5 x^{-2}$ pounds moves an object along a straight line when it is $x$ feet from the origin. Calculate the work done in moving the object from $x=1 \\mathrm{~ft}$ to $x=10 \\mathrm{~ft}$. The unit of the answer should be  $\\mathrm{ft-lb}$.",
+    "solution": "1. The work done by a variable force can be calculated by integrating the force function over the distance it acts. In this case, the force function is $5x^{-2}$ pounds and the distance is from $x=1$ ft to $x=10$ ft.\n\n2. To find the work done, we need to integrate the force function over the distance:\n$\\int_{1}^{10} 5x^{-2} dx$\n\n3. This integral can be simplified to:\n$5 \\int_{1}^{10} x^{-2} dx$\n\n4. Integrating $x^{-2}$ gives us $-\\frac{1}{x}$, so the integral becomes:\n$5 \\left[-\\frac{1}{x}\\right]_{1}^{10}$\n\n5. Plugging in the limits of integration, we get:\n$5 \\left[-\\frac{1}{10} + \\frac{1}{1}\\right]$\n\n6. Simplifying further, we get:\n$5 \\left[-\\frac{1}{10} + 1\\right]$\n\n7. This simplifies to:\n$5 \\times \\frac{9}{10}$\n\n8. Finally, the work done is:\n$4.5 \\mathrm{~ft-lb}$\n\nTherefore, the work done in moving the object from $x=1$ ft to $x=10$ ft is $4.5$ ft-lb.",
+    "summary": "The final answer is $4.5$ ft-lb.",
+    "accurate": true,
+    "real_answer": null,
+    "answer": 4.5,
+    "cost": {
+        "completion_tokens": 266853,
+        "prompt_tokens": 466627,
+        "cost": 0.6335930000000001
+    }
+},
+{
+    "content": "One model for the spread of an epidemic is that the rate of spread is jointly proportional to the number of infected people and the number of uninfected people. In an isolated town of 5000 inhabitants, 160 people have a disease at the beginning of the week and 1200 have it at the end of the week. How long does it take for $80 \\%$ of the population to become infected? The unit of the answer should be  $\\mathrm{days}$.",
+    "solution": "1. Let's denote the number of infected people at the beginning of the week as $I_0$ and at the end of the week as $I_t$. We are given that $I_0 = 160$ and $I_t = 1200$.\n\n2. According to the model, the rate of spread is jointly proportional to the number of infected people and the number of uninfected people. This can be expressed as:\n$$\\frac{dI}{dt} = kI(N-I)$$\nwhere $I$ is the number of infected people, $N$ is the total population, and $k$ is a constant of proportionality.\n\n3. We can rewrite this differential equation as:\n$$\\frac{dI}{I(N-I)} = kdt$$\n\n4. Integrating both sides, we get:\n$$\\int \\frac{dI}{I(N-I)} = \\int kdt$$\n\n5. This integral can be solved using partial fractions:\n$$\\int \\left(\\frac{1}{I} + \\frac{1}{N-I}\\right)dI = \\int kdt$$\n$$\\ln\\left(\\frac{I}{N-I}\\right) = kt + C$$\n\n6. To determine the constant of integration, we can use the initial conditions $I(0) = I_0$:\n$$\\ln\\left(\\frac{I_0}{N-I_0}\\right) = C$$\n\n7. Substituting the values $I_0 = 160$ and $N = 5000$ into the equation, we can solve for $C$:\n$$\\ln\\left(\\frac{160}{5000-160}\\right) = C$$\n$$C = \\ln\\left(\\frac{160}{4840}\\right)$$\n\n8. Now we can rewrite the equation as:\n$$\\ln\\left(\\frac{I}{N-I}\\right) = kt + \\ln\\left(\\frac{160}{4840}\\right)$$\n\n9. We are interested in finding the time it takes for $80\\%$ of the population to become infected, which means when $I = 0.8N$. Substituting this into the equation, we can solve for $t$:\n$$\\ln\\left(\\frac{0.8N}{N-0.8N}\\right) = kt + \\ln\\left(\\frac{160}{4840}\\right)$$\n$$\\ln\\left(\\frac{0.8}{0.2}\\right) = kt + \\ln\\left(\\frac{160}{4840}\\right)$$\n$$\\ln(4) = kt + \\ln\\left(\\frac{160}{4840}\\right)$$\n\n10. Finally, we can solve for $t$:\n$$t = \\frac{\\ln(4) - \\ln\\left(\\frac{160}{4840}\\right)}{k}$$\n\nBy solving this equation, we can find the time it takes for $80\\%$ of the population to become infected.",
+    "summary": "The final answer is $t = \\frac{\\ln(4) - \\ln\\left(\\frac{160}{4840}\\right)}{k}$",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 15.0,
+    "cost": {
+        "completion_tokens": 275347,
+        "prompt_tokens": 480742,
+        "cost": 0.6533914999999999
+    }
+},
+{
+    "content": "Find the volume of the described solid S. A tetrahedron with three mutually perpendicular faces and three mutually perpendicular edges with lengths $3 \\mathrm{~cm}$, $4 \\mathrm{~cm}$, and $5 \\mathrm{~cm}$ The unit of the answer should be  $\\mathrm{cm}^3$.",
+    "solution": "1. First, let's calculate the area of the base of the tetrahedron. Since the base is an equilateral triangle with side length 3 cm, we can use the formula for the area of an equilateral triangle: $A = \\frac{\\sqrt{3}}{4} \\times (side length)^2$. \n   Plugging in the values, we get $A = \\frac{\\sqrt{3}}{4} \\times 3^2 = \\frac{\\sqrt{3}}{4} \\times 9 = \\frac{9\\sqrt{3}}{4} \\mathrm{~cm}^2$.\n\n2. Next, we need to find the height of the tetrahedron. The height of a regular tetrahedron can be calculated using the formula $h = \\frac{2}{3} \\times \\sqrt{2} \\times \\text{(edge length)}$. \n   Plugging in the values, we get $h = \\frac{2}{3} \\times \\sqrt{2} \\times 5 = \\frac{10\\sqrt{2}}{3} \\mathrm{~cm}$.\n\n3. Finally, we can calculate the volume of the tetrahedron using the formula for the volume of a pyramid: $V = \\frac{1}{3} \\times \\text{(base area)} \\times \\text{(height)}$. \n   Plugging in the values, we get $V = \\frac{1}{3} \\times \\frac{9\\sqrt{3}}{4} \\times \\frac{10\\sqrt{2}}{3} = \\frac{90\\sqrt{6}}{12} \\mathrm{~cm}^3$.\n   \nTherefore, the volume of the tetrahedron is $\\frac{15\\sqrt{6}}{2} \\mathrm{~cm}^3$.",
+    "summary": "The final answer is $\\frac{15\\sqrt{6}}{2} \\mathrm{~cm}^3$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 10.0,
+    "cost": {
+        "completion_tokens": 283083,
+        "prompt_tokens": 492873,
+        "cost": 0.6710610000000001
+    }
+},
+{
+    "content": "The base of a solid is a circular disk with radius 3 . Find the volume of the solid if parallel cross-sections perpendicular to the base are isosceles right triangles with hypotenuse lying along the base. The unit of the answer should be  .",
+    "solution": "1. The base of the solid is a circle with radius 3, so the area of the base is π(3)^2 = 9π.\n\n2. Let's consider a cross-section of the solid that is an isosceles right triangle with one leg on the base and the hypotenuse lying along the base. The height of the triangle is the radius of the circle, which is 3.\n\n3. The area of an isosceles right triangle with legs of length x is (1/2)x^2. Since the height is 3, the legs of the triangle are also 3.\n\n4. The area of the triangle is (1/2)(3)^2 = 4.5.\n\n5. The volume of the solid can be found by integrating the areas of the cross-sections from 0 to the height of the solid. The height of the solid is also the radius of the circle, which is 3.\n\n6. The volume V of the solid is given by the integral V = ∫[0,3] 4.5 dx = 4.5x |[0,3] = 4.5(3) - 4.5(0) = 13.5 cubic units.\n\nTherefore, the volume of the solid is 13.5 cubic units.",
+    "summary": "The final answer is $13.5$ cubic units.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 36.0,
+    "cost": {
+        "completion_tokens": 289086,
+        "prompt_tokens": 502765,
+        "cost": 0.6850115000000001
+    }
+},
+{
+    "content": "A projectile is fired with an initial speed of $200 \\mathrm{~m} / \\mathrm{s}$ and angle of elevation $60^{\\circ}$. Find the speed at impact. The unit of the answer should be  $\\mathrm{m}/\\mathrm{s}$.",
+    "solution": "Step 1: Break down the initial velocity into its horizontal and vertical components. \n\nThe horizontal component of the velocity is given by:\n$V_{0x} = V_0 \\times \\cos(\\theta)$\n$V_{0x} = 200 \\times \\cos(60^\\circ)$\n$V_{0x} = 200 \\times 0.5$\n$V_{0x} = 100 \\mathrm{~m} / \\mathrm{s}$\n\nThe vertical component of the velocity is given by:\n$V_{0y} = V_0 \\times \\sin(\\theta)$\n$V_{0y} = 200 \\times \\sin(60^\\circ)$\n$V_{0y} = 200 \\times \\sqrt{3} / 2$\n$V_{0y} = 100\\sqrt{3} \\mathrm{~m} / \\mathrm{s}$\n\nStep 2: Use the vertical component of the velocity to find the time of flight.\n\nSince the projectile is fired upwards, we can use the equation:\n$V_{f} = V_{0y} - gt$\nwhere $V_{f} = 0$ at the peak of the trajectory.\n\n$0 = 100\\sqrt{3} - 9.8t$\n$t = \\frac{100\\sqrt{3}}{9.8}$\n\nStep 3: Use the time of flight to find the horizontal distance traveled.\n\nThe horizontal distance traveled is given by:\n$X = V_{0x} \\times t$\n$X = 100 \\times \\frac{100\\sqrt{3}}{9.8}$\n$X = \\frac{10000\\sqrt{3}}{9.8}$\n\nStep 4: Use the horizontal distance traveled to find the speed at impact.\n\nThe speed at impact is given by the horizontal component of the velocity at impact:\n$V_{impact} = V_{0x} = 100\\mathrm{~m} / \\mathrm{s}$\n\nTherefore, the speed at impact is $100 \\mathrm{~m} / \\mathrm{s}$.",
+    "summary": "The final answer is $100 \\mathrm{~m} / \\mathrm{s}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 200.0,
+    "cost": {
+        "completion_tokens": 300150,
+        "prompt_tokens": 517683,
+        "cost": 0.7090665
+    }
+},
+{
+    "content": "A force of $30 \\mathrm{~N}$ is required to maintain a spring stretched from its natural length of $12 \\mathrm{~cm}$ to a length of $15 \\mathrm{~cm}$. How much work is done in stretching the spring from $12 \\mathrm{~cm}$ to $20 \\mathrm{~cm}$ ?\r\n The unit of the answer should be  $\\mathrm{J}$.",
+    "solution": "1. Calculate the spring constant $k$ using Hooke's Law: $F = kx$\nGiven: $F = 30 \\mathrm{~N}$, $x = 0.03 \\mathrm{~m}$\n$30 = k \\times 0.03$\n$k = \\frac{30}{0.03} = 1000 \\mathrm{~N/m}$\n\n2. Calculate the work done in stretching the spring from $12 \\mathrm{~cm}$ to $20 \\mathrm{~cm}$.\nWork done = $\\frac{1}{2}kx^2$\nFor stretching from $12 \\mathrm{~cm}$ to $20 \\mathrm{~cm}$, the extension is $0.08 \\mathrm{~m}$.\nWork done = $\\frac{1}{2} \\times 1000 \\times (0.08)^2$\nWork done = $0.32 \\mathrm{~J}$\n\nTherefore, the work done in stretching the spring from $12 \\mathrm{~cm}$ to $20 \\mathrm{~cm}$ is $0.32 \\mathrm{~J}$.",
+    "summary": "The final answer is $0.32 \\mathrm{~J}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 3.2,
+    "cost": {
+        "completion_tokens": 307194,
+        "prompt_tokens": 529867,
+        "cost": 0.7257245000000001
+    }
+},
+{
+    "content": "Use Poiseuille's Law to calculate the rate of flow in a small human artery where we can take $\\eta=0.027, R=0.008 \\mathrm{~cm}$, $I=2 \\mathrm{~cm}$, and $P=4000$ dynes $/ \\mathrm{cm}^2$. The unit of the answer should be  $\\mathrm{10^{-4}} \\mathrm{~cm}^3/\\mathrm{s}$.",
+    "solution": "1. Poiseuille's Law states that the rate of flow through a cylindrical tube (such as a blood vessel) is given by the formula:\n\n\\[Q = \\frac{\\pi \\Delta P R^4}{8 \\eta l}\\]\n\nwhere:\nQ = flow rate\n$\\Delta P$ = pressure difference\nR = radius of the tube\n$\\eta$ = viscosity of the fluid\nl = length of the tube\n\n2. Given values:\n$\\eta = 0.027$\nR = 0.008 cm\nl = 2 cm\n$\\Delta P = 4000$ dynes/cm²\n\n3. Convert the radius to meters:\nR = 0.008 cm = 0.00008 m\n\n4. Now, plug in the values into the formula:\n\\[Q = \\frac{\\pi \\times 4000 \\times (0.00008)^4}{8 \\times 0.027 \\times 2}\\]\n\n\\[Q = \\frac{\\pi \\times 4000 \\times 2.56 \\times 10^{-17}}{0.432}\\]\n\n\\[Q = \\frac{3.1416 \\times 0.000000000256 \\times 4000}{0.432}\\]\n\n\\[Q = \\frac{3.1416 \\times 0.000001024}{0.432}\\]\n\n\\[Q = \\frac{0.00322656}{0.432}\\]\n\n\\[Q = 0.007474074 \\times 10^{-4} \\mathrm{cm}^3/\\mathrm{s}\\]\n\n5. Therefore, the rate of flow in the small human artery is approximately $0.0075 \\times 10^{-4} \\mathrm{cm}^3/\\mathrm{s}$.",
+    "summary": "The final answer is $0.0075 \\times 10^{-4} \\mathrm{cm}^3/\\mathrm{s}$.",
+    "accurate": false,
+    "real_answer": null,
+    "answer": 1.19,
+    "cost": {
+        "completion_tokens": 316480,
+        "prompt_tokens": 544503,
+        "cost": 0.7469715000000001
+    }
+}
+]
