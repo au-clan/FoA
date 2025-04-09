@@ -56,7 +56,7 @@ step_batcher = BatchingAPI(
 
 # Setup logging
 logging.basicConfig(
-    filename="test_results.log",
+    filename="new_test_results.log",
     level=logging.INFO,
     format="%(asctime)s - %(message)s"
 )
@@ -107,17 +107,25 @@ async def create_test_puzzles():
     """
     num_steps = 4
     num_agents = 1
-    agent_reflexions = {0:[]}
+    agent_reflexions = {}
+    agent_ids = [i for i in range(num_agents)] # Number of active agents
+
+    for agent_id in agent_ids:
+        agent_reflexions[agent_id] = []
+    
     finished_puzzles = []
     #TODO: 22212 missing from pickle file for some reason, prbly because it was 
     puzzles = ["1, 1, 4, 6", "1, 1, 11, 11", "1, 3, 8, 8", "1 1 1 8", "6 6 6 6", 
                "1 1 2 12", "1 2 2 6", "1 1 10 12", "2 2 10 10", "1 1 1 12", 
                "3 4 8 12", "2 4 6 11", "2 2 8 9", "1 5 6 7", "5 8 10 11",
                "4 4 9 12", "2 5 6 6", "1 1 3 12", "2 2 2 12", "1 1 4 12"]
-    for puzzle in puzzles:
-        states, _ = await solve_trial_wise(num_steps, puzzle, num_agents, agent_reflexions)
+    puzzles2 = ["1 1 4 6", "1 1 11 11", "6 6 6 6", "1 1 1 12", "1 1 2 12",
+                "2 4 7 7", "3 6 6 10", "4 7 9 11", "2 2 3 5", "2 5 7 9",
+                "2 4 10 10", "5 5 7 11", "1 3 4 6", "5 7 7 11", "3 3 7 13" ] #5 easy, 5 medium, 5 hard (<99%, 50-52%, 25-27%)
+    for puzzle in puzzles2:
+        states, _, _ = await solve_trial_wise(step_batcher, num_steps, puzzle, agent_ids, agent_reflexions)
         finished_puzzles.append(states)
-    with open("test_puzzles.pkl", "wb") as f:
+    with open("test_puzzles2.pkl", "wb") as f:
         pickle.dump(finished_puzzles, f)
 
 
@@ -127,13 +135,13 @@ async def test_reflexion():
     """
     # Load unfinished puzzles
     all_puzzles_data = load_test_puzzles()
-    num_reflexions_list = [4]  # Number of iterations to test
+    num_reflexions_list = [1]  # Number of iterations to test
     k = 2  # k for "k most recent"
     num_agents = 4  
     reflexion_types = ["list", "k most recent", "summary_incremental", "summary_all_previous"] 
     results = []
 
-    for states in all_puzzles_data[0:1]:
+    for states in all_puzzles_data[0:14]:
         for i in range(num_agents):
             states[i] = states[0]
         for num_reflexions in num_reflexions_list:
@@ -158,11 +166,11 @@ async def test_reflexion():
                 logging.info(result_entry)
 
     # Save results to a pickle file
-    with open(f"test_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pkl", "wb") as f:
+    with open(f"new_test_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pkl", "wb") as f:
         pickle.dump(results, f)
 
     # Plot the results
-    plotScore(results)
+    #plotScore(results)
 
 from src.prompts.adapt import gameof24 as llama_prompts
 
@@ -191,3 +199,8 @@ async def scoreTest():
 if __name__ == "__main__":
     asyncio.run(test_reflexion())
     #asyncio.run(scoreTest())
+    #asyncio.run(create_test_puzzles())
+    # with open('test_puzzles.pkl', 'rb') as file:
+    #     loaded_list = pickle.load(file)
+    # print(loaded_list[0])
+    # print(loaded_list[-1])

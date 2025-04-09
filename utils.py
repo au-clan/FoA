@@ -773,6 +773,6 @@ def merge_responses(responses):
     return merged_response      
 
 def load_test_puzzles():
-  with open("test_puzzles.pkl", "rb") as f:
+  with open("test_puzzles2.pkl", "rb") as f:
       puzzles = pickle.load(f)
   return puzzles  

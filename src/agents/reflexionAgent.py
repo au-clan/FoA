@@ -123,7 +123,7 @@ class GameOf24Agent:
         if time_of_reflexion == "step_wise":
             prompt = llama_prompts.reflexion_step_prompt.format(puzzle=puzzle, steps=steps)
         else:
-            prompt = llama_prompts.reflexion_prompt.format(puzzle=puzzle, steps=steps)
+            prompt = llama_prompts.new_reflexion_prompt.format(puzzle=puzzle, steps=steps)
         reflexion = api.buffered_request(prompt, key=hash(state), namespace=namespace)
         return reflexion
     

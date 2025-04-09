@@ -1,0 +1,93 @@
+2025-03-23 01:01:21,670 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 0, 'token_cost': 19631.0, 'num_used_reflexions': 8}
+2025-03-23 01:02:24,188 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 19419.0, 'num_used_reflexions': 8}
+2025-03-23 01:03:43,512 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 23343.0, 'num_used_reflexions': 8}
+2025-03-23 01:05:01,110 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 0, 'token_cost': 23265.0, 'num_used_reflexions': 8}
+2025-03-23 01:07:12,099 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 4, 'reflexion_type': 'list', 'score': 1, 'token_cost': 39065.0, 'num_used_reflexions': 16}
+2025-03-23 01:09:27,173 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 4, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 40048.0, 'num_used_reflexions': 16}
+2025-03-24 02:32:44,410 - Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2025-03-24 02:32:44,412 - Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2025-03-24 02:32:47,843 - Retrying request to /openai/v1/chat/completions in 9.000000 seconds
+2025-03-24 02:32:47,908 - Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+There was a mistake above where we did not correctly reflect first time, have to redo
+2025-03-24 02:55:46,670 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 0, 'token_cost': 21200.0, 'num_used_reflexions': 8}
+2025-03-24 02:56:58,711 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 21433.0, 'num_used_reflexions': 8}
+2025-03-24 02:58:22,955 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 24453.0, 'num_used_reflexions': 8}
+2025-03-24 02:59:37,381 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 0, 'token_cost': 22930.0, 'num_used_reflexions': 8}
+Tried some new reflexion prompt
+2025-03-25 03:10:19,295 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 1, 'token_cost': 16173.0, 'num_used_reflexions': 7}
+2025-03-25 03:13:28,522 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 19466.0, 'num_used_reflexions': 8}
+2025-03-25 03:17:03,163 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 20872.0, 'num_used_reflexions': 8}
+2025-03-25 03:20:03,609 - {'puzzle': '1, 1, 4, 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 1, 'token_cost': 18100.0, 'num_used_reflexions': 7}
+2025-03-26 03:30:37,558 - {'puzzle': '1, 1, 11, 11', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 0, 'token_cost': 18644.0, 'num_used_reflexions': 8}
+2025-03-26 03:31:25,235 - {'puzzle': '1, 1, 11, 11', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 17573.0, 'num_used_reflexions': 8}
+2025-03-26 03:32:32,863 - {'puzzle': '1, 1, 11, 11', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 19162.0, 'num_used_reflexions': 8}
+2025-03-26 03:33:36,131 - {'puzzle': '1, 1, 11, 11', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 0, 'token_cost': 20249.0, 'num_used_reflexions': 8}
+2025-03-26 03:34:44,194 - {'puzzle': '1, 3, 8, 8', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 0, 'token_cost': 20330.0, 'num_used_reflexions': 8}
+2025-03-26 03:35:55,709 - {'puzzle': '1, 3, 8, 8', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 1, 'token_cost': 20271.0, 'num_used_reflexions': 8}
+2025-03-26 03:37:06,238 - {'puzzle': '1, 3, 8, 8', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 21300.0, 'num_used_reflexions': 8}
+2025-03-26 03:38:13,678 - {'puzzle': '1, 3, 8, 8', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 1, 'token_cost': 19800.0, 'num_used_reflexions': 7}
+2025-03-26 03:39:07,101 - {'puzzle': '1 1 1 8', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 0, 'token_cost': 17196.0, 'num_used_reflexions': 8}
+2025-03-26 03:40:07,655 - {'puzzle': '1 1 1 8', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 17565.0, 'num_used_reflexions': 8}
+2025-03-26 03:41:15,192 - {'puzzle': '1 1 1 8', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 20465.0, 'num_used_reflexions': 8}
+2025-03-26 03:42:26,811 - {'puzzle': '1 1 1 8', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 0, 'token_cost': 20383.0, 'num_used_reflexions': 8}
+2025-03-26 03:43:18,894 - {'puzzle': '6 6 6 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 0, 'token_cost': 15885.0, 'num_used_reflexions': 8}
+2025-03-26 03:44:15,335 - {'puzzle': '6 6 6 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 15797.0, 'num_used_reflexions': 8}
+2025-03-26 03:45:01,032 - {'puzzle': '6 6 6 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 1, 'token_cost': 15048.0, 'num_used_reflexions': 7}
+2025-03-26 03:46:03,049 - {'puzzle': '6 6 6 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 0, 'token_cost': 17956.0, 'num_used_reflexions': 8}
+2025-04-02 07:00:01,651 - {'puzzle': '1 1 10 12', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 0, 'token_cost': 20367.0, 'num_used_reflexions': 8}
+2025-04-02 07:00:26,792 - {'puzzle': '1 1 10 12', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 20804.0, 'num_used_reflexions': 8}
+2025-04-02 07:01:21,837 - {'puzzle': '1 1 10 12', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 19912.0, 'num_used_reflexions': 8}
+2025-04-02 07:02:13,988 - {'puzzle': '1 1 10 12', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 1, 'token_cost': 21489.0, 'num_used_reflexions': 8}
+2025-04-02 07:02:53,611 - {'puzzle': '2 2 10 10', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 1, 'token_cost': 16053.0, 'num_used_reflexions': 7}
+2025-04-02 07:03:39,578 - {'puzzle': '2 2 10 10', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 16053.0, 'num_used_reflexions': 8}
+2025-04-02 07:04:38,794 - {'puzzle': '2 2 10 10', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 20017.0, 'num_used_reflexions': 8}
+2025-04-02 07:05:29,132 - {'puzzle': '2 2 10 10', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 1, 'token_cost': 19542.0, 'num_used_reflexions': 8}
+2025-04-02 07:06:06,091 - {'puzzle': '1 1 1 12', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 0, 'token_cost': 18134.0, 'num_used_reflexions': 8}
+2025-04-02 07:06:45,743 - {'puzzle': '1 1 1 12', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 19047.0, 'num_used_reflexions': 8}
+2025-04-02 07:07:36,876 - {'puzzle': '1 1 1 12', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 1, 'token_cost': 16785.0, 'num_used_reflexions': 7}
+2025-04-02 07:08:15,931 - {'puzzle': '1 1 1 12', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 0, 'token_cost': 19490.0, 'num_used_reflexions': 8}
+2025-04-02 07:17:54,857 - {'puzzle': '3 4 8 12', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 0, 'token_cost': 19515.0, 'num_used_reflexions': 8}
+2025-04-02 07:18:20,738 - {'puzzle': '3 4 8 12', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 20052.0, 'num_used_reflexions': 8}
+2025-04-02 07:19:10,874 - {'puzzle': '3 4 8 12', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 21557.0, 'num_used_reflexions': 8}
+2025-04-02 07:20:02,643 - {'puzzle': '3 4 8 12', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 0, 'token_cost': 20360.0, 'num_used_reflexions': 8}
+2025-04-02 07:20:51,549 - {'puzzle': '2 4 6 11', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 0, 'token_cost': 20021.0, 'num_used_reflexions': 8}
+2025-04-02 07:21:47,751 - {'puzzle': '2 4 6 11', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 20245.0, 'num_used_reflexions': 8}
+2025-04-02 07:22:38,034 - {'puzzle': '2 4 6 11', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 20805.0, 'num_used_reflexions': 8}
+2025-04-02 07:23:34,743 - {'puzzle': '2 4 6 11', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 0, 'token_cost': 22154.0, 'num_used_reflexions': 8}
+2025-04-03 14:00:56,026 - {'puzzle': '1 1 4 6', 'num_agents': 4, 'num_reflexions': 1, 'reflexion_type': 'list', 'score': 0, 'token_cost': 9831.0, 'num_used_reflexions': 4}
+2025-04-03 14:01:03,924 - {'puzzle': '1 1 4 6', 'num_agents': 4, 'num_reflexions': 1, 'reflexion_type': 'k most recent', 'score': 1, 'token_cost': 9864.0, 'num_used_reflexions': 4}
+2025-04-03 14:01:12,267 - {'puzzle': '1 1 4 6', 'num_agents': 4, 'num_reflexions': 1, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 10040.0, 'num_used_reflexions': 4}
+2025-04-03 14:01:18,832 - Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2025-04-03 14:01:18,934 - Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2025-04-03 14:01:21,305 - Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2025-04-03 14:01:21,486 - Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2025-04-03 14:01:24,624 - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2025-04-03 14:01:30,027 - {'puzzle': '1 1 4 6', 'num_agents': 4, 'num_reflexions': 1, 'reflexion_type': 'summary_all_previous', 'score': 0, 'token_cost': 9519.0, 'num_used_reflexions': 4}
+2025-04-03 14:01:30,507 - Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+2025-04-03 14:01:30,552 - Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+2025-04-03 14:01:34,426 - Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2025-04-03 14:01:34,527 - Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2025-04-03 14:01:38,825 - Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2025-04-03 14:01:38,926 - Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2025-04-03 14:01:42,895 - Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2025-04-03 14:01:42,931 - Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2025-04-03 14:01:45,424 - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2025-04-03 14:01:45,497 - Retrying request to /openai/v1/chat/completions in 5.000000 seconds
+2025-04-03 14:01:50,566 - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2025-04-03 14:01:54,830 - {'puzzle': '1 1 11 11', 'num_agents': 4, 'num_reflexions': 1, 'reflexion_type': 'list', 'score': 0, 'token_cost': 8616.0, 'num_used_reflexions': 4}
+2025-04-03 14:01:55,307 - Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2025-04-03 14:02:00,106 - Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+2025-04-03 14:02:01,203 - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2025-04-03 14:02:07,679 - Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+2025-04-03 14:02:09,352 - {'puzzle': '1 1 11 11', 'num_agents': 4, 'num_reflexions': 1, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 7998.0, 'num_used_reflexions': 4}
+2025-04-03 14:02:09,420 - Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2025-04-03 14:02:09,435 - Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2025-04-03 14:02:12,212 - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2025-04-03 14:02:12,215 - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2025-04-03 14:02:17,685 - Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2025-04-03 14:02:17,731 - Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2025-04-03 14:02:23,048 - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2025-04-03 14:02:23,185 - Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2025-04-03 14:02:28,053 - Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2025-04-03 14:02:28,054 - Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2025-04-03 14:02:30,580 - {'puzzle': '1 1 11 11', 'num_agents': 4, 'num_reflexions': 1, 'reflexion_type': 'summary_incremental', 'score': 1, 'token_cost': 8476.0, 'num_used_reflexions': 4}

@@ -374,14 +374,14 @@ async def run_reflexion_gameof24(
     Runs a complete Game of 24 with reflexions.
     Returns the total score (number of succesful agents) of the agents.
     """
+    puzzle = states[0].puzzle
     step_batcher = BatchingAPI(
         api, 
         batch_size=1, 
         timeout=2, 
         model=models["step"]["model_name"], 
-        tab=reflexion_type+str(num_reflexions)
+        tab=reflexion_type+str(num_reflexions)+puzzle
     )
-    puzzle = states[0].puzzle
     agent_reflexions = {}
     agent_all_reflexions = {}
     num_steps = 4
@@ -413,7 +413,7 @@ async def run_reflexion_gameof24(
             total_score += score
     else: #step_wise
         total_score = await solve_step_wise(step_batcher, num_steps, num_reflexions, k, puzzle, agent_ids, reflexion_type)
-    cost = api.cost(tab_name=reflexion_type+str(num_reflexions), report_tokens=True)
+    cost = api.cost(tab_name=reflexion_type+str(num_reflexions)+puzzle, report_tokens=True)
     token_cost = cost.get("total_tokens")
     num_used_reflexions = sum(len(reflexions) for reflexions in agent_all_reflexions.values())
     
@@ -433,7 +433,7 @@ async def main():
     state = puzzles[0] #1, 1, 4, 6
 
     # await run_reflexion_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
-    total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("step_wise", "list", state, num_agents, num_reflexions, k)
+    total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("step_wise", "list", state, num_agents, num_reflexions, k) #this does not work atm
     print("total_score: ", total_score, "token_cost: ", token_cost, "num_used_reflexions: ", num_used_reflexions)
 
 
