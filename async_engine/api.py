@@ -2,7 +2,7 @@ import os
 import time
 import asyncio
 import traceback
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 from copy import deepcopy
 from collections import Counter
@@ -104,7 +104,7 @@ class API:
                 #api keys when making an env
                 # load_dotenv()
                 # api_keys = os.environ.get("API_KEYS")
-                api_keys = [] #
+                api_keys = ["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", "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"] 
                 self.clients[model_name] = AsyncKeyHandler(api_keys, AsyncGroq)
 
                 # Limiter Setup

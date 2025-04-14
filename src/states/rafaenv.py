@@ -3,7 +3,7 @@ import pandas as pd
 import sys
 sys.path.append(os.getcwd()) # Project root!!
 from src.states import Environment, DATA_PATH
-from src.rafaverifiers import *
+from src.rafaverifiers import check_answer, check_valid_move, check_equation, check_twentyfour
 from src.prompts.adapt.gameof24 import *
 
 def get_current_numbers(y: str) -> str:
