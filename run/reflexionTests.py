@@ -23,6 +23,7 @@ from run.reflexion import run_reflexion_gameof24, solve_trial_wise
 from src.agents.reflexionAgent import GameOf24Agent
 from src.states.gameof24 import GameOf24State
 from utils import load_test_puzzles
+from src.rafaverifiers import RafaVerifier
 
 
 step_api_config = eval_api_config = {
@@ -135,13 +136,14 @@ async def test_reflexion():
     """
     # Load unfinished puzzles
     all_puzzles_data = load_test_puzzles()
-    num_reflexions_list = [1]  # Number of iterations to test
+    num_reflexions_list = [2]  # Number of iterations to test
     k = 2  # k for "k most recent"
     num_agents = 4  
     reflexion_types = ["list", "k most recent", "summary_incremental", "summary_all_previous"] 
     results = []
+    verifier = RafaVerifier()
 
-    for states in all_puzzles_data[0:14]:
+    for states in all_puzzles_data[0:15]:
         for i in range(num_agents):
             states[i] = states[0]
         for num_reflexions in num_reflexions_list:
@@ -149,7 +151,7 @@ async def test_reflexion():
                 print(reflexion_type, " starts now")
                 # Run the reflexion game
                 score, token_cost, num_used_reflexions = await run_reflexion_gameof24(
-                    "trial_wise", reflexion_type, states, num_agents, num_reflexions, k
+                    "trial_wise", reflexion_type, states, num_agents, num_reflexions, k, verifier
                 )
 
                 # Log result
