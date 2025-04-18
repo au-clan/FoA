@@ -139,11 +139,11 @@ async def test_reflexion():
     num_reflexions_list = [2]  # Number of iterations to test
     k = 2  # k for "k most recent"
     num_agents = 4  
-    reflexion_types = ["list", "k most recent", "summary_incremental", "summary_all_previous"] 
+    reflexion_types = ["list", "k most recent", "summary_incremental", "summary_all_previous"] #"list", "k most recent", "summary_incremental",
     results = []
     verifier = RafaVerifier()
 
-    for states in all_puzzles_data[0:15]:
+    for states in all_puzzles_data[4:15]:
         for i in range(num_agents):
             states[i] = states[0]
         for num_reflexions in num_reflexions_list:

@@ -66,4 +66,27 @@
 2025-04-16 12:29:32,127 - {'puzzle': '1 1 11 11', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 0, 'token_cost': 17092.0, 'num_used_reflexions': 8}
 2025-04-16 12:29:59,457 - {'puzzle': '1 1 11 11', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 1, 'token_cost': 14329.0, 'num_used_reflexions': 7}
 2025-04-16 12:30:22,382 - {'puzzle': '1 1 11 11', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 1, 'token_cost': 15618.0, 'num_used_reflexions': 7}
-
+2025-04-18 11:43:37,618 - {'puzzle': '1 1 11 11', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 1, 'token_cost': 18111.0, 'num_used_reflexions': 8}
+2025-04-18 11:47:00,568 - {'puzzle': '6 6 6 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 0, 'token_cost': 16431.0, 'num_used_reflexions': 8}
+2025-04-18 11:47:10,838 - {'puzzle': '6 6 6 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 16217.0, 'num_used_reflexions': 8}
+2025-04-18 11:47:20,913 - {'puzzle': '6 6 6 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 17172.0, 'num_used_reflexions': 8}
+2025-04-18 11:47:53,595 - {'puzzle': '6 6 6 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 0, 'token_cost': 18657.0, 'num_used_reflexions': 8}
+2025-04-02 07:06:06,091 - {'puzzle': '1 1 1 12', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 0, 'token_cost': 18134.0, 'num_used_reflexions': 8}
+2025-04-02 07:06:45,743 - {'puzzle': '1 1 1 12', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 19047.0, 'num_used_reflexions': 8}
+2025-04-02 07:07:36,876 - {'puzzle': '1 1 1 12', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 1, 'token_cost': 16785.0, 'num_used_reflexions': 7}
+2025-04-02 07:08:15,931 - {'puzzle': '1 1 1 12', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 0, 'token_cost': 19490.0, 'num_used_reflexions': 8}
+2025-04-18 11:51:05,583 - {'puzzle': '1 1 2 12', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 0, 'token_cost': 18152.0, 'num_used_reflexions': 8}
+2025-04-18 11:51:19,290 - {'puzzle': '1 1 2 12', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 18212.0, 'num_used_reflexions': 8}
+2025-04-18 11:51:37,826 - {'puzzle': '1 1 2 12', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 1, 'token_cost': 21320.0, 'num_used_reflexions': 8}
+2025-04-18 11:51:54,937 - {'puzzle': '1 1 2 12', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 0, 'token_cost': 21329.0, 'num_used_reflexions': 8}
+2025-04-18 11:52:20,997 - {'puzzle': '2 4 7 7', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 0, 'token_cost': 19804.0, 'num_used_reflexions': 8}
+2025-04-18 11:52:44,210 - {'puzzle': '2 4 7 7', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 18626.0, 'num_used_reflexions': 8}
+2025-04-18 11:53:23,252 - {'puzzle': '2 4 7 7', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 24289.0, 'num_used_reflexions': 8}
+2025-04-18 11:53:55,893 - {'puzzle': '2 4 7 7', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 0, 'token_cost': 22390.0, 'num_used_reflexions': 8}
+2025-04-18 11:54:27,711 - {'puzzle': '3 6 6 10', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 0, 'token_cost': 18782.0, 'num_used_reflexions': 8}
+2025-04-18 11:54:46,839 - {'puzzle': '3 6 6 10', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 18738.0, 'num_used_reflexions': 8}
+2025-04-18 11:55:14,505 - {'puzzle': '3 6 6 10', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 21727.0, 'num_used_reflexions': 8}
+2025-04-18 11:55:48,167 - {'puzzle': '3 6 6 10', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 0, 'token_cost': 21966.0, 'num_used_reflexions': 8}
+2025-04-18 11:56:20,360 - {'puzzle': '4 7 9 11', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 0, 'token_cost': 22996.0, 'num_used_reflexions': 8}
+2025-04-18 11:56:41,973 - {'puzzle': '4 7 9 11', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 22852.0, 'num_used_reflexions': 8}
+2025-04-18 11:57:14,533 - {'puzzle': '4 7 9 11', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 24841.0, 'num_used_reflexions': 8}
