@@ -144,7 +144,8 @@ async def solve_step_wise(
         k,
         puzzle: str, 
         agent_ids: List[int], 
-        reflexion_type: str
+        reflexion_type: str,
+        verifier
     ) -> Tuple[Dict[int, GameOf24State], List[int], int]:
 
     total_score = 0
@@ -187,8 +188,17 @@ async def solve_step_wise(
         ]
         new_states = await asyncio.gather(*agent_tasks)
 
+
         for agent_id, new_state in zip(states.keys(), new_states):
             states[agent_id] = new_state
+            print("previous_states:", previous_states[agent_id])
+            if len(previous_states[agent_id].steps) == 0:
+                last_step = states[agent_id].puzzle
+            else:
+                last_step = previous_states[agent_id].steps[-1]
+            feedback, reward = verify(new_state, last_step, verifier)
+            print("feedback is: ", feedback)
+            print("Reward is: ", reward)
             print(f"Current step for agent {agent_id}: {new_state.steps[-1]} \n")
         print(states)
         # Evaluate whether a puzzle has been solved, 
@@ -426,7 +436,7 @@ async def run_reflexion_gameof24(
             states, agent_ids, score = await solve_trial_wise(step_batcher, num_steps, puzzle, agent_ids, agent_reflexions, verifier)
             total_score += score
     else: #step_wise
-        total_score = await solve_step_wise(step_batcher, num_steps, num_reflexions, k, puzzle, agent_ids, reflexion_type)
+        total_score = await solve_step_wise(step_batcher, num_steps, num_reflexions, k, puzzle, agent_ids, reflexion_type, verifier)
     cost = api.cost(tab_name=reflexion_type+str(num_reflexions)+puzzle, report_tokens=True)
     token_cost = cost.get("total_tokens")
     num_used_reflexions = sum(len(reflexions) for reflexions in agent_all_reflexions.values())
@@ -448,11 +458,11 @@ async def main():
     verifier = RafaVerifier()
 
     # await run_reflexion_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
-    #total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("step_wise", "list", state, num_agents, num_reflexions, k) #this does not work atm
-    #print("total_score: ", total_score, "token_cost: ", token_cost, "num_used_reflexions: ", num_used_reflexions)
-
-    total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", state, num_agents, num_reflexions, k, verifier) 
+    total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("step_wise", "list", state, num_agents, num_reflexions, k, verifier) #this does not work atm
     print("total_score: ", total_score, "token_cost: ", token_cost, "num_used_reflexions: ", num_used_reflexions)
+
+    # total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", state, num_agents, num_reflexions, k, verifier) 
+    # print("total_score: ", total_score, "token_cost: ", token_cost, "num_used_reflexions: ", num_used_reflexions)
 
 if __name__ == "__main__":
     asyncio.run(main())         

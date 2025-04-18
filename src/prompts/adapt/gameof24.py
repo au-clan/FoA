@@ -317,10 +317,7 @@ invalid
 
 Now evaluate the followng formula:
 Input: {puzzle}
-{steps[0]}
-{steps[1]}
-{steps[2]}
-{steps[3]}
+{steps}
 '''
 # Updated
 value_prompt = '''Evaluate if given numbers can reach 24 by responding with the following sure, likely or impossible.
