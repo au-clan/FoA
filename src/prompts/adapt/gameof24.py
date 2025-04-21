@@ -1,3 +1,16 @@
+reflexion_step_prompt = '''The game of 24 is a math puzzle where players use four numbers and basic arithmetic operations (+ - * /) to make the result equal to 24. Following is a single step, which was determined to have failed
+Input: {puzzle}
+Step attempt:
+{steps}
+
+Reflect on the previous attempt and provide a reflection below:
+- If there's a mistake, identify it and explain how similar mistakes can be avoided.
+- If the mistake can be generalized, provide a general reflection.
+- Be succint and clear in your reflection.
+- Do not provide a new solution, only a reflection.
+
+Reflection:
+'''
 #RAFA prompts:
 # 1-shot
 propose_prompt = '''Now use numbers and basic arithmetic operations (+ - * /) to generate possible next steps. Make sure use steps that is sure to leads to 24 and avoid steps that are impossible to generate 24. Note that it is possible that we are considering intermediate steps so the numbers of the input may be less than 4. Only make one newline before suggestions
@@ -296,24 +309,24 @@ IMPORTANT: I want you to end your response with stating what step went wrong (0 
 '''
 
 #RAFA prompt
-validation_prompt = '''Evaluate if given formula is a valid move in the game of 24. Especially, check if a number is missing, if the arithmetic is incorrect, or if a number is used that is not in the input or used twice.
+validation_prompt = '''Evaluate if given formula is a valid move in the game of 24. Especially, check if a number is missing, if the arithmetic is incorrect, or if a number is used that is not in the input or used twice. All four numbers does not need to be used for the first three steps. Always end your answer with Invalid or Valid.
 Example
 
 Input: 3 6 8 10
 3 * 6 = 18 (left: 18 8 10)
-valid
+Valid
 
 Input: 2 6 8 14
 2 * 6 = 1 (left: 1 8 14)
-invalid
+Invalid
 
 Input: 4 6 8 10
 10 * 5 = 50 (left: 6 50)
-invalid
+Invalid
 
 Input: 1 5 7
 5 * 5 = 25 (left: 1 25 7)
-invalid
+Invalid
 
 Now evaluate the followng formula:
 Input: {puzzle}
@@ -331,37 +344,37 @@ sure
 12 - 11 = 1
 11 * 12 = 132
 11 / 12 = 0.91
-impossible
+Impossible
 4 4 10
 4 + 4 + 10 = 8 + 10 = 18
 4 * 10 - 4 = 40 - 4 = 36
 (10 - 4) * 4 = 6 * 4 = 24
-sure
+Sure
 4 9 11
 9 + 11 + 4 = 20 + 4 = 24
-sure
+Sure
 5 7 8
 5 + 7 + 8 = 12 + 8 = 20
 (8 - 5) * 7 = 3 * 7 = 21
 I cannot obtain 24 now, but numbers are within a reasonable range
-likely
+Likely
 5 6 6
 5 + 6 + 6 = 17
 (6 - 5) * 6 = 1 * 6 = 6
 I cannot obtain 24 now, but numbers are within a reasonable range
-likely
+Likely
 10 10 11
 10 + 10 + 11 = 31
 (11 - 10) * 10 = 10
 10 10 10 are all too big
-impossible
+Impossible
 1 3 3
 1 * 3 * 3 = 9
 (1 + 3) * 3 = 12
 1 3 3 are all too small
-impossible
+Impossible
 
-Input: {input}
+Input: {steps}
 '''
 
 

@@ -121,7 +121,7 @@ class GameOf24Agent:
         Generates a reflexion based on the puzzle and the steps done
         """
         if time_of_reflexion == "step_wise":
-            prompt = llama_prompts.reflexion_prompt.format(puzzle=puzzle, steps=steps)
+            prompt = llama_prompts.reflexion_step_prompt.format(puzzle=puzzle, steps=steps)
         else:
             prompt = llama_prompts.new_reflexion_prompt.format(puzzle=puzzle, steps=steps)
         reflexion = api.buffered_request(prompt, key=hash(state), namespace=namespace)
@@ -151,8 +151,8 @@ class GameOf24Agent:
         """
         Uses the value prompt to estimate the feasibility of the steps.
         """
-        input = "{state} \n {steps[0]}\n {steps[1]}\n {steps[2}\n {steps[3]}\n"
-        value_prompt = llama_prompts.value_prompt.format(input=input)
+        #input = "{state} \n {steps[0]}\n {steps[1]}\n {steps[2}\n {steps[3]}\n"
+        value_prompt = llama_prompts.value_prompt.format(input=input, steps=steps)
         value = api.buffered_request(value_prompt, key=hash(state), namespace=namespace)
         return value
 
