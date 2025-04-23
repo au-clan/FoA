@@ -72,6 +72,7 @@ logging.getLogger("botocore").setLevel(logging.WARNING)  # If AWS-related
 # Separate logger for step-wise reflexion
 stepwise_logger = logging.getLogger("stepwise")
 stepwise_logger.setLevel(logging.INFO)
+stepwise_logger.propagate = False #To avoid logging to the root logger
 
 # Create file handler for stepwise logger
 stepwise_handler = logging.FileHandler("stepwise_test_results.log")
@@ -152,7 +153,7 @@ async def test_reflexion():
     results = []
     verifier = RafaVerifier()
 
-    for states in all_puzzles_data[4:15]:
+    for states in all_puzzles_data[8:15]:
         for i in range(num_agents):
             states[i] = states[0]
         for num_reflexions in num_reflexions_list:
@@ -246,8 +247,8 @@ async def scoreTest():
     
 
 if __name__ == "__main__":
-    #asyncio.run(test_reflexion())
-    asyncio.run(test_stepwise_reflexion())
+    asyncio.run(test_reflexion())
+    #asyncio.run(test_stepwise_reflexion())
     #asyncio.run(scoreTest())
     #asyncio.run(create_test_puzzles())
     # with open('test_puzzles.pkl', 'rb') as file:
