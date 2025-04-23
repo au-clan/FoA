@@ -3,11 +3,7 @@ Input: {puzzle}
 Step attempt:
 {steps}
 
-Reflect on the previous attempt and provide a reflection below:
-- If there's a mistake, identify it and explain how similar mistakes can be avoided.
-- If the mistake can be generalized, provide a general reflection.
-- Be succint and clear in your reflection.
-- Do not provide a new solution, only a reflection.
+Explain which mistakes made either the problem unsolvable or brought the number further away from 24. Be concise
 
 Reflection:
 '''

@@ -1,0 +1,6 @@
+2025-04-23 11:09:33,678 - {'puzzle': '1 1 4 6', 'num_agents': 4, 'num_reflexions': 1, 'reflexion_type': 'list', 'score': 0, 'token_cost': 33540.0, 'num_used_reflexions': 0}
+2025-04-23 11:16:57,514 - {'puzzle': '1 1 4 6', 'num_agents': 4, 'num_reflexions': 1, 'reflexion_type': 'list', 'score': 0, 'token_cost': 35003.0, 'num_used_reflexions': 0}
+2025-04-23 11:34:45,116 - {'puzzle': '1 1 4 6', 'num_agents': 4, 'num_reflexions': 1, 'reflexion_type': 'list', 'score': 0, 'token_cost': 34105.0, 'num_used_reflexions': 0}
+2025-04-23 11:55:56,963 - {'puzzle': '1 1 4 6', 'num_agents': 4, 'num_reflexions': 1, 'reflexion_type': 'list', 'score': 0, 'token_cost': 33437.0, 'num_used_reflexions': 4}
+2025-04-23 12:04:31,326 - {'puzzle': '1 1 4 6', 'num_agents': 4, 'num_reflexions': 1, 'reflexion_type': 'list', 'score': 0, 'token_cost': 28935.0, 'num_used_reflexions': 3}
+2025-04-23 12:08:37,485 - {'puzzle': '1 1 4 6', 'num_agents': 4, 'num_reflexions': 1, 'reflexion_type': 'list', 'score': 1, 'token_cost': 31339.0, 'num_used_reflexions': 4}

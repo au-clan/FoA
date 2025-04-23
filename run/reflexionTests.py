@@ -69,6 +69,15 @@ logging.getLogger("openai").setLevel(logging.WARNING)  # If using OpenAI's SDK
 logging.getLogger("async_engine").setLevel(logging.WARNING)  # If it's coming from async_engine
 logging.getLogger("botocore").setLevel(logging.WARNING)  # If AWS-related
 
+# Separate logger for step-wise reflexion
+stepwise_logger = logging.getLogger("stepwise")
+stepwise_logger.setLevel(logging.INFO)
+
+# Create file handler for stepwise logger
+stepwise_handler = logging.FileHandler("stepwise_test_results.log")
+stepwise_handler.setFormatter(logging.Formatter("%(asctime)s - %(message)s"))
+stepwise_logger.addHandler(stepwise_handler)
+
 def plotScore(results):
     """
     Plots the number of successful agents for each reflexion method based on test results.
@@ -174,6 +183,44 @@ async def test_reflexion():
     # Plot the results
     #plotScore(results)
 
+async def test_stepwise_reflexion():
+    """
+    Test for step-wise reflexion types
+    """
+    # Load unfinished puzzles
+    all_puzzles_data = load_test_puzzles()
+    num_reflexions_list = [1]  # Number of iterations to test
+    k = 2  # k for "k most recent"
+    num_agents = 4  
+    reflexion_types = ["list"]  # Step-wise reflexion types , "k most recent", "summary_incremental", "summary_all_previous"
+    results = []
+    verifier = RafaVerifier()
+
+    for states in all_puzzles_data[0:1]:
+        for i in range(num_agents):
+            states[i] = states[0]
+        for num_reflexions in num_reflexions_list:
+            for reflexion_type in reflexion_types:
+                print(f"Step-wise reflexion ({reflexion_type}) starts now")
+                # Run the step-wise reflexion game
+                score, token_cost, num_used_reflexions = await run_reflexion_gameof24(
+                    "step_wise", reflexion_type, states, num_agents, num_reflexions, k, verifier
+                )
+
+                # Log result
+                result_entry = {
+                    "puzzle": states[0].puzzle,
+                    "num_agents": num_agents,
+                    "num_reflexions": num_reflexions,
+                    "reflexion_type": reflexion_type,
+                    "score": score,
+                    "token_cost": token_cost,
+                    "num_used_reflexions": num_used_reflexions
+                }
+                results.append(result_entry)
+                stepwise_logger.info(result_entry)
+
+
 from src.prompts.adapt import gameof24 as llama_prompts
 
 async def scoreTest():
@@ -199,7 +246,8 @@ async def scoreTest():
     
 
 if __name__ == "__main__":
-    asyncio.run(test_reflexion())
+    #asyncio.run(test_reflexion())
+    asyncio.run(test_stepwise_reflexion())
     #asyncio.run(scoreTest())
     #asyncio.run(create_test_puzzles())
     # with open('test_puzzles.pkl', 'rb') as file:

@@ -4,6 +4,7 @@ import os
 import random
 from secrets import token_bytes
 import sys
+import json
 from dataclasses import dataclass
 from typing import Any, Dict, List, Tuple
 sys.path.append(os.getcwd()) # Project root!!
@@ -13,7 +14,6 @@ from src.agents.reflexionAgent import GameOf24Agent
 from src.states.gameof24 import GameOf24State
 from utils import load_test_puzzles
 from src.rafaverifiers import RafaVerifier
-
 
 step_api_config = eval_api_config = {
     "max_tokens": 1000,
@@ -35,6 +35,21 @@ api = API(
     resources=2, 
     verbose=False
     )
+
+LOG_FILE = "mismatch_log.jsonl"
+
+def log_mismatch(agent_id, step, state, mismatch_type, source, message, verifier_feedback):
+    log_entry = {
+        "agent_id": agent_id,
+        "step": step,
+        "state_steps": state.steps,
+        "mismatch_type": mismatch_type,
+        "source": source,
+        "message": message,
+        "verifier_feedback": verifier_feedback
+    }
+    with open(LOG_FILE, "a") as f:
+        f.write(json.dumps(log_entry) + "\n")
 
 async def check_states(step_batcher, states, step):
     """
@@ -154,6 +169,7 @@ async def solve_step_wise(
     agent_reflexions = {}
     agent_all_reflexions = {}
     agent_num_reflexions = {}
+    num_used_reflexions = 0
 
     #Create one state for each agent
     for agent_id in agent_ids:
@@ -220,6 +236,26 @@ async def solve_step_wise(
             agent_validations[agent_id] = validation
             agent_values[agent_id] = value
             
+            # mismatch detection
+            feedback, reward = verify(states[agent_id], states[agent_id].steps[-2] if len(states[agent_id].steps) > 1 else states[agent_id].puzzle, verifier)
+    
+            # False Negative: validation or value says invalid but verifier reward = 1
+            if reward == 1:
+                if "Invalid" in validation or "Impossible" in value:
+                    if "Invalid" in validation:
+                        log_mismatch(agent_id, step, states[agent_id], "False Negative", "Validation", validation, feedback)
+                    if "Impossible" in value:
+                        log_mismatch(agent_id, step, states[agent_id], "False Negative", "Valuation", value, feedback)    
+
+            # False Positive: validation or value says valid, but verifier reward = 0
+            elif reward == 0:
+                if "Valid" in validation and ("Sure" in value or "Likely" in value):
+                    if "Valid" in validation:
+                        log_mismatch(agent_id, step, states[agent_id], "False Positive", "Validation", validation, feedback)
+                    if "Sure" or "Likely" in value:
+                        log_mismatch(agent_id, step, states[agent_id], "False Positive", "Valuation", value, feedback) 
+
+
             print("validation: ", validation)
             print("valuation: ", value)
             #Check what agents fails and append the agent id's to a list
@@ -238,6 +274,7 @@ async def solve_step_wise(
                 else:
                     single_state = {agent_id: states[agent_id]}
                     agent_num_reflexions[agent_id] += 1
+                    num_used_reflexions += 1
                     agent_reflexions, agent_all_reflexions = await make_reflexion(step_batcher, "step_wise", reflexion_type, k, single_state, agent_reflexions, agent_all_reflexions)
                     # print("agent_id after reflexion: ", agent_id)
                     print("agent reflexions in step wise: ", agent_reflexions[agent_id])
@@ -298,8 +335,27 @@ async def solve_step_wise(
                         print("agent id: ", agent_id, " failed again")
                     else:
                         failed_agents.remove(agent_id)
+                        
+                    # mismatch detection
+                    feedback, reward = verify(states[agent_id], states[agent_id].steps[-2] if len(states[agent_id].steps) > 1 else states[agent_id].puzzle, verifier)
+    
+                    # False Negative: validation or value says invalid but verifier reward = 1
+                    if reward == 1:
+                        if "Invalid" in validation or "Impossible" in value:
+                            if "Invalid" in validation:
+                                log_mismatch(agent_id, step, states[agent_id], "False Negative", "Validation", validation, feedback)
+                            if "Impossible" in value:
+                                log_mismatch(agent_id, step, states[agent_id], "False Negative", "Valuation", value, feedback)    
 
-    return total_score
+                    # False Positive: validation or value says valid, but verifier reward = 0
+                    elif reward == 0:
+                        if "Valid" in validation and ("Sure" in value or "Likely" in value):
+                            if "Valid" in validation:
+                                log_mismatch(agent_id, step, states[agent_id], "False Positive", "Validation", validation, feedback)
+                            if "Sure" or "Likely" in value:
+                                log_mismatch(agent_id, step, states[agent_id], "False Positive", "Valuation", value, feedback) 
+
+    return total_score, num_used_reflexions
    
 
 async def make_reflexion(
@@ -435,12 +491,12 @@ async def run_reflexion_gameof24(
             print("reflexions per agent", agent_reflexions)
             states, agent_ids, score = await solve_trial_wise(step_batcher, num_steps, puzzle, agent_ids, agent_reflexions, verifier)
             total_score += score
+        num_used_reflexions = sum(len(reflexions) for reflexions in agent_all_reflexions.values())
     else: #step_wise
-        total_score = await solve_step_wise(step_batcher, num_steps, num_reflexions, k, puzzle, agent_ids, reflexion_type, verifier)
+        total_score, num_used_reflexions = await solve_step_wise(step_batcher, num_steps, num_reflexions, k, puzzle, agent_ids, reflexion_type, verifier)
     cost = api.cost(tab_name=reflexion_type+str(num_reflexions)+puzzle, report_tokens=True)
     token_cost = cost.get("total_tokens")
-    num_used_reflexions = sum(len(reflexions) for reflexions in agent_all_reflexions.values())
-    
+
     #For loop counting how many reflexions have been done in total 
     
     return total_score, token_cost, num_used_reflexions
