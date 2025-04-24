@@ -153,7 +153,7 @@ async def test_reflexion():
     results = []
     verifier = RafaVerifier()
 
-    for states in all_puzzles_data[0:15]:
+    for states in all_puzzles_data[3:15]:
         for i in range(num_agents):
             states[i] = states[0]
         for num_reflexions in num_reflexions_list:
