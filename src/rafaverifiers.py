@@ -33,7 +33,7 @@ class RafaVerifier():
         
 
         try:
-            print(original_nums, new_nums, formula)
+            #print(original_nums, new_nums, formula)
             original_nums.remove(float(eval(formula[0])))
             original_nums.remove(float(eval(formula[2])))
             for num in original_nums:
@@ -99,10 +99,10 @@ class RafaVerifier():
     def check_all(self, state, last_step) -> Tuple[bool, str]:
         idx = len(state.steps)
         cur_step = state.steps[-1]
-        print("idx: ", idx)
-        print("cur_step: ", cur_step)
-        print("last_step: ", last_step)
-        print((idx, last_step, cur_step))
+        #print("idx: ", idx)
+        #print("cur_step: ", cur_step)
+        #print("last_step: ", last_step)
+        #print((idx, last_step, cur_step))
         try:
             if "answer" in cur_step.lower():
                 #print("Current step contains answer thus Checking answer")

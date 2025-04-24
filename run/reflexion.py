@@ -137,7 +137,7 @@ async def solve_trial_wise(
                 registry[agent_id].append((new_state.steps[-1], verify(new_state, last_step, verifier)))
             else:
                 registry[agent_id].append((new_state.steps[-1], verify(new_state, registry[agent_id][-1][0], verifier)))
-        print(registry)
+        #print(registry)
         # Evaluate whether a puzzle has been solved, 
         for agent_id in list(states.keys()):
             if GameOf24Agent.verify(states[agent_id]) == {"r": 1}:
@@ -398,7 +398,7 @@ async def make_reflexion(
         
     elif reflexion_type == "summary_incremental":
         for agent_id in states:
-            print("for agent_id: ", agent_id, "agent_reflexions: ", agent_reflexions[agent_id])
+            print("before summarization for agent_id: ", agent_id, "agent_reflexions: ", agent_reflexions[agent_id])
         agent_summaries = []
 
         #Summary is made from last summary + new reflexions
@@ -421,6 +421,8 @@ async def make_reflexion(
 
         #Summary is made from all reflexions
     elif reflexion_type == "summary_all_previous":
+        for agent_id in states:
+            print("before summarization for agent_id: ", agent_id, "agent_reflexions: ", agent_reflexions[agent_id])
         agent_summaries = [
             asyncio.create_task(
             GameOf24Agent.generate_summary(
@@ -507,14 +509,14 @@ async def main():
     # Do reflexiongame
     # Example of running an gameOf24 experiment with reflexion
     num_reflexions = 2
-    k = 3
+    k = 2
     num_agents = 2
     puzzles = load_test_puzzles()
     state = puzzles[0] #1, 1, 4, 6
     verifier = RafaVerifier()
 
     # await run_reflexion_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
-    total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("step_wise", "list", state, num_agents, num_reflexions, k, verifier) #this does not work atm
+    total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", state, num_agents, num_reflexions, k, verifier) #this does not work atm
     print("total_score: ", total_score, "token_cost: ", token_cost, "num_used_reflexions: ", num_used_reflexions)
 
     # total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", state, num_agents, num_reflexions, k, verifier) 

@@ -111,3 +111,22 @@
 2025-04-23 12:39:41,012 - {'puzzle': '1 3 4 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 20173.0, 'num_used_reflexions': 8}
 2025-04-23 12:40:09,115 - {'puzzle': '1 3 4 6', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 0, 'token_cost': 21880.0, 'num_used_reflexions': 8}
 2025-04-23 12:40:31,876 - {'puzzle': '5 7 7 11', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 0, 'token_cost': 19763.0, 'num_used_reflexions': 8}
+2025-04-24 13:02:07,342 - {'puzzle': '5 7 7 11', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 18958.0, 'num_used_reflexions': 8}
+2025-04-24 13:02:26,059 - {'puzzle': '5 7 7 11', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 21098.0, 'num_used_reflexions': 8}
+2025-04-24 13:02:41,954 - {'puzzle': '5 7 7 11', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 0, 'token_cost': 20463.0, 'num_used_reflexions': 8}
+2025-04-24 13:04:33,914 - {'puzzle': '3 3 7 13', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'list', 'score': 0, 'token_cost': 19067.0, 'num_used_reflexions': 8}
+2025-04-24 13:04:53,101 - {'puzzle': '3 3 7 13', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 19762.0, 'num_used_reflexions': 8}
+2025-04-24 13:05:08,993 - {'puzzle': '3 3 7 13', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 20198.0, 'num_used_reflexions': 8}
+2025-04-24 13:05:25,093 - {'puzzle': '3 3 7 13', 'num_agents': 4, 'num_reflexions': 2, 'reflexion_type': 'summary_all_previous', 'score': 0, 'token_cost': 20748.0, 'num_used_reflexions': 8}
+2025-04-24 13:11:37,958 - {'puzzle': '1 1 4 6', 'num_agents': 4, 'num_reflexions': 4, 'reflexion_type': 'list', 'score': 0, 'token_cost': 35671.0, 'num_used_reflexions': 16}
+2025-04-24 13:12:07,110 - {'puzzle': '1 1 4 6', 'num_agents': 4, 'num_reflexions': 4, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 37215.0, 'num_used_reflexions': 16}
+2025-04-24 13:12:29,571 - {'puzzle': '1 1 4 6', 'num_agents': 4, 'num_reflexions': 4, 'reflexion_type': 'summary_incremental', 'score': 3, 'token_cost': 25544.0, 'num_used_reflexions': 10}
+2025-04-24 13:13:01,624 - {'puzzle': '1 1 4 6', 'num_agents': 4, 'num_reflexions': 4, 'reflexion_type': 'summary_all_previous', 'score': 0, 'token_cost': 43729.0, 'num_used_reflexions': 16}
+2025-04-24 13:13:27,982 - {'puzzle': '1 1 11 11', 'num_agents': 4, 'num_reflexions': 4, 'reflexion_type': 'list', 'score': 0, 'token_cost': 34028.0, 'num_used_reflexions': 16}
+2025-04-24 13:13:57,107 - {'puzzle': '1 1 11 11', 'num_agents': 4, 'num_reflexions': 4, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 32627.0, 'num_used_reflexions': 16}
+2025-04-24 13:14:31,061 - {'puzzle': '1 1 11 11', 'num_agents': 4, 'num_reflexions': 4, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 39859.0, 'num_used_reflexions': 16}
+2025-04-24 13:15:07,963 - {'puzzle': '1 1 11 11', 'num_agents': 4, 'num_reflexions': 4, 'reflexion_type': 'summary_all_previous', 'score': 1, 'token_cost': 32364.0, 'num_used_reflexions': 13}
+2025-04-24 13:15:40,769 - {'puzzle': '6 6 6 6', 'num_agents': 4, 'num_reflexions': 4, 'reflexion_type': 'list', 'score': 0, 'token_cost': 33604.0, 'num_used_reflexions': 16}
+2025-04-24 13:16:14,418 - {'puzzle': '6 6 6 6', 'num_agents': 4, 'num_reflexions': 4, 'reflexion_type': 'k most recent', 'score': 0, 'token_cost': 35088.0, 'num_used_reflexions': 16}
+2025-04-24 13:16:55,280 - {'puzzle': '6 6 6 6', 'num_agents': 4, 'num_reflexions': 4, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 38342.0, 'num_used_reflexions': 16}
+2025-04-24 13:17:41,681 - {'puzzle': '6 6 6 6', 'num_agents': 4, 'num_reflexions': 4, 'reflexion_type': 'summary_all_previous', 'score': 0, 'token_cost': 41758.0, 'num_used_reflexions': 16}

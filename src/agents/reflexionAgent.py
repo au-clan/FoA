@@ -62,6 +62,7 @@ class GameOf24Agent:
             selected_suggestion = random.choice(suggestions)
             selected_state = GameOf24Agent.parse_next_state(selected_suggestion)
 
+        print("suggestions: ", suggestions)
         # set up new state object
         next_state = GameOf24State(
             puzzle=state.puzzle,
