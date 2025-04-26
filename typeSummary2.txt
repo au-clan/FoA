@@ -1,0 +1,180 @@
+Difficulty: easy, Reflexions: 1, Type: list
+  Avg Score: 0.00
+  Avg Token Cost: 9098.2
+  Num Samples: 5
+
+Difficulty: easy, Reflexions: 1, Type: k most recent
+  Avg Score: 0.00
+  Avg Token Cost: 8773.8
+  Num Samples: 5
+
+Difficulty: easy, Reflexions: 1, Type: summary_incremental
+  Avg Score: 0.20
+  Avg Token Cost: 9311.6
+  Num Samples: 5
+
+Difficulty: easy, Reflexions: 1, Type: summary_all_previous
+  Avg Score: 0.20
+  Avg Token Cost: 9639.8
+  Num Samples: 5
+
+Difficulty: medium, Reflexions: 1, Type: list
+  Avg Score: 0.00
+  Avg Token Cost: 10358.2
+  Num Samples: 5
+
+Difficulty: medium, Reflexions: 1, Type: k most recent
+  Avg Score: 0.00
+  Avg Token Cost: 10117.0
+  Num Samples: 5
+
+Difficulty: medium, Reflexions: 1, Type: summary_incremental
+  Avg Score: 0.00
+  Avg Token Cost: 10619.0
+  Num Samples: 5
+
+Difficulty: medium, Reflexions: 1, Type: summary_all_previous
+  Avg Score: 0.00
+  Avg Token Cost: 10592.6
+  Num Samples: 5
+
+Difficulty: hard, Reflexions: 1, Type: list
+  Avg Score: 0.00
+  Avg Token Cost: 9840.8
+  Num Samples: 5
+
+Difficulty: hard, Reflexions: 1, Type: k most recent
+  Avg Score: 0.00
+  Avg Token Cost: 9958.6
+  Num Samples: 5
+
+Difficulty: hard, Reflexions: 1, Type: summary_incremental
+  Avg Score: 0.00
+  Avg Token Cost: 10012.0
+  Num Samples: 5
+
+Difficulty: hard, Reflexions: 1, Type: summary_all_previous
+  Avg Score: 0.00
+  Avg Token Cost: 10254.4
+  Num Samples: 5
+
+Difficulty: easy, Reflexions: 2, Type: list
+  Avg Score: 0.00
+  Avg Token Cost: 17697.0
+  Num Samples: 5
+
+Difficulty: easy, Reflexions: 2, Type: k most recent
+  Avg Score: 0.20
+  Avg Token Cost: 17115.2
+  Num Samples: 5
+
+Difficulty: easy, Reflexions: 2, Type: summary_incremental
+  Avg Score: 1.00
+  Avg Token Cost: 17744.0
+  Num Samples: 5
+
+Difficulty: easy, Reflexions: 2, Type: summary_all_previous
+  Avg Score: 0.40
+  Avg Token Cost: 19059.0
+  Num Samples: 5
+
+Difficulty: medium, Reflexions: 2, Type: list
+  Avg Score: 0.00
+  Avg Token Cost: 20446.8
+  Num Samples: 5
+
+Difficulty: medium, Reflexions: 2, Type: k most recent
+  Avg Score: 0.00
+  Avg Token Cost: 20334.2
+  Num Samples: 5
+
+Difficulty: medium, Reflexions: 2, Type: summary_incremental
+  Avg Score: 0.00
+  Avg Token Cost: 22842.2
+  Num Samples: 5
+
+Difficulty: medium, Reflexions: 2, Type: summary_all_previous
+  Avg Score: 0.00
+  Avg Token Cost: 22223.2
+  Num Samples: 5
+
+Difficulty: hard, Reflexions: 2, Type: list
+  Avg Score: 0.00
+  Avg Token Cost: 19846.6
+  Num Samples: 5
+
+Difficulty: hard, Reflexions: 2, Type: k most recent
+  Avg Score: 0.00
+  Avg Token Cost: 19687.8
+  Num Samples: 5
+
+Difficulty: hard, Reflexions: 2, Type: summary_incremental
+  Avg Score: 0.00
+  Avg Token Cost: 20756.2
+  Num Samples: 5
+
+Difficulty: hard, Reflexions: 2, Type: summary_all_previous
+  Avg Score: 0.00
+  Avg Token Cost: 21335.0
+  Num Samples: 5
+
+Difficulty: easy, Reflexions: 4, Type: list
+  Avg Score: 0.20
+  Avg Token Cost: 34501.4
+  Num Samples: 5
+
+Difficulty: easy, Reflexions: 4, Type: k most recent
+  Avg Score: 0.00
+  Avg Token Cost: 35459.6
+  Num Samples: 5
+
+Difficulty: easy, Reflexions: 4, Type: summary_incremental
+  Avg Score: 0.60
+  Avg Token Cost: 36702.8
+  Num Samples: 5
+
+Difficulty: easy, Reflexions: 4, Type: summary_all_previous
+  Avg Score: 0.60
+  Avg Token Cost: 38426.4
+  Num Samples: 5
+
+Difficulty: medium, Reflexions: 4, Type: list
+  Avg Score: 0.00
+  Avg Token Cost: 40828.4
+  Num Samples: 5
+
+Difficulty: medium, Reflexions: 4, Type: k most recent
+  Avg Score: 0.00
+  Avg Token Cost: 39972.2
+  Num Samples: 5
+
+Difficulty: medium, Reflexions: 4, Type: summary_incremental
+  Avg Score: 0.00
+  Avg Token Cost: 44902.6
+  Num Samples: 5
+
+Difficulty: medium, Reflexions: 4, Type: summary_all_previous
+  Avg Score: 0.00
+  Avg Token Cost: 49096.0
+  Num Samples: 5
+
+Difficulty: hard, Reflexions: 4, Type: list
+  Avg Score: 0.00
+  Avg Token Cost: 39442.4
+  Num Samples: 5
+
+Difficulty: hard, Reflexions: 4, Type: k most recent
+  Avg Score: 0.00
+  Avg Token Cost: 38742.4
+  Num Samples: 5
+
+Difficulty: hard, Reflexions: 4, Type: summary_incremental
+  Avg Score: 0.00
+  Avg Token Cost: 44100.4
+  Num Samples: 5
+
+Difficulty: hard, Reflexions: 4, Type: summary_all_previous
+  Avg Score: 0.00
+  Avg Token Cost: 47527.2
+  Num Samples: 5
+
