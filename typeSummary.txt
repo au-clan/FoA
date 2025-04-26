@@ -1,0 +1,60 @@
+Reflexions: 1, Type: list
+  Avg Score: 0.00
+  Avg Token Cost: 9765.7
+  Num Samples: 15
+
+Reflexions: 1, Type: k most recent
+  Avg Score: 0.00
+  Avg Token Cost: 9616.5
+  Num Samples: 15
+
+Reflexions: 1, Type: summary_incremental
+  Avg Score: 0.07
+  Avg Token Cost: 9980.9
+  Num Samples: 15
+
+Reflexions: 1, Type: summary_all_previous
+  Avg Score: 0.07
+  Avg Token Cost: 10162.3
+  Num Samples: 15
+
+Reflexions: 2, Type: list
+  Avg Score: 0.00
+  Avg Token Cost: 19330.1
+  Num Samples: 15
+
+Reflexions: 2, Type: k most recent
+  Avg Score: 0.07
+  Avg Token Cost: 19045.7
+  Num Samples: 15
+
+Reflexions: 2, Type: summary_incremental
+  Avg Score: 0.33
+  Avg Token Cost: 20447.5
+  Num Samples: 15
+
+Reflexions: 2, Type: summary_all_previous
+  Avg Score: 0.13
+  Avg Token Cost: 20872.4
+  Num Samples: 15
+
+Reflexions: 4, Type: list
+  Avg Score: 0.07
+  Avg Token Cost: 38257.4
+  Num Samples: 15
+
+Reflexions: 4, Type: k most recent
+  Avg Score: 0.00
+  Avg Token Cost: 38058.1
+  Num Samples: 15
+
+Reflexions: 4, Type: summary_incremental
+  Avg Score: 0.20
+  Avg Token Cost: 41901.9
+  Num Samples: 15
+
+Reflexions: 4, Type: summary_all_previous
+  Avg Score: 0.20
+  Avg Token Cost: 45016.5
+  Num Samples: 15
+

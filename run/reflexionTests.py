@@ -149,11 +149,11 @@ async def test_reflexion():
     num_reflexions_list = [4]  # Number of iterations to test
     k = 2  # k for "k most recent"
     num_agents = 4  
-    reflexion_types = ["list", "k most recent",  "summary_incremental", "summary_all_previous"]  
+    reflexion_types = ["list", "k most recent", "summary_incremental", "summary_all_previous"]  #"list", "k most recent",  
     results = []
     verifier = RafaVerifier()
 
-    for states in all_puzzles_data[6:15]:
+    for states in all_puzzles_data[11:15]:
         for i in range(num_agents):
             states[i] = states[0]
         for num_reflexions in num_reflexions_list:
@@ -193,11 +193,11 @@ async def test_stepwise_reflexion():
     num_reflexions_list = [1]  # Number of iterations to test
     k = 2  # k for "k most recent"
     num_agents = 4  
-    reflexion_types = ["list"]  # Step-wise reflexion types , "k most recent", "summary_incremental", "summary_all_previous"
+    reflexion_types = ["summary_incremental"]  # Step-wise reflexion types , "k most recent", "summary_incremental", "summary_all_previous"
     results = []
     verifier = RafaVerifier()
 
-    for states in all_puzzles_data[0:1]:
+    for states in all_puzzles_data[0:15]:
         for i in range(num_agents):
             states[i] = states[0]
         for num_reflexions in num_reflexions_list:
@@ -244,11 +244,10 @@ async def scoreTest():
     cost = api.cost(tab_name = "list"+str(4), report_tokens=True)
     token_cost = cost.get("total_tokens")
     print(token_cost)
-    
 
 if __name__ == "__main__":
-    asyncio.run(test_reflexion())
-    #asyncio.run(test_stepwise_reflexion())
+    #asyncio.run(test_reflexion())
+    asyncio.run(test_stepwise_reflexion())
     #asyncio.run(scoreTest())
     #asyncio.run(create_test_puzzles())
     # with open('test_puzzles.pkl', 'rb') as file:
