@@ -17,9 +17,10 @@ from dotenv import load_dotenv
 
 #from src import states
 sys.path.append(os.getcwd()) # Project root!!
+# sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from async_engine.api import API
 from async_engine.batched_api import BatchingAPI
-from run.reflexion import run_reflexion_gameof24, solve_trial_wise
+from run.reflexion import run_reflexion_gameof24, solve_trial_wise, set_LLMverifier
 from src.agents.reflexionAgent import GameOf24Agent
 from src.states.gameof24 import GameOf24State
 from utils import load_test_puzzles
@@ -184,10 +185,11 @@ async def test_reflexion():
     # Plot the results
     #plotScore(results)
 
-async def test_stepwise_reflexion():
+async def test_LLM_stepwise_reflexion():
     """
     Test for step-wise reflexion types
     """
+    set_LLMverifier(True)
     # Load unfinished puzzles
     all_puzzles_data = load_test_puzzles()
     num_reflexions_list = [1]  # Number of iterations to test
@@ -195,9 +197,9 @@ async def test_stepwise_reflexion():
     num_agents = 4  
     reflexion_types = ["summary_incremental"]  # Step-wise reflexion types , "k most recent", "summary_incremental", "summary_all_previous"
     results = []
-    verifier = RafaVerifier()
+    verifier = RafaVerifier() #TODO: make rafaVerifier global or smth, it's dumb to have RAFAverifier as a parameter for LLM verifier tests
 
-    for states in all_puzzles_data[0:15]:
+    for states in all_puzzles_data[5:6]:
         for i in range(num_agents):
             states[i] = states[0]
         for num_reflexions in num_reflexions_list:
@@ -247,10 +249,12 @@ async def scoreTest():
 
 if __name__ == "__main__":
     #asyncio.run(test_reflexion())
-    asyncio.run(test_stepwise_reflexion())
+    asyncio.run(test_LLM_stepwise_reflexion())
     #asyncio.run(scoreTest())
     #asyncio.run(create_test_puzzles())
     # with open('test_puzzles.pkl', 'rb') as file:
     #     loaded_list = pickle.load(file)
     # print(loaded_list[0])
     # print(loaded_list[-1])
+
+    
