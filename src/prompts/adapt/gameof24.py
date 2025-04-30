@@ -315,24 +315,27 @@ Solution attempt:
 
 #RAFA prompt
 validation_prompt = '''Evaluate if given formula is a valid move in the game of 24. Especially, check if a number is missing, if the arithmetic is incorrect, or if a number is used that is not in the input or used twice. All four numbers does not need to be used for the first three steps. Always end your answer with Invalid or Valid.
-Example
-
+Example:
 Input: 3 6 8 10
 Step: 3 * 6 = 18 (left: 18 8 10)
 Valid
 
+Example:
 Input: 2 6 8 14
 2 * 6 = 1 (left: 1 8 14)
 Invalid
 
+Example:
 Input: 4 6 8 10
 10 * 5 = 50 (left: 6 50)
 Invalid
 
+Example:
 Input: 1 5 7
 5 * 5 = 25 (left: 1 25 7)
 Invalid
 
+Example:
 Input: 2 9
 2 * 9 = 18 (left: 18 9)
 Invalid
