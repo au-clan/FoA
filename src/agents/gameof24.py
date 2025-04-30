@@ -112,6 +112,7 @@ class GameOf24Agent:
             for _ in range(n):
                 coroutines.append(api.buffered_request(prompt, key=hash(state), namespace=namespace))
             iid_replies = await asyncio.gather(*coroutines)
+            print("iid_replies", iid_replies, "current state is : ", state.current_state)
 
             # Unwrap the iid_replies
 

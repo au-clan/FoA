@@ -199,23 +199,31 @@ Summarization of all reflections:
 bfs_prompt_single = '''Use numbers and basic arithmetic operations (+ - * /). Each step, you are only allowed to choose two of the remaining numbers to obtain a new number. Do not explain simply list a possible next step as well as all the remaining numbers and nothing else.
 
 Example: 2 8 8 14
-Possible next steps:
+A single possible next step:
 2 + 8 = 10 (left: 8 10 14)
-8 / 2 = 4 (left: 4 8 14)
-14 + 2 = 16 (left: 8 8 16)
-2 * 8 = 16 (left: 8 14 16)
-8 - 2 = 6 (left: 6 8 14)
+
+Example: 12 6 6
+A single possible next step:
+6 + 6 = 12 (left: 12 12)
+
+Example: 4 6
+A single possible next step:
+4 * 6 = 4 (left: 24)
 
 Example: 1 3
 Possible next steps:
-1 + 3 = 4 (left: 4)
-1 * 3 = 3 (left: 3)
 3 - 1 = 2 (left: 2)
-3 / 1 = 3 (left: 3)
-1 - 3 = -2 (left: -2)
+
+Example: 5 5 1 1
+A single possible next step:
+5 * 5 = 25 (left: 25 1 1)
+
+
+
+
 
 Input: {input}
-A possible next step:
+A single possible next step:
 '''
 
 bfs_reflexion_prompt_single = '''Use numbers and basic arithmetic operations (+ - * /). Each step, you are only allowed to choose two of the remaining numbers to obtain a new number. Do not explain simply list, a possible next step as well as all the remaining numbers and nothing else.
@@ -242,17 +250,11 @@ Based on previous attempts to solve the puzzle, here is some advice on how to pr
 {reflexion}
 
 Input: {input}
-A possible next step:'''
+A single possible next step:
+'''
 
 
-evaluate_prompt = '''The game of 24 is a math puzzle where players use four numbers and basic arithmetic operations (+ - * /) to make the result equal to 24. Following is a previous attempt at solving the puzzle.
-Input: {puzzle}
-Solution attempt:
-{steps[0]}
-{steps[1]}
-{steps[2]}
-{steps[3]}
-
+evaluate_prompt = '''The game of 24 is a math puzzle where players use four numbers and basic arithmetic operations (+ - * /) to make the result equal to 24.
 
 Task:
 1. Evaluate step
@@ -302,6 +304,13 @@ Task:
    - Verify if the result of each step is computed correctly and is used in subsequent steps properly.
 
 IMPORTANT: I want you to end your response with stating what step went wrong (0 indexed) for example: "Incorrect step: 2"
+
+Input: {puzzle}
+Solution attempt:
+{steps[0]}
+{steps[1]}
+{steps[2]}
+{steps[3]}
 '''
 
 #RAFA prompt
@@ -309,7 +318,7 @@ validation_prompt = '''Evaluate if given formula is a valid move in the game of 
 Example
 
 Input: 3 6 8 10
-3 * 6 = 18 (left: 18 8 10)
+Step: 3 * 6 = 18 (left: 18 8 10)
 Valid
 
 Input: 2 6 8 14
@@ -324,9 +333,12 @@ Input: 1 5 7
 5 * 5 = 25 (left: 1 25 7)
 Invalid
 
-Now evaluate the followng formula:
-Input: {puzzle}
-{steps}
+Input: 2 9
+2 * 9 = 18 (left: 18 9)
+Invalid
+
+Input: {state}
+Step: {steps}
 '''
 # Updated
 value_prompt = '''Evaluate if given numbers can reach 24 by responding with the following sure, likely or impossible.
@@ -370,7 +382,7 @@ Impossible
 1 3 3 are all too small
 Impossible
 
-Input: {steps}
+Input: {input}
 '''
 
 

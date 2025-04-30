@@ -239,7 +239,6 @@ async def solve_step_wise(
             break
         
         failed_agents = []
-        #TODO: Global var or pass the var?
         if LLMVERIFIER:
             validations, values = await check_states(step_batcher, states, step)
             for agent_id, validation, value in zip(states.keys(), validations, values):
