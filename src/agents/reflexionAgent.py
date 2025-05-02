@@ -183,7 +183,12 @@ class GameOf24Agent:
         """
         #TODO: Make a trial wise validation prompt. With this current change it will only work for trial wise
         last_step = steps[-1]
-        validation_prompt = llama_prompts.validation_prompt.format(state=state.current_state, steps=last_step)
+        if len(steps) == 1:
+            input = state.puzzle
+        else:
+            input = steps[-2].strip("left:")
+        validation_prompt = llama_prompts.validation_prompt.format(input=input, steps=last_step) #TODO: State should be last state not current state. Attempted change but have not tested
+        print("validation_prompt: ", validation_prompt)
         validation = api.buffered_request(validation_prompt, key=hash(state), namespace=namespace)
         return validation
     

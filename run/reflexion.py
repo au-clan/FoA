@@ -269,8 +269,8 @@ async def solve_step_wise(
                             log_mismatch(agent_id, step, states[agent_id], "False Positive", "Valuation", value, feedback) 
 
 
-                # print("validation: ", validation)
-                # print("valuation: ", value)
+                print("validation: ", validation)
+                print("valuation: ", value)
 
                 #Check what agents fails and append the agent id's to a list
                 if "Invalid" in agent_validations[agent_id] or agent_values[agent_id] == IMPOSSIBLE_SCORE:
@@ -352,8 +352,8 @@ async def solve_step_wise(
                         single_value = await asyncio.gather(*value_tasks)
                         agent_validations[agent_id] = single_validation[0]
                         agent_values[agent_id] = single_value[0]
-                        #print("validation for failed agent: ", agent_validations[agent_id])
-                        #print("valuations for failed agent: ", agent_values[agent_id])
+                        print("validation for failed agent: ", agent_validations[agent_id])
+                        print("valuations for failed agent: ", agent_values[agent_id])
                         #check if it fails or succeeds
                         if "Invalid" in agent_validations[agent_id] or agent_values[agent_id] == IMPOSSIBLE_SCORE:
                             print(f"agent {agent_id} failed again")

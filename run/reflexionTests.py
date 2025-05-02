@@ -56,12 +56,23 @@ step_batcher = BatchingAPI(
     tab="step"
     )
 
-# Setup logging
-logging.basicConfig(
-    filename="new_test_results.log",
-    level=logging.INFO,
-    format="%(asctime)s - %(message)s"
-)
+# Setup directory for logs
+log_dir = "reflexionLogs"
+
+# Setup named loggers for each test type
+def setup_logger(name, file_name):
+    logger = logging.getLogger(name)
+    logger.setLevel(logging.INFO)
+    logger.propagate = False
+    handler = logging.FileHandler(os.path.join(log_dir, file_name))
+    handler.setFormatter(logging.Formatter("%(asctime)s - %(message)s"))
+    logger.addHandler(handler)
+    return logger
+
+# Create loggers
+trial_logger = setup_logger("trial_wise", "trial_wise.log")
+rafa_step_logger = setup_logger("stepwise_RAFA", "stepwise_RAFA.log")
+llm_step_logger = setup_logger("stepwise_LLM", "stepwise_LLM.log")
 
 # Suppress logs from external HTTP libraries
 logging.getLogger("httpx").setLevel(logging.WARNING)
@@ -69,16 +80,6 @@ logging.getLogger("urllib3").setLevel(logging.WARNING)
 logging.getLogger("openai").setLevel(logging.WARNING)  # If using OpenAI's SDK
 logging.getLogger("async_engine").setLevel(logging.WARNING)  # If it's coming from async_engine
 logging.getLogger("botocore").setLevel(logging.WARNING)  # If AWS-related
-
-# Separate logger for step-wise reflexion
-stepwise_logger = logging.getLogger("stepwise")
-stepwise_logger.setLevel(logging.INFO)
-stepwise_logger.propagate = False #To avoid logging to the root logger
-
-# Create file handler for stepwise logger
-stepwise_handler = logging.FileHandler("stepwise_test_results.log")
-stepwise_handler.setFormatter(logging.Formatter("%(asctime)s - %(message)s"))
-stepwise_logger.addHandler(stepwise_handler)
 
 def plotScore(results):
     """
@@ -141,25 +142,26 @@ async def create_test_puzzles():
         pickle.dump(finished_puzzles, f)
 
 
-async def test_reflexion():
+async def trial_wise_type_testing():
     """
-    Test for testing reflexion types
+    Test for finding the best reflexion type for trial-wise
     """
+    print("trial_wise_type_testing")
     # Load unfinished puzzles
     all_puzzles_data = load_test_puzzles()
-    num_reflexions_list = [4]  # Number of iterations to test
+    num_reflexions_list = [1,2,4]  # Number of iterations to test
     k = 2  # k for "k most recent"
     num_agents = 4  
-    reflexion_types = ["list", "k most recent", "summary_incremental", "summary_all_previous"]  #"list", "k most recent",  
+    reflexion_types = ["list", "k most recent", "summary_incremental", "summary_all_previous"]   
     results = []
     verifier = RafaVerifier()
 
-    for states in all_puzzles_data[11:15]:
+    for states in all_puzzles_data[0:15]:
         for i in range(num_agents):
             states[i] = states[0]
         for num_reflexions in num_reflexions_list:
             for reflexion_type in reflexion_types:
-                print(reflexion_type, " starts now")
+                print("puzzle: ", states[0].puzzle, "with type: ", reflexion_type, " starts now")
                 # Run the reflexion game
                 score, token_cost, num_used_reflexions = await run_reflexion_gameof24(
                     "trial_wise", reflexion_type, states, num_agents, num_reflexions, k, verifier
@@ -176,35 +178,29 @@ async def test_reflexion():
                     "num_used_reflexions": num_used_reflexions
                 }
                 results.append(result_entry)
-                logging.info(result_entry)
+                trial_logger.info(result_entry)
 
-    # Save results to a pickle file
-    with open(f"new_test_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pkl", "wb") as f:
-        pickle.dump(results, f)
-
-    # Plot the results
-    #plotScore(results)
-
-async def test_LLM_stepwise_reflexion():
+async def test_RAFA_stepwise_types():
     """
-    Test for step-wise reflexion types
+    Test for step-wise reflexion types with RAFA deterministic verifiers
     """
-    set_LLMverifier(True)
+    print("step_wise type testing with RAFA verifiers")
+    set_LLMverifier(False)
     # Load unfinished puzzles
     all_puzzles_data = load_test_puzzles()
-    num_reflexions_list = [1]  # Number of iterations to test
-    k = 2  # k for "k most recent"
+    num_reflexions_list = [1,2,4]  # Number of iterations to test
+    k = 1  # k for "k most recent" TODO: Decide if k = 1 would be best here, since last mistake is most relevant for current problem. Should we also change k in trial?
     num_agents = 4  
-    reflexion_types = ["summary_incremental"]  # Step-wise reflexion types , "k most recent", "summary_incremental", "summary_all_previous"
+    reflexion_types = ["list", "k most recent", "summary_incremental", "summary_all_previous"]  # Step-wise reflexion types , "k most recent", "summary_incremental", "summary_all_previous"
     results = []
-    verifier = RafaVerifier() #TODO: make rafaVerifier global or smth, it's dumb to have RAFAverifier as a parameter for LLM verifier tests
+    verifier = RafaVerifier() 
 
-    for states in all_puzzles_data[5:6]:
+    for states in all_puzzles_data[0:15]:
         for i in range(num_agents):
             states[i] = states[0]
         for num_reflexions in num_reflexions_list:
             for reflexion_type in reflexion_types:
-                print(f"Step-wise reflexion ({reflexion_type}) starts now")
+                print("puzzle: ", states[0].puzzle, "with type: ", reflexion_type, " starts now")
                 # Run the step-wise reflexion game
                 score, token_cost, num_used_reflexions = await run_reflexion_gameof24(
                     "step_wise", reflexion_type, states, num_agents, num_reflexions, k, verifier
@@ -221,8 +217,46 @@ async def test_LLM_stepwise_reflexion():
                     "num_used_reflexions": num_used_reflexions
                 }
                 results.append(result_entry)
-                stepwise_logger.info(result_entry)
+                rafa_step_logger.info(result_entry)
 
+async def test_LLM_stepwise_reflexion():
+    """
+    Test for step-wise reflexion types
+    """
+    print("step_wise type testing with LLM verifiers")
+    set_LLMverifier(True)
+    # Load unfinished puzzles
+    all_puzzles_data = load_test_puzzles()
+    num_reflexions_list = [1,2,4]  # Number of iterations to test
+    k = 2  # k for "k most recent"
+    num_agents = 4  
+    reflexion_types = ["summary_incremental"]  #TODO: Change to the best type determined by RAFA verifiers
+    results = []
+    verifier = RafaVerifier() #TODO: make rafaVerifier global or smth, it's dumb to have RAFAverifier as a parameter for LLM verifier tests
+
+    for states in all_puzzles_data[0:15]:
+        for i in range(num_agents):
+            states[i] = states[0]
+        for num_reflexions in num_reflexions_list:
+            for reflexion_type in reflexion_types:
+                print("puzzle: ", states[0].puzzle, "with type: ", reflexion_type, " starts now")
+                # Run the step-wise reflexion game
+                score, token_cost, num_used_reflexions = await run_reflexion_gameof24(
+                    "step_wise", reflexion_type, states, num_agents, num_reflexions, k, verifier
+                )
+
+                # Log result
+                result_entry = {
+                    "puzzle": states[0].puzzle,
+                    "num_agents": num_agents,
+                    "num_reflexions": num_reflexions,
+                    "reflexion_type": reflexion_type,
+                    "score": score,
+                    "token_cost": token_cost,
+                    "num_used_reflexions": num_used_reflexions
+                }
+                results.append(result_entry)
+                llm_step_logger.info(result_entry)
 
 from src.prompts.adapt import gameof24 as llama_prompts
 
@@ -248,7 +282,8 @@ async def scoreTest():
     print(token_cost)
 
 if __name__ == "__main__":
-    #asyncio.run(test_reflexion())
+    asyncio.run(trial_wise_type_testing())
+    asyncio.run(test_RAFA_stepwise_types())
     asyncio.run(test_LLM_stepwise_reflexion())
     #asyncio.run(scoreTest())
     #asyncio.run(create_test_puzzles())

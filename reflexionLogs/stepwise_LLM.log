@@ -1,0 +1,3 @@
+2025-05-02 16:35:25,394 - {'puzzle': '1 1 4 6', 'num_agents': 4, 'num_reflexions': 1, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 38826.0, 'num_used_reflexions': 4}
+2025-05-02 16:55:42,052 - {'puzzle': '1 1 4 6', 'num_agents': 4, 'num_reflexions': 1, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 39877.0, 'num_used_reflexions': 4}
+2025-05-02 16:57:37,192 - {'puzzle': '1 1 4 6', 'num_agents': 1, 'num_reflexions': 1, 'reflexion_type': 'summary_incremental', 'score': 0, 'token_cost': 10415.0, 'num_used_reflexions': 1}

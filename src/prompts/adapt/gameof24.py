@@ -338,7 +338,7 @@ Input: 2 9
 2 * 9 = 18 (left: 18 9)
 Invalid
 
-Input: {state}
+Input: {input}
 Step: {steps}
 '''
 # Updated
