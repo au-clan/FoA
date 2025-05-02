@@ -16,6 +16,9 @@ from utils import load_test_puzzles
 from src.rafaverifiers import RafaVerifier
 
 LLMVERIFIER = False
+IMPOSSIBLE_SCORE = 0.0
+LIKELY_SCORE     = 1.0 
+SURE_SCORE       = 20.0
 
 def set_LLMverifier(bool):
     global LLMVERIFIER
@@ -58,7 +61,7 @@ def log_mismatch(agent_id, step, state, mismatch_type, source, message, verifier
     with open(LOG_FILE, "a") as f:
         f.write(json.dumps(log_entry) + "\n")
 
-async def check_states(step_batcher, states, step):
+async def check_states(step_batcher: BatchingAPI, states: GameOf24State, step) -> Tuple[str, int]:
     """
     Checking whether the current state is valid and determines the likelihood of it succeding.
     """
@@ -251,10 +254,10 @@ async def solve_step_wise(
                 # False Negative: validation or value says invalid but verifier reward = 1
                 
                 if reward == 1:
-                    if "Invalid" in validation or "Impossible" in value:
+                    if "Invalid" in validation or value < LIKELY_SCORE:
                         if "Invalid" in validation:
                             log_mismatch(agent_id, step, states[agent_id], "False Negative", "Validation", validation, feedback)
-                        if "Impossible" in value:
+                        if value < LIKELY_SCORE:
                             log_mismatch(agent_id, step, states[agent_id], "False Negative", "Valuation", value, feedback)    
 
                 # False Positive: validation or value says valid, but verifier reward = 0
@@ -262,7 +265,7 @@ async def solve_step_wise(
                     if "Valid" in validation and ("Sure" in value or "Likely" in value):
                         if "Valid" in validation:
                             log_mismatch(agent_id, step, states[agent_id], "False Positive", "Validation", validation, feedback)
-                        if "Sure" or "Likely" in value:
+                        if value >= LIKELY_SCORE:
                             log_mismatch(agent_id, step, states[agent_id], "False Positive", "Valuation", value, feedback) 
 
 
@@ -270,9 +273,9 @@ async def solve_step_wise(
                 print("valuation: ", value)
 
                 #Check what agents fails and append the agent id's to a list
-                if "Invalid" in agent_validations[agent_id] or "Impossible" in agent_values[agent_id]:
+                if "Invalid" in agent_validations[agent_id] or agent_values[agent_id] == IMPOSSIBLE_SCORE:
                     print("check for invalid: ", "Invalid" in agent_validations[agent_id])
-                    print("check for impossible: ","Impossible" in agent_values[agent_id])
+                    print("check for impossible: ", agent_values[agent_id] == IMPOSSIBLE_SCORE)
                     print("agent id: ", agent_id, " failed")
                     failed_agents.append(agent_id)
         else:
@@ -314,6 +317,8 @@ async def solve_step_wise(
                             finished_states[new_agent_id] = states.pop(new_agent_id)
                             agent_ids.remove(new_agent_id)
                             total_score +=1
+                            
+                    #Deterministic verifier
                     feedback, reward = verify(states[agent_id], states[agent_id].steps[-2] if len(states[agent_id].steps) > 1 else states[agent_id].puzzle, verifier)
                     if LLMVERIFIER:
                         #Need to validate the new state
@@ -350,7 +355,7 @@ async def solve_step_wise(
                         print("validation for failed agent: ", agent_validations[agent_id])
                         print("valuations for failed agent: ", agent_values[agent_id])
                         #check if it fails or succeeds
-                        if "Invalid" in agent_validations[agent_id] or "Impossible" in agent_values[agent_id]:
+                        if "Invalid" in agent_validations[agent_id] or agent_values[agent_id] == IMPOSSIBLE_SCORE:
                             print(f"agent {agent_id} failed again")
                         else:
                             failed_agents.remove(agent_id)
@@ -361,7 +366,7 @@ async def solve_step_wise(
                             if "Invalid" in validation or "Impossible" in value:
                                 if "Invalid" in validation:
                                     log_mismatch(agent_id, step, states[agent_id], "False Negative", "Validation", validation, feedback)
-                                if "Impossible" in value:
+                                if value == IMPOSSIBLE_SCORE:
                                     log_mismatch(agent_id, step, states[agent_id], "False Negative", "Valuation", value, feedback)    
 
                         # False Positive: validation or value says valid, but verifier reward = 0
@@ -369,7 +374,7 @@ async def solve_step_wise(
                             if "Valid" in validation and ("Sure" in value or "Likely" in value):
                                 if "Valid" in validation:
                                     log_mismatch(agent_id, step, states[agent_id], "False Positive", "Validation", validation, feedback)
-                                if "Sure" or "Likely" in value:
+                                if value >= LIKELY_SCORE:
                                     log_mismatch(agent_id, step, states[agent_id], "False Positive", "Valuation", value, feedback) 
                     else: 
                         if reward > 0:

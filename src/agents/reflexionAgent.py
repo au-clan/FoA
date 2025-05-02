@@ -5,6 +5,7 @@ from utils import parse_suggestions, create_box
 import re
 from sympy import simplify
 from typing import Any, Dict, List, Tuple
+import asyncio
 
 class GameOf24Agent:
 
@@ -186,8 +187,8 @@ class GameOf24Agent:
         validation = api.buffered_request(validation_prompt, key=hash(state), namespace=namespace)
         return validation
     
-
-    def value(puzzle: str, steps: List[str], state: GameOf24State, api, namespace) -> str:
+    @staticmethod
+    async def value(puzzle: str, steps: List[str], state: GameOf24State, api, namespace, n=3) -> str:
         """
         Uses the value prompt to estimate the feasibility of the steps.
         
@@ -211,13 +212,12 @@ class GameOf24Agent:
         if "left" not in last_step:
             answer = last_step.lower().replace("answer: ", "")
 
-            if any(author in api.model for author in ["meta", "google", "mistral", "gpt-4o"]):
-                prompt = llama_prompts.value_last_step_prompt.format(input=state.puzzle, answer=answer)
+
+            prompt = llama_prompts.value_last_step_prompt.format(input=state.puzzle, answer=answer)
             #print(f"Evaluating terminal state that is not correct : {state}")
             return 0
         else:
-            if any(author in api.model for author in ["meta", "google", "mistral", "gpt-4o"]):
-                prompt = llama_prompts.value_prompt.format(input=state.current_state)
+            prompt = llama_prompts.value_prompt.format(input=state.current_state)
            
         #TODO: Implement value_cache in run file (Hint: look at FoA run file)
         # if prompt in value_cache and caching:
@@ -225,20 +225,29 @@ class GameOf24Agent:
         if False:
             pass
         else:
-
-            iid_replies = api.buffered_request(prompt, key=hash(state), namespace=namespace)
+            coroutines = []
+            for _ in range(n):
+                coroutines.append(api.buffered_request(prompt, key=hash(state), namespace=namespace))
+            iid_replies = await asyncio.gather(*coroutines)
 
             # Unwrap the iid_replies
+            
 
             if len(state.steps) == 4 and 'answer' not in "\n".join(state.steps).lower():
                 value_number = 0
             
             else:
-                value_names = [value.split('\n')[-1] for value in iid_replies]
+                value_names = [value.split('\n')[-1].lower() for value in iid_replies]
+                print("")
+                print("Value names ", value_names)
+                print("")
                 value_map = {'impossible': 0.001, 'likely': 1, 'sure': 20}
                 value_number = sum(value * value_names.count(name) for name, value in value_map.items())
+                print("")
+                print("count value names")
+                print(value_names.count(name) for name, value in value_map.items())
             # value_cache[prompt] = value_number
-        
+        print("value number: ", value_number)
         return value_number
 
 
