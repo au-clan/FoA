@@ -218,17 +218,17 @@ async def solve_step_wise(
 
         for agent_id, new_state in zip(states.keys(), new_states):
             states[agent_id] = new_state
-            print("previous_states:", previous_states[agent_id])
+            #print("previous_states:", previous_states[agent_id])
             if len(previous_states[agent_id].steps) == 0:
                 last_step = states[agent_id].puzzle
             else:
                 last_step = previous_states[agent_id].steps[-1]
             feedback, reward = verify(new_state, last_step, verifier)
-            print("feedback is: ", feedback)
-            print("Reward is: ", reward)
+            #print("feedback is: ", feedback)
+            #print("Reward is: ", reward)
             print(f"Current step for agent {agent_id}: {new_state.steps[-1]} \n")
             agent_feedback[agent_id] = (feedback, reward)
-        print(states)
+        #print(states)
         # Evaluate whether a puzzle has been solved, 
         for agent_id in list(states.keys()):
             if GameOf24Agent.verify(states[agent_id]) == {"r": 1}:
@@ -262,21 +262,21 @@ async def solve_step_wise(
 
                 # False Positive: validation or value says valid, but verifier reward = 0
                 elif reward == 0:
-                    if "Valid" in validation and ("Sure" in value or "Likely" in value):
+                    if "Valid" in validation or value >= LIKELY_SCORE:
                         if "Valid" in validation:
                             log_mismatch(agent_id, step, states[agent_id], "False Positive", "Validation", validation, feedback)
                         if value >= LIKELY_SCORE:
                             log_mismatch(agent_id, step, states[agent_id], "False Positive", "Valuation", value, feedback) 
 
 
-                print("validation: ", validation)
-                print("valuation: ", value)
+                # print("validation: ", validation)
+                # print("valuation: ", value)
 
                 #Check what agents fails and append the agent id's to a list
                 if "Invalid" in agent_validations[agent_id] or agent_values[agent_id] == IMPOSSIBLE_SCORE:
-                    print("check for invalid: ", "Invalid" in agent_validations[agent_id])
-                    print("check for impossible: ", agent_values[agent_id] == IMPOSSIBLE_SCORE)
-                    print("agent id: ", agent_id, " failed")
+                    #print("check for invalid: ", "Invalid" in agent_validations[agent_id])
+                    #print("check for impossible: ", agent_values[agent_id] == IMPOSSIBLE_SCORE)
+                    #print("agent id: ", agent_id, " failed")
                     failed_agents.append(agent_id)
         else:
             for agent_id in agent_ids:
@@ -296,7 +296,7 @@ async def solve_step_wise(
                     num_used_reflexions += 1
                     agent_reflexions, agent_all_reflexions = await make_reflexion(step_batcher, "step_wise", reflexion_type, k, single_state, agent_reflexions, agent_all_reflexions)
                     # print("agent_id after reflexion: ", agent_id)
-                    print("agent reflexions in step wise: ", agent_reflexions[agent_id])
+                    #print("agent reflexions in step wise: ", agent_reflexions[agent_id])
                     agent_tasks = [
                         asyncio.create_task(
                         GameOf24Agent.step(
@@ -352,8 +352,8 @@ async def solve_step_wise(
                         single_value = await asyncio.gather(*value_tasks)
                         agent_validations[agent_id] = single_validation[0]
                         agent_values[agent_id] = single_value[0]
-                        print("validation for failed agent: ", agent_validations[agent_id])
-                        print("valuations for failed agent: ", agent_values[agent_id])
+                        #print("validation for failed agent: ", agent_validations[agent_id])
+                        #print("valuations for failed agent: ", agent_values[agent_id])
                         #check if it fails or succeeds
                         if "Invalid" in agent_validations[agent_id] or agent_values[agent_id] == IMPOSSIBLE_SCORE:
                             print(f"agent {agent_id} failed again")
@@ -363,15 +363,15 @@ async def solve_step_wise(
                         # mismatch detection
                         # False Negative: validation or value says invalid but verifier reward = 1
                         if reward == 1:
-                            if "Invalid" in validation or "Impossible" in value:
+                            if "Invalid" in validation or value < LIKELY_SCORE:
                                 if "Invalid" in validation:
                                     log_mismatch(agent_id, step, states[agent_id], "False Negative", "Validation", validation, feedback)
-                                if value == IMPOSSIBLE_SCORE:
+                                if value < LIKELY_SCORE:
                                     log_mismatch(agent_id, step, states[agent_id], "False Negative", "Valuation", value, feedback)    
 
                         # False Positive: validation or value says valid, but verifier reward = 0
                         elif reward == 0:
-                            if "Valid" in validation and ("Sure" in value or "Likely" in value):
+                            if "Valid" in validation or value >= LIKELY_SCORE:
                                 if "Valid" in validation:
                                     log_mismatch(agent_id, step, states[agent_id], "False Positive", "Validation", validation, feedback)
                                 if value >= LIKELY_SCORE:
@@ -541,8 +541,11 @@ async def main():
     state = puzzles[0] #1, 1, 4, 6
     verifier = RafaVerifier()
 
+    for i in range(num_agents):
+        state[i] = state[0]
+
     # await run_reflexion_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
-    total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", state, num_agents, num_reflexions, k, verifier) #this does not work atm
+    total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", state, num_agents, num_reflexions, k, verifier) 
     print("total_score: ", total_score, "token_cost: ", token_cost, "num_used_reflexions: ", num_used_reflexions)
 
     # total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", state, num_agents, num_reflexions, k, verifier) 

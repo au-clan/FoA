@@ -218,10 +218,6 @@ Example: 5 5 1 1
 A single possible next step:
 5 * 5 = 25 (left: 25 1 1)
 
-
-
-
-
 Input: {input}
 A single possible next step:
 '''
@@ -229,22 +225,24 @@ A single possible next step:
 bfs_reflexion_prompt_single = '''Use numbers and basic arithmetic operations (+ - * /). Each step, you are only allowed to choose two of the remaining numbers to obtain a new number. Do not explain simply list, a possible next step as well as all the remaining numbers and nothing else.
 
 Example: 2 8 8 14
-Possible next steps:
+A single possible next step:
 2 + 8 = 10 (left: 8 10 14)
-8 / 2 = 4 (left: 4 8 14)
-14 + 2 = 16 (left: 8 8 16)
-2 * 8 = 16 (left: 8 14 16)
-8 - 2 = 6 (left: 6 8 14)
+
+Example: 12 6 6
+A single possible next step:
+6 + 6 = 12 (left: 12 12)
+
+Example: 4 6
+A single possible next step:
+4 * 6 = 4 (left: 24)
 
 Example: 1 3
 Possible next steps:
-1 + 3 = 4 (left: 4)
-1 * 3 = 3 (left: 3)
 3 - 1 = 2 (left: 2)
-3 / 1 = 3 (left: 3)
-1 - 3 = -2 (left: -2)
 
-
+Example: 5 5 1 1
+A single possible next step:
+5 * 5 = 25 (left: 25 1 1)
 
 Based on previous attempts to solve the puzzle, here is some advice on how to proceed:
 {reflexion}
