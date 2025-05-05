@@ -297,7 +297,7 @@ async def solve_step_wise(
                     failed_agents.append(agent_id)
             
              
-        #Make it async
+        ##TODO: Make it async 
         while (failed_agents != []):
             for agent_id in failed_agents:
                 print("agent_id in failed agent loop: ", agent_id)
@@ -519,19 +519,19 @@ async def run_reflexion_gameof24(
         agent_reflexions[agent_id] = []
         agent_all_reflexions[agent_id] = []
     total_score = 0
-
     # Set up log
     log = {}
     log[puzzle_idx] = {"puzzle": puzzle}
     log[puzzle_idx].update({f"Agent {i}": {} for i in range(num_agents)})
-
     #Log initial solve
     for step in range(num_steps):
         for agent_id in range(num_agents):
             log[puzzle_idx][f"Agent {agent_id}"].update({f"Step {step}": {}})
 
-        for agent_id, state in enumerate(states):
-            log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Step": f"{' -> '.join(state.steps[step])}"})
+        for agent_id in range(num_agents):
+            print("state is : ", states[agent_id])
+            log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Step": f"{' -> '.join(states[agent_id].steps[step])}"})
+            print("Logged step: ", states[agent_id].steps[step])
 
     #print("states here: ", states)
 

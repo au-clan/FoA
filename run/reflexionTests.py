@@ -127,7 +127,6 @@ async def create_test_puzzles():
         agent_reflexions[agent_id] = []
     
     finished_puzzles = []
-    #TODO: 22212 missing from pickle file for some reason, prbly because it was 
     puzzles = ["1, 1, 4, 6", "1, 1, 11, 11", "1, 3, 8, 8", "1 1 1 8", "6 6 6 6", 
                "1 1 2 12", "1 2 2 6", "1 1 10 12", "2 2 10 10", "1 1 1 12", 
                "3 4 8 12", "2 4 6 11", "2 2 8 9", "1 5 6 7", "5 8 10 11",
@@ -141,6 +140,42 @@ async def create_test_puzzles():
     with open("test_puzzles2.pkl", "wb") as f:
         pickle.dump(finished_puzzles, f)
 
+async def run_puzzles(
+    time_of_reflexion: str,
+    puzzle_idx, 
+    states,
+    logger):
+    num_reflexions_list = [1]  # Number of iterations to test ,2,4
+    k = 2  # k for "k most recent"
+    num_agents = 4  
+    reflexion_types = ["list", "k most recent", "summary_incremental", "summary_all_previous"]   
+    results = []
+    verifier = RafaVerifier()
+
+    for i in range(num_agents):
+        states[i] = states[0]
+    for num_reflexions in num_reflexions_list:
+        for reflexion_type in reflexion_types:
+            print("puzzle: ", states[0].puzzle, "with type: ", reflexion_type, " starts now")
+            # Run the reflexion game
+            score, token_cost, num_used_reflexions = await run_reflexion_gameof24(
+                time_of_reflexion, reflexion_type, puzzle_idx, states, num_agents, num_reflexions, k, verifier
+            )
+
+            # Log result
+            result_entry = {
+                "puzzle": states[0].puzzle,
+                "num_agents": num_agents,
+                "num_reflexions": num_reflexions,
+                "reflexion_type": reflexion_type,
+                "score": score,
+                "token_cost": token_cost,
+                "num_used_reflexions": num_used_reflexions
+            }
+            logger.info(result_entry)
+            results.append(result_entry)
+
+    return results
 
 async def trial_wise_type_testing():
     """
@@ -149,37 +184,19 @@ async def trial_wise_type_testing():
     print("trial_wise_type_testing")
     # Load unfinished puzzles
     all_puzzles_data = load_test_puzzles()
-    puzzle_idxs = [0, 1, 4, 9, 5, 1287, 1293, 1290, 1291, 1286, 1355, 1343, 1360, 1337, 1338]
-    num_reflexions_list = [1,2,4]  # Number of iterations to test
-    k = 2  # k for "k most recent"
-    num_agents = 4  
-    reflexion_types = ["list", "k most recent", "summary_incremental", "summary_all_previous"]   
-    results = []
-    verifier = RafaVerifier()
+    puzzle_idxs = [0, 1] #, 4, 9, 5, 1287, 1293, 1290, 1291, 1286, 1355, 1343, 1360, 1337, 1338
 
-    for puzzle_idx, states in enumerate(all_puzzles_data[0:15]):
-        for i in range(num_agents):
-            states[i] = states[0]
-        for num_reflexions in num_reflexions_list:
-            for reflexion_type in reflexion_types:
-                print("puzzle: ", states[0].puzzle, "with type: ", reflexion_type, " starts now")
-                # Run the reflexion game
-                score, token_cost, num_used_reflexions = await run_reflexion_gameof24(
-                    "trial_wise", reflexion_type, puzzle_idxs[puzzle_idx], states, num_agents, num_reflexions, k, verifier
-                )
+    tasks = [
+        run_puzzles(
+            "trial-wise",
+            puzzle_idx=puzzle_idxs[idx],
+            states = all_puzzles_data[idx],
+            logger=trial_logger
+        )
+        for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
+    ]
 
-                # Log result
-                result_entry = {
-                    "puzzle": states[0].puzzle,
-                    "num_agents": num_agents,
-                    "num_reflexions": num_reflexions,
-                    "reflexion_type": reflexion_type,
-                    "score": score,
-                    "token_cost": token_cost,
-                    "num_used_reflexions": num_used_reflexions
-                }
-                results.append(result_entry)
-                trial_logger.info(result_entry)
+    all_results = await asyncio.gather(*tasks)
 
 async def test_RAFA_stepwise_types():
     """
@@ -242,7 +259,7 @@ async def test_LLM_stepwise_reflexion():
             for reflexion_type in reflexion_types:
                 print("puzzle: ", states[0].puzzle, "with type: ", reflexion_type, " starts now")
                 # Run the step-wise reflexion game
-                score, token_cost, num_used_reflexions = await run_reflexion_gameof24(
+                score, token_cost, num_used_reflexions, log = await run_reflexion_gameof24(
                     "step_wise", reflexion_type, states, num_agents, num_reflexions, k, verifier
                 )
 

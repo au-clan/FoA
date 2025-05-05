@@ -187,7 +187,7 @@ class GameOf24Agent:
             input = state.puzzle
         else:
             input = steps[-2].split("left:")[-1].strip("()")
-        validation_prompt = llama_prompts.validation_prompt.format(input=input, steps=last_step) #TODO: State should be last state not current state. Input now correctly is the last state but validation has not been tested.
+        validation_prompt = llama_prompts.validation_prompt.format(input=input, steps=last_step) #TODO: Validation has not been tested.
         # print("validation_prompt: ", validation_prompt)
         validation = api.buffered_request(validation_prompt, key=hash(state), namespace=namespace)
         return validation
