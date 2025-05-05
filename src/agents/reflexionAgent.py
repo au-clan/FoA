@@ -82,7 +82,6 @@ class GameOf24Agent:
         )
         return next_state
     
-
     @staticmethod
     def parse_next_state(suggestion: str) -> str:
         return suggestion.split('left: ')[-1].split(')')[0]

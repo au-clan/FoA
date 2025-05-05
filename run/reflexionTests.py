@@ -206,36 +206,19 @@ async def test_RAFA_stepwise_types():
     set_LLMverifier(False)
     # Load unfinished puzzles
     all_puzzles_data = load_test_puzzles()
-    num_reflexions_list = [1,2,4]  # Number of iterations to test
-    k = 1  # k for "k most recent" TODO: Decide if k = 1 would be best here, since last mistake is most relevant for current problem. Should we also change k in trial?
-    num_agents = 4  
-    reflexion_types = ["list", "k most recent", "summary_incremental", "summary_all_previous"]  # Step-wise reflexion types , "k most recent", "summary_incremental", "summary_all_previous"
-    results = []
-    verifier = RafaVerifier() 
+    puzzle_idxs = [0, 1] #, 4, 9, 5, 1287, 1293, 1290, 1291, 1286, 1355, 1343, 1360, 1337, 1338
 
-    for states in all_puzzles_data[0:15]: #TODO: make async
-        for i in range(num_agents):
-            states[i] = states[0]
-        for num_reflexions in num_reflexions_list: 
-            for reflexion_type in reflexion_types:
-                print("puzzle: ", states[0].puzzle, "with type: ", reflexion_type, " starts now")
-                # Run the step-wise reflexion game
-                score, token_cost, num_used_reflexions = await run_reflexion_gameof24(
-                    "step_wise", reflexion_type, states, num_agents, num_reflexions, k, verifier
-                )
+    tasks = [
+        run_puzzles(
+            "step-wise",
+            puzzle_idx=puzzle_idxs[idx],
+            states = all_puzzles_data[idx],
+            logger=rafa_step_logger
+        )
+        for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
+    ]
 
-                # Log result
-                result_entry = {
-                    "puzzle": states[0].puzzle,
-                    "num_agents": num_agents,
-                    "num_reflexions": num_reflexions,
-                    "reflexion_type": reflexion_type,
-                    "score": score,
-                    "token_cost": token_cost,
-                    "num_used_reflexions": num_used_reflexions
-                }
-                results.append(result_entry)
-                rafa_step_logger.info(result_entry)
+    all_results = await asyncio.gather(*tasks)
 
 async def test_LLM_stepwise_reflexion():
     """
@@ -245,36 +228,19 @@ async def test_LLM_stepwise_reflexion():
     set_LLMverifier(True)
     # Load unfinished puzzles
     all_puzzles_data = load_test_puzzles()
-    num_reflexions_list = [1,2,4]  # Number of iterations to test
-    k = 2  # k for "k most recent"
-    num_agents = 4  
-    reflexion_types = ["summary_incremental"]  #TODO: Change to the best type determined by RAFA verifiers
-    results = []
-    verifier = RafaVerifier() #TODO: make rafaVerifier global or smth, it's dumb to have RAFAverifier as a parameter for LLM verifier tests
+    puzzle_idxs = [0, 1] #, 4, 9, 5, 1287, 1293, 1290, 1291, 1286, 1355, 1343, 1360, 1337, 1338
 
-    for states in all_puzzles_data[0:15]:
-        for i in range(num_agents):
-            states[i] = states[0]
-        for num_reflexions in num_reflexions_list:
-            for reflexion_type in reflexion_types:
-                print("puzzle: ", states[0].puzzle, "with type: ", reflexion_type, " starts now")
-                # Run the step-wise reflexion game
-                score, token_cost, num_used_reflexions, log = await run_reflexion_gameof24(
-                    "step_wise", reflexion_type, states, num_agents, num_reflexions, k, verifier
-                )
+    tasks = [
+        run_puzzles(
+            "step-wise",
+            puzzle_idx=puzzle_idxs[idx],
+            states = all_puzzles_data[idx],
+            logger=llm_step_logger
+        )
+        for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
+    ]
 
-                # Log result
-                result_entry = {
-                    "puzzle": states[0].puzzle,
-                    "num_agents": num_agents,
-                    "num_reflexions": num_reflexions,
-                    "reflexion_type": reflexion_type,
-                    "score": score,
-                    "token_cost": token_cost,
-                    "num_used_reflexions": num_used_reflexions
-                }
-                results.append(result_entry)
-                llm_step_logger.info(result_entry)
+    all_results = await asyncio.gather(*tasks)
 
 from src.prompts.adapt import gameof24 as llama_prompts
 
