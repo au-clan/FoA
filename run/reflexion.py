@@ -16,9 +16,9 @@ from utils import load_test_puzzles
 from src.rafaverifiers import RafaVerifier
 
 LLMVERIFIER = False
-IMPOSSIBLE_SCORE = 0.0
+IMPOSSIBLE_SCORE = 0.003
 LIKELY_SCORE     = 1.0 
-SURE_SCORE       = 20.0
+SURE_SCORE       = 20.0 #TODO: Tag stilling til hvornår vi deemer noget impossible etc
 
 def set_LLMverifier(bool):
     global LLMVERIFIER
@@ -101,6 +101,7 @@ def verify(state, last_step, Verifier) -> Tuple[str, int]:
 async def solve_trial_wise(
         step_batcher: BatchingAPI,
         num_steps: int, 
+        puzzle_idx: int,
         puzzle: str, 
         agent_ids: List[int], 
         agent_reflexions: Dict[int, List[str]],
@@ -113,6 +114,7 @@ async def solve_trial_wise(
     score = 0
     states =  {}
     registry = {}
+    
     #Create one state for each agent
     for agent_id in agent_ids:
         states[agent_id] = GameOf24State(
@@ -127,6 +129,11 @@ async def solve_trial_wise(
     #Stepping
     for step in range(num_steps):
         print(f"Step {step} : Stepping")
+        
+        # Log - Set up log of each agent for current step
+        for agent_id in range(len(agent_ids)):
+            log[puzzle_idx][f"Agent {agent_id}"].update({f"Step {step}": {}})
+        
         agent_tasks = [
             asyncio.create_task(
             GameOf24Agent.step(
@@ -138,8 +145,12 @@ async def solve_trial_wise(
             for agent_id in states
         ]
         new_states = await asyncio.gather(*agent_tasks)
+        
 
         for agent_id, new_state in zip(states.keys(), new_states):
+             # Log - Steps
+            log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Step": f"{' -> '.join(new_state.steps)}"})
+            
             states[agent_id] = new_state
             print(f"Current step for agent {agent_id}: {new_state.steps[-1]} \n")
             if len(registry[agent_id]) == 0:
@@ -155,11 +166,13 @@ async def solve_trial_wise(
                 finished_states[agent_id] = states.pop(agent_id)
                 agent_ids.remove(agent_id)
                 score +=1
-            
+        
+        # After each step, the api should be empty
+        assert len(step_batcher.futures) == 0, f"API futures should be empty, but are {len(step_batcher.futures)}"
         # If all puzzles have been solved, break
         if not states:
             break
-    return states, agent_ids, score
+    return states, agent_ids, score, log
 
 
 async def solve_step_wise(
@@ -294,7 +307,7 @@ async def solve_step_wise(
                     single_state = {agent_id: states[agent_id]}
                     agent_num_reflexions[agent_id] += 1
                     num_used_reflexions += 1
-                    agent_reflexions, agent_all_reflexions = await make_reflexion(step_batcher, "step_wise", reflexion_type, k, single_state, agent_reflexions, agent_all_reflexions)
+                    agent_reflexions, agent_all_reflexions = await make_reflexion(step_batcher, "step_wise", reflexion_type, k, single_state, agent_reflexions, agent_all_reflexions, agent_feedback[agent_id][0])
                     # print("agent_id after reflexion: ", agent_id)
                     #print("agent reflexions in step wise: ", agent_reflexions[agent_id])
                     agent_tasks = [
@@ -350,6 +363,9 @@ async def solve_step_wise(
                             )
                         ]
                         single_value = await asyncio.gather(*value_tasks)
+                        print("")
+                        print("Single_validation: ", single_validation)
+                        print("")
                         agent_validations[agent_id] = single_validation[0]
                         agent_values[agent_id] = single_value[0]
                         print("validation for failed agent: ", agent_validations[agent_id])
@@ -391,22 +407,25 @@ async def make_reflexion(
         k: int, 
         states: Dict[int, GameOf24State], 
         agent_reflexions: Dict[int, List[str]], 
-        agent_all_reflexions: Dict[int, List[str]]
+        agent_all_reflexions: Dict[int, List[str]],
+        agent_feedback: str = ""
     ) -> Tuple[Dict[int, List[str]], Dict[int, List[str]]]:
     """
     Generates a reflection for each agent based on their current state and the chosen type of reflection.
     """
     print("states: ", states)
-    step = 3
+    step = 3 #TODO
+    
     agent_tasks = [
         asyncio.create_task(
             GameOf24Agent.generate_reflexion(
                 time_of_reflexion,
                 puzzle=states[agent_id].puzzle, 
                 steps=states[agent_id].steps, 
-                state=states[agent_id], 
+                state=states[agent_id],
                 api=step_batcher, 
-                namespace=(0, f"Agent: {int(agent_id)}", f"Step: {step}") #TODO: Change namespace to not have step
+                namespace=(0, f"Agent: {int(agent_id)}", f"Step: {step}"), #TODO: Change namespace to not have step
+                agent_feedback=agent_feedback
         )
     ) for agent_id in states ]
     new_reflexions = await asyncio.gather(*agent_tasks)
@@ -472,6 +491,7 @@ async def make_reflexion(
 async def run_reflexion_gameof24(
         time_of_reflexion: str, 
         reflexion_type: str, 
+        puzzle_idx: int,
         states: Dict[int, GameOf24State], 
         num_agents: int, 
         num_reflexions: int, 
@@ -500,6 +520,19 @@ async def run_reflexion_gameof24(
         agent_all_reflexions[agent_id] = []
     total_score = 0
 
+    # Set up log
+    log = {}
+    log[puzzle_idx] = {"puzzle": puzzle}
+    log[puzzle_idx].update({f"Agent {i}": {} for i in range(num_agents)})
+
+    #Log initial solve
+    for step in range(num_steps):
+        for agent_id in range(num_agents):
+            log[puzzle_idx][f"Agent {agent_id}"].update({f"Step {step}": {}})
+
+        for agent_id, state in enumerate(states):
+            log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Step": f"{' -> '.join(state.steps[step])}"})
+
     #print("states here: ", states)
 
     #Making states for all agent_ids, because pickle only has one
@@ -511,13 +544,13 @@ async def run_reflexion_gameof24(
     #         randomness=random.randint(0,1000)
     #         )
 
-    # states, agent_ids, score = await solve_trial_wise(num_steps, puzzle, agent_ids, agent_reflexions)
+    # states, agent_ids, score = await solve_trial_wise(step_batcher, num_steps, puzzle_idx, puzzle, agent_ids, agent_reflexions, verifier)
     if time_of_reflexion == "trial_wise":
         #Reflect and go again i times
         for _ in range(num_reflexions):
             agent_reflexions, agent_all_reflexions = await make_reflexion(step_batcher, time_of_reflexion, reflexion_type, k, states, agent_reflexions, agent_all_reflexions)
             print("reflexions per agent", agent_reflexions)
-            states, agent_ids, score = await solve_trial_wise(step_batcher, num_steps, puzzle, agent_ids, agent_reflexions, verifier)
+            states, agent_ids, score = await solve_trial_wise(step_batcher, num_steps, puzzle_idx, puzzle, agent_ids, agent_reflexions, verifier)
             total_score += score
         num_used_reflexions = sum(len(reflexions) for reflexions in agent_all_reflexions.values())
     else: #step_wise
@@ -527,7 +560,7 @@ async def run_reflexion_gameof24(
 
     #For loop counting how many reflexions have been done in total 
     
-    return total_score, token_cost, num_used_reflexions
+    return total_score, token_cost, num_used_reflexions, log
 
 
 async def main():

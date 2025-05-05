@@ -2,12 +2,13 @@ reflexion_step_prompt = '''The game of 24 is a math puzzle where players use fou
 Input: {puzzle}
 Step attempt:
 {steps}
-
-Explain which mistakes made either the problem unsolvable or brought the number further away from 24. Be concise
+And we have the following feedback: 
+{agent_feedback}
+Now using the above feedback, if there is any, explain which mistakes made the problem either unsolvable, invalid or brought the number further away from 24. Be concise
 
 Reflection:
 '''
-#RAFA prompts:
+
 # 1-shot
 propose_prompt = '''Now use numbers and basic arithmetic operations (+ - * /) to generate possible next steps. Make sure use steps that is sure to leads to 24 and avoid steps that are impossible to generate 24. Note that it is possible that we are considering intermediate steps so the numbers of the input may be less than 4. Only make one newline before suggestions
 Example:
@@ -64,6 +65,8 @@ Steps:
 Answer: ((5 + 5) + 5) + 9 = 24
 Input: {input}
 '''
+
+
 RAFA_value_prompt  = '''
 Evaluate if given numbers can reach 24 and choose labels from 'sure', 'likely' and 'impossible'. If the given numbers are already in the feedback above, just give the answer. Otherwise enumerate possible steps and try to give an approximate answer. Give the final answer in a separated line.
  {input}
@@ -92,7 +95,7 @@ Solution attempt:
 {steps}
 
 
-Explain which mistakes made either the problem unsolvable or brought the number further away from 24. Be concise
+Explain which mistakes made either the problem unsolvable, invalid or brought the number further away from 24. Be concise
 
 Reflection:
 '''
@@ -146,20 +149,6 @@ Based on previous attempts to solve the puzzle, here is some advice on how to pr
 Input: {input}
 Possible next steps:'''
 
-reflexion_prompt = '''The game of 24 is a math puzzle where players use four numbers and basic arithmetic operations (+ - * /) to make the result equal to 24. Following is a previous attempt at solving the puzzle.
-Input: {puzzle}
-Solution attempt:
-{steps}
-
-
-Reflect on the previous attempt and provide a reflection below:
-- If there's a mistake, identify it and explain how similar mistakes can be avoided.
-- If the mistake can be generalized, provide a general reflection.
-- Be succint and clear in your reflection.
-- Do not provide a new solution, only a reflection.
-
-Reflection:
-'''
 
 summary_prompt = '''The game of 24 is a math puzzle where players use four numbers and basic arithmetic operations (+ - * /) to make the result equal to 24. Following is a previous attempt at solving the puzzle.
 
@@ -172,28 +161,6 @@ Summarize all the reflexions to keep it concise and discard duplicates
 Summarization of all reflections:
 '''
 
-#Rafa prompt
-# propose_prompt = '''Now use numbers and basic arithmetic operations (+ - * /) to generate possible next steps. Make sure use steps that is sure to leads to 24 and avoid steps that are impossible to generate 24. Note that it is possible that we are considering intermediate steps so the numbers of the input may be less than 4.
-# Example:
-# Input: 2 8 8 14 
-# Possible next steps: 
-# 2 + 8 = 10 (left: 8 10 14)
-# 8 / 2 = 4 (left: 4 8 14)
-# 14 + 2 = 16 (left: 8 8 16)
-# 2 * 8 = 16 (left: 8 14 16)
-# 8 - 2 = 6 (left: 6 8 14)
-# 14 - 8 = 6 (left: 2 6 8)
-# 14 /  2 = 7 (left: 7 8 8)
-# 14 - 2 = 12 (left: 8 8 12)
-# Example:
-# Input: 2 5 8
-# 5 - 2 = 3 (left: 3 8)
-# 5 * 2 = 10 (left: 10 8)
-# 8 / 2 = 4 (left: 4 5)
-# Now try with the following input:
-# Input: {input}
-# Possible next steps:
-# '''
 
 #Prompt with only one suggestion for testing
 bfs_prompt_single = '''Use numbers and basic arithmetic operations (+ - * /). Each step, you are only allowed to choose two of the remaining numbers to obtain a new number. Do not explain simply list a possible next step as well as all the remaining numbers and nothing else.
@@ -251,65 +218,6 @@ Input: {input}
 A single possible next step:
 '''
 
-
-evaluate_prompt = '''The game of 24 is a math puzzle where players use four numbers and basic arithmetic operations (+ - * /) to make the result equal to 24.
-
-Task:
-1. Evaluate step
-   - Evaluate if the given numbers at each step can reach 24 for each step with the following sure, likely or impossible
-
-   Examples for evaluating:
-    10 14
-    10 + 14 = 24
-    sure
-    11 12
-    11 + 12 = 23
-    12 - 11 = 1
-    11 * 12 = 132
-    11 / 12 = 0.91
-    impossible
-    4 4 10
-    4 + 4 + 10 = 8 + 10 = 18
-    4 * 10 - 4 = 40 - 4 = 36
-    (10 - 4) * 4 = 6 * 4 = 24
-    sure
-    4 9 11
-    9 + 11 + 4 = 20 + 4 = 24
-    sure
-    5 7 8
-    5 + 7 + 8 = 12 + 8 = 20
-    (8 - 5) * 7 = 3 * 7 = 21
-    I cannot obtain 24 now, but numbers are within a reasonable range
-    likely
-    5 6 6
-    5 + 6 + 6 = 17
-    (6 - 5) * 6 = 1 * 6 = 6
-    I cannot obtain 24 now, but numbers are within a reasonable range
-    likely
-    10 10 11
-    10 + 10 + 11 = 31
-    (11 - 10) * 10 = 10
-    10 10 10 are all too big
-    impossible
-    1 3 3
-    1 * 3 * 3 = 9
-    (1 + 3) * 3 = 12
-    1 3 3 are all too small
-    impossible
-2. Check whether each step is valid.
-   - Verify if the arithmetic is correct (e.g., 4 * 6 = 24, 8 - 3 = 5, etc.).
-   - Verify if the step uses numbers that are still available.
-   - Verify if the result of each step is computed correctly and is used in subsequent steps properly.
-
-IMPORTANT: I want you to end your response with stating what step went wrong (0 indexed) for example: "Incorrect step: 2"
-
-Input: {puzzle}
-Solution attempt:
-{steps[0]}
-{steps[1]}
-{steps[2]}
-{steps[3]}
-'''
 
 #RAFA prompt
 validation_prompt = '''Evaluate if given formula is a valid move in the game of 24. Especially, check if a number is missing, if the arithmetic is incorrect, or if a number is used that is not in the input or used twice. All four numbers does not need to be used for the first three steps. Always end your answer with Invalid or Valid.
