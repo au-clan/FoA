@@ -14,11 +14,26 @@ from src.agents.reflexionAgent import GameOf24Agent
 from src.states.gameof24 import GameOf24State
 from utils import load_test_puzzles
 from src.rafaverifiers import RafaVerifier
+from dataclasses import dataclass
+
+@dataclass
+class AgentContext:
+    states: Dict[int, GameOf24State]
+    previous_states: Dict[int, GameOf24State]
+    finished_states: Dict[int, GameOf24State]
+    agent_ids: List[int]
+    agent_feedback: Dict[int, str]
+    agent_validations: Dict[int, str]
+    agent_values: Dict[int, float]
+    failed_agents: List[int]
+    verifier: Any
+    step_batcher: BatchingAPI
+    total_score: int
 
 LLMVERIFIER = False
-IMPOSSIBLE_SCORE = 0.003
-LIKELY_SCORE     = 1.0 
-SURE_SCORE       = 20.0 #TODO: Tag stilling til hvornår vi deemer noget impossible etc
+IMPOSSIBLE_SCORE = 2.001 #TODO: Tag stilling til hvornår vi deemer noget impossible etc
+#LIKELY_SCORE     = 1.0  
+#SURE_SCORE       = 20.0 
 
 def set_LLMverifier(bool):
     global LLMVERIFIER
@@ -100,113 +115,101 @@ def verify(state, last_step, Verifier) -> Tuple[str, int]:
 
 @staticmethod
 async def failed_agent_step(
-    step,
-    agent_id: int, 
-    states: dict,
-    step_batcher,
-    reflexion_type,
-    k,
-    agent_feedback,
-    previous_states,
-    finished_states,
-    agent_ids,
-    verifier,
-    agent_validations,
-    agent_values,
-    failed_agents,
+    step: int,
+    agent_id: int,
+    context: AgentContext,
+    reflexion_type: str,
+    k: int,
+    agent_reflexions: Dict[int, List[str]],
+    agent_all_reflexions: Dict[int, List[str]],
     ):
-    single_state = {agent_id: states[agent_id]}
-    agent_reflexions, agent_all_reflexions = await make_reflexion(step_batcher, "step_wise", reflexion_type, k, single_state, agent_reflexions, agent_all_reflexions, agent_feedback[agent_id][0])
+    single_state = {agent_id: context.states[agent_id]}
+    agent_reflexions, agent_all_reflexions = await make_reflexion(
+        context.step_batcher, "step_wise", reflexion_type, k,
+        single_state, agent_reflexions, agent_all_reflexions,
+        context.agent_feedback[agent_id][0]
+    )
     # print("agent_id after reflexion: ", agent_id)
     #print("agent reflexions in step wise: ", agent_reflexions[agent_id])
-    agent_tasks = [
-        asyncio.create_task(
+    agent_task = asyncio.create_task(
         GameOf24Agent.step(
-            previous_states[agent_id], 
-            step_batcher, 
-            namespace=(0, f"Agent: {agent_id}", f"Step : {step}"), #TODO: fix namespace stuff
-            reflexion=agent_reflexions[agent_id]) 
+            context.previous_states[agent_id],
+            context.step_batcher,
+            namespace=(0, f"Agent: {agent_id}", f"Step : {step}"),
+            reflexion=agent_reflexions[agent_id]
         )
-    ]
-    reattempt_state = await asyncio.gather(*agent_tasks) #Fake async, only for one state                    
-    states[agent_id] = reattempt_state[0]
-    print(f"Current step for agent {agent_id}: {states[agent_id].steps[-1]} \n")
+    )
+    reattempt_state = await asyncio.gather(agent_task) #Fake async, only for one state                    
+    context.states[agent_id] = reattempt_state[0]
+    print(f"Current step for agent {agent_id}: {context.states[agent_id].steps[-1]} \n")
         
     # Evaluate whether a puzzle has been solved, 
-    for new_agent_id in list(states.keys()):
-        if GameOf24Agent.verify(states[new_agent_id]) == {"r": 1}:
-            print(f"Puzzle finished by agent {new_agent_id}: {states[new_agent_id].puzzle}")
-            finished_states[new_agent_id] = states.pop(new_agent_id)
-            agent_ids.remove(new_agent_id)
-            total_score +=1
-            
+    if GameOf24Agent.verify(context.states[agent_id]) == {"r": 1}:
+        print(f"Puzzle finished by agent {agent_id}: {context.states[agent_id].puzzle}")
+        context.finished_states[agent_id] = context.states.pop(agent_id)
+        context.agent_ids.remove(agent_id)
+        context.failed_agents.remove(agent_id)
+        total_score += 1
+        return total_score
+
     #Deterministic verifier
-    feedback, reward = verify(states[agent_id], states[agent_id].steps[-2] if len(states[agent_id].steps) > 1 else states[agent_id].puzzle, verifier)
+    feedback, reward = verify(
+        context.states[agent_id],
+        context.states[agent_id].steps[-2] if len(context.states[agent_id].steps) > 1 else context.states[agent_id].puzzle,
+        context.verifier
+    )
+    context.agent_feedback[agent_id] = (feedback, reward)
+    
     if LLMVERIFIER:
         #Need to validate the new state
         #single_validation, single_value = await check_states(step_batcher, states, step)
         #TODO: Change check_states() to be able to accomodate single state / step
-        
-        validate_tasks = [
-            asyncio.create_task(
-                GameOf24Agent.validate(
-                    states[agent_id].puzzle, 
-                    states[agent_id].steps, 
-                    states[agent_id],
-                    step_batcher,
-                    namespace=(0, f"Agent: {agent_id}", f"Step : {step}") #TODO: fix namespace stuff
-                )
-            )
-        ]
-        single_validation = await asyncio.gather(*validate_tasks)
+        single_validation = await GameOf24Agent.validate(
+            context.states[agent_id].puzzle,
+            context.states[agent_id].steps,
+            context.states[agent_id],
+            context.step_batcher,
+            namespace=(0, f"Agent: {agent_id}", f"Step : {step}")
+        )
+        single_value = await GameOf24Agent.value(
+            context.states[agent_id].puzzle,
+            context.states[agent_id].steps,
+            context.states[agent_id],
+            context.step_batcher,
+            namespace=(0, f"Agent: {agent_id}", f"Step : {step}")
+        )
+        context.agent_validations[agent_id] = single_validation
+        context.agent_values[agent_id] = single_value
 
-        value_tasks = [
-            asyncio.create_task(
-                GameOf24Agent.value(
-                    states[agent_id].puzzle, 
-                    states[agent_id].steps, 
-                    states[agent_id],
-                    step_batcher,
-                    namespace=(0, f"Agent: {agent_id}", f"Step : {step}") #TODO: fix namespace stuff
-                )
-            )
-        ]
-        single_value = await asyncio.gather(*value_tasks)
         print("")
         print("Single_validation: ", single_validation)
         print("")
-        agent_validations[agent_id] = single_validation[0]
-        agent_values[agent_id] = single_value[0]
-        print("validation for failed agent: ", agent_validations[agent_id])
-        print("valuations for failed agent: ", agent_values[agent_id])
+        print("validation for failed agent: ", context.agent_validations[agent_id])
+        print("valuations for failed agent: ", context.agent_values[agent_id])
         #check if it fails or succeeds
-        if "Invalid" in agent_validations[agent_id] or agent_values[agent_id] == IMPOSSIBLE_SCORE:
+        if "Invalid" in single_validation or single_value <= IMPOSSIBLE_SCORE:
             print(f"agent {agent_id} failed again")
         else:
-            failed_agents.remove(agent_id)
-        
-        # mismatch detection
-        # False Negative: validation or value says invalid but verifier reward = 1
-        if reward == 1:
-            if "Invalid" in agent_validations[agent_id] or agent_values[agent_id] < LIKELY_SCORE:
-                if "Invalid" in agent_validations[agent_id]:
-                    log_mismatch(agent_id, step, states[agent_id], "False Negative", "Validation", agent_validations[agent_id], feedback)
-                if agent_values[agent_id] < LIKELY_SCORE:
-                    log_mismatch(agent_id, step, states[agent_id], "False Negative", "Valuation", agent_values[agent_id], feedback)    
+            context.failed_agents.remove(agent_id)
 
+        # Mismatch detection
+        # False Negative: validation or value says invalid but verifier reward = 1
+        if reward == 1 and ("Invalid" in single_validation or single_value <= IMPOSSIBLE_SCORE):
+            if "Invalid" in single_validation:
+                log_mismatch(agent_id, step, context.states[agent_id], "False Negative", "Validation", single_validation, feedback)
+            if single_value <= IMPOSSIBLE_SCORE:
+                log_mismatch(agent_id, step, context.states[agent_id], "False Negative", "Valuation", single_value, feedback)
         # False Positive: validation or value says valid, but verifier reward = 0
-        elif reward == 0:
-            if "Valid" in agent_validations[agent_id] or agent_values[agent_id] >= LIKELY_SCORE:
-                if "Valid" in agent_validations[agent_id]:
-                    log_mismatch(agent_id, step, states[agent_id], "False Positive", "Validation", agent_validations[agent_id], feedback)
-                if agent_values[agent_id] >= LIKELY_SCORE:
-                    log_mismatch(agent_id, step, states[agent_id], "False Positive", "Valuation", agent_values[agent_id], feedback) 
+        elif reward == 0 and ("Valid" in single_validation or single_value > IMPOSSIBLE_SCORE):
+            if "Valid" in single_validation:
+                log_mismatch(agent_id, step, context.states[agent_id], "False Positive", "Validation", single_validation, feedback)
+            if single_value > IMPOSSIBLE_SCORE:
+                log_mismatch(agent_id, step, context.states[agent_id], "False Positive", "Valuation", single_value, feedback)
     else: 
         if reward > 0:
-            failed_agents.remove(agent_id) 
+            context.failed_agents.remove(agent_id) 
         else:
             print(f"agent {agent_id} failed again")
-    return failed_agents, states, feedback, reward, finished_states, agent_ids, agent_validations, agent_values
 
 async def solve_trial_wise(
         step_batcher: BatchingAPI,
@@ -296,7 +299,6 @@ async def solve_step_wise(
         verifier
     ) -> Tuple[Dict[int, GameOf24State], List[int], int]:
 
-    total_score = 0
     states = {} 
     finished_states = {}
     agent_reflexions = {}
@@ -320,6 +322,20 @@ async def solve_step_wise(
         agent_feedback[agent_id] = ""
 
 
+    context = AgentContext(
+    states=states,
+    previous_states={},
+    finished_states=finished_states,
+    agent_ids=agent_ids,
+    agent_feedback=agent_feedback,
+    agent_validations={},
+    agent_values={},
+    failed_agents=[],
+    verifier=verifier,
+    step_batcher=step_batcher,
+    total_score=0
+    )
+    
     for step in range(num_steps):
         print(f"Step {step} : Stepping")
         agent_validations = {}
@@ -377,18 +393,18 @@ async def solve_step_wise(
 
                 # False Negative: validation or value says invalid but verifier reward = 1
                 if reward == 1:
-                    if "Invalid" in validation or value < LIKELY_SCORE:
+                    if "Invalid" in validation or value <= IMPOSSIBLE_SCORE:
                         if "Invalid" in validation:
                             log_mismatch(agent_id, step, states[agent_id], "False Negative", "Validation", validation, feedback)
-                        if value < LIKELY_SCORE:
+                        if value <= IMPOSSIBLE_SCORE:
                             log_mismatch(agent_id, step, states[agent_id], "False Negative", "Valuation", value, feedback)    
 
                 # False Positive: validation or value says valid, but verifier reward = 0
                 elif reward == 0:
-                    if "Valid" in validation or value >= LIKELY_SCORE:
+                    if "Valid" in validation or value > IMPOSSIBLE_SCORE:
                         if "Valid" in validation:
                             log_mismatch(agent_id, step, states[agent_id], "False Positive", "Validation", validation, feedback)
-                        if value >= LIKELY_SCORE:
+                        if value > IMPOSSIBLE_SCORE:
                             log_mismatch(agent_id, step, states[agent_id], "False Positive", "Valuation", value, feedback) 
 
 
@@ -399,46 +415,46 @@ async def solve_step_wise(
                 if "Invalid" in agent_validations[agent_id] or agent_values[agent_id] == IMPOSSIBLE_SCORE:
                     #print("check for invalid: ", "Invalid" in agent_validations[agent_id])
                     #print("check for impossible: ", agent_values[agent_id] == IMPOSSIBLE_SCORE)
-                    #print("agent id: ", agent_id, " failed")
+                    print("agent id: ", agent_id, " failed")
                     failed_agents.append(agent_id)
         else:
             for agent_id in agent_ids:
                 if agent_feedback[agent_id][1] == 0:
-                    failed_agents.append(agent_id)
-            
-             
+                    failed_agents.append(agent_id)   
+
         ##TODO: Make it async 
-        while (failed_agents != []):
-            for agent_id in failed_agents:
-                print("agent_id in failed agent loop: ", agent_id)
-                if agent_num_reflexions[agent_id] >= num_reflexions:
-                    failed_agents.remove(agent_id)
-                else:
-                    agent_num_reflexions[agent_id] += 1
-                    num_used_reflexions += 1
-                    failed_agent_tasks = [
-                        asyncio.create_task(
-                            failed_agent_step(
-                            step,
-                            agent_id, 
-                            states,
-                            step_batcher,
-                            reflexion_type,
-                            k,
-                            agent_feedback,
-                            previous_states,
-                            finished_states,
-                            agent_ids,
-                            verifier,
-                            agent_validations,
-                            agent_values,
-                            failed_agents
-                            )
-                        )
-                    ]
-            failed_agents, states, feedback, reward, finished_states, agent_ids, agent_validations, agent_values = await asyncio.gather(*failed_agent_tasks)
- 
-    return total_score, num_used_reflexions
+        while context.failed_agents:
+            print("context failed agents: ", context.failed_agents)
+            failed_agent_tasks = [
+                asyncio.create_task(
+                    failed_agent_step(
+                        step=step,
+                        agent_id=agent_id,
+                        context=context,
+                        reflexion_type=reflexion_type,
+                        k=k,
+                        agent_reflexions=agent_reflexions,
+                        agent_all_reflexions=agent_all_reflexions,
+                    )
+                )
+                for agent_id in context.failed_agents.copy()
+                if agent_num_reflexions[agent_id] < num_reflexions
+            ]
+
+            if not failed_agent_tasks:
+                print("breaks there is no failed agents")
+                break
+
+            for agent_id in context.failed_agents.copy():
+                print("gets here and adds 1")
+                agent_num_reflexions[agent_id] += 1
+                num_used_reflexions += 1
+
+            # Wait for all tasks to complete
+            await asyncio.gather(*failed_agent_tasks)
+            print("num_used_reflexions in while: ", num_used_reflexions)
+    print("num_used reflexion before return: ", num_used_reflexions)
+    return context.total_score, num_used_reflexions
    
 
 async def make_reflexion(
@@ -565,12 +581,13 @@ async def run_reflexion_gameof24(
     log[puzzle_idx] = {"puzzle": puzzle}
     log[puzzle_idx].update({f"Agent {i}": {} for i in range(num_agents)})
     #Log initial solve
+    print("num agents: ", num_agents)
+    print("state is : ", states[agent_id])
     for step in range(num_steps):
         for agent_id in range(num_agents):
             log[puzzle_idx][f"Agent {agent_id}"].update({f"Step {step}": {}})
 
         for agent_id in range(num_agents):
-            print("state is : ", states[agent_id])
             log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Step": f"{' -> '.join(states[agent_id].steps[step])}"})
             print("Logged step: ", states[agent_id].steps[step])
 
@@ -610,17 +627,21 @@ async def main():
     # Example of running an gameOf24 experiment with reflexion
     num_reflexions = 2
     k = 2
-    num_agents = 2
+    num_agents = 1
     puzzles = load_test_puzzles()
     state = puzzles[0] #1, 1, 4, 6
     verifier = RafaVerifier()
 
     for i in range(num_agents):
         state[i] = state[0]
+    
+    puzzle_idx = 0
 
     # await run_reflexion_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
-    total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", state, num_agents, num_reflexions, k, verifier) 
+    set_LLMverifier(True)
+    total_score, token_cost, num_used_reflexions, log = await run_reflexion_gameof24("step_wise", "list", puzzle_idx, state, num_agents, num_reflexions, k, verifier) 
     print("total_score: ", total_score, "token_cost: ", token_cost, "num_used_reflexions: ", num_used_reflexions)
+    print("log: ", log)
 
     # total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", state, num_agents, num_reflexions, k, verifier) 
     # print("total_score: ", total_score, "token_cost: ", token_cost, "num_used_reflexions: ", num_used_reflexions)
