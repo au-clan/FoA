@@ -52,6 +52,7 @@ class GameOf24Agent:
             selected_state = state.current_state
 
         else:
+            print("reflexion[0]: ", reflexion)
             if len(reflexion) == 0:
                 prompt = llama_prompts.bfs_prompt_single.format(input=current_state) 
             else:
@@ -142,6 +143,7 @@ class GameOf24Agent:
         """
         if time_of_reflexion == "step_wise":
             prompt = llama_prompts.reflexion_step_prompt.format(puzzle=puzzle, steps=steps, agent_feedback=agent_feedback)
+            print("prompt in generate reflexion: ", prompt)
         else:
             prompt = llama_prompts.new_reflexion_prompt.format(puzzle=puzzle, steps=steps)
         reflexion = api.buffered_request(prompt, key=hash(state), namespace=namespace)
@@ -241,6 +243,7 @@ class GameOf24Agent:
                 value_number = 0
             
             else:
+                print("iid_replies: ", iid_replies)
                 value_names = [value.split('\n')[-1].lower() for value in iid_replies]
                 print("")
                 print("Value names ", value_names)
