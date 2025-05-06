@@ -24,6 +24,9 @@ from run.reflexion import run_reflexion_gameof24, solve_trial_wise, set_LLMverif
 from src.agents.reflexionAgent import GameOf24Agent
 from src.states.gameof24 import GameOf24State
 from utils import load_test_puzzles
+from data.data import GameOf24Data
+
+dataset = GameOf24Data()
 
 step_api_config = eval_api_config = {
     "max_tokens": 1000,
@@ -123,19 +126,20 @@ async def create_test_puzzles():
 
     for agent_id in agent_ids:
         agent_reflexions[agent_id] = []
-    
+    puzzle_idxs, puzzles = dataset.get_data("uniform")
     finished_puzzles = []
-    puzzles = ["1, 1, 4, 6", "1, 1, 11, 11", "1, 3, 8, 8", "1 1 1 8", "6 6 6 6", 
-               "1 1 2 12", "1 2 2 6", "1 1 10 12", "2 2 10 10", "1 1 1 12", 
-               "3 4 8 12", "2 4 6 11", "2 2 8 9", "1 5 6 7", "5 8 10 11",
-               "4 4 9 12", "2 5 6 6", "1 1 3 12", "2 2 2 12", "1 1 4 12"]
+    #puzzles = ["1, 1, 4, 6", "1, 1, 11, 11", "1, 3, 8, 8", "1 1 1 8", "6 6 6 6", 
+    #           "1 1 2 12", "1 2 2 6", "1 1 10 12", "2 2 10 10", "1 1 1 12", 
+    #           "3 4 8 12", "2 4 6 11", "2 2 8 9", "1 5 6 7", "5 8 10 11",
+    #          "4 4 9 12", "2 5 6 6", "1 1 3 12", "2 2 2 12", "1 1 4 12"]
     puzzles2 = ["1 1 4 6", "1 1 11 11", "6 6 6 6", "1 1 1 12", "1 1 2 12",
                 "2 4 7 7", "3 6 6 10", "4 7 9 11", "2 2 3 5", "2 5 7 9",
                 "2 4 10 10", "5 5 7 11", "1 3 4 6", "5 7 7 11", "3 3 7 13" ] #5 easy, 5 medium, 5 hard (<99%, 50.3-52.7%, 25.8-27.6%)
-    for puzzle in puzzles2:
-        states, _, _ = await solve_trial_wise(step_batcher, num_steps, puzzle, agent_ids, agent_reflexions)
+    for puzzle in puzzles:
+        states, _, _ = await solve_trial_wise(step_batcher, num_steps, puzzle_idxs, puzzle, agent_ids, agent_reflexions)
         finished_puzzles.append(states)
-    with open("test_puzzles2.pkl", "wb") as f:
+    print(len(finished_puzzles))
+    with open("uniform_test_puzzles.pkl", "wb") as f:
         pickle.dump(finished_puzzles, f)
 
 async def run_puzzles(
@@ -263,14 +267,15 @@ async def scoreTest():
     print(token_cost)
 
 if __name__ == "__main__":
-    asyncio.run(trial_wise_type_testing())
+    # asyncio.run(trial_wise_type_testing())
     # asyncio.run(test_RAFA_stepwise_types())
     #asyncio.run(test_LLM_stepwise_reflexion())
     #asyncio.run(scoreTest())
     #asyncio.run(create_test_puzzles())
-    # with open('test_puzzles.pkl', 'rb') as file:
-    #     loaded_list = pickle.load(file)
+    with open('uniform_test_puzzles.pkl', 'rb') as file:
+        loaded_list = pickle.load(file)
     # print(loaded_list[0])
     # print(loaded_list[-1])
+    print(len(loaded_list))
 
     

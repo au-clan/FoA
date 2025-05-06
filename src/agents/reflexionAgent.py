@@ -41,16 +41,18 @@ class GameOf24Agent:
         if current_state.strip() == "24":
             # CoT prompt
             steps = "\n".join(state.steps) + "\n"
-            
-            prompt = llama_prompts.cot_prompt.format(input=state.puzzle) + "Steps:\n" + steps + "Answer: "
-
+            if len(reflexion) == 0:
+                prompt = llama_prompts.modified_cot_prompt.format(input=state.puzzle) + "Steps:\n" + steps + "Answer: "
+            else:
+                prompt = llama_prompts.modified_cot_reflexion_prompt.format(input=state.puzzle, reflexion=reflexion[0]) + "Steps:\n" + steps + "Answer: "
+            print("prompt in cot: ", prompt)
             # Get the final expression
             suggestions = await api.buffered_request(prompt, key=hash(state), namespace=namespace)
 
             # State does not change, only the steps
             selected_suggestion = suggestions
             selected_state = state.current_state
-
+            print("selected_suggestion: ", selected_suggestion, "selected state: ", state.current_state)
         else:
             print("reflexion[0]: ", reflexion)
             if len(reflexion) == 0:

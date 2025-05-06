@@ -1,5 +1,6 @@
 import json
 import pandas as pd
+import numpy as np
 from dataclasses import dataclass
 
 from utils import get_file_names
@@ -18,6 +19,10 @@ class GameOf24Data:
             indices = list(range(875,900)) + list(range(1000,1025))
         elif set == "test":
             indices = list(range(990,997))
+        elif set == "uniform":
+            arr = range(1000)
+            S = 60
+            indices = np.linspace(0, len(arr) -1, S, dtype=int)
         else:
             raise ValueError("Invalid set name")
 

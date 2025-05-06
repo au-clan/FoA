@@ -180,8 +180,8 @@ async def failed_agent_step(
         context.finished_states[agent_id] = context.states.pop(agent_id)
         context.agent_ids.remove(agent_id)
         context.failed_agents.remove(agent_id)
-        total_score += 1
-        return total_score
+        context.total_score += 1
+        return context.total_score
 
     #Deterministic verifier
     feedback, reward = verify(
@@ -608,7 +608,7 @@ async def main():
 
     # await run_reflexion_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
     set_LLMverifier(False)
-    total_score, token_cost, num_used_reflexions, log = await run_reflexion_gameof24("trial_wise", "list", puzzle_idx, state, num_agents, num_reflexions, k) 
+    total_score, token_cost, num_used_reflexions, log = await run_reflexion_gameof24("step_wise", "list", puzzle_idx, state, num_agents, num_reflexions, k) 
     print("total_score: ", total_score, "token_cost: ", token_cost, "num_used_reflexions: ", num_used_reflexions)
     print("log: ", log)
 
