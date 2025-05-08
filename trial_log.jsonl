@@ -1,0 +1,125 @@
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 1": {
+        "Reflexion": "The mistakes made were:\n\n1. Using subtraction (-) which moved away from the target (24) and introduced negative numbers, making it harder to reach 24.\n2. Performing division operations that reduced the number of available numbers, limiting further calculations.\n3. Not utilizing the multiplication (*) operation, which is often crucial in reaching the target of 24.",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 1 1 24)"
+        },
+        "Step 1": {
+            "Step": "1 * 1 = 1 (left: 1 24)"
+        },
+        "Step 2": {
+            "Step": "24 * 1 = 24 (left: 24)"
+        },
+        "Step 3": {
+            "Step": "answer: (6 * 4) * (1 * 1) = 24"
+        }
+    },
+    "Agent 0": {
+        "Step 0": {
+            "Step": "1 + 1 = 2 (left: 2 4 6)"
+        },
+        "Step 1": {
+            "Step": "4 * 6 = 24 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "24 / 2 = 12 (left: 12)"
+        },
+        "Step 3": {
+            "Step": "Not possible, there is only one number left."
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        },
+        "Agent 1": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 1": {
+        "Reflexion": "The mistakes made were:\n\n1. Using subtraction (-) which moved away from the target (24) and introduced negative numbers, making it harder to reach 24.\n2. Performing division operations that reduced the number of available numbers, limiting further calculations.\n3. Not utilizing the multiplication (*) operation, which is often crucial in reaching the target of 24.",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 1 1 24)"
+        },
+        "Step 1": {
+            "Step": "1 * 1 = 1 (left: 1 24)"
+        },
+        "Step 2": {
+            "Step": "24 * 1 = 24 (left: 24)"
+        },
+        "Step 3": {
+            "Step": "answer: (6 * 4) * (1 * 1) = 24"
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The mistakes made were:\n\n1. Dividing 24 by 2, moving further away from the target of 24.\n2. Not utilizing the basic arithmetic operations to combine the numbers effectively, resulting in an unsolvable state with only one number left. \n\nA correct approach would involve using operations that combine numbers or get closer to 24, such as using the two 1's and 4 and 6 to directly get 24.",
+        "Step 0": {
+            "Step": "1 + 1 = 2 (left: 2 4 6)"
+        },
+        "Step 1": {
+            "Step": "4 * 6 = 24 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "24 / 2 = 12 (left: 12)"
+        },
+        "Step 3": {
+            "Step": "Not possible to generate a new number as there is only one number left."
+        }
+    }
+}

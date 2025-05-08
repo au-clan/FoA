@@ -54,7 +54,7 @@ class GameOf24Agent:
             selected_state = state.current_state
             print("selected_suggestion: ", selected_suggestion, "selected state: ", state.current_state)
         else:
-            print("reflexion[0]: ", reflexion)
+            #print("reflexion[0]: ", reflexion[0])
             if len(reflexion) == 0:
                 prompt = llama_prompts.bfs_prompt_single.format(input=current_state) 
             else:
