@@ -13,7 +13,8 @@ from async_engine.batched_api import BatchingAPI
 from src.agents.reflexionAgent import GameOf24Agent
 from src.states.gameof24 import GameOf24State
 from utils import load_test_puzzles
-from src.rafaverifiers import RafaVerifier
+from src.verifiers.RafaVerifiers import RafaVerifier
+from src.verifiers.TextVerifier import TextVerifier
 
 @dataclass
 class AgentContext:
@@ -34,7 +35,7 @@ IMPOSSIBLE_SCORE = 2.001 #TODO: Tag stilling til hvornår vi deemer noget imposs
 #SURE_SCORE       = 20.0 
 
 LOG_FILE = "mismatch_log.jsonl"
-RAFAVERIFIER = RafaVerifier()
+VERIFIER = RafaVerifier()
 
 def set_LLMverifier(bool):
     global LLMVERIFIER
@@ -146,7 +147,8 @@ def mismatch_detecting(agent_id, context, step, iid_replies):
                 log_mismatch(agent_id, step, context.states[agent_id], "False Positive", "Valuation", iid_replies, feedback) 
 
 def verify(state, last_step) -> Tuple[str, int]:
-    return RAFAVERIFIER.check_all(state, last_step)
+    verifier = VERIFIER
+    return verifier.check_all(state, last_step)
 
 @staticmethod
 async def failed_agent_step(
@@ -656,8 +658,8 @@ async def main():
     puzzle_idx = 0
 
     # await run_reflexion_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
-    set_LLMverifier(True)
-    total_score, token_cost, num_used_reflexions, log = await run_reflexion_gameof24("step_wise", "list", puzzle_idx, state, num_agents, num_reflexions, k) 
+    set_LLMverifier(False)
+    total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("step_wise", "list", puzzle_idx, state, num_agents, num_reflexions, k) 
     print("total_score: ", total_score, "token_cost: ", token_cost, "num_used_reflexions: ", num_used_reflexions)
 
     # total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", state, num_agents, num_reflexions, k, verifier) 

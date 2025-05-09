@@ -223,7 +223,7 @@ class GameOf24Agent:
 
             prompt = llama_prompts.value_last_step_prompt.format(input=state.puzzle, answer=answer)
             #print(f"Evaluating terminal state that is not correct : {state}")
-            return 0
+            return 0.0, []
         else:
             prompt = llama_prompts.value_prompt.format(input=state.current_state)
            
@@ -240,13 +240,14 @@ class GameOf24Agent:
 
             # Unwrap the iid_replies
             
-
             if len(state.steps) == 4 and 'answer' not in "\n".join(state.steps).lower():
                 value_number = 0
             
             else:
                 print("iid_replies: ", iid_replies)
                 value_names = [value.split('\n')[-1].lower() for value in iid_replies]
+                if "impossible" in value_names:
+                    return 0.001, iid_replies
                 print("")
                 print("Value names ", value_names)
                 print("")
