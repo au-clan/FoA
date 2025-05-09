@@ -253,11 +253,9 @@ class GameOf24Agent:
                 value_map = {'impossible': 0.001, 'likely': 1, 'sure': 20}
                 value_number = sum(value * value_names.count(name) for name, value in value_map.items())
                 print("")
-                print("count value names")
-                print(value_names.count(name) for name, value in value_map.items())
             # value_cache[prompt] = value_number
         print("value number: ", value_number)
-        return value_number
+        return value_number, iid_replies
 
 
     @staticmethod

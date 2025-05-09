@@ -33,6 +33,7 @@ IMPOSSIBLE_SCORE = 2.001 #TODO: Tag stilling til hvornår vi deemer noget imposs
 #LIKELY_SCORE     = 1.0  
 #SURE_SCORE       = 20.0 
 
+LOG_FILE = "mismatch_log.jsonl"
 RAFAVERIFIER = RafaVerifier()
 
 def set_LLMverifier(bool):
@@ -61,7 +62,6 @@ api = API(
     verbose=False
     )
 
-LOG_FILE = "mismatch_log.jsonl"
 
 def log_mismatch(agent_id, step, state, mismatch_type, source, message, RAFAVERIFIER_feedback):
     log_entry = {
@@ -95,9 +95,15 @@ async def check_states(step_batcher: BatchingAPI, step, context) -> Tuple[str, i
     values = await asyncio.gather(*value_tasks)
     
     for agent_id, value in zip(context.states.keys(), values):
-        
-        context.agent_values[agent_id] = value
 
+        print("\n\n")
+        print("Value list: ", value)
+        context.agent_values[agent_id] = value[0]
+        iid_replies = value[1]
+        print("value: ", context.agent_values[agent_id])
+        print("iid_replies: ", iid_replies)
+        print("\n\n")
+        
         #Check what agents fails and append the agent id's to a list
         if context.agent_values[agent_id] <= IMPOSSIBLE_SCORE:
             #print("check for invalid: ", "Invalid" in agent_validations[agent_id])
@@ -117,11 +123,11 @@ async def check_states(step_batcher: BatchingAPI, step, context) -> Tuple[str, i
             if "Invalid" in single_validation:
                 context.failed_agents.append(agent_id)
 
-        mismatch_detecting(agent_id, context, step)
+        mismatch_detecting(agent_id, context, step, iid_replies)
 
 
 
-def mismatch_detecting(agent_id, context, step):
+def mismatch_detecting(agent_id, context, step, iid_replies):
     feedback = context.agent_feedback[agent_id][0]
     reward = context.agent_feedback[agent_id][1]
     if reward == 1:
@@ -129,7 +135,7 @@ def mismatch_detecting(agent_id, context, step):
             if "Invalid" in context.agent_validations[agent_id]:
                 log_mismatch(agent_id, step, context.states[agent_id], "False Negative", "Validation", context.agent_validations[agent_id], feedback)
             if context.agent_values[agent_id] <= IMPOSSIBLE_SCORE:
-                log_mismatch(agent_id, step, context.states[agent_id], "False Negative", "Valuation", context.agent_values[agent_id], feedback)    
+                log_mismatch(agent_id, step, context.states[agent_id], "False Negative", "Valuation", iid_replies, feedback)    
 
     # False Positive: validation or value says valid, but verifier reward = 0
     elif reward == 0:
@@ -137,7 +143,7 @@ def mismatch_detecting(agent_id, context, step):
             if "Valid" in context.agent_validations[agent_id]:
                 log_mismatch(agent_id, step, context.states[agent_id], "False Positive", "Validation", context.agent_validations[agent_id], feedback)
             if context.agent_values[agent_id] > IMPOSSIBLE_SCORE:
-                log_mismatch(agent_id, step, context.states[agent_id], "False Positive", "Valuation", context.agent_values[agent_id], feedback) 
+                log_mismatch(agent_id, step, context.states[agent_id], "False Positive", "Valuation", iid_replies, feedback) 
 
 def verify(state, last_step) -> Tuple[str, int]:
     return RAFAVERIFIER.check_all(state, last_step)
@@ -212,8 +218,10 @@ async def failed_agent_step(
             context.step_batcher,
             namespace=(0, f"Agent: {agent_id}", f"Step : {step}")
         )
-        context.agent_values[agent_id] = single_value
-
+        context.agent_values[agent_id] = single_value[0]
+        iid_replies = single_value[1]
+        print("\n\nvalue in failed agent: ", context.agent_values[agent_id])
+        print("iid_replies in failed agent: ", iid_replies, "\n\n")
         if context.agent_values[agent_id] > IMPOSSIBLE_SCORE:
             single_validation = await GameOf24Agent.validate(
                 context.states[agent_id].puzzle,
@@ -230,7 +238,7 @@ async def failed_agent_step(
         else:
             context.failed_agents.remove(agent_id)
 
-        mismatch_detecting(agent_id, context, step)
+        mismatch_detecting(agent_id, context, step, iid_replies)
     else: 
         if reward > 0:
             context.failed_agents.remove(agent_id) 
@@ -648,8 +656,8 @@ async def main():
     puzzle_idx = 0
 
     # await run_reflexion_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
-    set_LLMverifier(False)
-    total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", puzzle_idx, state, num_agents, num_reflexions, k) 
+    set_LLMverifier(True)
+    total_score, token_cost, num_used_reflexions, log = await run_reflexion_gameof24("step_wise", "list", puzzle_idx, state, num_agents, num_reflexions, k) 
     print("total_score: ", total_score, "token_cost: ", token_cost, "num_used_reflexions: ", num_used_reflexions)
 
     # total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", state, num_agents, num_reflexions, k, verifier) 
