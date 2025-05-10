@@ -30,7 +30,7 @@ class AgentContext:
     total_score: int
 
 LLMVERIFIER = False
-IMPOSSIBLE_SCORE = 2.001 #TODO: Tag stilling til hvornår vi deemer noget impossible etc
+IMPOSSIBLE_SCORE = 0.001
 #LIKELY_SCORE     = 1.0  
 #SURE_SCORE       = 20.0 
 
@@ -446,6 +446,12 @@ async def solve_step_wise(
 
         while context.failed_agents:
             print("context failed agents: ", context.failed_agents)
+            print("agent_num_reflexions: ", agent_num_reflexions)
+            for agent_id in context.failed_agents.copy():
+                if agent_num_reflexions[agent_id] >= num_reflexions:
+                    context.failed_agents.remove(agent_id)
+
+            print("context failed agents: ", context.failed_agents)
             failed_agent_tasks = [
                 asyncio.create_task(
                     failed_agent_step(
@@ -460,7 +466,6 @@ async def solve_step_wise(
                     )
                 )
                 for agent_id in context.failed_agents.copy()
-                if agent_num_reflexions[agent_id] < num_reflexions
             ]
 
             if not failed_agent_tasks:
@@ -605,12 +610,12 @@ async def run_reflexion_gameof24(
     print("state is : ", states[agent_id])
     if time_of_reflexion == "trial_wise":
         for step in range(num_steps):
-            for agent_id in range(num_agents):
-                log[puzzle_idx][f"Agent {agent_id}"].update({f"Step {step}": {}})
+            #for agent_id in range(num_agents):
+            log[puzzle_idx][f"Agent {agent_id}"].update({f"Step {step}": {}})
 
             #for agent_id in range(num_agents):
-                log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Step": f"{states[agent_id].steps[step]}"})
-                print("Logged step: ", states[agent_id].steps[step])
+            log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Step": f"{states[agent_id].steps[step]}"})
+            print("Logged step: ", states[agent_id].steps[step])
 
     #print("states here: ", states)
 
@@ -659,7 +664,7 @@ async def main():
 
     # await run_reflexion_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
     set_LLMverifier(False)
-    total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("step_wise", "list", puzzle_idx, state, num_agents, num_reflexions, k) 
+    total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", puzzle_idx, state, num_agents, num_reflexions, k) 
     print("total_score: ", total_score, "token_cost: ", token_cost, "num_used_reflexions: ", num_used_reflexions)
 
     # total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", state, num_agents, num_reflexions, k, verifier) 

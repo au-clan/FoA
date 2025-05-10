@@ -1,20 +1,7 @@
 {
     "0": {
         "puzzle": "1 1 4 6",
-        "Agent 0": {
-            "Step 0": {
-                "Step": "1 - 4 = -3 (left: -3 1 6)"
-            },
-            "Step 1": {
-                "Step": "6 / 1 = 6 (left: -3 6)"
-            },
-            "Step 2": {
-                "Step": "6 / (-3) = -2 (left: -2)"
-            },
-            "Step 3": {
-                "Step": "-2 / (-2) = 1 (left: 1)"
-            }
-        },
+        "Agent 0": {},
         "Agent 1": {
             "Step 0": {
                 "Step": "1 - 4 = -3 (left: -3 1 6)"
@@ -31,52 +18,39 @@
         }
     },
     "Agent 1": {
-        "Reflexion": "The mistakes made were:\n\n1. Using subtraction (-) which moved away from the target (24) and introduced negative numbers, making it harder to reach 24.\n2. Performing division operations that reduced the number of available numbers, limiting further calculations.\n3. Not utilizing the multiplication (*) operation, which is often crucial in reaching the target of 24.",
+        "Reflexion": "The mistakes made were:\n\n1. Starting with subtraction, which introduced a negative number, making it harder to reach 24.\n2. Performing division operations that reduced the numbers, moving further away from 24.\n3. Not utilizing the multiplication operation, which is often crucial in reaching the target number 24.",
         "Step 0": {
             "Step": "6 * 4 = 24 (left: 1 1 24)"
         },
         "Step 1": {
-            "Step": "1 * 1 = 1 (left: 1 24)"
+            "Step": "1 + 1 = 2 (left: 2 24)"
         },
         "Step 2": {
-            "Step": "24 * 1 = 24 (left: 24)"
+            "Step": "2 * 24 = 48 (left: 48)"
         },
         "Step 3": {
-            "Step": "answer: (6 * 4) * (1 * 1) = 24"
+            "Step": "No possible operation with only one number, start with two numbers, e.g., 4 12 "
         }
     },
     "Agent 0": {
         "Step 0": {
-            "Step": "1 + 1 = 2 (left: 2 4 6)"
+            "Step": "6 * 4 = 24 (left: 1 1 24)"
         },
         "Step 1": {
-            "Step": "4 * 6 = 24 (left: 2 24)"
+            "Step": "1 + 1 = 2 (left: 2 24)"
         },
         "Step 2": {
             "Step": "24 / 2 = 12 (left: 12)"
         },
         "Step 3": {
-            "Step": "Not possible, there is only one number left."
+            "Step": "No possible next steps, only one number left: 12"
         }
     }
 }
 {
     "0": {
         "puzzle": "1 1 4 6",
-        "Agent 0": {
-            "Step 0": {
-                "Step": "1 - 4 = -3 (left: -3 1 6)"
-            },
-            "Step 1": {
-                "Step": "6 / 1 = 6 (left: -3 6)"
-            },
-            "Step 2": {
-                "Step": "6 / (-3) = -2 (left: -2)"
-            },
-            "Step 3": {
-                "Step": "-2 / (-2) = 1 (left: 1)"
-            }
-        },
+        "Agent 0": {},
         "Agent 1": {
             "Step 0": {
                 "Step": "1 - 4 = -3 (left: -3 1 6)"
@@ -93,33 +67,32 @@
         }
     },
     "Agent 1": {
-        "Reflexion": "The mistakes made were:\n\n1. Using subtraction (-) which moved away from the target (24) and introduced negative numbers, making it harder to reach 24.\n2. Performing division operations that reduced the number of available numbers, limiting further calculations.\n3. Not utilizing the multiplication (*) operation, which is often crucial in reaching the target of 24.",
+        "Reflexion": "The mistakes made were:\n\n1. Not using all four numbers to get closer to 24.\n2. Performing '2 * 24 = 48', which moved the result further away from 24.\n3. Ending with a single number, which limited further operations.",
         "Step 0": {
             "Step": "6 * 4 = 24 (left: 1 1 24)"
         },
         "Step 1": {
-            "Step": "1 * 1 = 1 (left: 1 24)"
-        },
-        "Step 2": {
-            "Step": "24 * 1 = 24 (left: 24)"
-        },
-        "Step 3": {
-            "Step": "answer: (6 * 4) * (1 * 1) = 24"
-        }
-    },
-    "Agent 0": {
-        "Reflexion": "The mistakes made were:\n\n1. Dividing 24 by 2, moving further away from the target of 24.\n2. Not utilizing the basic arithmetic operations to combine the numbers effectively, resulting in an unsolvable state with only one number left. \n\nA correct approach would involve using operations that combine numbers or get closer to 24, such as using the two 1's and 4 and 6 to directly get 24.",
-        "Step 0": {
-            "Step": "1 + 1 = 2 (left: 2 4 6)"
-        },
-        "Step 1": {
-            "Step": "4 * 6 = 24 (left: 2 24)"
+            "Step": "1 + 1 = 2 (left: 2 24)"
         },
         "Step 2": {
             "Step": "24 / 2 = 12 (left: 12)"
         },
         "Step 3": {
-            "Step": "Not possible to generate a new number as there is only one number left."
+            "Step": "Not possible with a single number."
+        }
+    },
+    "Agent 0": {
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 1 1 24)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "24 / 2 = 12 (left: 12)"
+        },
+        "Step 3": {
+            "Step": "No possible next steps, (left: 12)"
         }
     }
 }
