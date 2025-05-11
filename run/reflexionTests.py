@@ -74,6 +74,8 @@ def setup_logger(name, file_name):
 trial_logger = setup_logger("trial_wise", "trial_wise.log")
 rafa_step_logger = setup_logger("stepwise_RAFA", "stepwise_RAFA.log")
 llm_step_logger = setup_logger("stepwise_LLM", "stepwise_LLM.log")
+k_trial_logger = setup_logger("k_trial_logger", "k_trial.log")
+k_step_logger = setup_logger("k_step_logger", "k_step.log")
 
 # Suppress logs from external HTTP libraries
 logging.getLogger("httpx").setLevel(logging.WARNING)
@@ -149,7 +151,7 @@ async def run_puzzles(
     logger):
     num_reflexions_list = [1]  # Number of iterations to test ,2,4
     k = 2  # k for "k most recent"
-    num_agents = 4  
+    num_agents = 1  
     reflexion_types = ["list", "k most recent", "summary_incremental", "summary_all_previous"]   
     results = []
 
@@ -175,6 +177,42 @@ async def run_puzzles(
             }
             logger.info(result_entry)
             results.append(result_entry)
+
+    return results
+
+async def find_k(
+    time_of_reflexion: str,
+    puzzle_idx, 
+    states,
+    logger):
+    num_reflexions = 4  # Number of iterations of reflexion
+    ks = [1,2,4]  # k for "k most recent"
+    num_agents = 1  
+    reflexion_type = "k most recent"
+    results = []
+
+    for i in range(num_agents):
+        states[i] = states[0]
+    for k in ks:
+        print("puzzle: ", states[0].puzzle, "with type: ", reflexion_type, " starts now")
+        # Run the reflexion game
+        score, token_cost, num_used_reflexions = await run_reflexion_gameof24(
+            time_of_reflexion, reflexion_type, puzzle_idx, states, num_agents, num_reflexions, k
+        )
+
+        # Log result
+        result_entry = {
+            "puzzle": states[0].puzzle,
+            "num_agents": num_agents,
+            "num_reflexions": num_reflexions,
+            "reflexion_type": reflexion_type,
+            "k": k,
+            "score": score,
+            "token_cost": token_cost,
+            "num_used_reflexions": num_used_reflexions
+        }
+        logger.info(result_entry)
+        results.append(result_entry)
 
     return results
 
@@ -244,6 +282,38 @@ async def test_LLM_stepwise_reflexion():
     all_results = await asyncio.gather(*tasks)
 
 from src.prompts.adapt import gameof24 as llama_prompts
+
+async def test_K_value():
+    """
+    test for finding the best k value in both trial-wise and step-wise
+    """
+    print("K testing starts now")
+    set_LLMverifier = False
+    all_puzzles_data = load_test_puzzles()
+    puzzle_idxs = [0, 1] #, 4, 9, 5, 1287, 1293, 1290, 1291, 1286, 1355, 1343, 1360, 1337, 1338
+
+    trial_tasks = [
+        test_K_value(
+            "trial-wise",
+            puzzle_idx=puzzle_idxs[idx],
+            states = all_puzzles_data[idx],
+            logger=k_trial_logger
+        )
+        for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
+    ]
+
+    step_tasks = [
+        test_K_value(
+            "step-wise",
+            puzzle_idx=puzzle_idxs[idx],
+            states = all_puzzles_data[idx],
+            logger=k_step_logger
+        )
+        for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
+    ]
+
+    trial_results = await asyncio.gather(*trial_tasks)
+    step_results = await asyncio.gather(*step_tasks)
 
 async def scoreTest():
     states = []
