@@ -288,7 +288,7 @@ async def test_K_value():
     test for finding the best k value in both trial-wise and step-wise
     """
     print("K testing starts now")
-    set_LLMverifier = False
+    set_LLMverifier(False)
     all_puzzles_data = load_test_puzzles()
     puzzle_idxs = [0, 1] #, 4, 9, 5, 1287, 1293, 1290, 1291, 1286, 1355, 1343, 1360, 1337, 1338
 
