@@ -100,7 +100,7 @@ class RafaVerifier():
 
     #Modified RAFA's check_step, to match how we have designed states in FOA
     def check_all(self, state, last_step) -> Tuple[bool, str]:
-        idx = len(state.steps) - 1
+        idx = len(state.steps)
         cur_step = state.steps[-1]
         #print("idx: ", idx)
         #print("cur_step: ", cur_step)
@@ -112,30 +112,30 @@ class RafaVerifier():
                 correct, feedback = self.check_answer(state.puzzle, cur_step)
                 #print("Answer is correct: ", correct, " Why: ", feedback)
                 if not correct:
-                    return f"Step {idx+1} tries to give an answer but it is incorrect. {feedback}", 0
-                return f"Step {idx+1} is correct. {feedback}", 10
+                    return f"Step {idx} tries to give an answer but it is incorrect. {feedback}", 0
+                return f"Step {idx} is correct. {feedback}", 10
             else:
                 # Check if the step is valid
                 #print("Current step does not contain answer, Checking valid move")
                 correct, feedback = self.check_valid_move(idx, last_step, cur_step)
                 #print("Current step is valid: ", correct, " Why: ", feedback)
                 if not correct:
-                    return f"Step {idx+1} is illegal. {feedback}", 0
+                    return f"Step {idx} is illegal. {feedback}", 0
 
                 formula = cur_step.split('left:')[0].strip("()")
                 #print("Checking equation, formula:", formula)
                 correct, feedback = self.check_equation(formula)
                 #print("Equation is correct: ", correct, " Why: ", feedback)
                 if not correct:
-                    return f"Step {idx+1} is not correctly calculated. {feedback}", 0
+                    return f"Step {idx} is not correctly calculated. {feedback}", 0
                 #print("Checking if it is possible to reach 24")
                 correct, feedback = self.check_twentyfour(cur_step)
                 #print("It is possible: ", correct, " Why: ", feedback)S
                 if not correct:
-                    return f"Step {idx+1} is impossible to lead to 24. {feedback}", 0
+                    return f"Step {idx} is impossible to lead to 24. {feedback}", 0
 
-                return f"Step {idx+1} is correct and can lead to 24.", 1
+                return f"Step {idx} is correct and can lead to 24.", 1
             
         except Exception as e:
             print(e)
-            return f"Step {idx+1} is invalid.", 0
+            return f"Step {idx} is invalid.", 0
