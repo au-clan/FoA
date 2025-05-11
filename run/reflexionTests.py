@@ -223,8 +223,7 @@ async def trial_wise_type_testing():
     print("trial_wise_type_testing")
     # Load unfinished puzzles
     all_puzzles_data = load_test_puzzles()
-    puzzle_idxs = [0, 1] #, 4, 9, 5, 1287, 1293, 1290, 1291, 1286, 1355, 1343, 1360, 1337, 1338
-
+    puzzle_idxs , _ = dataset.get_data("uniform")
     tasks = [
         run_puzzles(
             "trial-wise",
@@ -344,8 +343,9 @@ if __name__ == "__main__":
     #asyncio.run(create_test_puzzles())
     with open('uniform_test_puzzles.pkl', 'rb') as file:
         loaded_list = pickle.load(file)
-    # print(loaded_list[0])
-    # print(loaded_list[-1])
+    for i in range(len(loaded_list)):
+        print(loaded_list[i])
     print(len(loaded_list))
-
+    idxs, _ = dataset.get_data("uniform")
+    print(idxs)
     
