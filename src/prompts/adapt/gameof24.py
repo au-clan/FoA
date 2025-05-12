@@ -1,3 +1,47 @@
+modified_value_prompt = '''Evaluate if given numbers can reach 24 by responding with the following sure, likely or impossible. All remaining numbers needs to be used and can only be used once. 
+
+Examples:
+10 14
+10 + 14 = 24
+sure
+11 12
+11 + 12 = 23
+12 - 11 = 1
+11 * 12 = 132
+11 / 12 = 0.91
+Impossible
+4 4 10
+4 + 4 + 10 = 8 + 10 = 18
+4 * 10 - 4 = 40 - 4 = 36
+(10 - 4) * 4 = 6 * 4 = 24
+Sure
+4 9 11
+9 + 11 + 4 = 20 + 4 = 24
+Sure
+5 7 8
+5 + 7 + 8 = 12 + 8 = 20
+(8 - 5) * 7 = 3 * 7 = 21
+I cannot obtain 24 now, but numbers are within a reasonable range
+Likely
+5 6 6
+5 + 6 + 6 = 17
+(6 - 5) * 6 = 1 * 6 = 6
+I cannot obtain 24 now, but numbers are within a reasonable range
+Likely
+10 10 11
+10 + 10 + 11 = 31
+(11 - 10) * 10 = 10
+10 10 10 are all too big
+Impossible
+1 3 3
+1 * 3 * 3 = 9
+(1 + 3) * 3 = 12
+1 3 3 are all too small
+Impossible
+
+Input: {input}
+'''
+
 reflexion_step_prompt = '''The game of 24 is a math puzzle where players use four numbers and basic arithmetic operations (+ - * /) to make the result equal to 24. Following is a single step, which was determined to have failed
 Input: {puzzle}
 Step attempt:
@@ -331,7 +375,6 @@ Impossible
 
 Input: {input}
 '''
-
 
 
 # Taken from Tree of Thoughts paper
