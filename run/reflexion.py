@@ -388,6 +388,10 @@ async def solve_step_wise(
     for step in range(num_steps):
         print(f"Step {step} : Stepping")
 
+        #Reset reflexions such that it does not use reflexions from earlier step
+        for agent_id in agent_ids:
+            agent_reflexions[agent_id] = []
+
         #Save previous valid step before stepping
         context.previous_states = states.copy()
         agent_tasks = [
@@ -634,7 +638,7 @@ async def main():
     # Solve
     # Do reflexiongame
     # Example of running an gameOf24 experiment with reflexion
-    num_reflexions = 1
+    num_reflexions = 4
     k = 2
     num_agents = 1
     puzzles = load_test_puzzles()
@@ -646,8 +650,8 @@ async def main():
     puzzle_idx = 0
 
     # await run_reflexion_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
-    set_LLMverifier(True)
-    total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", puzzle_idx, state, num_agents, num_reflexions, k) 
+    set_LLMverifier(False)
+    total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("step_wise", "list", puzzle_idx, state, num_agents, num_reflexions, k) 
     print("total_score: ", total_score, "token_cost: ", token_cost, "num_used_reflexions: ", num_used_reflexions)
 
     # total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", state, num_agents, num_reflexions, k, verifier) 
