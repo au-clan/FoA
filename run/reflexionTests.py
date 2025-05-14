@@ -223,7 +223,7 @@ async def trial_wise_type_testing():
     print("trial_wise_type_testing")
     # Load unfinished puzzles
     all_puzzles_data = load_test_puzzles()
-    puzzle_idxs , _ = dataset.get_data("uniform")
+    puzzle_idxs, _ = dataset.get_data("uniform")
     tasks = [
         run_puzzles(
             "trial-wise",
@@ -244,7 +244,7 @@ async def test_RAFA_stepwise_types():
     set_LLMverifier(False)
     # Load unfinished puzzles
     all_puzzles_data = load_test_puzzles()
-    puzzle_idxs = [0, 1] #, 4, 9, 5, 1287, 1293, 1290, 1291, 1286, 1355, 1343, 1360, 1337, 1338
+    puzzle_idxs, _ = dataset.get_data("uniform")
 
     tasks = [
         run_puzzles(
@@ -266,7 +266,7 @@ async def test_LLM_stepwise_reflexion():
     set_LLMverifier(True)
     # Load unfinished puzzles
     all_puzzles_data = load_test_puzzles()
-    puzzle_idxs = [0, 1] #, 4, 9, 5, 1287, 1293, 1290, 1291, 1286, 1355, 1343, 1360, 1337, 1338
+    puzzle_idxs, _ = dataset.get_data("uniform")
 
     tasks = [
         run_puzzles(
@@ -289,7 +289,7 @@ async def test_K_value():
     print("K testing starts now")
     set_LLMverifier(False)
     all_puzzles_data = load_test_puzzles()
-    puzzle_idxs = [0, 1] #, 4, 9, 5, 1287, 1293, 1290, 1291, 1286, 1355, 1343, 1360, 1337, 1338
+    puzzle_idxs, _ = dataset.get_data("uniform")
 
     trial_tasks = [
         test_K_value(
@@ -340,7 +340,7 @@ if __name__ == "__main__":
     # asyncio.run(test_RAFA_stepwise_types())
     #asyncio.run(test_LLM_stepwise_reflexion())
     #asyncio.run(scoreTest())
-    #asyncio.run(create_test_puzzles())
+    # asyncio.run(create_test_puzzles())
     with open('uniform_test_puzzles.pkl', 'rb') as file:
         loaded_list = pickle.load(file)
     for i in range(len(loaded_list)):
