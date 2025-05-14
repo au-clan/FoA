@@ -146,6 +146,7 @@ async def check_states(
             for agent_id in valid_agents
         ]
         values = await asyncio.gather(*value_tasks)
+
         
         #Check if any values less than impossible score and mismatch detection
         for agent_id, value in zip(valid_agents, values):
@@ -309,9 +310,7 @@ async def solve_trial_wise(
     Returns the updated states, remaining agent_ids, and the accumulated score.
     """
     score = 0
-    states =  {}
-    registry = {}
-    
+    states =  {}        
     #Create one state for each agent
     for agent_id in agent_ids:
         states[agent_id] = GameOf24State(
@@ -320,12 +319,12 @@ async def solve_trial_wise(
             steps=[], 
             randomness=random.randint(0,1000)
             )
-        registry[agent_id] = []
     finished_states = {}
 
     #print("agent_reflexions: ", agent_reflexions)
     #add last trials reflexion to log
-    log[f"Agent {agent_id}"] = {
+    for agent_id in agent_ids:
+        log[f"Agent {agent_id}"] = {
             "Reflexion": agent_reflexions[agent_id][-1] if agent_reflexions[agent_id] else "",
         }
     #Stepping
@@ -363,11 +362,6 @@ async def solve_trial_wise(
             
             states[agent_id] = new_state
             print(f"Current step for agent {agent_id}: {new_state.steps[-1]} \n")
-            if len(registry[agent_id]) == 0:
-                last_step = new_state.puzzle
-                registry[agent_id].append((new_state.steps[-1], verify(new_state)))
-            else:
-                registry[agent_id].append((new_state.steps[-1], verify(new_state)))
         #print(registry)
         # Evaluate whether a puzzle has been solved, 
         for agent_id in list(states.keys()):
@@ -520,10 +514,65 @@ async def solve_step_wise(
             # Wait for all tasks to complete
             await asyncio.gather(*failed_agent_tasks)
 
-    with open("trial_log.jsonl", "a") as f:
+    with open("step_log.jsonl", "a") as f:
         f.write(json.dumps(log) + "\n")
     return context.total_score, num_used_reflexions
    
+async def async_cache_reflexion(states, agent_id, cache, time_of_reflexion, step_batcher, agent_feedback):
+    print("agent_id in make_reflexion", agent_id)
+    state = states[agent_id]
+    key = hash(state)
+    print(f"agent_id {agent_id} has state: {state} and key: {key} in make_reflexion")
+    entry = cache.get(key, RegistryEntry(state=state, verifiers={}, reflections={}))
+
+    use_cache = False
+
+    if time_of_reflexion in entry.reflections:
+        if time_of_reflexion == "trial_wise":
+            cache_steps = cache.get(key).state.steps
+            if cache_steps == state.steps:
+                use_cache = True
+                # reflexion = entry.reflections[time_of_reflexion]["reflection"]
+                # new_reflexions.append(reflexion)
+                # print("Getting reflexion from cache")
+                # print("reflexion: ", reflexion)
+            else:
+                use_cache = True
+        # else:
+        #     reflexion = entry.reflections[time_of_reflexion]["reflection"]
+        #     new_reflexions.append(reflexion)
+        #     print("Getting reflexion from cache")
+        #     print("reflexion: ", reflexion)
+    if use_cache:
+        reflexion = entry.reflections[time_of_reflexion]["reflection"]
+        print("Getting reflexion from cache")
+        print(f"agent {agent_id} reflexion: ", reflexion)
+        return reflexion
+    else:
+        print("Getting reflexion from LLM")
+        reflexion = await GameOf24Agent.generate_reflexion(
+            time_of_reflexion,
+            puzzle=states[agent_id].puzzle, 
+            steps=states[agent_id].steps,
+            state=states[agent_id],
+            api=step_batcher, 
+            namespace=(0, f"Agent: {int(agent_id)}"), 
+            agent_feedback=agent_feedback
+        )
+        # print("reflexion: ", reflexion)
+        metadata = {
+            "model_used": model,
+            "temperature": eval_api_config["temperature"],
+            "max_tokens": eval_api_config["max_tokens"],
+        }
+        entry.reflections[time_of_reflexion] = {"reflection": reflexion, "metadata": metadata}
+        cache.set(key, entry)
+        if time_of_reflexion in entry.reflections:
+            print("Getting reflexion from cache - sanity check")
+            reflexion = entry.reflections[time_of_reflexion]["reflection"]
+            print(f"agent {agent_id} reflexion: ", reflexion)
+        return reflexion
+
 
 async def make_reflexion(
         step_batcher: BatchingAPI,
@@ -539,44 +588,19 @@ async def make_reflexion(
     """
     Generates a reflection for each agent based on their current state and the chosen type of reflection.
     """
-
+    print("cache is of type in make reflexion ", type(cache))
     print("states: ", states)
-    new_reflexions = []
-    for agent_id in states:
-        print("agent_id in make_reflexion", agent_id)
-        state = states[agent_id]
-        key = hash(state)
-        print(f"agent_id {agent_id} has state: {state} and key: {key} in make_reflexion")
-        entry = cache.get(key, RegistryEntry(state=state, verifiers={}, reflections={}))
-        if time_of_reflexion in entry.reflections:
-            print("Getting reflexion from cache")
-            reflexion = entry.reflections[time_of_reflexion]["reflection"]
-            print("reflexion: ", reflexion)
-        else:
-            print("Getting reflexion from LLM")
-            reflexion = await GameOf24Agent.generate_reflexion(
-                time_of_reflexion,
-                puzzle=states[agent_id].puzzle, 
-                steps=states[agent_id].steps, 
-                state=states[agent_id],
-                api=step_batcher, 
-                namespace=(0, f"Agent: {int(agent_id)}"), 
-                agent_feedback=agent_feedback
+
+    cache_reflexions_tasks = [
+        asyncio.create_task(
+            async_cache_reflexion(
+                states, agent_id, cache, time_of_reflexion, step_batcher, agent_feedback
             )
-            # print("reflexion: ", reflexion)
-            metadata = {
-                "model_used": model,
-                "temperature": eval_api_config["temperature"],
-                "max_tokens": eval_api_config["max_tokens"],
-            }
-            entry.reflections[time_of_reflexion] = {"reflection": reflexion, "metadata": metadata}
-            cache.set(key, entry)
-            if time_of_reflexion in entry.reflections:
-                print("Getting reflexion from cache - sanity check")
-                reflexion = entry.reflections[time_of_reflexion]["reflection"]
-                print("reflexion: ", reflexion)
-            
-        new_reflexions.append(reflexion)
+        )
+        for agent_id in states
+    ]
+    new_reflexions = await asyncio.gather(*cache_reflexions_tasks)
+    print("new_reflexions: ", new_reflexions)
         
     for agent_id, reflexion in zip(states.keys(), new_reflexions):
         agent_reflexions[agent_id].append(reflexion)
@@ -697,12 +721,15 @@ async def run_reflexion_gameof24(
     # states, agent_ids, score = await solve_trial_wise(step_batcher, num_steps, puzzle_idx, puzzle, agent_ids, agent_reflexions, verifier)
     if time_of_reflexion == "trial_wise":
         #Reflect and go again i times
+        cache = Cache('caches/registry')
+        print("cache in run_reflexion is of type ", type(cache))
         for _ in range(num_reflexions):
-            agent_reflexions, agent_all_reflexions = await make_reflexion(step_batcher, time_of_reflexion, reflexion_type, k, states, agent_reflexions, agent_all_reflexions)
+            agent_reflexions, agent_all_reflexions = await make_reflexion(step_batcher, time_of_reflexion, reflexion_type, k, states, agent_reflexions, agent_all_reflexions, cache=cache)
             print("reflexions per agent", agent_reflexions)
             states, agent_ids, score = await solve_trial_wise(step_batcher, num_steps, puzzle_idx, puzzle, agent_ids, agent_reflexions, log)
             total_score += score
         num_used_reflexions = sum(len(reflexions) for reflexions in agent_all_reflexions.values())
+        print(cache)
     else: #step_wise
         total_score, num_used_reflexions = await solve_step_wise(step_batcher, num_steps, num_reflexions, k, puzzle, agent_ids, reflexion_type, log)
     cost = api.cost(tab_name=reflexion_type+str(num_reflexions)+puzzle, report_tokens=True)
@@ -719,7 +746,7 @@ async def main():
     # Example of running an gameOf24 experiment with reflexion
     num_reflexions = 2
     k = 2
-    num_agents = 2
+    num_agents = 6
     puzzles = load_test_puzzles()
     state = puzzles[0] #1, 1, 4, 6
 
@@ -730,7 +757,7 @@ async def main():
 
     # await run_reflexion_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
     set_LLMverifier(True)
-    total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("step_wise", "list", puzzle_idx, state, num_agents, num_reflexions, k) 
+    total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", puzzle_idx, state, num_agents, num_reflexions, k) 
     print("total_score: ", total_score, "token_cost: ", token_cost, "num_used_reflexions: ", num_used_reflexions)
 
     # total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", state, num_agents, num_reflexions, k, verifier) 

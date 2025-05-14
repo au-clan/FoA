@@ -50,6 +50,15 @@ class RafaVerifier():
         #print("last_step: ", last_step)
         #print((idx, last_step, cur_step))
         try:
+            #If it contains answer, we don't need to check if it can reach 24
+            if "answer" in cur_step.lower():
+                #print("Current step contains answer thus Checking answer")
+                correct, feedback = self.check_answer(state.puzzle, cur_step)
+                #print("Answer is correct: ", correct, " Why: ", feedback)
+                if not correct:
+                    return f"Step {idx} tries to give an answer but it is incorrect. {feedback}", 0
+                return f"Step {idx} is correct. {feedback}", 10
+            else:
                 #print("Checking if it is possible to reach 24")
                 correct, feedback = self.check_twentyfour(cur_step)
                 #print("It is possible: ", correct, " Why: ", feedback)S
