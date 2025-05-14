@@ -46,23 +46,23 @@ class GameOf24Agent:
                 prompt = llama_prompts.modified_cot_prompt.format(input=state.puzzle) + "Steps:\n" + steps + "Answer: "
             else:
                 prompt = llama_prompts.modified_cot_reflexion_prompt.format(input=state.puzzle, reflexion=reflexion[0]) + "Steps:\n" + steps + "Answer: "
-            print("prompt in cot: ", prompt)
+            # print("prompt in cot: ", prompt)
             # Get the final expression
             suggestions = await api.buffered_request(prompt, key=hash(state), namespace=namespace)
 
             # State does not change, only the steps
             selected_suggestion = suggestions
             selected_state = state.current_state
-            print("selected_suggestion: ", selected_suggestion, "selected state: ", state.current_state)
+            # print("selected_suggestion: ", selected_suggestion, "selected state: ", state.current_state)
         else:
-            print("reflexion:", reflexion)
+            # print("reflexion:", reflexion)
             if len(reflexion) == 0:
                 prompt = llama_prompts.bfs_prompt_single.format(input=current_state) 
             else:
                 #print("reflexion[0]: ", reflexion[0])
                 prompt = llama_prompts.bfs_reflexion_prompt_single.format(input=current_state, reflexion=reflexion) 
 
-            print("step prompt: ", prompt)
+            # print("step prompt: ", prompt)
             suggestions = await api.buffered_request(prompt, key=hash(state), namespace=namespace)
 
             # parse suggestions, based on the current state
@@ -199,7 +199,7 @@ class GameOf24Agent:
         return validation
     
     @staticmethod
-    async def value(puzzle: str, steps: List[str], state: GameOf24State, api, namespace, n=3) -> str:
+    async def value(state: GameOf24State, api, namespace, n=3) -> str:
         """
         Uses the value prompt to estimate the feasibility of the steps.
         
@@ -230,35 +230,29 @@ class GameOf24Agent:
         else:
             prompt = llama_prompts.value_prompt.format(input=state.current_state)
            
-        #TODO: Implement value_cache in run file (Hint: look at FoA run file)
-        # if prompt in value_cache and caching:
-        #     value_number = value_cache[prompt]
-        if False:
-            pass
-        else:
-            coroutines = []
-            for _ in range(n):
-                coroutines.append(api.buffered_request(prompt, key=hash(state), namespace=namespace))
-            iid_replies = await asyncio.gather(*coroutines)
 
-            # Unwrap the iid_replies
-            
-            if len(state.steps) == 4 and 'answer' not in "\n".join(state.steps).lower():
-                value_number = 0
-            
-            else:
-                print("iid_replies: ", iid_replies)
-                value_names = [value.split('\n')[-1].lower() for value in iid_replies]
-                if "impossible" in value_names:
-                    return 0.001, iid_replies
-                print("")
-                print("Value names ", value_names)
-                print("")
-                value_map = {'impossible': 0.001, 'likely': 1, 'sure': 20}
-                value_number = sum(value * value_names.count(name) for name, value in value_map.items())
-                print("")
-            # value_cache[prompt] = value_number
-        print("value number: ", value_number)
+        coroutines = []
+        for _ in range(n):
+            coroutines.append(api.buffered_request(prompt, key=hash(state), namespace=namespace))
+        iid_replies = await asyncio.gather(*coroutines)
+
+        # Unwrap the iid_replies
+        
+        if len(state.steps) == 4 and 'answer' not in "\n".join(state.steps).lower():
+            value_number = 0
+        
+        else:
+            # print("iid_replies: ", iid_replies)
+            value_names = [value.split('\n')[-1].lower() for value in iid_replies]
+            if "impossible" in value_names:
+                return 0.001, iid_replies
+            # print("")
+            # print("Value names ", value_names)
+            # print("")
+            value_map = {'impossible': 0.001, 'likely': 1, 'sure': 20}
+            value_number = sum(value * value_names.count(name) for name, value in value_map.items())
+            # print("")
+        # print("value number: ", value_number)
         return value_number, iid_replies
 
 
