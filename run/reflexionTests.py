@@ -30,7 +30,7 @@ dataset = GameOf24Data()
 
 step_api_config = eval_api_config = {
     "max_tokens": 1000,
-    "temperature": 0,
+    "temperature": 0.7,
     "top_p": 1,
     "request_timeout": 120,
     "top_k": 50
@@ -130,7 +130,7 @@ async def create_test_puzzles():
         agent_reflexions[agent_id] = []
     puzzle_idxs, puzzles = dataset.get_data("uniform")
     finished_puzzles = []
-    #puzzles = ["1, 1, 4, 6", "1, 1, 11, 11", "1, 3, 8, 8", "1 1 1 8", "6 6 6 6", 
+    # puzzles = ["1, 1, 4, 6", "1, 5, 9, 10", "1, 3, 8, 8", "1 1 1 8", "6 6 6 6"]
     #           "1 1 2 12", "1 2 2 6", "1 1 10 12", "2 2 10 10", "1 1 1 12", 
     #           "3 4 8 12", "2 4 6 11", "2 2 8 9", "1 5 6 7", "5 8 10 11",
     #          "4 4 9 12", "2 5 6 6", "1 1 3 12", "2 2 2 12", "1 1 4 12"]
@@ -138,8 +138,11 @@ async def create_test_puzzles():
                 "2 4 7 7", "3 6 6 10", "4 7 9 11", "2 2 3 5", "2 5 7 9",
                 "2 4 10 10", "5 5 7 11", "1 3 4 6", "5 7 7 11", "3 3 7 13" ] #5 easy, 5 medium, 5 hard (<99%, 50.3-52.7%, 25.8-27.6%)
     for puzzle in puzzles:
-        states, _, _ = await solve_trial_wise(step_batcher, num_steps, puzzle_idxs, puzzle, agent_ids, agent_reflexions)
+        agent_id = [0]
+        states, _, _ = await solve_trial_wise(step_batcher, num_steps, puzzle_idxs, puzzle, agent_id, agent_reflexions, {})
         finished_puzzles.append(states)
+        print("agent_ids", agent_ids)
+        print("State in create test puzzles:", states)
     print(len(finished_puzzles))
     with open("uniform_test_puzzles.pkl", "wb") as f:
         pickle.dump(finished_puzzles, f)
@@ -344,8 +347,11 @@ if __name__ == "__main__":
     with open('uniform_test_puzzles.pkl', 'rb') as file:
         loaded_list = pickle.load(file)
     for i in range(len(loaded_list)):
-        print(loaded_list[i])
+        # print(loaded_list[i])
+        if len(loaded_list[i]) == 0:
+            print(i)
     print(len(loaded_list))
-    idxs, _ = dataset.get_data("uniform")
+    idxs, puzzles = dataset.get_data("uniform")
     print(idxs)
-    
+    print(puzzles)
+    print(len(puzzles))
