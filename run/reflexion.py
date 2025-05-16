@@ -8,6 +8,7 @@ import json
 from dataclasses import dataclass
 from typing import Any, Dict, List, Tuple
 from diskcache import Cache
+from deepdiff import DeepHash
 sys.path.append(os.getcwd()) # Project root!!
 from async_engine.api import API
 from async_engine.batched_api import BatchingAPI
@@ -35,7 +36,7 @@ class AgentContext:
 class RegistryEntry:
     state: GameOf24State
     verifiers: dict
-    reflections: dict
+    reflexions: dict
 
 LLMVERIFIER = False
 IMPOSSIBLE_SCORE = 0.001
@@ -186,8 +187,8 @@ async def check_states(
                     context.failed_agents.remove(agent_id) 
                     
 async def async_cache_verify(state, cache, agent_id, step_batcher, step):
-    key = hash(state)
-    entry = cache.get(key, RegistryEntry(state=state, verifiers={}, reflections={}))
+    key = DeepHash(state)[state]
+    entry = cache.get(key, RegistryEntry(state=state, verifiers={}, reflexions={}))
     verifier = VERIFIER
     print(f"agent_id has state: {state} and key: {key} in verification")
     
@@ -306,7 +307,7 @@ async def solve_trial_wise(
         log: Dict[str, Any]
     ) -> Tuple[Dict[int, GameOf24State], List[int], int]:
     """"
-    Solves the puzzle either with or without reflections.
+    Solves the puzzle either with or without reflexions.
     Returns the updated states, remaining agent_ids, and the accumulated score.
     """
     score = 0
@@ -521,33 +522,20 @@ async def solve_step_wise(
 async def async_cache_reflexion(states, agent_id, cache, time_of_reflexion, step_batcher, agent_feedback):
     print("agent_id in make_reflexion", agent_id)
     state = states[agent_id]
-    key = hash(state)
+    key = DeepHash(state)[state]
     print(f"agent_id {agent_id} has state: {state} and key: {key} in make_reflexion")
-    entry = cache.get(key, RegistryEntry(state=state, verifiers={}, reflections={}))
+    entry = cache.get(key, RegistryEntry(state=state, verifiers={}, reflexions={}))
 
-    use_cache = False
+    print("entry: ", entry)
 
-    if time_of_reflexion in entry.reflections:
-        if time_of_reflexion == "trial_wise":
-            cache_steps = cache.get(key).state.steps
-            if cache_steps == state.steps:
-                use_cache = True
-                # reflexion = entry.reflections[time_of_reflexion]["reflection"]
-                # new_reflexions.append(reflexion)
-                # print("Getting reflexion from cache")
-                # print("reflexion: ", reflexion)
-            else:
-                use_cache = True
-        # else:
-        #     reflexion = entry.reflections[time_of_reflexion]["reflection"]
-        #     new_reflexions.append(reflexion)
-        #     print("Getting reflexion from cache")
-        #     print("reflexion: ", reflexion)
-    if use_cache:
-        reflexion = entry.reflections[time_of_reflexion]["reflection"]
+
+    print("entry.reflexions: ", entry.reflexions)
+    print("time_of_reflexion in entry.reflexions: ", time_of_reflexion in entry.reflexions)
+
+    if time_of_reflexion in entry.reflexions:  
+        reflexion = entry.reflexions[time_of_reflexion]["reflexion"]
         print("Getting reflexion from cache")
         print(f"agent {agent_id} reflexion: ", reflexion)
-        return reflexion
     else:
         print("Getting reflexion from LLM")
         reflexion = await GameOf24Agent.generate_reflexion(
@@ -565,13 +553,12 @@ async def async_cache_reflexion(states, agent_id, cache, time_of_reflexion, step
             "temperature": eval_api_config["temperature"],
             "max_tokens": eval_api_config["max_tokens"],
         }
-        entry.reflections[time_of_reflexion] = {"reflection": reflexion, "metadata": metadata}
+
+        entry.reflexions[time_of_reflexion] = {"reflexion": reflexion, "metadata": metadata}
+        print("entry.reflexions[time_of_reflexion][type_of_reflexion]", entry.reflexions[time_of_reflexion])
+        print("entry.reflexions: ", entry.reflexions)
         cache.set(key, entry)
-        if time_of_reflexion in entry.reflections:
-            print("Getting reflexion from cache - sanity check")
-            reflexion = entry.reflections[time_of_reflexion]["reflection"]
-            print(f"agent {agent_id} reflexion: ", reflexion)
-        return reflexion
+    return reflexion
 
 
 async def make_reflexion(
@@ -586,9 +573,8 @@ async def make_reflexion(
         cache=None
     ) -> Tuple[Dict[int, List[str]], Dict[int, List[str]]]:
     """
-    Generates a reflection for each agent based on their current state and the chosen type of reflection.
+    Generates a reflexion for each agent based on their current state and the chosen type of reflexion.
     """
-    print("cache is of type in make reflexion ", type(cache))
     print("states: ", states)
 
     cache_reflexions_tasks = [
@@ -601,6 +587,7 @@ async def make_reflexion(
     ]
     new_reflexions = await asyncio.gather(*cache_reflexions_tasks)
     print("new_reflexions: ", new_reflexions)
+
         
     for agent_id, reflexion in zip(states.keys(), new_reflexions):
         agent_reflexions[agent_id].append(reflexion)
@@ -705,7 +692,6 @@ async def run_reflexion_gameof24(
 
             #for agent_id in range(num_agents):
             log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Step": f"{states[agent_id].steps[step]}"})
-            print("Logged step: ", states[agent_id].steps[step])
 
     #print("states here: ", states)
 
@@ -722,7 +708,6 @@ async def run_reflexion_gameof24(
     if time_of_reflexion == "trial_wise":
         #Reflect and go again i times
         cache = Cache('caches/registry')
-        print("cache in run_reflexion is of type ", type(cache))
         for _ in range(num_reflexions):
             agent_reflexions, agent_all_reflexions = await make_reflexion(step_batcher, time_of_reflexion, reflexion_type, k, states, agent_reflexions, agent_all_reflexions, cache=cache)
             print("reflexions per agent", agent_reflexions)
@@ -746,7 +731,7 @@ async def main():
     # Example of running an gameOf24 experiment with reflexion
     num_reflexions = 2
     k = 2
-    num_agents = 6
+    num_agents = 1
     puzzles = load_test_puzzles()
     state = puzzles[0] #1, 1, 4, 6
 
@@ -764,7 +749,18 @@ async def main():
     # print("total_score: ", total_score, "token_cost: ", token_cost, "num_used_reflexions: ", num_used_reflexions)
 
 if __name__ == "__main__":
-    asyncio.run(main())         
+    # asyncio.run(main())       
     # state = GameOf24State("1 1 4 6", "test", "['test']", 2)
     # print(state.hash())
     # print(state.hash())
+    cache = Cache('caches/registry')
+    cache.clear()
+    keys = []
+    for key in cache:
+        keys.append(key)
+    print("number of keys in cache is ", len(keys))
+    for key in keys:
+        print(key)
+        print(cache.get(key))
+        
+    
