@@ -65,7 +65,7 @@ class RafaValidator():
             return False, "The Equation is not valid."
 
 
-    def validate_all(self, state, last_step) -> Tuple[bool, str]:
+    def validate_all(self, state, last_step) -> Tuple[str, bool]:
         idx = len(state.steps)
         cur_step = state.steps[-1]
         #print("idx: ", idx)

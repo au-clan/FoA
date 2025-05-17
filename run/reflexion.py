@@ -102,36 +102,33 @@ async def check_states(
     """
     validator = RafaValidator()
     
-    
-    
     #Creating a list if using single_state with agent_ids_to_check otherwise creating list with all agents.
     if agent_ids_to_check is None:
         agent_ids = list(context.states.keys())
         # fully fresh run
         context.failed_agents.clear()
     else:
-        print("agent_id")
+        print("agent_id to check")
         agent_ids = [agent_ids_to_check]
     
     valid_agents = []
     #Validate each agent state
     for agent_id in agent_ids:
         last_step = context.states[agent_id].steps[-2] if len(context.states[agent_id].steps) > 1 else context.states[agent_id].puzzle
-        print("last_step: ", last_step)
+        #print("last_step: ", last_step)
         print("state in check_states: ", context.states[agent_id])
-        validation_feedback, reward = validator.validate_all(
+        validation = validator.validate_all(
             context.states[agent_id], 
             last_step
         )
-        context.agent_feedback[agent_id] = (validation_feedback, reward)
-        
         #Checking whether an agent's state is invalid or not
-        if reward == 0 or "invalid" in validation_feedback:
-            print("agent id: ", agent_id, " failed")
-            context.failed_agents.append(agent_id)   
+        if validation[1] == 0:
+            context.agent_validations[agent_id] = validation
+            context.failed_agents.append(agent_id)  
         else:
             valid_agents.append(agent_id)
-            
+            #Set validations to be empty
+            context.agent_validations[agent_id] = ("", "")
     #Early stop if all agents contain invalid step
     if not valid_agents:
         return
@@ -157,18 +154,13 @@ async def check_states(
         
         #Check if any values less than impossible score and mismatch detection
         for agent_id, value in zip(valid_agents, values):
-            print("\n\n")
+            #print("\n\n")
             print("Value list: ", value)
             context.agent_values[agent_id] = value[0]
             iid_replies = value[1]
-            print("value: ", context.agent_values[agent_id])
-            print("iid_replies: ", iid_replies)
-            print("\n\n")
             
-            #Need to run rafaverifier in order to do mismatching... we might want to add a value feedback in the context to keep them apart
-            feedback, reward = verify(context.states[agent_id])            
-            if reward == 0 or "invalid" in feedback:
-                context.agent_feedback[agent_id] = (feedback, reward)
+            #Need to run rafaverifier in order to do mismatching
+            context.agent_feedback[agent_id] = verify(context.states[agent_id])            
                 
             if context.agent_values[agent_id] <= IMPOSSIBLE_SCORE:
                 print("agent id: ", agent_id, " failed")
@@ -194,7 +186,14 @@ async def check_states(
                     
 async def async_cache_verify(state, cache, agent_id, reflexion_type, num_reflexions, step_batcher, step):
     global total_cost
-    key = DeepHash(state)[state]
+    # Create a proxy dict excluding 'randomness'
+    state_to_hash = {
+        'puzzle': state.puzzle,
+        'current_state': state.current_state,
+        'steps': state.steps
+    }
+
+    key = DeepHash(state_to_hash)[state_to_hash]
     entry = cache.get(key, RegistryEntry(state=state, verifiers={}, reflexions={}))
     verifier = VERIFIER
     print(f"agent_id has state: {state} and key: {key} in verification")
@@ -202,9 +201,9 @@ async def async_cache_verify(state, cache, agent_id, reflexion_type, num_reflexi
     if verifier.name in entry.verifiers:
         print("Getting verification from cache")
         verification = entry.verifiers[verifier.name]["verification"]
-        print("verification: ", verification)
+        #print("verification: ", verification)
         verification_cost = entry.verifiers[verifier.name]["metadata"]["verification_cost"]
-        print("verification cost=", verification_cost)
+        #print("verification cost=", verification_cost)
         total_cost += verification_cost
     else:
         print("Getting verification from LLM")
@@ -218,8 +217,8 @@ async def async_cache_verify(state, cache, agent_id, reflexion_type, num_reflexi
         cost = api.cost(tab_name=reflexion_type+str(num_reflexions)+state.puzzle, report_tokens=True)
         post_cost = cost.get("total_tokens")
         diff_cost = post_cost-pre_cost
-        print("diff_cost: ", diff_cost)
-        print("verification: ", verification)
+        #print("diff_cost: ", diff_cost)
+        #print("verification: ", verification)
         metadata = {
         "model_used": model,
         "temperature": eval_api_config["temperature"],
@@ -235,17 +234,17 @@ def mismatch_detecting(agent_id, context, step, iid_replies):
     feedback = context.agent_feedback[agent_id][0]
     reward = context.agent_feedback[agent_id][1]
     if reward == 1:
-        if "Invalid" in feedback or context.agent_values[agent_id] <= IMPOSSIBLE_SCORE:
-            if "Invalid" in feedback:
-                log_mismatch(agent_id, step, context.states[agent_id], "False Negative", "Validation", context.agent_validations[agent_id], feedback)
+        if context.agent_values[agent_id] <= IMPOSSIBLE_SCORE: #"Invalid" in feedback or
+            #if "Invalid" in feedback:
+                #log_mismatch(agent_id, step, context.states[agent_id], "False Negative", "Validation", context.agent_validations[agent_id], feedback)
             if context.agent_values[agent_id] <= IMPOSSIBLE_SCORE:
                 log_mismatch(agent_id, step, context.states[agent_id], "False Negative", "Valuation", iid_replies, feedback)    
 
     # False Positive: validation or value says valid, but verifier reward = 0
     elif reward == 0:
-        if "Valid" in feedback or context.agent_values[agent_id] > IMPOSSIBLE_SCORE:
-            if "Valid" in feedback:
-                log_mismatch(agent_id, step, context.states[agent_id], "False Positive", "Validation", context.agent_validations[agent_id], feedback)
+        if context.agent_values[agent_id] > IMPOSSIBLE_SCORE: #"Valid" in feedback or
+            # if "Valid" in feedback:
+            #     log_mismatch(agent_id, step, context.states[agent_id], "False Positive", "Validation", context.agent_validations[agent_id], feedback)
             if context.agent_values[agent_id] > IMPOSSIBLE_SCORE:
                 log_mismatch(agent_id, step, context.states[agent_id], "False Positive", "Valuation", iid_replies, feedback) 
 
@@ -277,7 +276,8 @@ async def failed_agent_step(
         single_state, 
         agent_reflexions, 
         agent_all_reflexions,
-        context.agent_feedback[agent_id][0] if not LLMVERIFIER else "",
+        context.agent_feedback[agent_id][0],
+        context.agent_validations[agent_id][0],
         cache=cache
     )
     # print("agent_id after reflexion: ", agent_id)
@@ -499,8 +499,6 @@ async def solve_step_wise(
         await check_states(step_batcher, reflexion_type, num_reflexions, step, context, cache)
 
         while context.failed_agents:
-            print("context failed agents: ", context.failed_agents)
-            print("agent_num_reflexions: ", agent_num_reflexions)
             for agent_id in context.failed_agents.copy():
                 if agent_num_reflexions[agent_id] >= num_reflexions:
                     context.failed_agents.remove(agent_id)
@@ -539,32 +537,30 @@ async def solve_step_wise(
         f.write(json.dumps(log) + "\n")
     return context.total_score, num_used_reflexions
    
-async def async_cache_reflexion(states, agent_id, cache, time_of_reflexion, reflexion_type, num_reflexions, step_batcher, agent_feedback):
+async def async_cache_reflexion(states, agent_id, cache, time_of_reflexion, reflexion_type, num_reflexions, step_batcher, agent_feedback, agent_validation):
     global total_cost
-    print("agent_id in make_reflexion", agent_id)
     state = states[agent_id]
-    key = DeepHash(state)[state]
+    # Create a proxy dict excluding 'randomness'
+    state_to_hash = {
+        'puzzle': state.puzzle,
+        'current_state': state.current_state,
+        'steps': state.steps
+    }
+
+    key = DeepHash(state_to_hash)[state_to_hash]
     print(f"agent_id {agent_id} has state: {state} and key: {key} in make_reflexion")
     entry = cache.get(key, RegistryEntry(state=state, verifiers={}, reflexions={}))
 
-    print("entry: ", entry)
-
-
-    print("entry.reflexions: ", entry.reflexions)
-    print("time_of_reflexion in entry.reflexions: ", time_of_reflexion in entry.reflexions)
-
+    #If the reflection exists
     if time_of_reflexion in entry.reflexions:  
         reflexion = entry.reflexions[time_of_reflexion]["reflexion"]
         print("Getting reflexion from cache")
-        print(f"agent {agent_id} reflexion: ", reflexion)
         reflexion_cost = entry.reflexions[time_of_reflexion]["metadata"]["reflexion_cost"]
-        print("Reflexion cost=", reflexion_cost)
         total_cost += reflexion_cost
     else:
         print("Getting reflexion from LLM")
         cost = api.cost(tab_name=reflexion_type+str(num_reflexions)+state.puzzle, report_tokens=True)
         pre_cost = cost.get("total_tokens")
-        print("cost before making reflexion: ", pre_cost)
         reflexion = await GameOf24Agent.generate_reflexion(
             time_of_reflexion,
             puzzle=states[agent_id].puzzle, 
@@ -572,14 +568,12 @@ async def async_cache_reflexion(states, agent_id, cache, time_of_reflexion, refl
             state=states[agent_id],
             api=step_batcher, 
             namespace=(0, f"Agent: {int(agent_id)}"), 
-            agent_feedback=agent_feedback
+            agent_feedback="" if LLMVERIFIER else agent_feedback,
+            agent_validation= agent_validation
         )
         cost = api.cost(tab_name=reflexion_type+str(num_reflexions)+state.puzzle, report_tokens=True)
         post_cost = cost.get("total_tokens")
-        print("cost after: ", post_cost)
         diff_cost = post_cost - pre_cost
-        print("difference in cost cost: ", diff_cost)
-        # print("reflexion: ", reflexion)
         metadata = {
             "model_used": model,
             "temperature": eval_api_config["temperature"],
@@ -588,8 +582,6 @@ async def async_cache_reflexion(states, agent_id, cache, time_of_reflexion, refl
         }
 
         entry.reflexions[time_of_reflexion] = {"reflexion": reflexion, "metadata": metadata}
-        print("entry.reflexions[time_of_reflexion][type_of_reflexion]", entry.reflexions[time_of_reflexion])
-        print("entry.reflexions: ", entry.reflexions)
         cache.set(key, entry)
     return reflexion
 
@@ -604,24 +596,22 @@ async def make_reflexion(
         agent_reflexions: Dict[int, List[str]], 
         agent_all_reflexions: Dict[int, List[str]],
         agent_feedback: str = "",
+        agent_validations = "",
         cache=None
     ) -> Tuple[Dict[int, List[str]], Dict[int, List[str]]]:
     """
     Generates a reflexion for each agent based on their current state and the chosen type of reflexion.
     """
-    print("states: ", states)
-    
     cache_reflexions_tasks = [
         asyncio.create_task(
             async_cache_reflexion(
-                states, agent_id, cache, time_of_reflexion, reflexion_type, num_reflexions, step_batcher, agent_feedback
+                states, agent_id, cache, time_of_reflexion, reflexion_type, num_reflexions, step_batcher, agent_feedback, agent_validations
             )
         )
         for agent_id in states
     ]
     new_reflexions = await asyncio.gather(*cache_reflexions_tasks)
     print("new_reflexions: ", new_reflexions)
-
         
     for agent_id, reflexion in zip(states.keys(), new_reflexions):
         agent_reflexions[agent_id].append(reflexion)
@@ -718,7 +708,6 @@ async def run_reflexion_gameof24(
     log[puzzle_idx] = {"puzzle": puzzle}
     log[puzzle_idx].update({f"Agent {i}": {} for i in range(num_agents)})
     #Log initial solve
-    print("num agents: ", num_agents)
     print("state is : ", states[agent_id])
     if time_of_reflexion == "trial_wise":
         for step in range(num_steps):

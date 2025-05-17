@@ -117,9 +117,9 @@ Input: {input}
 reflexion_step_prompt = '''The game of 24 is a math puzzle where players use four numbers and basic arithmetic operations (+ - * /) to make the result equal to 24. Following is a single step, which was determined to have failed
 Input: {puzzle}
 Step attempt:
-{steps}
+{step}
 And we have the following feedback: 
-{agent_feedback}
+{agent_feedback}{agent_validation}
 Now using the above feedback, if there is any, explain which mistakes made the problem either unsolvable, invalid or brought the number further away from 24. Be concise
 
 Reflection:
