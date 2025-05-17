@@ -70,6 +70,24 @@ def setup_logger(name, file_name):
     logger.addHandler(handler)
     return logger
 
+def remove_all_retrying_lines(log_path: str):
+    # Pattern: Match any line that includes "Retrying request to /openai/v1/chat/completions in X seconds"
+    pattern = re.compile(
+        r".*Retrying request to /openai/v1/chat/completions in .* seconds.*"
+    )
+
+    with open(log_path, 'r') as file:
+        lines = file.readlines()
+
+    # Filter out retrying lines
+    cleaned_lines = [line for line in lines if not pattern.search(line)]
+
+    with open(log_path, 'w') as file:
+        file.writelines(cleaned_lines)
+
+    print(f"Removed all retry lines from {log_path}")
+
+
 # Create loggers
 trial_logger = setup_logger("trial_wise", "trial_wise.log")
 rafa_step_logger = setup_logger("stepwise_RAFA", "stepwise_RAFA.log")
@@ -344,14 +362,15 @@ if __name__ == "__main__":
     #asyncio.run(test_LLM_stepwise_reflexion())
     #asyncio.run(scoreTest())
     # asyncio.run(create_test_puzzles())
-    with open('uniform_test_puzzles.pkl', 'rb') as file:
-        loaded_list = pickle.load(file)
-    for i in range(len(loaded_list)):
-        # print(loaded_list[i])
-        if len(loaded_list[i]) == 0:
-            print(i)
-    print(len(loaded_list))
-    idxs, puzzles = dataset.get_data("uniform")
-    print(idxs)
-    print(puzzles)
-    print(len(puzzles))
+    # with open('uniform_test_puzzles.pkl', 'rb') as file:
+    #     loaded_list = pickle.load(file)
+    # for i in range(len(loaded_list)):
+    #     # print(loaded_list[i])
+    #     if len(loaded_list[i]) == 0:
+    #         print(i)
+    # print(len(loaded_list))
+    # idxs, puzzles = dataset.get_data("uniform")
+    # print(idxs)
+    # print(puzzles)
+    # print(len(puzzles))
+    remove_all_retrying_lines("reflexionLogs/failedTrialwise2.log")
