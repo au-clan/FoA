@@ -37,7 +37,7 @@ class GameOf24Agent:
 
         # set up the prompt, based on the current state
         current_state = state.current_state
-        
+        print("reflexion in step: ", reflexion)
         if current_state.strip() == "24":
             # CoT prompt
             #print("reflexion:", reflexion)

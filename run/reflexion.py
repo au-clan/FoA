@@ -38,7 +38,7 @@ class RegistryEntry:
     verifiers: dict
     reflexions: dict
 
-total_cost = 0
+total_tokens = 0
 
 LLMVERIFIER = False
 IMPOSSIBLE_SCORE = 0.001
@@ -90,7 +90,7 @@ def log_mismatch(agent_id, step, state, mismatch_type, source, message, RAFAVERI
 
 async def check_states(
     step_batcher: BatchingAPI, 
-    reflexion_type,
+    type_of_reflexion,
     num_reflexions,
     step, 
     context,
@@ -116,7 +116,7 @@ async def check_states(
     for agent_id in agent_ids:
         last_step = context.states[agent_id].steps[-2] if len(context.states[agent_id].steps) > 1 else context.states[agent_id].puzzle
         #print("last_step: ", last_step)
-        print("state in check_states: ", context.states[agent_id])
+        #print("state in check_states: ", context.states[agent_id])
         validation = validator.validate_all(
             context.states[agent_id], 
             last_step
@@ -141,7 +141,7 @@ async def check_states(
                 context.states[agent_id],
                 cache,
                 agent_id,
-                reflexion_type,
+                type_of_reflexion,
                 num_reflexions,
                 step_batcher,
                 step
@@ -184,8 +184,8 @@ async def check_states(
                 if agent_id in context.failed_agents:
                     context.failed_agents.remove(agent_id) 
                     
-async def async_cache_verify(state, cache, agent_id, reflexion_type, num_reflexions, step_batcher, step):
-    global total_cost
+async def async_cache_verify(state, cache, agent_id, type_of_reflexion, num_reflexions, step_batcher, step):
+    global total_tokens
     # Create a proxy dict excluding 'randomness'
     state_to_hash = {
         'puzzle': state.puzzle,
@@ -204,17 +204,17 @@ async def async_cache_verify(state, cache, agent_id, reflexion_type, num_reflexi
         #print("verification: ", verification)
         verification_cost = entry.verifiers[verifier.name]["metadata"]["verification_cost"]
         #print("verification cost=", verification_cost)
-        total_cost += verification_cost
+        total_tokens += verification_cost
     else:
         print("Getting verification from LLM")
-        cost = api.cost(tab_name=reflexion_type+str(num_reflexions)+state.puzzle, report_tokens=True)
+        cost = api.cost(tab_name="step_wise"+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+state.puzzle, report_tokens=True)
         pre_cost = cost.get("total_tokens")
         verification = await GameOf24Agent.value( 
                             state,
                             step_batcher,
                             namespace=(0, f"Agent: {agent_id}", f"Step : {step}",)
                         )
-        cost = api.cost(tab_name=reflexion_type+str(num_reflexions)+state.puzzle, report_tokens=True)
+        cost = api.cost(tab_name="step_wise"+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+state.puzzle, report_tokens=True)
         post_cost = cost.get("total_tokens")
         diff_cost = post_cost-pre_cost
         #print("diff_cost: ", diff_cost)
@@ -257,7 +257,7 @@ async def failed_agent_step(
     step: int,
     agent_id: int,
     context: AgentContext,
-    reflexion_type: str,
+    type_of_reflexion: str,
     num_reflexions,
     k: int,
     agent_reflexions: Dict[int, List[str]],
@@ -270,7 +270,7 @@ async def failed_agent_step(
     agent_reflexions, agent_all_reflexions = await make_reflexion(
         context.step_batcher, 
         "step_wise", 
-        reflexion_type, 
+        type_of_reflexion, 
         num_reflexions,
         k,
         single_state, 
@@ -314,7 +314,7 @@ async def failed_agent_step(
         context.total_score += 1
         return context.total_score
 
-    await check_states(context.step_batcher, reflexion_type, num_reflexions, step, context, cache, agent_id)
+    await check_states(context.step_batcher, type_of_reflexion, num_reflexions, step, context, cache, agent_id)
 
 async def solve_trial_wise(
         step_batcher: BatchingAPI,
@@ -408,8 +408,9 @@ async def solve_step_wise(
         k,
         puzzle: str, 
         agent_ids: List[int], 
-        reflexion_type: str,
-        log: Dict[str, Any]
+        type_of_reflexion: str,
+        log: Dict[str, Any],
+        cache
     ) -> Tuple[Dict[int, GameOf24State], List[int], int]:
 
     states = {} 
@@ -433,8 +434,6 @@ async def solve_step_wise(
         agent_all_reflexions[agent_id] = []
         agent_num_reflexions[agent_id] = 0
         agent_feedback[agent_id] = ""
-    cache = Cache('caches/registry')
-
     context = AgentContext(
         states=states,
         previous_states={},
@@ -480,7 +479,8 @@ async def solve_step_wise(
                 "Step": step_description,
                 "Reflexion": agent_reflexions[agent_id][-1] if agent_reflexions[agent_id] else "",
             }
-
+            print(f"Current step for agent {agent_id}: {step_description}")
+            
             context.states[agent_id] = new_state
 
         #print(states)
@@ -496,7 +496,7 @@ async def solve_step_wise(
         if not states:
             break
     
-        await check_states(step_batcher, reflexion_type, num_reflexions, step, context, cache)
+        await check_states(step_batcher, type_of_reflexion, num_reflexions, step, context, cache)
 
         while context.failed_agents:
             for agent_id in context.failed_agents.copy():
@@ -510,7 +510,7 @@ async def solve_step_wise(
                         step=step,
                         agent_id=agent_id,
                         context=context,
-                        reflexion_type=reflexion_type,
+                        type_of_reflexion=type_of_reflexion,
                         num_reflexions=num_reflexions,
                         k=k,
                         agent_reflexions=agent_reflexions,
@@ -537,8 +537,8 @@ async def solve_step_wise(
         f.write(json.dumps(log) + "\n")
     return context.total_score, num_used_reflexions
    
-async def async_cache_reflexion(states, agent_id, cache, time_of_reflexion, reflexion_type, num_reflexions, step_batcher, agent_feedback, agent_validation):
-    global total_cost
+async def async_cache_reflexion(states, agent_id, cache, time_of_reflexion, type_of_reflexion, num_reflexions, step_batcher, agent_feedback, agent_validation):
+    global total_tokens
     state = states[agent_id]
     # Create a proxy dict excluding 'randomness'
     state_to_hash = {
@@ -556,10 +556,10 @@ async def async_cache_reflexion(states, agent_id, cache, time_of_reflexion, refl
         reflexion = entry.reflexions[time_of_reflexion]["reflexion"]
         print("Getting reflexion from cache")
         reflexion_cost = entry.reflexions[time_of_reflexion]["metadata"]["reflexion_cost"]
-        total_cost += reflexion_cost
+        total_tokens += reflexion_cost
     else:
         print("Getting reflexion from LLM")
-        cost = api.cost(tab_name=reflexion_type+str(num_reflexions)+state.puzzle, report_tokens=True)
+        cost = api.cost(tab_name=time_of_reflexion+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+state.puzzle, report_tokens=True)
         pre_cost = cost.get("total_tokens")
         reflexion = await GameOf24Agent.generate_reflexion(
             time_of_reflexion,
@@ -571,7 +571,7 @@ async def async_cache_reflexion(states, agent_id, cache, time_of_reflexion, refl
             agent_feedback="" if LLMVERIFIER else agent_feedback,
             agent_validation= agent_validation
         )
-        cost = api.cost(tab_name=reflexion_type+str(num_reflexions)+state.puzzle, report_tokens=True)
+        cost = api.cost(tab_name=time_of_reflexion+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+state.puzzle, report_tokens=True)
         post_cost = cost.get("total_tokens")
         diff_cost = post_cost - pre_cost
         metadata = {
@@ -589,7 +589,7 @@ async def async_cache_reflexion(states, agent_id, cache, time_of_reflexion, refl
 async def make_reflexion(
         step_batcher: BatchingAPI,
         time_of_reflexion: str,
-        reflexion_type: str,
+        type_of_reflexion: str,
         num_reflexions,
         k: int, 
         states: Dict[int, GameOf24State], 
@@ -605,7 +605,7 @@ async def make_reflexion(
     cache_reflexions_tasks = [
         asyncio.create_task(
             async_cache_reflexion(
-                states, agent_id, cache, time_of_reflexion, reflexion_type, num_reflexions, step_batcher, agent_feedback, agent_validations
+                states, agent_id, cache, time_of_reflexion, type_of_reflexion, num_reflexions, step_batcher, agent_feedback, agent_validations
             )
         )
         for agent_id in states
@@ -617,17 +617,17 @@ async def make_reflexion(
         agent_reflexions[agent_id].append(reflexion)
         agent_all_reflexions[agent_id].append(reflexion) #To store all reflexions there have been
         
-    if reflexion_type == "list":
+    if type_of_reflexion == "list":
         return agent_reflexions, agent_all_reflexions
 
-    elif reflexion_type == "k most recent":
+    elif type_of_reflexion == "k_most_recent":
         for agent_id in agent_reflexions:
             agent_reflexions[agent_id] = agent_reflexions[agent_id][-k:]
         return agent_reflexions, agent_all_reflexions
         
-    elif reflexion_type == "summary_incremental":
+    elif type_of_reflexion == "summary_incremental":
         for agent_id in states:
-            print("before summarization for agent_id: ", agent_id, "agent_reflexions: ", agent_reflexions[agent_id])
+            print("before summarization for agent_id ", agent_id, "agent_reflexions: ", agent_reflexions[agent_id])
         agent_summaries = []
 
         #Summary is made from last summary + new reflexions
@@ -646,10 +646,11 @@ async def make_reflexion(
 
         for agent_id, summary in zip(states.keys(), summaries):
             agent_reflexions[agent_id] = [summary] #Replaces reflexions with summary
+            print("after summarization for agent_id ", agent_id, "summary: ", summary)
         return agent_reflexions, agent_all_reflexions
 
         #Summary is made from all reflexions
-    elif reflexion_type == "summary_all_previous":
+    elif type_of_reflexion == "summary_all_previous":
         for agent_id in states:
             print("before summarization for agent_id: ", agent_id, "agent_reflexions: ", agent_reflexions[agent_id])
         agent_summaries = [
@@ -674,7 +675,7 @@ async def make_reflexion(
 
 async def run_reflexion_gameof24(
         time_of_reflexion: str, 
-        reflexion_type: str, 
+        type_of_reflexion: str, 
         puzzle_idx: int,
         states: Dict[int, GameOf24State], 
         num_agents: int, 
@@ -685,14 +686,15 @@ async def run_reflexion_gameof24(
     Runs a complete Game of 24 with reflexions.
     Returns the total score (number of succesful agents) of the agents.
     """
-    global total_cost
+    global total_tokens
+    total_tokens = 0
     puzzle = states[0].puzzle
     step_batcher = BatchingAPI(
         api, 
         batch_size=1, 
         timeout=2, 
         model=models["step"]["model_name"], 
-        tab=reflexion_type+str(num_reflexions)+puzzle
+        tab=time_of_reflexion+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+puzzle
     )
     agent_reflexions = {}
     agent_all_reflexions = {}
@@ -717,6 +719,11 @@ async def run_reflexion_gameof24(
             #for agent_id in range(num_agents):
             log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Step": f"{states[agent_id].steps[step]}"})
 
+    if model == "gpt-4.1-nano-2025-04-14":
+        model_in_use = "openai"
+    elif model == "llama-3.3-70b-versatile":
+        model_in_use = "llama"
+    cache = Cache(f'caches/registry - {model_in_use}')
     #print("states here: ", states)
 
     #Making states for all agent_ids, because pickle only has one
@@ -731,32 +738,34 @@ async def run_reflexion_gameof24(
     # states, agent_ids, score = await solve_trial_wise(step_batcher, num_steps, puzzle_idx, puzzle, agent_ids, agent_reflexions, verifier)
     if time_of_reflexion == "trial_wise":
         #Reflect and go again i times
-        cache = Cache('caches/registry')
         for _ in range(num_reflexions):
-            agent_reflexions, agent_all_reflexions = await make_reflexion(step_batcher, time_of_reflexion, reflexion_type, num_reflexions, k, states, agent_reflexions, agent_all_reflexions, cache=cache)
-            print("reflexions per agent", agent_reflexions)
+            agent_reflexions, agent_all_reflexions = await make_reflexion(step_batcher, time_of_reflexion, type_of_reflexion, num_reflexions, k, states, agent_reflexions, agent_all_reflexions, cache=cache)
+            #print("reflexions per agent", agent_reflexions)
             states, agent_ids, score = await solve_trial_wise(step_batcher, num_steps, puzzle_idx, puzzle, agent_ids, agent_reflexions, log)
             total_score += score
         num_used_reflexions = sum(len(reflexions) for reflexions in agent_all_reflexions.values())
         print(cache)
-    else: #step_wise
-        total_score, num_used_reflexions = await solve_step_wise(step_batcher, num_steps, num_reflexions, k, puzzle, agent_ids, reflexion_type, log)
-    cost = api.cost(tab_name=reflexion_type+str(num_reflexions)+puzzle, report_tokens=True)
-    token_cost = cost.get("total_tokens")
-    print("token_cost: ", token_cost)
-    total_cost += token_cost
-    print("total cost: ", total_cost)
+    elif time_of_reflexion == "step_wise": #step_wise
+        total_score, num_used_reflexions = await solve_step_wise(step_batcher, num_steps, num_reflexions, k, puzzle, agent_ids, type_of_reflexion, log, cache)
+    else:
+        print("Wrong time of reflexion")
+    print("LLMverifier: ", str(LLMVERIFIER))
+    cost = api.cost(tab_name=time_of_reflexion+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+puzzle, report_tokens=True)
+    tokens_used = cost.get("total_tokens")
+    print("tokens_used: ", tokens_used)
+    total_tokens += tokens_used
+    print("total_tokens: ", total_tokens)
 
     #For loop counting how many reflexions have been done in total 
     
-    return total_score, total_cost, num_used_reflexions
+    return total_score, tokens_used, total_tokens, num_used_reflexions
 
 
 async def main():
     # Solve
     # Do reflexiongame
     # Example of running an gameOf24 experiment with reflexion
-    num_reflexions = 2
+    num_reflexions = 1
     k = 2
     num_agents = 1
     puzzles = load_test_puzzles()
@@ -768,12 +777,12 @@ async def main():
     puzzle_idx = 0
 
     # await run_reflexion_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
-    set_LLMverifier(True)
-    total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("step_wise", "list", puzzle_idx, state, num_agents, num_reflexions, k) 
-    print("total_score: ", total_score, "token_cost: ", token_cost, "num_used_reflexions: ", num_used_reflexions)
+    set_LLMverifier(False)
+    total_score, tokens_used, total_tokens, num_used_reflexions = await run_reflexion_gameof24("step_wise", "summary_incremental", puzzle_idx, state, num_agents, num_reflexions, k) 
+    print("total_score: ", total_score, "tokens_used: ", tokens_used, "total_tokens: ", total_tokens, "num_used_reflexions: ", num_used_reflexions)
 
-    # total_score, token_cost, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", state, num_agents, num_reflexions, k, verifier) 
-    # print("total_score: ", total_score, "token_cost: ", token_cost, "num_used_reflexions: ", num_used_reflexions)
+    # total_score, tokens_used, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", state, num_agents, num_reflexions, k, verifier) 
+    # print("total_score: ", total_score, "tokens_used: ", tokens_used, "num_used_reflexions: ", num_used_reflexions)
 
 if __name__ == "__main__":
     asyncio.run(main())       
@@ -782,12 +791,12 @@ if __name__ == "__main__":
     # print(state.hash())
     cache = Cache('caches/registry')
     # cache.clear()
-    keys = []
-    for key in cache:
-        keys.append(key)
-    print("number of keys in cache is ", len(keys))
-    for key in keys:
-        print(key)
-        print(cache.get(key))
+    # keys = []
+    # for key in cache:
+    #     keys.append(key)
+    # print("number of keys in cache is ", len(keys))
+    # for key in keys:
+    #     print(key)
+    #     print(cache.get(key))
         
     
