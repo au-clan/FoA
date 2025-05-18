@@ -14,6 +14,7 @@ from async_engine.api import API
 from async_engine.batched_api import BatchingAPI
 from src.agents.reflexionAgent import GameOf24Agent
 from src.states.gameof24 import GameOf24State
+from src.registry.registry import RegistryEntry
 from utils import load_test_puzzles
 from src.verifiers.RafaVerifiers import RafaVerifier
 from src.verifiers.TextVerifier import TextVerifier
@@ -32,13 +33,14 @@ class AgentContext:
     step_batcher: BatchingAPI
     total_score: int
     
-@dataclass(frozen=True)
-class RegistryEntry:
-    state: GameOf24State
-    verifiers: dict
-    reflexions: dict
+# @dataclass(frozen=True)
+# class RegistryEntry:
+#     state: GameOf24State
+#     verifiers: dict
+#     reflexions: dict
 
 total_tokens = 0
+total_price = 0
 
 LLMVERIFIER = False
 IMPOSSIBLE_SCORE = 0.001
@@ -186,6 +188,7 @@ async def check_states(
                     
 async def async_cache_verify(state, cache, agent_id, type_of_reflexion, num_reflexions, step_batcher, step):
     global total_tokens
+    global total_price
     # Create a proxy dict excluding 'randomness'
     state_to_hash = {
         'puzzle': state.puzzle,
@@ -202,13 +205,17 @@ async def async_cache_verify(state, cache, agent_id, type_of_reflexion, num_refl
         print("Getting verification from cache")
         verification = entry.verifiers[verifier.name]["verification"]
         #print("verification: ", verification)
+        verification_tokens = entry.verifiers[verifier.name]["metadata"]["verification_tokens"]
         verification_cost = entry.verifiers[verifier.name]["metadata"]["verification_cost"]
         #print("verification cost=", verification_cost)
-        total_tokens += verification_cost
+        total_tokens += verification_tokens
+        total_price += verification_cost
     else:
         print("Getting verification from LLM")
         cost = api.cost(tab_name="step_wise"+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+state.puzzle, report_tokens=True)
         pre_cost = cost.get("total_tokens")
+        cost = api.cost(tab_name="step_wise"+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+state.puzzle, report_tokens=False)
+        pre_price = cost.get("total_cost")
         verification = await GameOf24Agent.value( 
                             state,
                             step_batcher,
@@ -216,14 +223,19 @@ async def async_cache_verify(state, cache, agent_id, type_of_reflexion, num_refl
                         )
         cost = api.cost(tab_name="step_wise"+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+state.puzzle, report_tokens=True)
         post_cost = cost.get("total_tokens")
+        cost = api.cost(tab_name="step_wise"+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+state.puzzle, report_tokens=False)
+        post_price = cost.get("total_cost")
         diff_cost = post_cost-pre_cost
+        diff_price = post_price-pre_price
+        print("diff_price: ", diff_price)
         #print("diff_cost: ", diff_cost)
         #print("verification: ", verification)
         metadata = {
         "model_used": model,
         "temperature": eval_api_config["temperature"],
         "max_tokens": eval_api_config["max_tokens"],
-        "verification_cost": diff_cost
+        "verification_tokens": diff_cost,
+        "verification_cost": diff_price
         }
         entry.verifiers[verifier.name] = {"verification": verification, "metadata": metadata}
         cache.set(key, entry)
@@ -539,6 +551,7 @@ async def solve_step_wise(
    
 async def async_cache_reflexion(states, agent_id, cache, time_of_reflexion, type_of_reflexion, num_reflexions, step_batcher, agent_feedback, agent_validation):
     global total_tokens
+    global total_price
     state = states[agent_id]
     # Create a proxy dict excluding 'randomness'
     state_to_hash = {
@@ -555,12 +568,16 @@ async def async_cache_reflexion(states, agent_id, cache, time_of_reflexion, type
     if time_of_reflexion in entry.reflexions:  
         reflexion = entry.reflexions[time_of_reflexion]["reflexion"]
         print("Getting reflexion from cache")
+        reflexion_tokens = entry.reflexions[time_of_reflexion]["metadata"]["reflexion_tokens"]
         reflexion_cost = entry.reflexions[time_of_reflexion]["metadata"]["reflexion_cost"]
-        total_tokens += reflexion_cost
+        total_tokens += reflexion_tokens
+        total_price += reflexion_cost
     else:
         print("Getting reflexion from LLM")
         cost = api.cost(tab_name=time_of_reflexion+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+state.puzzle, report_tokens=True)
         pre_cost = cost.get("total_tokens")
+        cost = api.cost(tab_name=time_of_reflexion+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+state.puzzle, report_tokens=False)
+        pre_price = cost.get("total_cost")
         reflexion = await GameOf24Agent.generate_reflexion(
             time_of_reflexion,
             puzzle=states[agent_id].puzzle, 
@@ -573,12 +590,17 @@ async def async_cache_reflexion(states, agent_id, cache, time_of_reflexion, type
         )
         cost = api.cost(tab_name=time_of_reflexion+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+state.puzzle, report_tokens=True)
         post_cost = cost.get("total_tokens")
+        cost = api.cost(tab_name=time_of_reflexion+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+state.puzzle, report_tokens=False)
+        post_price = cost.get("total_cost")
+        
         diff_cost = post_cost - pre_cost
+        diff_price = post_price - pre_price
         metadata = {
             "model_used": model,
             "temperature": eval_api_config["temperature"],
             "max_tokens": eval_api_config["max_tokens"],
-            "reflexion_cost": diff_cost
+            "reflexion_tokens": diff_cost,
+            "reflexion_cost": diff_price
         }
 
         entry.reflexions[time_of_reflexion] = {"reflexion": reflexion, "metadata": metadata}
@@ -687,7 +709,9 @@ async def run_reflexion_gameof24(
     Returns the total score (number of succesful agents) of the agents.
     """
     global total_tokens
+    global total_price
     total_tokens = 0
+    total_price = 0
     puzzle = states[0].puzzle
     step_batcher = BatchingAPI(
         api, 
@@ -755,10 +779,15 @@ async def run_reflexion_gameof24(
     print("tokens_used: ", tokens_used)
     total_tokens += tokens_used
     print("total_tokens: ", total_tokens)
+    cost = api.cost(tab_name=time_of_reflexion+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+puzzle, report_tokens=False)
+    price_used = cost.get("total_cost")
+    total_price += price_used
+    print("price_used: ", price_used)
+    print("total_price: ", total_price)
 
     #For loop counting how many reflexions have been done in total 
     
-    return total_score, tokens_used, total_tokens, num_used_reflexions
+    return total_score, tokens_used, total_tokens, price_used, total_price, num_used_reflexions
 
 
 async def main():
@@ -777,9 +806,9 @@ async def main():
     puzzle_idx = 0
 
     # await run_reflexion_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
-    set_LLMverifier(False)
-    total_score, tokens_used, total_tokens, num_used_reflexions = await run_reflexion_gameof24("step_wise", "summary_incremental", puzzle_idx, state, num_agents, num_reflexions, k) 
-    print("total_score: ", total_score, "tokens_used: ", tokens_used, "total_tokens: ", total_tokens, "num_used_reflexions: ", num_used_reflexions)
+    set_LLMverifier(True)
+    total_score, tokens_used, total_tokens, price_used, total_price, num_used_reflexions = await run_reflexion_gameof24("step_wise", "list", puzzle_idx, state, num_agents, num_reflexions, k) 
+    print("total_score: ", total_score, "tokens_used: ", tokens_used, "total_tokens: ", total_tokens, "price_used: ", price_used, "total_price: ", total_price, "num_used_reflexions: ", num_used_reflexions)
 
     # total_score, tokens_used, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", state, num_agents, num_reflexions, k, verifier) 
     # print("total_score: ", total_score, "tokens_used: ", tokens_used, "num_used_reflexions: ", num_used_reflexions)

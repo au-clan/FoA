@@ -1,0 +1,2 @@
+2025-05-18 15:56:37,953 - {'puzzle': '1 1 4 6', 'num_agents': 1, 'num_reflexions': 1, 'reflexion_type': 'k_most_recent', 'k': 1, 'score': 0, 'tokens_used': 2826.0, 'total_tokens': 3066.0, 'price_used': 0.0003294, 'price_total': 0.000375, 'num_used_reflexions': 1}
+2025-05-18 15:57:40,935 - {'puzzle': '1 1 4 6', 'num_agents': 1, 'num_reflexions': 1, 'reflexion_type': 'k_most_recent', 'k': 1, 'score': 0, 'tokens_used': 2831.0, 'total_tokens': 3071.0, 'price_used': 0.0003314, 'price_total': 0.00037699999999999995, 'num_used_reflexions': 1}

@@ -1599,3 +1599,751 @@
         }
     }
 }
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The mistakes made were:\n\n1. **Division by a negative number** that didn't bring the result closer to 24.\n2. **Using division when the result is not a whole number or doesn't simplify the problem**, such as '-2 / (-2)' which only resulted in 1, a number already present.\n3. **Not utilizing all four numbers effectively** to combine and simplify towards the target result of 24.",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 24 1 1)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 24 2)"
+        },
+        "Step 2": {
+            "Step": "24 / 2 = 12 (left: 12)"
+        },
+        "Step 3": {
+            "Step": "Not possible with one number."
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The mistakes made were:\n\n1. **Division by a negative number** that didn't bring the result closer to 24.\n2. **Using division when the result is not a whole number or doesn't simplify the problem**, such as '-2 / (-2)' which only resulted in 1, a number already present.\n3. **Not utilizing all four numbers effectively** to combine and simplify towards the target result of 24.",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 1 1 24)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "24 / 2 = 12 (left: 12 2)"
+        },
+        "Step 3": {
+            "Step": "12 * 2 = 24 (left: 24)"
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "To keep it concise and discard duplicates, the reflections can be summarized as:\n\n* Avoid division by a negative number if it doesn't bring the result closer to 24.\n* Use division only when it results in a whole number or simplifies the problem.\n* Utilize all four numbers effectively to combine and simplify towards the target result of 24.",
+        "Step 0": {
+            "Step": "1 + 1 = 2 (left: 2 4 6)"
+        },
+        "Step 1": {
+            "Step": "4 * 6 = 24 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "24 / 2 = 12 (left: 12)"
+        },
+        "Step 3": {
+            "Step": "Not possible with one number."
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The mistakes made were: \n1. Division by a negative number that didn't simplify the problem.\n2. Using division when the result is not a whole number.\n3. Not utilizing all four numbers effectively to combine and simplify towards the target result of 24.",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 1 1 24)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "24 / 2 = 12 (left: 12)"
+        },
+        "Step 3": {
+            "Step": "Not possible with one number, need at least two numbers."
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The mistakes made were:\n\n1. **Division by a negative number** that didn't bring the result closer to 24.\n2. **Using division when the result is not a whole number or doesn't simplify the problem**, such as '-2 / (-2)' which only resulted in 1, a number already present.\n3. **Not utilizing all four numbers effectively** to combine and simplify towards the target result of 24.",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 1 1 24)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "24 / 2 = 12 (left: 12 2)"
+        },
+        "Step 3": {
+            "Step": "12 * 2 = 24 (left: 24)"
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The mistakes made were:\n\n1. **Division by a negative number** that didn't bring the result closer to 24.\n2. **Using division when the result is not a whole number or doesn't simplify the problem**, such as '-2 / (-2)' which only resulted in 1, a number already present.\n3. **Not utilizing all four numbers effectively** to combine and simplify towards the target result of 24.",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 1 1 24)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "24 / 2 = 12 (left: 12 2)"
+        },
+        "Step 3": {
+            "Step": "12 * 2 = 24 (left: 24)"
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "To keep it concise and discard duplicates, the reflections can be summarized as:\n\n* Avoid division by a negative number if it doesn't bring the result closer to 24.\n* Use division only when it results in a whole number or simplifies the problem.\n* Utilize all four numbers effectively to combine and simplify towards the target result of 24.",
+        "Step 0": {
+            "Step": "1 + 1 = 2 (left: 2 4 6)"
+        },
+        "Step 1": {
+            "Step": "4 * 6 = 24 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "24 / 2 = 12 (left: 12)"
+        },
+        "Step 3": {
+            "Step": "Not possible with one number."
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The mistakes made were: \n1. Division by a negative number that didn't bring the result closer to 24.\n2. Using division when the result is not a whole number or doesn't simplify the problem.\n3. Not utilizing all four numbers effectively to combine and simplify towards the target result of 24. \n\nThese reflections can be concisely summarized as: \n**Ineffective use of division and failure to utilize all four numbers to simplify and reach the target result of 24.**",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 24 1 1)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 24 2)"
+        },
+        "Step 2": {
+            "Step": "24 / 2 = 12 (left: 12)"
+        },
+        "Step 3": {
+            "Step": "There are no other numbers to choose from, so no operation can be performed."
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The mistakes made were:\n\n1. **Division by a negative number** that didn't bring the result closer to 24.\n2. **Using division when the result is not a whole number or doesn't simplify the problem**, such as '-2 / (-2)' which only resulted in 1, a number already present.\n3. **Not utilizing all four numbers effectively** to combine and simplify towards the target result of 24.",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 1 1 24)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "24 / 2 = 12 (left: 12 2)"
+        },
+        "Step 3": {
+            "Step": "12 * 2 = 24 (left: 24)"
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The mistakes made were:\n\n1. **Division by a negative number** that didn't bring the result closer to 24.\n2. **Using division when the result is not a whole number or doesn't simplify the problem**, such as '-2 / (-2)' which only resulted in 1, a number already present.\n3. **Not utilizing all four numbers effectively** to combine and simplify towards the target result of 24.",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 1 1 24)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "24 / 2 = 12 (left: 12 2)"
+        },
+        "Step 3": {
+            "Step": "12 * 2 = 24 (left: 24)"
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "To keep it concise, the reflections can be summarized as follows:\n\nThe mistakes made were:\n1. **Division by a negative number** that didn't bring the result closer to 24.\n2. **Ineffective use of division**, such as when the result is not a whole number or doesn't simplify the problem.\n3. **Not utilizing all four numbers effectively** to combine and simplify towards the target result of 24.",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 24 1 1)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 24 2)"
+        },
+        "Step 2": {
+            "Step": "24 / 2 = 12 (left: 12)"
+        },
+        "Step 3": {
+            "Step": "Not possible with one number, need at least two numbers."
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The mistakes made were:\n1. **Division by a negative number** that didn't bring the result closer to 24.\n2. **Ineffective use of division**, such as when the result is not a whole number or doesn't simplify the problem.\n3. **Not utilizing all four numbers effectively** to combine and simplify towards the target result of 24.",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 1 1 24)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "2 * 24 = 48 (left: 48)"
+        },
+        "Step 3": {
+            "Step": "No possible step, as there is only one number."
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The mistakes made were:\n\n1. Using subtraction initially, which introduced a negative number, making it difficult to reach 24.\n2. Performing division operations that reduced the numbers instead of multiplying or adding to get closer to 24.\n3. Continuing with division operations that didn't bring the result closer to 24.\n\nThese mistakes made the solution attempt invalid and moved further away from the target result of 24.",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 1 1 24)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "2 * 24 = 48 (left: 48)"
+        },
+        "Step 3": {
+            "Step": "48 / 2 = 24 (left: 24)"
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The mistakes made were:\n\n1. Using subtraction initially, which introduced a negative number, making it difficult to reach 24.\n2. Performing division operations that reduced the numbers instead of multiplying or adding to get closer to 24.\n3. Continuing with division operations that didn't bring the result closer to 24.\n\nThese mistakes made the solution attempt invalid and moved further away from the target result of 24.",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 1 1 24)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "2 * 24 = 48 (left: 48)"
+        },
+        "Step 3": {
+            "Step": "No possible next step, as there is only one number."
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The mistakes made were:\n\n1. Using subtraction initially, introducing a negative number.\n2. Performing division operations that reduced the numbers instead of multiplying or adding to get closer to 24.\n\nThese mistakes made the solution attempt invalid and moved further away from the target result of 24.",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 1 1 24)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "2 * 24 = 48 (left: 48)"
+        },
+        "Step 3": {
+            "Step": "Not applicable, as there is only one number."
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The mistakes made were:\n1. Using subtraction initially, introducing a negative number.\n2. Performing division operations that reduced the numbers instead of multiplying or adding to get closer to 24.\n\nThese mistakes made the solution attempt invalid and moved further away from the target result of 24.",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 1 1 24)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "2 * 24 = 48 (left: 48)"
+        },
+        "Step 3": {
+            "Step": "A single possible next step:"
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The mistakes made were:\n\n1. Using subtraction initially, which introduced a negative number, making it difficult to reach 24.\n2. Performing division operations that reduced the numbers instead of multiplying or adding to get closer to 24.\n3. Continuing with division operations that didn't bring the result closer to 24.\n\nThese mistakes made the solution attempt invalid and moved further away from the target result of 24.",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 1 1 24)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "24 / 2 = 12 (left: 12)"
+        },
+        "Step 3": {
+            "Step": "12 * 12 = 144 (left: 144)"
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The mistakes made were:\n\n1. Using subtraction initially, which introduced a negative number, making it difficult to reach 24.\n2. Performing division operations that reduced the numbers instead of multiplying or adding to get closer to 24.\n3. Continuing with division operations that didn't bring the result closer to 24.\n\nThese mistakes made the solution attempt invalid and moved further away from the target result of 24.",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 1 1 24)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "24 / 2 = 12 (left: 12)"
+        },
+        "Step 3": {
+            "Step": "Not possible with a single number, need at least two numbers."
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The mistakes made were:\n\n1. Using subtraction initially, which introduced a negative number, making it difficult to reach 24.\n2. Performing division operations that reduced the numbers instead of multiplying or adding to get closer to 24.\n3. Continuing with division operations that didn't bring the result closer to 24.\n\nThese mistakes made the solution attempt invalid and moved further away from the target result of 24.",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 1 1 24)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "2 * 24 = 48 (left: 48)"
+        },
+        "Step 3": {
+            "Step": "No possible next step, as there is only one number."
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The mistakes made were:\n1. Using subtraction initially, introducing a negative number.\n2. Performing division operations that reduced the numbers instead of multiplying or adding to get closer to 24.\n\nThese mistakes moved the solution further away from the target result of 24.",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 1 1 24)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "2 * 24 = 48 (left: 48)"
+        },
+        "Step 3": {
+            "Step": "No possible step as only one number is given."
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The mistakes made were:\n1. Using subtraction initially, introducing a negative number.\n2. Performing division operations that reduced the numbers instead of multiplying or adding to get closer to 24.\n\nThese mistakes made the solution attempt invalid and moved further away from the target result of 24.",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 1 1 24)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "2 * 24 = 48 (left: 48)"
+        },
+        "Step 3": {
+            "Step": "48 / 2 = 24 (left: 24)"
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The mistakes made were:\n\n1. Using subtraction initially, which introduced a negative number, making it difficult to reach 24.\n2. Performing division operations that reduced the numbers instead of multiplying or adding to get closer to 24.\n3. Continuing with division operations that didn't bring the result closer to 24.\n\nThese mistakes made the solution attempt invalid and moved further away from the target result of 24.",
+        "Step 0": {
+            "Step": "6 * 4 = 24 (left: 1 1 24)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 2 24)"
+        },
+        "Step 2": {
+            "Step": "2 * 24 = 48 (left: 48)"
+        },
+        "Step 3": {
+            "Step": "No possible next step, since there is only one number."
+        }
+    }
+}

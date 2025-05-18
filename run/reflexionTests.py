@@ -182,7 +182,7 @@ async def run_puzzles(
         for reflexion_type in reflexion_types:
             print("\npuzzle: ", states[0].puzzle, "with type: ", reflexion_type, " starts now")
             # Run the reflexion game
-            score, tokens_used, total_tokens, num_used_reflexions = await run_reflexion_gameof24(
+            total_score, tokens_used, total_tokens, price_used, total_price, num_used_reflexions = await run_reflexion_gameof24(
                 time_of_reflexion, reflexion_type, int(puzzle_idx), states, num_agents, num_reflexions, k
             )
 
@@ -192,9 +192,11 @@ async def run_puzzles(
                 "num_agents": num_agents,
                 "num_reflexions": num_reflexions,
                 "reflexion_type": reflexion_type,
-                "score": score,
+                "score": total_score,
                 "tokens_used": tokens_used,
                 "total_tokens": total_tokens,
+                "price_used": price_used,
+                "price_total": total_price,
                 "num_used_reflexions": num_used_reflexions
             }
             logger.info(type_of_reflexion_entry)
@@ -218,7 +220,7 @@ async def find_k(
     for k in ks:
         print("\npuzzle: ", states[0].puzzle, "with type: ", reflexion_type, " starts now")
         # Run the reflexion game
-        score, tokens_used, total_tokens, num_used_reflexions = await run_reflexion_gameof24(
+        total_score, tokens_used, total_tokens, price_used, total_price, num_used_reflexions = await run_reflexion_gameof24(
             time_of_reflexion, reflexion_type, int(puzzle_idx), states, num_agents, num_reflexions, k
         )
 
@@ -229,9 +231,11 @@ async def find_k(
             "num_reflexions": num_reflexions,
             "reflexion_type": reflexion_type,
             "k": k,
-            "score": score,
+            "score": total_score,
             "tokens_used": tokens_used,
             "total_tokens": total_tokens,
+            "price_used": price_used,
+            "price_total": total_price,
             "num_used_reflexions": num_used_reflexions
         }
         logger.info(type_of_reflexion_entry)

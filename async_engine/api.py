@@ -468,6 +468,7 @@ class API:
             "gpt-3.5-turbo-0125": {"prompt_tokens": 0.0005, "completion_tokens":0.0015},
             "gpt-4o-2024-05-13": {"prompt_tokens": 0.005, "completion_tokens":0.015},
             "gpt-4o-2024-05-13-global": {"prompt_tokens": 0.005, "completion_tokens":0.015},
+            "gpt-4.1-nano-2025-04-14": {"prompt_tokens": 0.10/1000, "completion_tokens": 0.4/1000},
             
             # Llama 3.1 - TogetherAI
             "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo": {"prompt_tokens": 0.88/1000, "completion_tokens":0.88/1000},
@@ -490,7 +491,7 @@ class API:
             #DeepSeek - Groq
             "deepseek-r1-distill-llama-70b": {"prompt_tokens": 0.8/1000, "completion_tokens": 0.8/1000},
             "llama-3.2-11b-vision-preview": {"prompt_tokens": 0.8/1000, "completion_tokens": 0.8/1000},
-            "llama-3.3-70b-versatile": {"prompt_tokens": 0.8/1000, "completion_tokens": 0.8/1000},
+            "llama-3.3-70b-versatile": {"prompt_tokens": 0.10/1000, "completion_tokens": 0.4/1000},
         }
 
         # Same model just different name
