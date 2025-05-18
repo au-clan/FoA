@@ -29,7 +29,7 @@ from data.data import GameOf24Data
 dataset = GameOf24Data()
 
 step_api_config = eval_api_config = {
-    "max_tokens": 1000,
+    "max_tokens": 300,
     "temperature": 0.7,
     "top_p": 1,
     "request_timeout": 120,

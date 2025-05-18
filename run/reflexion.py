@@ -19,6 +19,7 @@ from utils import load_test_puzzles
 from src.verifiers.RafaVerifiers import RafaVerifier
 from src.verifiers.TextVerifier import TextVerifier
 from src.validators.RafaValidator import RafaValidator
+sys.stdout.reconfigure(encoding='utf-8')
 
 @dataclass
 class AgentContext:
@@ -56,15 +57,16 @@ def set_LLMverifier(bool):
     
 
 step_api_config = eval_api_config = {
-    "max_tokens": 1000,
+    "max_tokens": 300,
     "temperature": 0.7,
     "top_p": 1,
     "request_timeout": 120,
     "top_k": 50
 }
 
-model = "llama-3.3-70b-versatile"
-provider = "LazyKey"
+#model = "llama-3.3-70b-versatile"
+model = "gpt-4.1-nano-2025-04-14"
+provider = "OpenAI"
 models = {
     "step": {"model_name":model, "provider":provider},
     "eval": {"model_name":model, "provider":provider},

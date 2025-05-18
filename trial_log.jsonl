@@ -2347,3 +2347,445 @@
         }
     }
 }
+From now on OpenAI{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The solution attempts to perform invalid operations or steps that do not logically lead to 24. Specifically:\n\n- \"1 - 4 = -3\" is valid, but the resulting \"left\" list suggests a misunderstanding: after this operation, the remaining numbers are -3, 1, 6, yet the next step uses \"6 / 1,\" ignoring the updated list.\n- The sequence attempts to divide 6 by -3, which is valid (-2), but then divides -2 by -2 to get 1, moving away from 24.\n- The entire sequence does not combine the numbers to reach 24; instead, it produces intermediate results unrelated to 24.\n\nOverall, the mistakes are:\n- Mismanagement of remaining numbers after each operation (not updating the list correctly).\n- Performing steps that do not aim toward 24, leading further away from the target.\n- No valid combination of four numbers to reach 24 is demonstrated; the steps are inconsistent and do not solve the puzzle properly.",
+        "Step 0": {
+            "Step": "6 - 1 = 5 (left: 1 4 5)"
+        },
+        "Step 1": {
+            "Step": "1 + 4 = 5 (left: 5 5)"
+        },
+        "Step 2": {
+            "Step": "5 + 5 = 10 (left: 10)"
+        },
+        "Step 3": {
+            "Step": "10 - 10 = 0 (left: 0)"
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The solution attempts to perform invalid operations or steps that do not logically lead to 24. Specifically:\n\n- \"1 - 4 = -3\" is valid, but the resulting \"left\" list suggests a misunderstanding: after this operation, the remaining numbers are -3, 1, 6, yet the next step uses \"6 / 1,\" ignoring the updated list.\n- The sequence attempts to divide 6 by -3, which is valid (-2), but then divides -2 by -2 to get 1, moving away from 24.\n- The entire sequence does not combine the numbers to reach 24; instead, it produces intermediate results unrelated to 24.\n\nOverall, the mistakes are:\n- Mismanagement of remaining numbers after each operation (not updating the list correctly).\n- Performing steps that do not aim toward 24, leading further away from the target.\n- No valid combination of four numbers to reach 24 is demonstrated; the steps are inconsistent and do not solve the puzzle properly.",
+        "Step 0": {
+            "Step": "1 + 1 = 2 (left: 2 4 6)"
+        },
+        "Step 1": {
+            "Step": "2 + 4 = 6 (left: 6 6)"
+        },
+        "Step 2": {
+            "Step": "6 + 6 = 12 (left: 12)"
+        },
+        "Step 3": {
+            "Step": "Cannot proceed; only one number remaining."
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The reflections highlight that the attempt used invalid or illogical operations, failed to properly update remaining numbers after each step, and did not successfully combine the four numbers to reach 24.",
+        "Step 0": {
+            "Step": "1 + 1 = 2 (left: 2 4 6)"
+        },
+        "Step 1": {
+            "Step": "2 * 4 = 8 (left: 8 6)"
+        },
+        "Step 2": {
+            "Step": "8 - 6 = 2 (left: 2)"
+        },
+        "Step 3": {
+            "Step": "2 * 1 = 2 (left: 2)"
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The reflections highlight that the solution mishandles number updates after operations, performs invalid or inconsistent steps, and ultimately fails to correctly combine the four numbers to reach 24.",
+        "Step 0": {
+            "Step": "6 - 4 = 2 (left: 1 1 2)"
+        },
+        "Step 1": {
+            "Step": "1 + 2 = 3 (left: 1 3)"
+        },
+        "Step 2": {
+            "Step": "3 - 1 = 2 (left: 2)"
+        },
+        "Step 3": {
+            "Step": "2 * 1 = 2 (left: 2)"
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The solution attempts to perform invalid operations or steps that do not logically lead to 24. Specifically:\n\n- \"1 - 4 = -3\" is valid, but the resulting \"left\" list suggests a misunderstanding: after this operation, the remaining numbers are -3, 1, 6, yet the next step uses \"6 / 1,\" ignoring the updated list.\n- The sequence attempts to divide 6 by -3, which is valid (-2), but then divides -2 by -2 to get 1, moving away from 24.\n- The entire sequence does not combine the numbers to reach 24; instead, it produces intermediate results unrelated to 24.\n\nOverall, the mistakes are:\n- Mismanagement of remaining numbers after each operation (not updating the list correctly).\n- Performing steps that do not aim toward 24, leading further away from the target.\n- No valid combination of four numbers to reach 24 is demonstrated; the steps are inconsistent and do not solve the puzzle properly.",
+        "Step 0": {
+            "Step": "6 - 1 = 5 (left: 1 4 5)"
+        },
+        "Step 1": {
+            "Step": "1 + 4 = 5 (left: 5 5)"
+        },
+        "Step 2": {
+            "Step": "5 + 5 = 10 (left: 10)"
+        },
+        "Step 3": {
+            "Step": "No possible next step."
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The solution attempts to perform invalid operations or steps that do not logically lead to 24. Specifically:\n\n- \"1 - 4 = -3\" is valid, but the resulting \"left\" list suggests a misunderstanding: after this operation, the remaining numbers are -3, 1, 6, yet the next step uses \"6 / 1,\" ignoring the updated list.\n- The sequence attempts to divide 6 by -3, which is valid (-2), but then divides -2 by -2 to get 1, moving away from 24.\n- The entire sequence does not combine the numbers to reach 24; instead, it produces intermediate results unrelated to 24.\n\nOverall, the mistakes are:\n- Mismanagement of remaining numbers after each operation (not updating the list correctly).\n- Performing steps that do not aim toward 24, leading further away from the target.\n- No valid combination of four numbers to reach 24 is demonstrated; the steps are inconsistent and do not solve the puzzle properly.",
+        "Step 0": {
+            "Step": "6 - 4 = 2 (left: 1 1 2)"
+        },
+        "Step 1": {
+            "Step": "1 + 2 = 3 (left: 1 3)"
+        },
+        "Step 2": {
+            "Step": "3 - 1 = 2 (left: 2)"
+        },
+        "Step 3": {
+            "Step": "2 * 2 = 4 (left: 4)"
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The reflections highlight that the solution incorrectly performed or tracked operations, failing to update remaining numbers properly, and did not logically combine them to reach 24; instead, it used invalid steps and produced results unrelated to the target.",
+        "Step 0": {
+            "Step": "1 + 1 = 2 (left: 2 4 6)"
+        },
+        "Step 1": {
+            "Step": "2 + 4 = 6 (left: 6 6)"
+        },
+        "Step 2": {
+            "Step": "6 * 6 = 36 (left: 36)"
+        },
+        "Step 3": {
+            "Step": "36 / 1 = 36 (left: 36)"
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The solution mismanages remaining numbers after each step, performing invalid operations or steps that do not lead toward 24, resulting in inconsistent calculations that fail to solve the puzzle properly.",
+        "Step 0": {
+            "Step": "6 - 1 = 5 (left: 1 4 5)"
+        },
+        "Step 1": {
+            "Step": "1 + 4 = 5 (left: 5 5)"
+        },
+        "Step 2": {
+            "Step": "5 + 5 = 10 (left: 10)"
+        },
+        "Step 3": {
+            "Step": "10 / 10 = 1 (left: 1)"
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The solution attempts to perform invalid operations or steps that do not logically lead to 24. Specifically:\n\n- \"1 - 4 = -3\" is valid, but the resulting \"left\" list suggests a misunderstanding: after this operation, the remaining numbers are -3, 1, 6, yet the next step uses \"6 / 1,\" ignoring the updated list.\n- The sequence attempts to divide 6 by -3, which is valid (-2), but then divides -2 by -2 to get 1, moving away from 24.\n- The entire sequence does not combine the numbers to reach 24; instead, it produces intermediate results unrelated to 24.\n\nOverall, the mistakes are:\n- Mismanagement of remaining numbers after each operation (not updating the list correctly).\n- Performing steps that do not aim toward 24, leading further away from the target.\n- No valid combination of four numbers to reach 24 is demonstrated; the steps are inconsistent and do not solve the puzzle properly.",
+        "Step 0": {
+            "Step": "6 - 4 = 2 (left: 1 1 2 2)"
+        },
+        "Step 1": {
+            "Step": "1 + 2 = 3 (left: 1 2 3)"
+        },
+        "Step 2": {
+            "Step": "1 + 2 = 3 (left: 3 3)"
+        },
+        "Step 3": {
+            "Step": "3 + 3 = 6 (left: 6)"
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The solution attempts to perform invalid operations or steps that do not logically lead to 24. Specifically:\n\n- \"1 - 4 = -3\" is valid, but the resulting \"left\" list suggests a misunderstanding: after this operation, the remaining numbers are -3, 1, 6, yet the next step uses \"6 / 1,\" ignoring the updated list.\n- The sequence attempts to divide 6 by -3, which is valid (-2), but then divides -2 by -2 to get 1, moving away from 24.\n- The entire sequence does not combine the numbers to reach 24; instead, it produces intermediate results unrelated to 24.\n\nOverall, the mistakes are:\n- Mismanagement of remaining numbers after each operation (not updating the list correctly).\n- Performing steps that do not aim toward 24, leading further away from the target.\n- No valid combination of four numbers to reach 24 is demonstrated; the steps are inconsistent and do not solve the puzzle properly.",
+        "Step 0": {
+            "Step": "1 + 1 = 2 (left: 2 4 6)"
+        },
+        "Step 1": {
+            "Step": "2 + 4 = 6 (left: 6 6)"
+        },
+        "Step 2": {
+            "Step": "6 + 6 = 12 (left: 12)"
+        },
+        "Step 3": {
+            "Step": "12 + 12 = 24 (left: 24)"
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The solution incorrectly handles remaining numbers after operations, performs invalid or illogical steps that do not lead to 24, and fails to properly combine the four numbers into the target.",
+        "Step 0": {
+            "Step": "6 - 4 = 2 (left: 1 1 2)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 2 2)"
+        },
+        "Step 2": {
+            "Step": "2 + 2 = 4 (left: 4)"
+        },
+        "Step 3": {
+            "Step": "Cannot perform any operation with only one number."
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The attempts contain invalid operations, mismanage remaining numbers, and do not correctly combine the four numbers to reach 24; they are inconsistent and deviate from the target.",
+        "Step 0": {
+            "Step": "6 - 4 = 2 (left: 1 1 2)"
+        },
+        "Step 1": {
+            "Step": "1 + 2 = 3 (left: 1 3)"
+        },
+        "Step 2": {
+            "Step": "3 - 1 = 2 (left: 2)"
+        },
+        "Step 3": {
+            "Step": "2"
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 - 4 = -3 (left: -3 1 6)"
+            },
+            "Step 1": {
+                "Step": "6 / 1 = 6 (left: -3 6)"
+            },
+            "Step 2": {
+                "Step": "6 / (-3) = -2 (left: -2)"
+            },
+            "Step 3": {
+                "Step": "-2 / (-2) = 1 (left: 1)"
+            }
+        }
+    },
+    "Agent 0": {
+        "Reflexion": "The solution attempts to perform invalid operations or steps that do not logically lead to 24. Specifically:\n\n- \"1 - 4 = -3\" is valid, but the resulting \"left\" list suggests a misunderstanding: after this operation, the remaining numbers are -3, 1, 6, yet the next step uses \"6 / 1,\" ignoring the updated list.\n- The sequence attempts to divide 6 by -3, which is valid (-2), but then divides -2 by -2 to get 1, moving away from 24.\n- The entire sequence does not combine the numbers to reach 24; instead, it produces intermediate results unrelated to 24.\n\nOverall, the mistakes are:\n- Mismanagement of remaining numbers after each operation (not updating the list correctly).\n- Performing steps that do not aim toward 24, leading further away from the target.\n- No valid combination of four numbers to reach 24 is demonstrated; the steps are inconsistent and do not solve the puzzle properly.",
+        "Step 0": {
+            "Step": "6 - 4 = 2 (left: 1 1 2)"
+        },
+        "Step 1": {
+            "Step": "1 + 1 = 2 (left: 2 2)"
+        },
+        "Step 2": {
+            "Step": "2 + 2 = 4 (left: 4)"
+        },
+        "Step 3": {
+            "Step": "4 * 4 = 16 (left: 16)"
+        }
+    }
+}

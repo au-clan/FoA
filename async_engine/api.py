@@ -491,7 +491,7 @@ class API:
             #DeepSeek - Groq
             "deepseek-r1-distill-llama-70b": {"prompt_tokens": 0.8/1000, "completion_tokens": 0.8/1000},
             "llama-3.2-11b-vision-preview": {"prompt_tokens": 0.8/1000, "completion_tokens": 0.8/1000},
-            "llama-3.3-70b-versatile": {"prompt_tokens": 0.10/1000, "completion_tokens": 0.4/1000},
+            "llama-3.3-70b-versatile": {"prompt_tokens": 0.59/1000, "completion_tokens": 0.79/1000},
         }
 
         # Same model just different name
