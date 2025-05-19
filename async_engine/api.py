@@ -104,7 +104,7 @@ class API:
                 #api keys when making an env
                 # load_dotenv()
                 # api_keys = os.environ.get("API_KEYS")
-                api_keys = ["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", "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", "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"] 
+                api_keys = [] 
                 self.clients[model_name] = AsyncKeyHandler(api_keys, AsyncGroq)
 
                 # Limiter Setup

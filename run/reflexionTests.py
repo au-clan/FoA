@@ -182,7 +182,7 @@ async def run_puzzles(
         print("\npuzzle: ", states[0].puzzle, "with type: ", reflexion_type, " starts now")
         for num_reflexions in num_reflexions_list:
             # Run the reflexion game
-            total_score, tokens_used, total_tokens, price_used, total_price, num_used_reflexions = await run_reflexion_gameof24(
+            total_score, tokens_used, tokens_saved, price_used, price_saved, num_used_reflexions = await run_reflexion_gameof24(
                 time_of_reflexion, reflexion_type, int(puzzle_idx), states, num_agents, num_reflexions, k
             )
 
@@ -194,9 +194,9 @@ async def run_puzzles(
                 "reflexion_type": reflexion_type,
                 "score": total_score,
                 "tokens_used": tokens_used,
-                "total_tokens": total_tokens,
+                "total_tokens": tokens_used+tokens_saved,
                 "price_used": price_used,
-                "price_total": total_price,
+                "price_total": price_used+price_saved,
                 "num_used_reflexions": num_used_reflexions
             }
             logger.info(type_of_reflexion_entry)
@@ -210,7 +210,7 @@ async def find_k(
     states,
     logger):
     num_reflexions = 4  # Number of iterations of reflexion 4
-    ks = [1]  # k for "k_most_recent",2,4
+    ks = [2,4]  # k for "k_most_recent",2,4
     num_agents = 1  
     reflexion_type = "k_most_recent"
     type_of_reflexions = []
@@ -331,7 +331,8 @@ async def test_K_value():
             states = all_puzzles_data[idx],
             logger=k_trial_logger
             )
-        )    
+        )
+        #for idx in range(2)    
         for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
     ]
 
@@ -345,7 +346,8 @@ async def test_K_value():
             states = all_puzzles_data[idx],
             logger=k_step_logger
             )
-        )    
+        )
+        #for idx in range(2)       
         for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
     ]
 

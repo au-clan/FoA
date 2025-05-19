@@ -40,9 +40,6 @@ class AgentContext:
 #     verifiers: dict
 #     reflexions: dict
 
-total_tokens = 0
-total_price = 0
-
 LLMVERIFIER = False
 IMPOSSIBLE_SCORE = 0.001
 #LIKELY_SCORE     = 1.0  
@@ -64,10 +61,10 @@ step_api_config = eval_api_config = {
     "top_k": 50
 }
 
-#model = "llama-3.3-70b-versatile"
-#provider = "LazyKey"
-model = "gpt-4.1-nano-2025-04-14"
-provider = "OpenAI"
+model = "llama-3.3-70b-versatile"
+provider = "LazyKey"
+#model = "gpt-4.1-nano-2025-04-14"
+#provider = "OpenAI"
 models = {
     "step": {"model_name":model, "provider":provider},
     "eval": {"model_name":model, "provider":provider},
@@ -129,7 +126,8 @@ async def check_states(
         #Checking whether an agent's state is invalid or not
         if validation[1] == 0:
             context.agent_validations[agent_id] = validation
-            context.failed_agents.append(agent_id)  
+            context.failed_agents.append(agent_id) 
+            context.agent_feedback[agent_id] = ("", "")
         else:
             valid_agents.append(agent_id)
             #Set validations to be empty
@@ -154,16 +152,21 @@ async def check_states(
             )
             for agent_id in valid_agents
         ]
-        values = await asyncio.gather(*value_tasks)
+        results = await asyncio.gather(*value_tasks)
 
+        tokens_saved = 0
+        price_saved = 0.0
         
         #Check if any values less than impossible score and mismatch detection
-        for agent_id, value in zip(valid_agents, values):
+        for agent_id, (verification, (tokens, cost)) in zip(valid_agents, results):
             #print("\n\n")
-            print("Value list: ", value)
-            context.agent_values[agent_id] = value[0]
-            iid_replies = value[1]
+            print("Value list: ", verification)
+            context.agent_values[agent_id] = verification[0]
+            iid_replies = verification[1]
             
+            tokens_saved += tokens
+            price_saved += cost
+
             #Need to run rafaverifier in order to do mismatching
             context.agent_feedback[agent_id] = verify(context.states[agent_id])            
                 
@@ -176,6 +179,7 @@ async def check_states(
                     context.failed_agents.remove(agent_id)
 
             mismatch_detecting(agent_id, context, step, iid_replies)
+        return tokens_saved, price_saved
     else: 
         #Otherwise we use Rafa's deterministic verifier.
         for agent_id in valid_agents:
@@ -188,10 +192,9 @@ async def check_states(
             else: 
                 if agent_id in context.failed_agents:
                     context.failed_agents.remove(agent_id) 
+        return 0, 0
                     
 async def async_cache_verify(state, cache, agent_id, type_of_reflexion, num_reflexions, step_batcher, step):
-    global total_tokens
-    global total_price
     # Create a proxy dict excluding 'randomness'
     state_to_hash = {
         'puzzle': state.puzzle,
@@ -208,11 +211,8 @@ async def async_cache_verify(state, cache, agent_id, type_of_reflexion, num_refl
         print("Getting verification from cache")
         verification = entry.verifiers[verifier.name]["verification"]
         #print("verification: ", verification)
-        verification_tokens = entry.verifiers[verifier.name]["metadata"]["verification_tokens"]
-        verification_cost = entry.verifiers[verifier.name]["metadata"]["verification_cost"]
-        #print("verification cost=", verification_cost)
-        total_tokens += verification_tokens
-        total_price += verification_cost
+        tokens_saved = entry.verifiers[verifier.name]["metadata"]["verification_tokens"]
+        price_saved = entry.verifiers[verifier.name]["metadata"]["verification_cost"]
     else:
         print("Getting verification from LLM")
         cost = api.cost(tab_name="step_wise"+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+state.puzzle, report_tokens=True)
@@ -242,7 +242,9 @@ async def async_cache_verify(state, cache, agent_id, type_of_reflexion, num_refl
         }
         entry.verifiers[verifier.name] = {"verification": verification, "metadata": metadata}
         cache.set(key, entry)
-    return verification
+        tokens_saved = 0
+        price_saved
+    return verification, (tokens_saved, price_saved)
     
 
 def mismatch_detecting(agent_id, context, step, iid_replies):
@@ -282,7 +284,7 @@ async def failed_agent_step(
     ):
     single_state = {agent_id: context.states[agent_id]}
     print("single_state: ", single_state)
-    agent_reflexions, agent_all_reflexions = await make_reflexion(
+    agent_reflexions, agent_all_reflexions, reflexion_tokens_saved, reflexion_price_saved = await make_reflexion(
         context.step_batcher, 
         "step_wise", 
         type_of_reflexion, 
@@ -291,7 +293,7 @@ async def failed_agent_step(
         single_state, 
         agent_reflexions, 
         agent_all_reflexions,
-        context.agent_feedback[agent_id][0],
+        context.agent_feedback[agent_id][0] ,
         context.agent_validations[agent_id][0],
         cache=cache
     )
@@ -327,13 +329,16 @@ async def failed_agent_step(
         context.agent_ids.remove(agent_id)
         context.failed_agents.remove(agent_id)
         context.total_score += 1
-        return context.total_score
+        return reflexion_tokens_saved, reflexion_price_saved
 
-    await check_states(context.step_batcher, type_of_reflexion, num_reflexions, step, context, cache, agent_id)
+    verify_tokens_saved, verify_price_saved = await check_states(context.step_batcher, type_of_reflexion, num_reflexions, step, context, cache, agent_id)
+
+    return reflexion_tokens_saved+verify_tokens_saved, reflexion_price_saved+verify_price_saved
 
 async def solve_trial_wise(
         step_batcher: BatchingAPI,
-        num_steps: int, 
+        num_steps: int,
+        iteration: int,
         puzzle_idx: int,
         puzzle: str, 
         agent_ids: List[int], 
@@ -359,7 +364,11 @@ async def solve_trial_wise(
     #print("agent_reflexions: ", agent_reflexions)
     #add last trials reflexion to log
     for agent_id in agent_ids:
-        log[f"Agent {agent_id}"] = {
+        if iteration == 0:
+            log_key = f"Agent {agent_id}"
+        else:
+            log_key = f"Agent {agent_id} - iteration {iteration}"
+        log[log_key] = {
             "Reflexion": agent_reflexions[agent_id][-1] if agent_reflexions[agent_id] else "",
         }
     #Stepping
@@ -383,15 +392,18 @@ async def solve_trial_wise(
         new_states = await asyncio.gather(*agent_tasks)
         
         #Ensures that the agent still exists in log
+        # for agent_id in agent_ids:
+        #     if f"Agent {agent_id}" not in log:
+        #         log[f"Agent {agent_id}"] = {}
         for agent_id in agent_ids:
-            if f"Agent {agent_id}" not in log:
-                log[f"Agent {agent_id}"] = {}
+            if f"Agepuzzle_nt {agent_id} - iteration {iteration}" not in log[puzzle_idx]:
+                log[puzzle_idx][f"Agent {agent_id} - iteration {iteration}"] = {}
 
         for agent_id, new_state in zip(states.keys(), new_states):
              # Log - Steps
             # log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Step": f"{' -> '.join(new_state.steps)}"})
             step_description = new_state.steps[-1] if new_state.steps else "" #empty string should never happend
-            log[f"Agent {agent_id}"][f"Step {step}"] = {
+            log[puzzle_idx][f"Agent {agent_id} - iteration {iteration}"][f"Step {step}"] = {
                 "Step": step_description
             }
             
@@ -411,9 +423,7 @@ async def solve_trial_wise(
         # If all puzzles have been solved, break
         if not states:
             break
-    with open("trial_log.jsonl", "a") as f:
-        f.write(json.dumps(log, indent=4) + "\n")
-    return states, agent_ids, score#, log
+    return states, agent_ids, score, log
 
 
 async def solve_step_wise(
@@ -461,6 +471,9 @@ async def solve_step_wise(
         step_batcher=step_batcher,
         total_score=0
     )
+
+    tokens_saved = 0
+    price_saved = 0
 
     for agent_id in agent_ids:
         if f"Agent {agent_id}" not in log:
@@ -511,7 +524,10 @@ async def solve_step_wise(
         if not states:
             break
     
-        await check_states(step_batcher, type_of_reflexion, num_reflexions, step, context, cache)
+        check_tokens_saved, check_price_saved = await check_states(step_batcher, type_of_reflexion, num_reflexions, step, context, cache)
+
+        tokens_saved += check_tokens_saved
+        price_saved += check_price_saved
 
         while context.failed_agents:
             for agent_id in context.failed_agents.copy():
@@ -546,15 +562,17 @@ async def solve_step_wise(
                 num_used_reflexions += 1
 
             # Wait for all tasks to complete
-            await asyncio.gather(*failed_agent_tasks)
+            results = await asyncio.gather(*failed_agent_tasks)
+
+            for failed_tokens_saved, failed_price_saved in (results):
+                tokens_saved += failed_tokens_saved
+                price_saved += failed_price_saved
 
     with open("step_log.jsonl", "a") as f:
         f.write(json.dumps(log) + "\n")
-    return context.total_score, num_used_reflexions
+    return context.total_score, num_used_reflexions, tokens_saved, price_saved
    
 async def async_cache_reflexion(states, agent_id, cache, time_of_reflexion, type_of_reflexion, num_reflexions, step_batcher, agent_feedback, agent_validation):
-    global total_tokens
-    global total_price
     state = states[agent_id]
     # Create a proxy dict excluding 'randomness'
     state_to_hash = {
@@ -571,10 +589,8 @@ async def async_cache_reflexion(states, agent_id, cache, time_of_reflexion, type
     if time_of_reflexion in entry.reflexions:  
         reflexion = entry.reflexions[time_of_reflexion]["reflexion"]
         print("Getting reflexion from cache")
-        reflexion_tokens = entry.reflexions[time_of_reflexion]["metadata"]["reflexion_tokens"]
-        reflexion_cost = entry.reflexions[time_of_reflexion]["metadata"]["reflexion_cost"]
-        total_tokens += reflexion_tokens
-        total_price += reflexion_cost
+        tokens_saved = entry.reflexions[time_of_reflexion]["metadata"]["reflexion_tokens"]
+        price_saved = entry.reflexions[time_of_reflexion]["metadata"]["reflexion_cost"]
     else:
         print("Getting reflexion from LLM")
         cost = api.cost(tab_name=time_of_reflexion+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+state.puzzle, report_tokens=True)
@@ -608,7 +624,9 @@ async def async_cache_reflexion(states, agent_id, cache, time_of_reflexion, type
 
         entry.reflexions[time_of_reflexion] = {"reflexion": reflexion, "metadata": metadata}
         cache.set(key, entry)
-    return reflexion
+        tokens_saved = 0
+        price_saved = 0
+    return reflexion, (tokens_saved, price_saved)
 
 
 async def make_reflexion(
@@ -635,20 +653,26 @@ async def make_reflexion(
         )
         for agent_id in states
     ]
-    new_reflexions = await asyncio.gather(*cache_reflexions_tasks)
-    print("new_reflexions: ", new_reflexions)
+    results = await asyncio.gather(*cache_reflexions_tasks)
+    #print("new_reflexions: ", new_reflexions)
+
+    tokens_saved = 0
+    price_saved = 0.0
         
-    for agent_id, reflexion in zip(states.keys(), new_reflexions):
+    for agent_id, (reflexion, (tokens, price_saved)) in zip(states.keys(), results):
         agent_reflexions[agent_id].append(reflexion)
         agent_all_reflexions[agent_id].append(reflexion) #To store all reflexions there have been
+
+        tokens_saved += tokens
+        price_saved += price_saved
         
     if type_of_reflexion == "list":
-        return agent_reflexions, agent_all_reflexions
+        return agent_reflexions, agent_all_reflexions, tokens_saved, price_saved
 
     elif type_of_reflexion == "k_most_recent":
         for agent_id in agent_reflexions:
             agent_reflexions[agent_id] = agent_reflexions[agent_id][-k:]
-        return agent_reflexions, agent_all_reflexions
+        return agent_reflexions, agent_all_reflexions, tokens_saved, price_saved
         
     elif type_of_reflexion == "summary_incremental":
         for agent_id in states:
@@ -672,7 +696,7 @@ async def make_reflexion(
         for agent_id, summary in zip(states.keys(), summaries):
             agent_reflexions[agent_id] = [summary] #Replaces reflexions with summary
             print("after summarization for agent_id ", agent_id, "summary: ", summary)
-        return agent_reflexions, agent_all_reflexions
+        return agent_reflexions, agent_all_reflexions, tokens_saved, price_saved
 
         #Summary is made from all reflexions
     elif type_of_reflexion == "summary_all_previous":
@@ -693,7 +717,7 @@ async def make_reflexion(
 
         for agent_id, summary in zip(states.keys(), summaries):
             agent_reflexions[agent_id] = [summary] #Replaces reflexions with summary
-        return agent_reflexions, agent_all_reflexions
+        return agent_reflexions, agent_all_reflexions, tokens_saved, price_saved
     else:
         raise ValueError("Unknown reflexion type")
 
@@ -711,10 +735,6 @@ async def run_reflexion_gameof24(
     Runs a complete Game of 24 with reflexions.
     Returns the total score (number of succesful agents) of the agents.
     """
-    global total_tokens
-    global total_price
-    total_tokens = 0
-    total_price = 0
     puzzle = states[0].puzzle
     step_batcher = BatchingAPI(
         api, 
@@ -762,46 +782,52 @@ async def run_reflexion_gameof24(
     #         randomness=random.randint(0,1000)
     #         )
 
+
+    total_tokens_saved = 0
+    total_price_saved = 0.0
     # states, agent_ids, score = await solve_trial_wise(step_batcher, num_steps, puzzle_idx, puzzle, agent_ids, agent_reflexions, verifier)
     if time_of_reflexion == "trial_wise":
         #Reflect and go again i times
-        for _ in range(num_reflexions):
-            agent_reflexions, agent_all_reflexions = await make_reflexion(step_batcher, time_of_reflexion, type_of_reflexion, num_reflexions, k, states, agent_reflexions, agent_all_reflexions, cache=cache)
+        for iteration in range(num_reflexions):
+            agent_reflexions, agent_all_reflexions, tokens_saved, price_saved = await make_reflexion(step_batcher, time_of_reflexion, type_of_reflexion, num_reflexions, k, states, agent_reflexions, agent_all_reflexions, cache=cache)
+            #print("tokens_saved: ", tokens_saved, "price_saved: ", price_saved)
+            
             #print("reflexions per agent", agent_reflexions)
-            states, agent_ids, score = await solve_trial_wise(step_batcher, num_steps, puzzle_idx, puzzle, agent_ids, agent_reflexions, log)
+            states, agent_ids, score, log = await solve_trial_wise(step_batcher, num_steps, iteration, puzzle_idx, puzzle, agent_ids, agent_reflexions, log)
             total_score += score
+            total_tokens_saved += tokens_saved
+            total_price_saved += price_saved
         num_used_reflexions = sum(len(reflexions) for reflexions in agent_all_reflexions.values())
-        print(cache)
+        #print(cache)
+        with open("trial_log_test.jsonl", "a") as f:
+            f.write(json.dumps(log, indent=4) + "\n")
     elif time_of_reflexion == "step_wise": #step_wise
-        total_score, num_used_reflexions = await solve_step_wise(step_batcher, num_steps, num_reflexions, k, puzzle, agent_ids, type_of_reflexion, log, cache)
+        total_score, num_used_reflexions, total_tokens_saved, total_price_saved = await solve_step_wise(step_batcher, num_steps, num_reflexions, k, puzzle, agent_ids, type_of_reflexion, log, cache)
     else:
         print("Wrong time of reflexion")
-    print("LLMverifier: ", str(LLMVERIFIER))
+    print("tokens_saved: ", total_tokens_saved)
+    print("price_saved: ", total_price_saved)
     cost = api.cost(tab_name=time_of_reflexion+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+puzzle, report_tokens=True)
     tokens_used = cost.get("total_tokens")
     print("tokens_used: ", tokens_used)
-    total_tokens += tokens_used
-    print("total_tokens: ", total_tokens)
     cost = api.cost(tab_name=time_of_reflexion+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+puzzle, report_tokens=False)
     price_used = cost.get("total_cost")
-    total_price += price_used
     print("price_used: ", price_used)
-    print("total_price: ", total_price)
 
     #For loop counting how many reflexions have been done in total 
     
-    return total_score, tokens_used, total_tokens, price_used, total_price, num_used_reflexions
+    return total_score, tokens_used, tokens_saved, price_used, price_saved, num_used_reflexions
 
 
 async def main():
     # Solve
     # Do reflexiongame
     # Example of running an gameOf24 experiment with reflexion
-    num_reflexions = 1
+    num_reflexions = 4
     k = 2
     num_agents = 1
     puzzles = load_test_puzzles()
-    state = puzzles[0] #1, 1, 4, 6
+    state = puzzles[2] #6, 6, 6, 6
 
     for i in range(num_agents):
         state[i] = state[0]
@@ -810,8 +836,8 @@ async def main():
 
     # await run_reflexion_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
     set_LLMverifier(True)
-    total_score, tokens_used, total_tokens, price_used, total_price, num_used_reflexions = await run_reflexion_gameof24("step_wise", "list", puzzle_idx, state, num_agents, num_reflexions, k) 
-    print("total_score: ", total_score, "tokens_used: ", tokens_used, "total_tokens: ", total_tokens, "price_used: ", price_used, "total_price: ", total_price, "num_used_reflexions: ", num_used_reflexions)
+    total_score, tokens_used, tokens_saved, price_used, price_saved, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", puzzle_idx, state, num_agents, num_reflexions, k) 
+    print("total_score: ", total_score, "tokens_used: ", tokens_used, "tokens_saved: ", tokens_saved, "price_used: ", price_used, "price_saved: ", price_saved, "num_used_reflexions: ", num_used_reflexions)
 
     # total_score, tokens_used, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", state, num_agents, num_reflexions, k, verifier) 
     # print("total_score: ", total_score, "tokens_used: ", tokens_used, "num_used_reflexions: ", num_used_reflexions)
