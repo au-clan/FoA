@@ -20,7 +20,7 @@ class GameOf24Data:
         elif set == "test":
             indices = list(range(990,997))
         elif set == "uniform":
-            arr = range(1000)
+            arr = range(1362)
             S = 60
             indices = np.linspace(0, len(arr) -1, S, dtype=int)
         else:

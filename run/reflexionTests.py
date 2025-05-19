@@ -170,7 +170,7 @@ async def run_puzzles(
     puzzle_idx, 
     states,
     logger):
-    num_reflexions_list = [1]  # Number of iterations to test ,2,4
+    num_reflexions_list = [1,2,4]  # Number of iterations to test
     k = 2  # k for "k_most_recent"
     num_agents = 1  
     reflexion_types = ["list", "k_most_recent", "summary_incremental", "summary_all_previous"]   
@@ -178,9 +178,9 @@ async def run_puzzles(
 
     for i in range(num_agents):
         states[i] = states[0]
-    for num_reflexions in num_reflexions_list:
-        for reflexion_type in reflexion_types:
-            print("\npuzzle: ", states[0].puzzle, "with type: ", reflexion_type, " starts now")
+    for reflexion_type in reflexion_types:
+        print("\npuzzle: ", states[0].puzzle, "with type: ", reflexion_type, " starts now")
+        for num_reflexions in num_reflexions_list:
             # Run the reflexion game
             total_score, tokens_used, total_tokens, price_used, total_price, num_used_reflexions = await run_reflexion_gameof24(
                 time_of_reflexion, reflexion_type, int(puzzle_idx), states, num_agents, num_reflexions, k
@@ -209,7 +209,7 @@ async def find_k(
     puzzle_idx, 
     states,
     logger):
-    num_reflexions = 1  # Number of iterations of reflexion 4
+    num_reflexions = 4  # Number of iterations of reflexion 4
     ks = [1]  # k for "k_most_recent",2,4
     num_agents = 1  
     reflexion_type = "k_most_recent"
@@ -260,8 +260,7 @@ async def trial_wise_type_testing():
             logger=trial_logger
             )
         )
-        for idx in range(0,1)
-        #for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
+        for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
     ]
     all_type_of_reflexions = await asyncio.gather(*tasks)
 
@@ -284,8 +283,7 @@ async def test_RAFA_stepwise_types():
             logger=rafa_step_logger
             )
         )
-        for idx in range(0,1)
-        #for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
+        for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
     ]
 
     all_type_of_reflexions = await asyncio.gather(*tasks)
@@ -309,8 +307,7 @@ async def test_LLM_stepwise_reflexion():
             logger=llm_step_logger
             )
         )
-        for idx in range(0,1)
-        #or idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
+        for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
     ]
 
     all_type_of_reflexions = await asyncio.gather(*tasks)
@@ -335,8 +332,7 @@ async def test_K_value():
             logger=k_trial_logger
             )
         )    
-        for idx in range(0,1)
-        #for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
+        for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
     ]
 
     trial_type_of_reflexions = await asyncio.gather(*trial_tasks)
@@ -350,8 +346,7 @@ async def test_K_value():
             logger=k_step_logger
             )
         )    
-        for idx in range(0,1)
-        #for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
+        for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
     ]
 
     step_type_of_reflexions = await asyncio.gather(*step_tasks)
@@ -378,9 +373,10 @@ async def scoreTest():
     print(token_cost)
 
 if __name__ == "__main__":
-    asyncio.run(trial_wise_type_testing())
-    asyncio.run(test_LLM_stepwise_reflexion())
-    asyncio.run(test_RAFA_stepwise_types())
+    #asyncio.run(create_test_puzzles())
+    #asyncio.run(trial_wise_type_testing())
+    #asyncio.run(test_LLM_stepwise_reflexion())
+    #asyncio.run(test_RAFA_stepwise_types())
     asyncio.run(test_K_value())
     # asyncio.run(trial_wise_type_testing())
     # asyncio.run(test_RAFA_stepwise_types())
@@ -390,7 +386,7 @@ if __name__ == "__main__":
     # with open('uniform_test_puzzles.pkl', 'rb') as file:
     #     loaded_list = pickle.load(file)
     # for i in range(len(loaded_list)):
-    #     # print(loaded_list[i])
+    #     print(loaded_list[i])
     #     if len(loaded_list[i]) == 0:
     #         print(i)
     # print(len(loaded_list))

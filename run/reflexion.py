@@ -65,6 +65,7 @@ step_api_config = eval_api_config = {
 }
 
 #model = "llama-3.3-70b-versatile"
+#provider = "LazyKey"
 model = "gpt-4.1-nano-2025-04-14"
 provider = "OpenAI"
 models = {
@@ -733,7 +734,7 @@ async def run_reflexion_gameof24(
     total_score = 0
     # Set up log
     log = {}
-    log[puzzle_idx] = {"puzzle": puzzle}
+    log[puzzle_idx] = {"puzzle": puzzle, "type of reflexion": type_of_reflexion, "number of reflexions": num_reflexions}
     log[puzzle_idx].update({f"Agent {i}": {} for i in range(num_agents)})
     #Log initial solve
     print("state is : ", states[agent_id])
