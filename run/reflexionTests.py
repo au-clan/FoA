@@ -260,7 +260,8 @@ async def trial_wise_type_testing():
             logger=trial_logger
             )
         )
-        for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
+        for idx in range(3)
+        # for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
     ]
     all_type_of_reflexions = await asyncio.gather(*tasks)
 
@@ -376,10 +377,10 @@ async def scoreTest():
 
 if __name__ == "__main__":
     #asyncio.run(create_test_puzzles())
-    #asyncio.run(trial_wise_type_testing())
+    asyncio.run(trial_wise_type_testing())
     #asyncio.run(test_LLM_stepwise_reflexion())
     #asyncio.run(test_RAFA_stepwise_types())
-    asyncio.run(test_K_value())
+    # asyncio.run(test_K_value())
     # asyncio.run(trial_wise_type_testing())
     # asyncio.run(test_RAFA_stepwise_types())
     #asyncio.run(test_LLM_stepwise_reflexion())

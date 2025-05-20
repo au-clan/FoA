@@ -336,93 +336,91 @@ async def failed_agent_step(
     return reflexion_tokens_saved+verify_tokens_saved, reflexion_price_saved+verify_price_saved
 
 async def solve_trial_wise(
-        step_batcher: BatchingAPI,
-        num_steps: int,
-        iteration: int,
-        puzzle_idx: int,
-        puzzle: str, 
-        agent_ids: List[int], 
-        agent_reflexions: Dict[int, List[str]],
-        log: Dict[str, Any]
-    ) -> Tuple[Dict[int, GameOf24State], List[int], int]:
-    """"
+    step_batcher: BatchingAPI,
+    num_steps: int,
+    iteration: int,
+    puzzle_idx: int,
+    puzzle: str, 
+    agent_ids: List[int], 
+    agent_reflexions: Dict[int, List[str]],
+    log: Dict[str, Any]
+) -> Tuple[Dict[int, GameOf24State], List[int], int, Dict[str, Any]]:
+    """
     Solves the puzzle either with or without reflexions.
-    Returns the updated states, remaining agent_ids, and the accumulated score.
+    Returns the updated states, remaining agent_ids, accumulated score, and updated log.
     """
     score = 0
-    states =  {}        
-    #Create one state for each agent
+    states = {}        
+    # Create one state for each agent
     for agent_id in agent_ids:
         states[agent_id] = GameOf24State(
             puzzle=puzzle, 
             current_state=puzzle, 
             steps=[], 
             randomness=random.randint(0,1000)
-            )
+        )
     finished_states = {}
 
-    #print("agent_reflexions: ", agent_reflexions)
-    #add last trials reflexion to log
-    for agent_id in agent_ids:
-        if iteration == 0:
-            log_key = f"Agent {agent_id}"
-        else:
-            log_key = f"Agent {agent_id} - iteration {iteration}"
-        log[log_key] = {
-            "Reflexion": agent_reflexions[agent_id][-1] if agent_reflexions[agent_id] else "",
+    # Initialize log
+    if puzzle_idx not in log:
+        log[puzzle_idx] = {
+            "puzzle": puzzle,
+            "type of reflexion": "list",
+            "number of reflexions": len(agent_reflexions[agent_ids[0]]) if agent_reflexions and agent_ids else 0
         }
-    #Stepping
+
+    # Initialize agent entries in the log
+    for agent_id in agent_ids:
+        log_key = f"Agent {agent_id}" if iteration == 0 else f"Agent {agent_id} - iteration {iteration}"
+        if log_key not in log[puzzle_idx]:
+            log[puzzle_idx][log_key] = {
+                "Reflexion": agent_reflexions[agent_id][-1] if agent_reflexions.get(agent_id) else ""
+            }
+
+    # Stepping
     for step in range(num_steps):
         print(f"Step {step} : Stepping")
         
-        # # Log - Set up log of each agent for current step
-        # for agent_id in range(len(agent_ids)):
-        #     log[puzzle_idx][f"Agent {agent_id}"].update({f"Step {step}": {}})
-        
         agent_tasks = [
             asyncio.create_task(
-            GameOf24Agent.step(
-                states[agent_id], 
-                step_batcher, 
-                namespace=(0, f"Agent: {agent_id}", f"Step : {step}"), #TODO: fix namespace stuff
-                reflexion=agent_reflexions[agent_id])
+                GameOf24Agent.step(
+                    states[agent_id], 
+                    step_batcher, 
+                    namespace=(0, f"Agent: {agent_id}", f"Step : {step}"),
+                    reflexion=agent_reflexions[agent_id]
+                )
             )
             for agent_id in states
         ]
         new_states = await asyncio.gather(*agent_tasks)
         
-        #Ensures that the agent still exists in log
-        # for agent_id in agent_ids:
-        #     if f"Agent {agent_id}" not in log:
-        #         log[f"Agent {agent_id}"] = {}
-        for agent_id in agent_ids:
-            if f"Agepuzzle_nt {agent_id} - iteration {iteration}" not in log[puzzle_idx]:
-                log[puzzle_idx][f"Agent {agent_id} - iteration {iteration}"] = {}
-
+        # Log steps for each agent
         for agent_id, new_state in zip(states.keys(), new_states):
-             # Log - Steps
-            # log[puzzle_idx][f"Agent {agent_id}"][f"Step {step}"].update({"Step": f"{' -> '.join(new_state.steps)}"})
-            step_description = new_state.steps[-1] if new_state.steps else "" #empty string should never happend
-            log[puzzle_idx][f"Agent {agent_id} - iteration {iteration}"][f"Step {step}"] = {
+            log_key = f"Agent {agent_id}" if iteration == 0 else f"Agent {agent_id} - iteration {iteration}"
+            
+            # Log all steps for every iteration
+            step_description = new_state.steps[-1] if new_state.steps else ""
+            log[puzzle_idx][log_key][f"Step {step}"] = {
                 "Step": step_description
             }
             
             states[agent_id] = new_state
             print(f"Current step for agent {agent_id}: {new_state.steps[-1]} \n")
-        #print(registry)
-        # Evaluate whether a puzzle has been solved, 
+        
+        # Evaluate whether a puzzle has been solved
         for agent_id in list(states.keys()):
             if GameOf24Agent.verify(states[agent_id]) == {"r": 1}:
                 print(f"Puzzle finished by agent {agent_id}: {states[agent_id].puzzle}")
                 finished_states[agent_id] = states.pop(agent_id)
                 agent_ids.remove(agent_id)
-                score +=1
+                score += 1
         
-        # After each step, the api should be empty
+        # After each step, the API should be empty
         assert len(step_batcher.futures) == 0, f"API futures should be empty, but are {len(step_batcher.futures)}"
         # If all puzzles have been solved, break
         if not states:
             break
+    
     return states, agent_ids, score, log
 
 
