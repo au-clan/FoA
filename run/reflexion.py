@@ -61,10 +61,10 @@ step_api_config = eval_api_config = {
     "top_k": 50
 }
 
-model = "llama-3.3-70b-versatile"
-provider = "LazyKey"
-#model = "gpt-4.1-nano-2025-04-14"
-#provider = "OpenAI"
+#model = "llama-3.3-70b-versatile"
+#provider = "LazyKey"
+model = "gpt-4.1-nano-2025-04-14"
+provider = "OpenAI"
 models = {
     "step": {"model_name":model, "provider":provider},
     "eval": {"model_name":model, "provider":provider},
@@ -566,8 +566,8 @@ async def solve_step_wise(
                 tokens_saved += failed_tokens_saved
                 price_saved += failed_price_saved
 
-    with open("step_log.jsonl", "a") as f:
-        f.write(json.dumps(log) + "\n")
+    with open("new_step_log.jsonl", "a") as f:
+        f.write(json.dumps(log, indent=4) + "\n")
     return context.total_score, num_used_reflexions, tokens_saved, price_saved
    
 async def async_cache_reflexion(states, agent_id, cache, time_of_reflexion, type_of_reflexion, num_reflexions, step_batcher, agent_feedback, agent_validation):
@@ -643,6 +643,9 @@ async def make_reflexion(
     """
     Generates a reflexion for each agent based on their current state and the chosen type of reflexion.
     """
+    cost = api.cost(tab_name=time_of_reflexion+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+states[0].puzzle, report_tokens=True)
+    tokens_before_cache = cost.get("total_tokens")
+    print("tokens before cache: ", tokens_before_cache)
     cache_reflexions_tasks = [
         asyncio.create_task(
             async_cache_reflexion(
@@ -652,19 +655,26 @@ async def make_reflexion(
         for agent_id in states
     ]
     results = await asyncio.gather(*cache_reflexions_tasks)
+    cost = api.cost(tab_name=time_of_reflexion+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+states[0].puzzle, report_tokens=True)
+    tokens_after_cache = cost.get("total_tokens")
+    print("tokens after cache: ", tokens_after_cache)
+
     #print("new_reflexions: ", new_reflexions)
 
     tokens_saved = 0
     price_saved = 0.0
         
-    for agent_id, (reflexion, (tokens, price_saved)) in zip(states.keys(), results):
+    for agent_id, (reflexion, (tokens, price)) in zip(states.keys(), results):
         agent_reflexions[agent_id].append(reflexion)
         agent_all_reflexions[agent_id].append(reflexion) #To store all reflexions there have been
 
         tokens_saved += tokens
-        price_saved += price_saved
+        price_saved += price
         
     if type_of_reflexion == "list":
+        cost = api.cost(tab_name=time_of_reflexion+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+states[0].puzzle, report_tokens=True)
+        tokens_after_list = cost.get("total_tokens")
+        print("tokens after list: ", tokens_after_list)
         return agent_reflexions, agent_all_reflexions, tokens_saved, price_saved
 
     elif type_of_reflexion == "k_most_recent":
@@ -715,6 +725,10 @@ async def make_reflexion(
 
         for agent_id, summary in zip(states.keys(), summaries):
             agent_reflexions[agent_id] = [summary] #Replaces reflexions with summary
+
+        cost = api.cost(tab_name=time_of_reflexion+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+states[0].puzzle, report_tokens=True)
+        tokens_after_summary = cost.get("total_tokens")
+        print("tokens after summary: ", tokens_after_summary)
         return agent_reflexions, agent_all_reflexions, tokens_saved, price_saved
     else:
         raise ValueError("Unknown reflexion type")
@@ -788,6 +802,10 @@ async def run_reflexion_gameof24(
         #Reflect and go again i times
         for iteration in range(num_reflexions):
             agent_reflexions, agent_all_reflexions, tokens_saved, price_saved = await make_reflexion(step_batcher, time_of_reflexion, type_of_reflexion, num_reflexions, k, states, agent_reflexions, agent_all_reflexions, cache=cache)
+            cost = api.cost(tab_name=time_of_reflexion+type_of_reflexion+str(LLMVERIFIER)+str(num_reflexions)+puzzle, report_tokens=True)
+            tokens_at_this_point = cost.get("total_tokens")
+            print("tokens at this point after making reflexion :", tokens_at_this_point, "at iteration:", iteration)
+            print("tokens_saved after make_reflexion: ", tokens_saved, "at iteration:", iteration)
             #print("tokens_saved: ", tokens_saved, "price_saved: ", price_saved)
             
             #print("reflexions per agent", agent_reflexions)
@@ -797,7 +815,7 @@ async def run_reflexion_gameof24(
             total_price_saved += price_saved
         num_used_reflexions = sum(len(reflexions) for reflexions in agent_all_reflexions.values())
         #print(cache)
-        with open("trial_log_test.jsonl", "a") as f:
+        with open("new_trial_log.jsonl", "a") as f:
             f.write(json.dumps(log, indent=4) + "\n")
     elif time_of_reflexion == "step_wise": #step_wise
         total_score, num_used_reflexions, total_tokens_saved, total_price_saved = await solve_step_wise(step_batcher, num_steps, num_reflexions, k, puzzle, agent_ids, type_of_reflexion, log, cache)
@@ -821,7 +839,7 @@ async def main():
     # Solve
     # Do reflexiongame
     # Example of running an gameOf24 experiment with reflexion
-    num_reflexions = 4
+    num_reflexions = 1
     k = 2
     num_agents = 1
     puzzles = load_test_puzzles()
@@ -834,7 +852,7 @@ async def main():
 
     # await run_reflexion_gameof24(state, agent_ids, "summary", num_reflexions, k, "incremental")
     set_LLMverifier(True)
-    total_score, tokens_used, tokens_saved, price_used, price_saved, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", puzzle_idx, state, num_agents, num_reflexions, k) 
+    total_score, tokens_used, tokens_saved, price_used, price_saved, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "summary_all_previous", puzzle_idx, state, num_agents, num_reflexions, k) 
     print("total_score: ", total_score, "tokens_used: ", tokens_used, "tokens_saved: ", tokens_saved, "price_used: ", price_used, "price_saved: ", price_saved, "num_used_reflexions: ", num_used_reflexions)
 
     # total_score, tokens_used, num_used_reflexions = await run_reflexion_gameof24("trial_wise", "list", state, num_agents, num_reflexions, k, verifier) 

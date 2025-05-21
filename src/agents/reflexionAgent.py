@@ -270,5 +270,7 @@ class GameOf24Agent:
         """
 
         prompt = llama_prompts.summary_prompt.format(reflexion=reflexion)
+
+        print("summary prompt: ", prompt)
         reflexion = api.buffered_request(prompt, key=hash(state), namespace=namespace)
         return reflexion

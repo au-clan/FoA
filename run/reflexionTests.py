@@ -173,7 +173,7 @@ async def run_puzzles(
     num_reflexions_list = [1,2,4]  # Number of iterations to test
     k = 2  # k for "k_most_recent"
     num_agents = 1  
-    reflexion_types = ["list"]#, "k_most_recent", "summary_incremental", "summary_all_previous"   
+    reflexion_types = ["list", "summary_all_previous"]#, "k_most_recent", "summary_incremental"  
     type_of_reflexions = []
 
     for i in range(num_agents):
@@ -260,8 +260,8 @@ async def trial_wise_type_testing():
             logger=trial_logger
             )
         )
-        for idx in range(2)
-        # for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
+        #for idx in range(2)
+        for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
     ]
     all_type_of_reflexions = await asyncio.gather(*tasks)
 
@@ -308,8 +308,8 @@ async def test_LLM_stepwise_reflexion():
             logger=llm_step_logger
             )
         )
-        for idx in range(2)
-        #for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
+        #for idx in range(2)
+        for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
     ]
 
     all_type_of_reflexions = await asyncio.gather(*tasks)
@@ -378,9 +378,9 @@ async def scoreTest():
 
 if __name__ == "__main__":
     #asyncio.run(create_test_puzzles())
-    asyncio.run(trial_wise_type_testing())
+    #asyncio.run(trial_wise_type_testing())
     #asyncio.run(test_LLM_stepwise_reflexion())
-    #asyncio.run(test_RAFA_stepwise_types())
+    asyncio.run(test_RAFA_stepwise_types())
     # asyncio.run(test_K_value())
     # asyncio.run(trial_wise_type_testing())
     # asyncio.run(test_RAFA_stepwise_types())

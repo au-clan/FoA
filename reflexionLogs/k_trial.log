@@ -61,3 +61,4 @@ From now on OpenAI
 2025-05-19 17:11:30,299 - {'puzzle': '5 7 7 11', 'num_agents': 1, 'num_reflexions': 4, 'reflexion_type': 'k_most_recent', 'k': 1, 'score': 0, 'tokens_used': 8293.0, 'total_tokens': 477171.0, 'price_used': 0.001066, 'price_total': 0.0636684, 'num_used_reflexions': 4}
 2025-05-19 17:11:30,752 - {'puzzle': '2 3 6 8', 'num_agents': 1, 'num_reflexions': 4, 'reflexion_type': 'k_most_recent', 'k': 1, 'score': 0, 'tokens_used': 7990.0, 'total_tokens': 485161.0, 'price_used': 0.0010144000000000002, 'price_total': 0.0646828, 'num_used_reflexions': 4}
 2025-05-19 17:11:30,860 - {'puzzle': '2 3 5 12', 'num_agents': 1, 'num_reflexions': 4, 'reflexion_type': 'k_most_recent', 'k': 1, 'score': 0, 'tokens_used': 7964.0, 'total_tokens': 493125.0, 'price_used': 0.0010148000000000002, 'price_total': 0.0656976, 'num_used_reflexions': 4}
+Herfra skulle være rigtige:

@@ -215,3 +215,159 @@ From now on OpenAI{"0": {"puzzle": "1 1 4 6", "Agent 0": {}}, "Agent 0": {"Step 
 {"0": {"puzzle": "1 1 4 6", "type of reflexion": "list", "number of reflexions": 2, "Agent 0": {}}, "Agent 0": {"Step 0": {"Step": "1 + 1 = 2 (left: 2 4 6)", "Reflexion": ""}, "Step 1": {"Step": "4 + 6 = 10 (left: 2 10)", "Reflexion": "The initial step of \"2 + 4 = 6\" is incorrect because the numbers 2 and 4 are not present in the original input (1, 1, 4, 6). This operation is invalid as it introduces a non-existent number (2) into the calculation."}, "Step 2": {"Step": "2 + 10 = 12 (left: 12)", "Reflexion": "The initial step attempt is incorrect because it doesn't use the given numbers (1, 1, 4, 6) and instead uses unrelated numbers (2, 10). This makes the step invalid, as it doesn't follow the game's rules."}, "Step 3": {"Step": "12 * 12 = 144 is not possible since there is only one number, a possible next step is not available, but to follow the rules and the example of 4 6 where 4 * 6 = 4 is listed as a possible next step even though the result is the same as one of the inputs, we can list:", "Reflexion": ""}}}
 {"23": {"puzzle": "3 7 7 8", "type of reflexion": "list", "number of reflexions": 4, "Agent 0": {}}, "Agent 0": {"Step 0": {"Step": "7 + 7 = 14 (left: 3 8 14)", "Reflexion": ""}, "Step 1": {"Step": "8 + 14 = 22 (left: 3 22)", "Reflexion": "The initial step attempt, 8 + 14 = 22 (left: 3 22), is invalid because the number 14 is not one of the original input numbers (3, 7, 7, 8). The correct step should have started with a combination of the given numbers using basic arithmetic operations. This mistake made the problem unsolvable from this point, as it introduced an extraneous number."}, "Step 2": {"Step": "22 - 3 = 19 (left: 19)", "Reflexion": ""}, "Step 3": {"Step": "19 + 19 = 38 (left: 38)", "Reflexion": ""}}}
 {"0": {"puzzle": "1 1 4 6", "type of reflexion": "list", "number of reflexions": 4, "Agent 0": {}}, "Agent 0": {"Step 0": {"Step": "1 + 1 = 2 (left: 2 4 6)", "Reflexion": ""}, "Step 1": {"Step": "4 + 6 = 10 (left: 2 10)", "Reflexion": "The initial step of \"2 + 4 = 6\" is incorrect because the numbers 2 and 4 are not present in the original input (1, 1, 4, 6). This operation is invalid as it introduces a non-existent number (2) into the calculation."}, "Step 2": {"Step": "10 - 2 = 8 (left: 8)", "Reflexion": "The initial step attempt is incorrect because it doesn't utilize the given numbers (1, 1, 4, 6) and instead introduces new numbers (10, 2). This makes the step invalid, as it doesn't follow the game's rules of using the provided numbers and basic arithmetic operations to reach 24."}, "Step 3": {"Step": "8 * 1 = 8 and 8 / 1 = 8 and 8 - 1 is not possible since there is no 1 and 8 + 1 is not possible since there is no 1 and 8 / 8 = 1 (left: 1)", "Reflexion": ""}}}
+{
+    "23": {
+        "puzzle": "3 7 7 8",
+        "type of reflexion": "list",
+        "number of reflexions": 1,
+        "Agent 0": {}
+    },
+    "Agent 0": {
+        "Step 0": {
+            "Step": "7 + 7 = 14 (left: 3 8 14)",
+            "Reflexion": ""
+        },
+        "Step 1": {
+            "Step": "8 + 14 = 22 (left: 3 22)",
+            "Reflexion": "The initial step attempt, 8 + 14 = 22 (left: 3 22), is invalid because the number 14 is not one of the original input numbers (3, 7, 7, 8). The correct step should have started with a combination of the given numbers using basic arithmetic operations. This mistake made the problem unsolvable from this point, as it introduced an extraneous number."
+        },
+        "Step 2": {
+            "Step": "22 - 3 = 19 (left: 19)",
+            "Reflexion": ""
+        },
+        "Step 3": {
+            "Step": "19 * 1 = 19 (left: 19)",
+            "Reflexion": ""
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "type of reflexion": "list",
+        "number of reflexions": 1,
+        "Agent 0": {}
+    },
+    "Agent 0": {
+        "Step 0": {
+            "Step": "1 + 1 = 2 (left: 2 4 6)",
+            "Reflexion": ""
+        },
+        "Step 1": {
+            "Step": "4 + 6 = 10 (left: 2 10)",
+            "Reflexion": "The initial step of \"2 + 4 = 6\" is incorrect because the numbers 2 and 4 are not present in the original input (1, 1, 4, 6). This operation is invalid as it introduces a non-existent number (2) into the calculation."
+        },
+        "Step 2": {
+            "Step": "2 + 10 = 12 (left: 12)",
+            "Reflexion": ""
+        },
+        "Step 3": {
+            "Step": "12 * 12 = 144 is not possible since there is only one number, ",
+            "Reflexion": ""
+        }
+    }
+}
+{
+    "23": {
+        "puzzle": "3 7 7 8",
+        "type of reflexion": "list",
+        "number of reflexions": 2,
+        "Agent 0": {}
+    },
+    "Agent 0": {
+        "Step 0": {
+            "Step": "7 + 7 = 14 (left: 3 8 14)",
+            "Reflexion": ""
+        },
+        "Step 1": {
+            "Step": "8 + 14 = 22 (left: 3 22)",
+            "Reflexion": "The initial step attempt, 8 + 14 = 22 (left: 3 22), is invalid because the number 14 is not one of the original input numbers (3, 7, 7, 8). The correct step should have started with a combination of the given numbers using basic arithmetic operations. This mistake made the problem unsolvable from this point, as it introduced an extraneous number."
+        },
+        "Step 2": {
+            "Step": "22 - 3 = 19 (left: 19)",
+            "Reflexion": ""
+        },
+        "Step 3": {
+            "Step": "19 * 1 = 19 (left: 19)",
+            "Reflexion": ""
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "type of reflexion": "list",
+        "number of reflexions": 2,
+        "Agent 0": {}
+    },
+    "Agent 0": {
+        "Step 0": {
+            "Step": "1 + 1 = 2 (left: 2 4 6)",
+            "Reflexion": ""
+        },
+        "Step 1": {
+            "Step": "4 + 6 = 10 (left: 2 10)",
+            "Reflexion": "The initial step of \"2 + 4 = 6\" is incorrect because the numbers 2 and 4 are not present in the original input (1, 1, 4, 6). This operation is invalid as it introduces a non-existent number (2) into the calculation."
+        },
+        "Step 2": {
+            "Step": "10 - 2 = 8 (left: 8)",
+            "Reflexion": "The initial step attempt is incorrect because it doesn't use the given numbers (1, 1, 4, 6) and instead uses unrelated numbers (2, 10). This makes the step invalid, as it doesn't follow the game's rules."
+        },
+        "Step 3": {
+            "Step": "8 / 8 = 1 (left: 1)",
+            "Reflexion": ""
+        }
+    }
+}
+{
+    "23": {
+        "puzzle": "3 7 7 8",
+        "type of reflexion": "list",
+        "number of reflexions": 4,
+        "Agent 0": {}
+    },
+    "Agent 0": {
+        "Step 0": {
+            "Step": "7 + 7 = 14 (left: 3 8 14)",
+            "Reflexion": ""
+        },
+        "Step 1": {
+            "Step": "8 + 14 = 22 (left: 3 22)",
+            "Reflexion": "The initial step attempt, 8 + 14 = 22 (left: 3 22), is invalid because the number 14 is not one of the original input numbers (3, 7, 7, 8). The correct step should have started with a combination of the given numbers using basic arithmetic operations. This mistake made the problem unsolvable from this point, as it introduced an extraneous number."
+        },
+        "Step 2": {
+            "Step": "22 - 3 = 19 (left: 19)",
+            "Reflexion": ""
+        },
+        "Step 3": {
+            "Step": "19 / 19 = 1 (left: 1)",
+            "Reflexion": ""
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "type of reflexion": "list",
+        "number of reflexions": 4,
+        "Agent 0": {}
+    },
+    "Agent 0": {
+        "Step 0": {
+            "Step": "1 + 1 = 2 (left: 2 4 6)",
+            "Reflexion": ""
+        },
+        "Step 1": {
+            "Step": "4 + 6 = 10 (left: 2 10)",
+            "Reflexion": "The initial step of \"2 + 4 = 6\" is incorrect because the numbers 2 and 4 are not present in the original input (1, 1, 4, 6). This operation is invalid as it introduces a non-existent number (2) into the calculation."
+        },
+        "Step 2": {
+            "Step": "10 * 2 = 20 (left: 20)",
+            "Reflexion": "The mistake is that the numbers used (10 and 2) are not part of the original input (1, 1, 4, 6). This makes the step invalid, as it introduces external numbers not provided in the problem."
+        },
+        "Step 3": {
+            "Step": "20 / 1 = 20 (left: 20)",
+            "Reflexion": ""
+        }
+    }
+}
