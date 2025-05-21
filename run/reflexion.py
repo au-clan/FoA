@@ -134,7 +134,7 @@ async def check_states(
             context.agent_validations[agent_id] = ("", "")
     #Early stop if all agents contain invalid step
     if not valid_agents:
-        return
+        return 0, 0.0
     
     #If using the LLM verifier then the LLM determines whether it is still possible to reach 24.
     if LLMVERIFIER:  
@@ -192,7 +192,7 @@ async def check_states(
             else: 
                 if agent_id in context.failed_agents:
                     context.failed_agents.remove(agent_id) 
-        return 0, 0
+        return 0, 0.0
                     
 async def async_cache_verify(state, cache, agent_id, type_of_reflexion, num_reflexions, step_batcher, step):
     # Create a proxy dict excluding 'randomness'
@@ -243,7 +243,7 @@ async def async_cache_verify(state, cache, agent_id, type_of_reflexion, num_refl
         entry.verifiers[verifier.name] = {"verification": verification, "metadata": metadata}
         cache.set(key, entry)
         tokens_saved = 0
-        price_saved
+        price_saved = 0
     return verification, (tokens_saved, price_saved)
     
 
@@ -814,7 +814,7 @@ async def run_reflexion_gameof24(
 
     #For loop counting how many reflexions have been done in total 
     
-    return total_score, tokens_used, tokens_saved, price_used, price_saved, num_used_reflexions
+    return total_score, tokens_used, total_tokens_saved, price_used, total_price_saved, num_used_reflexions
 
 
 async def main():

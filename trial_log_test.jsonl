@@ -568,3 +568,1101 @@
         }
     }
 }
+{
+    "23": {
+        "puzzle": "3 7 7 8",
+        "type of reflexion": "list",
+        "number of reflexions": 1,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 3 19)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 3 16)"
+            }
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "type of reflexion": "list",
+        "number of reflexions": 1,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "6 * 4 = 24 (left: 1 1 24)"
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 12)"
+            },
+            "Step 3": {
+                "Step": "Not possible with one number, consider adding more numbers to proceed."
+            }
+        }
+    }
+}
+{
+    "23": {
+        "puzzle": "3 7 7 8",
+        "type of reflexion": "list",
+        "number of reflexions": 2,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 3 19)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 3 16)"
+            }
+        },
+        "Agent 0 - iteration 1": {
+            "Reflexion": "The mistakes made were:\n\n1. Subtracting 3 from 22, moving further away from 24.\n2. Continuing with another subtraction, instead of exploring other operations to get closer to 24.\n3. Not utilizing the initial numbers (3, 7, 7, 8) efficiently, and not considering multiplication or division operations.",
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 19 3)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 16 3)"
+            }
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "type of reflexion": "list",
+        "number of reflexions": 2,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "6 * 4 = 24 (left: 1 1 24)"
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 12)"
+            },
+            "Step 3": {
+                "Step": "12 - 12 = 0 (left: 0) "
+            }
+        },
+        "Agent 0 - iteration 1": {
+            "Reflexion": "The mistakes made were:\n\n1. Not using the result to get closer to 24.\n2. Introducing unnecessary operations that moved away from 24 (e.g., '24 / 2 = 12' and '12 - 12 = 0').\n3. Not utilizing all four numbers to reach 24.\n\nThese errors made the solution attempt invalid and further away from the goal of reaching 24.",
+            "Step 0": {
+                "Step": "6 * 4 = 24 (left: 1 1 24)"
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 12)"
+            },
+            "Step 3": {
+                "Step": "No possible next step, since there is only one number."
+            }
+        }
+    }
+}
+{
+    "23": {
+        "puzzle": "3 7 7 8",
+        "type of reflexion": "list",
+        "number of reflexions": 4,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 3 19)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 3 16)"
+            }
+        },
+        "Agent 0 - iteration 1": {
+            "Reflexion": "The mistakes made were:\n\n1. Subtracting 3 from 22, moving further away from 24.\n2. Continuing with another subtraction, instead of exploring other operations to get closer to 24.\n3. Not utilizing the initial numbers (3, 7, 7, 8) efficiently, and not considering multiplication or division operations.",
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 3 19)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 16 3)"
+            }
+        },
+        "Agent 0 - iteration 2": {
+            "Reflexion": "The mistakes made were:\n\n1. Not using all four numbers to reach 24.\n2. Performing operations that moved the result further away from 24 (e.g., '19 - 3 = 16' instead of trying to get closer to 24).\n3. Not exploring alternative operations (e.g., multiplication, division) that could have led to 24.",
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 19 3)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 16)"
+            }
+        },
+        "Agent 0 - iteration 3": {
+            "Reflexion": "The mistakes made were:\n\n1. Not utilizing the '*' operation, which is often crucial in reaching 24.\n2. Performing '19 - 3 = 16', moving further away from 24 instead of trying to get closer.\n3. Not exploring alternative operations, such as multiplying or dividing, to utilize the numbers more effectively.",
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 19 3)"
+            },
+            "Step 3": {
+                "Step": "19 + 3 = 22 (left: 22)"
+            }
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "type of reflexion": "list",
+        "number of reflexions": 4,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "6 * 4 = 24 (left: 1 1 24)"
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 12)"
+            },
+            "Step 3": {
+                "Step": "12 - 12 = 0 (left: 0) "
+            }
+        },
+        "Agent 0 - iteration 1": {
+            "Reflexion": "The mistakes made were:\n\n1. Not using the result to get closer to 24.\n2. Introducing unnecessary operations that moved away from 24 (e.g., '24 / 2 = 12' and '12 - 12 = 0').\n3. Not utilizing all four numbers to reach 24.\n\nThese errors made the solution attempt invalid and further away from the goal of reaching 24.",
+            "Step 0": {
+                "Step": "6 * 4 = 24 (left: 1 1 24)"
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 12)"
+            },
+            "Step 3": {
+                "Step": "There are no other numbers to choose from, so there are no possible next steps."
+            }
+        },
+        "Agent 0 - iteration 2": {
+            "Reflexion": "The mistakes made were:\n\n1. Not using all four numbers to get closer to 24.\n2. Performing operations that moved further away from 24 (24 / 2 = 12).\n3. Not exploring alternative operations that could utilize all numbers to reach 24.",
+            "Step 0": {
+                "Step": "1 + 1 = 2 (left: 2 4 6)"
+            },
+            "Step 1": {
+                "Step": "4 + 6 = 10 (left: 2 10)"
+            },
+            "Step 2": {
+                "Step": "2 * 10 = 20 (left: 20)"
+            },
+            "Step 3": {
+                "Step": "There is only one number, no operation can be performed."
+            }
+        },
+        "Agent 0 - iteration 3": {
+            "Reflexion": "The mistakes made were:\n\n1. Multiplying 2 and 10, which moved further away from 24.\n2. Not utilizing division or subtraction operations to potentially get closer to 24.\n3. Not exploring alternative combinations of numbers and operations.",
+            "Step 0": {
+                "Step": "6 * 4 = 24 (left: 1 1 24)"
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 12)"
+            },
+            "Step 3": {
+                "Step": "There are no other numbers to choose from, so no operation can be performed."
+            }
+        }
+    }
+}
+{
+    "23": {
+        "puzzle": "3 7 7 8",
+        "type of reflexion": "k_most_recent",
+        "number of reflexions": 1,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 3 19)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 3 16)"
+            }
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "type of reflexion": "k_most_recent",
+        "number of reflexions": 1,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "6 * 4 = 24 (left: 1 1 24)"
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 12)"
+            },
+            "Step 3": {
+                "Step": "12 * 12 = 144 is not allowed since there is only one number, however 12 / 12 = 1 (left: 1) or 12 - 12 = 0 (left: 0) or 12 + 12 = 24 (left: 24)"
+            }
+        }
+    }
+}
+{
+    "23": {
+        "puzzle": "3 7 7 8",
+        "type of reflexion": "k_most_recent",
+        "number of reflexions": 2,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 3 19)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 3 16)"
+            }
+        },
+        "Agent 0 - iteration 1": {
+            "Reflexion": "The mistakes made were:\n\n1. Subtracting 3 from 22, moving further away from 24.\n2. Continuing with another subtraction, instead of exploring other operations to get closer to 24.\n3. Not utilizing the initial numbers (3, 7, 7, 8) efficiently, and not considering multiplication or division operations.",
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 19 3)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 16 3)"
+            }
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "type of reflexion": "k_most_recent",
+        "number of reflexions": 2,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "6 * 4 = 24 (left: 1 1 24)"
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 12)"
+            },
+            "Step 3": {
+                "Step": "12 - 12 = 0 (left: 0) "
+            }
+        },
+        "Agent 0 - iteration 1": {
+            "Reflexion": "The mistakes made were:\n\n1. Not using the result to get closer to 24.\n2. Introducing unnecessary operations that moved away from 24 (e.g., '24 / 2 = 12' and '12 - 12 = 0').\n3. Not utilizing all four numbers to reach 24.\n\nThese errors made the solution attempt invalid and further away from the goal of reaching 24.",
+            "Step 0": {
+                "Step": "1 + 1 = 2 (left: 2 4 6)"
+            },
+            "Step 1": {
+                "Step": "4 + 6 = 10 (left: 2 10)"
+            },
+            "Step 2": {
+                "Step": "10 / 2 = 5 (left: 5)"
+            },
+            "Step 3": {
+                "Step": "There are no other numbers to choose from, so there are no possible next steps."
+            }
+        }
+    }
+}
+{
+    "23": {
+        "puzzle": "3 7 7 8",
+        "type of reflexion": "k_most_recent",
+        "number of reflexions": 4,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 3 19)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 3 16)"
+            }
+        },
+        "Agent 0 - iteration 1": {
+            "Reflexion": "The mistakes made were:\n\n1. Subtracting 3 from 22, moving further away from 24.\n2. Continuing with another subtraction, instead of exploring other operations to get closer to 24.\n3. Not utilizing the initial numbers (3, 7, 7, 8) efficiently, and not considering multiplication or division operations.",
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 3 19)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 16 3)"
+            }
+        },
+        "Agent 0 - iteration 2": {
+            "Reflexion": "The mistakes made were:\n\n1. Not using all four numbers to reach 24.\n2. Performing operations that moved the result further away from 24 (e.g., '19 - 3 = 16' instead of trying to get closer to 24).\n3. Not exploring alternative operations (e.g., multiplication, division) that could have led to 24.",
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "3 + 22 = 25 (left: 25)"
+            },
+            "Step 3": {
+                "Step": "There are no numbers to choose from, only one number is given."
+            }
+        },
+        "Agent 0 - iteration 3": {
+            "Reflexion": "The mistakes made were:\n\n1. Adding 7 and 7, which limited options for using the other numbers to reach 24.\n2. Adding 8 and 14, moving further away from 24.\n3. Adding 3 and 22, resulting in 25, which is even further from 24.\n\nThese steps made it impossible to reach 24 using basic arithmetic operations.",
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 19 3)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 16)"
+            }
+        }
+    }
+}
+{
+    "23": {
+        "puzzle": "3 7 7 8",
+        "type of reflexion": "summary_incremental",
+        "number of reflexions": 1,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "8 * 3 = 24 (left: 7 7 24)"
+            },
+            "Step 1": {
+                "Step": "7 * 7 = 49 (left: 24 49)"
+            },
+            "Step 2": {
+                "Step": "24 / 49 = 0.49 (left: 0.49 49)"
+            },
+            "Step 3": {
+                "Step": "49 * 0.49 = 24.01 (left: 24.01)"
+            }
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "type of reflexion": "k_most_recent",
+        "number of reflexions": 4,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "6 * 4 = 24 (left: 1 1 24)"
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 12)"
+            },
+            "Step 3": {
+                "Step": "12 * 12 = 144 (left: 144)"
+            }
+        },
+        "Agent 0 - iteration 1": {
+            "Reflexion": "The mistakes made were:\n\n1. Not using the result of the first operation (24) to directly reach 24, but instead continuing with unnecessary operations.\n2. Introducing a new number (144) that deviates further from the target (24).\n3. Failing to use the four numbers efficiently to directly achieve the result of 24.",
+            "Step 0": {
+                "Step": "6 * 4 = 24 (left: 1 1 24)"
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 12)"
+            },
+            "Step 3": {
+                "Step": "No possible next step, since there is only one number."
+            }
+        },
+        "Agent 0 - iteration 2": {
+            "Reflexion": "The mistakes made were:\n\n1. Not using all four numbers to get closer to 24.\n2. The operation '24 / 2 = 12' moved further away from the goal of 24.\n3. Not exploring alternative operations that could utilize the remaining numbers to reach 24.",
+            "Step 0": {
+                "Step": "6 * 4 = 24 (left: 1 1 24)"
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 2 12)"
+            },
+            "Step 3": {
+                "Step": "12 / 2 = 6 (left: 6)"
+            }
+        },
+        "Agent 0 - iteration 3": {
+            "Reflexion": "The mistakes made were:\n\n1. Not using the result to get closer to 24, but instead dividing 24 to get further away from the target.\n2. Not utilizing the operations to combine the numbers effectively to reach 24.\n\nA correct approach would involve using the operations to combine the numbers in a way that gets closer to 24, rather than moving away from it.",
+            "Step 0": {
+                "Step": "1 + 1 = 2 (left: 2 4 6)"
+            },
+            "Step 1": {
+                "Step": "4 + 6 = 10 (left: 2 10)"
+            },
+            "Step 2": {
+                "Step": "2 * 10 = 20 (left: 20)"
+            },
+            "Step 3": {
+                "Step": "There is only one number, no operation can be performed."
+            }
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "type of reflexion": "summary_incremental",
+        "number of reflexions": 1,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 + 1 = 2 (left: 2 4 6)"
+            },
+            "Step 1": {
+                "Step": "2 + 4 = 6 (left: 6 6)"
+            },
+            "Step 2": {
+                "Step": "6 + 6 = 12 (left: 12)"
+            },
+            "Step 3": {
+                "Step": "12 - 12 = 0 (left: 0)"
+            }
+        }
+    }
+}
+{
+    "23": {
+        "puzzle": "3 7 7 8",
+        "type of reflexion": "summary_incremental",
+        "number of reflexions": 2,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 19)"
+            },
+            "Step 3": {
+                "Step": "Not possible with only one number, add a number to proceed, for example: "
+            }
+        },
+        "Agent 0 - iteration 1": {
+            "Reflexion": "The mistakes made were: \n1. Not utilizing the multiplication operation.\n2. Not using the division operation effectively.\n3. Over-reliance on subtraction, which moved the result further away from 24, instead of bringing it closer to the target.",
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 19)"
+            },
+            "Step 3": {
+                "Step": "Not possible with a single number, add two more numbers to proceed."
+            }
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "type of reflexion": "summary_incremental",
+        "number of reflexions": 2,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "1 + 1 = 2 (left: 2 4 6)"
+            },
+            "Step 1": {
+                "Step": "4 * 6 = 24 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 12)"
+            },
+            "Step 3": {
+                "Step": "12 / 12 = 1 (left: 1) is a possible operation. "
+            }
+        },
+        "Agent 0 - iteration 1": {
+            "Reflexion": "To keep it concise, the reflections can be summarized as follows:\n\nThe mistakes made were:\n1. Performing invalid operations, such as using a number more times than available.\n2. Not fully exploring other operations or combinations of numbers.\n3. Dividing 24 by 2, which moved the result away from 24.\n4. Continuing operations after reaching 24, which was the target number.\n\nThese mistakes led to an invalid solution, moving the result away from 24.",
+            "Step 0": {
+                "Step": "1 + 1 = 2 (left: 2 4 6)"
+            },
+            "Step 1": {
+                "Step": "2 + 4 = 6 (left: 6 6)"
+            },
+            "Step 2": {
+                "Step": "6 * 6 = 36 (left: 36)"
+            },
+            "Step 3": {
+                "Step": "No possible operation with a single number."
+            }
+        }
+    }
+}
+{
+    "23": {
+        "puzzle": "3 7 7 8",
+        "type of reflexion": "list",
+        "number of reflexions": 1,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 3 19)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 3 16)"
+            }
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "type of reflexion": "list",
+        "number of reflexions": 1,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "6 * 4 = 24 (left: 1 1 24)"
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 12)"
+            },
+            "Step 3": {
+                "Step": "12 - 12 = 0 (left: 0) "
+            }
+        }
+    }
+}
+{
+    "23": {
+        "puzzle": "3 7 7 8",
+        "type of reflexion": "list",
+        "number of reflexions": 2,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 3 19)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 3 16)"
+            }
+        },
+        "Agent 0 - iteration 1": {
+            "Reflexion": "The mistakes made were:\n\n1. Subtracting 3 from 22, moving further away from 24.\n2. Continuing with another subtraction, instead of exploring other operations to get closer to 24.\n3. Not utilizing the initial numbers (3, 7, 7, 8) efficiently, and not considering multiplication or division operations.",
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 19 3)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 16 3)"
+            }
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "type of reflexion": "list",
+        "number of reflexions": 2,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "6 * 4 = 24 (left: 1 1 24)"
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 12)"
+            },
+            "Step 3": {
+                "Step": "12 - 12 = 0 (left: 0) "
+            }
+        },
+        "Agent 0 - iteration 1": {
+            "Reflexion": "The mistakes made were:\n\n1. Not using the result to get closer to 24.\n2. Introducing unnecessary operations that moved away from 24 (e.g., '24 / 2 = 12' and '12 - 12 = 0').\n3. Not utilizing all four numbers to reach 24.\n\nThese errors made the solution attempt invalid and further away from the goal of reaching 24.",
+            "Step 0": {
+                "Step": "6 * 4 = 24 (left: 1 1 24)"
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 12)"
+            },
+            "Step 3": {
+                "Step": "No possible next steps, only one number is given."
+            }
+        }
+    }
+}
+{
+    "23": {
+        "puzzle": "3 7 7 8",
+        "type of reflexion": "list",
+        "number of reflexions": 4,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 3 19)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 3 16)"
+            }
+        },
+        "Agent 0 - iteration 1": {
+            "Reflexion": "The mistakes made were:\n\n1. Subtracting 3 from 22, moving further away from 24.\n2. Continuing with another subtraction, instead of exploring other operations to get closer to 24.\n3. Not utilizing the initial numbers (3, 7, 7, 8) efficiently, and not considering multiplication or division operations.",
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 3 19)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 16 3)"
+            }
+        },
+        "Agent 0 - iteration 2": {
+            "Reflexion": "The mistakes made were:\n\n1. Not using all four numbers to reach 24.\n2. Performing operations that moved the result further away from 24 (e.g., '19 - 3 = 16' instead of trying to get closer to 24).\n3. Not exploring alternative operations (e.g., multiplication, division) that could have led to 24.",
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 19 3)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 16)"
+            }
+        },
+        "Agent 0 - iteration 3": {
+            "Reflexion": "The mistakes made were:\n\n1. Not utilizing the '*' operation, which is often crucial in reaching 24.\n2. Performing '19 - 3 = 16', moving further away from 24 instead of trying to get closer.\n3. Not exploring alternative operations, such as multiplying or dividing, to utilize the numbers more effectively.",
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "3 + 22 = 25 (left: 25)"
+            },
+            "Step 3": {
+                "Step": "Not possible with one number, need at least two numbers."
+            }
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "type of reflexion": "list",
+        "number of reflexions": 4,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "6 * 4 = 24 (left: 1 1 24)"
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 12)"
+            },
+            "Step 3": {
+                "Step": "12 * 12 = 144 is not allowed since there's only one number, and other operations like subtraction or division with only one number are also not possible, so there is no valid operation for a single number."
+            }
+        },
+        "Agent 0 - iteration 1": {
+            "Reflexion": "The mistakes made in the solution attempt were:\n\n1. Not using all four numbers to reach 24.\n2. Performing operations that moved further away from 24, such as '24 / 2 = 12' and '12 * 12 = 144'.\n3. Not exploring alternative operations, such as combining the 1s and 6 in a different way or using subtraction.",
+            "Step 0": {
+                "Step": "1 + 1 = 2 (left: 2 4 6)"
+            },
+            "Step 1": {
+                "Step": "4 * 6 = 24 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 12)"
+            },
+            "Step 3": {
+                "Step": "No possible next steps, only one number is given."
+            }
+        },
+        "Agent 0 - iteration 2": {
+            "Reflexion": "The mistakes made were:\n\n1. Dividing 24 by 2, which moved the result away from 24.\n2. Not using all four numbers in a way that could potentially lead to 24.\n\nA correct approach would involve combining the numbers using basic arithmetic operations to get as close to 24 as possible, without moving away from the target.",
+            "Step 0": {
+                "Step": "1 + 1 = 2 (left: 2 4 6)"
+            },
+            "Step 1": {
+                "Step": "4 * 6 = 24 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 12)"
+            },
+            "Step 3": {
+                "Step": "No possible next step, only one number is left."
+            }
+        },
+        "Agent 0 - iteration 3": {
+            "Reflexion": "The mistakes made were:\n\n1. The final step '24 / 2 = 12' moved the result further away from 24.\n2. The division operation in the final step was unnecessary and reduced the result.\n3. No attempt was made to utilize the result '24' to conclude the game, as it already equals the target number.",
+            "Step 0": {
+                "Step": "1 + 1 = 2 (left: 2 4 6)"
+            },
+            "Step 1": {
+                "Step": "4 * 6 = 24 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 2 12)"
+            },
+            "Step 3": {
+                "Step": "12 * 2 = 24 (left: 24)"
+            }
+        }
+    }
+}
+{
+    "23": {
+        "puzzle": "3 7 7 8",
+        "type of reflexion": "list",
+        "number of reflexions": 1,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 3 19)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 3 16)"
+            }
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "type of reflexion": "list",
+        "number of reflexions": 1,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "6 * 4 = 24 (left: 1 1 24)"
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 12)"
+            },
+            "Step 3": {
+                "Step": "12 * 12 = 144 is not valid since there's only one number, "
+            }
+        }
+    }
+}
+{
+    "23": {
+        "puzzle": "3 7 7 8",
+        "type of reflexion": "list",
+        "number of reflexions": 2,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 3 19)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 3 16)"
+            }
+        },
+        "Agent 0 - iteration 1": {
+            "Reflexion": "The mistakes made were:\n\n1. Subtracting 3 from 22, moving further away from 24.\n2. Continuing with another subtraction, instead of exploring other operations to get closer to 24.\n3. Not utilizing the initial numbers (3, 7, 7, 8) efficiently, and not considering multiplication or division operations.",
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 19 3)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 16 3)"
+            }
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "type of reflexion": "list",
+        "number of reflexions": 2,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "6 * 4 = 24 (left: 1 1 24)"
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 12)"
+            },
+            "Step 3": {
+                "Step": "12 + 12 is not allowed since there's only one number, "
+            }
+        },
+        "Agent 0 - iteration 1": {
+            "Reflexion": "The mistakes made were:\n\n1. Not using all four numbers to get closer to 24.\n2. Performing an operation ('24 / 2 = 12') that moved further away from the goal of getting 24.\n3. Attempting an invalid operation ('12 + 12') since there was only one 12 available.",
+            "Step 0": {
+                "Step": "6 * 4 = 24 (left: 1 1 24)"
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 2 12)"
+            },
+            "Step 3": {
+                "Step": "2 * 12 = 24 (left: 24)"
+            }
+        }
+    }
+}
+{
+    "23": {
+        "puzzle": "3 7 7 8",
+        "type of reflexion": "list",
+        "number of reflexions": 4,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 3 19)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 3 16)"
+            }
+        },
+        "Agent 0 - iteration 1": {
+            "Reflexion": "The mistakes made were:\n\n1. Subtracting 3 from 22, moving further away from 24.\n2. Continuing with another subtraction, instead of exploring other operations to get closer to 24.\n3. Not utilizing the initial numbers (3, 7, 7, 8) efficiently, and not considering multiplication or division operations.",
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 19 3)"
+            },
+            "Step 3": {
+                "Step": "19 - 3 = 16 (left: 16 3)"
+            }
+        },
+        "Agent 0 - iteration 2": {
+            "Reflexion": "The mistakes made were:\n\n1. '22 - 3 = 19' moved the result away from 24.\n2. '19 - 3 = 16' further decreased the result, making it even more distant from 24.\n\nA more promising approach would have been to try operations that increase the result or bring it closer to 24, such as multiplication or addition.",
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 + 3 = 25 (left: 25)"
+            },
+            "Step 3": {
+                "Step": "Not possible with a single number."
+            }
+        },
+        "Agent 0 - iteration 3": {
+            "Reflexion": "The mistakes made were:\n\n1. Adding 8 and 14, which moved the result further away from 24.\n2. Adding 22 and 3, which exceeded 24 and made it impossible to reach 24 with a single number.\n\nA better approach would be to try operations that bring the result closer to 24, such as multiplication or subtraction.",
+            "Step 0": {
+                "Step": "7 + 7 = 14 (left: 3 8 14)"
+            },
+            "Step 1": {
+                "Step": "8 + 14 = 22 (left: 3 22)"
+            },
+            "Step 2": {
+                "Step": "22 - 3 = 19 (left: 19 3)"
+            },
+            "Step 3": {
+                "Step": "19 + 3 = 22 (left: 22)"
+            }
+        }
+    }
+}
+{
+    "0": {
+        "puzzle": "1 1 4 6",
+        "type of reflexion": "list",
+        "number of reflexions": 4,
+        "Agent 0": {
+            "Step 0": {
+                "Step": "6 * 4 = 24 (left: 1 1 24)"
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 12)"
+            },
+            "Step 3": {
+                "Step": "12 + 12 is not allowed since there is only one number, "
+            }
+        },
+        "Agent 0 - iteration 1": {
+            "Reflexion": "The mistakes made were:\n\n1. Not using all four numbers to get closer to 24.\n2. Performing an operation ('24 / 2 = 12') that moved further away from the goal of getting 24.\n3. Attempting an operation ('12 + 12') that was not valid since it required an additional number.",
+            "Step 0": {
+                "Step": "6 * 4 = 24 (left: 1 1 24)"
+            },
+            "Step 1": {
+                "Step": "1 + 1 = 2 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 2 12)"
+            },
+            "Step 3": {
+                "Step": "2 * 12 = 24 (left: 24)"
+            }
+        },
+        "Agent 0 - iteration 2": {
+            "Reflexion": "The mistakes made were:\n\n1. Introducing 24 prematurely, which is the target result.\n2. Performing operations that moved further away from 24 (e.g., '24 / 2 = 12' moved from 24 to 12).\n3. Not utilizing all four input numbers effectively to reach 24.",
+            "Step 0": {
+                "Step": "1 + 1 = 2 (left: 2 4 6)"
+            },
+            "Step 1": {
+                "Step": "4 + 6 = 10 (left: 2 10)"
+            },
+            "Step 2": {
+                "Step": "10 * 2 = 20 (left: 20)"
+            },
+            "Step 3": {
+                "Step": "There is only one number, no operation can be performed."
+            }
+        },
+        "Agent 0 - iteration 3": {
+            "Reflexion": "The mistakes made were:\n\n1. Multiplying 10 by 2, which moved the result further away from 24.\n2. Not utilizing division or subtraction operations to potentially reach 24.\n3. Not exploring alternative combinations of numbers and operations.",
+            "Step 0": {
+                "Step": "1 + 1 = 2 (left: 2 4 6)"
+            },
+            "Step 1": {
+                "Step": "6 * 4 = 24 (left: 2 24)"
+            },
+            "Step 2": {
+                "Step": "24 / 2 = 12 (left: 2 12)"
+            },
+            "Step 3": {
+                "Step": "12 / 2 = 6 (left: 6 2)"
+            }
+        }
+    }
+}

@@ -173,7 +173,7 @@ async def run_puzzles(
     num_reflexions_list = [1,2,4]  # Number of iterations to test
     k = 2  # k for "k_most_recent"
     num_agents = 1  
-    reflexion_types = ["list", "k_most_recent", "summary_incremental", "summary_all_previous"]   
+    reflexion_types = ["list"]#, "k_most_recent", "summary_incremental", "summary_all_previous"   
     type_of_reflexions = []
 
     for i in range(num_agents):
@@ -220,7 +220,7 @@ async def find_k(
     for k in ks:
         print("\npuzzle: ", states[0].puzzle, "with type: ", reflexion_type, " starts now")
         # Run the reflexion game
-        total_score, tokens_used, total_tokens, price_used, total_price, num_used_reflexions = await run_reflexion_gameof24(
+        total_score, tokens_used, tokens_saved, price_used, price_saved, num_used_reflexions = await run_reflexion_gameof24(
             time_of_reflexion, reflexion_type, int(puzzle_idx), states, num_agents, num_reflexions, k
         )
 
@@ -233,9 +233,9 @@ async def find_k(
             "k": k,
             "score": total_score,
             "tokens_used": tokens_used,
-            "total_tokens": total_tokens,
+            "total_tokens": tokens_used+tokens_saved,
             "price_used": price_used,
-            "price_total": total_price,
+            "price_total": price_used+price_saved,
             "num_used_reflexions": num_used_reflexions
         }
         logger.info(type_of_reflexion_entry)
@@ -260,7 +260,7 @@ async def trial_wise_type_testing():
             logger=trial_logger
             )
         )
-        for idx in range(3)
+        for idx in range(2)
         # for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
     ]
     all_type_of_reflexions = await asyncio.gather(*tasks)
@@ -308,7 +308,8 @@ async def test_LLM_stepwise_reflexion():
             logger=llm_step_logger
             )
         )
-        for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
+        for idx in range(2)
+        #for idx in range(min(len(puzzle_idxs), len(all_puzzles_data)))
     ]
 
     all_type_of_reflexions = await asyncio.gather(*tasks)
