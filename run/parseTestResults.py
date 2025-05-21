@@ -1,11 +1,15 @@
-import ast
+import ast 
 from collections import defaultdict
+import sys
+import os
+sys.path.append(os.getcwd())
+sys.stdout.reconfigure(encoding='utf-8')
 
-#Reading
-with open('new_test_results.log', 'r') as f:
+# Reading
+with open('reflexionLogs/stepwise_LLM.log', 'r', encoding='utf-8') as f:
     lines = f.readlines()
 
-#Parsing
+# Parsing
 data = []
 for line in lines:
     try:
@@ -16,45 +20,38 @@ for line in lines:
     except Exception as e:
         print(f"Skipping line due to error: {e}")
 
-# Define mapping
-easy_puzzles = {"1 1 4 6", "1 1 11 11", "6 6 6 6", "1 1 1 12", "1 1 2 12"}
-medium_puzzles = {"2 4 7 7", "3 6 6 10", "4 7 9 11", "2 2 3 5", "2 5 7 9"}
-hard_puzzles = {"2 4 10 10", "5 5 7 11", "1 3 4 6", "5 7 7 11", "3 3 7 13"}
-
-# Assign difficulty based on puzzle
-for entry in data:
-    puzzle = entry['puzzle']
-    if puzzle in easy_puzzles:
-        entry['difficulty'] = 'easy'
-    elif puzzle in medium_puzzles:
-        entry['difficulty'] = 'medium'
-    elif puzzle in hard_puzzles:
-        entry['difficulty'] = 'hard'
-    else:
-        entry['difficulty'] = 'unknown'  # In case of unexpected puzzle
-
-#grouping
+# Grouping
 grouped = defaultdict(list)
 for entry in data:
-    key = (entry['difficulty'], entry['num_reflexions'], entry['reflexion_type'])
+    key = (entry['num_reflexions'], entry['reflexion_type'])
     grouped[key].append(entry)
 
 # Summarize
 summary = {}
 for key, entries in grouped.items():
     avg_score = sum(e['score'] for e in entries) / len(entries)
-    avg_token_cost = sum(e['token_cost'] for e in entries) / len(entries)
+    avg_tokens_used = sum(e['tokens_used'] for e in entries) / len(entries)
+    avg_total_tokens = sum(e['total_tokens'] for e in entries) / len(entries)
+    avg_price_used = sum(e['price_used'] for e in entries) / len(entries)
+    avg_price_total = sum(e['price_total'] for e in entries) / len(entries)
+
     summary[key] = {
         'avg_score': avg_score,
-        'avg_token_cost': avg_token_cost,
+        'avg_tokens_used': avg_tokens_used,
+        'avg_total_tokens': avg_total_tokens,
+        'avg_price_used': avg_price_used,
+        'avg_price_total': avg_price_total,
         'count': len(entries)
     }
 
 # Print nicely
 for key, stats in summary.items():
-    difficulty, num_reflexions, reflexion_type = key
-    print(f"Difficulty: {difficulty}, Reflexions: {num_reflexions}, Type: {reflexion_type}")
-    print(f"  Avg Score: {stats['avg_score']:.2f}")
-    print(f"  Avg Token Cost: {stats['avg_token_cost']:.1f}")
-    print(f"  Num Samples: {stats['count']}")
+    num_reflexions, reflexion_type = key
+    print(f"Reflexions: {num_reflexions}, Type: {reflexion_type}")
+    print(f"  Avg Score:       {stats['avg_score']:.2f}")
+    print(f"  Avg Tokens Used: {stats['avg_tokens_used']:.1f}")
+    print(f"  Avg Total Tokens:{stats['avg_total_tokens']:.1f}")
+    print(f"  Avg Cost Used:   ${stats['avg_price_used']:.6f}")
+    print(f"  Avg Total Cost:  ${stats['avg_price_total']:.6f}")
+    print(f"  Num Samples:     {stats['count']}")
     print()
