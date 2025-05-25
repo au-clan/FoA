@@ -32,7 +32,7 @@ Answer: ((5 + 5) + 5) + 9 = 24
 Input: {input}
 '''
 
-modified_cot_reflexion_prompt = '''Now just remember the tips from before (if any) and focus on the new task. Create an equation using the three steps. Only single newline and never double newline. Write "answer: " before the equation
+improved_cot_reflexion_prompt = '''Now just remember the tips from before (if any) and focus on the new task. Create an equation using the three steps. Only single newline and never double newline. Write "answer: " before the equation
 Input: 4 4 6 8
 Steps:
 4 + 8 = 12 (left: 4 6 12)

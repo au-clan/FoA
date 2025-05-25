@@ -1,9 +1,10 @@
 import os
 import pandas as pd
 import sys
+import numpy as np
 sys.path.append(os.getcwd()) # Project root!!
 from src.states import Environment, DATA_PATH
-from src.verifiers.RafaVerifiers import check_answer, check_valid_move, check_equation, check_twentyfour
+from src.verifiers.Rafa.RafaVerifiersValidators import check_answer, check_valid_move, check_equation, check_twentyfour
 from src.prompts.adapt.gameof24 import *
 
 def get_current_numbers(y: str) -> str:
@@ -19,17 +20,20 @@ class Game24(Environment):
         self.value_cache = {}
         path = os.path.join(DATA_PATH, 'datasets', datadir)
         self.data = list(pd.read_csv(path)['Puzzles'])
+        self.uniform_indices = np.linspace(0, len(self.data) - 1, 60, dtype=int).tolist()
+        
         self.max_steps = max_steps
         self.index = 0
-        self.puzzle = self.data[self.index]
+        self.puzzle = self.data[self.uniform_indices[self.index]]
         self.history = []
         self.feedbacks = []
         self.cur_step = 0
         self.feedback = feedback
 
     def reset(self, idx: int):
-        self.index = idx
-        self.puzzle = self.data[idx]
+        self.index = self.uniform_indices[idx]
+        print("index:", self.index)
+        self.puzzle = self.data[self.index]
         self.history = []
         self.feedbacks = []
         self.cur_step = 0
@@ -128,7 +132,7 @@ class Game24(Environment):
 
     @staticmethod
     def cot_prompt_wrap(x: str, y: str = '') -> str:
-        return cot_prompt.format(input=x) + y
+        return modified_cot_prompt.format(input=x) + y
 
     @staticmethod
     def propose_prompt_wrap(x: str, y: str = '') -> str:
@@ -137,7 +141,7 @@ class Game24(Environment):
         if current_numbers == '24':
             #print("got in here, because one was 24")
             #print("x: ", x)
-            prompt = cot_prompt.format(input=x) + 'Steps:\n' + y + "Answer: "
+            prompt = modified_cot_prompt.format(input=x) + 'Steps:\n' + y + "Answer: "
             # print([prompt])
         else:
             prompt = propose_prompt.format(input=current_numbers)

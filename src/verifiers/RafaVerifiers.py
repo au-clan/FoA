@@ -8,7 +8,7 @@ class RafaVerifier():
         self.name = "Rafa Verifier"
     
     def check_twentyfour(self, cur_step):
-        cards = [float(num) for num in cur_step.split('left:')[-1].strip("()").split(" ") if num != '']
+        cards = [float(num) for num in cur_step.split('left:')[-1].strip().strip("()").split(" ") if num != '']
 
         try:
             for nums in itertools.permutations(cards):  # 四个数
