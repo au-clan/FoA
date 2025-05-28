@@ -9,20 +9,25 @@ from src.agents.rafaagent import TreeOfThoughtAgent
 from src.states.rafaenv import Game24
 from src.agents import gpt_usage
 
+def get_model():
+    gpt_model = "gpt-4.1-nano-2025-04-14"
+    llama_model = "llama-3.3-70b-versatile"
+    return llama_model
 
 async def run():
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+    model = get_model()
 
     agent = TreeOfThoughtAgent(
-        backend="gpt-4.1-nano-2025-04-14", temperature=0.7, prompt_sample="standard",
-        method_generate="propose", method_evaluate="value",
+        backend=model, temperature=0.7, prompt_sample="standard",
+        method_generate="single", method_evaluate="value",
         method_select="greedy", n_generate_sample=10,
         n_evaluate_sample=1, n_select_sample=1
     )
-    env = Game24(f'24_tot.csv', True, 20)
+    env = Game24(f'24_tot.csv', True, 8)
     cur_time = int(time.time())
-    file = f'logs/recent/gameof24/RAFA/game24/{agent.backend}_{agent.temperature}_{agent.method_generate}_{agent.n_generate_sample}_{agent.method_evaluate}_{agent.n_evaluate_sample}_{agent.method_select}_{agent.n_select_sample}_time{cur_time}.json'
+    file = f'logs/recent/gameof24/RAFA/game24/{agent.backend}_0.7_{agent.method_generate}_{agent.n_generate_sample}_{agent.method_evaluate}_{agent.n_evaluate_sample}_{agent.method_select}_{agent.n_select_sample}_time{cur_time}.json'
 
     os.makedirs(os.path.dirname(file), exist_ok=True)
     logs = []
@@ -34,7 +39,7 @@ async def run():
                 i, env, agent, logs, file
             )
         )
-        for i in range(0, 60)
+        for i in range(0, 1)
     ]
     await asyncio.gather(*puzzle_tasks)
     

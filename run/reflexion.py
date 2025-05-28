@@ -859,11 +859,11 @@ async def main():
     # print("total_score: ", total_score, "tokens_used: ", tokens_used, "num_used_reflexions: ", num_used_reflexions)
 
 if __name__ == "__main__":
-    asyncio.run(main())       
+    #asyncio.run(main())       
     # state = GameOf24State("1 1 4 6", "test", "['test']", 2)
     # print(state.hash())
     # print(state.hash())
-    cache = Cache('caches/registry')
+    #cache = Cache('caches/registry')
     # cache.clear()
     # keys = []
     # for key in cache:

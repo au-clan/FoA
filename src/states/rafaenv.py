@@ -146,6 +146,18 @@ class Game24(Environment):
         else:
             prompt = propose_prompt.format(input=current_numbers)
         return prompt
+    @staticmethod
+    def single_proposal_prompt_wrap(x: str, y: str = '') -> str:
+        current_numbers = get_current_numbers(y if y else x)
+        print("current_numbers: ", current_numbers)
+        if current_numbers == '24':
+            #print("got in here, because one was 24")
+            #print("x: ", x)
+            prompt = modified_cot_prompt.format(input=x) + 'Steps:\n' + y + "Answer: "
+            # print([prompt])
+        else:
+            prompt = single_propose_prompt.format(input=current_numbers)
+        return prompt
 
     @staticmethod
     def value_prompt_wrap(x: str, y: str) -> str:

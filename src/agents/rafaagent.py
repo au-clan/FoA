@@ -1,7 +1,7 @@
 from . import *
 import itertools
 import numpy as np
-
+from src.prompts.adapt import gameof24 as prompts
 from functools import partial
 
 def get_value(env, history, x, y, n_evaluate_sample, cache_value=True):
@@ -15,6 +15,7 @@ def get_value(env, history, x, y, n_evaluate_sample, cache_value=True):
     if cache_value and value_prompt in env.value_cache:
         #print("value was in cache")
         return env.value_cache[value_prompt]
+    print("Calls gpt with history")
     value_outputs = gpt_with_history(value_prompt, history, temperature=0.3, n=n_evaluate_sample, stop=None)
     value = env.value_outputs_unwrap(x, y, value_outputs)
     if cache_value:
@@ -48,6 +49,16 @@ def get_proposals(env, history, x, y, n_propose_sample=10):
     #print("proposals before indexing: ", proposals)    
     proposals = proposals[:min(len(proposals), n_propose_sample)]
     print("proposals: ", proposals)
+    return [y + _ + '\n' for _ in proposals]
+
+def get_proposal(env, history, x, y):
+    propose_prompt = env.single_proposal_prompt_wrap(x,y)
+    print("propose_prompt ", propose_prompt)
+    proposal_list = [x.split('\n') for x in gpt_with_history(propose_prompt, history, n=1, stop=["\n\n"])]
+    proposals = []
+    for p in proposal_list:
+        proposals.extend(p)
+    print("propossals: ", proposals)
     return [y + _ + '\n' for _ in proposals]
 
 class TreeOfThoughtAgent(Agent):
@@ -90,10 +101,14 @@ class TreeOfThoughtAgent(Agent):
         value_obs = [prompt,
                      dict(feedback="What you have learned about the puzzle are summarized below.\n" + "\n".join(
                          self.value_reflects))]
+        print("self.value_reflects", value_obs[1])
         for step in range(4 - len(history)):
             print("step: ", step)
             # generation
-            new_ys = [get_proposals(env, obs, x, y, self.n_generate_sample) for y in ys]
+            if self.method_generate == "propose":
+                new_ys = [get_proposals(env, obs, x, y, self.n_generate_sample) for y in ys]
+            elif self.method_generate == "single":
+                new_ys = [get_proposal(env, obs, x, y) for y in ys]
             new_ys = list(itertools.chain(*new_ys))
             #print("new_ys: ", new_ys)
             ids = list(range(len(new_ys)))
@@ -114,9 +129,6 @@ class TreeOfThoughtAgent(Agent):
                 {'step': step, 'x': x, 'ys': ys, 'new_ys': new_ys, 'values': values, 'select_new_ys': select_new_ys})
             ys = select_new_ys
 
-        if to_print:
-            print("to_print is true")
-            print("ys: ", )
         ys_list = [y.split('\n')[len(history):] for y in ys]
         res_ys = ["\n".join(ys) for ys in ys_list][0]
         return res_ys, {'steps': infos}

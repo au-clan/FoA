@@ -520,3 +520,30 @@ impossible
 Input: {input}
 Answer: {answer}
 Judge:'''
+
+single_propose_prompt = '''Now use numbers and basic arithmetic operations (+ - * /) to generate possible next steps. Make sure use steps that is sure to leads to 24 and avoid steps that are impossible to generate 24. Note that it is possible that we are considering intermediate steps so the numbers of the input may be less than 4. Only make one newline before the suggestion and just write the suggestion and nothing else
+
+Example: 2 8 8 14
+A single possible next step:
+2 + 8 = 10 (left: 8 10 14)
+
+Example: 6 6 12
+A single possible next step:
+6 + 6 = 12 (left: 12 12)
+
+Example: 1 4 6 
+A single possible next step:
+4 * 6 = 4 (left: 1 24)
+
+Example: 1 3
+Possible next steps:
+3 - 1 = 2 (left: 2)
+
+Example: 1 1 5 5
+A single possible next step:
+5 / 1 = 5 (left: 5 5 1)
+
+Now try with the following input:
+Input: {input}
+A single possible next step:
+'''
