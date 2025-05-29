@@ -10,11 +10,11 @@ completion_tokens = prompt_tokens = 0
 
 #model = get_model()
 #if model == "gpt-4.1-nano-2025-04-14":
-model = "gpt-4.1-nano-2025-04-14"
+#model = "gpt-4.1-nano-2025-04-14"
 openai.api_key = os.getenv("OPENAI_API_KEY", "")
 #elif model == "llama-3.3-70b-versatile":
-#model = "llama-3.3-70b-versatile"
-client = Groq(api_key=os.getenv("GROQ_API_KEY2")) #Replace key here
+model = "llama-3.3-70b-versatile"
+client = Groq(api_key=os.getenv("GROQ_API_KEY")) #Replace key here
 
 @retry(retry=retry_if_exception_type(Exception), 
        wait=wait_random_exponential(min=1, max=60), 

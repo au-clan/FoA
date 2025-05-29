@@ -133,9 +133,9 @@ class TreeOfThoughtAgent(Agent):
             infos.append(
                 {'step': step, 'x': x, 'ys': ys, 'new_ys': new_ys, 'values': values, 'select_new_ys': select_new_ys})
             ys = select_new_ys
-
-        ys_list = [y.split('\n')[len(history):] for y in ys]
-        res_ys = ["\n".join(ys) for ys in ys_list][0]
+        print('ys before ys_list: ', ys)
+        res_ys = "\n".join(y.strip() for y in ys[0].splitlines()) # Splitting the ys list at every \n, then stripping away trailing and leading whitespace
+        print("res_ys: ", repr(res_ys))
         return res_ys, {'steps': infos}
 
     def reflect(self, env, obs):
