@@ -46,8 +46,9 @@ def get_proposals(env, history, x, y, n_propose_sample=10):
     proposals = []
     for p in proposal_list:
         proposals.extend(p)
-    #print("proposals before indexing: ", proposals)    
+    #print("proposals before indexing: ", proposals)
     proposals = proposals[:min(len(proposals), n_propose_sample)]
+    proposals = [p.replace('\u00f7', '/') for p in proposals]
     print("proposals: ", proposals)
     return [y + _ + '\n' for _ in proposals]
 
@@ -58,7 +59,8 @@ def get_proposal(env, history, x, y):
     proposals = []
     for p in proposal_list:
         proposals.extend(p)
-    print("propossals: ", proposals)
+    print("proposals: ", proposals)
+    proposals = [p.replace('\u00f7', '/') for p in proposals]
     return [y + _ + '\n' for _ in proposals]
 
 class TreeOfThoughtAgent(Agent):
@@ -105,20 +107,23 @@ class TreeOfThoughtAgent(Agent):
         for step in range(4 - len(history)):
             print("step: ", step)
             # generation
-            if self.method_generate == "propose":
-                new_ys = [get_proposals(env, obs, x, y, self.n_generate_sample) for y in ys]
-            elif self.method_generate == "single":
-                new_ys = [get_proposal(env, obs, x, y) for y in ys]
+            new_ys = [get_proposals(env, obs, x, y, self.n_generate_sample) for y in ys]
+            #elif self.method_generate == "single":
+                #new_ys = [get_proposal(env, obs, x, y) for y in ys]
             new_ys = list(itertools.chain(*new_ys))
             #print("new_ys: ", new_ys)
             ids = list(range(len(new_ys)))
             #print("ids: ", ids)
             # evaluation
-            values = get_values(env, value_obs, x, new_ys, self.n_evaluate_sample, cache_value=False)
-            # selection
-            select_ids = sorted(ids, key=lambda x: values[x], reverse=True)[:self.n_select_sample]
-            select_new_ys = [new_ys[select_id] for select_id in select_ids]
-            print("selected new ys: ", select_new_ys) #current log has new_ys not select_new_ys
+            if self.method_generate == "propose":
+                values = get_values(env, value_obs, x, new_ys, self.n_evaluate_sample, cache_value=False)  
+                # selection
+                select_ids = sorted(ids, key=lambda x: values[x], reverse=True)[:self.n_select_sample]
+                select_new_ys = [new_ys[select_id] for select_id in select_ids]
+            elif self.method_generate == "single":
+                select_new_ys = [new_ys[0]] if new_ys else []
+                values = [0] * len(new_ys)
+            print("selected new ys: ", select_new_ys) 
             # log
             if to_print:
                 sorted_new_ys, sorted_values = zip(*sorted(zip(new_ys, values), key=lambda x: x[1], reverse=True))

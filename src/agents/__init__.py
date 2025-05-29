@@ -10,9 +10,10 @@ completion_tokens = prompt_tokens = 0
 
 #model = get_model()
 #if model == "gpt-4.1-nano-2025-04-14":
-    #openai.api_key = os.getenv("OPENAI_API_KEY", "")
+model = "gpt-4.1-nano-2025-04-14"
+openai.api_key = os.getenv("OPENAI_API_KEY", "")
 #elif model == "llama-3.3-70b-versatile":
-model = "llama-3.3-70b-versatile"
+#model = "llama-3.3-70b-versatile"
 client = Groq(api_key=os.getenv("GROQ_API_KEY2")) #Replace key here
 
 @retry(retry=retry_if_exception_type(Exception), 
@@ -21,15 +22,17 @@ client = Groq(api_key=os.getenv("GROQ_API_KEY2")) #Replace key here
 def completions_with_backoff(**kwargs):
     if "prompt" in kwargs:
         #print("prompt was in kwargs, uses completions")
-        if model == "gpt":
+        if model == "gpt-4.1-nano-2025-04-14":
             return openai.Completion.create(**kwargs)
-        return client.completions.create(**kwargs)
+        elif model == "llama-3.3-70b-versatile":
+            return client.completions.create(**kwargs)
     else:
         assert "messages" in kwargs, "Either prompt or messages must be provided"
         #print("uses chat completions")
-        if model == "gpt":
+        if model == "gpt-4.1-nano-2025-04-14":
             return openai.chat.completions.create(**kwargs)
-        return client.chat.completions.create(**kwargs)
+        elif model == "llama-3.3-70b-versatile":
+            return client.chat.completions.create(**kwargs)
 
 def gpt_with_history(prompt, history, model=model, temperature=0.7, max_tokens=1000, n=1, stop=None) -> list:
     messages = []
