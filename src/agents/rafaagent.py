@@ -62,6 +62,8 @@ def get_proposal(env, history, x, y):
         proposals.extend(p)
     print("proposals: ", proposals)
     proposals = [p.replace('\u00f7', '/') for p in proposals]
+    proposals = [p.replace('\u2212', '-') for p in proposals]
+    proposals = [p.replace('\u00d7', '*') for p in proposals]
     return [y + _ + '\n' for _ in proposals]
 
 class TreeOfThoughtAgent(Agent):
