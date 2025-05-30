@@ -12,7 +12,7 @@ def get_current_numbers(y: str) -> str:
     return last_line.split('left: ')[-1].split(')')[0]
 
 class Game24(Environment):
-    def __init__(self, datadir, feedback=True, max_steps=20):
+    def __init__(self, datadir, feedback=True, max_steps=20, data='uniform-validation'):
         """
                 file: a csv file (fixed)
         """
@@ -20,8 +20,18 @@ class Game24(Environment):
         self.value_cache = {}
         path = os.path.join(DATA_PATH, 'datasets', datadir)
         self.data = list(pd.read_csv(path)['Puzzles'])
-        self.uniform_indices = np.linspace(0, len(self.data) - 1, 60, dtype=int).tolist()
+        arr = np.arange(len(self.data))
+        uniform_test_indices = np.linspace(0, len(self.data) - 1, 60, dtype=int)
+        remaining_indices = [i for i in arr if i not in set(uniform_test_indices)]
+        uniform_val_indices = np.array([remaining_indices[i] for i in np.linspace(0, len(remaining_indices) - 1, 30, dtype=int)])
         
+        if data == 'uniform-validation':
+            self.uniform_indices = uniform_test_indices.tolist()
+        elif data == 'uniform-test':
+            self.uniform_indices = uniform_val_indices.tolist()
+        else:
+            raise ValueError("Invalid data. Choose 'uniform-test' or 'uniform-validation'.")
+                
         self.max_steps = max_steps
         self.index = 0
         self.puzzle = self.data[self.uniform_indices[self.index]]

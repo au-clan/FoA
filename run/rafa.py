@@ -28,9 +28,9 @@ async def run(args):
         n_generate_sample=10, n_evaluate_sample=1, n_select_sample=1,
         k = args.k, limit = args.limit
     )
-    env = Game24(f'24_tot.csv', True, 2)
+    env = Game24(f'24_tot.csv', True, 20, "uniform-validation")
     cur_time = int(time.time())
-    file = f'logs/recent/gameof24/RAFA/game24/{agent.backend}_0.7_{agent.method_generate}_{agent.n_generate_sample}_{agent.method_evaluate}_{agent.n_evaluate_sample}_{agent.method_select}_{agent.n_select_sample}_loggingTest_time{cur_time}.json'
+    file = f'logs/recent/gameof24/RAFA/game24/{agent.backend}_{args.method_reflexion_type}_k_{args.k}_limit_{args.limit}_{cur_time}.json'
 
     os.makedirs(os.path.dirname(file), exist_ok=True)
     logs = []
