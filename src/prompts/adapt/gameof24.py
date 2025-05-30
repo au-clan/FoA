@@ -315,6 +315,17 @@ Summarize all the reflexions to keep it concise and discard duplicates
 Summarization of all reflections:
 '''
 
+limit_summary_prompt = '''The game of 24 is a math puzzle where players use four numbers and basic arithmetic operations (+ - * /) to make the result equal to 24. Following is a previous attempt at solving the puzzle.
+
+You made the following list of reflections:
+
+{reflexion}
+
+Write a short summary. The should not exceed the limit: {limit} words. Be concise
+
+Summary:
+'''
+
 
 #Prompt with only one suggestion for testing
 bfs_prompt_single = '''Use numbers and basic arithmetic operations (+ - * /). Each step, you are only allowed to choose two of the remaining numbers to obtain a new number. Do not explain simply list a possible next step as well as all the remaining numbers and nothing else.

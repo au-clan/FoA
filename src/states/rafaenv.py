@@ -177,6 +177,11 @@ class Game24(Environment):
                                                                                                         feedback=feedback)
 
     @staticmethod
+    def summary_prompt_wrap(all_reflects: list, limit: int) -> str:
+        return summary_prompt.format(all_reflects, limit)
+
+
+    @staticmethod
     def value_outputs_unwrap(x: str, y: str, value_outputs: list) -> float:
         #if len(y.strip().split('\n')) == 4 and 'answer' not in y.lower():
         #   return 0
@@ -191,26 +196,26 @@ class Game24(Environment):
 
         # Step 1: Check for early exit
         stripped_lines = y.strip().split('\n')
-        #print("Stripped lines in y:", stripped_lines)
+        print("Stripped lines in y:", stripped_lines)
         
         if len(stripped_lines) == 4 and 'answer' not in y.lower():
-            #print("Early exit: y contains only 4 lines and no 'answer'")
+            print("Early exit: y contains only 4 lines and no 'answer'")
             return 0
 
         # Step 2: Get last line of each value output and lowercase it
         value_names = [output.split('\n')[-1].lower() for output in value_outputs]
-        #print("Extracted value judgments (last lines):", value_names)
+        print("Extracted value judgments (last lines):", value_names)
 
         # Step 3: Define value mapping
         value_map = {'impossible': 0.001, 'likely': 1, 'sure': 20}
-        #print("Value map:", value_map)
+        print("Value map:", value_map)
 
         # Step 4: Compute the final value
         total_value = 0
         for name, score in value_map.items():
             match_count = sum(name in value_name for value_name in value_names)
-            #print(f"Keyword '{name}' found {match_count} times. Score contribution: {match_count * score}")
+            print(f"Keyword '{name}' found {match_count} times. Score contribution: {match_count * score}")
             total_value += match_count * score
 
-        #print("Total value score:", total_value)
+        print("Total value score:", total_value)
         return total_value

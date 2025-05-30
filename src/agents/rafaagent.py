@@ -3,6 +3,7 @@ import itertools
 import numpy as np
 from src.prompts.adapt import gameof24 as prompts
 from functools import partial
+import re
 
 def get_value(env, history, x, y, n_evaluate_sample, cache_value=True):
     # validation_prompt = env.validation_prompt_wrap(x, y)
@@ -17,6 +18,7 @@ def get_value(env, history, x, y, n_evaluate_sample, cache_value=True):
         return env.value_cache[value_prompt]
     print("Calls gpt with history")
     value_outputs = gpt_with_history(value_prompt, history, temperature=0.3, n=n_evaluate_sample, stop=None)
+    print("value_outputs: ", value_outputs)
     value = env.value_outputs_unwrap(x, y, value_outputs)
     if cache_value:
         env.value_cache[value_prompt] = value
@@ -64,9 +66,9 @@ def get_proposal(env, history, x, y):
     return [y + _ + '\n' for _ in proposals]
 
 class TreeOfThoughtAgent(Agent):
-    def __init__(self, backend, temperature, prompt_sample, method_generate, method_evaluate, method_select,
+    def __init__(self, backend, temperature, prompt_sample, method_generate, method_evaluate, method_select, method_reflexion_type,
                  n_generate_sample,
-                 n_evaluate_sample, n_select_sample):
+                 n_evaluate_sample, n_select_sample, k, limit):
         super().__init__()
 
         global gpt
@@ -79,10 +81,14 @@ class TreeOfThoughtAgent(Agent):
         self.method_generate = method_generate
         self.method_evaluate = method_evaluate
         self.method_select = method_select
+        self.method_reflexion_type = method_reflexion_type #Added new method reflexion type
         self.n_generate_sample = n_generate_sample
         self.n_evaluate_sample = n_evaluate_sample
         self.n_select_sample = n_select_sample
+        self.k = k 
+        self.limit = limit
         self.reflects = []
+        self.all_reflects = []
         self.value_reflects = []
 
     def plan(self, env, to_print=True):
@@ -144,9 +150,42 @@ class TreeOfThoughtAgent(Agent):
         reflect_prompt, value_reflect_prompt = env.reflect_prompt_wrap(env.puzzle, y, feedback)
         reflects = gpt(reflect_prompt, stop=None)
         value_reflects = gpt(value_reflect_prompt, stop=None)
-        self.reflects.extend(reflects)
-        print("self.reflects: ", self.reflects)
-        self.value_reflects.extend(value_reflects)
+        if self.method_reflexion_type == "list":
+            self.reflects.extend(reflects)
+            print("self.reflects: ", self.reflects)
+            self.value_reflects.extend(value_reflects)
+            print("self.value_reflects: ", self.value_reflects)
+        if self.method_reflexion_type == "k_most_recent":
+            self.reflects.extend(reflects)
+            self.value_reflects.extend(value_reflects)
+            print("self.reflects before k: ", self.reflects)
+            print("self.value_reflects before k: ", self.value_reflects)
+            if len(self.reflects) > self.k:
+                self.reflects.pop(0)
+            if len(self.value_reflects) > self.k:
+                self.value_reflects.pop(0)
+            print("self.reflects after k: ", self.reflects)
+            print("self.value_reflects after k: ", self.value_reflects)
+        if self.method_reflexion_type == "summary":
+            self.all_reflects.extend(reflects)
+            self.value_reflects.extend(reflects)
+            summary_prompt = env.summary_prompt_wrap(self.all_reflects, self.limit)
+            summary = gpt(summary_prompt, stop=None)
+            self.reflects = summary
+            print("all reflexions: ", self.all_reflects)
+            print("summary: ", self.reflects)
+            print("self.value_reflects: ", self.value_reflects)
+
+            # Extract all number sequences followed by 'impossible' or 'sure', our way of summarizing the labels
+            results = []
+            for entry in self.value_reflects:
+                match = re.search(r'(\d+(?:\s+\d+)+):\s*(impossible|sure)', entry)
+                if match:
+                    nums, label = match.groups()
+                    results.append(f"{nums}: {label}")
+            self.value_reflects = results
+            print("summarized self.value_reflects: ", self.value_reflects)            
+
         return
 
     def act(self, env, obs):
@@ -159,4 +198,5 @@ class TreeOfThoughtAgent(Agent):
     def update(self, obs, reward, done, info):
         if done:
             self.reflects = []
+            self.all_reflects = []
             self.value_reflects = []
