@@ -72,6 +72,8 @@ async def run_puzzle(i, env, agent, logs, file):
         log['agent_info'].append(agent_info)
         log['env_info'].append(env_info)
         log['usage_so_far'] = gpt_usage("gpt-4.1-nano-2025-04-14")
+        with open(file, 'w') as f:
+            json.dump(logs, [log], f, indent=4)
 
     log['total_reward'] = total_reward
     log['success'] = f'success: {success}'
