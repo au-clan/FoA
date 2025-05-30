@@ -110,7 +110,7 @@ class TreeOfThoughtAgent(Agent):
         value_obs = [prompt,
                      dict(feedback="What you have learned about the puzzle are summarized below.\n" + "\n".join(
                          self.value_reflects))]
-        print("self.value_reflects", value_obs[1])
+        #print("self.value_reflects", value_obs[1])
         for step in range(4 - len(history)):
             print("step: ", step)
             # generation
@@ -159,14 +159,12 @@ class TreeOfThoughtAgent(Agent):
         if self.method_reflexion_type == "k_most_recent":
             self.reflects.extend(reflects)
             self.value_reflects.extend(value_reflects)
-            print("self.reflects before k: ", self.reflects)
-            print("self.value_reflects before k: ", self.value_reflects)
             if len(self.reflects) > self.k:
                 self.reflects.pop(0)
             if len(self.value_reflects) > self.k:
                 self.value_reflects.pop(0)
-            print("self.reflects after k: ", self.reflects)
-            print("self.value_reflects after k: ", self.value_reflects)
+            print("self.reflects: ", self.reflects)
+            print("self.value_reflects: ", self.value_reflects)
         if self.method_reflexion_type == "summary":
             # Step 1: Extend and summarize
             self.all_reflects.extend(reflects)
