@@ -102,8 +102,7 @@ class TreeOfThoughtAgent(Agent):
         ys = ["\n".join(history) + "\n"] if len(history) else [""]  # current output candidates
         print("ys: ", ys)
         infos = []
-        prompt = "Now we would like to play a game of 24. That is, given 4 numbers, try to use "
-        "them with arithmetic operations (+ - * /) to get 24. "
+        prompt = "Now we would like to play a game of 24. That is, given 4 numbers, try to use them with arithmetic operations (+ - * /) to get 24. "
         obs = [{"feedback":prompt},
                {"feedback": "What you have learned about the puzzle are summarized below.\n" + "\n".join(
                    self.reflects)}]
