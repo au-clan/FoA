@@ -42,7 +42,7 @@ async def run(args):
                 i, env, agent, logs, file
             )
         )
-        for i in range(0, 1)
+        for i in range(0, 30)
     ]
     await asyncio.gather(*puzzle_tasks)
     

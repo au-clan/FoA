@@ -26,9 +26,9 @@ class Game24(Environment):
         uniform_val_indices = np.array([remaining_indices[i] for i in np.linspace(0, len(remaining_indices) - 1, 30, dtype=int)])
         
         if data == 'uniform-validation':
-            self.uniform_indices = uniform_test_indices.tolist()
+            self.uniform_indices = uniform_test_indices
         elif data == 'uniform-test':
-            self.uniform_indices = uniform_val_indices.tolist()
+            self.uniform_indices = uniform_val_indices
         else:
             raise ValueError("Invalid data. Choose 'uniform-test' or 'uniform-validation'.")
                 
