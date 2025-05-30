@@ -16,7 +16,6 @@ def get_value(env, history, x, y, n_evaluate_sample, cache_value=True):
     if cache_value and value_prompt in env.value_cache:
         #print("value was in cache")
         return env.value_cache[value_prompt]
-    print("Calls gpt with history")
     value_outputs = gpt_with_history(value_prompt, history, temperature=0.3, n=n_evaluate_sample, stop=None)
     print("value_outputs: ", value_outputs)
     value = env.value_outputs_unwrap(x, y, value_outputs)
@@ -57,7 +56,6 @@ def get_proposals(env, history, x, y, n_propose_sample=10):
 
 def get_proposal(env, history, x, y):
     propose_prompt = env.single_proposal_prompt_wrap(x,y)
-    print("propose_prompt ", propose_prompt)
     proposal_list = [x.split('\n') for x in gpt_with_history(propose_prompt, history, n=1, stop=["\n\n"])]
     proposals = []
     for p in proposal_list:
@@ -139,8 +137,8 @@ class TreeOfThoughtAgent(Agent):
             infos.append(
                 {'step': step, 'x': x, 'ys': ys, 'new_ys': new_ys, 'values': values, 'select_new_ys': select_new_ys})
             ys = select_new_ys
-        print('ys before ys_list: ', ys)
-        res_ys = "\n".join(y.strip() for y in ys[0].splitlines()) # Splitting the ys list at every \n, then stripping away trailing and leading whitespace
+        #res_ys = "\n".join(y.strip() for y in ys[0].splitlines()) # Splitting the ys list at every \n, then stripping away trailing and leading whitespace
+        res_ys = "\n".join([line.strip() for line in ys[0].splitlines()[len(history):]])
         print("res_ys: ", repr(res_ys))
         return res_ys, {'steps': infos}
 
@@ -209,7 +207,6 @@ class TreeOfThoughtAgent(Agent):
         return
 
     def act(self, env, obs):
-        print(obs['feedback'])
         if len(obs['feedback']) >= 1:
             self.reflect(env, obs)
         action, info = self.plan(env)

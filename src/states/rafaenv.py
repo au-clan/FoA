@@ -31,10 +31,7 @@ class Game24(Environment):
             self.uniform_indices = uniform_test_indices
         else:
             raise ValueError("Invalid data. Choose 'uniform-test' or 'uniform-validation'.")
-        print(f"[INIT] split: {split}")
-        print(f"[INIT] Length of self.data: {len(self.data)}")
-        print(f"[INIT] First 5 uniform_indices: {self.uniform_indices[:5]}")
-        print(f"[INIT] First 5 puzzles: {[self.data[i] for i in self.uniform_indices[:5]]}")
+
         self.max_steps = max_steps
         self.index = 0
         self.puzzle = self.data[self.uniform_indices[self.index]]
@@ -102,8 +99,6 @@ class Game24(Environment):
                 last_step = self.puzzle
             else:
                 last_step = self.history[-1]
-            print(last_step)
-            # print(action)
             if self.feedback:
                 idx += 1
             feedback, reward = self.check_step(idx, last_step, action)
@@ -213,7 +208,6 @@ class Game24(Environment):
         #print("Stripped lines in y:", stripped_lines)
         
         if len(stripped_lines) == 4 and 'answer' not in y.lower():
-            print("Early exit: y contains only 4 lines and no 'answer'")
             return 0
 
         # Step 2: Get last line of each value output and lowercase it

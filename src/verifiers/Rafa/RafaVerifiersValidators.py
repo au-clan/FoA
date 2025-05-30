@@ -29,8 +29,7 @@ def check_valid_move(idx, last_step, cur_step):
                         num != '']
     formula = [op for op in cur_step.split('left:')[0].strip("()").split(" ") if op != '']
     new_nums = [float(num) for num in cur_step.split('left:')[-1].strip().strip("()").split(" ") if num != ''] #Added a strip() to remove potential whitespace behind "(left: x)  "
-    
-
+     
     try:
         #print(original_nums, new_nums, formula)
         original_nums.remove(float(eval(formula[0])))
