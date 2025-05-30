@@ -28,9 +28,9 @@ async def run(args):
         n_generate_sample=10, n_evaluate_sample=1, n_select_sample=1,
         k = args.k, limit = args.limit
     )
-    env = Game24(f'24_tot.csv', True, 8)
+    env = Game24(f'24_tot.csv', True, 2)
     cur_time = int(time.time())
-    file = f'logs/recent/gameof24/RAFA/game24/{agent.backend}_0.7_{agent.method_generate}_{agent.n_generate_sample}_{agent.method_evaluate}_{agent.n_evaluate_sample}_{agent.method_select}_{agent.n_select_sample}_60PuzzlesNoSelectionState_time{cur_time}.json'
+    file = f'logs/recent/gameof24/RAFA/game24/{agent.backend}_0.7_{agent.method_generate}_{agent.n_generate_sample}_{agent.method_evaluate}_{agent.n_evaluate_sample}_{agent.method_select}_{agent.n_select_sample}_loggingTest_time{cur_time}.json'
 
     os.makedirs(os.path.dirname(file), exist_ok=True)
     logs = []
@@ -57,30 +57,42 @@ async def run_puzzle(i, env, agent, logs, file):
 
     while not done:
         j += 1
-        print("Iteration: ", j)
+        print(f"Iteration {j}")
+
+        # Step: agent decides action
         action, agent_info = agent.act(env, obs)
-        print("List of actions after agent.act: ", action)
-        print("Agent info after agent.act: ", agent_info)
+        print("Action:", action)
+        print("Agent info:", agent_info)
+
+        # Step: environment reacts
         obs, reward, done, env_info = env.step(action)
-        print("env info after env.step: ", env_info)
+        print("Env info:", env_info)
 
         total_reward += reward
         if reward >= 10:
             success = True
 
+        # Step: update agent
         agent.update(obs, reward, done, env_info)
-        log['agent_info'].append(agent_info)
-        log['env_info'].append(env_info)
-        log['usage_so_far'] = gpt_usage("gpt-4.1-nano-2025-04-14")
-        with open(file, 'w') as f:
-            json.dump(logs, [log], f, indent=4)
 
+        # Step: record logs for this iteration
+        log['agent_info'].append(agent_info)
+
+        # Get usage and attach it to this env_info step
+        usage = gpt_usage(agent.backend)
+        env_info['usage_so_far'] = usage
+        log['env_info'].append(env_info)
+
+        # Save intermediate state (ensures file is non-empty and debuggable)
+        with open(file, 'w') as f:
+            json.dump(logs + [log], f, indent=4)
+
+    # Finalize log
     log['total_reward'] = total_reward
     log['success'] = f'success: {success}'
-    #Hej
-
     logs.append(log)
-    #Hej
+
+    # Final write
     with open(file, 'w') as f:
         json.dump(logs, f, indent=4)
 
@@ -89,7 +101,7 @@ async def run_puzzle(i, env, agent, logs, file):
 def parse_args():
     args = argparse.ArgumentParser()
     args.add_argument('--backend', type=str,
-                      choices=['gpt-4.1-nano-2025-04-14', 'gpt-4.1-nano-2025-04-14'],
+                      choices=['gpt-4.1-nano-2025-04-14', 'llama-3.3-70b-versatile'],
                       default='gpt-4.1-nano-2025-04-14')
 
 
