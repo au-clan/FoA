@@ -319,9 +319,9 @@ limit_summary_prompt = '''The game of 24 is a math puzzle where players use four
 
 You made the following list of reflections:
 
-{reflexion}
+{reflexions}
 
-Write a short summary. The should not exceed the limit: {limit} words. Be concise
+Summarize all the reflexions to keep it concise and discard duplicates. The should not exceed the limit: {limit} words.
 
 Summary:
 '''

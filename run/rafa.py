@@ -22,11 +22,11 @@ async def run():
     agent = TreeOfThoughtAgent(
         backend=model, temperature=0.7, prompt_sample="standard",
         method_generate="propose", method_evaluate="value",
-        method_select="greedy", method_reflexion_type="k_most_recent",
+        method_select="greedy", method_reflexion_type="summary",
         n_generate_sample=10, n_evaluate_sample=1, n_select_sample=1,
         k = 1, limit = 15
     )
-    env = Game24(f'24_tot.csv', True, 3)
+    env = Game24(f'24_tot.csv', True, 8)
     cur_time = int(time.time())
     file = f'logs/recent/gameof24/RAFA/game24/{agent.backend}_0.7_{agent.method_generate}_{agent.n_generate_sample}_{agent.method_evaluate}_{agent.n_evaluate_sample}_{agent.method_select}_{agent.n_select_sample}_60PuzzlesNoSelectionState_time{cur_time}.json'
 

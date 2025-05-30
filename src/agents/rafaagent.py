@@ -22,6 +22,7 @@ def get_value(env, history, x, y, n_evaluate_sample, cache_value=True):
     value = env.value_outputs_unwrap(x, y, value_outputs)
     if cache_value:
         env.value_cache[value_prompt] = value
+    print("value: ", value)
     return value
 
 def get_values(env, history, x, ys, n_evaluate_sample, cache_value=True):
@@ -167,8 +168,9 @@ class TreeOfThoughtAgent(Agent):
             print("self.reflects after k: ", self.reflects)
             print("self.value_reflects after k: ", self.value_reflects)
         if self.method_reflexion_type == "summary":
+            # Step 1: Extend and summarize
             self.all_reflects.extend(reflects)
-            self.value_reflects.extend(reflects)
+            self.value_reflects.extend(value_reflects)
             summary_prompt = env.summary_prompt_wrap(self.all_reflects, self.limit)
             summary = gpt(summary_prompt, stop=None)
             self.reflects = summary
@@ -176,15 +178,36 @@ class TreeOfThoughtAgent(Agent):
             print("summary: ", self.reflects)
             print("self.value_reflects: ", self.value_reflects)
 
-            # Extract all number sequences followed by 'impossible' or 'sure', our way of summarizing the labels
-            results = []
-            for entry in self.value_reflects:
-                match = re.search(r'(\d+(?:\s+\d+)+):\s*(impossible|sure)', entry)
-                if match:
-                    nums, label = match.groups()
-                    results.append(f"{nums}: {label}")
-            self.value_reflects = results
-            print("summarized self.value_reflects: ", self.value_reflects)            
+            # Step 2: Normalize and clean
+            summarized_labels = [
+                entry.strip() for entry in self.value_reflects
+                if re.match(r'^\d+(?:\s+\d+)*:\s*(sure|impossible)$', entry.strip())
+            ]
+            text_reflections = [entry for entry in self.value_reflects if entry not in summarized_labels]
+
+            # Step 3: Normalize commas to avoid broken matches (e.g., '1, 5, 6: sure')
+            text = " ".join(text_reflections)
+            text = re.sub(r'(?<=\d),\s*(?=\d)', ' ', text)
+
+            # Step 4: Define patterns
+            patterns = [
+                r'\(left:\s*([\d\s]+)\)\s*[:\-–]?\s*(sure|impossible)',  # Old format
+                r'\b(\d+(?:\s+\d+)*):\s*(sure|impossible)'               # New format
+            ]
+
+            # Step 5: Extract and deduplicate
+            new_labels = []
+            for pattern in patterns:
+                matches = re.findall(pattern, text)
+                for nums, label in matches:
+                    formatted = f"{nums.strip()}: {label}"
+                    if formatted not in summarized_labels and formatted not in new_labels:
+                        new_labels.append(formatted)
+
+            # Step 6: Combine all labels
+            self.value_reflects = summarized_labels + new_labels
+
+            print("self.value_reflects after summary: ", self.value_reflects)
 
         return
 
