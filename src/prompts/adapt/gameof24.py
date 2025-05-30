@@ -303,7 +303,7 @@ Based on previous attempts to solve the puzzle, here is some advice on how to pr
 Input: {input}
 Possible next steps:'''
 
-
+#No limit
 summary_prompt = '''The game of 24 is a math puzzle where players use four numbers and basic arithmetic operations (+ - * /) to make the result equal to 24. Following is a previous attempt at solving the puzzle.
 
 You made the following list of reflections:
@@ -315,17 +315,56 @@ Summarize all the reflexions to keep it concise and discard duplicates
 Summarization of all reflections:
 '''
 
-limit_summary_prompt = '''The game of 24 is a math puzzle where players use four numbers and basic arithmetic operations (+ - * /) to make the result equal to 24. Following is a previous attempt at solving the puzzle.
+#Word limit
+word_limit_summary_prompt = '''Write a short summary based on the list of reflections.
 
 You made the following list of reflections:
 
 {reflexions}
 
-Summarize all the reflexions to keep it concise and discard duplicates. The should not exceed the limit: {limit} words.
+Summarize all the reflexions to keep it concise and discard duplicates. This should not exceed the limit: {limit} words.
 
 Summary:
 '''
 
+#Character limit
+char_limit_summary_prompt = '''Write a short summary based on the list of reflections.
+
+You made the following list of reflections:
+
+{reflexions}
+
+Summarize all the reflexions to keep it concise and discard duplicates. This should not exceed the limit: {limit} characters.
+
+Summary:
+'''
+
+#relaxed limit 
+relaxed_limit_summary_prompt = '''Write a short summary based on the list of reflections.
+
+You made the following list of reflections:
+
+{reflexions}
+
+Summarize all the reflexions to keep it concise and discard duplicates. This should not exceed the limit: {lowerlimit}-{upperlimit} sentences.
+
+Summary:
+'''
+
+#1 shot summary
+one_shot_summary_prompt = '''Write a short summary based on the list of reflections. Keep it concise and discard duplicates. 
+
+Example: 
+Reflections: ["Based on the given attempt answer and feedback, we can analyze the steps as follows:\n\n1. 1 + 4 = 5 (left: 1 5 6): sure\n2. 5 + 6 = 11 (left: 1 11): impossible\n\nThe first step is labeled as 'sure' because the feedback states that it is correct and can lead to 24. The second step is labeled as 'impossible' because the feedback states that it is impossible to lead to 24. \n\nNote that the evaluation of the steps is based on the given feedback, which provides information about the potential of each step to lead to the target result of 24."]
+Summary: 1. 1 + 4 = 5 (left: 1 5 6): sure\n2. 5 + 6 = 11 (left: 1 11): impossible\n 
+
+Example:
+Reflections: ["Based on the given attempt answer and feedback, we can analyze the steps as follows:\n\n1. 1 + 4 = 5 (left: 1 5 6): sure\n2. 5 + 6 = 11 (left: 1 11): impossible\n\nThe first step is labeled as 'sure' because the feedback states that it is correct and can lead to 24. The second step is labeled as 'impossible' because the feedback states that it is impossible to lead to 24. \n\nNote that the evaluation of the steps is based on the given feedback, which provides information about the potential of each step to lead to the target result of 24.", "To evaluate the given attempt and provide labels, let's break it down step by step.\n\n1. The initial attempt is: \n['Step 1: 1 + 4 = 5 (left: 1 5 6)']\n\nGiven this step, we can analyze the operation and the numbers left:\n- The operation performed is 1 + 4 = 5.\n- The numbers left after this operation are 1, 5, and 6.\n\nSo, the formula with left numbers from this step is:\n1 + 4 = 5 (left: 1 5 6): impossible\n\nThe reason it's labeled as 'impossible' is because the feedback indicates that Step 2 is illegal, implying that the subsequent steps following this initial operation would not lead to a valid solution that equals 24, given the constraints of the game. However, this initial step itself is mathematically correct but does not lead to a path that can reach 24 with the remaining numbers through legal operations as defined by the game's rules. \n\nTo achieve 24 using the numbers 1, 1, 4, and 6, one would typically look for combinations that allow for multiplication or division to reach higher numbers more quickly, given the low starting values. The correct path to solve this puzzle involves using these numbers in a way that leverages their potential for multiplication and division to reach 24, which is not directly achievable through simple addition or subtraction with these numbers. \n\nA correct solution to the puzzle 1, 1, 4, 6 to reach 24 could involve operations like:\n(6 - 1) * (4 - 1) = 5 * 3 = 15, which still doesn't reach 24, indicating my initial approach to directly solve it was incorrect. The actual solution involves recognizing the potential for using the numbers in a way that directly leads to 24, such as:\n6 * (4 - 1) = 6 * 3 = 18, and then finding a way to adjust this to reach 24, which is not straightforward from the initial step provided. \n\nThe key insight or formula that actually works for these numbers is:\n(6 - 1/1) * 4 = (6 - 1) * 4 = 5 * 4 = 20, which is still not 24, showing the challenge in directly finding the right combination. The correct approach to solving this puzzle would involve recognizing that the numbers can be manipulated in a specific way to directly achieve 24, such as leveraging the division and multiplication operations effectively.\n\nGiven the constraints and upon reevaluation, a correct path involves recognizing the mistake in the approach and understanding that a direct solution from the given numbers requires a specific sequence of operations that might not be immediately apparent from the initial step provided. \n\nThe actual solution to reach 24 using the numbers 1, 1, 4, and 6 is:\n(6 * 4) / (1 + 1) = 24\n\nThis solution directly achieves 24 by using the numbers in a mathematically valid operation sequence:\n(6 * 4) = 24, and (1 + 1) = 2, thus (24) / 2 = 12 is not the correct operation, indicating a mistake in my calculation. The correct calculation directly leading to 24 is:\n(6 * 4) / (1 + 1) actually calculates to (24) / 2 = 12, which means my explanation of the solution was incorrect.\n\nThe correct formula should directly lead to 24 without incorrect intermediate steps:\n6 * (4 / (1 + 1)) = 6 * (4 / 2) = 6 * 2 = 12, which again does not solve it, showing the mistake in calculation.\n\nThe right approach to solve (1, 1, 4, 6) to get 24 is actually:\n6 * (1 + 1 + 4 / 1) is not the correct formula, as it was another misstep in calculation.\n\nCorrectly solving it involves:\n6 * 4 = 24, which directly gives us 24 when we divide the product by the sum of the ones, but since that step is conceptually mistaken, let's clarify:\n\nThe actual correct step to solve this puzzle and get 24 using the numbers 1, 1, 4, and 6, acknowledging the error in previous explanations, is indeed to find a combination that directly multiplies to 24 or leverages division and addition/subtraction correctly.\n\nGiven the error in explanation and to directly address the puzzle without incorrect intermediate steps:\nA correct and straightforward solution is (6 * 4) = 24, and then considering the role of 1s in a division or addition that maintains the result as 24,"]
+Summary: 1. 1 + 4 = 5 (left: 1 5 6): sure\n2. 5 + 6 = 11 (left: 1 11): impossible\n look for combinations that allow for multiplication or division
+
+Reflections: {reflexions}
+Summary:
+'''
 
 #Prompt with only one suggestion for testing
 bfs_prompt_single = '''Use numbers and basic arithmetic operations (+ - * /). Each step, you are only allowed to choose two of the remaining numbers to obtain a new number. Do not explain simply list a possible next step as well as all the remaining numbers and nothing else.
