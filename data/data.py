@@ -19,10 +19,19 @@ class GameOf24Data:
             indices = list(range(875,900)) + list(range(1000,1025))
         elif set == "test":
             indices = list(range(990,997))
-        elif set == "uniform":
+        elif set == "uniform-test":
             arr = range(1362)
             S = 60
             indices = np.linspace(0, len(arr) -1, S, dtype=int)
+        elif set == "uniform-validation":
+            arr = range(1362)
+
+            test_indices = np.linspace(0, len(arr) - 1, 60, dtype=int)
+
+            remaining_indices = [i for i in arr if i not in test_indices]
+
+            validation_indices = np.linspace(0, len(remaining_indices) - 1, 30, dtype=int)
+            indices = np.array([remaining_indices[i] for i in validation_indices])
         else:
             raise ValueError("Invalid set name")
 

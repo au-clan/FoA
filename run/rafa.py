@@ -4,6 +4,7 @@ import time
 import sys
 import io
 import asyncio
+import argparse
 sys.path.append(os.getcwd()) # Project root!!
 from src.agents.rafaagent import TreeOfThoughtAgent
 from src.states.rafaenv import Game24
@@ -12,19 +13,20 @@ from src.agents import gpt_usage
 def get_model():
     gpt_model = "gpt-4.1-nano-2025-04-14"
     llama_model = "llama-3.3-70b-versatile"
-    return llama_model
+    return gpt_model
 
-async def run():
+async def run(args):
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
-    model = get_model()
+    #model = get_model()
+    model = args.backend
 
     agent = TreeOfThoughtAgent(
         backend=model, temperature=0.7, prompt_sample="standard",
         method_generate="propose", method_evaluate="value",
-        method_select="greedy", method_reflexion_type="summary",
+        method_select="greedy", method_reflexion_type=args.method_reflexion_type,
         n_generate_sample=10, n_evaluate_sample=1, n_select_sample=1,
-        k = 1, limit = 15
+        k = args.k, limit = args.limit
     )
     env = Game24(f'24_tot.csv', True, 8)
     cur_time = int(time.time())
@@ -80,5 +82,23 @@ async def run_puzzle(i, env, agent, logs, file):
 
     print(f"Finished puzzle {i} | Success: {success} | Total reward: {total_reward}")
 
+def parse_args():
+    args = argparse.ArgumentParser()
+    args.add_argument('--backend', type=str,
+                      choices=['gpt-4.1-nano-2025-04-14', 'gpt-4.1-nano-2025-04-14'],
+                      default='gpt-4.1-nano-2025-04-14')
+
+
+    args.add_argument('--method_reflexion_type', type=str,
+                      choices=['list', 'k-most-recent', 'summary'],
+                      default='list') 
+    args.add_argument('--k', type=int, default=3)
+    args.add_argument('--limit', type=int, default=15)
+
+    return args.parse_args()
+
+
 if __name__ == '__main__':
-    asyncio.run(run())
+    args = parse_args()
+    print(args)
+    asyncio.run(run(args))
