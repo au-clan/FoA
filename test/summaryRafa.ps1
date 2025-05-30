@@ -1,1 +1,1 @@
-python run/rafa.py --backend llama-3.3-70b-versatile --method_reflexion_type summary --limit 15
+python run/rafa.py --backend gpt-4.1-nano-2025-04-14 --method_reflexion_type summary --limit 15
