@@ -77,6 +77,7 @@ async def run_puzzle(i, env, agent, logs, file):
 
     log['total_reward'] = total_reward
     log['success'] = f'success: {success}'
+    #Hej
 
     logs.append(log)
     #Hej
