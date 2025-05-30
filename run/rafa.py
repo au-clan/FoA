@@ -79,6 +79,7 @@ async def run_puzzle(i, env, agent, logs, file):
     log['success'] = f'success: {success}'
 
     logs.append(log)
+    #Hej
     with open(file, 'w') as f:
         json.dump(logs, f, indent=4)
 
