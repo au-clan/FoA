@@ -187,7 +187,7 @@ class Game24(Environment):
 
     @staticmethod
     def summary_prompt_wrap(all_reflects: list, lower_limit: int, upper_limit) -> str:
-        return relaxed_limit_summary_prompt.format(reflexions = all_reflects, lower_limit = lower_limit, upper_limit = upper_limit)
+        return char_limit_summary_prompt.format(reflexions = all_reflects, limit = upper_limit)
 
 
     @staticmethod
