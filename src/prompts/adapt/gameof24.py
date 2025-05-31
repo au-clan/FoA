@@ -346,12 +346,12 @@ You made the following list of reflections:
 
 {reflexions}
 
-Summarize all the reflexions to keep it concise and discard duplicates. This should not exceed the limit: {lowerlimit}-{upperlimit} sentences.
+Summarize all the reflexions to keep it concise and discard duplicates. This should not exceed the limit: {lower_limit}-{upper_limit} sentences.
 
 Summary:
 '''
 
-#1 shot summary
+#1 shot summary. Maybe add something like "focus on what operations that would be good or bad"
 one_shot_summary_prompt = '''Write a short summary based on the list of reflections. Keep it concise and discard duplicates. 
 
 Example: 

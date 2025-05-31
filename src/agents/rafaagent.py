@@ -71,7 +71,7 @@ def get_proposal(env, history, x, y):
 class TreeOfThoughtAgent(Agent):
     def __init__(self, backend, temperature, prompt_sample, method_generate, method_evaluate, method_select, method_reflexion_type,
                  n_generate_sample,
-                 n_evaluate_sample, n_select_sample, k, limit):
+                 n_evaluate_sample, n_select_sample, k, lower_limit, upper_limit):
         super().__init__()
 
         global gpt
@@ -89,7 +89,8 @@ class TreeOfThoughtAgent(Agent):
         self.n_evaluate_sample = n_evaluate_sample
         self.n_select_sample = n_select_sample
         self.k = k 
-        self.limit = limit
+        self.lower_limit = lower_limit
+        self.upper_limit = upper_limit
         self.reflects = []
         self.all_reflects = []
         self.value_reflects = []
@@ -186,7 +187,6 @@ class TreeOfThoughtAgent(Agent):
 
             if '\n' in reflection:
                 value_reflects[i] = reflection.split('\n')[-1]
-        print(value_reflects)
         return value_reflects
 
     def reflect(self, env, obs):
@@ -214,7 +214,7 @@ class TreeOfThoughtAgent(Agent):
             # Step 1: Extend and summarize
             self.all_reflects.extend(reflects)
             self.value_reflects.extend(value_reflects)
-            summary_prompt = env.summary_prompt_wrap(self.all_reflects, self.limit)
+            summary_prompt = env.summary_prompt_wrap(self.all_reflects, self.lower_limit, self.upper_limit)
             summary = gpt(summary_prompt, stop=None)
             self.reflects = summary
             print("all reflexions: ", self.all_reflects)
