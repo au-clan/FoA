@@ -20,6 +20,7 @@ async def run(args):
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
     #model = get_model()
     model = args.backend
+    print("reflection type: ", args.method_reflexion_type)
 
     agent = TreeOfThoughtAgent(
         backend=model, temperature=0.7, prompt_sample="standard",
@@ -106,7 +107,7 @@ def parse_args():
 
 
     args.add_argument('--method_reflexion_type', type=str,
-                      choices=['list', 'k-most-recent', 'summary'],
+                      choices=['list', 'k_most_recent', 'summary'],
                       default='list') 
     args.add_argument('--k', type=int, default=3)
     args.add_argument('--limit', type=int, default=15)

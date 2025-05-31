@@ -51,6 +51,8 @@ def get_proposals(env, history, x, y, n_propose_sample=10):
     #print("proposals before indexing: ", proposals)
     proposals = proposals[:min(len(proposals), n_propose_sample)]
     proposals = [p.replace('\u00f7', '/') for p in proposals]
+    proposals = [p.replace('\u2212', '-') for p in proposals]
+    proposals = [p.replace('\u00d7', '*') for p in proposals]
     print("proposals: ", proposals)
     return [y + _ + '\n' for _ in proposals]
 
@@ -155,7 +157,7 @@ class TreeOfThoughtAgent(Agent):
             print("self.reflects: ", self.reflects)
             self.value_reflects.extend(value_reflects)
             print("self.value_reflects: ", self.value_reflects)
-        if self.method_reflexion_type == "k_most_recent":
+        elif self.method_reflexion_type == "k_most_recent":
             self.reflects.extend(reflects)
             self.value_reflects.extend(value_reflects)
             if len(self.reflects) > self.k:
@@ -164,7 +166,7 @@ class TreeOfThoughtAgent(Agent):
                 self.value_reflects.pop(0)
             print("self.reflects: ", self.reflects)
             print("self.value_reflects: ", self.value_reflects)
-        if self.method_reflexion_type == "summary":
+        elif self.method_reflexion_type == "summary":
             # Step 1: Extend and summarize
             self.all_reflects.extend(reflects)
             self.value_reflects.extend(value_reflects)
@@ -205,6 +207,9 @@ class TreeOfThoughtAgent(Agent):
             self.value_reflects = summarized_labels + new_labels
 
             print("self.value_reflects after summary: ", self.value_reflects)
+
+        else:
+            raise ValueError(f"Invalid reflection type: {self.method_reflexion_type}")
 
         return
 
