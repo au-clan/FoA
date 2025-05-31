@@ -152,6 +152,7 @@ class TreeOfThoughtAgent(Agent):
         reflect_prompt, value_reflect_prompt = env.reflect_prompt_wrap(env.puzzle, y, feedback)
         reflects = gpt(reflect_prompt, stop=None)
         value_reflects = gpt(value_reflect_prompt, stop=None)
+        
         if self.method_reflexion_type == "list":
             self.reflects.extend(reflects)
             print("self.reflects: ", self.reflects)
@@ -176,6 +177,7 @@ class TreeOfThoughtAgent(Agent):
             print("all reflexions: ", self.all_reflects)
             print("summary: ", self.reflects)
             print("self.value_reflects: ", self.value_reflects)
+
 
             # Step 2: Normalize and clean
             summarized_labels = [
@@ -207,6 +209,8 @@ class TreeOfThoughtAgent(Agent):
             self.value_reflects = summarized_labels + new_labels
 
             print("self.value_reflects after summary: ", self.value_reflects)
+        else:
+            raise ValueError(f"Invalid reflection type: {self.method_reflexion_type}")
 
         else:
             raise ValueError(f"Invalid reflection type: {self.method_reflexion_type}")
