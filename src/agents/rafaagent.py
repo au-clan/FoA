@@ -145,6 +145,49 @@ class TreeOfThoughtAgent(Agent):
         res_ys = "\n".join([line.strip() for line in ys[0].splitlines()[len(history):]])
         print("res_ys: ", repr(res_ys))
         return res_ys, {'steps': infos}
+    
+    def shorten_value_reflects(self, value_reflects):
+        # Step 2: Normalize and clean
+        summarized_labels = [
+            entry.strip() for entry in value_reflects
+            if re.match(r'^-?\d+(?:[\s,]+-?\d+)*:\s*(sure|impossible)$', entry.strip())
+        ]
+        text_reflections = [entry for entry in value_reflects if entry not in summarized_labels]
+
+        for i, reflection in enumerate(text_reflections):
+            if 'Label' in reflection:
+                text_reflections[i] = reflection.replace("Label", "").replace("\n", "")
+            
+        # Step 3: Normalize commas to avoid broken matches (e.g., '1, 5, 6: sure')
+        text = " ".join(text_reflections)
+        text = re.sub(r'(?<=\d),\s*(?=\d)', ' ', text).replace("{", "").replace("}", "")
+
+        # Step 4: Define patterns
+        patterns = [
+            r'\(left:\s*([\d\s]+)\)\s*[:\-–]?\s*(sure|impossible)',  # Old format
+            r'(-?\d+(?:\s+-?\d+)*)\s*:\s*(sure|impossible)'              # New format
+        ]
+
+
+        # Step 5: Extract and deduplicate
+        new_labels = []
+        for pattern in patterns:
+            matches = re.findall(pattern, text)
+            for nums, label in matches:
+                formatted = f"{nums.strip()}: {label}"
+                if formatted not in summarized_labels and formatted not in new_labels:
+                    new_labels.append(formatted)
+                    
+
+        # Step 6: Combine all labels
+        value_reflects = summarized_labels + new_labels
+
+        for i, reflection in enumerate(value_reflects):
+
+            if '\n' in reflection:
+                value_reflects[i] = reflection.split('\n')[-1]
+        print(value_reflects)
+        return value_reflects
 
     def reflect(self, env, obs):
         y = obs['answer']
@@ -177,41 +220,10 @@ class TreeOfThoughtAgent(Agent):
             print("all reflexions: ", self.all_reflects)
             print("summary: ", self.reflects)
             print("self.value_reflects: ", self.value_reflects)
-
-
-            # Step 2: Normalize and clean
-            summarized_labels = [
-                entry.strip() for entry in self.value_reflects
-                if re.match(r'^\d+(?:\s+\d+)*:\s*(sure|impossible)$', entry.strip())
-            ]
-            text_reflections = [entry for entry in self.value_reflects if entry not in summarized_labels]
-
-            # Step 3: Normalize commas to avoid broken matches (e.g., '1, 5, 6: sure')
-            text = " ".join(text_reflections)
-            text = re.sub(r'(?<=\d),\s*(?=\d)', ' ', text)
-
-            # Step 4: Define patterns
-            patterns = [
-                r'\(left:\s*([\d\s]+)\)\s*[:\-–]?\s*(sure|impossible)',  # Old format
-                r'\b(\d+(?:\s+\d+)*):\s*(sure|impossible)'               # New format
-            ]
-
-            # Step 5: Extract and deduplicate
-            new_labels = []
-            for pattern in patterns:
-                matches = re.findall(pattern, text)
-                for nums, label in matches:
-                    formatted = f"{nums.strip()}: {label}"
-                    if formatted not in summarized_labels and formatted not in new_labels:
-                        new_labels.append(formatted)
-
-            # Step 6: Combine all labels
-            self.value_reflects = summarized_labels + new_labels
-
+            
+            shortened_values = self.shorten_value_reflects(self.value_reflects)
+            self.value_reflects = shortened_values
             print("self.value_reflects after summary: ", self.value_reflects)
-        else:
-            raise ValueError(f"Invalid reflection type: {self.method_reflexion_type}")
-
         else:
             raise ValueError(f"Invalid reflection type: {self.method_reflexion_type}")
 
