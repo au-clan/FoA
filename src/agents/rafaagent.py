@@ -214,7 +214,12 @@ class TreeOfThoughtAgent(Agent):
             # Step 1: Extend and summarize
             self.all_reflects.extend(reflects)
             self.value_reflects.extend(value_reflects)
-            summary_prompt = env.summary_prompt_wrap(self.all_reflects, self.lower_limit, self.upper_limit)
+            len_of_reflexions = 0
+            for reflexion in self.all_reflects:
+                len_of_reflexions += len(reflexion)
+            lower_limit = len_of_reflexions * self.lower_limit
+            upper_limit = len_of_reflexions * self.upper_limit
+            summary_prompt = env.summary_prompt_wrap(self.all_reflects, lower_limit, upper_limit)
             summary = gpt(summary_prompt, stop=None)
             self.reflects = summary
             print("all reflexions: ", self.all_reflects)
