@@ -217,8 +217,8 @@ class TreeOfThoughtAgent(Agent):
             len_of_reflexions = 0
             for reflexion in self.all_reflects:
                 len_of_reflexions += len(reflexion)
-            lower_limit = len_of_reflexions * self.lower_limit
-            upper_limit = len_of_reflexions * self.upper_limit
+            lower_limit = int(len_of_reflexions * self.lower_limit)
+            upper_limit = int(len_of_reflexions * self.upper_limit)
             summary_prompt = env.summary_prompt_wrap(self.all_reflects, lower_limit, upper_limit)
             summary = gpt(summary_prompt, stop=None)
             self.reflects = summary

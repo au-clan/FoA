@@ -111,7 +111,7 @@ def parse_args():
                       default='list') 
     args.add_argument('--k', type=int, default=3)
     args.add_argument('--lower_limit', type=int, default=2)
-    args.add_argument('--upper_limit', type=int, default=3)
+    args.add_argument('--upper_limit', type=float, default=3)
     return args.parse_args()
 
 
