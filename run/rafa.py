@@ -24,15 +24,15 @@ async def run(args):
 
     agent = TreeOfThoughtAgent(
         backend=model, temperature=0.7, prompt_sample="standard",
-        method_generate="propose", method_evaluate="value",
+        method_generate=args.method_generate, method_evaluate="value",
         method_select="greedy", method_reflexion_type=args.method_reflexion_type,
         n_generate_sample=10, n_evaluate_sample=1, n_select_sample=1,
         k = args.k, lower_limit = args.lower_limit, upper_limit = args.upper_limit
     )
-    env = Game24(datadir=f'24_tot.csv', feedback=True, max_steps=20, split="uniform-validation")
+    env = Game24(datadir=f'24_tot.csv', feedback=True, max_steps=20, split=args.split)
     cur_time = int(time.time())
     file = f'logs/recent/gameof24/RAFA/game24/{agent.backend}_{args.method_reflexion_type}_k_{args.k}_limit_{args.upper_limit}_{cur_time}.json'
-
+    num_puzzles = 30 if args.split == 'uniform-validation' else 60
     os.makedirs(os.path.dirname(file), exist_ok=True)
     logs = []
 
@@ -43,7 +43,7 @@ async def run(args):
                 i, env, agent, logs, file
             )
         )
-        for i in range(0, 30)
+        for i in range(0, num_puzzles)
     ]
     await asyncio.gather(*puzzle_tasks)
     
@@ -62,8 +62,8 @@ async def run_puzzle(i, env, agent, logs, file):
 
         # Step: agent decides action
         action, agent_info = agent.act(env, obs)
-        print("Action:", action)
-        print("Agent info:", agent_info)
+        #print("Action:", action)
+        #print("Agent info:", agent_info)
 
         # Step: environment reacts
         obs, reward, done, env_info = env.step(action)
@@ -109,6 +109,12 @@ def parse_args():
     args.add_argument('--method_reflexion_type', type=str,
                       choices=['list', 'k_most_recent', 'summary'],
                       default='list') 
+    args.add_argument('--method_generate', type=str,
+                      choices=['propose', 'single'],
+                      default='propose')  
+    args.add_argument('--split', type=str,
+                      choices=['uniform-validation', 'uniform-test'],
+                      default='uniform-validation')                                   
     args.add_argument('--k', type=int, default=3)
     args.add_argument('--lower_limit', type=int, default=2)
     args.add_argument('--upper_limit', type=float, default=3)

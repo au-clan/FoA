@@ -42,12 +42,12 @@ def gpt_with_history(prompt, history, model=model, temperature=0.7, max_tokens=1
             messages.append({"role": "user", "content": h["feedback"]})
             #print("feedback was in history")
     messages.append({"role": "user", "content": prompt})
-    print("messages in gpt with history: ", messages)
+    #print("messages in gpt with history: ", messages)
     return chatgpt(messages, model=model, temperature=temperature, max_tokens=max_tokens, n=n, stop=stop)
 
 def gpt(prompt, model=model, temperature=0.7, max_tokens=1000, n=1, stop=None) -> list:
     messages = [{"role": "user", "content": prompt}]
-    print("messages in gpt: ", messages)
+    #print("messages in gpt: ", messages)
     return chatgpt(messages, model=model, temperature=temperature, max_tokens=max_tokens, n=n, stop=stop)
 
 def chatgpt(messages, model=model, temperature=0.7, max_tokens=1000, n=1, stop=None) -> list:

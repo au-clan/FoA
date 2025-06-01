@@ -17,11 +17,11 @@ def get_value(env, history, x, y, n_evaluate_sample, cache_value=True):
         #print("value was in cache")
         return env.value_cache[value_prompt]
     value_outputs = gpt_with_history(value_prompt, history, temperature=0.3, n=n_evaluate_sample, stop=None)
-    print("value_outputs: ", value_outputs)
+    #print("value_outputs: ", value_outputs)
     value = env.value_outputs_unwrap(x, y, value_outputs)
     if cache_value:
         env.value_cache[value_prompt] = value
-    print("value: ", value)
+    #print("value: ", value)
     return value
 
 def get_values(env, history, x, ys, n_evaluate_sample, cache_value=True):
@@ -53,7 +53,7 @@ def get_proposals(env, history, x, y, n_propose_sample=10):
     proposals = [p.replace('\u00f7', '/') for p in proposals]
     proposals = [p.replace('\u2212', '-') for p in proposals]
     proposals = [p.replace('\u00d7', '*') for p in proposals]
-    print("proposals: ", proposals)
+    #print("proposals: ", proposals)
     return [y + _ + '\n' for _ in proposals]
 
 def get_proposal(env, history, x, y):
@@ -62,7 +62,7 @@ def get_proposal(env, history, x, y):
     proposals = []
     for p in proposal_list:
         proposals.extend(p)
-    print("proposals: ", proposals)
+    #print("proposals: ", proposals)
     proposals = [p.replace('\u00f7', '/') for p in proposals]
     proposals = [p.replace('\u2212', '-') for p in proposals]
     proposals = [p.replace('\u00d7', '*') for p in proposals]
@@ -101,9 +101,9 @@ class TreeOfThoughtAgent(Agent):
         x = env.puzzle  # input
         print("current puzzle is ", x)
         history = env.history  # history
-        print("history: ", history)
+        #print("history: ", history)
         ys = ["\n".join(history) + "\n"] if len(history) else [""]  # current output candidates
-        print("ys: ", ys)
+        #print("ys: ", ys)
         infos = []
         prompt = "Now we would like to play a game of 24. That is, given 4 numbers, try to use them with arithmetic operations (+ - * /) to get 24. "
         obs = [{"feedback":prompt},
@@ -114,7 +114,7 @@ class TreeOfThoughtAgent(Agent):
                          self.value_reflects))]
         #print("self.value_reflects", value_obs[1])
         for step in range(4 - len(history)):
-            print("step: ", step)
+            #print("step: ", step)
             # generation
             new_ys = [get_proposals(env, obs, x, y, self.n_generate_sample) for y in ys]
             #elif self.method_generate == "single":
@@ -132,19 +132,19 @@ class TreeOfThoughtAgent(Agent):
             elif self.method_generate == "single":
                 select_new_ys = [new_ys[0]] if new_ys else []
                 values = [0] * len(new_ys)
-            print("selected new ys: ", select_new_ys) 
+            #print("selected new ys: ", select_new_ys) 
             # log
             if to_print:
                 sorted_new_ys, sorted_values = zip(*sorted(zip(new_ys, values), key=lambda x: x[1], reverse=True))
-                print(
-                    f'-- new_ys --: {sorted_new_ys}\n-- sol values --: {sorted_values}\n-- choices --: {select_new_ys}\n')
+                # print(
+                #     f'-- new_ys --: {sorted_new_ys}\n-- sol values --: {sorted_values}\n-- choices --: {select_new_ys}\n')
 
             infos.append(
                 {'step': step, 'x': x, 'ys': ys, 'new_ys': new_ys, 'values': values, 'select_new_ys': select_new_ys})
             ys = select_new_ys
         #res_ys = "\n".join(y.strip() for y in ys[0].splitlines()) # Splitting the ys list at every \n, then stripping away trailing and leading whitespace
         res_ys = "\n".join([line.strip() for line in ys[0].splitlines()[len(history):]])
-        print("res_ys: ", repr(res_ys))
+        #print("res_ys: ", repr(res_ys))
         return res_ys, {'steps': infos}
     
     def shorten_value_reflects(self, value_reflects):
@@ -198,9 +198,9 @@ class TreeOfThoughtAgent(Agent):
         
         if self.method_reflexion_type == "list":
             self.reflects.extend(reflects)
-            print("self.reflects: ", self.reflects)
+            #print("self.reflects: ", self.reflects)
             self.value_reflects.extend(value_reflects)
-            print("self.value_reflects: ", self.value_reflects)
+            #print("self.value_reflects: ", self.value_reflects)
         elif self.method_reflexion_type == "k_most_recent":
             self.reflects.extend(reflects)
             self.value_reflects.extend(value_reflects)
