@@ -29,7 +29,7 @@ async def run(args):
         n_generate_sample=10, n_evaluate_sample=1, n_select_sample=1,
         k = args.k, lower_limit = args.lower_limit, upper_limit = args.upper_limit
     )
-    env = Game24(datadir=f'24_tot.csv', feedback=True, max_steps=4, split="uniform-validation")
+    env = Game24(datadir=f'24_tot.csv', feedback=True, max_steps=20, split="uniform-validation")
     cur_time = int(time.time())
     file = f'logs/recent/gameof24/RAFA/game24/{agent.backend}_{args.method_reflexion_type}_k_{args.k}_limit_{args.upper_limit}_{cur_time}.json'
 
@@ -43,7 +43,7 @@ async def run(args):
                 i, env, agent, logs, file
             )
         )
-        for i in range(29, 30)
+        for i in range(0, 30)
     ]
     await asyncio.gather(*puzzle_tasks)
     
