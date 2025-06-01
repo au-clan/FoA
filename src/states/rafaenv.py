@@ -105,12 +105,16 @@ class Game24(Environment):
             if self.feedback:
                 self.feedbacks.append(feedback)
                 feedbacks.append(feedback)
-            if reward > 0:
-                if self.feedback:
-                    self.history.append(action)
-                rewards += reward
+                if reward > 0:
+                    if self.feedback:
+                        self.history.append(action)
+                    rewards += reward
+                else:
+                    break
             else:
-                break
+                rewards += reward
+        if not self.feedback and rewards > 10:
+            self.history.extend(actions)
         # if 'answer' not in steps[-1].lower():
         #     feedbacks.append("The answer is not complete.")
         total_feedback = " ".join(feedbacks) if self.feedback else None
@@ -135,7 +139,7 @@ class Game24(Environment):
             obs = {'answer': answer, 'feedback': feedback}
         else:
             info = {'action': action, 'history': []}
-            obs = {'answer': answer, 'feedback': []}
+            obs = {'answer': answer, 'feedback': " "}
         #print("obs: ", obs)
         return obs, reward, done, info
 
@@ -181,6 +185,7 @@ class Game24(Environment):
 
     @staticmethod
     def reflect_prompt_wrap(x: str, y: str, feedback: str) -> str:
+        print('feedback in reflect prompt wrap: ', feedback)
         return reflect_prompt.format(input=x, answer=y, feedback=feedback), value_reflect_prompt.format(input=x,
                                                                                                         answer=y,
                                                                                                         feedback=feedback)

@@ -71,7 +71,7 @@ def get_proposal(env, history, x, y):
 class TreeOfThoughtAgent(Agent):
     def __init__(self, backend, temperature, prompt_sample, method_generate, method_evaluate, method_select, method_reflexion_type,
                  n_generate_sample,
-                 n_evaluate_sample, n_select_sample, k, lower_limit, upper_limit):
+                 n_evaluate_sample, n_select_sample, k, lower_limit, upper_limit, feedback):
         super().__init__()
 
         global gpt
@@ -91,6 +91,7 @@ class TreeOfThoughtAgent(Agent):
         self.k = k 
         self.lower_limit = lower_limit
         self.upper_limit = upper_limit
+        self.feedback = feedback
         self.reflects = []
         self.all_reflects = []
         self.value_reflects = []
@@ -192,6 +193,9 @@ class TreeOfThoughtAgent(Agent):
     def reflect(self, env, obs):
         y = obs['answer']
         feedback = obs['feedback']
+
+            
+        print(self.feedback, ":", feedback)
         reflect_prompt, value_reflect_prompt = env.reflect_prompt_wrap(env.puzzle, y, feedback)
         reflects = gpt(reflect_prompt, stop=None)
         value_reflects = gpt(value_reflect_prompt, stop=None)
@@ -235,6 +239,7 @@ class TreeOfThoughtAgent(Agent):
         return
 
     def act(self, env, obs):
+        print('obs[feedback]',repr(obs['feedback']), 'len ', len(obs['feedback']))
         if len(obs['feedback']) >= 1:
             self.reflect(env, obs)
         action, info = self.plan(env)

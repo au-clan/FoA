@@ -21,18 +21,21 @@ async def run(args):
     #model = get_model()
     model = args.backend
     print("reflection type: ", args.method_reflexion_type)
+    feedback = False if args.feedback == 'False' else True
 
     agent = TreeOfThoughtAgent(
         backend=model, temperature=0.7, prompt_sample="standard",
         method_generate=args.method_generate, method_evaluate="value",
         method_select="greedy", method_reflexion_type=args.method_reflexion_type,
         n_generate_sample=10, n_evaluate_sample=1, n_select_sample=1,
-        k = args.k, lower_limit = args.lower_limit, upper_limit = args.upper_limit
+        k = args.k, lower_limit = args.lower_limit, upper_limit = args.upper_limit,
+        feedback=feedback
     )
-    env = Game24(datadir=f'24_tot.csv', feedback=True, max_steps=20, split=args.split)
+    env = Game24(datadir=f'24_tot.csv', feedback=feedback, max_steps=4, split="uniform-validation")
     cur_time = int(time.time())
-    file = f'logs/recent/gameof24/RAFA/game24/{agent.backend}_{args.method_reflexion_type}_k_{args.k}_limit_{args.upper_limit}_{cur_time}.json'
-    num_puzzles = 30 if args.split == 'uniform-validation' else 60
+    num_puzzles = 30 if args.split == "uniform-validation" else 60
+    file = f'logs/recent/gameof24/RAFA/game24/{agent.backend}_{args.method_reflexion_type}_k_{args.k}_limit_{args.upper_limit}_noVerificationAblation_{cur_time}.json'
+
     os.makedirs(os.path.dirname(file), exist_ok=True)
     logs = []
 
@@ -118,6 +121,9 @@ def parse_args():
     args.add_argument('--k', type=int, default=3)
     args.add_argument('--lower_limit', type=int, default=2)
     args.add_argument('--upper_limit', type=float, default=3)
+    args.add_argument('--feedback', type=str, 
+                      choices=['False', 'True'],
+                      default='True')
     return args.parse_args()
 
 
