@@ -7,10 +7,10 @@ import sys
 completion_tokens = prompt_tokens = 0
 
 
-#model = "gpt-4.1-nano-2025-04-14"
-model = "llama-3.3-70b-versatile"
+model = "gpt-4.1-nano-2025-04-14"
+#model = "llama-3.3-70b-versatile"
 openai.api_key = os.getenv("OPENAI_API_KEY", "")
-client = Groq(api_key=os.getenv("GROQ_API_KEY3")) #Replace key here
+client = Groq(api_key=os.getenv("GROQ_API_KEY7")) #Replace key here
 
 @retry(retry=retry_if_exception_type(Exception), 
        wait=wait_random_exponential(min=1, max=60), 
@@ -42,12 +42,12 @@ def gpt_with_history(prompt, history, model=model, temperature=0.7, max_tokens=1
             messages.append({"role": "user", "content": h["feedback"]})
             #print("feedback was in history")
     messages.append({"role": "user", "content": prompt})
-    #print("messages in gpt with history: ", messages)
+    print("messages in gpt with history: ", messages)
     return chatgpt(messages, model=model, temperature=temperature, max_tokens=max_tokens, n=n, stop=stop)
 
 def gpt(prompt, model=model, temperature=0.7, max_tokens=1000, n=1, stop=None) -> list:
     messages = [{"role": "user", "content": prompt}]
-    #print("messages in gpt: ", messages)
+    print("messages in gpt: ", messages)
     return chatgpt(messages, model=model, temperature=temperature, max_tokens=max_tokens, n=n, stop=stop)
 
 def chatgpt(messages, model=model, temperature=0.7, max_tokens=1000, n=1, stop=None) -> list:

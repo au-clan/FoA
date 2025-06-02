@@ -12,7 +12,7 @@ def get_current_numbers(y: str) -> str:
     return last_line.split('left: ')[-1].split(')')[0]
 
 class Game24(Environment):
-    def __init__(self, datadir, feedback=True, max_steps=20, split='uniform-validation'):
+    def __init__(self, datadir, feedback=True, max_steps=20, split='uniform-validation', reflect=True, feedback_string=True):
         """
                 file: a csv file (fixed)
         """
@@ -39,6 +39,8 @@ class Game24(Environment):
         self.feedbacks = []
         self.cur_step = 0
         self.feedback = feedback
+        self.reflect = reflect
+        self.feedback_string = feedback_string
 
     def reset(self, idx: int):
         self.index = self.uniform_indices[idx]
@@ -113,7 +115,7 @@ class Game24(Environment):
                     break
             else:
                 rewards += reward
-        if not self.feedback and rewards > 10:
+        if not self.feedback and rewards >= 10:
             self.history.extend(actions)
         # if 'answer' not in steps[-1].lower():
         #     feedbacks.append("The answer is not complete.")
@@ -126,6 +128,8 @@ class Game24(Environment):
         self.cur_step += 1
         prev_len = len(self.history)
         feedback, reward = self.generate_feedback(action)
+        if not self.feedback_string:
+            feedback = " "
         print("feedback: ", feedback, "reward: ", reward)
         #print("feedback in env.step: ", feedback)
         new_len = len(self.history)
@@ -134,10 +138,13 @@ class Game24(Environment):
         done = (reward >= 10) or (self.cur_step > self.max_steps)
         answer = [f"Step {i + 1}: {x}" for i, x in enumerate(action.split('\n')[:delta]) if x != ""]
         #answer = "Attempt answer: " + "\n".join(answer)
-        if self.feedback:
+        if not self.reflect:
+            info = {'action': action, 'history': self.history}
+            obs = {'answer': answer, 'feedback': []}
+        elif self.feedback:
             info = {'action': action, 'history': self.history}
             obs = {'answer': answer, 'feedback': feedback}
-        else:
+        elif not self.feedback:
             info = {'action': action, 'history': []}
             obs = {'answer': answer, 'feedback': " "}
         #print("obs: ", obs)
