@@ -113,8 +113,12 @@ class Game24(Environment):
                     break
             else:
                 rewards += reward
-        if not self.feedback and rewards > 10:
-            self.history.extend(actions)
+        #print("if not feedback", not self.feedback)
+        #print("rewards: ", rewards)
+        if not self.feedback and rewards >= 10:
+            #print("actions in if: ", actions)
+            for action in actions:
+                self.history.append(action)
         # if 'answer' not in steps[-1].lower():
         #     feedbacks.append("The answer is not complete.")
         total_feedback = " ".join(feedbacks) if self.feedback else None
@@ -138,7 +142,7 @@ class Game24(Environment):
             info = {'action': action, 'history': self.history}
             obs = {'answer': answer, 'feedback': feedback}
         else:
-            info = {'action': action, 'history': []}
+            info = {'action': action, 'history': self.history}
             obs = {'answer': answer, 'feedback': " "}
         #print("obs: ", obs)
         return obs, reward, done, info

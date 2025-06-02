@@ -7,8 +7,8 @@ import sys
 completion_tokens = prompt_tokens = 0
 
 
-#model = "gpt-4.1-nano-2025-04-14"
-model = "llama-3.3-70b-versatile"
+model = "gpt-4.1-nano-2025-04-14"
+#model = "llama-3.3-70b-versatile"
 openai.api_key = os.getenv("OPENAI_API_KEY", "")
 client = Groq(api_key=os.getenv("GROQ_API_KEY3")) #Replace key here
 
