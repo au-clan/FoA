@@ -202,9 +202,9 @@ class TreeOfThoughtAgent(Agent):
         
         if self.method_reflexion_type == "list":
             self.reflects.extend(reflects)
-            #print("self.reflects: ", self.reflects)
+            print("self.reflects: ", self.reflects)
             self.value_reflects.extend(value_reflects)
-            #print("self.value_reflects: ", self.value_reflects)
+            print("self.value_reflects: ", self.value_reflects)
         elif self.method_reflexion_type == "k_most_recent":
             self.reflects.extend(reflects)
             self.value_reflects.extend(value_reflects)

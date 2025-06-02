@@ -22,6 +22,9 @@ async def run(args):
     model = args.backend
     print("reflection type: ", args.method_reflexion_type)
     feedback = False if args.feedback == 'False' else True
+    reflect = False if args.reflect == 'False' else True
+    feedback_string = False if args.feedback_string == 'False' else True
+    
 
     agent = TreeOfThoughtAgent(
         backend=model, temperature=0.7, prompt_sample="standard",
@@ -31,10 +34,10 @@ async def run(args):
         k = args.k, lower_limit = args.lower_limit, upper_limit = args.upper_limit,
         feedback=feedback
     )
-    env = Game24(datadir=f'24_tot.csv', feedback=feedback, max_steps=20, split=args.split)
+    env = Game24(datadir=f'24_tot.csv', feedback=feedback, max_steps=20, split=args.split, reflect=reflect, feedback_string=feedback_string)
     cur_time = int(time.time())
     num_puzzles = 30 if args.split == "uniform-validation" else 60
-    file = f'logs/recent/gameof24/RAFA/game24/{agent.backend}_{args.method_reflexion_type}_k_{args.k}_limit_{args.upper_limit}_noVerificationAblation_{cur_time}.json'
+    file = f'logs/recent/gameof24/RAFA/game24/{agent.backend}_{args.method_reflexion_type}_k_{args.k}_limit_{args.upper_limit}_noReflectionAblation_{cur_time}.json'
 
     os.makedirs(os.path.dirname(file), exist_ok=True)
     logs = []
@@ -66,7 +69,7 @@ async def run_puzzle(i, env, agent, logs, file):
         # Step: agent decides action
         action, agent_info = agent.act(env, obs)
         #print("Action:", action)
-        #print("Agent info:", agent_info)
+        print("Agent info:", agent_info)
 
         # Step: environment reacts
         obs, reward, done, env_info = env.step(action)
@@ -122,6 +125,12 @@ def parse_args():
     args.add_argument('--lower_limit', type=int, default=2)
     args.add_argument('--upper_limit', type=float, default=3)
     args.add_argument('--feedback', type=str, 
+                      choices=['False', 'True'],
+                      default='True')
+    args.add_argument('--reflect', type=str, 
+                      choices=['False', 'True'],
+                      default='True')
+    args.add_argument('--feedback_string', type=str, 
                       choices=['False', 'True'],
                       default='True')
     return args.parse_args()
