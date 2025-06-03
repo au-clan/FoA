@@ -97,8 +97,8 @@ class TreeOfThoughtAgent(Agent):
         self.value_reflects = []
 
     def plan(self, env, to_print=True):
-        print(gpt)
-        print(gpt_with_history)
+        #print(gpt)
+        #print(gpt_with_history)
         x = env.puzzle  # input
         print("current puzzle is ", x)
         history = env.history  # history
@@ -115,7 +115,7 @@ class TreeOfThoughtAgent(Agent):
                          self.value_reflects))]
         #print("self.value_reflects", value_obs[1])
         for step in range(4 - len(history)):
-            #print("step: ", step)
+            print("step: ", step)
             # generation
             new_ys = [get_proposals(env, obs, x, y, self.n_generate_sample) for y in ys]
             #elif self.method_generate == "single":
@@ -145,7 +145,7 @@ class TreeOfThoughtAgent(Agent):
             ys = select_new_ys
         #res_ys = "\n".join(y.strip() for y in ys[0].splitlines()) # Splitting the ys list at every \n, then stripping away trailing and leading whitespace
         res_ys = "\n".join([line.strip() for line in ys[0].splitlines()[len(history):]])
-        #print("res_ys: ", repr(res_ys))
+        print("res_ys: ", repr(res_ys))
         return res_ys, {'steps': infos}
     
     def shorten_value_reflects(self, value_reflects):
@@ -195,16 +195,16 @@ class TreeOfThoughtAgent(Agent):
         feedback = obs['feedback']
 
             
-        print(self.feedback, ":", feedback)
+        print('Feedback is set to ', self.feedback, ":", feedback)
         reflect_prompt, value_reflect_prompt = env.reflect_prompt_wrap(env.puzzle, y, feedback)
         reflects = gpt(reflect_prompt, stop=None)
         value_reflects = gpt(value_reflect_prompt, stop=None)
         
         if self.method_reflexion_type == "list":
             self.reflects.extend(reflects)
-            print("self.reflects: ", self.reflects)
+            #print("self.reflects: ", self.reflects)
             self.value_reflects.extend(value_reflects)
-            print("self.value_reflects: ", self.value_reflects)
+            #print("self.value_reflects: ", self.value_reflects)
         elif self.method_reflexion_type == "k_most_recent":
             self.reflects.extend(reflects)
             self.value_reflects.extend(value_reflects)

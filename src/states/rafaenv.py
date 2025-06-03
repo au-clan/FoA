@@ -144,10 +144,13 @@ class Game24(Environment):
         elif self.feedback:
             info = {'action': action, 'history': self.history}
             obs = {'answer': answer, 'feedback': feedback}
-        else:
+        elif not self.feedback:
             info = {'action': action, 'history': self.history}
             obs = {'answer': answer, 'feedback': " "}
         #print("obs: ", obs)
+        answer = [f"Step {i + 1}: {x}" for i, x in enumerate(action.split('\n')[:delta]) if x != ""]
+        #answer = "Attempt answer: " + "\n".join(answer)
+        
         return obs, reward, done, info
 
     @staticmethod
@@ -192,7 +195,7 @@ class Game24(Environment):
 
     @staticmethod
     def reflect_prompt_wrap(x: str, y: str, feedback: str) -> str:
-        print('feedback in reflect prompt wrap: ', feedback)
+        #print('feedback in reflect prompt wrap: ', feedback)
         return reflect_prompt.format(input=x, answer=y, feedback=feedback), value_reflect_prompt.format(input=x,
                                                                                                         answer=y,
                                                                                                         feedback=feedback)
