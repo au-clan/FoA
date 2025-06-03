@@ -1,0 +1,3 @@
+#python run/rafa.py --backend gpt-4.1-nano-2025-04-14 --method_reflexion_type summary --upper_limit 0.1 --split uniform-validation --feedback True --reflect True > outputFiles/summary10.txt
+python run/rafa.py --backend gpt-4.1-nano-2025-04-14 --method_reflexion_type summary --upper_limit 0.15 --split uniform-validation --feedback True --reflect True > outputFiles/summary15.txt
+python run/rafa.py --backend gpt-4.1-nano-2025-04-14 --method_reflexion_type summary --upper_limit 0.20 --split uniform-validation --feedback True --reflect True > outputFiles/summary20.txt

@@ -37,7 +37,7 @@ async def run(args):
     env = Game24(datadir=f'24_tot.csv', feedback=feedback, max_steps=20, split=args.split, reflect=reflect, feedback_string=feedback_string)
     cur_time = int(time.time())
     num_puzzles = 30 if args.split == "uniform-validation" else 60
-    file = f'logs/recent/gameof24/RAFA/game24/{agent.backend}_{args.method_reflexion_type}_k_{args.k}_limit_{args.upper_limit}_noReflectionAblation_{cur_time}.json'
+    file = f'logs/recent/gameof24/RAFA/game24/{agent.backend}_{args.method_reflexion_type}_k_{args.k}_limit_{args.upper_limit}_summaryLimit_{cur_time}.json'
 
     os.makedirs(os.path.dirname(file), exist_ok=True)
     logs = []

@@ -162,7 +162,7 @@ class TreeOfThoughtAgent(Agent):
             
         # Step 3: Normalize commas to avoid broken matches (e.g., '1, 5, 6: sure')
         text = " ".join(text_reflections)
-        text = re.sub(r'(?<=\d),\s*(?=\d)', ' ', text).replace("{", "").replace("}", "")
+        text = re.sub(r'(?<=\d),\s*(?=\d)', ' ', text).replace("{", "").replace("}", "").replace("→", "").replace("\u2192", "")
 
         # Step 4: Define patterns
         patterns = [
