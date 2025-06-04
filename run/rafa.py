@@ -69,11 +69,9 @@ async def run_puzzle(i, env, agent, logs, file):
         # Step: agent decides action
         action, agent_info = agent.act(env, obs)
         #print("Action:", action)
-        print("Agent info:", agent_info)
-
+        print("Action: ", action)
         # Step: environment reacts
         obs, reward, done, env_info = env.step(action)
-        print("Env info:", env_info)
 
         total_reward += reward
         if reward >= 10:

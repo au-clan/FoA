@@ -1,1 +1,1 @@
-python run/rafa.py --backend gpt-4.1-nano-2025-04-14 --method_reflexion_type list --split uniform-test --feedback_string False > .\outputFiles\feedbackStringAblation.txt
+python run/rafa.py --backend gpt-4.1-nano-2025-04-14 --method_reflexion_type list --split uniform-test --feedback_string False > .\outputFiles\feedbackStringAblationPart2.txt
