@@ -136,7 +136,8 @@ class Game24(Environment):
         delta = new_len - prev_len + 1 if new_len < 4 else new_len - prev_len
         assert delta > 0
         done = (reward >= 10) or (self.cur_step > self.max_steps)
-        answer = [f"Step {i + 1}: {x}" for i, x in enumerate(action.split('\n')[:delta]) if x != ""]
+        #Added history len to the index given to the LLM at attmepted answer
+        answer = [f"Step {i + 1 + prev_len}: {x}" for i, x in enumerate(action.split('\n')[:delta]) if x != ""]
         #answer = "Attempt answer: " + "\n".join(answer)
         if not self.reflect:
             info = {'action': action, 'history': self.history}
@@ -168,18 +169,6 @@ class Game24(Environment):
             # print([prompt])
         else:
             prompt = propose_prompt.format(input=current_numbers)
-        return prompt
-    @staticmethod
-    def single_proposal_prompt_wrap(x: str, y: str = '') -> str:
-        current_numbers = get_current_numbers(y if y else x)
-        print("current_numbers: ", current_numbers)
-        if current_numbers == '24':
-            #print("got in here, because one was 24")
-            #print("x: ", x)
-            prompt = modified_cot_prompt.format(input=x) + 'Steps:\n' + y + "Answer: "
-            # print([prompt])
-        else:
-            prompt = single_propose_prompt.format(input=current_numbers)
         return prompt
 
     @staticmethod

@@ -1,0 +1,26 @@
+reflection type:  list
+index: 92
+Iteration 1
+obs[feedback] [] len  0
+current puzzle is  9 9 11 12
+step:  0
+propose prompt wrap
+proposal list before replacing:  [['9 + 11 = 20 (left: 12 9 20)  ', '9 * 11 = 99 (left: 12 9 99)  ', '12 + 11 = 23 (left: 9 12 23)  ', '12 - 11 = 1 (left: 9 1 12)  ', '12 / 11 ≈ 1.09 (left: 9 1.09 12)  ', '9 + 12 = 21 (left: 9 11 21)  ', '9 - 11 = -2 (left: -2 12 9)  ', '9 * 12 = 108 (left: 11 9 108)']]
+proposal list after replacing:  ['9 + 11 = 20 (left: 12 9 20)  ', '9 * 11 = 99 (left: 12 9 99)  ', '12 + 11 = 23 (left: 9 12 23)  ', '12 - 11 = 1 (left: 9 1 12)  ', '12 / 11 = 1.09 (left: 9 1.09 12)  ', '9 + 12 = 21 (left: 9 11 21)  ', '9 - 11 = -2 (left: -2 12 9)  ', '9 * 12 = 108 (left: 11 9 108)']
+proposals before popping: ['9 + 11 = 20 (left: 12 9 20)  ', '9 * 11 = 99 (left: 12 9 99)  ', '12 + 11 = 23 (left: 9 12 23)  ', '12 - 11 = 1 (left: 9 1 12)  ', '12 / 11 = 1.09 (left: 9 1.09 12)  ', '9 + 12 = 21 (left: 9 11 21)  ', '9 - 11 = -2 (left: -2 12 9)  ', '9 * 12 = 108 (left: 11 9 108)']
+proposals after popping: 
+proposals:  ['9 + 11 = 20 (left: 12 9 20)', '9 * 11 = 99 (left: 12 9 99)', '12 + 11 = 23 (left: 9 12 23)', '12 - 11 = 1 (left: 9 1 12)', '12 / 11 = 1.09 (left: 9 1.09 12)', '9 + 12 = 21 (left: 9 11 21)', '9 - 11 = -2 (left: -2 12 9)', '9 * 12 = 108 (left: 11 9 108)']
+step:  1
+propose prompt wrap
+proposal list before replacing:  [['11 + 9 = 20 (left: 20 108)', '11 - 9 = 2 (left: 2 108)', '11 * 9 = 99 (left: 99 108)', '11 / 9 ≈ 1.22 (not helpful)', '108 + 11 = 119 (left: 119 9)', '108 - 11 = 97 (left: 97 9)', '108 * 11 = 1188 (not helpful)', '108 / 11 ≈ 9.82 (not helpful)']]
+proposal list after replacing:  ['11 + 9 = 20 (left: 20 108)', '11 - 9 = 2 (left: 2 108)', '11 * 9 = 99 (left: 99 108)', '11 / 9 = 1.22 (not helpful)', '108 + 11 = 119 (left: 119 9)', '108 - 11 = 97 (left: 97 9)', '108 * 11 = 1188 (not helpful)', '108 / 11 = 9.82 (not helpful)']
+proposals before popping: ['11 + 9 = 20 (left: 20 108)', '11 - 9 = 2 (left: 2 108)', '11 * 9 = 99 (left: 99 108)', '11 / 9 = 1.22 (not helpful)', '108 + 11 = 119 (left: 119 9)', '108 - 11 = 97 (left: 97 9)', '108 * 11 = 1188 (not helpful)', '108 / 11 = 9.82 (not helpful)']
+proposals after popping: 
+proposals:  ['11 + 9 = 20 (left: 20 108)', '11 - 9 = 2 (left: 2 108)', '11 * 9 = 99 (left: 99 108)', '108 + 11 = 119 (left: 119 9)', '108 - 11 = 97 (left: 97 9)']
+step:  2
+propose prompt wrap
+proposal list before replacing:  [['20 + 4 = 24 (assuming 4 is derived from previous operations)', '20 * 1.08 = 21.6 (not helpful directly)', '108 / 4 = 27 (not 24)', '108 - 84 = 24 (if 84 is derived from previous steps)', '108 / 4.5 = 24 (if 4.5 is derived from previous steps)', "However, with only 20 and 108, direct operations do not yield 24 easily. Let's consider possible intermediate steps:"]]
+proposal list after replacing:  ['20 + 4 = 24 (assuming 4 is derived from previous operations)', '20 * 1.08 = 21.6 (not helpful directly)', '108 / 4 = 27 (not 24)', '108 - 84 = 24 (if 84 is derived from previous steps)', '108 / 4.5 = 24 (if 4.5 is derived from previous steps)', "However, with only 20 and 108, direct operations do not yield 24 easily. Let's consider possible intermediate steps:"]
+proposals before popping: ['20 + 4 = 24 (assuming 4 is derived from previous operations)', '20 * 1.08 = 21.6 (not helpful directly)', '108 / 4 = 27 (not 24)', '108 - 84 = 24 (if 84 is derived from previous steps)', '108 / 4.5 = 24 (if 4.5 is derived from previous steps)', "However, with only 20 and 108, direct operations do not yield 24 easily. Let's consider possible intermediate steps:"]
+proposals after popping: 
+proposals:  []

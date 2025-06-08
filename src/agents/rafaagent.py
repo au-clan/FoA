@@ -1,9 +1,11 @@
+from curses.ascii import isdigit
 from . import *
 import itertools
 import numpy as np
 from src.prompts.adapt import gameof24 as prompts
 from functools import partial
 import re
+from src.states.rafaenv import get_current_numbers
 
 def get_value(env, history, x, y, n_evaluate_sample, cache_value=True):
     # validation_prompt = env.validation_prompt_wrap(x, y)
@@ -42,18 +44,127 @@ def get_values(env, history, x, ys, n_evaluate_sample, cache_value=True):
 def get_proposals(env, history, x, y, n_propose_sample=10):
     propose_prompt = env.propose_prompt_wrap(x, y)
     #print("x:", x)
-    proposal_list = [x.split('\n') for x in gpt_with_history(propose_prompt, history, n=1, stop=["\n\n"])]
+    # for x in gpt_with_history(propose_prompt, history, n=2):
+    #     print(x.split('\n'))
+    # proposal_list = [x.split('\n') for x in gpt_with_history(propose_prompt, history, n=1)]
+    #proposal_list = [x.split('\n') for x in gpt_with_history(propose_prompt, history, n=1, stop=["\n\n"])]
+    
+    # print("proposal list before replacing: ", proposal_list)
     #for xx in gpt_with_history(propose_prompt, history, n=1, stop=["\n\n"]):
     #    print("x in for: ", xx)
-    proposals = []
-    for p in proposal_list:
-        proposals.extend(p)
-    #print("proposals before indexing: ", proposals)
+
+
+    # Define regex for the format:
+    # something like: 1 + 4 = 5 (left: 2 3)
+    operation_pattern = re.compile(r'^[-\d\(\)\s]+(?:[\+\-\*/]\s*[-\d\(\)\s]+)*\s*=\s*-?[\d/\.]+(?:\s*)\(left:\s*[-\d\s/\.]+\)$')
+    index = 0
+    while True:
+        current_numbers = get_current_numbers(y if y else x)
+        if current_numbers == "24":
+            proposal_list = [x.split('\n') for x in gpt_with_history(propose_prompt, history, n=1, stop=["\n\n"])]
+        else:
+            proposal_list = [x.split('\n') for x in gpt_with_history(propose_prompt, history, n=1)]
+        print("proposal list before replacing: ", proposal_list)
+        proposal_list = [p.replace('\u00f7', '/') for p in proposal_list[0]]
+        proposal_list = [p.replace('\u2212', '-') for p in proposal_list]
+        proposal_list = [p.replace('\u2248', '=') for p in proposal_list]
+        proposals_raw = [p.replace('\u00d7', '*') for p in proposal_list]
+
+        elements_to_be_popped = []
+        #print("proposals before popping:", proposals_raw)
+        index += 1
+        
+        cleaned_proposals = []
+
+        for p in proposals_raw:
+            original_p = p
+            p = p.strip()
+            if len(p) > 2:
+                if p[1] == ".":
+                    p = p[2:]
+                elif p[2] == ".":
+                    p = p[3:]
+                if p[0] == "-" and p[1] == " ":
+                    p = p[2:]
+
+
+            p = p.strip()
+
+            left_match = re.search(r'\(left: [\d\s.\-]+\)', p)
+            if left_match:
+                p = p[:left_match.end()]
+
+            
+            # Save cleaned version back
+            #proposals[i] = p
+
+            if operation_pattern.match(p):
+                cleaned_proposals.append(p)
+                continue
+
+            #print("cleaned proposals: ", proposals[i])
+            # Match against the desired pattern
+            # if operation_pattern.match(p):
+            #     continue
+            
+            # current_numbers = get_current_numbers(y if y else x)
+
+            if current_numbers == '24': #Troels dont like this
+                if len(p)> 2 and p[0] == "*":
+                    p = p[0:2]
+                p = p.strip()
+                # Match patterns like "answer: <expr> = <result>" and capture just that part
+                match = re.match(r"(answer:\s*[\d\+\-\*/\s\(\)]+=\s*\d+)", p.lower())
+                if match:
+                    matched = match.group(1).strip()
+                    cleaned_proposals.append(matched)
+                    continue
+                
+                # Normalize "answer:"
+                last_part = p.lower().split('answer:')[-1].strip()
+                if last_part:
+                    cleaned_proposals.append("answer: " + last_part)
+                    continue
+
+                # if len(p) != 0:
+                #     if p[0] not in ("(", "a") and not p[0].isdigit():
+                #         elements_to_be_popped.insert(0, i)
+                #     # elif p[0]
+                # else:
+                #     elements_to_be_popped.insert(0,i)
+                # p = "answer  :" + p
+
+                # Normalize duplicate "answer:" labels
+                # last_part = p.lower().split('answer:')[-1].strip()
+                # proposals[i] = "answer: " + last_part
+                # continue
+
+            #print("len of current numbers", len(current_numbers))
+            #print("p: ", p)    
+            #print("current_numbers: ", current_numbers)
+            if re.match(r"^-?\d+(\.\d+)?$", current_numbers) and p:
+                cleaned_proposals.append(p)
+                continue
+
+            #print("cleaned proposals: ", cleaned_proposals)
+
+        if cleaned_proposals or index > 4:
+            proposals = cleaned_proposals[:min(len(cleaned_proposals), n_propose_sample)]
+            break
+        # print(elements_to_be_popped)
+
+        # for pop in elements_to_be_popped:
+        #     proposals.pop(pop)
+
+        # print("proposals after popping: ", proposals)
+        # print("len of proposals: ", len(proposals))
+        # print("i: ", index)
+        # if len(proposals) > 0 or index > 4:
+        #     break
+        
+    #print("final proposals: ", proposals)
     proposals = proposals[:min(len(proposals), n_propose_sample)]
-    proposals = [p.replace('\u00f7', '/') for p in proposals]
-    proposals = [p.replace('\u2212', '-') for p in proposals]
-    proposals = [p.replace('\u00d7', '*') for p in proposals]
-    #print("proposals: ", proposals)
+    print("proposals: ", proposals)
     return [y + _ + '\n' for _ in proposals]
 
 def get_proposal(env, history, x, y):
@@ -133,7 +244,7 @@ class TreeOfThoughtAgent(Agent):
             elif self.method_generate == "single":
                 select_new_ys = [new_ys[0]] if new_ys else []
                 values = [0] * len(new_ys)
-            #print("selected new ys: ", select_new_ys) 
+            print("selected new ys: ", select_new_ys) 
             # log
             if to_print:
                 sorted_new_ys, sorted_values = zip(*sorted(zip(new_ys, values), key=lambda x: x[1], reverse=True))
@@ -202,9 +313,9 @@ class TreeOfThoughtAgent(Agent):
         
         if self.method_reflexion_type == "list":
             self.reflects.extend(reflects)
-            #print("self.reflects: ", self.reflects)
+            print("self.reflects: ", self.reflects)
             self.value_reflects.extend(value_reflects)
-            #print("self.value_reflects: ", self.value_reflects)
+            print("self.value_reflects: ", self.value_reflects)
         elif self.method_reflexion_type == "k_most_recent":
             self.reflects.extend(reflects)
             self.value_reflects.extend(value_reflects)
