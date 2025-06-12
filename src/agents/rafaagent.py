@@ -112,7 +112,7 @@ def get_proposals(env, history, x, y, n_propose_sample=10):
             if current_numbers == '24': #Troels dont like this
                 if len(p)> 2 and p[0] == "*":
                     p = p[0:2]
-                p = p.strip()
+                p = p.strip().split("(left", 1)[0]
                 # Match patterns like "answer: <expr> = <result>" and capture just that part
                 match = re.match(r"(answer:\s*[\d\+\-\*/\s\(\)]+=\s*\d+)", p.lower())
                 if match:
