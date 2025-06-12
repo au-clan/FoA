@@ -134,6 +134,8 @@ class Game24(Environment):
         #print("feedback in env.step: ", feedback)
         new_len = len(self.history)
         delta = new_len - prev_len + 1 if new_len < 4 else new_len - prev_len
+        if not self.feedback:
+            delta = 4
         assert delta > 0
         done = (reward >= 10) or (self.cur_step > self.max_steps)
         #Added history len to the index given to the LLM at attmepted answer
