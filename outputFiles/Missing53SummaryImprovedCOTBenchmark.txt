@@ -1,0 +1,28 @@
+reflection type:  summary
+index: 1222
+Iteration 1
+obs[feedback] [] len  0
+current puzzle is  8 10 12 12
+step:  0
+proposal list before replacing:  [['8 + 12 = 20 (left: 10 12 20)', '8 * 12 = 96 (left: 10 12 96)', '12 - 8 = 4 (left: 10 12 4)', '12 / 8 = 1.5 (left: 10 12 1.5)', '10 + 12 = 22 (left: 8 22)', '10 - 12 = -2 (left: 8 -2)', '10 * 12 = 120 (left: 8 120)', '12 - 12 = 0 (left: 8 0)', '12 / 12 = 1 (left: 8 1)']]
+proposals:  ['8 + 12 = 20 (left: 10 12 20)', '8 * 12 = 96 (left: 10 12 96)', '12 - 8 = 4 (left: 10 12 4)', '12 / 8 = 1.5 (left: 10 12 1.5)', '10 + 12 = 22 (left: 8 22)', '10 - 12 = -2 (left: 8 -2)', '10 * 12 = 120 (left: 8 120)', '12 - 12 = 0 (left: 8 0)', '12 / 12 = 1 (left: 8 1)']
+selected new ys:  ['8 + 12 = 20 (left: 10 12 20)\n']
+step:  1
+proposal list before replacing:  [['10 - 12 = -2 (left: -2 20)', '10 + 12 = 22 (left: 22 20)', '20 - 10 = 10 (left: 12 10)', '20 + 10 = 30 (left: 12 30)', '20 / 10 = 2 (left: 12 2)', '20 - 12 = 8 (left: 8 10)', '20 + 12 = 32 (left: 32 10)', '20 / 12 ≈ 1.666... (less promising)', '20 * 10 = 200 (less promising for 24 target)']]
+proposals:  ['10 - 12 = -2 (left: -2 20)', '10 + 12 = 22 (left: 22 20)', '20 - 10 = 10 (left: 12 10)', '20 + 10 = 30 (left: 12 30)', '20 / 10 = 2 (left: 12 2)', '20 - 12 = 8 (left: 8 10)', '20 + 12 = 32 (left: 32 10)']
+selected new ys:  ['8 + 12 = 20 (left: 10 12 20)\n20 / 10 = 2 (left: 12 2)\n']
+step:  2
+proposal list before replacing:  [['12 + 2 = 14 (left: 14)  ', '12 - 2 = 10 (left: 10)  ', '12 * 2 = 24 (left: 24)  ', '12 / 2 = 6 (left: 6)']]
+proposals:  ['12 + 2 = 14 (left: 14)', '12 - 2 = 10 (left: 10)', '12 * 2 = 24 (left: 24)', '12 / 2 = 6 (left: 6)']
+selected new ys:  ['8 + 12 = 20 (left: 10 12 20)\n20 / 10 = 2 (left: 12 2)\n12 * 2 = 24 (left: 24)\n']
+step:  3
+proposal list before replacing:  [['answer: (8 + 12) / 10 * 12 = 24']]
+proposals:  ['answer: (8 + 12) / 10 * 12 = 24']
+selected new ys:  ['8 + 12 = 20 (left: 10 12 20)\n20 / 10 = 2 (left: 12 2)\n12 * 2 = 24 (left: 24)\nanswer: (8 + 12) / 10 * 12 = 24\n']
+res_ys:  '8 + 12 = 20 (left: 10 12 20)\n20 / 10 = 2 (left: 12 2)\n12 * 2 = 24 (left: 24)\nanswer: (8 + 12) / 10 * 12 = 24'
+Action:  8 + 12 = 20 (left: 10 12 20)
+20 / 10 = 2 (left: 12 2)
+12 * 2 = 24 (left: 24)
+answer: (8 + 12) / 10 * 12 = 24
+feedback:  Evaluation: Step 1 is correct and can lead to 24. Step 2 is correct and can lead to 24. Step 3 is correct and can lead to 24. Step 4 is correct. The formula is correct. reward:  13
+Finished puzzle 53 | Success: True | Total reward: 13

@@ -1,1 +1,1 @@
-python run/rafa.py --backend gpt-4.1-nano-2025-04-14 --method_reflexion_type summary --upper_limit 0.25 --split uniform-test --feedback True --reflect True > outputFiles/SummaryBenchmark.txt
+python run/rafa.py --backend gpt-4.1-nano-2025-04-14 --method_reflexion_type summary --upper_limit 0.25 --split uniform-test --feedback True --reflect True > outputFiles/Missing53SummaryImprovedCOTBenchmark.txt
