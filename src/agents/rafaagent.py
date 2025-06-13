@@ -1,4 +1,3 @@
-from curses.ascii import isdigit
 from . import *
 import itertools
 import numpy as np
