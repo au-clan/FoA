@@ -1,6 +1,8 @@
 import os
 import time
 import asyncio
+import traceback
+
 
 from copy import deepcopy
 from collections import Counter
@@ -10,6 +12,7 @@ import together
 from openai import AsyncOpenAI
 from together import AsyncTogether
 from groq import AsyncGroq
+from lazykey import AsyncKeyHandler
 
 from async_engine.round_robin_manager import AsyncRoundRobin
 from utils import merge_responses
@@ -41,6 +44,7 @@ class API:
         self.limiters = {}
         self.providers = {}
         self.groq_requests = 0
+        self.lazykey_requests = 0
 
 
         for model in models:
@@ -79,7 +83,7 @@ class API:
                 # Limiter Setup
                 self.limiters[model_name] = AsyncRoundRobin()
                 for _ in range(resources):
-                    self.limiters[model_name].add_resource(data=api_key)
+                    self.limiters[model_name].add_resource(data="api_key")
             
             elif provider == "OpenAI":
                 
@@ -96,6 +100,15 @@ class API:
                 for _ in range(resources):
                     self.limiters[model_name].add_resource(data=api_key)
                 
+            elif provider == "LazyKey":
+                #api keys when making an env
+                api_keys = ["MANGLER API KEY HER!!!!!"]
+                self.clients[model_name] = AsyncKeyHandler(api_keys, AsyncGroq)
+
+                # Limiter Setup
+                self.limiters[model_name] = AsyncRoundRobin()
+                for _ in range(resources):
+                    self.limiters[model_name].add_resource(data="api_key")
             else:
                 raise NotImplementedError(f"Provider '{provider}' not supported.\nSupported providers are : Groq, TogetherAI and OpenAI")
 
@@ -158,6 +171,8 @@ class API:
                     response = await self.groq_request(model, n, request_config, request_timeout)
                 elif self.providers[model] == "TogetherAI":
                     response = await self.together_request(model, n, request_config, request_timeout)
+                elif self.providers[model] == "LazyKey":
+                    response = await self.lazykey_request(model, n, request_config, request_timeout)
                 else:
                     response = await self.openai_request(model, n, request_config, request_timeout)
 
@@ -188,8 +203,9 @@ class API:
             responses.append(mapping[namespace].pop(0))
         
         if self.verbose:
-            m = f"+++PROMPT+++\n{messages[0]["content"]}\n\n" + f"+++RESPONSES+++ :\n {"----------------------\n".join([r+"\n" for r in responses])}"
-            print("#"*100 + "\n" + m + "\n" + "#"*100)
+            pass
+            #m = f"+++PROMPT+++\n{messages[0]["content"]}\n\n" + f"+++RESPONSES+++ :\n {"----------------------\n".join([r+"\n" for r in responses])}"
+            #print("#"*100 + "\n" + m + "\n" + "#"*100)
         return responses
 
 
@@ -236,6 +252,64 @@ class API:
                         self.current_sleep_time *= self.sleep_factor
                     
                     else:
+                        print(e)
+                        raise e
+        
+        
+        response = merge_responses(responses=responses) # merge_responses(...) counts prompts only once!
+        
+        assert len(response.choices) == n, f"Expected {n} choices but got {len(response.choices)} choices after merge"
+        assert len(responses) == n, f"Expected {n} responses but got {len(responses)} responses" # Assert makes sense as Groq only allows n=1
+        
+        return response
+
+    async def lazykey_request(self, model, n, CACHE_CONFIG, request_timeout=30):
+        responses = []
+        
+        # Groq currently only allows n=1
+        for _ in range(n):
+            while True:
+                self.current_sleep_time = min(self.current_sleep_time, self.max_sleep)
+                try:
+                
+                    self.lazykey_requests += 1
+                    single_response = await asyncio.wait_for(self.clients[model].request(
+                    **CACHE_CONFIG,
+                    # messages=CACHE_CONFIG["messages"],
+                    # model=CACHE_CONFIG["model"],
+                    # temperature=CACHE_CONFIG["temperature"],
+                    # max_tokens=CACHE_CONFIG["max_tokens"],
+                    # timeout=request_timeout,
+                    n=1), timeout=request_timeout)
+                    assert single_response is not None
+                    self.current_sleep_time = self.sleep_time
+                    responses.append(single_response)
+                    break
+                
+                except asyncio.TimeoutError as e:
+                    traceback.print_exc()
+                    print(f"Asyncio timeout error, sleeping for {self.current_sleep_time} seconds")
+                    print(e)
+                    await asyncio.sleep(self.current_sleep_time)
+                    self.current_sleep_time *= self.sleep_factor
+
+                except Exception as e:
+                    if e.response.status_code == 429:
+                        traceback.print_exc()
+                        print(f"Rate limit error, sleeping for {self.current_sleep_time} seconds")
+                        print(e)
+                        await asyncio.sleep(self.current_sleep_time)
+                        self.current_sleep_time *= self.sleep_factor
+                    
+                    elif e.response.status_code == 500:
+                        traceback.print_exc()
+                        print(f"API error, sleeping for {self.current_sleep_time} seconds")
+                        print(e)
+                        await asyncio.sleep(self.current_sleep_time)
+                        self.current_sleep_time *= self.sleep_factor
+                    
+                    else:
+                        traceback.print_exc()
                         print(e)
                         raise e
         

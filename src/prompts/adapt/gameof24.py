@@ -21,6 +21,105 @@ Input: {input}
 Possible next steps:
 '''
 
+bfs_reflexion_prompt = '''Use numbers and basic arithmetic operations (+ - * /). Each step, you are only allowed to choose two of the remaining numbers to obtain a new number. Do not explain simply list possible next steps as well as all the remaining numbers and nothing else.
+
+Example: 2 8 8 14
+Possible next steps:
+2 + 8 = 10 (left: 8 10 14)
+8 / 2 = 4 (left: 4 8 14)
+14 + 2 = 16 (left: 8 8 16)
+2 * 8 = 16 (left: 8 14 16)
+8 - 2 = 6 (left: 6 8 14)
+
+Example: 1 3
+Possible next steps:
+1 + 3 = 4 (left: 4)
+1 * 3 = 3 (left: 3)
+3 - 1 = 2 (left: 2)
+3 / 1 = 3 (left: 3)
+1 - 3 = -2 (left: -2)
+
+
+
+Based on previous attempts to solve the puzzle, here is some advice on how to proceed:
+{reflexion}
+
+Input: {input}
+Possible next steps:'''
+
+reflexion_prompt = '''The game of 24 is a math puzzle where players use four numbers and basic arithmetic operations (+ - * /) to make the result equal to 24. Following is a previous attempt at solving the puzzle.
+Input: {puzzle}
+Solution attempt:
+{steps}
+
+
+Reflect on the previous attempt and provide a reflection below:
+- If there's a mistake, identify it and explain how similar mistakes can be avoided.
+- If the mistake can be generalized, provide a general reflection.
+- Be succint and clear in your reflection.
+- Do not provide a new solution, only a reflection.
+
+Reflection:
+'''
+
+evaluate_prompt = '''The game of 24 is a math puzzle where players use four numbers and basic arithmetic operations (+ - * /) to make the result equal to 24. Following is a previous attempt at solving the puzzle.
+Input: {puzzle}
+Solution attempt:
+{steps[0]}
+{steps[1]}
+{steps[2]}
+{steps[3]}
+
+
+Task:
+1. Evaluate steo
+   - Evaluate if the given numbers at each step can reach 24 for each step with the following sure, likely or impossible
+
+   Examples for evaluating:
+    10 14
+    10 + 14 = 24
+    sure
+    11 12
+    11 + 12 = 23
+    12 - 11 = 1
+    11 * 12 = 132
+    11 / 12 = 0.91
+    impossible
+    4 4 10
+    4 + 4 + 10 = 8 + 10 = 18
+    4 * 10 - 4 = 40 - 4 = 36
+    (10 - 4) * 4 = 6 * 4 = 24
+    sure
+    4 9 11
+    9 + 11 + 4 = 20 + 4 = 24
+    sure
+    5 7 8
+    5 + 7 + 8 = 12 + 8 = 20
+    (8 - 5) * 7 = 3 * 7 = 21
+    I cannot obtain 24 now, but numbers are within a reasonable range
+    likely
+    5 6 6
+    5 + 6 + 6 = 17
+    (6 - 5) * 6 = 1 * 6 = 6
+    I cannot obtain 24 now, but numbers are within a reasonable range
+    likely
+    10 10 11
+    10 + 10 + 11 = 31
+    (11 - 10) * 10 = 10
+    10 10 10 are all too big
+    impossible
+    1 3 3
+    1 * 3 * 3 = 9
+    (1 + 3) * 3 = 12
+    1 3 3 are all too small
+    impossible
+2. Check whether each step is valid.
+   - Verify if the arithmetic is correct (e.g., 4 * 6 = 24, 8 - 3 = 5, etc.).
+   - Verify if the step uses numbers that are still available.
+   - Verify if the result of each step is computed correctly and is used in subsequent steps properly.
+
+IMPORTANT: I want you to end your response with stating what step went wrong (0 indexed) for example: "Incorrect step: 2"
+'''
 
 # Updated
 value_prompt = '''Evaluate if given numbers can reach 24 by responding with the following sure, likely or impossible.
@@ -139,39 +238,3 @@ impossible
 Input: {input}
 Answer: {answer}
 Judge:'''
-
-
-reflection_prompt = '''Use numbers and basic arithmetic operations (+ - * /). Each step, you are only allowed to choose two of the remaining numbers to obtain a new number. Do not explain simply list possible next steps as well as all the remaining numbers and nothing else.
-
-Example: 2 8 8 14
-Possible next steps:
-2 + 8 = 10 (left: 8 10 14)
-8 / 2 = 4 (left: 4 8 14)
-14 + 2 = 16 (left: 8 8 16)
-2 * 8 = 16 (left: 8 14 16)
-8 - 2 = 6 (left: 6 8 14)
-
-Example: 1 3
-Possible next steps:
-1 + 3 = 4 (left: 4)
-1 * 3 = 3 (left: 3)
-3 - 1 = 2 (left: 2)
-3 / 1 = 3 (left: 3)
-1 - 3 = -2 (left: -2)
-
-Input: {input}
-Possible next steps:
-
-
-
-In your last attempt you gave the following solution to the 24 puzzle:
-        Numbers: {puzzle}
-        Solution attempt: Step 1: {steps[0]}
-                            Step 2: {steps[1]}
-                            Step 3: {steps[2]}
-                            Step 4: {steps[3]}
-
-
-So for this attempt do not make the same mistakes and keep the following reflection in mind:
-
-{reflection}'''
