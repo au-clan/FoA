@@ -1,6 +1,9 @@
 # Official Repository of Fleet of Agents
 
-![Foa detailed method gif](/pics/foa_detailed.gif)
+<p align="center">
+  <img src="/pics/foa_detailed.gif" alt="Foa detailed method gif" />
+</p>
+
 
 This is the official implementation of Fleet of Agents: Coordinated Problem Solving with Large Language Models
 
