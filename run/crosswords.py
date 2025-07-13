@@ -20,7 +20,6 @@ from data.data import CrosswordsData
 from utils import create_folder, create_box, update_actual_cost
 
 log_folder = f"logs_recent/crosswords/{datetime.now().strftime("%m-%d/%H/%M")}/" # Folder in which logs will be saved 
-#log_folder = f"logs_recent/gridsearch/crosswords/" # Folder in which logs will be saved 
 create_folder(log_folder)
 
 step_api_config = eval_api_config = {
@@ -31,11 +30,6 @@ step_api_config = eval_api_config = {
     "top_k": 50
 }
 
-# Models
-## "gpt-3.5-turbo-0125"
-## "gpt-4-0613"
-## "meta-llama/Llama-3.2-11B-Vision-Instruct-Turbo"
-## "meta-llama/Llama-3.2-90B-Vision-Instruct-Turbo"
 model = "gpt-4-0613"
 provider = "TogetherAI" if "meta" in model else "OpenAI"
 

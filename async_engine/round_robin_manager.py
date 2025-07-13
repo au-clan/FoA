@@ -17,6 +17,8 @@ class AsyncRoundRobin(AbstractAsyncContextManager):
         return resource
 
     def add_resource(self, data: Any = None):
+        # Adds more resouces: Data is the API key
+        # (same API key can be added more than once)
         resource = Resource(self, data)
         self.resources.append(resource)
         self.queue.put_nowait(resource)

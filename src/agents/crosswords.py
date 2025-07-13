@@ -44,9 +44,9 @@ class CrosswordsAgent:
             if response == None:
                 continue
             parsed_response = parse_response(response)
-            # response = {'h1. apple': "certain", 'h2. banana': "high", 'h3. apple': "medium", 'h4. apple': "low", 'h5. apple': "low"}
-            # mapping = {'certain': 1, 'high': 0.5, 'medium': 0.2, 'low': 0.1}
-            # parsed_response = {"h1. apple": 1, "h2. banana": 0.5, "h3. apple": 0.2, "h4. apple": 0.1, "h5. apple": 0.1}
+            # Example: response = {'h1. apple': "certain", 'h2. banana': "high", 'h3. apple': "medium", 'h4. apple': "low", 'h5. apple': "low"}
+            # Example: mapping = {'certain': 1, 'high': 0.5, 'medium': 0.2, 'low': 0.1}
+            # Example: parsed_response = {"h1. apple": 1, "h2. banana": 0.5, "h3. apple": 0.2, "h4. apple": 0.1, "h5. apple": 0.1}
             if parsed_response:
                 for candidate, score in parsed_response:
                     candidates_to_scores[candidate] = candidates_to_scores.get(candidate, 0) + score
@@ -56,7 +56,7 @@ class CrosswordsAgent:
         if len(filtered_candidate_to_score) > 0:
             candidate_cache[obs] = filtered_candidate_to_score
 
-        # {"h1. apple": 2.5, "h2. banana": 1.0, "h3. apple": 0.5, "h4. apple": 0.4, "h5. apple": 0.3}
+        # Example: {"h1. apple": 2.5, "h2. banana": 1.0, "h3. apple": 0.5, "h4. apple": 0.4, "h5. apple": 0.3}
         return filtered_candidate_to_score
     
     @staticmethod

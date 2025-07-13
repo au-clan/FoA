@@ -20,7 +20,6 @@ from data.data import GameOf24Data
 from utils import create_folder, create_box, update_actual_cost
 
 log_folder = f"logs_recent/gameof24/{datetime.now().strftime("%m-%d/%H/%M")}/" # Folder in which logs will be saved 
-#log_folder = f"logs_recent/gridsearch/gameof24/"
 create_folder(log_folder)
 
 step_api_config = eval_api_config = {

@@ -46,6 +46,7 @@ class API:
         for model in models:
 
             model_name = model.get("model_name")
+            # OpenAI, Groq or TogetherAI supported
             provider = model.get("provider")
 
             # Save provider for specific model

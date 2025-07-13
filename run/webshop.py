@@ -26,7 +26,6 @@ time = datetime.now()
 day = time.strftime("%d-%m")
 hour = time.strftime("%H")
 log_folder = f"logs_recent/ws/{datetime.now().strftime("%m-%d/%H/%M")}/" # Folder in which logs will be saved 
-#log_folder = f"logs_recent/webshop/{day}/{hour}/"
 create_folder(log_folder)
 
 # According to ReAct
